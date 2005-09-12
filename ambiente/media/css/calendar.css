@@ -1,0 +1,96 @@
+.caption {
+	margin: 0;
+	padding: 0;
+	width: 141px;
+	background: #C0B9E1;
+	color: #fff;	 
+	font: bold 12px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+	text-align: center;
+}
+
+#cal span { 
+			width: 15px; 
+			height: 15px; 
+			float: left; 
+			border: 1px solid #A2ADBC;
+			text-align: center;
+			padding: 1px 1px 3px 3px; 
+			font: normal 11px/15px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+			color: #616B76;
+			}
+
+#cal span#bloco {border-top-width: 0px;
+			border-bottom-width: 1px; 
+			border-left-width: 0px;
+			border-right-width: 1px;
+			}
+
+#cal a {
+	text-decoration: none;
+	font-weight: bold;
+	display: block;
+}
+
+#cal a:link, td a:visited {	
+	color: #608194;
+	}
+
+#cal a:hover, td a:active {
+	color: #6aa3ae;
+	}
+	
+.today, .today a{
+	color: #ffffff;
+	font-weight: bold;
+	background: #DF9496;
+}
+
+.marked_day, .marked_day a{
+	color: #616B76;
+	font-weight: bold;
+	background: #FDF0FF;
+}
+			
+#cal span.firstday { 
+			clear: left;
+			border-top-width: 0px;
+			border-left-width: 1px;  }
+			
+#cal span#bloco_week {
+			border-left-width: 0px;
+			background-color: #F2F2FE;	 
+			font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+			color: #457EBC;
+			}
+#cal span.first_week {
+			border-top-width: 1px;
+			border-bottom-width: 1px; 
+			border-left-width: 1px;
+			border-right-width: 1px;
+			background-color: #F2F2FE;	 
+			font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+			color: #457EBC;
+}
+
+#calendar {
+	width: 141px;
+	padding: 0;
+	margin: 0;
+	border-left: 1px solid #A2ADBC;
+	font: normal 12px/20px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+	color: #616B76;
+	text-align: center;
+	background-color: #fff;
+}
+
+.nav, .nav a {
+	font: bold 18px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+	color: #fff;	
+	text-align: center;
+	text-decoration: none;
+}	
+
+
+
+
+

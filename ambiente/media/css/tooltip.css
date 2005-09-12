@@ -1,0 +1,46 @@
+/* css tooltip */
+
+/* css tooltip */
+
+
+.tooltip { 
+           margin:0;
+           padding:0;
+           position: relative; 
+           top: 0px; 
+           left: 0px; 
+           width: 170px; 
+           background-color: transparent;
+           }
+
+#tooltip_internal_area { 
+                         background-color: white;
+                         }
+
+
+.perfil {
+         position: relative;
+          }
+
+
+.tooltip_line { 
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 3px;
+                margin-bottom: 3px;
+                text-align: center;
+                }
+
+.tooltip_line img { 
+                    margin-right: 4px;
+                    vertical-align: middle;
+                    }
+
+
+.tooltip_line a{ 
+                 color: #666666; 
+                 FONT-SIZE: 11px;
+                 text-decoration: underline;
+                 FONT-FAMILY: Arial;
+                 vertical-align: -20%;
+                 }

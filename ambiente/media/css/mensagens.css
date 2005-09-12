@@ -1,0 +1,183 @@
+body {
+       font: 0.7em Arial, Helvetica, sans-serif;
+       background-color: #C3B6E4;
+       padding: 3px;
+       margin: 0;
+       }
+
+#chatcorpo {
+             position: absolute;
+             width:98%;
+             height: 98%;
+             }
+
+#chat {
+        position:absolute;
+        width: 98%;
+        height:93%;
+        top:15px;
+        left:10px;
+        scroll: vertical;
+        border: none;
+        }
+
+.envio {
+         background-image: url("../images/msg_img_bgenvio.png");
+         background-repeat: no-repeat;
+         width: 120;
+         height:70;
+         position: absolute;
+         right:10;
+         bottom: 15px;	
+         }
+
+.btenvio{
+          margin: 30px;
+          background-color: #8080C3;
+          color: #FFFFFF;
+          font-weight: bold;
+          }
+
+.btenvio:hover { 
+                 background-color: #FFFFFF; 
+                 color: red;
+                 border-color: black white white black;
+                 text-decoration: none;
+                 }
+.btenvio:active { 
+                  background-color: #369; 
+                  color: #ccc; 
+                  text-decoration: none;
+                  }
+
+#area_mensagens{ 
+                 position:absolute;
+                 left: 0px;
+                 right:84px;
+                 background-color: #FFFFFF;
+                 bottom: 100px;
+                 top: 0px;
+                 }
+
+#area_informacao {
+                   position:absolute;
+                   top:0px;
+                   right: 0px;
+                   background-color: #A7A7FD;
+                   bottom: 0px;
+                   }
+
+#area_enviarmsg { 
+                  position:absolute;
+                  left: 0px;
+                  right:84px;
+                  bottom: 0px;
+                  height: 100px;
+                  background-color: #F2F2FE;
+                  border-top-width: 0px;
+                  border-bottom-width: 1px;
+                  border-left-width: 0px;
+                  border-right-width: 0px;
+                  border-style: solid;
+                  border-color: #D2D2FD;
+                  }
+
+
+/* área central da parte de envio */
+#main_enviarmsg {
+                  position: absolute;
+                  left:0;
+                  bottom: 15px;
+                  margin-left:20px;
+                  }
+
+
+/* área de informações entre usuários */
+
+#areainfocorpo {
+                 margin-left:5px;
+                 margin-right: 0px;
+                 background-color: #A7A7FD;
+                 }
+#footerlement {
+                position:absolute;
+                bottom: 0px;
+                margin-left:5px;
+                }
+
+#traco{
+        float:left;
+        width:5px;
+        height:100%; 
+        background-color: #D2D2FD;
+        }
+
+
+#infoelement{
+              text-align: center;
+              font: normal 10px/20px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+              color: fff;
+              position:absolute;
+              top:130;	
+              margin-left:12px;;	
+              }
+
+.element {
+           width: 64px;
+           }
+.setas{
+        margin: 15px;
+        }
+
+
+/* usamos a propriedade margin para abrir espaços para as colunas laterais */
+#areatextochat {
+                 margin-left:1.2em;
+                 margin-right:1.2em;
+                 padding-left:0.2em;
+                 padding-right:1em;
+                 }
+
+/* Propriedades dos cantinhos arredondados*/
+div.posicaoseta {
+                  width:14px;
+                  position:absolute;
+                  padding-left:0;
+                  padding-right:0;
+                  margin-left:0;
+                  margin-right:0;
+                  }
+
+/* cantinhos laterais no lugar */
+#seta1 {
+         top:0;
+         left:0;
+         }
+#seta2 {
+         top:0;
+         right:0;
+         }
+#seta3 {
+         left:0;
+         bottom:-1;
+         }
+#seta4 {
+         right:-1;
+         bottom:-1;
+         
+         }
+
+#send_message { 
+                visibility: visible;
+                }
+			
+.messageSender {
+                 font: 0.7em Arial, Helvetica, sans-serif;
+                 background-color: #DFE2FF;
+                 }
+
+.messageRecipient {
+                    font: 0.7em Arial, Helvetica, sans-serif;
+                    background-color: #FFF;
+                    }
+

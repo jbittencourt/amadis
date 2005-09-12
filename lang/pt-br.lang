@@ -1,0 +1,803 @@
+[smartform]
+required = "Voc&ecirc; n&atilde;o preencheu os seguintes campos:"
+
+hour_invalid = "A hora deve ser um n&uacute;mero entre 0 e 23."
+minuts_invalid = "Os minutos devem ser um n&uacute;mero entre 0 e 59."
+seconds_invalid = "Os segundos devem ser um n&uacute;mero entre 0 e 59."
+
+day_invalid = "O dia digitado n&atilde;o &eacute; v&aacute;lido."  
+month_invalid = "O m&ecirc;s digitado n&atilde;o &eacute; v&aacute;lido."    
+day_february_invalid = "O m&ecirc;s de fevereiro possui apenas 28 dias ou, em anos bissestos, 29 dias."
+
+[localization]
+january = "Janeiro"
+february = "Fevereiro"
+march = "Mar&ccedil;o"
+april = "Abril"
+may = "Maio"
+june = "Junho"
+july = "Julho"
+august = "Agosto"
+september = "Setembro"
+october = "Outubro"
+november = "Novembro"
+december = "Dezembro"
+
+sun = "Dom"
+mon = "Seg"
+tue = "Ter"
+wed = "Qua"
+thu = "Qui"
+fri = "Sex"
+sat = "Sab"
+
+date_format = "d/m/Y"
+hour_format = "h:i"
+hour_complete_format = "h:i:s"
+
+[global]
+amadis = "AMADIS - Ambiente Virtual de Aprendizagem"
+
+people = "Pessoas"
+projects = "Projetos"
+communities = "Comunidades"
+courses = "Cursos"
+
+acesso_nao_permitido = "Acesso n&atilde;o permitido"
+acesso_negado = "Acesso negado"
+erro_geral = "Ocorreu um erro durante o processamento."
+contact_errors = "Caso persista o erro, entre em contato com o administrador do ambiente."
+
+sair = "Sair"
+entrar = "Entrar"
+ok = "OK"
+cancel = "Cancelar"
+send = "Enviar"
+back = "voltar"
+login = "Login"
+logout = "Logout"
+download = "Download"
+edit = "Editar"
+delete = "Apagar"
+first = "Primeira"
+last = "&Uacute;ltima"
+on_AMADIS = "no AMADIS"
+save = "Salvar"
+by = "por"
+bem_vindo = "Bem-vindo"
+logged = "AMADIS Logado"
+
+select_one = "Selecione uma op&ccedil;&atilde;o"
+next = "Pr&oacute;ximo";
+conclude = "Concluir"
+valid_image_types = "Os tipos de exte&ccedil;&atilde;o de arquivo v&aacute;lidas s&atilde;o"
+
+error_invalid_login = "O seu login falhou. Por favor confira o seu usu&aacute;rio e a sua senha."
+error_invalid_image_type = "O tipo de imagem enviada n&atilde;o &eacute; suportada. Por favor selecione uma imagem em outro formato."
+
+user_info = "Informa&ccedil;&otilde;es sobre o usu&aacute;rio"
+loading_user_info = "Carregando os dados do usu&aacute;rio. Por favor aguarde..."
+
+#sections of the plataform
+projects = Projetos
+courses = Cursos
+news = Classificados
+
+accept = "Aceitar"
+reject = "Rejeitar"
+
+not_member_any_project = "Voc&ecirc; ainda n&atilde;o participa de um projeto."
+no_friends = "Voc&ecirc; ainda n&atilde;o cadastrou amigos."
+
+search = "Buscar"
+
+
+add_friend = "Adicionar como amigo"
+send_mail = "Enviar-lhe um E-Mail"
+page = "Ver a p&aacute;gina"
+no_user_found = "Nenhum usu&aacute;rio encontrado"
+
+join_reason = "Justificativa do ingresso no projeto:"
+approval = "Aprova&ccedil;&atilde;o da equipe:"
+no_user_found = "Nenhum usu&aacute;rio encontrado"
+
+
+finder_mode_VISIBLE = "Logado"
+finder_mode_BUSY = "Ocupado"
+finder_mode_HIDDEN = "Invis&iacute;vel"
+
+empty_search = "Voc&ecirc; deve preencher um par&acirc;metro para a busca"
+
+
+no_project_found = "Nenhum projeto foi encontrado nesta busca."
+error_cannot_find_user = "Esse usu&aacute;rio n&atilde;o existe."
+
+list_all_projects = "Listar todos os projetos"
+list_all_communities = "Listas todas as comunidades"
+list_all_friends = "Listar todos os amigos"
+visit_webfolio = "Ver Webf&oacute;lio"
+visit_page = "Ver p&aacute;gina"
+visit_diary = "Ver di&aacute;rio"
+[logs]
+new_user = " Novo(s) usu&aacute;rio foi cadastrado no AMADIS."
+
+[invalid_login]
+back_to_start = "Voltar para a tela inicial do AMADIS."
+
+[inicial]
+lec_text_1 = "O ambiente Amadis foi desenvolvido com intuito de conectar pessoas e id&eacute;ias. Nele voc&ecirc; pode compartilhar seus projetos com outros colegas, divulgar e discutir suas id&eacute;ias, buscar informa&ccedil;&otilde;es, encontrar parcerias de trabalho e ainda participar de cursos virtuais."
+
+
+error_session_timeout = "A sua sess&atilde;o espirou. Por favor, efetue o login novamente."
+error_cannot_register_logged = "Para poder realizar um novo cadastro no AMADIS, voc&ecirc; deve primeiro sair do ambiente."
+
+
+
+[register]
+escolher_cidade ="Escolha uma cidade:"
+frm_username="Digite um nome de usu&aacute;rio:"
+frm_password="Digite uma senha:"
+frm_re_password="Re-digite a senha:"
+
+frm_name="Digite o seu nome completo:"
+frm_email="Digite o seu e-mail:"
+frm_endereco="Digite o seu endere&ccedil;o residencial:"
+frm_codCidade="Selecione a sua cidade:"
+frm_cep="Digite o seu CEP:"
+frm_telefone="Digite o seu telefone. Ex:(0xx)-N. Telefone:"
+
+frm_datNascimento="Informe a sua data de nascimento:"
+frm_datNascimento_name = "Data de nascimento"
+
+frm_aboutMe="Fale um pouco sobre voc&ecirc;."
+
+frm_foto = "Selecione um arquivo com uma foto sua."
+
+try_again = "Tente Novamente"
+
+register_ok = "Seu cadastro foi efetuado com sucesso. Para acessar o AMADIS, basta agora entra com seu nome de usu&aacute;rio e senha no menu ao lado."
+register_wait = "Seu pedido de cadastro foi efetuado com sucesso e aguarda aprova&ccedil;&atilde;o do administrador. Assim que ele for aceito, uma mensagem ser&aacute; enviada para o e-mail que voc&ecirc; cadastrou."
+
+error_user_exists = "J&aacute; existe um usu&aacute;rio utilizando este nome."
+error_fatal = "Infelizmente n&atilde;o foi poss&iacute;vel completar o seu processo de cadastro devido a um erro desconhecido. Por favor tente novamente. Caso o problema persista, entre em contato com o administrador do sistema."
+
+error_password_dot_not_macth = "As senhas digitadas n&atilde;o s&atilde;o iguais."
+error_picture_not_defined = "O nome de uma foto n&atilde;o foi corretamente selecionado, por favor tente novamente"
+
+error_saving_picture = "Ocorreu um erro salvando a sua foto no banco de dados. Por favor entre em contato com o administrador do ambiente."
+
+error_creating_user_dir = "Ocorreu um erro grave criando a pasta para seu usu&aacute;rio. Por favor, contate o adminsitrador do sistema."
+
+error_saving_user = "Ocorreu um erro grave salvando seus dados. A opera&ccedil;&atilde;o n&atilde;o foi conclu&iacute;da com sucesso. Por favor entre em contato com o administrador do ambiente." 
+
+error_sending_email = "O seu cadastro foi efetuado com sucesso, mas por uma raz&atilde;o desconhecida o seu e-mail de confirma&ccedil;&atilde;o n&atilde;o foi corretamente enviado. No entanto isso n&atilde;o impede que voc&ecirc; utilize normalmente o ambiente."
+
+error_invalid_email = "O endere&ccedil;o de e-mail digitado n&atilde;o &eacute; v&aacute;lido."
+error_cannot_contact_email_server = "N&atilde;o consegui contato com o servidor de email que voc&ecirc; digitou. Isso pode ser um problema tempor&aacute;rio de comunica&ccedil;&atilde;o, ou um problema no preenchimento do formul&aacute;rio. Voc&ecirc; tem certeza que seu email &eacute; {EMAIL}?"
+
+pag_0 = "Nome de Usu&aacute;rio e a Senha"
+pag_1 = "Dados Pessoais"
+pag_2 = "Foto Pessoal"
+pag_3 = "Concluir Cadastro" 
+
+#email to be send when the user register
+register_accepted_email = "<html> <body> <p>Caro(a) {FIRSTNAME}, <p>Seu cadastro foi aceito no AMADIS com os seguintes dados: <p>Usu&aacute;rio: {USERNAME} <br>Nome Completo: {NAME} <p>Para acessar o ambiente, basta visitar o site {URL}, digitar o seu usu&aacute;rio e senha no Login (ver abaixo), e clicar em OK.  <p align=center><img src='{IMG_URL}/howto_login.gif'> </body> </html>"
+
+register_waiting_email = " Seu cadastro foi aceito no AMADIS "
+register_subject_email = "Cadastro no AMADIS"
+
+
+[diary]
+frm_titulo = "T&iacute;tulo da minha mensagem:"
+frm_texto = "Conte&uacute;do da minha mensagem:"
+frm_imagem = "Escolha a imagem do seu di&aacute;rio:"
+frm_tituloDiario = "Escolha o t&iacute;tulo do seu di&aacute;rio:"
+frm_textoProfile = "Descreva seu perfil pessoal:"
+
+frm_body = "Coment&aacute;rio"
+
+aguardando_comentario = "Aguardando coment&aacute;rios."
+comentarios = "Coment&aacute;rios"
+escrever_nota = "Escrever uma nova nota no di&aacute;rio."
+editar_diario = "Editar meu di&aacute;rio."
+procurar_diarios = "Procurar por outros di&aacute;rios."
+data_envio = "Enviado em "
+por = " por "
+titulo_padrao = "Di&aacute;rio de"
+
+permanent_link = "Link Permanente"
+
+post_diary = "Publicar no meu di&aacute;rio"
+post_not_exists = "N&atilde;o existe a nota no di&aacute;rio."
+post_not_deleted = "N&atilde;o foi possivel salvar a sua nota!"
+post_com_comments = "Esta nota do di&aacute;rio n&atilde;o pode ser removida, pois j&aacute; possui comentarios!"
+post_no_edit = "Esta nota do di&aacute;rio n&atilde;o pode ser editada, pois j&aacute; possui coment&aaacute;rios!"
+post_new_comment = "Escrever novo Coment&aacute;rio"
+post_delete = "Voc&ecirc; realmente deseja apagar esta nota no di&aacute;rio?"
+
+comments_dont_exists = "Esta nota ainda n&atilde;o possui coment&aacute;rios"
+
+diary_amadis = "Di&aacute;rios do AMADIS"
+diary_empty = "Este Di&aacute;rio n&atilde;o possui notas."
+profile_not_saved = "N&atilde;o foi poss&iacute;vel salvar sua altera&ccedil&atilde;o no Di&aacute;rio."
+write_comment = "Escrever um Coment&aacute;rio para este Di&aacute;rio"
+edit_profile = "Editar dados do meu Di&aacute;rio"
+
+
+no_diary_found = "Nenhum usu&aacute;rio enviou mensagens para o Di&aacute;rio at&eacute; o momento."
+
+msg_comments_saved = "Seu Coment&aacute;rio foi enviado com sucesso"
+msg_post_success = "Sua nota foi editada com sucesso"
+msg_profile_edit_success = "Seu Di&aacute;rio foi editado com sucesso."
+
+error_post_cannot_be_edited = "Esta nota n&atilde;o pode ser editada post j&aacute; possui coment&ecirc;rios";
+error_comment_not_saved = "A nota n&atilde;o foi salva com sucesso!"
+error_post_cannot_be_deleted = "Este Post nao pode ser deletado pois ja possui comentarios!"
+error_post_not_delete = "N&atilde;o foi possivel deletar esta nota!"
+error_post_does_not_exist = "Esse post n&atilde;o existe ou foi apagado"
+error_user_not_logged = "Voc&ecirc; precisa estar logado no sistema para acessar seu di&aacute;rio pessoal";
+
+[Correio]
+frm_destinatario = "Destinat&aacute;rio de minha mensagem:"
+frm_assunto = "Assunto da minha mensagem:"
+frm_mensagem = "Texto da minha mensagem:"
+
+
+[webfolio]
+change_personal_data = "Alterar meus dados pessoais"
+change_password = "Trocar senha"
+
+see_my_home_page = "Ver a minha p&aacute;gina"
+publish_my_home_page = "Publicar a minha p&aacute;gina"
+see_home_page = "Ver p&aacute;gina"
+see_diary = "Ver di&aacute;rio"
+add_friend = "Adicionar como amigo"
+send_email = "Enviar um e-mail"
+send_a_comment = "Envie um coment&aacute;rio (Opcional)"
+send_a_message = "Deixe uma mensagem"
+message = "Mensagem:"
+read_my_messages = "Ver as minhas mensagens"
+error_message_not_send = "N&atilde;o foi poss&iacute;vel enviar a sua mensagem."
+error_message_send_success = "A sua mensagem foi enviada com sucesso!"
+user_profile = "Ver webf&oacute;lio"
+communities = "Comunidades"
+new_message = "nova mensagem para voc&ecirc;"
+new_messages = "novas mensagens para voc&ecirc;"
+access_email = "acessar o e-mail"
+empty_inbox = "N&atilde;o h&aacute; novas mensagens"
+no_comments = "N&atilde;o h&aacute; coment&aacute;rios."
+messages = "Mensagens"
+diary = "Di&aacute;rio"
+no_amadis_news = "N&atilde;o h&aacute; novidades"
+
+change_password = "Troca senha"
+project_invitation = "Voc&ecirc; foi convidado para participar do projeto";
+
+friend_invitation = "Este usu&aacute;rio te adcionou como amigo!"
+no_chats = "Nao h&aacute; chats ocorrendo"
+
+
+project_comments = "coment&aacute;rios em"
+project_comment = "coment&aacute;rio em"
+
+forum_list_more = "Ver todos os F&oacute;runs"
+webfolio_visit = "Ir para o Webf&oacute;lio"
+
+user_no_communities = "O usu&aacute; n&atilde; participa de nenhuma comunidade no momento."
+user_no_projects = "O usu&aacute; n&atilde; participa de nenhum projeto no momento."
+no_forums_events = "Nenhuma novidade nos f&oacute;runs"
+init_chat = "Iniciar conversa"
+off_line_user = "Usu&aacute;rio desconectado"
+
+[chat]
+frm_flaPermanente = "Salvar o chat da sala ?"
+frm_datInicio = "Agende o in&iacute;cio do seu chat"
+frm_nomSala = "Escolha um nome para sua sala:"
+frm_desSala = "Escolha o assunto da sala:"
+submit_chat = "Criar Sala"
+chats_open = "Salas Abertas" 
+create_chat = "Crie Seu Chat no AMADIS!"
+create_chat_error = "Erro na abertura da sala."
+no_users_inside = "sem usu&aacute;rios na sala" 
+one_user_inside = "1 usu&aacute;rio na sala"
+users_inside = " usu&aacute;rios na sala"
+scheduled_chats = " marcado para dia"
+no_scheduled_chats = "N&atilde;o h&aacute; chats agendados."
+chat_name_already_exists="Nome de Sala j&aacute; Utilizado"
+cannot_schedule_in_past="N&aatilde;o &eacute; poss&iacute;vel agendar chats no passado"		     
+not_allowed="Acesso Negado"
+user_already_in_room = "Usu&aacute;rio j&aacute; est&aacute; em outra sala de chat"
+
+
+[chatroom]
+access_denied = "Acesso Negado ! N&aatilde;o existe c&oacute;digo na sala"
+invalid_room = "A sala solicitada n&aacute;o existe." 
+user_enter_room = "Entrou na sala "
+user_exit_room = "Saiu da sala "
+talk_all = "Fala para Todos"
+talk_to = "Fala para"
+user_not_logged = "Usu&aacute;rio n&aacute;o existe na sala"
+send_to = "Enviar para:"
+msg = "Mensagem:"
+all = "TODOS"
+sendmsg = "Enviar"
+leave = "Sair da sala"
+
+
+[cursos]
+my_courses ="Meus Cursos"
+chat_curso="Chats do Curso"
+diario_curso ="Di&aacute;rio do Curso"
+lista_inscritos_curso="Inscritos no Curso"
+aprovar_pedidos="Moderar Inscritos"
+upload_curso="Upload"
+atualizar_curso="atualizar"
+no_code ="Acesso inv&aacute;lido"
+
+
+[cad_curso]
+inicial = "Cadastro de Cursos"
+erro_datas = "Houve um erro na escolha das datas"
+frm_descricao= "Descri&ccedil;&atilde;o do curso"
+frm_nome = "Nome do Curso"
+frm_flagInscricaoAutomatica = "Inscri&ccedil;&atilde;o automatica"
+frm_datInicio = "Data de In&iacute;cio"
+frm_datFim = "Data de Fim"
+frm_datInscricaoInicio = "In&iacute;cio das Inscri&ccedil;&otilde;es"
+frm_datInscricaoFim = "Fim das Inscri&ccedil;&otilde;es"
+
+
+[atualizar_curso]
+frm_descricao= "Descri&ccedil;&atilde;o do curso"
+frm_nome = "Nome do Curso"
+frm_flagInscricaoAutomatica = "Inscri&ccedil;&atilde;o autom&aacute;tica"
+frm_datInicio = "Data de In&iacute;cio"
+frm_datFim = "Data de Fim"
+frm_datInscricaoInicio = "In&iacute;cio das Inscri&ccedil;&otilde;es"
+frm_datInscricaoFim = "Fim das Inscri&ccedil;&otilde;es"
+
+
+
+[errors]
+error_course_not_exists = "O curso requisitado n&atilde;o existe!"
+error_project_not_exists = "O projeto requisitado n&atilde;o existe!"
+error_not_a_project_member = "Voc&ecirc; n&atilde;o &eacute; um membro deste projeto."
+error_not_a_course_member = "Voc&ecirc; n&atilde;o &eacute; um participante deste curso."
+
+error_loading_image = "Erro ao carregar a imagem..."
+
+notices_not_found = "N&atilde;o existe nenhum aviso atualmente."
+
+msg_password_change_sucesfull = "Sua senha foi alterada com sucesso."
+msg_data_changed = "Seus dados foram alterados com sucesso."
+msg_joined_project = "Voc&ecirc; agora faz parte da equipe do projeto "
+msg_rejected_project = "Voc&ecirc; rejeitou o pedido para fazer parte do projeto "
+
+error_joining_project = "Ocorreu algum problema ao tentar aceitar o convite. Por favor tente novamente."
+error_invitation_user_failed = "N&atilde;o foi poss&iacute;vel adicionar o amigo!"
+error_invitation_user_success = "Amigo adicionado com sucesso!"
+
+error_under_construction = "Esta ferramente encontra-se em constru&ccedil;&atilde;o"
+[changepassword]
+frm_password="Digite sua senha atual:"
+frm_new_password="Digite sua nova senha:"
+frm_re_password="Re-digite sua nova senha:"
+change_password = "Trocar a senha"
+
+error_old_password_problem = "Sua senha atual n&atilde;o confere. Por favor tente novamente."
+error_saving_password = "Ocorreu um erro salvando sua nova senha. A senha atual <b>n&atilde;o</b> foi alterada. Por favor, tente novamente."
+
+error_empty_password = "Voc&ecirc; digitou um nova senha em branco. Por favor digite uma senha v&aacute;lida e tente novamente"
+
+
+[changeUserData]
+escolher_cidade ="Escolha uma cidade:"
+frm_username="Digite um nome de usu&aacute;rio:"
+#frm_username_desc="O nome de usu&aacute;rio serve para voc&ecirc; efetuar logon no ambiente."
+frm_password="Digite uma senha:"
+#frm_password_desc="A sua senha &eacute; secreta e n&atilde;o a perca!!"
+frm_re_password="Re-digite a senha:"
+
+frm_name="Digite o seu nome completo:"
+frm_email="Digite o seu e-mail:"
+frm_endereco="Digite o seu endere&ccedil;o residencial:"
+frm_codCidade="Selecione a sua cidade:"
+frm_cep="Digite o seu CEP:"
+frm_telefone="Digite o seu telefone. Ex:(0xx)-N. Telefone:"
+
+frm_datNascimento="Informe a sua data de nascimento:"
+frm_datNascimento_name = "Data de nascimento"
+
+frm_historico="Envie um arquivo com um breve hist&oacute;rico de sua experi&ecirc;ncia profissional."
+
+frm_foto = "Selecione um arquivo com uma foto sua."
+
+try_again = "Tente Novamente"
+
+
+
+pag_0 = "Dados Pessoais"
+pag_1 = "Foto Pessoal"
+pag_2 = "Concluir" 
+
+
+error_user_exists = "J&aacute; existe um usu&aacute;rio utilizando este nome."
+error_fatal = "Infelizmente n&atilde;o foi poss&iacute;vel completar o seu processo de cadastro devido a um erro desconhecido. Por favor tente novamente. Caso o problema persista, entre em contato com o administrador do sistema."
+
+error_picture_not_defined = "O nome de uma foto n&atilde;o foi corretamente selecionado, por favor tente novamente"
+
+error_saving_picture = "Ocorreu um erro salvando a sua foto no banco de dados. Por favor entre em contato com o administrador do ambiente."
+
+error_saving_user = "Ocorreu um erro grave salvando seus dados. A opera&ccedil;&atilde;o n&atilde;o foi conclu&iacute;da com sucesso. Por favor entre em contato com o administrador do ambiente." 
+
+error_cannot_contact_email_server = "N&atilde;o consegui contato com o servidor de email que voc&ecirc; digitou. Isso pode ser um problema tempor&aacute;rio de comunica&ccedil;&atilde;o, ou um problema no preenchimento do form&aacute;rio. Voc&ecirc; tem certeza que seu email &eacute; {EMAIL}?"
+
+
+[recoverPassword]
+explanation = "Para gerar uma nova senha para sua conta, por favor entre com as informa&ccedil;&otilde;es abaixo. Ambas as informa&ccedil;&otilde;es devem coincindir com o seu cadastro, caso contr&aacute;rio n&atilde;o ser&aaacute; poss&iacute;vel recuperar a sua senha."
+
+frm_username="Digite um nome de usu&aacute;rio:"
+frm_email="Digite o e-mail que voc&ecirc; utilizou no seu cadastro."
+
+recover_password_email_sub = "Sua nova senha do AMADIS"
+recover_password_email = "{FIRSTNAME}, sua nova senha &eacute; {PASSWORD}."
+
+error_email_possible_problem = "Apesar do e-mail digitado coincidir com o seu cadastro, n&atilde;o foi possivel contactar o seu servidor de email. Pode ser que o e-mail enviado pelo AMADIS n&atilde;o seja entregue corretamente. Se voc&ecirc; tem certeza que esta conta de e-mail est&acirc funcionando corretamente, basta submeter novamente seu pedido."
+
+error_user_not_found = "N&atilde;o consegui encontrar um usu&aacute;rio com essa combina&ccedil;&atilde;o de nome e e-mail."
+
+error_sending_email = "Houve um erro enviando o e-mail com sua nova senha."
+error_saving_user = "Apesar de um e-mail ter sido enviado com uma nova senha, ocorreu um erro ao salv&aacute;-la no banco de dados. Portanto, voc&ecirc; deve ignorar o e-mail enviado, pois a senha que ali consta n&atilde;o &eacute; v&aacute;lida."
+
+try_again = "Tente novamente"
+recover_password_success = "Uma e-mail com sua nova senha foi enviado. Por favor verifique sua caixa postal."
+
+
+[avisos]
+frm_titulo = "T&iacute;tulo do Aviso:"
+frm_descricao = "Descri&ccedil;&atilde;o"
+
+error_aviso_not_found = "Ocorreu algum problema ao ler o aviso."
+change_password = "Troca senha"
+
+warning_amadis = "Avisos do AMADIS"
+
+[projects]
+project = "Projeto"
+areas = "Selecione uma das &aacute;reas para listar<br> os projetos referente ao t&oacute;pico:"
+any_area = "Nenhuma &aacute;rea cadastrada"
+no_members = "Nenhum membro cadastrado"
+more_members = "Ver todos os membros que j&aacute; participaram do projeto:"
+more_comments = "Mais coment&aacute;rios do projeto"
+more_news = "Mais not&iacute;cias do projeto"
+add_news = "Enviar uma nova not&iacute;cia para o projeto"
+add_project_comment = "Adicionar um coment&aacute;rio"
+send_a_comment = "Coment&aacute;rio"
+project_in = "Projeto em"
+project_areas = "Areas:"
+project_group = "Equipe do Projeto:"
+project_link_page = "Ver a p&aacute;gina do projeto"
+project_link_forum = "F&oacute;runs do projeto"
+project_link_chat = "Chats do projeto"
+project_link_library = "Biblioteca do projeto"
+project_link_diary = "Di&aacute;rio do projeto"
+project_link_edit = "Editar a p&aacute;gina do projeto"
+project_link_info = "Atualizar as informa&ccedil;&otilde;es do deste projeto"
+project_link_group = "Convidar pessoas para o projeto"
+project_link_upload = "Publicar arquivos"
+project_link_leave = "Abandonar este projeto"
+
+view_all_files = "Ver todos arquivos desta biblioteca "
+last_five = "Cinco &uacute;ltimos arquivos enviados:"
+no_files = "Sem arquivos no momento"
+
+project_leave_confirm = "Voc&ecirc; tem certeza que deseja abandonar esse projeto?"
+project_not_projects = "Voc&ecirc; n&atilde;o possui nenhum projeto"
+projects_community = "Selecione uma comunidade para listar os projetos"
+project_join = "Juntar-me a esse Projeto"
+project_join_request = "Por qu&ecirc; voc&ecirc; deseja fazer parte desse projeto?"
+user_join_request = " deseja tornar-se membro deste projeto."
+list_projects = "Listagem dos projetos"
+list_projects_areas = "Projetos de"
+list_projects_community = "Projetos da comunidade"
+list_projects_comments = "Coment&aacute;rios do projeto"
+list_projects_news = "Novidades do projeto"
+search_projects_result = "Resultados para"
+project_comments = "novos coment&aacute;rios"
+project_comment = "novo coment&aacute;rio"
+comment = "Coment&aacute;rio"
+project_news = "Novidade"
+project_orfan = "Este projeto encontra-se atualmente como &oacute;rf&atilde;o. Voc&ecirc; pode adot&aacute;-lo como seu, se quiser."
+project_adopt = "Adotar este Projeto"
+project_adopt_confirm = "Voc&ecirc; tem certeza que deseja adotar esse projeto?"
+
+project_forum_title = "F&oacute;rum no Projeto"
+
+frm_title = "Titulo da not&iacute;cia"
+frm_text = "Not&iacute;cia"
+
+project_intro = "O ambiente Amadis foi desenvolvido para<br> conectar pessoas e id&eacute;ias. Nele voc&ecirc; pode <br>compartilhar seus projetos com outros colegas, divulgar e discutir suas id&eacute;ias, buscar <br>informa&ccedil;&otilde;es, encontrar parcerias de trabalho e <br>ainda participar de cursos virtuais."
+request_join_waiting = "Sua requisi&ccedil;&atilde;o para participar desse projeto est&aacute; aguardando por aprova&ccedil;&atilde;o."
+
+search_projects = "Buscar nos Projetos"
+
+error_no_explain_join_project = "Voc&ecirc; deve preencher os seus motivos para entrar nesse projeto"
+msg_save_comment_success  = "O seu coment&aacute;rio foi enviado com sucesso!"
+error_not_save_comment = "O seu coment&aacute;rio n&atilde;o foi enviado com sucesso.<br> Se o problema persistir contate o administrador do ambiente."
+error_not_save_news = "A not&iacute;cia n&atilde;o foi salva!"
+error_save_news_success = "Sua not&iacute;cia foi salva com sucesso!"
+error_any_project_id = "Nenhum identificador de projeto foi especificado!"
+error_project_code_does_not_exists = "O projeto que foi requisitado n&atilde;o existe no banco de dados. Por favor contate o administrador do sistema caso o problema persistir."
+error_not_group_member = "Acesso negado! Para realizar essa opera&ccedil;&atilde;o voc&ecirc; precisa ser membro deste grupo."
+error_join_request = "Houve um erro ao registrar o seu pedido para juntar-se ao projeto. Por favor tente novamente"
+error_joining_user = "Ocorreu um erro ao aceitar este pedido. Por favor tente novamente."
+
+error_cannot_leave_project = "Ocorreu algum erro ao deixar esse projeto. Por favor tente novamente."
+error_edit_not_allowed = "Voc&ecirc; s&oacute; pode editar os projetos nos quais participa."
+
+msg_project_created = "O projeto foi criado com sucesso!"
+msg_join_request_send = "Sua solicita&ccedil;&atilde;o para juntar-se a esse projeto foi registrada, por favor, aguarde por uma resposta"
+msg_user_added = " foi aceito como membro deste projeto."
+msg_rejected_user = " foi rejeitado como membro deste projeto."
+msg_leave_project = " Voc&ecirc; n&atilde;o &eacute; mais membro do projeto "
+msg_project_adopted = "O projeto foi adotado com sucesso."
+
+no_comments = "N&atilde;o h&aacute; coment&aacute;rios no projeto."
+no_news = "N&atilde;o h&aacute; not&iacute;cias no projeto."
+back_to_project = "Voltar para o projeto"
+
+[project_create]
+frm_title = "Nome do Projeto"
+frm_description = "Uma breve descri&ccedil;&atilde;o sobre o projeto"
+frm_status = "Em que estado o projeto encontra-se atualmente"
+
+frm_foto = "Selecione um arquivo com uma imagem que represente o seu projeto."
+
+trye_again = "Tente Novamente"
+
+error_proj_exists = "J&aacute; existe um projeto com esse nome."
+error_proj_must_select_areas = "Voc&ecirc; deve selecionar ao menos uma &aacute;rea do conhecimento para o seu projeto"
+
+error_picture_not_defined = "O nome de uma foto n&atilde;o foi corretamente selecionado, por favor tente novamente"
+error_saving_picture = "Ocorreu um erro salvando a sua foto no banco de dados. Por favor entre em contato com o administrador do ambiente."
+error_invalid_image_type = "O tipo de imagem enviada n&atilde;o &eacute; suportada. Por favor seleciona uma imagem em outro formato."
+
+error_save_failed = "Ocorreu um erro ao salva o seu projeto no Banco de Dados. Infelizmente n&atilde;o foi poss&iacute;vel completar a opera&ccedil;&atilde;o. Caso o problem persista, por favor contate o administrador do sistema."
+
+pag_0 = "Dados Gerais"
+pag_1 = "&Aacute;reas do Conhecimento"
+pag_2 = "Foto do Projeto"
+pag_3 = "Concluir" 
+
+[project_members]
+project = Projeto
+project_group_actual = "Equipe atual do Projeto"
+project_group_old = "Pessoas que j&aacute; participaram deste projeto."
+back_to_project = "Voltar para o projeto"
+
+
+[project_invite_user]
+invite_users_to_project = "Convidar Usu&aacute;rio para o Projeto"
+search_result = "Resultado da Pesquisa"
+frm_invite = "Convidar"
+
+msg_users_removed = "Essa pesquisa retornou algumas pessoas que j&aacute; fazem parte do projeto. Para evitar problemas, eles foram retirados da listagem."
+msg_invitation_success = "Os convites para participar do seu projeto foram enviados. Assim que as pessoas convidadas aceitarem, elas far&atilde;o parte da equipe do seu projeto. Voc&ecirc; pode convidar mais pessoas, ou clicar em cancelar e voltar para o seu projeto."
+
+search_users = "Procura por usu&aacute;rios"
+search = "Procura"
+
+error_user_not_select = "Voc&ecirc; deve selecionar ao menos uma pessoa para convidar."
+error_invitation_failed = "Ouve um erro ao realizar os convites para o seu projeto. Por favor tente novamente. Caso o problema persista, contate o administrador do sistema."
+
+[upload]
+error_upload_err_ini_size = "Tamanho do arquivo: {FILE} excede o permitido pelo servidor."
+error_upload_err_form_size = "Tamanho do arquivo: {FILE} excede o especificado para este formul&aacute;rio."
+error_upload_err_partial = "N&atilde;o foi feito o envio completo do arquivo: {FILE}."
+error_upload_err_no_file = "O arquivo: {FILE} n&atilde;o foi enviado."
+error_cannot_delete_diretory = "N&atilde;o foi poss&iacute;vel deletar o diret&oacute;rio: {DIR}"
+msg_diretory_removed_success = "O diret&oacute;rio: {DIR} foi removido com sucesso"
+msg_files_removed_success = "Arquivo(s) removido(s) com sucesso!"
+msg_diretory_created_success = "O diret&oacute;rio: {DIR} foi criado com sucesso."
+msg_upload_success = "Arquivo(s) enviado(s) com sucesso."
+msg_upload_unzip_success = "Arquivo descompactado com sucesso."
+msg_diretory_not_exists = "Diret&oacute;rio inv&aacute;lido!"
+msg_upload_save_file_success = "Arquivo salvo com sucesso!"
+
+html_page = "P&aacute;gina HTML"
+diretory = "Pasta"
+image_gif = "Imagem GIF"
+image_jpeg = "Imagem JPEG"
+image_jpg = "Imagem JPG"
+image_png = "Imagem PNG"
+image_bmp = "Imagem BMP"
+zip_file = "Arquivo ZIP"
+unknow_file = "Desconhecido"
+empty_diretory = "Diret&oacute;rio vazio."
+edit_page = "&Aacute;rea de Edi&ccedil;&atilde;o da P&aacute;gina"
+send_files = "Enviar arquivos:"
+
+fields_to_delete = "Os seguintes arquivos ser&atilde;o removidos!"
+not_delete_empty_diretory = "Este diret&oacute;rio est&aacute; vazio. N&atilde;o &eacute; poss&iacute;vel delet&aacute;-lo,\n estando dentro dele!"
+not_selected_files = "N&atilde;o foi selecionado nenhum arquivo!"
+new_folder_name = "Digite o nome da nova pasta:\n"
+number_files_to_send = "Quero enviar mais arquivos:"
+overwrite_files = "Os seguintes arquivos ser&atilde;o sobrescritos:"
+new_file_name = "Digite o nome do novo arquivo:\n"
+invalid_file_name = "Nome do arquivo inv&aacute;lido."
+invalid_folder_name = "Nome da pasta inv&aacute;lido."
+file_exists = "Este arquivo j&aacute; existe."
+
+
+[communities]
+dont_have_communities = "N&atilde;o h&aacute; comunidades"
+members = "membros"
+member = "membro"
+search_communities_result = "Resultados para"
+community_join = "Juntar-me a esta comunidade"
+communities = "Comunidades"
+more_options = "Mais Op&ccedil;&otilde;es"
+no_communities = "Voc&ecirc; n&atilde;o possui comunidades"
+msg_community_created = "Comunidade criada com sucesso!"
+msg_community_updated ="Comunidade Atualizada com Sucesso"
+without_communities_news = "N&atilde;o h&aacute; entrada de not&iacute;cias nas comunidades"
+msg_community_news_created = "Not&iacute;cia salva com sucesso!"
+community = "Comunidade"
+error_community_not_exists = "A comunidade requisitada n&atilde;o existe"
+error_no_community_id = "N&atilde;o foi especificado um identificador para comunidade"
+community_members = "Membros da Comunidade"
+more_members = "Mais integrantes"
+not_admin = "Voc&ecirc; n&aacute;o &eacute; administrador desta comunidade " 
+no_members = "N&aacute;o h&aacute; integrantes nesta Comunidade"
+community_link_edit = "Editar os dados da Comunidade"
+community_link_members = "Gerenciar participantes da Comunidade"
+community_link_projects = "Gerenciar projetos vinculados a Comunidade"
+community_link_change_image = "Alterar imagem"
+community_link_forum = "F&oacute;runs da Comunidade"
+community_link_chat = "Chats da Comunidade"
+community_link_leave = "Abandonar essa Comunidade"
+membersjoin_not_exists = "N&atilde;o existem solicita&ccedil;&otilde;es de novos membros para esta Comunidade!"
+no_projects = "N&atilde;o h&aacute; projetos para esta comunidade"
+more_projects = "Mais projetos"
+
+user_added ="Usu&aacute;rio adicionado a comunidade"
+user_rejected ="Usu&aacute;rio rejeitado"
+no_users_waiting ="N&atilde;o h&aacute; membros aguardando"
+user_name ="Nome"
+action = "A&ccedil;&otilde;es"
+rejeitado = "rejeitado"
+aprovado = "aprovado"
+
+accepted_subscriptions = " Inscri&ccedil;&otilde;es aceitas" 
+not_accepted_subscriptions = "Inscri&ccedil;&otilde;es negadas"
+not_judged_subscriptions = "Inscri&ccedil;&otilde;es n&atilde;o julgadas"
+
+see_accepted_subscriptions = " Ver Inscri&ccedil;&otilde;es aceitas" 
+see_not_accepted_subscriptions = "Ver Inscri&ccedil;&otilde;es negadas"
+see_not_judged_subscriptions = "Ver Inscri&ccedil;&otilde;es n&atilde;o julgadas"
+
+frm_title = "T&iacute;tulo da not&iacute;cia"
+frm_text = "Texto da not&iacute;cia"
+community_news = "Not&iacute;cia da comunidade"
+save_failure = "N&atilde;o foi poss&iacute;vel salvar a not&iacute;cia.<br> Tente novamente, se o problema persistir contate o administrador do sistema."
+pag_0 = "Not&iacute;cia da comunidade"
+pag_1 = "Concluir"
+send_news = "Enviar novidade"
+
+communities_on_amadis = "Comunidades do AMADIS"
+no_communities_found = "Nenhuma comunidade encontrada"
+
+[community_create]
+moderate = "Moderada"
+error_community_not_exists = "A comunidade requisitada n&atilde;o existe"
+error_no_community_id = "N&atilde;o foi especificado um identificador para comunidade"
+not_admin = "Voc&ecirc; N&atilde;o &eacute; administrador desta comunidade " 
+public = "P&uacute;blica"
+frm_name = "Nome da comunidade"
+frm_description = "Descri&ccedil;&atilde;o"
+frm_flagAuth = "Esta comunidade &eacute;"
+pag_0 = "Dados gerais"
+pag_1 = "Foto da comunidade"
+pag_2 = "Concluir"
+general_data = "Dados Gerais"
+community_pic = "Foto da Comunidade"
+try_again = "Tente novamente"
+
+error_save_failed = "Ocorreu um erro ao salva a sua comunidade no Banco de Dados. Infelizmente n&atilde;o foi poss&iacute;vel completar a opera&ccedil;&atilde;o. Caso o problem persista, por favor contate o administrador do sistema."
+error_saving_picture = "Ocorreu um erro salvando a sua foto no banco de dados. Por favor entre em contato com o administrador do sistema."
+
+[people]
+search_users = "Busca de Pessoas"
+frm_username = "Nome de usu&aacute;rio:"
+frm_name = "Nome completo:"
+diary = "Di&aacute;rio"
+last_users = "Usu&aacute;rios logados"
+last_diary_posts = "&Uacute;ltimas postagens em di&aacute;rios"
+list_all_diaries = "Listar todos os di&aacute;rios pessoais"
+more_options = "Mais Op&ccedil;&otilde;es"
+see_home_page = "Ver p&aacute;gina"
+users_pages = "P&aacute;ginas de usu&aacute;rios"
+projects_pages = "P&aacute;ginas de projetos"
+no_user_loggeds = "Nenhum usu&aacute;rio logado."
+
+[admin]
+admin = "Administracao"
+access_denied = "Acesso negado, &aacute;rea restrita para administra&ccedil;&atilde;o do ambiente"
+edit_categories = "Editar Categorias de usu&aacute;rio"
+edit_states = "Editar Lista de Estados"
+edit_cities = "Editar Lista de Cidades"
+edit_knowledge_areas = "Editar Lista de &Aacute;reas do Conhecimento"
+edit_project_status = "Editar Lista de Status de Projetos"
+config_environment = "Configurar Ambiente"
+config_forum = "Configurar F&oacute;rum"
+config_chat = "Configurar Chat"
+config_communities = "Configurar Comunidades"
+list_not_authorized = "Communidades n&atilde;o autorizadas"
+error_authorization_success = "Autoriza&ccedil;&atilde;o da(s) comunidade(s) realizada com sucesso!"
+send_messages = "Enviar avisos para utilizadores"
+
+[forum]
+frm_title = "T&iacute;tulo do F&oacute;rum"
+frm_body = "Corpo da Mensagem"
+
+frm_name = "Nome do F&oacute;rum"
+frm_open = "Permitir que pessoas de fora do grupo participem deste f&oacute;rum"
+
+messages = "Mensagens"
+no_messages = "Este F&oacute;rum ainda n&atilde;o possu&iacute; mensagens."
+delete_message = "Voc&ecirc; realmente deseja excluir essa mensagem?"
+msg_message_posted = "Sua mensagem foi enviada com sucesso."
+msg_message_edit = "Sua mensagem foi editada com sucesso."
+
+
+
+error_forum_not_found = "O f&oacute;rum requisitado n&atilde;o existe."
+error_no_id = "O c&oacute;digo do f&oacute;rum n&atilde;o foi informado."
+error_message_not_posted = "Ocorreu um erro ao enviar sua mensagem. Por favor, tente novamente."
+
+
+[library]
+
+upload_file = "Enviar arquivo"
+view_file = "Visualizar arquivos"
+delete_file = "Apagar arquivo";
+select_file = "Selecione um arquivo para exib&iacute;-lo"
+image_file = "Imagens"
+text_file = "Textos"
+audio_file = "&Aacute;udio"
+video_file = "V&iacute;deo"
+other_file = "Outros"
+list_all_files = "Listar todos os arquivos"
+
+wish_delete = "Voc&ecirc; tem certeza que deseja deletar este arquivo?"
+
+no_img = "N&atilde;o temos imagens no momento"
+no_docs = "N&atilde;o temos textos no momento"
+no_audio = "N&atilde;o temos &aacute;udios no momento"
+no_video = "N&atilde;o temos v&iacute;deos no momento"
+no_other = "N&atilde;o temos outros arquivos no momento"
+no_all = "N&atilde;o temos documentos nesta biblioteca, para inserir
+novos use o campo abaixo!"
+no_files = "Sem arquivos no momento"
+
+file_successful_sent = "Arquivo enviado com sucesso!"
+file_successful_delete = "Arquivo excluido com sucesso!"
+error_send_file = "Erro ao enviar o arquivo."
+
+
+bad_extension = "Extens&atilde;o n&atilde;o permitida pelo upload"
+files = "arquivos"
+name = "Nome"
+date = "Data"
+size = "Tamanho"
+action = "A&ccedil;&otilde;es"
+send = "Enviar"
+
+[finder]
+finder = "Finder"
+reply_to = "Responder para "
+user_close_window = "A janela de conversa foi fechada."
+
+[scraps]
+scraps_of = "Mensagens de"
+no_scraps = "Esse usu&aacute;rio ainda n&atilde;o possu&iacute; nenhuma mensagem."

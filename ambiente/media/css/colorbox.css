@@ -1,0 +1,256 @@
+#color-box-bounding { 
+                      display: table;
+                      width: 100%;
+                      max-width: 400px;
+                      }
+
+.color-box { 
+             margin-left: 20px;
+             margin-right: 20px;
+             }
+
+#color-table { 
+               margin-bottom: 20px;
+               border: none;
+               border-collapse: separate;
+               border-spacing: 0px;
+               border-padding: 0px;
+               width: 100%;
+               }
+
+
+#color-table TD { 
+                  border: 0px;
+                  border-spacing: 0px;
+                  padding: 0px;
+                  }
+
+/* cbl - corner bottom left */
+/* cbr - corner bottom right */
+/* ctl - corner top left */
+/* ctr - corner top right */
+/* bl - border left */
+/* br - border right */
+/* bt - border top */
+/* bb - border bottom */
+
+
+#color-table TD#ctl { 
+                  height: 12px;
+                  width: 12px;
+                 }
+
+#color-table TD#ctr { 
+                  height: 12px;
+                  width: 12px;
+                  }
+
+#color-table TD#cbl { 
+                  height: 12px;
+                  width: 12px;
+                 }
+
+#color-table TD#cbr { 
+                  height: 10px;
+                  width: 12px;
+                 }
+
+
+.box_bege { 
+            background-color: #FAFAF8;
+            }
+
+/* BLUE */
+.box_blue { 
+            background-color: #F3F7FF;
+            }
+.box_blue TD {  
+                 font-family: Arial, Helvetica, sans-serif;
+                 color: #85c0d4;
+                 font-size: 11px;
+                 line-height: 14px;
+                 }
+
+.box_blue A { 
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 11px;
+                color: #5481A8;
+                font-weight: bold;
+                text-decoration: none;
+                }
+
+.box_blue A:hover { 
+                      color: #689BCF
+                      }
+.box_blue #thumb { 
+                     border: thin solid  #85c0d4;
+                     }
+
+.box_blue #icon-el  { 
+                       background: #F9FBFD;
+                       }
+
+/* BLUE B */
+
+.box_blueb { 
+              background-color: #f8fbff;
+              }
+.box_green { 
+             background-color: #F7F9FA;
+             }
+.box_blua { 
+             background-color: #F1FAFF ;
+             }
+.box_rosa { 
+            background-color: #FFF3F2;
+            }
+
+
+.box_lgreen { 
+              background-color: #FAFAEA;
+              }
+
+
+.box_green2 { 
+              background-color: #F8FBFF;
+              }
+
+
+.box_purple { 
+              background-color: #f6f3ff;
+              }
+
+.box_purple TD {  
+                 font-family: Arial, Helvetica, sans-serif;
+                 color: #564FB4;
+                 font-size: 11px;
+                 line-height: 14px;
+                 vertical-align: top;
+                 }
+
+
+.box_purple A { 
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 11px;
+                color: #6666CC;
+                font-weight: bold;
+                }
+
+.box_purple A:hover { 
+                      color: #3399FF;
+                      }
+
+
+
+.box_darkpurple  { 
+                   background-color: #c3b6e4;
+                   }
+
+.box_darkpurple TD { 
+                     font-family: Arial, Helvetica, sans-serif;
+                     color: #564FB4;
+                     font-size: 11px;
+                     line-height: 14px;
+                     }
+
+.box_darkpurple A { 
+                    font-family: Arial, Helvetica, sans-serif;
+                    font-size: 11px;
+                    color: #6666CC;
+                    font-weight: bold;
+                    }
+
+.box_darkpurple A:hover { 
+                          color: #3399FF;
+                          }
+
+
+
+/* YELLOW */
+.box_yellow { 
+              background-color: #f7f7bc;
+              }
+
+.box_yellow TD {  
+                 font-family: Arial, Helvetica, sans-serif;
+                 color: #85813B;
+                 font-size: 11px;
+                 line-height: 14px;
+                 }
+
+.box_yellow A { 
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 11px;
+                color: #95952A;
+                font-weight: bold;
+                text-decoration: none;
+                }
+
+.box_yellow A:hover { 
+                      color: #3399FF;
+                      }
+.box_yellow #thumb { 
+                     border: solid  #95952A thin;
+                     }
+
+/* YELLOW B */
+.box_yellowb { 
+              background-color: #fff7d1;
+              }
+
+.box_yellowb TD {  
+                 font-family: Arial, Helvetica, sans-serif;
+                 color: #85813B;
+                 font-size: 11px;
+                 line-height: 14px;
+                 }
+
+.box_yellowb A { 
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 11px;
+                color: #856716;
+                font-weight: bold;
+                text-decoration: none;
+                }
+
+.box_yellowb A:hover { 
+                      color: #B88F1E
+                      }
+.box_yellowb #thumb { 
+                     border: solid  #95952A thin;
+                     }
+
+.box_yellowb #icon-el  { 
+                       background: #FFFAE7;
+                       }
+
+/* PINK */
+.box_pink { 
+              background-color: #f9eaea;
+              }
+
+.box_pink TD {  
+                 font-family: Arial, Helvetica, sans-serif;
+                 color: #FFBBC3;
+                 font-size: 11px;
+                 line-height: 14px;
+                 }
+
+.box_pink A { 
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 11px;
+                color: #990000      ;
+                font-weight: bold;
+                text-decoration: none;
+                }
+
+.box_pink A:hover { 
+                      color: #C90000;
+                      }
+.box_pink #thumb { 
+                     border: solid  #FFBBC3 2px;
+                     }
+
+.box_pink #icon-el  { 
+                       background: #FCF4F4;
+                       }

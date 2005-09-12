@@ -1,0 +1,74 @@
+
+
+/* CSSs referentes ao Chat */
+
+.titchat {
+font-family: Arial, Helvetica, sans-serif;
+font-size: 18px;
+line-height: 18px;
+color: #CE3333;
+}
+
+
+
+
+.txtchat {
+font-family: Arial, Helvetica, sans-serif;
+font-size: 11px;
+line-height: 18px;
+color: #CC7474;
+}
+
+.txttitchat { 
+font-family: Arial, Helvetica, sans-serif;
+font-size: 20px;
+line-height: 20px;
+color: #339966;
+}
+
+.chatheader {
+font-family: Arial, Helvetica, sans-serif;
+font-size: 11px;
+line-height: 18px;
+color: #7B4E4E;
+}
+
+.datachat {
+font-family: Arial, Helvetica, sans-serif;
+font-size: 11px;
+font-weight: bold; 
+line-height: 18px;
+color: #006666;
+}
+
+
+
+.persona_01  { 
+               border-top-width: 1px;
+               border-bottom-width: 1px;
+               border-left-width: 0px; 
+               border-right-width: 1px;
+               border-style: solid; 
+               border-color: #E1F7F9;
+               background-color: #FFFFDF; 
+               padding: 7px; 
+               font-family: verdana, Helvetica, sans-serif;
+               font-size: 11px;
+               color: #666666;
+               }
+
+.persona_02  { border-top-width: 1px; border-bottom-width: 1px; border-left-width: 0px; border-right-width: 1px;border-style: solid; border-color: #E1F7F9;background-color: #FFE2B1; padding: 7px; font-family: verdana, Helvetica, sans-serif;font-size: 11px;color: #666666;
+               }
+
+.persona_03  { border-top-width: 1px; border-bottom-width: 1px; border-left-width: 0px; border-right-width: 1px;border-style: solid; border-color: #E1F7F9;background-color: #FFCB27; padding: 7px; font-family: verdana, Helvetica, sans-serif;font-size: 11px;color: #666666;
+               }
+
+.persona_04  { border-top-width: 1px; border-bottom-width: 1px; border-left-width: 0px; border-right-width: 1px;border-style: solid; border-color: #E1F7F9;background-color: #FFEE5E; padding: 7px; font-family: verdana, Helvetica, sans-serif;font-size: 11px;color: #666666;
+               }
+               
+.persona_05  { border-top-width: 1px; border-bottom-width: 1px; border-left-width: 0px; border-right-width: 1px;border-style: solid; border-color: #E1F7F9;background-color: #FFEE5E; padding: 7px; font-family: verdana, Helvetica, sans-serif;font-size: 11px;color: #666666;
+               }
+
+.persona_06  { border-top-width: 1px; border-bottom-width: 1px; border-left-width: 0px; border-right-width: 1px;border-style: solid; border-color: #E1F7F9;background-color: #FAF8FA; padding: 7px; font-family: verdana, Helvetica, sans-serif;font-size: 11px;color: #666666;
+               }
+

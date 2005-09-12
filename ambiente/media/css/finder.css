@@ -1,0 +1,7 @@
+/* finder css */
+/* div#finder { color: #ffffff; letter-spacing: 10.5em } */
+#finderAlert { 
+               position: fixed;
+               top: 0px;
+               right: 20px;
+               }

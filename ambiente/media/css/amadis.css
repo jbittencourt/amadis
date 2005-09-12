@@ -1,0 +1,395 @@
+BODY {
+       margin: 0px;
+       width: 100%;
+       font-family: Arial, Helvetica, sans-serif;
+       font-size: 11px;
+       line-height: 16px;
+       color: #666666;
+
+       background-image: url("../images/bg_linhas_lateral2.gif");
+       background-repeat: repeat-y;
+       background-position: right;
+}
+
+
+BODY IMG { 
+           border: 0px;
+           }
+
+
+/* MAIN MENU */
+
+#amadis-global-wrapper { 
+                         position: absolute;
+                         background-image: url("../images/img_dot_blue.gif");
+                         background-repeat: repeat-y;
+                         }
+
+#amadis-logo { 
+               position: absolute;
+               left: 2px;
+               z-index: 20;
+               }
+
+#amadis-header { 
+                 position: absolute;
+                 top: 0px;
+                 left: 206px;
+                 right: 0px;
+                 z-index: 0;
+                 background-image: url("../images/bg_header_2.jpg");
+                 height: 108px;
+                 padding-left: 30px;
+                 }
+
+#amadis-header-menu { 
+                      position: absolute;
+                      bottom: 12px;
+                      }
+
+#amadis-header-line { 
+                      position: absolute;
+                      bottom: 0px;
+                      right: 0px;
+                      }
+#amadis-footer { 
+                 margin-left: 19px;
+                 margin-top: 20px;
+                 height: 50px;
+                 }
+
+
+#nav-menu { 
+            margin-top: 239px;
+            margin-left: 19px;
+            }
+
+#column-one {  
+              background-image: url("../images/pecas_amadis_2.png");
+              padding-top: 25px;
+              padding-bottom: 10px;
+              background-color: #f3f3f6;
+              width: 187px;
+              }
+
+
+
+
+#content-column { 
+                  width: 100%;
+                  margin-top: 108px;
+                  margin-right: 7px;
+                  padding-left: 236px;
+                  float: right;
+                  }
+
+
+#content { 
+           margin-left: 236px;
+           z-index: 2;
+           padding-right: 10px;
+           }
+
+#footer-menu { 
+               display: table-cell;
+               margin-left: 19px;
+               margin-top: -5px;
+               }
+
+
+
+#orange-line { 
+               display:table-cell;
+               }
+
+#dashed-line { 
+               background-image: url("../images/bg_linha_dots.gif");
+               background-repeat: repeat-x;
+               height: 7px;
+               width: 100%;
+               }
+
+
+.portlet-line { 
+                display:table-row;
+                }
+
+.portlet-line DIV { 
+                    vertical-align: top;
+                    }
+
+.portlet { 
+           top: 0px;
+           border: none;
+           margin: 0 0 0.4em 0em;
+           float: none;
+           padding: 0;
+           width: 11.6em;
+           overflow: hidden;
+           margin-left: 6px;
+           display:table-cell
+           } 
+
+
+.error {
+         font-family: Arial, Helvetica, sans-serif;
+         font-size: 16px;
+         line-height: 20px;
+         text-align: center;
+         vertical-align: middle;
+}
+
+.message {
+           font-family: Arial, Helvetica, sans-serif;
+           font-size: 16px;
+           line-height: 20px;
+           text-align: center;
+           vertical-align: middle;
+}
+
+.mnlateral {
+	   font-family: Arial, Helvetica, sans-serif;
+	   font-size: 11px;
+	   line-height: 20px;
+	   color: #007FA0;
+	   left: 3px;
+	   position: relative;
+}
+
+.progress_realcado {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  line-height: 20px;
+ color: #19669E;
+  font-weight: bold;
+}
+
+.progress_normal {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  line-height: 20px;
+ color: #6BB9F2;
+  font-weight: bold;
+}
+
+
+
+ 
+
+
+
+
+
+#logout_button { 
+                 border: none;
+                 background-color: transparent;
+                 float: right;
+                 }
+
+
+.small_list IMG#thumb  { 
+                border: 2px solid #d9ccff;
+                margin-right: 4px;
+                }
+
+
+
+/* used for the user photo */
+.user-image TABLE {
+                    margin-left: 10px; 
+                    margin-right: auto;
+                    }
+
+
+/* button that shoul apear like links */
+.button-as-link { 
+                  width: 75px;
+                  height: 50px;
+                  margin: 3px;
+                  padding: 1px;
+                  font-size: 11px;
+                  cursor: pointer;
+                  cursor: hand;
+                  }
+
+.image-as-link { 
+                  cursor: pointer;
+                  cursor: hand;
+                  }
+
+
+/* UNIFICAR NO FUTURO */
+/* Texts- AND LINKS */
+a.bluebox {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 16px;
+	color: #3466D1;
+	text-decoration: underline;
+	left: 5px;
+	position: relative;
+}
+
+.textobox {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 20px;
+	color: #666666;
+	left: 5px;
+	position: relative;
+}
+
+
+.texto {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 16px;
+	color: #666666;
+}
+.box {
+       border: 2px solid #6699FF;
+       }
+
+
+
+a.blue {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 16px;
+	color: #3466D1;
+	text-decoration: underline;
+
+}
+
+a.green {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 20px;
+	color: #009999;
+	text-decoration: underline;
+
+}
+
+/* link box - marrom */
+a.marrom:link    {text-decoration: none; color: #CC9966; FONT-FAMILY: Arial; FONT-SIZE: 11px; line-height : 20px; position: relative;}
+a.marrom:visited {text-decoration: none; color: #CC9966; FONT-FAMILY: Arial; FONT-SIZE: 11px; line-height : 20px; position: relative;}
+a.marrom:active  {text-decoration: none; color: #CC9966; FONT-FAMILY: Arial; FONT-SIZE: 11px; line-height : 20px; position: relative;}
+a.marrom:hover   {text-decoration: underline; color: #CC9966; FONT-FAMILY: Arial; FONT-SIZE: 11px; line-height : 20px; position: relative;}
+
+
+
+a.cinza:link  { 
+                FONT-SIZE: 11px; line-height : 20px; position: relative;text-decoration: none; color: #666666; FONT-FAMILY: Arial;
+                }
+
+a.cinza:visited { FONT-SIZE: 11px; line-height : 20px; position: relative;text-decoration: none; color: #666666; FONT-FAMILY: Arial;}
+a.cinza:active { 
+                 FONT-SIZE: 11px; line-height : 20px; position: relative;text-decoration: none; color: #666666; FONT-FAMILY: Arial;
+                 }
+
+a.cinza:hover { FONT-SIZE: 11px; line-height : 20px; position: relative text-decoration: underline; color: #3666666; FONT-FAMILY: Arial;}
+
+.persona_03  { border-top-width: 1px; border-bottom-width: 1px; border-left-width: 0px; border-right-width: 1px;border-style: solid; border-color: #E1F7F9;background-color: #FFCB27; padding: 7px;
+               font-family: verdana, Helvetica, sans-serif;font-size: 11px;color: #666666;
+               }
+
+.persona_04  { border-top-width: 1px; border-bottom-width: 1px; border-left-width: 0px; border-right-width: 1px;border-style: solid; border-color: #E1F7F9;background-color: #FFEE5E; padding: 7px;
+               font-family: verdana, Helvetica, sans-serif;font-size: 11px;color: #666666;
+               }
+               
+.persona_05  { border-top-width: 1px; border-bottom-width: 1px; border-left-width: 0px; border-right-width: 1px;border-style: solid; border-color: #E1F7F9;background-color: #FFEE5E; padding: 7px;
+               font-family: verdana, Helvetica, sans-serif;font-size: 11px;color: #666666;
+               }               
+
+.persona_06  { border-top-width: 1px; border-bottom-width: 1px; border-left-width: 0px; border-right-width: 1px;border-style: solid; border-color: #E1F7F9;background-color: #FAF8FA; padding: 7px;
+               font-family: verdana, Helvetica, sans-serif;font-size: 11px;color: #666666;
+               }
+
+
+.menuitems{
+            padding-left:10px;
+            padding-right:10px;
+            }
+.textoint {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11px;
+            line-height: 20px;
+            color: #666666;
+            }
+
+.webfolio_forum A { 
+                    text-decoration: none; 
+                    color: #666666; 
+                    FONT-FAMILY: Arial;	
+                    FONT-SIZE: 11px; 
+                    line-height : 20px; 
+                    position: relative;
+                    }
+
+
+.webfolio_forum A:hover { 
+                          text-decoration: underline;
+                          }
+
+
+.webfolio_forum_new A { 
+                        text-decoration: none; 
+                        color: green; 
+                        FONT-FAMILY: Arial;	
+                        FONT-SIZE: 11px; 
+                        line-height : 20px; 
+                        position: relative;
+                        }
+
+
+.webfolio_forum_new A:hover { 
+                              text-decoration: underline;
+                              }
+.logon select{ 
+               font-family: Arial, Helvetica, sans-serif;
+               font-size: 11px;
+               color: #333366;
+               border: thin solid #DDD7EE;
+               background-color: #E8E7EF;
+               width:130px;
+               margin-right: 0;
+               }
+.btsair { 
+          margin-right: 20;
+          margin-top: 5;
+          }
+
+#logout_button { 
+                 border: none;
+                 background-color: transparent;
+                 float: right;
+                 }
+.user_ico {
+            cursor: pointer;
+            }
+
+/* CSSs referentes ao Upload */
+.titupload { 
+             font-family: Arial, Helvetica, sans-serif;
+             font-size:18px;
+             line-height: 22px;
+             color: #2171B6;
+             }
+
+.imgtitupload { 
+
+                width:70px;
+                border: thin solid #2171B6;
+                margin-left: 12px;
+                }
+                
+.subtitupload { 
+                font-family: Arial, Helvetica, sans-serif;
+                font-size:16px;
+                font-weight: bold; 
+                line-height: 20px;
+                color: #fff;
+                }
+.cursor { 
+          cursor: pointer;
+          }

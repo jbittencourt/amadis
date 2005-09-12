@@ -1,0 +1,54 @@
+.box { 
+       margin-bottom: 20px;
+       border: none;
+       border-collapse: separate;
+       border-spacing: 0px;
+       border-padding: 0px;
+       table-layout: auto;
+       }
+
+
+.box TD { 
+                  border: 0px;
+                  border-spacing: 0px;
+                  padding: 0px;
+                  }
+
+/* cbl - corner bottom left */
+/* cbr - corner bottom right */
+/* ctl - corner top left */
+/* ctr - corner top right */
+/* bl - border left */
+/* br - border right */
+/* bt - border top */
+/* bb - border bottom */
+
+
+.box TD#ctl  {
+               width:10px;
+               height: 10px;
+               }
+
+.box TD#ctr  {
+               width:10px;
+               height: 10px;
+               }
+
+.box TD#cbl  {
+               width:10px;
+               height: 10px;
+               }
+
+.box TD#cbr  {
+               width:10px;
+               height: 10px;
+               }
+
+/* .box#top { }  */
+/* .box#left { }  */
+/* .box#right {  } */
+/* .box#bottom {  } */
+
+.box_white { 
+             background-color: #ffffff
+             }

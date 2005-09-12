@@ -1,0 +1,77 @@
+/* CSS Document */
+
+body {
+       background-color: transparent;
+       padding: 3px;
+       margin: 0;
+       }
+
+#tipms {
+         position:fixed; /*absolute;*/
+         top:0px;
+         right: 0px;
+         }
+
+#tipmscorpo {
+              position: relative;
+              background-image: url("../imagens/tipms_box_bg.png");
+              background-repeat: no-repeat;
+              background-color: #F2F2FE;
+              padding: 3px;
+              border-top-width: 6px;
+              border-bottom-width: 0px;
+              border-left-width: 4px;
+              border-right-width: 4px;
+              border-style: solid;
+              border-color: #D2D2FD;
+              width: 126px;
+              }
+
+#tipfooter {
+             position: absolute;
+             left:-4;
+             bottom:-8;
+             }
+
+#tipfala {
+           position: relative;
+           font: 0.7em Arial, Helvetica, sans-serif;
+           color: #6699FF;
+           font-weight: bold;
+           padding: 4px;
+           margin:0px;
+           }
+
+#tipresposta {
+               position: relative;
+               font: 0.7em Arial, Helvetica, sans-serif;
+               color: #7E7EC3;
+               padding: 0px;
+               left: 28px;
+               margin: 0;
+               }
+
+.tipfoto {
+           position:absolute;
+           top: 0px;
+           left: 0px;
+           margin:8px;
+           height: 50px;
+           }
+
+.tipbtmsg {
+            position:absolute;
+            left: 2px;
+            margin:4px;
+            cursor: pointer;
+            }
+
+.tipsair {
+           position:absolute;
+           top: 0px;
+           right: 0px;
+           margin:8px;
+           cursor: pointer;
+           }
+
+

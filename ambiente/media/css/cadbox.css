@@ -1,0 +1,86 @@
+.cad-box { 
+           margin-left: auto;
+           margin-right: auto;
+           }
+
+.cad-box-cols-sides { 
+                    background-repeat: repeat-y;
+                    }
+
+.cad-box-cols-top { 
+                    background-repeat: repeat-x;
+                    }
+
+
+#cad-box { 
+           margin-bottom: 20px;
+           border: none;
+           border-collapse: separate;
+           border-spacing: 0px;
+           border-padding: 0px;
+           }
+
+#cad-box TD { 
+              border: 0;
+              padding: 0
+              }
+
+
+/* cbl - corner bottom left */
+/* cbr - corner bottom right */
+/* ctl - corner top left */
+/* ctr - corner top right */
+/* bl - border left */
+/* br - border right */
+/* bt - border top */
+/* bb - border bottom */
+
+
+.cad-box TD#ctl { 
+                  height: 33px;
+                  width: 49px;
+                  vertical-align: top;
+                 }
+
+.cad-box TD#ctr { 
+                  height: 33px;
+                  width: 49px;
+                  vertical-align: top;
+                  }
+
+.cad-box TD#cbl { 
+                  height: 33px;
+                  width: 49px;
+                  vertical-align: top;
+                 }
+
+.cad-box TD#cbr { 
+                  height: 33px;
+                  width: 49px;
+                  vertical-align: top;
+                 }
+
+
+
+/*  THEMES */
+
+.cad-box-default { 
+                 background-color: #fafcfe;
+                 }
+
+.cad-box-webfolio { 
+                 background-color: #fffcff;
+                 }
+
+.cad-box-project { 
+                   background-color: #fafcfe;
+                 }
+
+.cad-box-community { 
+                     background-color: #fbfbec;
+                     }
+
+.cad-box-people { 
+                  background-color: #fff5f5;
+                  }
+ 

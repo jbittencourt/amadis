@@ -1,0 +1,41 @@
+.response-button IMG { 
+                   margin: 10px;
+                   cursor: pointer;
+                   cursor: hand;
+                   }
+
+
+#request-group-box { 
+                     display: inline-block;
+                     }
+
+#group-table { 
+               display: table;
+               border: thin dashed green;
+               }
+
+#group-buttons { 
+                 float: right;
+                 }
+
+#accept-box  { 
+               display: none;
+               }
+
+#reject-box  { 
+               display: none;
+                }
+
+.response-box { 
+                display: none;
+                }                   
+
+.response-button TD { 
+                      text-align: right;
+                      float: right;
+                      }
+
+.response-box BUTTON { 
+                       border: 0px;
+                       background: transparent;
+                       }

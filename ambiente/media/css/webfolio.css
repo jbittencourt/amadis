@@ -1,0 +1,53 @@
+.webfolio_forum A { 
+                    text-decoration: none; 
+                    color: #666666; 
+                    FONT-FAMILY: Arial;	
+                    FONT-SIZE: 11px; 
+                    line-height : 20px; 
+                    position: relative;
+                  }
+
+
+.webfolio_forum A:hover { 
+                          text-decoration: underline;
+                          }
+
+
+.webfolio_forum_new A { 
+                    text-decoration: none; 
+                    color: green; 
+                    FONT-FAMILY: Arial;	
+                    FONT-SIZE: 11px; 
+                    line-height : 20px; 
+                    position: relative;
+                  }
+
+
+.webfolio_forum_new A:hover { 
+                          text-decoration: underline;
+                          }
+
+
+TABLE#scraps  { 
+                width: 100%;
+                }
+
+TABLE#scraps  TD { 
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 11px;
+                line-height: 16px;
+                color: #666666;
+                }
+
+TABLE#scraps IMG#thumb { 
+         border: 2px solid #80BAC9;
+         }
+
+
+.webfolio-title { 
+                  font-family: Arial, Helvetica, sans-serif;
+                  font-size:18px;
+                  line-height: 20px;
+                  text-decoration: none;
+                  color: #7ABFF5;
+                  }

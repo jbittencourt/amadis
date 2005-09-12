@@ -1,0 +1,7 @@
+Lista de funcoes e recursos a serem implementados no AMADIS
+-----------------------------------------------------------
+
+  -Linha de comando para gerar classes do CMDevel
+  -cmdevel -h localhost -u amadis -d amadis -p mestre -t nome_da_tabela -c nome_da_classe gen_class
+
+  -

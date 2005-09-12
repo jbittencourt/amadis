@@ -1,0 +1,64 @@
+.alert_box_table { 
+                   margin-bottom: 20px;
+                   border: none;
+                   border-collapse: separate;
+                   border-spacing: 0px;
+                   border-padding: 0px;
+                   width: 100%;
+             }
+
+.alert-box { 
+             min-width: 520px;
+             max-width: 650px; 
+             }
+
+.alert_box TD { 
+                vertical-align: center;
+                  }
+
+#msg_alert {
+             position:relative;
+             }
+
+#msg_alert font{
+                 float: right;
+                 FONT-FAMILY: Arial;	
+                 FONT-SIZE: 11px;
+                 }
+
+#msg_alert img{ 
+                float: left;
+                margin-left: 0;
+}
+
+#alert{ 
+        width: 50; 
+        margin-left: 0;
+        border: 1px solid #6699FF;
+        }
+
+#msg_alert a{	color: #666666; 
+              FONT-FAMILY: Arial;	
+              FONT-SIZE: 11px;
+              text-decoration: underline;
+              }
+																							
+
+
+#box_message { 
+             background-color: #E3FFDE;
+               }
+
+#box_dialog { 
+              background-color: #F3F7FF;
+              }
+
+#box_alert { 
+             background-color: #FFFCE1;
+             }
+
+#box_error { 
+             background-color: #FFF2F2;
+             }
+
+

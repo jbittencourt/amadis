@@ -1,0 +1,71 @@
+#stats { 
+         width: 100%;
+         }
+
+#stats_table{
+              table-layout: fixed;
+              margin-left: auto;
+              margin-right: auto;
+              }
+
+
+#stats_col {
+             display: block;
+             position: absolute;
+             height: 80px;	
+             width: 90px;
+             }
+
+#stats_table IMG#logo_amadis { 
+                               margin-top:10px;
+                               }
+
+.stats {
+         width: 5px;
+         position: absolute;
+         display: block;
+         bottom: 25px;
+         }
+
+.stats#bar_people{
+                   background-color: #E94D54;
+                   margin-left: 0px;
+                   }
+
+.stats#bar_projects{
+                     background-color: #5DA2BD;
+                     margin-left: 6px;
+                     }
+
+.stats#bar_courses{
+                    background-color: #6DC05A;
+                    margin-left: 12px;
+                    }
+
+
+.stats#bar_communities{
+                        background-color: #BFBF36;
+                        margin-left: 18px;
+                        }
+
+
+.stats_text{
+             font-family: Arial, Helvetica, sans-serif;
+             font-size: 11px;
+             }
+
+
+#stats_people {
+                color: #E94D54;
+                }
+#stats_projects{
+                 color: #5DA2BD;
+                 }
+#stats_courses{
+               color: #66B454;
+               }
+
+#stats_communities{
+                    color: #95952D;
+                    }
+

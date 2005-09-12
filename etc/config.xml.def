@@ -1,0 +1,70 @@
+<cmapp>
+<cmdevel>
+   <smartform>
+     <calendar>
+         <images main="bt_calendar.png" left="bt_cal_prev.gif" right="bt_cal_next.gif" />
+     </calendar>
+   </smartform>
+</cmdevel>
+<app>
+   <general>
+       <admin_email>admin@yourdomain.org</admin_email>
+	<!-- The profile can be "low_traffic" ir "low_processing" -->
+       <profile>low_traffic</profile>
+   </general>
+   <environment>
+      <plataform>1</plataform>
+      <plataform_name>AMADIS</plataform_name>
+      <use_md5_password>1</use_md5_password>
+      <store_plain_password>0</store_plain_password>
+      <auto_accept_subscribe>0</auto_accept_subscribe>
+   </environment>
+   <session>
+      <name>AMADIS</name>
+      <timeout>1500</timeout>
+   </session>
+   <urls>
+      <base>COMPLETE_WITH_YOUR_URL</base>
+      <media>COMPLETE_WITH_YOUR_URL/media</media>
+      <images>COMPLETE_WITH_YOUR_URL/media/images</images>
+      <js>COMPLETE_WITH_YOUR_URL/media/js</js>
+      <css>COMPLETE_WITH_YOUR_URL/media/css</css>
+      <thumbnails>COMPLETE_WITH_YOUR_URL/media/thumbnails</thumbnails>
+      <services>COMPLETE_WITH_YOUR_URL/ferramentas</services>
+      <pages>COMPLETE_WITH_YOUR_URL/paginas</pages>
+   </urls>
+   <paths>
+      <pages>COMPLETE_WITH_YOUR_PATH/ambiente/paginas</pages>
+      <thumbnails>/home/juliano/projetos/amadis/ambiente/media/thumbnails</thumbnails>	
+   </paths>
+   <database>
+      <driver>mysql</driver>
+      <host>DB_HOST</host>
+      <user>DB_USER</user>
+      <password>DB_PASSWORD</password>
+      <name>DB_NAME</name>
+   </database>
+   <userclass>
+      <class>AMUser</class>
+      <lib>amuser.inc.php</lib>
+   </userclass>
+   <languages>
+      <active>1</active>
+      <default>pt-br</default>
+      <language name="Portugues Brasil" file="pt-br.lang" prefix="pt-br" />
+      <language name="English" file="en.lang" prefix="en" />
+   </languages>
+   <tools>
+      <finder>
+         <timeout>300</timeout>
+         <window_refresh_timeout>30</window_refresh_timeout>
+         <activate_emotions>1</activate_emotions>
+     </finder>
+   </tools>
+   <interface>
+     <smilies>
+        <smile key=":)" image="face-smile.png" />
+     </smilies>
+   </interface>
+</app>
+</cmapp>

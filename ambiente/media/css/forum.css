@@ -1,0 +1,203 @@
+/* CSS Forum Externo */
+.forum_box {
+             border-top-width: 1px;
+             border-bottom-width: 1px; 
+             border-left-width: 1px;
+             border-right-width: 1px;
+             border-style: solid;
+             padding: 4px;
+             font-family: verdana, Helvetica, sans-serif;
+             font-size: 10px; 
+             line-height: 18px; 
+             color: #666666;
+             padding: 4px 6px 4px 12px; 
+             }             
+
+A.forum_message_title  { 
+                         text-decoration: none;
+                         color: #666666;
+                         }
+
+A.forum_message_title:hover { 
+                              text-decoration: underline;
+                              }
+
+
+.msg_level_A01 { 
+                           border-color: #96B9FF;
+                           background-color: #BED7FF; 
+                           }
+
+.msg_level_A02 {
+                           border-color: #BFD5FF;
+                           background-color: #DBE8FF;
+                           }
+
+.msg_level_A03 { 
+                           border-color: #D2E1FF;
+                           background-color: #E9F2FF; 
+}                 
+.msg_level_A04 {
+                           border-color: #E1EBFF;
+                           background-color: #F7FAFF;
+                           }
+
+/* Formata_Tdproj-_01ao das repostas do F  { 
+Borderrrrum - rosa */
+
+.msg_level_B01 { 
+                           border-color: #D8C0D9;
+                           background-color: #E3D1E3; 
+                           }
+
+.msg_level_B02 { 
+                           border-color: #E7D9E8;
+                           background-color: #EEE3EE; 
+                           }
+
+.msg_level_B03 {
+                           border-color: #F4E5F4;
+                           background-color: #F7F2F7;
+                           }
+
+.msg_level_B04 { 
+                           border-color: #F4EDF4;
+                           background-color: #FAF7FA; 
+                           }                     
+
+
+.forum_newMessage { 
+                    border: green solid !important;
+                    }
+
+
+.box_forum_resposta  { 
+                       border-top-width: 1px;
+                       border-bottom-width: 3px;
+                       border-left-width: 1px;
+                       border-right-width: 3px;
+                       border-style: solid;
+                       border-color: #FFB9B9;
+                       background-color: #FFE6E6; 
+                       padding: 5px;
+                       }         
+
+
+.box_forum_resposta INPUT[type=submit]{ 
+                                        font-weight: bold;
+                                        font-size: 9px;
+                                        font-family: Verdana, Arial, Helvetica, sans-serif;
+                                        padding: 2px 2px;
+                                        border-top: 1px solid #FFB9B9;
+                                        border-right: 1px solid black;
+                                        border-bottom: 1px solid black;
+                                        border-left: 1px solid #FFB9B9;
+                                        min-width: 70px;
+                                        text-align: center;
+                                        text-transform: uppercase;
+                                        background-color: #FF7373; 
+                                        color: #FFF;
+                                        text-decoration: none;
+                                        }              
+
+.box_forum_resposta INPUT[type=button]{ 
+                                        font-weight: bold;
+                                        font-size: 9px;
+                                        font-family: Verdana, Arial, Helvetica, sans-serif;
+                                        padding: 2px 2px;
+                                        border-top: 1px solid #FFB9B9;
+                                        border-right: 1px solid black;
+                                        border-bottom: 1px solid black;
+                                        border-left: 1px solid #FFB9B9;
+                                        min-width: 70px;
+                                        text-align: center;
+                                        text-transform: uppercase;
+                                        background-color: #FF7373; 
+                                        color: #FFF;
+                                        text-decoration: none;
+                                        }              
+
+
+.btresposta:hover {  
+                    background-color: #FFFFFF; 
+                    color: red;
+                    border-color: black white white black;
+                    text-decoration: none;
+                    }
+
+.btresposta:active {  
+                     background-color: #369; 
+                     color: #ccc; 
+                     text-decoration: none;
+                     }  
+
+.titforumresposta { 
+                    font-family: Arial, Helvetica, sans-serif;
+                    font-size: 11px;
+                    font-weight: bold;
+                    line-height: 20px;
+                    color: #996666;
+                    }
+
+
+.forum_title { 
+               font-family: Arial, Helvetica, sans-serif;
+               font-size: 13px;
+               font-weight: bold;
+               line-height: 20px;
+               color: #663333;
+               vertical-align: middle;
+               }
+
+.forum_project_title { 
+                       font-family: Arial, Helvetica, sans-serif;
+                       font-size: 13px;
+                       font-weight: bold;
+                       line-height: 20px;
+                       color: #336699;
+                       }
+
+
+.forum_project_col { 
+                     border-width: 1px;
+                     border-style: solid;
+                     border-color: #FFFFFF;
+                     background-color: #F1F2F6;
+                     font-family: verdana, Helvetica, sans-serif;
+                     font-size: 11px;
+                     color: #666666;
+                     }
+
+.forum_project_col A { 
+                       font-family: verdana, Helvetica, sans-serif;
+                       font-size: 11px;
+                       color: #666666;
+                       text-decoration: none;
+                       }
+
+.forum_project_col A:hover { 
+                             text-decoration: underline;
+                             }
+
+
+.forum_project_col#a1 { 
+                        background-color: #F1F2F6;
+                        }
+
+.forum_project_col#a2 { 
+                        background-color: #FAF8FA;
+                        }
+
+.forum_project_col#b1 { 
+                        background-color: #F1F2F6;
+                        }
+
+.forum_project_col#b2 { 
+                        background-color: #FBFAF9;
+                        }
+
+
+.forum_novo_topico { 
+                     float: right;
+                     padding-right: 15px;
+                     }

@@ -1,0 +1,44 @@
+<?
+
+class {TEMPLATE_NAME}SAMPLE extends AMVisualization {
+  
+  private $itens = array();
+  private $links = array();
+  
+  public function __construct() {
+    /*
+     *$_CMAPP keep the configuration map of the environment
+     */
+
+    global $_CMAPP;
+    parent::__construct("");
+  }
+
+
+  public function __toString() {
+    global $_CMAPP;
+    /*
+     *Load a lang file
+     */
+    $_CMAPP[i18n]->addFile($this->path."/lang");
+    $language = $_CMAPP[i18n]->getTranslationArray();
+
+    /*
+     *Load language module
+     */
+    $lang = $language[lecbox];
+
+    /*
+     *Buffering html of the box to output screen
+     */
+    
+    $buffer.="<table align=center>";
+    
+    $buffer.="</table>";
+
+    parent::add($buffer);
+    return parent::__toString();
+  }
+}
+
+?>

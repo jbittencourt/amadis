@@ -1,0 +1,79 @@
+/* CSSs Bibliotec */
+
+.titbiblioteca {
+                 font-family: Arial, Helvetica, sans-serif;
+                 font-size: 16px;
+                 font-weight: bold;
+                 line-height: 20px;	
+                 color: #7E719A;
+                 }
+
+.blt_linha_tipo  {
+                   border-top-width: 0px;
+                   border-bottom-width: 0px;
+                   border-left-width: 0px;
+                   border-right-width: 1px;
+                   border-style: solid;
+                   border-color: #FFFFFF;
+                   background-color: #C6BFD8;
+                   padding: 3px; 
+                   font-family: verdana, Helvetica, sans-serif; 
+                   font-weight: bold;
+                   font-size: 11px;
+                   color: #FFFFFF;
+                   }
+
+
+
+.blt_col_a  {
+              border-top-width: 1px;
+              border-bottom-width: 1px;
+              border-left-width: 0px;
+              border-right-width: 0px;
+              border-style: solid;
+              border-color: #FFFFFF;
+              background-color: #FAF8FA; 
+              padding: 4px;
+              font-family: verdana, Helvetica, sans-serif;
+              font-size: 10px;
+              color: #666666;
+              text-align:center;
+              }
+
+.blt_col_b  {
+              border-width: 1px;
+              border-style: solid;
+              border-color: #FFFFFF;
+              background-color: #F1F2F6; 
+              padding: 4px; 
+              font-family: verdana, Helvetica, sans-serif;
+              font-size: 10px;
+              color: #666666; 
+              text-align:center;
+              }
+
+.blt_col_a#first_column { 
+                          text-align:left;
+                          }
+
+.blt_col_b#first_column { 
+                          text-align:left;
+                          }
+
+
+.blt_col_select  TD {
+                   border-width: 1px;
+                   border-style: solid;
+                   border-color: #FFFFFF;
+                   background-color: #F6D89D; 
+                   padding: 4px; 
+                   font-family: verdana, Helvetica, sans-serif;
+                   font-size: 10px;
+                   color: #333333; 
+                   }
+
+TR.blt_col_select { border: dashed green !important; }
+
+.blt_subtitulo {font-family: Arial, Helvetica, sans-serif;  font-size: 11px; line-height: 20px;	color: #7E719A; font-weight: bold;}
+
+.blt_projBox { font-family: verdana, Helvetica, sans-serif; font-size: 10px; color: #333333;   }

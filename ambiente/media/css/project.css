@@ -1,0 +1,91 @@
+.project_box {
+              border: 2px solid #80BAC9;
+              }
+
+
+.project_title {
+                 font-family: Arial, Helvetica, sans-serif;
+                 font-size: 20px;
+                 line-height: 20px;
+                 color: #80BAC9;
+                 }
+
+
+.project_comment { 
+                   font-family: Arial, Helvetica, sans-serif;
+                   color: #666666;
+                   font-size: 11px;
+                   line-height: 14px;
+                   }
+
+A.project_comment { 
+                         color: #008CAF;
+                         }
+
+A.project_comment:hover { 
+                          color: #3399FF;
+                          }
+
+.project_news { 
+                font-family: Arial, Helvetica, sans-serif;
+                color: #666666;
+                font-size: 11px;
+                line-height: 14px;
+                }
+
+A.project_news { 
+                 color: #336699;
+                 }
+
+
+A.project_news:hover { 
+                       color: #3399FF;
+                       }
+
+
+#thumb { 
+         border: 2px solid #80BAC9;
+         }
+
+#project_list {
+                border-collapse: collapse;
+                text-align: left;
+                width: 100%;
+                }
+
+#project_list A { 
+                  color: #80BAC9;
+                  }
+
+.project_list_line  { 
+                      height: 90px;
+                      }
+
+.project_list_line_int { 
+                         height: 50px;
+                         }
+
+.project_list_line TD { 
+                        padding: 0px;
+                        border-spacing: 0px;
+                        border: 0px;
+                        }
+
+
+#project_list_2 { 
+                  background-color: #FFFCFC;
+                  }
+
+#project_list BUTTON { 
+                       background-color: white;
+                       border: 2px #DDF0FB solid;
+                      }
+.project_list_subtitle{ 
+                        font-family: Arial, Helvetica, sans-serif;
+                        color: #57a2c3;
+                        font-size: 12px;
+                        line-height: 14px;
+                        text-align: left;
+                        font-weight: bold;
+                        }
+

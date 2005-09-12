@@ -1,0 +1,63 @@
+/* CSSs referentes a Pessoas */
+
+.people_title {
+                font-family: Arial, Helvetica, sans-serif;
+                font-size:18px;
+                line-height: 20px;
+                text-decoration: none;
+                color: #BC2C2C;
+}
+
+
+
+a.people_blog_entry { 
+                      color: #666666; 
+                      FONT-FAMILY: Arial;
+                      FONT-SIZE: 11px; 
+                      font-weight: bolder;
+                      line-height : 40px
+                      text-decoration: underline;
+                      }
+
+a.people_blog_entry:hover { 
+                            color: #366666; 
+                            }
+
+
+
+/* LISTS IN PEOPLE */
+
+#thumb { 
+         border: #BC2C2C solid;
+         }
+
+#people_list { 
+               border-collapse: collapse;
+               text-align: center;
+               width: 100%;
+               }
+
+#people_list A { 
+                 color: #993333;
+                 }
+
+.people_list_line { 
+                height: 90px;
+                }
+
+.people_list_line TD { 
+                   padding: 0px;
+                   border-spacing: 0px;
+                   border: 0px;
+                   }
+
+#people_list_2 { 
+                 background-color: #FFFCFC;
+                 }
+
+
+
+#people_list BUTTON { 
+                      background-color: #FFFCFC;
+                      border: 2px #FFDCDF solid;
+                      }

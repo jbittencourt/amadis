@@ -1,0 +1,76 @@
+#!/usr/local/bin/php
+
+<?
+
+require 'Console/Getopt.php';
+//require 'amcli/GenModule.inc.php';
+
+$argv = Console_Getopt::readPHPArgv();
+//print_r($argv);
+//array_shift($argv);
+
+/** 
+ * -n module name 
+ * -c tool categorie
+ * -t tool type
+ * -v toll visualization #values 1 or 2
+ * -h print help 
+ **/
+
+$short_options = "n:c:t:v:l:h";
+
+
+$options = Console_Getopt::getopt($argv,$short_options);
+
+if(is_a($options, "PEAR_Error")) {
+  die("Erro processing parameters: ".$options->message."\n");
+}
+
+$opts=$options[0];
+
+$command = (isset($options[1][0])) ? $options[1][0] : null;
+
+$module = array();
+
+foreach($opts as $opt) {
+  switch($opt[0]) {
+  case "h":
+    echo "AMADIS - Ambiente de Aprendizagem a distancia\n";
+    echo "\tGPA - Gerador de Pacotes AMADIS\n\n";
+    echo "Este eh um software que gera pacotes dentro dos padroes do AMADIS\n";
+    echo "Segue um exemplo de como gerar um pacote:\n\n";
+    echo "./amadis -n AMToolName -c toolCategorie -t toolType -v [1 or 2] gen_package";
+    echo "\n\n";
+    break;
+  case "n":
+    $module[name] = $opt[1];
+    break;
+  case "c":
+    $module[categorie] = $opt[1];
+    break;
+  case "t":
+    $module[type] = $opt[1];
+    break;
+  case "v":
+    $module[visualization] = $opt[1];
+    break;
+  case "l":
+    $module[default_language] = $opt[1];
+    break;
+  }
+}
+switch($command) {
+ 
+ case "gen_package":
+   include("amcli/GenPackage.inc.php");
+   
+   $package = new GenPackage($module);
+   $package->makeInstall();
+   
+   print_r($package);
+   
+   break;
+
+}
+  
+?>

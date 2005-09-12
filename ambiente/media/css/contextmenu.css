@@ -1,0 +1,13 @@
+#AMContextMenu{
+                position:absolute;
+                border:1px solid #FFCF63;
+                background-color: #FFF6E3;
+                font-color: #996633;
+                font-family:Arial, Helvetica, Verdana;
+                line-height:20px;
+                cursor:default;
+                font-size:14px;
+                z-index:100;
+                visibility:hidden;
+/*                 filter: alpha (opacity=50%); */
+                }

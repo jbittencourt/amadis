@@ -1,0 +1,36 @@
+<?
+/** Listagem generica com thumbnails de usuarios ou projetos
+ * @param items CMContainer
+ * @param title String
+ * @param theme AMTCadBox themes constants
+ * @param type AMTCadBox type constants
+ */
+
+abstract class AMListBox extends AMTCadBox {
+
+  const PEOPLE = 0;
+  const PROJECT = 1;
+
+  protected $itens;
+  protected $class_prefix;
+
+  public function __construct(CMContainer $items,$title,$theme, $type=AMTCadBox::CADBOX_SEARCH) {
+    global $_language;
+  
+    switch($theme) {
+    case self::PEOPLE:
+      $box_theme=AMTCadBox::PEOPLE_THEME;
+      $this->class_prefix = 'people';
+      break;
+    case self::PROJECT:
+      $box_theme=AMTCadBox::PROJECT_THEME;
+      $this->class_prefix = 'project';
+      break;
+    }
+
+    parent::__construct($title, $type, $box_theme);
+    $this->itens = $items;
+  }
+
+}
+?>

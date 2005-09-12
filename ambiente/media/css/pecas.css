@@ -1,0 +1,446 @@
+.textobox {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 20px;
+	color: #666666;
+	left: 5px;
+	position: relative;
+}
+
+.textoint {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 20px;
+	color: #666666;
+}
+
+.texto {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 16px;
+	color: #666666;
+}
+
+.textocinza {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 16px;
+	color: #999999;
+}
+.textoverde {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 16px;
+	color: #647770;
+}
+
+.mnlateral {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 20px;
+	color: #007FA0;
+	left: 3px;
+	position: relative;
+}
+
+a.bluebox {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 16px;
+	color: #3466D1;
+	text-decoration: underline;
+	left: 5px;
+	position: relative;
+}
+
+a.blue {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 16px;
+	color: #3466D1;
+	text-decoration: underline;
+
+}
+
+a.blueproj {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 20px;
+	color: #0089AD;
+	text-decoration: underline;
+
+}
+
+a.green {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 20px;
+	color: #009999;
+	text-decoration: underline;
+
+}
+
+/* link box - cinza */
+a.cinza:link    {text-decoration: none; color: #666666; FONT-FAMILY: Arial;	FONT-SIZE: 11px; line-height : 20px; position: relative;}
+a.cinza:visited {text-decoration: none; color: #666666; FONT-FAMILY: Arial;	FONT-SIZE: 11px; line-height : 20px; position: relative;}
+a.cinza:active  {text-decoration: none; color: #666666; FONT-FAMILY: Arial;	FONT-SIZE: 11px; line-height : 20px; position: relative;}
+a.cinza:hover   {text-decoration: underline; color: #3666666; FONT-FAMILY: Arial;	FONT-SIZE: 11px; line-height : 20px; position: relative;}
+
+/* link box - marrom */
+a.marrom:link    {text-decoration: none; color: #CC9966; FONT-FAMILY: Arial;	FONT-SIZE: 11px; line-height : 20px; position: relative;}
+a.marrom:visited {text-decoration: none; color: #CC9966; FONT-FAMILY: Arial;	FONT-SIZE: 11px; line-height : 20px; position: relative;}
+a.marrom:active  {text-decoration: none; color: #CC9966; FONT-FAMILY: Arial;	FONT-SIZE: 11px; line-height : 20px; position: relative;}
+a.marrom:hover   {text-decoration: underline; color: #CC9966; FONT-FAMILY: Arial;	FONT-SIZE: 11px; line-height : 20px; position: relative;}
+
+
+/* link menu lateral - home */
+a.menu:link    {text-decoration: none; color: #37A5EC; FONT-FAMILY: Arial;	FONT-SIZE: 11px; line-height : 12px; font-weight: bold; position: relative;}
+a.menu:visited {text-decoration: none; color: #37A5EC; FONT-FAMILY: Arial;	FONT-SIZE: 11px; line-height : 12px; font-weight: bold; position: relative;}
+a.menu:active  {text-decoration: none; color: #37A5EC; FONT-FAMILY: Arial;	FONT-SIZE: 11px; line-height : 12px; font-weight: bold; position: relative;}
+a.menu:hover   {text-decoration: underline; color: #37A5EC; FONT-FAMILY: Arial;	FONT-SIZE: 11px; line-height : 12px; font-weight: bold; position: relative;}
+
+.box {
+	border: 2px solid #6699FF;
+}
+
+.boxprojeto {
+	border: 2px solid #80BAC9;
+}
+
+
+.txttitproj {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	line-height: 20px;
+	color: #80BAC9;
+}
+
+/* CSSs referentes a Comunidades */
+
+.titcomunidade {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:18px;
+	line-height: 20px;
+	color: #666633;
+}
+.txttitcomunidade {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:18px;
+	line-height: 20px;
+	color: #B6B640;
+}
+
+a.boxlinkcomun {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 20px;
+	color: #666633;
+	text-decoration: underline;
+}
+
+.boxcomunidade {
+	border: 2px solid #C6C67A;
+}
+
+/* CSSs referentes a Pessoas */
+
+.titpessoas {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:18px;
+	line-height: 20px;
+	color: #BC2C2C;
+}
+
+
+
+/* CSSs referentes a Cursos */
+
+.link_box {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:11px;
+	line-height: 20px;
+	color: #666633;
+}
+
+.link_box_mais {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:10px;
+	font-weight: bold; 
+	text-decoration: underline;
+	line-height: 20px;
+	color: #507539;
+}
+
+
+
+/* CSSs referentes ao Chat */
+
+.titchat {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	line-height: 18px;
+	color: #CE3333;
+}
+
+
+a.linkchat:link    {font-family: Arial, Helvetica, sans-serif;	font-size: 11px;	line-height: 22px;	color: #CC7474;	text-decoration: underline;}
+a.linkchat:visited {font-family: Arial, Helvetica, sans-serif;	font-size: 11px;	line-height: 22px;	color: #CC7474;	text-decoration: underline;}
+a.linkchat:active  {font-family: Arial, Helvetica, sans-serif;	font-size: 11px;	line-height: 22px;	color: #CC7474;	text-decoration: underline;}
+a.linkchat:hover   {font-family: Arial, Helvetica, sans-serif;	font-size: 11px;	line-height: 22px;	color: #8D5555;	text-decoration: underline;}
+
+
+
+.txtchat {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 18px;
+	color: #CC7474;
+}
+
+.txttitchat {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	line-height: 20px;
+	color: #339966;
+}
+
+.chatheader {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 18px;
+	color: #7B4E4E;
+}
+
+.datachat {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold; 
+	line-height: 18px;
+	color: #006666;
+}
+
+
+
+/* CSSs referentes ao Diário */
+
+.titpost {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+	line-height: 20px;
+	color: #76769C;
+}
+.datapost {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	line-height: 20px;
+	color: #ABABE2;
+}
+
+.boxdiario {
+	border: 2px solid #4074AE;
+}
+.titdiario {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	line-height: 20px;
+	color: #4074AE;
+}
+.txtdiario {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 18px;
+	color: #76769C;
+}
+
+a.diariocoment {
+	font-family: verdana, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: 22px;
+	font-weight: bold;
+	color: #7070FF;
+}
+a.diarioedit {
+	font-family: verdana, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: 22px;
+	font-weight: bold;
+	color: #FF6699;
+	text-decoration: none;
+}
+
+a.headerdiario {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 22px;
+	color: #4074AE;
+	text-decoration: underline;
+
+}
+
+/* CSSs Bibliotec */
+
+.titbiblioteca {font-family: Arial, Helvetica, sans-serif;	font-size: 16px; font-weight: bold; line-height: 20px;	color: #7E719A;}
+.blt_linha_tipo  {border-top-width: 0px; border-bottom-width: 0px;border-left-width: 0px;border-right-width: 1px; border-style: solid; border-color: #FFFFFF;background-color: #C6BFD8; padding: 3px; font-family: verdana, Helvetica, sans-serif; font-weight: bold; font-size: 11px;color: #FFFFFF;}
+.blt_col_a  {border-top-width: 1px;border-bottom-width: 1px;border-left-width: 0px;border-right-width: 0px;border-style: solid;border-color: #FFFFFF;background-color: #FAF8FA; padding: 4px;font-family: verdana, Helvetica, sans-serif;font-size: 10px;color: #666666;}
+.blt_col_b  {border-width: 1px;border-style: solid;border-color: #FFFFFF;background-color: #F1F2F6; padding: 4px; font-family: verdana, Helvetica, sans-serif;font-size: 10px;color: #666666; }
+.blt_col_select  {border-width: 1px;border-style: solid;border-color: #FFFFFF;background-color: #F6D89D; padding: 4px; font-family: verdana, Helvetica, sans-serif;font-size: 10px;color: #333333; }
+.blt_subtitulo {font-family: Arial, Helvetica, sans-serif;	font-size: 11px; line-height: 20px;	color: #7E719A; font-weight: bold;}
+
+/* CSSs Forum */
+
+
+.forum_tdproj_01a  {
+border-width: 1px;
+border-style: solid;
+border-color: #FFFFFF;
+background-color: #F1F2F6;
+
+
+font-family: verdana, Helvetica, sans-serif;
+font-size: 11px;
+color: #666666;
+    }
+.forum_tdproj_01b  {border-top-width: 1px;border-bottom-width: 1px;border-left-width: 0px;border-right-width: 0px;border-style: solid;border-color: #FFFFFF;background-color: #FAF8FA; padding: 4px;
+font-family: verdana, Helvetica, sans-serif;font-size: 10px;color: #666666;
+    }
+
+.forum_tdproj_01a  {border-width: 1px;border-style: solid;border-color: #FFFFFF;background-color: #F1F2F6; padding: 4px;
+font-family: verdana, Helvetica, sans-serif;font-size: 10px;color: #666666;
+    }
+
+.forum_tdproj_02a  {border-width: 1px;border-style: solid;border-color: #FFFFFF;background-color: #FBFAF9; padding: 4px;
+font-family: verdana, Helvetica, sans-serif;font-size: 10px;color: #666666;
+    }
+.forum_tdproj_02b  {border-top-width: 1px;border-bottom-width: 1px;border-left-width: 0px;border-right-width: 0px;border-style: solid;border-color: #FEFCFC;background-color: #FAF8FA; padding: 4px;
+font-family: verdana, Helvetica, sans-serif;font-size: 10px;color: #666666;
+    }
+
+.forum_tdcurso_01a  {border-top-width: 1px;border-bottom-width: 1px;border-left-width: 0px;border-right-width: 0px;border-style: solid;border-color: #FFFFFF;background-color: #EFF4EE; padding: 4px;
+font-family: verdana, Helvetica, sans-serif;font-size: 10px;color: #666666;
+    }
+.forum_tdcurso_01b  {border-top-width: 1px;border-bottom-width: 1px;border-left-width: 0px;border-right-width: 0px;border-style: solid;border-color: #FEFCFC;background-color: #F9F9F6; padding: 4px;
+font-family: verdana, Helvetica, sans-serif;font-size: 10px;color: #666666;
+}
+
+.forum_tdcurso_02a  {border-width: 1px;border-style: solid;border-color: #FFFFFF;background-color: #FBFAF9; padding: 4px;
+font-family: verdana, Helvetica, sans-serif;font-size: 10px;color: #666666;
+    }
+.forum_tdcurso_02b  {border-top-width: 1px;border-bottom-width: 1px;border-left-width: 0px;border-right-width: 0px;border-style: solid;border-color: #FEFCFC;background-color: #FAF8FA; padding: 4px;
+font-family: verdana, Helvetica, sans-serif;font-size: 10px;color: #666666;
+    }
+	
+	
+/* CSSs Forum interna */
+
+.titforumint {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+	line-height: 20px;
+	color: #663333;
+}
+
+
+.titforumens {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+	line-height: 20px;
+	color: #996666;
+}
+
+.box_forum_resposta  {border-top-width: 1px;
+					  border-bottom-width: 3px;
+					  border-left-width: 1px;
+					  border-right-width: 3px;
+					  border-style: solid;
+					  border-color: #FFB9B9;
+					  background-color: #FFE6E6; 
+					  padding: 5px;
+					  }
+
+.btresposta {
+	font-weight: bold;
+	font-size: 9px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	padding: 2px 2px;
+	border-top: 1px solid #FFB9B9;
+	border-right: 1px solid black;
+	border-bottom: 1px solid black;
+	border-left: 1px solid #FFB9B9;
+	min-width: 70px;
+	text-align: center;
+	text-transform: uppercase;
+	background-color: #FF7373; 
+	color: #FFF;
+	text-decoration: none;
+}
+.btresposta:hover { 
+	background-color: #FFFFFF; 
+	color: red;
+	border-color: black white white black;
+	text-decoration: none;
+	}
+.btresposta:active { 
+	background-color: #369; 
+	color: #ccc; 
+	text-decoration: none;
+	}					  
+
+.titforumresposta {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	line-height: 20px;
+	color: #996666;
+}
+
+
+.forum_blue_01  {border-top-width: 1px;border-bottom-width: 1px; border-left-width: 1px;border-right-width: 1px;border-style: solid;border-color: #96B9FF;background-color: #BED7FF; padding: 4px;
+font-family: verdana, Helvetica, sans-serif;font-size: 10px; line-height: 18px; color: #666666;
+    }
+.forum_blue_02  {border-top-width: 1px;border-bottom-width: 1px; border-left-width: 1px;border-right-width: 1px;border-style: solid;border-color: #BFD5FF;background-color: #DBE8FF; padding: 4px;
+font-family: verdana, Helvetica, sans-serif;font-size: 10px; line-height: 18px;text-indent: 4px; color: #666666;
+    }
+.forum_blue_03  {border-top-width: 1px;border-bottom-width: 1px; border-left-width: 1px;border-right-width: 1px;border-style: solid;border-color: #D2E1FF;background-color: #E9F2FF; padding: 4px;
+font-family: verdana, Helvetica, sans-serif;font-size: 10px; line-height: 18px; text-indent: 18px; color: #666666;
+    }		
+.forum_blue_04  {border-top-width: 1px;border-bottom-width: 1px; border-left-width: 1px;border-right-width: 1px;border-style: solid;border-color: #E1EBFF;background-color: #F7FAFF; padding: 4px;
+font-family: verdana, Helvetica, sans-serif;font-size: 10px; line-height: 18px; text-indent: 32px; color: #666666;
+    }
+
+.forum_red_01  {border-top-width: 1px;border-bottom-width: 1px; border-left-width: 1px;border-right-width: 1px;border-style: solid;border-color: #D8C0D9;background-color: #E3D1E3; padding: 4px;
+font-family: verdana, Helvetica, sans-serif;font-size: 10px; line-height: 18px; color: #666666;
+    }
+.forum_red_02  {border-top-width: 1px;border-bottom-width: 1px; border-left-width: 1px;border-right-width: 1px;border-style: solid;border-color: #E7D9E8;background-color: #EEE3EE; padding: 4px;
+font-family: verdana, Helvetica, sans-serif;font-size: 10px; line-height: 18px; text-indent: 4px; color: #666666;
+    }
+.forum_red_03  {border-top-width: 1px;border-bottom-width: 1px; border-left-width: 1px;border-right-width: 1px;border-style: solid;border-color: #F4E5F4;background-color: #F7F2F7; padding: 4px;
+font-family: verdana, Helvetica, sans-serif;font-size: 10px; line-height: 18px; text-indent: 18px; color: #666666;
+    }		
+.forum_red_04  {border-top-width: 1px;border-bottom-width: 1px; border-left-width: 1px;border-right-width: 1px;border-style: solid;border-color: #F4EDF4;background-color: #FAF7FA; padding: 4px;
+font-family: verdana, Helvetica, sans-serif;font-size: 10px; line-height: 18px; text-indent: 32px; color: #666666;
+    }
+
+.forum_green_01  {border-top-width: 1px;border-bottom-width: 1px; border-left-width: 1px;border-right-width: 1px;border-style: solid;border-color: #B6DCAC;background-color: #CFE8C9; padding: 4px;
+font-family: verdana, Helvetica, sans-serif;font-size: 10px; line-height: 18px; color: #666666;
+    }
+.forum_green_02  {border-top-width: 1px;border-bottom-width: 1px; border-left-width: 1px;border-right-width: 1px;border-style: solid;border-color: #D0E9CA;background-color: #E0F0DC; padding: 4px;
+font-family: verdana, Helvetica, sans-serif;font-size: 10px; line-height: 18px; text-indent: 4px; color: #666666;
+    }
+.forum_green_03  {border-top-width: 1px;border-bottom-width: 1px; border-left-width: 1px;border-right-width: 1px;border-style: solid;border-color: #DCEED7;background-color: #E9F4E6; padding: 4px;
+font-family: verdana, Helvetica, sans-serif;font-size: 10px; line-height: 18px; text-indent: 18px; color: #666666;
+    }		
+.forum_green_04  {border-top-width: 1px;border-bottom-width: 1px; border-left-width: 1px;border-right-width: 1px;border-style: solid;border-color: #E4F2E0;background-color: #F2F9F0; padding: 4px;
+font-family: verdana, Helvetica, sans-serif;font-size: 10px; line-height: 18px; text-indent: 32px; color: #666666;
+    }
+
+.tit_forum_proj{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+	line-height: 20px;
+	color: #336699;
+}
