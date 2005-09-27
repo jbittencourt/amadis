@@ -1,7 +1,7 @@
 <?
 
 
-class AMWSmartform extends CMWSmartform {
+class AMWSmartform extends CMWSmartForm {
 
   public function __construct($objClass,$name,$action="",$fields_rec="",$fields_hidden="",$fields_ausentes="",$method="POST",$enctype="") {
     parent::__construct($objClass,$name,$action,$fields_rec,$fields_hidden,$fields_ausentes,$method,$enctype);

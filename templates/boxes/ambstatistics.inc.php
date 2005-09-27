@@ -17,14 +17,14 @@ class AMBStatistics extends AMBox {
     parent::add('<table id="stats_table">');
     parent::add('<tr>');
     parent::add('<td id="stats_col">');
-
-    $max = max($stats[communities],$stats[people],$stats[projects],$stats[communities]);
-
-    $p_communities = ($stats[communities]/$max)*50;
-    $p_people = ($stats[people]/$max)*50;
-    //$p_courses = ($stats[courses]/$max)*50;
-    $p_projects = ($stats[projects]/$max)*50;
     
+    $max = max($stats[communities],$stats[people],$stats[projects],$stats[communities]);
+    if($max > 0) {
+      $p_communities = ($stats[communities]/$max)*50;
+      $p_people = ($stats[people]/$max)*50;
+      //$p_courses = ($stats[courses]/$max)*50;
+      $p_projects = ($stats[projects]/$max)*50;
+    }
     $dot = '<img width="1" height="1" border="0" src="'.$_CMAPP[images_url].'/dot.gif">';
     parent::add('<span id="bar_communities" style="height: '.$p_communities.'%;" class="stats">'.$dot.'</span>');
     parent::add('<span id="bar_people" style="height: '.$p_people.'%;" class="stats">'.$dot.'</span>');

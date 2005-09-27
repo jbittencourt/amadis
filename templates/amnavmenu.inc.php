@@ -29,7 +29,7 @@ class AMNavMenu extends CMHTMLObj {
       $str.="<td class=\"mnlateral\">".$_SESSION[user]->username." $_language[on_AMADIS]:<br>";
       $str.="<form class=\"logon\" name=\"form5\" method=\"post\" action=\"\">";
       //select com os modos 
-      $str.="<select name=\"select\" onChange=\"Finder_changeStatus(this,'$_CMAPP[services_url]';\">";
+      $str.="<select name=\"select\" onChange=\"Finder_changeStatus(this,'$_CMAPP[services_url]');\">";
       $modes = AMFinder::getModes();
       foreach($modes as $k=>$item) {
 	if($_SESSION[session]->visibility == $k) $str.="<option value=\"$k\" SELECTED>$item</option>";
