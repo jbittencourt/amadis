@@ -135,13 +135,13 @@ switch($_REQUEST[action]) {
    $_SESSION[cad_user]->loadDataFromRequest();
    
    //tests if the email is a defined internet site
-   if(!checkdnsrr(array_pop(explode("@",$_SESSION[cad_user]->email)),"MX")) {
+   $email = explode("@",$_SESSION[cad_user]->email);
+   if(!checkdnsrr(array_pop($email),"MX")) {
      $_REQUEST[frm_amerror][] = "cannot_contact_email_server";
 
      //change the string {EMAIL} in the language file key error_cannot_contact_email_server by the user email address
      $_language[error_cannot_contact_email_server] = str_replace("{EMAIL}",$_SESSION[cad_user]->email,$_language[error_cannot_contact_email_server]);
    }
-
 
    $_SESSION[cad_foto] = new AMUserFoto;
 
@@ -153,7 +153,7 @@ switch($_REQUEST[action]) {
        $pag->addError($_language[error_invalid_image_type]);
      }
    }
-
+   
    $view = $_SESSION[cad_foto]->getView();
    $cadBox->add("<p align=center>");
    $cadBox->add($view);
@@ -161,7 +161,7 @@ switch($_REQUEST[action]) {
 
    //get the image types that are allowed in this installation of gd+php
    $types = AMImage::getValidImageExtensions();
-
+   
    $cadBox->add("<form name=cad_user method=post action=\"$_SERVER[PHP_SELF]\" enctype=\"multipart/form-data\">");
    $cadBox->add("<input type=hidden name=action value=pag_2>");
    $cadBox->add("<p align=center>".$_language[frm_foto]);
@@ -181,8 +181,8 @@ switch($_REQUEST[action]) {
    }
 
    $foto = unserialize($_SESSION[cad_foto]);
-
-   if($foto->state==CMObj::STATE_DIRTY) {
+   
+   if($foto->state==CMObj::STATE_DIRTY || $foto->state==CMObj::STATE_NEW) {
      $foto->tempo = time();
      try {
        $foto->save(); 
