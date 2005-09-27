@@ -35,7 +35,7 @@
    </urls>
    <paths>
       <pages>COMPLETE_WITH_YOUR_PATH/ambiente/paginas</pages>
-      <thumbnails>/home/juliano/projetos/amadis/ambiente/media/thumbnails</thumbnails>	
+      <thumbnails>COMPLETE_WITH_YOUR_PATH/ambiente/media/thumbnails</thumbnails>	
    </paths>
    <database>
       <driver>mysql</driver>
