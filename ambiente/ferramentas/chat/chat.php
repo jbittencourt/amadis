@@ -116,7 +116,7 @@ switch($_REQUEST[tarefa]){
 
    //cria o formulario
    $requisitados = array("nomSala","desSala","datInicio","flaPermanente");
-   $form1 = new CMWSmartform(AMChat,"criarchat","chat.php".$destino,$requisitados);
+   $form1 = new CMWSmartForm(AMChat,"criarchat","chat.php".$destino,$requisitados);
 
    if(is_a($_SESSION[sala],AMChat)) {
      //$form->loadDataFromObject($_SESSION[sala]);
