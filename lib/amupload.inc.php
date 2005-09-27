@@ -140,8 +140,8 @@ class AMUpload {
     global $_language;
     
     $dirMime = array();
-    
-    $dir = array_splice(scandir($path), 2);
+    $list = scandir($path);
+    $dir = array_splice($list, 2);
     
     if(!empty($dir)) {
       $i=0;

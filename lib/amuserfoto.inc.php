@@ -14,6 +14,7 @@ class AMUserFoto extends AMFoto {
   }
 
   public function getView() {
+
     switch($this->state) {
     case CMObj::STATE_PERSISTENT:
       return new AMTUserImage($this->codeArquivo);
@@ -21,7 +22,7 @@ class AMUserFoto extends AMFoto {
     case CMObj::STATE_DIRTY:
       return new AMTUserImage($this,AMImageTemplate::METHOD_SESSION);
     case CMObj::STATE_NEW:
-      if(empty($this->dados)) {
+      if($this->dados == "") {
 	return new AMTUserImage($this->default_image);
       }
       else {

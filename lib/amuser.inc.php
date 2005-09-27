@@ -151,15 +151,14 @@ class AMUser extends CMUser {
       if(empty($path)) {
 	Throw new AMException("Cannot save user because the pages dir is not correctly configured. Please, verify your config.xml");
       }
-      $path.= "/users/user_".$this->codeUser;
+      $path .= "/users/user_".$this->codeUser;
 
       //if the this doesn't exists, so we can create it, otherwise generate an exception.
       try {
 	$dir = new CMvfsLocal($path);
 	$this->delete();
 	Throw new AMException("You are trying to create a user directory that alredy exists.");
-      }
-      catch(CMvfsFileNotFound $e) {
+      } catch(CMvfsFileNotFound $e) {
 	$dir = new CMvfsLocal($path,0);  //create but not verify if the dir exists
 	$dir->register();
       }
