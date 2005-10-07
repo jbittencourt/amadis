@@ -270,7 +270,7 @@ if($count_all != 0 ){
 	    $conteudo .=  "<td class='blt_col_".$cor_css."' width='120' align='center'><br>";
 	    $page->add($conteudo);
 	    $page->add($thumb->getView());
-	    $conteudo = "<br>$item->nome<br> <a href='$_SERVER[PHP_SELF]?frm_type=$_REQUEST[frm_type]&frm_codeProjeto=$_REQUEST[frm_codeProjeto]&opcao=download&codeArquivo=$item->codeArquivo'><img src='".$_CMAPP[media_url]."/images/img_blt_ico_baixar.gif'></a><img onclick='Library_delFile($item->codeArquivo, $link)' src='".$_CMAPP[media_url]."/images/img_blt_ico_excluir.gif' class='cursor'></td>";
+	    $conteudo = "<br>$item->nome<br> <a href='$_SERVER[PHP_SELF]?frm_type=$_REQUEST[frm_type]&frm_codeProjeto=$_REQUEST[frm_codeProjeto]&opcao=download&codeArquivo=$item->codeArquivo'><img src='".$_CMAPP[media_url]."/images/img_blt_ico_baixar.gif'></a><img onclick='Library_delFile($item->codeArquivo,\"$link\");' src='".$_CMAPP[media_url]."/images/img_blt_ico_excluir.gif' class='cursor'></td>";
 	    
 	    if($broke_line == 3){ // 3 thumbs por coluna :) para 2 / col, bote 2.. e assim por diante.
 	      $conteudo .= "</tr>";
