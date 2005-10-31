@@ -24,7 +24,7 @@ class AMTreeAreas extends CMHTMLObj{
     }
 
     if($hits==0) {
-      $node = "<a href=\"".$_CMAPP[tools_url]."/projetos/projetoarea.php?frm_codArea=$parent->codArea\" class=\"fontgray\">&raquo; $parent->nomArea</a>";
+      $node = "<a href=\"".$_CMAPP['tools_url']."/projetos/projetoarea.php?frm_codArea=$parent->codArea\" class=\"fontgray\">&raquo; $parent->nomArea</a>";
     }
 
     return $node;

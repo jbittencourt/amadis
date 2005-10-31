@@ -1,11 +1,12 @@
 <?
-$_CMAPP[notrestricted] = True;
+$_CMAPP['notrestricted'] = 1;
 include("../../config.inc.php");
 
-$_language = $_CMAPP[i18n]->getTranslationArray("people");
+$_language = $_CMAPP['i18n']->getTranslationArray("people");
 $pag = new AMTPeople;
 
-switch($_REQUEST[frm_action]) {
+if(!isset($_REQUEST['frm_action'])) $_REQUEST['frm_action']='';
+switch($_REQUEST['frm_action']) {
  
  default:
    $box = new AMTwoColsLayout;

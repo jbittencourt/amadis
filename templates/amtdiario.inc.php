@@ -10,8 +10,8 @@ class AMTDiario extends AMMain {
 
     $this->requires("diary.css",self::MEDIA_CSS);
 
-    $this->setImgId($_CMAPP[imlang_url]."/top_diario.gif");
-
+    $this->setImgId($_CMAPP['imlang_url']."/top_diario.gif");
+    
     $this->openNavMenu();
   }
 }

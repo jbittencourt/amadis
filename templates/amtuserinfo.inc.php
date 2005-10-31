@@ -17,11 +17,11 @@ class AMTUserInfo extends CMHTMLObj {
 
   static protected $_inicialized = false;
 
-  protected $user;
+  protected $user, $text;
   protected $username;
   protected $class;
   private $tip;
-
+  
   public function __construct(CMUser $user,$username=self::LIST_FULLNAME,$setLink=false) {
     global $_CMAPP;
     parent::__construct();
@@ -37,11 +37,11 @@ class AMTUserInfo extends CMHTMLObj {
     }
     $this->class = "blue";
     
-
+    
     $this->tip = new CMWTip($this->text,"");
 
     if($setLink){
-      $this->tip->setLink($_CMAPP[services_url]."/webfolio/userinfo_details.php?frm_codeUser=$user->codeUser");
+      $this->tip->setLink($_CMAPP['services_url']."/webfolio/userinfo_details.php?frm_codeUser=$user->codeUser");
     }
     else{
       $this->tip->setLink("#");

@@ -7,7 +7,7 @@ class AMBProjectsCommunity extends CMHTMLObj {
   public function __construct() {
 
     parent::__construct();
-    $this->communities = $_SESSION[environment]->listCommunities();
+    $this->communities = $_SESSION['environment']->listCommunities();
 
   }
   
@@ -15,12 +15,12 @@ class AMBProjectsCommunity extends CMHTMLObj {
 
     global $_CMAPP;
     
-    $_language = $_CMAPP[i18n]->getTranslationArray("projects");
+    $_language = $_CMAPP['i18n']->getTranslationArray("projects");
 
     /*
      * URL de submit do form
      */
-    $url = $_CMAPP[services_url]."/projetos/listprojects.php";
+    $url = $_CMAPP['services_url']."/projetos/listprojects.php";
     
     /*
      *Buffering html of the box to output screen
@@ -29,8 +29,8 @@ class AMBProjectsCommunity extends CMHTMLObj {
     $buffer .= "<form action=$url method=post name=frm_prjtCommunity>\n";
     $buffer .= "<tr>\n";
     $buffer .= "<td>\n";
-    $buffer .= "<img src=\"".$_CMAPP[imlang_url]."/img_projetos_comunidade.gif\" border=\"0\"><br>";
-    $buffer .= "<img src=\"".$_CMAPP[images_url]."/dot.gif\" border=\"0\" height=\"7\" width=\"1\"><br>\n";
+    $buffer .= "<img src=\"".$_CMAPP['imlang_url']."/img_projetos_comunidade.gif\" border=\"0\"><br>";
+    $buffer .= "<img src=\"".$_CMAPP['images_url']."/dot.gif\" border=\"0\" height=\"7\" width=\"1\"><br>\n";
     $buffer .= "<font class=\"textoint\">&raquo; $_language[projects_community]<br><br>\n";
     $buffer .= "<select onChange=\"document.frm_prjtCommunity.submit();\" ";
     $buffer .= "name=\"frm_codeCommunity\" style=\"position: relative; top: 0pt;\">\n";

@@ -94,9 +94,9 @@ class AMColorBox extends AMAbstractBox {
 
     //first line empty
     parent::add("<tr>");
-    parent::add("<td id='ctl'><img  src=\"".$_CMAPP[images_url]."/".$this->theme."_es.gif\"></td>");
-    parent::add("<td id='bt' ><img   src=\"".$_CMAPP[images_url]."/dot.gif\"></td>");
-    parent::add("<td id='ctr'><img  src=\"".$_CMAPP[images_url]."/".$this->theme."_ds.gif\"></td>");
+    parent::add("<td id='ctl'><img  src=\"".$_CMAPP['images_url']."/".$this->theme."_es.gif\"></td>");
+    parent::add("<td id='bt' ><img   src=\"".$_CMAPP['images_url']."/dot.gif\"></td>");
+    parent::add("<td id='ctr'><img  src=\"".$_CMAPP['images_url']."/".$this->theme."_ds.gif\"></td>");
     parent::add("</tr>");
     //end first line empty
 
@@ -108,7 +108,7 @@ class AMColorBox extends AMAbstractBox {
       parent::add("<td valign=\"top\"><img src=\"".$this->title."\" ");
     }
     else {
-      parent::add("<td valign=\"top\"><img src=\"".$_CMAPP[images_url]."/dot.gif\" ");
+      parent::add("<td valign=\"top\"><img src=\"".$_CMAPP['images_url']."/dot.gif\" ");
     }
     parent::add("border=\"0\"><br>");
     //end title image
@@ -124,9 +124,9 @@ class AMColorBox extends AMAbstractBox {
     
     //last line empty
     parent::add("<tr>");
-    parent::add("<td id='cbl'><img src=\"".$_CMAPP[images_url]."/".$this->theme."_ei.gif\"></td>");
-    parent::add("<td id='bb' ><img src=\"".$_CMAPP[images_url]."/dot.gif\" border=\"0\"></td>");
-    parent::add("<td id='cbr'><img  src=\"".$_CMAPP[images_url]."/".$this->theme."_di.gif\"></td>");
+    parent::add("<td id='cbl'><img src=\"".$_CMAPP['images_url']."/".$this->theme."_ei.gif\"></td>");
+    parent::add("<td id='bb' ><img src=\"".$_CMAPP['images_url']."/dot.gif\" border=\"0\"></td>");
+    parent::add("<td id='cbr'><img  src=\"".$_CMAPP['images_url']."/".$this->theme."_di.gif\"></td>");
     parent::add("</tr>");
     //end last line empty
 

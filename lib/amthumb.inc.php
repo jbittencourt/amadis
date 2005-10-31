@@ -26,7 +26,7 @@ abstract class AMThumb extends AMImage {
     global $_CMAPP;
 
     $this->resize($this->maxX, $this->maxY);
-    $_conf = $_CMAPP[config]->getObj();
+    $_conf = $_CMAPP['config']->getObj();
     $path =  (string) $_conf->app[0]->paths[0]->thumbnails;
     $image = fopen($path.'/'.$this->name_file, "w+");
     $w = fwrite($image, $this->dados);
@@ -40,7 +40,7 @@ abstract class AMThumb extends AMImage {
 
   protected function checkThumbExists() {
     global $_CMAPP;
-    $_conf = $_CMAPP[config]->getObj();
+    $_conf = $_CMAPP['config']->getObj();
     $path =  (string) $_conf->app[0]->paths[0]->thumbnails;
     if(file_exists($path.'/'.$this->name_file)) return true;
     else return false;

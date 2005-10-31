@@ -44,7 +44,7 @@ class AMPathIndicator extends CMHTMLObj {
     }
     $temp[$this->state] = "<td class=\"progress_realcado\">".$this->elements[$this->state]."</td>";
 
-    $img = "<td><img src=\"".$_CMAPP[images_url]."/arrow.gif\"> <td>";
+    $img = "<td><img src=\"".$_CMAPP['images_url']."/arrow.gif\"> <td>";
     parent::add("<!-- Navigation path indicator -->");
     parent::add("<table align=\"$this->align\" border=0 cellspacing=1 cellpadding=0><tr valign=center>".implode($img,$temp)."</tr></table>");
 

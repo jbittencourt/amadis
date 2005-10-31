@@ -3,6 +3,8 @@
 
 class AMTFotoDiario extends AMImageTemplate {
 
+  private $textoProfile;
+
   public function __toString() {
     global $_CMAPP;
 

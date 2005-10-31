@@ -7,12 +7,12 @@ class AMBPeopleLastUsersLogeds extends AMSimpleBox implements CMActionListener {
   public function __construct() {
     global $_CMAPP;
 
-    parent::__construct($_CMAPP[imlang_url]."/img_pessoas_logadas.gif");
+    parent::__construct($_CMAPP['imlang_url']."/img_pessoas_logadas.gif");
     
   }
 
   public function doAction() {
-    $this->itens = $_SESSION[environment]->listLastUsersLogeds();
+    $this->itens = $_SESSION['environment']->listLastUsersLogeds();
 
   }
 

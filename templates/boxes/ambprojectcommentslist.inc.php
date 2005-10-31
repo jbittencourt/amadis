@@ -51,7 +51,7 @@ class AMBProjectCommentsList extends AMListBox {
       }
     }
     else {
-      parent::add("<span class=\"texto\">".$_language[no_comments]."</span>");
+      parent::add("<span class=\"texto\">".$_language['no_comments']."</span>");
     }
       
     parent::add("</table>");

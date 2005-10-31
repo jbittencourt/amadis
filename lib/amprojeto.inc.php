@@ -27,7 +27,7 @@ class AMProjeto extends CMObj {
   public function save() {
     global $_conf, $_CMDEVEL;
 
-    unset($_SESSION[amadis][projects]);
+    unset($_SESSION['amadis']['projects']);
     $state = $this->state;
 
     if(($state==self::STATE_NEW) || ($state==self::STATE_DIRTY_NEW) ) {
@@ -45,8 +45,8 @@ class AMProjeto extends CMObj {
     }
 
     parent::save();
-    unset($_SESSION[amadis][projects]);
-
+    unset($_SESSION['amadis']['projects']);
+    
 
     if($state==self::STATE_NEW) {
       //create an new disk space for the project
@@ -74,36 +74,37 @@ class AMProjeto extends CMObj {
 
   
   public function getGroup() {
-    if(empty($_SESSION[AMADIS][Project][$this->codeProject][group])) {
+    if(empty($_SESSION['AMADIS']['Project'][$this->codeProject]['group'])) {
       $g = new CMGroup;
       $g->codeGroup = $this->codeGroup;
       $g->load();
-      $_SESSION[AMADIS][Project][$this->codeProject][group] = $g;
+      $_SESSION['AMADIS']['Project'][$this->codeProject]['group'] = $g;
     }  else {
-      $g = $_SESSION[AMADIS][Project][$this->codeProject][group];
+      $g = $_SESSION['AMADIS']['Project'][$this->codeProject]['group'];
     }
     return $g;
   }
 
   public function getStatus(){
-    $q = new CMQuery(AMProjectStatus);
+    $q = new CMQuery('AMProjectStatus');
     $q->setFilter("code = ".$this->status);
     $res = $q->execute();
-    return $res->items[0]->name;
+    $res = array_pop($res->items);
+    return $res->name;
     
   }
 
   static function listAvaiableStatus() {
-    $q = new CMQuery(AMProjectStatus);
+    $q = new CMQuery('AMProjectStatus');
     $res = $q->execute();
     return $res;    
   }
 
   public function listNews($ini=0, $lenght=4) {
-    $q = new CMQuery(AMProjectNews);
+    $q = new CMQuery('AMProjectNews');
 
     $j= new CMJoin(CMJoin::INNER);
-    $j->setClass(AMUser);
+    $j->setClass('AMUser');
     $j->using('codeUser');
 
     $q->addJoin($j,'autor');
@@ -112,7 +113,7 @@ class AMProjeto extends CMObj {
     $q->setCount();
     $count = $q->execute();
 
-    $q = new CMQuery(AMProjectNews);
+    $q = new CMQuery('AMProjectNews');
 
     $q->addJoin($j,'autor');
     $q->setFilter('AMProjectNews::codeProject = '.$this->codeProject);
@@ -125,14 +126,14 @@ class AMProjeto extends CMObj {
 
 
   public function listComments($ini=0, $lenght=3, $time="") {
-    $q = new CMQuery(AMComment);
+    $q = new CMQuery('AMComment');
 
     $j1 = new CMJoin(CMJoin::INNER);
-    $j1->setClass(AMProjectComment);
+    $j1->setClass('AMProjectComment');
     $j1->on('AMProjectComment::codComentario = AMComment::codComentario');
 
     $j2 = new CMJoin(CMJoin::INNER);
-    $j2->setClass(AMUser);
+    $j2->setClass('AMUser');
     $j2->on("AMComment::codeUser = AMUser::codeUser");
 
     $q->addJoin($j1,"comentarios");
@@ -140,8 +141,8 @@ class AMProjeto extends CMObj {
 
     $q->setCount();
 
-    if(!empty($time) && !empty($_SESSION[last_session])) {
-      $q->setFilter("AMProjectComment::codProjeto=$this->codeProject AND tempo > ".$_SESSION[last_session]->timeEnd);
+    if(!empty($time) && !empty($_SESSION['last_session'])) {
+      $q->setFilter("AMProjectComment::codProjeto=$this->codeProject AND tempo > ".$_SESSION['last_session']->timeEnd);
       $q->setOrder("tempo desc");
     }else {
       $q->setFilter("AMProjectComment::codProjeto=".$this->codeProject);
@@ -150,13 +151,13 @@ class AMProjeto extends CMObj {
     
     $count = $q->execute();
     
-    $q = new CMQuery(AMComment);
+    $q = new CMQuery('AMComment');
 
     $q->addJoin($j1,"comentarios");
     $q->addJoin($j2,"usuarios");
 
-    if(!empty($time) && !empty($_SESSION[last_session])) {
-      $q->setFilter("AMProjectComment::codProjeto=$this->codeProject AND tempo < ".$_SESSION[last_session]->timeEnd);
+    if(!empty($time) && !empty($_SESSION['last_session'])) {
+      $q->setFilter("AMProjectComment::codProjeto=$this->codeProject AND tempo < ".$_SESSION['last_session']->timeEnd);
       $q->setOrder("tempo desc");
     }else {
       $q->setFilter("AMProjectComment::codProjeto=".$this->codeProject);
@@ -170,18 +171,18 @@ class AMProjeto extends CMObj {
 
 
   public function hit() {
-    if(!empty($_CMAPP[amadis][projects][hist][$this->codeProject])) return true;
+    if(!empty($_CMAPP['amadis']['projects']['hist'][$this->codeProject])) return true;
 
-    $_CMAPP[amadis][projects][hist][$this->codeProject] = true;
+    $_CMAPP['amadis']['projects']['hist'][$this->codeProject] = true;
     $this->hits++;
     $this->save();
   }
 
 
   public function listAreas() {
-    $q = new CMQuery(AMArea);
+    $q = new CMQuery('AMArea');
     $j = new CMJoin(CMJoin::NATURAL);
-    $j->setClass(AMProjetoArea);
+    $j->setClass('AMProjetoArea');
     $q->addJoin($j,"areas");
 
     $q->setLimit(4,0);
@@ -191,13 +192,13 @@ class AMProjeto extends CMObj {
   }
 
   public function listDiaryPostsProject() {
-    $q = new CMQuery(AMDiarioPost);
+    $q = new CMQuery('AMDiarioPost');
     
     $j = new CMJoin(CMJoin::NATURAL);
-    $j->setClass(AMDiarioProjeto);
+    $j->setClass('AMDiarioProjeto');
 
     $j2 = new CMJoin(CMJoin::INNER);
-    $j2->setClass(AMUser);
+    $j2->setClass('AMUser');
     $j2->on("AMDiarioProjeto::codeUser = AMUser::codeUser");
     $q->addJoin($j, "projeto");
     $q->addJoin($j2, "user");
@@ -209,15 +210,15 @@ class AMProjeto extends CMObj {
   }
 
   public function listForums() {
-    $q = new CMQuery(AMForum);
+    $q = new CMQuery('AMForum');
     
     $j = new CMJoin(CMJoin::INNER);
-    $j->setClass(AMProjectForum);
+    $j->setClass('AMProjectForum');
     $j->on("AMForum::code = AMProjectForum::codeForum");
 
     $j2 = new CMJoin(CMJoin::LEFT);
     $j2->on("AMForum::code=AMForumMessage::codeForum");
-    $j2->setClass(AMForumMessage);
+    $j2->setClass('AMForumMessage');
 
     $q->addJoin($j, "projeto");
     $q->addJoin($j2, "messages");

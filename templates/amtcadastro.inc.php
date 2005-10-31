@@ -8,7 +8,7 @@ class AMTCadastro extends AMMain {
     global $_CMAPP;
     parent::__construct("azul2");
 
-    $this->setImgId($_CMAPP[imlang_url]."/top_cadastro.gif");
+    $this->setImgId($_CMAPP['imlang_url']."/top_cadastro.gif");
 
     $this->openNavMenu();
 

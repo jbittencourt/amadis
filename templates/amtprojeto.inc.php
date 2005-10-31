@@ -8,7 +8,7 @@ class AMTProjeto extends AMMain {
     parent::__construct();
 
     $this->requires("project.css",CMHTMLObj::MEDIA_CSS);
-    $this->setImgId($_CMAPP[imlang_url]."/top_projetos.gif");
+    $this->setImgId($_CMAPP['imlang_url']."/top_projetos.gif");
 
     $this->openNavMenu();
 

@@ -9,7 +9,7 @@ class AMTWebfolio extends AMMain {
     parent::__construct("azul2");
     
     $this->requires("webfolio.css",CMHTMLObj::MEDIA_CSS);
-    $this->setImgId($_CMAPP[imlang_url]."/$type");
+    $this->setImgId($_CMAPP['imlang_url']."/$type");
 
     $this->openNavMenu();
 

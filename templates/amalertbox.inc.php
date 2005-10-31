@@ -46,7 +46,7 @@ Class AMAlertBox extends AMAbstractBox {
   public function __toString() {
     global $_CMAPP;
 
-    $url = $_CMAPP[images_url].'/'.$this->theme;
+    $url = $_CMAPP['images_url'].'/'.$this->theme;
 
     parent::add('<div id="'.$this->id.'" class="alert-box">');
     parent::add("<table id='$this->table_id' class='alert_box_table'>");

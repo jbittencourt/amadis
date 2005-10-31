@@ -36,7 +36,7 @@ switch($_REQUEST[acao]) {
    
    
    
-   if(is_a($_SESSION[curso],AMCurso)) {
+   if($_SESSION[curso] instanceof AMCurso) {
      //$_SESSION[curso]->loadDataFromRequest();
      $form->loadDataFromObject($_SESSION[curso]);
    }
@@ -76,7 +76,7 @@ switch($_REQUEST[acao]) {
    
 
    //se for a primeira tentativa, cria o obejto na sessao
-   if(!is_a($_SESSION[curso],AMCurso)){
+   if(!($_SESSION[curso] instanceof AMCurso)){
      $_SESSION[curso] = new AMCurso();
      $_SESSION[curso]->loadDataFromRequest();
      $_SESSION[curso]->tempo = time();

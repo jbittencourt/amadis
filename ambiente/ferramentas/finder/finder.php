@@ -2,13 +2,21 @@
 
 include_once("../../config.inc.php");
 
-$pag = new CMHTMLPage();
-$pag->setRefreshRate((int) $_CMAPP[finder]->window_refresh_timeout);
+$pag = new AMMain;
+//$pag = new CMHTMLPage;
+$_language = $_CMAPP['i18n']->getTranslationArray("finder");
+$_SESSION['communicator'][1] = 'AMFinder';
 
-$_language = $_CMAPP[i18n]->getTranslationArray("finder");
+$pag->add(CMHTMLObj::getScript("var AMFinder = new amfinder(AMFinderCallBack);"));
 
-if(empty($_SESSION[finder])) {
-  $_SESSION[finder] = new AMFinder();
+$pag->add(CMHTMLObj::getScript("function teste() { AMFinder.getmodes(); }"));
+
+$pag->add("<input type='button' name='check' value='Test' onclick='teste(); return false;'>");
+echo $pag;
+
+die();
+if(empty($_SESSION['finder'])) {
+  $_SESSION['finder'] = new AMFinder();
 };
 
 switch($_REQUEST[action]) {

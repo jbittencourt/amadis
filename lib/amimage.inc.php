@@ -38,7 +38,7 @@ class AMImage extends AMArquivo {
 
 
   public function loadImageFromRequest($formname) {
-    $name = $_FILES[$formname][name];
+    $name = $_FILES[$formname]['name'];
     $parts = explode(".",$name);
     $extension = strtolower($parts[count($parts)-1]);
 
@@ -59,8 +59,8 @@ class AMImage extends AMArquivo {
   public function resize($x1,$y1) {
     //calculate proportions
     $size = $this->getSize();
-    $x0 = $size[x];
-    $y0 = $size[y];
+    $x0 = $size['x'];
+    $y0 = $size['y'];
 
     //compute the new dimmensions of the image considering
     //the requested new dimensions and mantaining the
@@ -112,7 +112,7 @@ class AMImage extends AMArquivo {
     //see AMThumb for more information about thumbnail generation
     $p = AMThumb::getImagesPattern($this->codeArquivo);
 
-    $_conf = $_CMAPP[config]->getObj();
+    $_conf = $_CMAPP['config']->getObj();
     $path =  (string) $_conf->app[0]->paths[0]->thumbnails;
     $handle = opendir($path);
     

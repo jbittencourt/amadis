@@ -13,7 +13,7 @@ class AMLibrary extends CMObj{
   }
   public function busca($tipo){    
     
-    $q = new CMQuery(AMArquivo, AMLibraryFiles);
+    $q = new CMQuery('AMArquivo', 'AMLibraryFiles');
 
     switch( $tipo ){
     case "img":
@@ -43,7 +43,7 @@ class AMLibrary extends CMObj{
   
   public function countBooks($mimeType){
 
-    $q = new CMQuery(AMArquivo,AMLibraryFiles);
+    $q = new CMQuery('AMArquivo','AMLibraryFiles');
     
     if($mimeType == "image"){
       $q->setFilter("(Arquivo.codeArquivo = FilesLibraries.filesCode ) AND (Arquivo.tipoMime LIKE 'image/%') AND (FilesLibraries.libraryCode = '$this->code')");
@@ -67,7 +67,7 @@ class AMLibrary extends CMObj{
   
   public function buscaThumbs(){
     global $_CMAPP;
-    $q = new CMQuery(AMArquivo,AMLibraryFiles);
+    $q = new CMQuery('AMArquivo','AMLibraryFiles');
     $q->setFilter("(Arquivo.codeArquivo = FilesLibraries.filesCode ) AND (Arquivo.tipoMime LIKE 'image/%') AND (FilesLibraries.libraryCode = '$this->code')");
     $q->setOrder('nome');
     $res = $q->execute();    
@@ -77,7 +77,7 @@ class AMLibrary extends CMObj{
   }
   
   public function saveEntry(){
-    $formName = $_REQUEST[nomeCampo]; // recebe o nome do campo de tipo 'file'
+    $formName = $_REQUEST['nomeCampo']; // recebe o nome do campo de tipo 'file'
     $tipo = explode("/", $_FILES[$formName]['type']);
     $file_type =  explode(".",$_FILES[$formName]['name']);
     $bad_ext = array("exe","bin","php","sh","com");  //lista de arquivos indevidos..
@@ -136,7 +136,7 @@ class AMLibrary extends CMObj{
   }
   public function getLastFiles($limit){
     try{
-      $q = new CMQuery(AMArquivo,AMLibraryFiles);
+      $q = new CMQuery('AMArquivo','AMLibraryFiles');
       $q->setFilter("Arquivo.codeArquivo = FilesLibraries.filesCode AND FilesLibraries.libraryCode = '$this->code'");
       $q->setLimit('','$limit');
       $q->setOrder('tempo desc');

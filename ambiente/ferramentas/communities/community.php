@@ -77,7 +77,7 @@ $box->add(new AMBCommunitiesNews(AMBCommunitiesNews::COMMUNITY_NEWS), AMTwoColsL
 
 $box->add("<img src=\"".$_CMAPP[images_url]."/dot.gif\" width=\"20\" height=\"1\" border=\"0\">", AMTwoColsLayout::RIGHT);
 
-if(is_a($_SESSION[user],CMUser)) {
+if($_SESSION[user] instanceof CMUser) {
   if($community->isAdmin($_SESSION[user]->codeUser)) {
     $box->add(new AMBCommunityItems,AMTwoColsLayout::LEFT);
     $box->add("<br>",AMTwoColsLayout::LEFT);

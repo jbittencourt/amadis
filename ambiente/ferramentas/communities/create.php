@@ -47,7 +47,7 @@ switch($_REQUEST[action]) {
    
    $form->setWidgetOrder($fields_rec);
    
-   if(is_a($_SESSION[cad_community],CMObj)) {
+   if($_SESSION[cad_community] instanceof CMObj) {
      $form->loadDataFromObject($_SESSION[cad_community]);
    }
    
@@ -85,7 +85,7 @@ switch($_REQUEST[action]) {
      }   
    }
 
-   if(!is_a($_SESSION[cad_community],AMCommunities)) {
+   if(!($_SESSION[cad_community] instanceof AMCommunities)) {
      //if this is the first submit, create an object in the session to store the user data
      $_SESSION[cad_community] = new AMCommunities();
      $_SESSION[cad_community]->loadDataFromRequest();

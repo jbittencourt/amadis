@@ -22,8 +22,8 @@ function error() {
 
 
 
-if(empty($_REQUEST[method])) {
-     if($_REQUEST[debug]==1) {
+if(empty($_REQUEST['method'])) {
+     if($_REQUEST['debug']==1) {
        die("Metodo de rende nao definido.");
      }
      else {
@@ -31,16 +31,16 @@ if(empty($_REQUEST[method])) {
      }
 }
 
-switch($_REQUEST[method]) {
+switch($_REQUEST['method']) {
  case "db":
    $imagem = new AMArquivo;
-   $imagem->codeArquivo = $_REQUEST[frm_codeArquivo];
+   $imagem->codeArquivo = $_REQUEST['frm_codeArquivo'];
    Try {
      $imagem->load();
    }
    catch(Exception $e) {
      //tests if a debug var is set in the request, if not, send an error image, otherwise print the exception.
-     if($_REQUEST[debug]==1) {
+     if($_REQUEST['debug']==1) {
        echo $e;
        die();
      }
@@ -50,7 +50,7 @@ switch($_REQUEST[method]) {
    }
    break;
  case "session":
-   $imagem = unserialize($_SESSION[amadis][imageview][$_REQUEST[frm_id]]);
+   $imagem = unserialize($_SESSION['amadis']['imageview'][$_REQUEST['frm_id']]);
    //unset($_SESSION[amadis][imageview][frm_id]);
    break;
 }

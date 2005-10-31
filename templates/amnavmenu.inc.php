@@ -13,26 +13,36 @@ class AMNavMenu extends CMHTMLObj {
     $this->requires("menu.js",self::MEDIA_JS);
 
     //adds the default items(lines)
-    if(!$_SESSION[environment]->logged) {
+    if(!$_SESSION['environment']->logged) {
       $login = new AMBLogin();
       $this->add($login,true,true);
 
       $box = new AMMenuBox;
       $box->add("<a href=\"$_CMAPP[services_url]/webfolio/recoverpassword.php\" ><img src=\"$_CMAPP[imlang_url]/img_esqueci.gif\" border=0></a>");
       $this->add($box,true,false);
-
+     
     }
     else {
+
+      if(!isset($_SESSION['amadis']['menus'])) {
+	$_SESSION['amadis']['menus'] = array("projects"=>0,
+					     "friends"=>0,
+					     "communities"=>0
+					   );
+      }
+
       $str ="	 <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"100%\">";
       $str.="	 <tr>";
       $str.="	 <td valign=\"top\" width=\"25\"><img src=\"$_CMAPP[images_url]/img_mn_login_on.gif\" width=\"25\" height=\"19\" border=\"0\"></td>";
-      $str.="<td class=\"mnlateral\">".$_SESSION[user]->username." $_language[on_AMADIS]:<br>";
+      $str.="<td class=\"mnlateral\">".$_SESSION['user']->username." $_language[on_AMADIS]:<br>";
       $str.="<form class=\"logon\" name=\"form5\" method=\"post\" action=\"\">";
       //select com os modos 
-      $str.="<select name=\"select\" onChange=\"Finder_changeStatus(this,'$_CMAPP[services_url]');\">";
+
+      $str.="<select name=\"select\" onChange=\"AMFinder.changemode(this.value);\">";
+
       $modes = AMFinder::getModes();
       foreach($modes as $k=>$item) {
-	if($_SESSION[session]->visibility == $k) $str.="<option value=\"$k\" SELECTED>$item</option>";
+	if($_SESSION['session']->visibility == $k) $str.="<option value=\"$k\" SELECTED>$item</option>";
 	else $str.="<option value=\"$k\">$item</option>";
       }
       $str.="</select>";
@@ -50,7 +60,7 @@ class AMNavMenu extends CMHTMLObj {
 
       // WEBFOLIO
       $str = "<a href=\"$_CMAPP[services_url]/webfolio/webfolio.php\">";
-      $str.= "<img border=\"0\" src=\"".$_CMAPP[imlang_url]."/mn_meu_webfolio.gif\"></a>";
+      $str.= "<img border=\"0\" src=\"".$_CMAPP['imlang_url']."/mn_meu_webfolio.gif\"></a>";
       $this->add($str,true);
 
       // MY DIARY
@@ -62,14 +72,14 @@ class AMNavMenu extends CMHTMLObj {
       $this->add("<a href=\"$_CMAPP[services_url]/library/biblioteca.php\">$img</a>");
 
       // MY PROJECTS
-      $projects  = $_SESSION[user]->listMyProjects();
+      $projects  = $_SESSION['user']->listMyProjects();
 
-      $temp = "<img border=\"0\" src=\"".$_CMAPP[imlang_url]."/mn_meu_meusprojetos.gif\">";
+      $temp = "<img border=\"0\" src=\"".$_CMAPP['imlang_url']."/mn_meu_meusprojetos.gif\">";
       
       $tree = new AMTree($temp);
       $tree->setJSCall("sendMenuStatus('projects','$tree->name','$_CMAPP[url]/handlemenu.php')");
 
-      if($_SESSION[amadis][menus][projects]==1) {
+      if($_SESSION['amadis']['menus']['projects']==1) {
 	$tree->open();
       }
 
@@ -77,21 +87,21 @@ class AMNavMenu extends CMHTMLObj {
 	foreach($projects as $proj) {
  	  $str="";
 
- 	  $tree->add("<a href=\"".$_CMAPP[services_url]."/projetos/projeto.php?frm_codProjeto=$proj->codeProject\" class=\"mnlateral\">&raquo; $proj->title $str</a><br>");
+ 	  $tree->add("<a href=\"".$_CMAPP['services_url']."/projetos/projeto.php?frm_codProjeto=$proj->codeProject\" class=\"mnlateral\">&raquo; $proj->title $str</a><br>");
  	}
       }
       else {
-	$tree->add('<span class="texto">'.$_language[not_member_any_project].'</span>');
+	$tree->add('<span class="texto">'.$_language['not_member_any_project'].'</span>');
       }
-      $this->add($tree,false,false,$_CMAPP[images_url]."/mn_bgmeus.gif");
+      $this->add($tree,false,false,$_CMAPP['images_url']."/mn_bgmeus.gif");
 
       // MY FRIENDS
-      $friends = $_SESSION[user]->listFriends();
+      $friends = $_SESSION['user']->listFriends();
       $temp = "<img src=\"$_CMAPP[imlang_url]/mn_meu_meusamigos.gif\" border=0>";
       $tree = new AMTree($temp);
 
       $tree->setJSCall("sendMenuStatus('friends','$tree->name','$_CMAPP[url]/handlemenu.php')");
-      if($_SESSION[amadis][menus][friends]==1) {
+      if($_SESSION['amadis']['menus']['friends']==1) {
 	$tree->open();
       }
 
@@ -99,42 +109,44 @@ class AMNavMenu extends CMHTMLObj {
 	foreach($friends as $friend) {
  	  $str="";
 	  
-	  switch($_SESSION[amadis][finder][contacts][$friend->codeUser][status]) {
-	  case  AMFinder::FINDER_NORMAL_MODE :
-	    $ico = $_CMAPP[images_url]."/ico_user_on_line.png";
-	    $onClick = "onclick=\"Finder_openChatWindow('$_CMAPP[services_url]/finder/finder_chat.php?frm_codeUser=$friend->codeUser', $friend->codeUser);\"";
-	    break;
-	  case  AMFinder::FINDER_BUSY_MODE :
-	    $ico = $_CMAPP[images_url]."/ico_user_ocupado.png";
-	    $onClick = "onclick=\"Finder_openChatWindow('$_CMAPP[services_url]/finder/finder_chat.php?frm_codeUser=$friend->codeUser', $friend->codeUser);\"";
-	    break;
-	  case  AMFinder::FINDER_HIDDEN_MODE :
-	    $ico = $_CMAPP[images_url]."/ico_user_off_line.png";
-	    $onClick = "onclick=\"Finder_openChatWindow('$_CMAPP[services_url]/finder/finder_chat.php?frm_codeUser=$friend->codeUser', $friend->codeUser);\"";
-	    break;
-	  default:
-	    $ico = $_CMAPP[images_url]."/ico_user_off_line.png";
-	    $onClick = "";
-	    break;
-	  }
+	  // switch($_SESSION['amadis']['finder']['contacts'][$friend->codeUser]['status']) {
+// 	  case  AMFinder::FINDER_NORMAL_MODE :
+// 	    $ico = $_CMAPP['images_url']."/ico_user_on_line.png";
+// 	    $onClick = "onclick=\"Finder_openChatWindow('$_CMAPP[services_url]/finder/finder_chat.php?frm_codeUser=$friend->codeUser', $friend->codeUser);\"";
+// 	    break;
+// 	  case  AMFinder::FINDER_BUSY_MODE :
+// 	    $ico = $_CMAPP['images_url']."/ico_user_ocupado.png";
+// 	    $onClick = "onclick=\"Finder_openChatWindow('$_CMAPP[services_url]/finder/finder_chat.php?frm_codeUser=$friend->codeUser', $friend->codeUser);\"";
+// 	    break;
+// 	  case  AMFinder::FINDER_HIDDEN_MODE :
+// 	    $ico = $_CMAPP['images_url']."/ico_user_off_line.png";
+// 	    $onClick = "onclick=\"Finder_openChatWindow('$_CMAPP[services_url]/finder/finder_chat.php?frm_codeUser=$friend->codeUser', $friend->codeUser);\"";
+// 	    break;
+// 	  default:
+// 	    $ico = $_CMAPP['images_url']."/ico_user_off_line.png";
+// 	    $onClick = "";
+// 	    break;
+// 	  }
 	  $onClick = "";
+	  $ico = "";
 	  $icoOnline = "<img id=\"UserIco_$friend->codeUser\" alfign=\"middle\" src=\"$ico\" $onClick>";
-	  $tree->add("$icoOnline<a class=\"mnlateral\" href=\"".$_CMAPP[services_url]."/webfolio/userinfo_details.php?frm_codeUser=$friend->codeUser\"> $friend->name $str</a><br>");
+	  $tree->add("$icoOnline<a class=\"mnlateral\" href=\"".$_CMAPP['services_url']."/webfolio/userinfo_details.php?frm_codeUser=$friend->codeUser\"> $friend->name $str</a><br>");
       }
     }
       else {
 	$tree->add("<font class=\"texto\">$_language[no_friends]</font>");
       }
       
-      $this->add($tree,false,false,$_CMAPP[images_url]."/mn_bgmeus.gif");
+      $this->add($tree,false,false,$_CMAPP['images_url']."/mn_bgmeus.gif");
 
       //MY_COMMUNITIES
-      $communities = $_SESSION[user]->listMyCommunities();
+      $communities = $_SESSION['user']->listMyCommunities();
       $temp = "<img src=\"$_CMAPP[imlang_url]/mn_minhas_comunidades.gif\" border=0>";
       $tree = new AMTree($temp);
 
       $tree->setJSCall("sendMenuStatus('communities','$tree->name','$_CMAPP[url]/handlemenu.php')");
-      if($_SESSION[amadis][menus][communities]==1) {
+
+      if($_SESSION['amadis']['menus']['communities']==1) {
 	$tree->open();
       }
 
@@ -143,13 +155,13 @@ class AMNavMenu extends CMHTMLObj {
 	foreach($communities as $communitie) {
  	  $str="";
 	  
- 	  $tree->add("<a class=\"mnlateral\" href=\"".$_CMAPP[services_url]."/communities/community.php?frm_codeCommunity=$communitie->code\" class=\"mnlateral\">&raquo; $communitie->name $str</a><br>");
+ 	  $tree->add("<a class=\"mnlateral\" href=\"".$_CMAPP['services_url']."/communities/community.php?frm_codeCommunity=$communitie->code\" class=\"mnlateral\">&raquo; $communitie->name $str</a><br>");
  	}
       }
       else {
 	$tree->add("<font class=\"texto\">$_language[no_communities]</font>");
       }
-      $this->add($tree,false,false,$_CMAPP[images_url]."/mn_bgmeus.gif");
+      $this->add($tree,false,false,$_CMAPP['images_url']."/mn_bgmeus.gif");
 
      //FOOTER
       $this->add("<img src=\"$_CMAPP[imlang_url]/mn_box_footer.gif\" border=0>");
@@ -187,7 +199,7 @@ class AMNavMenu extends CMHTMLObj {
     if(!empty($this->lines)) {
       foreach($this->lines as $line) {
 	parent::add("<tr>");
-	if($line[connector]) {
+	if($line['connector']) {
 	  $img = "mn_traco_laranja.gif";
 	}
 	else {
@@ -195,13 +207,13 @@ class AMNavMenu extends CMHTMLObj {
 	}
 	$bg="";
 	parent::add('<div class="portlet-line">');
-	parent::add('<div id="orange-line"><img src="'.$_CMAPP[images_url].'/'.$img.'"></div>');
-	parent::add('<div class="portlet" style=\'background-image: url("'.$_CMAPP[images_url].'/'.$line[bg].'")\'>');
-	parent::add($line[line]);
+	parent::add('<div id="orange-line"><img src="'.$_CMAPP['images_url'].'/'.$img.'"></div>');
+	parent::add('<div class="portlet" style=\'background-image: url("'.$_CMAPP['images_url'].'/'.$line['bg'].'")\'>');
+	parent::add($line['line']);
 	parent::add('</div>');
 	parent::add('</div>');
 	
-	if($line[line_after]) {
+	if($line['line_after']) {
 	  parent::add("<br>");
 	}
       }
@@ -210,7 +222,7 @@ class AMNavMenu extends CMHTMLObj {
 		
     //end of items
     parent::add('</div>');
-    parent::add('<div id="footer-menu"><img src="'.$_CMAPP[images_url].'/img_footer_menu.gif"></div>');
+    parent::add('<div id="footer-menu"><img src="'.$_CMAPP['images_url'].'/img_footer_menu.gif"></div>');
     parent::add('</div>');
  
    

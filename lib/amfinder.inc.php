@@ -41,17 +41,16 @@ class AMFinder {
    */
   public function __construct() {
     //cria uma area de cache para o finder
-    $_SESSION[amadis][finder] = array();
+    $_SESSION['amadis']['finder'] = array();
     //cria uma area de cache e gerenciamento de contatos
-    $_SESSION[amadis][finder][contacts] = array();
+    $_SESSION['amadis']['finder']['contacts'] = array();
     $this->setTime();
   }
   
   public static function getTimeOut() {
     global $_CMAPP;
-    
-    return (int) $_CMAPP[finder]->timeout;
-
+    $this->timeOut = (int) $_CMAPP['finder']->timeout;
+    return $this->timeOut;
   }
   
   public function getFinderTime() {
@@ -84,18 +83,18 @@ class AMFinder {
    */
   public function getOnlineUsers() {
     
-    if(empty($_SESSION[environment])) 
+    if(empty($_SESSION['environment'])) 
       throw new AMEFinderEmptyEnvironment;
 
-    return $_SESSION[environment]->getOnlineUsers();
+    return $_SESSION['environment']->getOnlineUsers();
   }
 
 
 
   static public function isChatOpen($codeUser) {
-    if(isset($_SESSION[amadis][finder][contacts][$codeUser][chating])) 
-      return $_SESSION[amadis][finder][contacts][$codeUser][chating];
-    else return $_SESSION[amadis][finder][contacts][$codeUser][chating]=0;
+    if(isset($_SESSION['amadis']['finder']['contacts'][$codeUser]['chating'])) 
+      return $_SESSION['amadis']['finder']['contacts'][$codeUser]['chating'];
+    else return $_SESSION['amadis']['finder']['contacts'][$codeUser]['chating']=0;
   }
 
   /**
@@ -106,7 +105,7 @@ class AMFinder {
    */
   public function sendMessage($recipient,$text) {
     $message = new AMFinderMessages;
-    $message->codeSender = $_SESSION[user]->codeUser;
+    $message->codeSender = $_SESSION['user']->codeUser;
     $message->codeRecipient = $recipient;
     $message->message = $text;
     $message->status = AMFinderMessages::ENUM_STATUS_NOT_READ;
@@ -121,11 +120,11 @@ class AMFinder {
 
   public function getNewMessages($recipient,$time) {
 
-    $sender = $_SESSION[user]->codeUser;
-    $q = new CMQuery(AMFinderMessages);
+    $sender = $_SESSION['user']->codeUser;
+    $q = new CMQuery('AMFinderMessages');
     
     $j = new CMJoin(CMJoin::INNER);
-    $j->setClass(AMUser);
+    $j->setClass('AMUser');
     $j->on("FinderMessages.codeSender = User.codeUser");
     
     $q->addJoin($j, "users");
@@ -152,11 +151,11 @@ class AMFinder {
    * @param integer $para Codigo do usuario para quem se deseja enviar um mensagem
    */
   public function changeMode($mode) {
-    @session_start();
-    if(!empty($_SESSION[session])) {
+    
+    if(!empty($_SESSION['session'])) {
      
-      $_SESSION[session]->visibility = $mode;
-      $_SESSION[session]->save();
+      $_SESSION['session']->visibility = $mode;
+      $_SESSION['session']->save();
       $this->mode = $mode;
     }
     else {
@@ -167,12 +166,11 @@ class AMFinder {
 
   }
 
-
   public function getNewRequests() {
 
-    $q = new CMQuery(AMFinderMessages);
+    $q = new CMQuery('AMFinderMessages');
 
-    $filter = "codeRecipient = ".$_SESSION[user]->codeUser." AND status = '".AMFinderMessages::ENUM_STATUS_NOT_READ."'";
+    $filter = "codeRecipient = ".$_SESSION['user']->codeUser." AND status = '".AMFinderMessages::ENUM_STATUS_NOT_READ."'";
     
     $q->setFilter($filter);
 
@@ -185,9 +183,9 @@ class AMFinder {
 	
 	if(!self::isChatOpen($item->codeSender)) {
 	  $ret[] = $item;
-	  if(empty($_SESSION[amadis][finder][contacts][$item->codeSender][time]) ||
-	     ($_SESSION[amadis][finder][contacts][$item->codeSender][time]>$item->time)) {
-	    $_SESSION[amadis][finder][contacts][$item->codeSender][time] = $item->time;
+	  if(empty($_SESSION['amadis']['finder']['contacts'][$item->codeSender]['time']) ||
+	     ($_SESSION['amadis']['finder']['contacts'][$item->codeSender]['time']>$item->time)) {
+	    $_SESSION['amadis']['finder']['contacts'][$item->codeSender]['time'] = $item->time;
 	  }
 		 
 	}
@@ -199,8 +197,8 @@ class AMFinder {
 
 
   public function getTime($to) {
-    if(!empty($_SESSION[amadis][finder][contacts][$to][time])) {
-      return $_SESSION[amadis][finder][contacts][$to][time];
+    if(!empty($_SESSION['amadis']['finder']['contacts'][$to]['time'])) {
+      return $_SESSION['amadis']['finder']['contacts'][$to]['time'];
     }
     
     return $this->time;
@@ -208,28 +206,28 @@ class AMFinder {
 
   static public function startChat($to) {
     @session_start();
-    $_SESSION[amadis][finder][contacts][$to][chating] = 1;
+    $_SESSION['amadis']['finder']['contacts'][$to]['chating'] = 1;
   }
 
   public function stopChat($to) {
     @session_start();
-    $_SESSION[amadis][finder][contacts][$to][chating] = 0;
+    $_SESSION['amadis']['finder']['contacts'][$to]['chating'] = 0;
 
   }
 
   static public function putMessageInTabuList($codmes) {
-    $_SESSION[amadis][finder][tabu_list][$cod_mes] = 1;
+    $_SESSION['amadis']['finder']['tabu_list'][$cod_mes] = 1;
   }
 
   static public function isMessageInTabuList($codmen) {
-    return $_SESSION[finder_tmp][tabu_list][$cod_men];
+    return $_SESSION['finder_tmp']['tabu_list'][$cod_men];
   }
 
   public function __toString() {
-    note($_SESSION[amadis][finder]);
+    note($_SESSION['amadis']['finder']);
     return "";
   }
-};
+}
 
 
 ?>

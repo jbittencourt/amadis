@@ -1,5 +1,5 @@
 <?
-include($_CMAPP[path]."/templates/ammain.inc.php");
+include($_CMAPP['path']."/templates/ammain.inc.php");
 class AMInicial extends AMMain {
   
 
@@ -7,7 +7,7 @@ class AMInicial extends AMMain {
     global $_CMAPP;
     parent::__construct("green");
 
-    $this->setImgId($_CMAPP[imlang_url]."/top_apresentacao.gif");
+    $this->setImgId($_CMAPP['imlang_url']."/top_apresentacao.gif");
 
     $this->openNavMenu();
   }

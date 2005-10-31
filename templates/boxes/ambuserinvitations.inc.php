@@ -15,7 +15,7 @@ class AMBUserInvitations extends AMColorBox implements CMActionListener {
     parent::__construct("",self::COLOR_BOX_BLUE);
 
     try {
-      $this->invitations = $_SESSION[user]->listProjectsInvitations();
+      $this->invitations = $_SESSION['user']->listProjectsInvitations();
       ($this->invitations->__hasItems() ? $this->__hasItems = true : $this->__hasItems = false);
     }catch(AMWEFirstLogin $e) {
       $this->__hasItems = false;
@@ -30,49 +30,49 @@ class AMBUserInvitations extends AMColorBox implements CMActionListener {
 
   public function doAction() {
     global $_CMAPP,$_language;
-
-    if(empty($_REQUEST[inv_action])) {
+    
+    if(!isset($_REQUEST['inv_action'])) {
       return false;
     }
 
     try {
       $proj = new AMProjeto;
-      $proj->codeProject = $_REQUEST[inv_codeProject];
+      $proj->codeProject = $_REQUEST['inv_codeProject'];
       $proj->load();
       
       $group = $proj->getGroup();
     }
     catch(CMDBNoRecord $e) {
       note($e);die();
-      $err = new AMError($_language[error_joining_project],get_class($this));
+      $err = new AMError($_language['error_joining_project'],get_class($this));
       return false;
     }
 
 
-    switch($_REQUEST[inv_action]) {
+    switch($_REQUEST['inv_action']) {
     case "A_accpect":
       //add the user to the project
       try {
-	$group->acceptInvitation($_REQUEST[inv_codeGroupMemberJoin]);
-	unset($_SESSION[amadis][projects]);
+	$group->acceptInvitation($_REQUEST['inv_codeGroupMemberJoin']);
+	unset($_SESSION['amadis']['projects']);
       }
       catch(CMGroupException $e) {
-	$err = new AMError($_language[error_joining_project],get_class($this));
+	$err = new AMError($_language['error_joining_project'],get_class($this));
 	return false;
       }
 
-      $msg = new AMMessage($_language[msg_joined_project]." $proj->title.",get_class($this));
+      $msg = new AMMessage($_language['msg_joined_project']." $proj->title.",get_class($this));
       break;
 
     case "A_reject":
       try {
-	$group->rejectInvitation($_REQUEST[inv_codeGroupMemberJoin]);
+	$group->rejectInvitation($_REQUEST['inv_codeGroupMemberJoin']);
       }
       catch(CMGroupException $e) {
-	$err = new AMError($_language[error_joining_project],get_class($this));
+	$err = new AMError($_language['error_joining_project'],get_class($this));
 	return false;
       }
-      $msg = new AMMessage($_language[msg_rejected_project]." $proj->title.",get_class($this));
+      $msg = new AMMessage($_language['msg_rejected_project']." $proj->title.",get_class($this));
       break;
     }
 
@@ -106,12 +106,12 @@ class AMBUserInvitations extends AMColorBox implements CMActionListener {
 
 	//invitation text
 	parent::add("</td><td class=\"texto\">");
-	parent::add($_language[project_invitation].' ');
+	parent::add($_language['project_invitation'].' ');
 	parent::add("<a class=\"blue\" href=\"$_CMAPP[services_url]/projetos/projeto.php?frm_codProjeto=$proj->codeProject\">$proj->title</a>.");
 	parent::add("</td><td align=center>");
 
 	$inv = $proj->invitation[0];
-	$link = $_CMAPP[services_url]."/webfolio/webfolio.php?inv_codeProject=$proj->codeProject&inv_codeGroupMemberJoin=".$inv->codeGroupMemberJoin;
+	$link = $_CMAPP['services_url']."/webfolio/webfolio.php?inv_codeProject=$proj->codeProject&inv_codeGroupMemberJoin=".$inv->codeGroupMemberJoin;
 
 	parent::add("<a href=\"$link&inv_action=A_accpect\" class=\"blue\">$_language[accept]</a><br>");
 	parent::add("<a href=\"$link&inv_action=A_reject\"class=\"blue\">$_language[reject]</a>");

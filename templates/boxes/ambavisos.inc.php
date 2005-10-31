@@ -7,16 +7,16 @@ class AMBAvisos extends AMColorBox {
 
   public function __construct() {
     global $_CMAPP;
-    parent::__construct($_CMAPP[imlang_url]."/box_avisos_amadis.gif",self::COLOR_BOX_BLUE);
+    parent::__construct($_CMAPP['imlang_url']."/box_avisos_amadis.gif",self::COLOR_BOX_BLUE);
   }
 
   public function __toString() {
     global $_language, $_CMAPP;
 
-    $list = $_SESSION[environment]->listaAvisos();
+    $list = $_SESSION['environment']->listaAvisos();
 
     if(empty($list->items)) {
-      parent::add($_language[notices_not_found]);
+      parent::add($_language['notices_not_found']);
     }
     else {
       foreach($list as $item) {

@@ -1,17 +1,17 @@
 <?
-$_CMAPP[notrestricted] = 1;
+$_CMAPP['notrestricted'] = 1;
 include("../../config.inc.php");
 
 
-$_language = $_CMAPP[i18n]->getTranslationArray("projects");
+$_language = $_CMAPP['i18n']->getTranslationArray("projects");
 
 $pag = new AMTProjeto;
 $box = new AMTwoColsLayout;
 
 
-if(!empty($_REQUEST[frm_codProjeto])) {
+if(isset($_REQUEST['frm_codProjeto']) && !empty($_REQUEST['frm_codProjeto'])) {
      $proj = new AMProjeto;
-     $proj->codeProject = $_REQUEST[frm_codProjeto];
+     $proj->codeProject = $_REQUEST['frm_codProjeto'];
      try{
        $proj->load();
        $group = $proj->getGroup();
@@ -21,10 +21,10 @@ if(!empty($_REQUEST[frm_codProjeto])) {
        header("Location:$location");
      }
 } else { 
-  $_REQUEST[frm_amerror] = "any_project_id";
+  $_REQUEST['frm_amerror'] = "any_project_id";
   
-  $pag->add("<br><div align=center><a href=\"".$_SERVER[HTTP_REFERER]."\" ");
-  $pag->add("class=\"cinza\">".$_language[voltar]."</a></div><br>");
+  $pag->add("<br><div align=center><a href=\"".$_SERVER['HTTP_REFERER']."\" ");
+  $pag->add("class=\"cinza\">".$_language['back']."</a></div><br>");
   echo $pag;
   die();
 }
@@ -32,11 +32,11 @@ if(!empty($_REQUEST[frm_codProjeto])) {
 
 //checks if the user is a member of the project
 $isMember = false;
-if(!empty($_SESSION[user])) {
-  $isMember = $group->isMember($_SESSION[user]->codeUser);
+if(!empty($_SESSION['user'])) {
+  $isMember = $group->isMember($_SESSION['user']->codeUser);
   if(!$isMember) $proj->hit();
 }
-$_CMAPP[smartform][language] = $_language;
+$_CMAPP['smartform']['language'] = $_language;
 
 if($isMember) {
   $req = new AMBProjectRequest($proj);
@@ -55,7 +55,7 @@ if($isMember) {
 //coluna da esquerda
 $box->add("<font class=\"project_title\">$_language[project]: ".$proj->title."<br>",
 	  AMTwoColsLayout::LEFT);
-$box->add("<img src=\"".$_CMAPP[images_url]."/dot.gif\" border=\"0\" height=\"10\" width=\"1\"><br>",
+$box->add("<img src=\"".$_CMAPP['images_url']."/dot.gif\" border=\"0\" height=\"10\" width=\"1\"><br>",
 	  AMTwoColsLayout::LEFT);
 
 $box->add(new AMTProjectImage($proj->image),
@@ -63,23 +63,23 @@ $box->add(new AMTProjectImage($proj->image),
 
 $box->add("      <br>",
 	  AMTwoColsLayout::LEFT);
-$box->add("<img src=\"".$_CMAPP[images_url]."/dot.gif\" border=\"0\" height=\"10\" width=\"1\"><br>",
+$box->add("<img src=\"".$_CMAPP['images_url']."/dot.gif\" border=\"0\" height=\"10\" width=\"1\"><br>",
 	  AMTwoColsLayout::LEFT);
 
 $box->add("<font class=\"texto\">$_language[project]: $proj->title <br>$proj->description<br>",
 	  AMTwoColsLayout::LEFT);
-$box->add("<img src=\"".$_CMAPP[images_url]."/dot.gif\" border=\"0\" height=\"10\" width=\"1\"><br>",
+$box->add("<img src=\"".$_CMAPP['images_url']."/dot.gif\" border=\"0\" height=\"10\" width=\"1\"><br>",
 	  AMTwoColsLayout::LEFT);
 
 /*
  *STATUS DO PROJETO
  */
 $projStatus = $proj->getStatus();
-$box->add("    <img src=\"".$_CMAPP[imlang_url]."/img_dados_projeto.gif\"><br>",
+$box->add("    <img src=\"".$_CMAPP['imlang_url']."/img_dados_projeto.gif\"><br>",
 	  AMTwoColsLayout::LEFT);
 $box->add("    <font class=\"texto\"><b>$_language[project_in]: $projStatus</b><br>",
 	  AMTwoColsLayout::LEFT);
-$box->add("    <img src=\"".$_CMAPP[images_url]."/dot.gif\" border=\"0\" height=\"10\" width=\"1\"><br>",
+$box->add("    <img src=\"".$_CMAPP['images_url']."/dot.gif\" border=\"0\" height=\"10\" width=\"1\"><br>",
 	  AMTwoColsLayout::LEFT);
 
 /*
@@ -94,7 +94,7 @@ if(!empty($projAreas->items)) {
   $box->add("<br><br>",AMTwoColsLayout::LEFT);
 }
 else {
-  $box->add($_language[any_area]."<br><br>",AMTwoColsLayout::LEFT);
+  $box->add($_language['any_area']."<br><br>",AMTwoColsLayout::LEFT);
 }
 
 /*
@@ -117,10 +117,10 @@ else {
   $adopt = new AMBProjectOrfan($proj);
   $adopt->setWidth($box->getWidth());
   $pag->add($adopt);
-  $box->add($_language[no_members]."<br>",AMTwoColsLayout::LEFT);
+  $box->add($_language['no_members']."<br>",AMTwoColsLayout::LEFT);
 }
 
-$box->add("<a href=\"".$_CMAPP[services_url]."/projetos/members.php?frm_codProjeto=".$proj->codeProject."\"",AMTwoColsLayout::LEFT);
+$box->add("<a href=\"".$_CMAPP['services_url']."/projetos/members.php?frm_codProjeto=".$proj->codeProject."\"",AMTwoColsLayout::LEFT);
 $box->add(" class=\"green\">$_language[more_members]</a><br><br>",AMTwoColsLayout::LEFT);
 $box->add("<br>",AMTwoColsLayout::LEFT);
 // END of the members box.
@@ -134,7 +134,7 @@ $box->add($projItens,AMTwoColsLayout::LEFT);
 /**
  *FINAL DA COLUNA ESQUERDA
  **/
-$box->add("<img src=\"".$_CMAPP[images_url]."/dot.gif\" width=\"20\" height=\"1\" border=\"0\">",
+$box->add("<img src=\"".$_CMAPP['images_url']."/dot.gif\" width=\"20\" height=\"1\" border=\"0\">",
 	  AMTwoColsLayout::RIGHT);
 
 /*
@@ -145,7 +145,7 @@ $box->add("<img src=\"".$_CMAPP[images_url]."/dot.gif\" width=\"20\" height=\"1\
  */
 
 if(!$orfan) {
-  if(is_a($_SESSION[user],CMUser)) {
+  if($_SESSION['user'] instanceof CMUser) {
     if($isMember) {
       $projEdit = new AMBProjectEdit($proj);
       $box->add($projEdit,AMTwoColsLayout::RIGHT);
@@ -162,7 +162,7 @@ if(!$orfan) {
  */
  
 
-if(is_a($_SESSION[user],CMUser)) {
+if($_SESSION['user'] instanceof CMUser) {
   if($isMember) {
     $checkIfExist = new AMProjectLibraryEntry($proj->codeProject);
     $checkIfExist->libraryExist();

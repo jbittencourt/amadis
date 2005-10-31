@@ -10,7 +10,7 @@ class AMTCorreio extends AMMain {
     global $_CMAPP;
     parent::__construct("bege");
 
-    $this->setImgId($_CMAPP[imlang_url]."/top_correio.gif");
+    $this->setImgId($_CMAPP['imlang_url']."/top_correio.gif");
 
     $this->openNavMenu();
   }

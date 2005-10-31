@@ -46,7 +46,7 @@ if (empty($_REQUEST[frm_codeCommunity])){
 else{
   //carrega o objeto na sessao para poder recarregar ele no formulario
   
-  if(is_a($_SESSION[atu_community],AMCommunities)) {
+  if($_SESSION[atu_community] instanceof AMCommunities) {
     $community = new AMCommunities();
     $community->code = $_REQUEST[frm_codeCommunity];
     try{
@@ -84,7 +84,7 @@ switch($_REQUEST[action]) {
    $form->setWidgetOrder($fields_rec);
 
   
-   if(is_a($_SESSION[atu_community],CMObj)) {
+   if($_SESSION[atu_community] instanceof CMObj) {
      $form->loadDataFromObject($_SESSION[atu_community]);
    }
 
@@ -100,7 +100,7 @@ switch($_REQUEST[action]) {
    
    $descrip = new CMWTextArea("frm_description", 5, 35);
    $form->addComponent("description",$descrip);
-   if(is_a($_SESSION[atu_community],CMObj)) {
+   if($_SESSION[atu_community] instanceof CMObj) {
      $form->loadDataFromObject($_SESSION[atu_community]);
    }
 
@@ -111,7 +111,7 @@ switch($_REQUEST[action]) {
       
  case "pag_1":
 
-   if(!is_a($_SESSION[atu_community],AMCommunities)) {
+   if(!($_SESSION[atu_community] instanceof AMCommunities)) {
      //
 
      $_SESSION[atu_community]->loadDataFromRequest();

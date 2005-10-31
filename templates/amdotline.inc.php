@@ -16,9 +16,9 @@ class AMDotLine extends CMHtmlObj {
     
     if($this->fullWidth) {
       parent::add('<div id="dashed-line">');
-      parent::add("<img src=\"".$_CMAPP[images_url]."/dot.gif\" width=2></div>");
+      parent::add("<img src=\"".$_CMAPP['images_url']."/dot.gif\" width=2></div>");
     } else {
-      parent::add("<img src=\"".$_CMAPP[images_url]."/box_traco.gif\">");
+      parent::add("<img src=\"".$_CMAPP['images_url']."/box_traco.gif\">");
     }
     return parent::__toString();
   }

@@ -36,7 +36,7 @@ class AMTwoColsLayout extends CMHTMLObj {
 
     parent::add("<!--main body -->");
     parent::add("<table cellpadding=0 cellspacing=0 border=0 width=$this->width>");
-    parent::add("<tr><td colspan=3><img src=".$_CMAPP[images_url]."/dot.gif width=20 height=20></td></tr>");
+    parent::add("<tr><td colspan=3><img src=".$_CMAPP['images_url']."/dot.gif width=20 height=20></td></tr>");
  
     
     parent::add("<!-- coluna da esquerda -->");
@@ -47,7 +47,7 @@ class AMTwoColsLayout extends CMHTMLObj {
     parent::add("</td>");
     parent::add("<!-- final coluna da esquerda -->");
     
-    parent::add("<td width=20><img src=".$_CMAPP[images_url]."/dot.gif width=20 height=1 border=0></td>");
+    parent::add("<td width=20><img src=".$_CMAPP['images_url']."/dot.gif width=20 height=1 border=0></td>");
     
     parent::add("<!-- coluna da direita -->");
     parent::add("<td valign=top width='50%'>");

@@ -7,11 +7,11 @@ function notfound() {
   exit;
 }
 
-if(!isset($_REQUEST[frm_image])) {
+if(!isset($_REQUEST['frm_image'])) {
   notfound();
 }
 
-$imagePath = $_CMAPP[path]."/ambiente/paginas/$_REQUEST[frm_image]";
+$imagePath = $_CMAPP['path']."/ambiente/paginas/$_REQUEST[frm_image]";
 
 // check if file exists
 if (!file_exists("$imagePath")) {
@@ -57,21 +57,21 @@ switch ($imginfo[2]) {
 if (isset($maxX)) {
   $imagesx = imagesx($img_in);
   if ($maxX < $imagesx) {
-    $imagem[width] = $maxX;
-  }else $imagem[width] = $imagesx;
+    $imagem['width'] = $maxX;
+  }else $imagem['width'] = $imagesx;
 }
 if (isset($maxY)) {
   $imagesy = imagesy($img_in);
   if ($maxY < $imagesy) {
-    $imagem[height] = $maxY;
-  }else $imagem[height] = $imagesy;
+    $imagem['height'] = $maxY;
+  }else $imagem['height'] = $imagesy;
 }
 
 $x0 = $imginfo[0];
 $y0 = $imginfo[1];
 
-$x1 = $imagem[width];
-$y1 = $imagem[height];
+$x1 = $imagem['width'];
+$y1 = $imagem['height'];
 
 //compute the new dimmensions of the image considering
 //the requested new dimensions and mantaining the

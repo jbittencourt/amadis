@@ -4,7 +4,8 @@ class AMBPeopleSearchUsers extends AMPageBox implements CMActionListener {
 
   private $itens = array();
   protected $form;
-  
+  private $parent;
+
   public function __construct() {
     parent::__construct(10);
   }
@@ -15,8 +16,8 @@ class AMBPeopleSearchUsers extends AMPageBox implements CMActionListener {
 
   public function doAction() {
     global $_CMAPP, $_CMDEVEL, $_language;
-
-    switch($_REQUEST[search_action]) {
+    if(!isset($_REQUEST['search_action'])) $_REQUEST['search_action']='';
+    switch($_REQUEST['search_action']) {
 
     default :
       
@@ -27,13 +28,13 @@ class AMBPeopleSearchUsers extends AMPageBox implements CMActionListener {
     
     case "listing" :
       
-      $result = $_SESSION[environment]->searchUsers($_REQUEST[frm_search], $this->init, $this->numHitsFP);
+      $result = $_SESSION['environment']->searchUsers($_REQUEST['frm_search'], $this->init, $this->numHitsFP);
       
-      $this->numItems = $result[count];
+      $this->numItems = $result['count'];
       $this->itens = $result[0];
 
       $box = new AMUserList($this->itens,"$_language[search_users]",AMUserList::PEOPLE);
-      
+      if(!isset($_REQUEST['action'])) $_REQUEST['action']='';
       $this->addRequestVars("action=$_REQUEST[action]&search_action=$_REQUEST[search_action]&frm_search=$_REQUEST[frm_search]");
             
       parent::add($box);    

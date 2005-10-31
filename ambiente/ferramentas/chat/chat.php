@@ -118,7 +118,7 @@ switch($_REQUEST[tarefa]){
    $requisitados = array("nomSala","desSala","datInicio","flaPermanente");
    $form1 = new CMWSmartForm(AMChat,"criarchat","chat.php".$destino,$requisitados);
 
-   if(is_a($_SESSION[sala],AMChat)) {
+   if($_SESSION[sala] instanceof AMChat) {
      //$form->loadDataFromObject($_SESSION[sala]);
    }
 
@@ -200,7 +200,7 @@ switch($_REQUEST[tarefa]){
  case "salvar":
    
    $pag = new AMTChat();
-   if(!is_a($_SESSION[sala],AMChat)){
+   if(!($_SESSION[sala] instanceof AMChat)){
      $_SESSION[sala] = new AMChat();
      $_SESSION[sala]->loadDataFromRequest();
      $_SESSION[sala]->tempo = time();

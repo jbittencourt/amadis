@@ -6,35 +6,35 @@ class AMAmbiente extends CMEnvironment {
 
 
   public function getStats() {
-    $q1 = new CMQuery(AMProjeto);
+    $q1 = new CMQuery('AMProjeto');
     $q1->setCount();
 
-    $q2 = new CMQuery(AMUser);
+    $q2 = new CMQuery('AMUser');
     $q2->setCount();
 
-    $q3 = new CMQuery(AMCommunities);
+    $q3 = new CMQuery('AMCommunities');
     $q3->setCount();
     
     $resul = array();
-    $resul[projects] = $q1->execute();
-    $resul[communities] = $q3->execute();
-    $resul[people] = $q2->execute();
-    $resul[courses] = 0;
+    $resul['projects'] = $q1->execute();
+    $resul['communities'] = $q3->execute();
+    $resul['people'] = $q2->execute();
+    $resul['courses'] = 0;
     
     return $resul;
   }
 
   public function listAreas() {
-    $q = new CMQuery(AMArea);
+    $q = new CMQuery('AMArea');
     $q->setOrder("nomArea asc");
     return $q->execute();
   }
 
 
   public function listProjectsByArea($codArea, $ini=0, $length=5) {
-    $q= new CMQuery(AMProjeto);
+    $q= new CMQuery('AMProjeto');
     $j = new CMJoin(CMJoin::INNER);
-    $j->setClass(AMProjetoArea);
+    $j->setClass('AMProjetoArea');
     $j->on("AMProjeto::codeProject = AMProjetoArea::codProjeto");
 
     $result = array();
@@ -43,11 +43,11 @@ class AMAmbiente extends CMEnvironment {
     $q->setOrder("time desc");
     $q->setFilter("codArea =". $codArea);
     $q->setCount();
-    $result[count] = $q->execute();
+    $result['count'] = $q->execute();
     
-    $q = new CMQuery(AMProjeto);
+    $q = new CMQuery('AMProjeto');
     $j1 = new CMJoin(CMJoin::INNER);
-    $j1->setClass(AMArea);
+    $j1->setClass('AMArea');
     $j1->on("AMArea::codArea = AMProjetoArea::codArea");
     
     $q->addJoin($j, "areas");
@@ -60,7 +60,7 @@ class AMAmbiente extends CMEnvironment {
   }
 
   public function searchProjects($searchString, $ini=0, $length=10) {
-    $s = new CMSearch(AMProjeto);
+    $s = new CMSearch('AMProjeto');
     $s->addSearchFields("AMProjeto::title","AMProjeto::description");
     $s->setSeachString($searchString);
 
@@ -76,12 +76,12 @@ class AMAmbiente extends CMEnvironment {
   }
 
   public function listAllProjects($ini=0, $length=5){
-    $q = new CMQuery(AMProjeto);
+    $q = new CMQuery('AMProjeto');
     $result = array();
     $q->setCount();
-    $result[count] = $q->execute();
+    $result['count'] = $q->execute();
 
-    $q = new CMQuery(AMProjeto);
+    $q = new CMQuery('AMProjeto');
     $q->setOrder("title asc");
     $q->setLimit($ini, $length);
     $result[] = $q->execute();
@@ -90,14 +90,14 @@ class AMAmbiente extends CMEnvironment {
 
 
   public function listTopProjects($limit=5) {
-    $q = new CMQuery(AMProjeto);
+    $q = new CMQuery('AMProjeto');
     $q->setOrder("hits desc");
     $q->setLimit(0, $limit);
     return $q->execute(); 
   }
 
   public function listNewProjects($limit=3) {
-    $q = new CMQuery(AMProjeto);
+    $q = new CMQuery('AMProjeto');
     $q->setOrder("time desc");
     $q->setLimit(0, $limit);
     return $q->execute(); 
@@ -106,9 +106,9 @@ class AMAmbiente extends CMEnvironment {
 
   function listaCidades() {
     
-    $q = new CMQuery(AMCidade);
+    $q = new CMQuery('AMCidade');
     $j = new CMJoin(CMJoin::NATURAL);
-    $j->setClass(AMEstado);
+    $j->setClass('AMEstado');
     
     $q->addJoin($j, "estado");
     
@@ -120,7 +120,7 @@ class AMAmbiente extends CMEnvironment {
 
   public function listaAvisos() {
     $tempo = time();
-    $q = new CMQuery(AMAviso);
+    $q = new CMQuery('AMAviso');
     $q->setFilter(" tempoInicio<='$tempo' AND tempoFim>='time()'");
     return $q->execute();
   }
@@ -131,7 +131,7 @@ class AMAmbiente extends CMEnvironment {
    */
   
   public function countUsers() {
-    $q = new CMQuery(AMUser);
+    $q = new CMQuery('AMUser');
     $q->setCount();
     return $q->execute();
   }
@@ -147,7 +147,7 @@ class AMAmbiente extends CMEnvironment {
     $ini = $args[0];
     $final = $args[1];
     $filter = $args[2];    
-    $listUsers = new CMQuery(AMUser);
+    $listUsers = new CMQuery('AMUser');
     $listUsers->setFilter($filter);
     $listUsers->setOrder("codeUser asc");
     $listUsers->setLimit($ini, $final);
@@ -155,7 +155,7 @@ class AMAmbiente extends CMEnvironment {
   }
 
   public function searchUsers($searchString, $init="", $final="") {
-    $s = new CMSearch(AMUser);
+    $s = new CMSearch('AMUser');
     $s->addSearchFields("AMUser::name","AMUser::username");
     $s->setSeachString($searchString);
 
@@ -175,10 +175,10 @@ class AMAmbiente extends CMEnvironment {
    *de usuarios.
    */
   public function listLastDiaryPosts() {
-    $q = new CMQuery(AMDiarioPost);
+    $q = new CMQuery('AMDiarioPost');
     
     $j2 = new CMJoin(CMJoin::INNER);
-    $j2->setClass(AMUser);
+    $j2->setClass('AMUser');
     $j2->on("AMDiarioPost::codeUser = AMUser::codeUser");
 
     $q->addJoin($j2, "autor");
@@ -194,14 +194,14 @@ class AMAmbiente extends CMEnvironment {
    **/
   public static function listDiaries($lower_limit=0,$upper_limit=0) {
     
-    $q = new CMQuery(AMUser);
+    $q = new CMQuery('AMUser');
     
     $j1 = new CMJoin(CMJoin::LEFT);
-    $j1->setClass(AMDiarioProfile);
+    $j1->setClass('AMDiarioProfile');
     $j1->on("AMDiarioProfile::codeUser=AMUser::codeUser");
 
     $j2 = new CMJoin(CMJoin::INNER);
-    $j2->setClass(AMDiarioPost);
+    $j2->setClass('AMDiarioPost');
     $j2->on("AMDiarioPost::codeUser=AMUser::codeUser");
     $j2->setFake();
     
@@ -230,18 +230,18 @@ class AMAmbiente extends CMEnvironment {
    *Lista 5 ultimos usuarios logados no exato momento
    */
   public function listLastUsersLogeds($numRows=5) {
-    $q = new CMQuery(AMUser);
+    $q = new CMQuery('AMUser');
 
     $j = new CMJoin(CMJoin::NATURAL);
-    $j->setClass(CMEnvSession);
+    $j->setClass('CMEnvSession');
     
     $q->addJoin($j, "sessions");
     $q->setLimit(0,$numRows);
     $q->setOrder("timeEnd DESC");
     $timeOut = CMEnvSession::getTimeout(time());
     $filter = "timeEnd > $timeOut AND visibility = '".CMEnvSession::ENUM_VISIBILITY_VISIBLE."'";
-    if(!empty($_SESSION[user])) {
-       $filter.= "AND User.codeUser != ".$_SESSION[user]->codeUser;
+    if(!empty($_SESSION['user'])) {
+       $filter.= "AND User.codeUser != ".$_SESSION['user']->codeUser;
     }
     $q->setFilter($filter);
     $q->groupBy("User.codeUser");
@@ -256,10 +256,10 @@ class AMAmbiente extends CMEnvironment {
    *( CommunityMembers.codeCommunity = Communities.code ) GROUP BY codeCommunity
    */
   public function listBiggerCommunities($limit=5) {
-    $q = new CMQuery(AMCommunities);
+    $q = new CMQuery('AMCommunities');
     
     $j = new CMJoin(CMJoin::LEFT);
-    $j->setClass(AMCommunityMembers);
+    $j->setClass('AMCommunityMembers');
     $j->on("AMCommunities::code = AMCommunityMembers::codeCommunity");
     $j->setFake();
 
@@ -274,7 +274,7 @@ class AMAmbiente extends CMEnvironment {
   }
 
   public function listNewComminities($limit=3) {
-    $q = new CMQuery(AMCommunities);
+    $q = new CMQuery('AMCommunities');
     $q->setOrder("time DESC");
     $q->setLimit(0,$limit);
     return $q->execute();
@@ -285,10 +285,10 @@ class AMAmbiente extends CMEnvironment {
    *Lista as ultimas novidades das comunidades
    */
   public function listLastCommunitiesNews() {
-    $q = new CMQuery(AMCommunities);
+    $q = new CMQuery('AMCommunities');
     
     $j = new CMJoin(CMJoin::INNER);
-    $j->setClass(AMCommunityNews);
+    $j->setClass('AMCommunityNews');
     $j->on("Communities.code = CommunityNews.codeCommunity");
 
     $q->addJoin($j, "news");
@@ -305,7 +305,7 @@ class AMAmbiente extends CMEnvironment {
    *Lista de comunidades
    */
   public function listCommunities() {
-    $q = new CMQuery(AMCommunities);
+    $q = new CMQuery('AMCommunities');
     $q->setOrder("name asc");
     $q->setFilter("Communities.status = '".AMCommunities::ENUM_STATUS_AUTHORIZED."'");
 
@@ -316,13 +316,13 @@ class AMAmbiente extends CMEnvironment {
    *Lista todas as comunidades em partes
    */
   public function listAllCommunities($ini=0, $length=5){
-    $q = new CMQuery(AMCommunities);
+    $q = new CMQuery('AMCommunities');
     $result = array();
     $q->setFilter("Communities.status = '".AMCommunities::ENUM_STATUS_AUTHORIZED."'");
     $q->setCount();
-    $result[count] = $q->execute();
+    $result['count'] = $q->execute();
 
-    $q = new CMQuery(AMCommunities);
+    $q = new CMQuery('AMCommunities');
     $q->setOrder("name asc");
     $q->setFilter("Communities.status = '".AMCommunities::ENUM_STATUS_AUTHORIZED."'");
     $q->setLimit($ini, $length);
@@ -335,7 +335,7 @@ class AMAmbiente extends CMEnvironment {
    *Busca de comunidades
    */
   public function searchCommunities($searchString, $ini=0, $length=10) {
-    $s = new CMSearch(AMCommunities);
+    $s = new CMSearch('AMCommunities');
     $s->addSearchFields("AMCommunities::name","AMCommunities::description");
     $s->setSeachString($searchString);
     $s->setFilter("AMCommunities::status='".AMCommunities::ENUM_STATUS_AUTHORIZED."'");
@@ -356,14 +356,14 @@ class AMAmbiente extends CMEnvironment {
    *Lista os projetos de uma comunidade
    */
   public function listProjectsCommunity($codeCommunity, $ini=0, $length=5) {
-    $q= new CMQuery(AMProjeto);
+    $q= new CMQuery('AMProjeto');
     
     $j = new CMJoin(CMJoin::INNER);
-    $j->setClass(AMCommunityProjects);
+    $j->setClass('AMCommunityProjects');
     $j->on("Projects.codeProject = CommunityProjects.codeProject");
 
     $j1 = new CMJoin(CMJoin::INNER);
-    $j1->setClass(AMCommunities);
+    $j1->setClass('AMCommunities');
     $j1->on("Communities.code = CommunityProjects.codeCommunity");
 
     $result = array();
@@ -372,9 +372,9 @@ class AMAmbiente extends CMEnvironment {
     $q->addJoin($j1, "community");
     $q->setCount();
     $q->setFilter("Communities.status = '".AMCommunities::ENUM_STATUS_AUTHORIZED."'");
-    $result[count] = $q->execute();
+    $result['count'] = $q->execute();
     
-    $q = new CMQuery(AMProjeto);
+    $q = new CMQuery('AMProjeto');
 
     $q->addJoin($j, "pCommunity");
     $q->addJoin($j1, "community");
@@ -394,10 +394,10 @@ class AMAmbiente extends CMEnvironment {
    *Lista requisicoes de entrada na comunidade
    */
   public function listMembersJoinCommunity($codeCommunity) {
-    $q = new CMQuery(AMCommunityMemberJoin);
+    $q = new CMQuery('AMCommunityMemberJoin');
     
     $j = new CMJoin(CMJoin::INNER);
-    $j->setClass(AMUser);
+    $j->setClass('AMUser');
     $j->on("CommunityMemberJoin.codeUser = User.codeUser");
 
     $q->addJoin($j, "user");
@@ -412,21 +412,21 @@ class AMAmbiente extends CMEnvironment {
    *Friends no AMADIS
    */  
   public function listInvitationUsers() {
-    $q = new CMQuery(AMFriend);
-    $j = new CMJoin(AMUser);
-    $q->setFilter("Friends.codeUser = ".$_SESSION[user]->codeUser);
+    $q = new CMQuery('AMFriend');
+    $j = new CMJoin('AMUser');
+    $q->setFilter("Friends.codeUser = ".$_SESSION['user']->codeUser);
   }
 
   /**
    *Lista usuarios que nao convidei para serem meus amigos
    */
   public function listNotMyFriendsUsers() {
-    $q = new CMQuery(AMUser);
+    $q = new CMQuery('AMUser');
     $j = new CMJoin(CMJoin::INNER);
     $j->on("Friends.codeUser != User.codeUser");
-    $j->setClass(AMFriend);
+    $j->setClass('AMFriend');
     $q->addJoin($j, "friend");
-    $q->setFilter("User.codeUser != ".$_SESSION[user]->codeUser." AND Friends.codeUser != ".$_SESSION[user]->codeUser." AND codeFriend != ".$_SESSION[user]->codeUser);
+    $q->setFilter("User.codeUser != ".$_SESSION['user']->codeUser." AND Friends.codeUser != ".$_SESSION['user']->codeUser." AND codeFriend != ".$_SESSION['user']->codeUser);
 
     return $q->execute();
   }
@@ -443,16 +443,16 @@ class AMAmbiente extends CMEnvironment {
    */
   public function getOnLineUsers($camposProj="") {
     
-    $q = new CMQuery(CMEnvSession);
+    $q = new CMQuery('CMEnvSession');
     
     //$filter = "EnvSession.flagEnded = '".CMEnvSession::ENUM_FLAGENDED_NOT_ENDED."'";
-    $filter  = "Friends.codeUser = ".$_SESSION[user]->codeUser;//." AND EnvSession.timeEnd < ".CMEnvSession::getTimeout(time());
+    $filter  = "Friends.codeUser = ".$_SESSION['user']->codeUser;//." AND EnvSession.timeEnd < ".CMEnvSession::getTimeout(time());
     $filter .= " AND EnvSession.flagEnded = '".CMEnvSession::ENUM_FLAGENDED_NOT_ENDED."'";
  
     $q->setProjection("EnvSession.*");
 
     $j1 = new CMJoin(CMJoin::INNER);
-    $j1->setClass(AMFriend);
+    $j1->setClass('AMFriend');
     $j1->on("Friends.codeFriend = EnvSession.codeUser");
     
     $q->addJoin($j1, "friends");
@@ -469,11 +469,13 @@ class AMAmbiente extends CMEnvironment {
    * 
    */
   public function checkIsOnLine($codeUser) {
-    $q = new CMQuery(CMEnvSession);
+    $q = new CMQuery('CMEnvSession');
     $q->setFilter("codeUser = $codeUser AND flagEnded = '".CMEnvSession::ENUM_FLAGENDED_NOT_ENDED."' AND timeEnd > ".CMEnvSession::getTimeOut(time()));
     $result = $q->execute();
-    $session =  array_pop($result->items);
-    return $session->visibility;
+    if(!empty($result->items)) {
+      $session = array_pop($result->items);
+      return $session->visibility;
+    }else return 0;
   }
 
   public function getNumOnlineUsers() {
@@ -486,16 +488,16 @@ class AMAmbiente extends CMEnvironment {
    */
   public function listaChatsFuturos($data,$tipo,$cod){
     $ju = new CMJoin(CMJoin::INNER);
-    $ju->setClass(AMUser);
+    $ju->setClass('AMUser');
     $ju->on("chat_sala.codeUser = User.codeUser");
     
     switch($tipo){
 
     case "Comunidade":
-      $query = new CMQuery(AMChat);
+      $query = new CMQuery('AMChat');
       $j = new CMJoin(CMJoin::INNER);
       $j->on("chat_sala.codSala = comunidadeChats.codSala");
-      $j->setClass(AMComunidadeChats);
+      $j->setClass('AMComunidadeChats');
       $query->addJoin($j, "aux");
       $query->addJoin($ju,"users");
       $data=$data+300;
@@ -507,7 +509,7 @@ class AMAmbiente extends CMEnvironment {
       break;
 
     case "Projeto":
-      $query = new CMQuery(AMChat);
+      $query = new CMQuery('AMChat');
       $j = new CMJoin(CMJoin::INNER);
       $j->on("chat_sala.codSala = projetoChats.codSala");
       $j->setClass(AMProjetoChats);
@@ -533,10 +535,10 @@ class AMAmbiente extends CMEnvironment {
     switch($tipo){
 
     case "Comunidade":
-      $query = new CMQuery(AMChat);
+      $query = new CMQuery('AMChat');
       $j = new CMJoin(CMJoin::INNER);
       $j->on("chat_sala.codSala = comunidadeChats.codSala");
-      $j->setClass(AMComunidadeChats);
+      $j->setClass('AMComunidadeChats');
       $query->addJoin($j, "aux");
       $tempo = time();
       $sql = "codComunidade=".$cod." AND datInicio<=$tempo AND datFim>$tempo";;
@@ -549,10 +551,10 @@ class AMAmbiente extends CMEnvironment {
 
 
     case "Projeto":
-      $query = new CMQuery(AMChat);
+      $query = new CMQuery('AMChat');
       $j = new CMJoin(CMJoin::INNER);
       $j->on("chat_sala.codSala = projetoChats.codSala");
-      $j->setClass(AMProjetoChats);
+      $j->setClass('AMProjetoChats');
       $query->addJoin($j, "aux");
       $tempo = time();
       $sql = "codProjeto=".$cod." AND datInicio<=$tempo AND datFim>$tempo";;
@@ -571,7 +573,7 @@ class AMAmbiente extends CMEnvironment {
     
     foreach($salas_abertas as $sala) {
       $sql = "codSala=".$sala->codSala." AND codUser=$user AND flaOnline=1";
-      $query = new CMQuery(AMChatConnection);
+      $query = new CMQuery('AMChatConnection');
       $query->setFilter($sql);
       $ret = $query->execute();
 
@@ -584,7 +586,6 @@ class AMAmbiente extends CMEnvironment {
     }
     return $return;
   }
-
 
 }
 

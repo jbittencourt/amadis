@@ -99,8 +99,6 @@ no_user_found = "Nenhum usu&aacute;rio encontrado"
 
 join_reason = "Justificativa do ingresso no projeto:"
 approval = "Aprova&ccedil;&atilde;o da equipe:"
-no_user_found = "Nenhum usu&aacute;rio encontrado"
-
 
 finder_mode_VISIBLE = "Logado"
 finder_mode_BUSY = "Ocupado"

@@ -1,7 +1,7 @@
 <?
-$_CMAPP[notrestricted] = 1;
+$_CMAPP['notrestricted'] = 1;
 include("../../config.inc.php");
-$_language = $_CMAPP[i18n]->getTranslationArray("register");
+$_language = $_CMAPP['i18n']->getTranslationArray("register");
 
 ?>
 
@@ -12,7 +12,7 @@ function passwd_validate(password, re_password) {
   if(password.value == re_password.value) {
     return true;
   }else {
-    alert('<? echo $_language[error_password_dot_not_macth] ?>');
+    alert('<? echo $_language['error_password_dot_not_macth'] ?>');
     return false;
   }
 
@@ -62,7 +62,7 @@ function echeck(str) {
 function email_validate(email){
 
   if(!echeck(email.value)) {
-    alert('<? echo $_language[error_invalid_email] ?>');
+    alert('<? echo $_language['error_invalid_email'] ?>');
     return false;
   }
 

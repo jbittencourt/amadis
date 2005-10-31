@@ -1,12 +1,12 @@
 <?
-$_CMAPP[notrestricted] = 1;
+$_CMAPP['notrestricted'] = 1;
 include("../../config.inc.php");
 
-if(!empty($_SESSION[user])) {
+if(!empty($_SESSION['user'])) {
   Header("Location: $_CMAPP[url]/index.php?frm_amerror=cannot_register_logged");
 }
 
-$_language = $_CMAPP[i18n]->getTranslationArray("register");
+$_language = $_CMAPP['i18n']->getTranslationArray("register");
 
 
 $pag = new AMTCadastro();
@@ -15,23 +15,24 @@ $pag = new AMTCadastro();
  *Load language module
  */
     
-$_CMAPP[smartform] = array();
-$_CMAPP[smartform][language] = $_language;
+$_CMAPP['smartform'] = array();
+$_CMAPP['smartform']['language'] = $_language;
     
 
-$el["default"] = $_language[pag_0];
-$el[pag_1] = $_language[pag_1];
-$el[pag_2] = $_language[pag_2];
-$el[pag_3] = $_language[pag_3];
+$el['default'] = $_language['pag_0'];
+$el['pag_1'] = $_language['pag_1'];
+$el['pag_2'] = $_language['pag_2'];
+$el['pag_3'] = $_language['pag_3'];
 $ind =  new AMPathIndicator($el);
-$ind->setState($_REQUEST[action]);
+$ind->setState($_REQUEST['action']);
 $pag->setPathIndicator($ind);
 
 $cadBox = new AMTCadBox("",AMTCadBox::CADBOX_CREATE,AMTCadBox::WEBFOLIO_THEME);
 
 //form box to interface
+if(!isset($_REQUEST['action'])) $_REQUEST['action'] = "";
 
-switch($_REQUEST[action]) {
+switch($_REQUEST['action']) {
 
  default:
 
@@ -39,10 +40,10 @@ switch($_REQUEST[action]) {
    $fields_rec = array("username");
       
    //formulary
-   $form = new AMWSmartForm(AMUser,"cad_user",$_SERVER[PHP_SELF],$fields_rec);
+   $form = new AMWSmartForm('AMUser',"cad_user",$_SERVER[PHP_SELF],$fields_rec);
 
-   if(is_a($_SESSION[cad_user],AMUser)) {
-     $form->loadDataFromObject($_SESSION[cad_user]);
+   if($_SESSION['cad_user'] instanceof AMUser) {
+     $form->loadDataFromObject($_SESSION['cad_user']);
    }
 
    $pwd = new CMWText("frm_password","",20,10);
@@ -55,12 +56,12 @@ switch($_REQUEST[action]) {
    $form->addComponent("action",new CMWHidden("action","pag_1"));
 
    $form->forceCheckField(array("username","password","re_password"));
-   $form->submit_label = $_language[next];
+   $form->submit_label = $_language['next'];
    $form->addOnSubmitAction("passwd_validate(this['frm_password'],this['frm_re_password'])");      
 
-   $form->setCancelUrl($_SERVER[HTTP_REFERER]);
+   $form->setCancelUrl($_SERVER['HTTP_REFERER']);
 
-   $cadBox->setTitle($_language[pag_0]);
+   $cadBox->setTitle($_language['pag_0']);
    $cadBox->add($form);
    
    
@@ -69,7 +70,7 @@ switch($_REQUEST[action]) {
  case "pag_1":
    //checa os dados do usuario, pra ver se nao existe o usuario
    $user = new AMUser;
-   $user->username = $_REQUEST[frm_username];
+   $user->username = $_REQUEST['frm_username'];
    try {
      $user->load();
      header("Location:$_SERVER[PHP_SELF]?frm_amerror=user_exists");
@@ -78,19 +79,19 @@ switch($_REQUEST[action]) {
    }
 
    $fields_rec = array("name","datNascimento","email","endereco","codCidade","cep","telefone","aboutMe");
-   $form = new AMWSmartForm(AMUser, "cad_user", $_SERVER[PHP_SELF], $fields_rec);
+   $form = new AMWSmartForm('AMUser', "cad_user", $_SERVER['PHP_SELF'], $fields_rec);
 
 
-   if(!is_a($_SESSION[cad_user],AMUser)) {
+   if(!($_SESSION['cad_user'] instanceof AMUser)) {
      //if this is the first submit, create an object in the session to store the user data
-     $_SESSION[cad_user] = new AMUser();
-     $_SESSION[cad_user]->loadDataFromRequest();
-     $_SESSION[cad_user]->time = time();
+     $_SESSION['cad_user'] = new AMUser();
+     $_SESSION['cad_user']->loadDataFromRequest();
+     $_SESSION['cad_user']->time = time();
    }
    else {
      //if the user hit back, fill the from with the data from the session object
-     $_SESSION[cad_user]->loadDataFromRequest();
-     $form->loadDataFromObject($_SESSION[cad_user]);
+     $_SESSION['cad_user']->loadDataFromRequest();
+     $form->loadDataFromObject($_SESSION['cad_user']);
    }
 
    
@@ -99,13 +100,13 @@ switch($_REQUEST[action]) {
 
       
    //campo cidade
-   $cidades = $_SESSION[environment]->listaCidades();
+   $cidades = $_SESSION['environment']->listaCidades();
    $form->setSelect("codCidade",$cidades,"codCidade","nomCidade");
-   $form->components[codCidade]->addOption(0,$_language[escolher_cidade]);
+   $form->components['codCidade']->addOption(0,$_language['escolher_cidade']);
 
    //die("V2:".$form->components[codCidade]->getValue());
-   if(!$form->components[codCidade]->getValue())
-     $form->components[codCidade]->setValue(0);
+   if(!$form->components['codCidade']->getValue())
+     $form->components['codCidade']->setValue(0);
 
    
 
@@ -115,12 +116,12 @@ switch($_REQUEST[action]) {
       
    //campo acao
    $form->addComponent("action",new CMWHidden("action","pag_2"));
-   $form->submit_label = $_language[next];
-   $form->setCancelUrl($_SERVER[HTTP_REFERER]);
+   $form->submit_label = $_language['next'];
+   $form->setCancelUrl($_SERVER['HTTP_REFERER']);
    //campos da pagina anterior
 
    
-   $cadBox->setTitle($_language[pag_1]);
+   $cadBox->setTitle($_language['pag_1']);
    $cadBox->add($form);
    
    break;
@@ -128,61 +129,63 @@ switch($_REQUEST[action]) {
  case "pag_2":
 
 
-   if(!is_a($_SESSION[cad_user],AMUser)) {
+   if(!($_SESSION['cad_user'] instanceof AMUser)) {
      header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=fatal");
    }
 
-   $_SESSION[cad_user]->loadDataFromRequest();
+   $_SESSION['cad_user']->loadDataFromRequest();
    
    //tests if the email is a defined internet site
-   $email = explode("@",$_SESSION[cad_user]->email);
+   $email = explode("@",$_SESSION['cad_user']->email);
    if(!checkdnsrr(array_pop($email),"MX")) {
-     $_REQUEST[frm_amerror][] = "cannot_contact_email_server";
+     $_REQUEST['frm_amerror'][] = "cannot_contact_email_server";
 
      //change the string {EMAIL} in the language file key error_cannot_contact_email_server by the user email address
-     $_language[error_cannot_contact_email_server] = str_replace("{EMAIL}",$_SESSION[cad_user]->email,$_language[error_cannot_contact_email_server]);
+     $_language['error_cannot_contact_email_server'] = str_replace("{EMAIL}",$_SESSION['cad_user']->email,$_language['error_cannot_contact_email_server']);
    }
 
-   $_SESSION[cad_foto] = new AMUserFoto;
+   $_SESSION['cad_foto'] = new AMUserFoto;
 
-   if(!empty($_FILES[frm_foto])) {
+   if(!empty($_FILES['frm_foto'])) {
      try {
-       $_SESSION[cad_foto]->loadImageFromRequest("frm_foto");
+       $_SESSION['cad_foto']->loadImageFromRequest("frm_foto");
      }
      catch(AMEImage $e) {
-       $pag->addError($_language[error_invalid_image_type]);
+       $pag->addError($_language['error_invalid_image_type']);
      }
    }
    
-   $view = $_SESSION[cad_foto]->getView();
+   $view = $_SESSION['cad_foto']->getView();
    $cadBox->add("<p align=center>");
    $cadBox->add($view);
-   $_SESSION[cad_foto]=serialize($_SESSION[cad_foto]);
+   $_SESSION['cad_foto']=serialize($_SESSION['cad_foto']);
 
    //get the image types that are allowed in this installation of gd+php
    $types = AMImage::getValidImageExtensions();
    
    $cadBox->add("<form name=cad_user method=post action=\"$_SERVER[PHP_SELF]\" enctype=\"multipart/form-data\">");
    $cadBox->add("<input type=hidden name=action value=pag_2>");
-   $cadBox->add("<p align=center>".$_language[frm_foto]);
-   $cadBox->add("&nbsp;".$_language[valid_image_types]." ".implode(", ",$types).".");
+   $cadBox->add("<p align=center>".$_language['frm_foto']);
+   $cadBox->add("&nbsp;".$_language['valid_image_types']." ".implode(", ",$types).".");
    $cadBox->add("<br><input type=file name=frm_foto onChange=\"this.form.submit()\">");
    $cadBox->add("<br><input type=submit onClick=\"this.form['action'].value='pag_3'\" value=\"$_language[conclude]\">");
    $cadBox->add("</form>");
 
-   $cadBox->setTitle($_language[pag_2]);
+   $cadBox->setTitle($_language['pag_2']);
    
    break;
  case "pag_3":
 
-   
-   if(empty($_SESSION[cad_foto])) {
+   echo "merda!!!!";
+   if(empty($_SESSION['cad_foto'])) {
      header("Location:$_SERVER[PHP_SELF]?action=pag_2&frm_amerror=picture_not_defined");
    }
+   
+   $foto = unserialize($_SESSION['cad_foto']);
 
-   $foto = unserialize($_SESSION[cad_foto]);
    
    if($foto->state==CMObj::STATE_DIRTY || $foto->state==CMObj::STATE_NEW) {
+
      $foto->tempo = time();
      try {
        $foto->save(); 
@@ -191,7 +194,7 @@ switch($_REQUEST[action]) {
        header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_picture");
      }
 
-     $_SESSION[cad_user]->foto = $foto->codeArquivo;
+     $_SESSION['cad_user']->foto = $foto->codeArquivo;
    }
 
    //verifica se o ambiente esta configurado para aceitar o cadastro
@@ -199,15 +202,15 @@ switch($_REQUEST[action]) {
    $auto_accept = $_conf->app->environment->auto_accept_subscrib;
    
    if($auto_accept) {
-     $_SESSION[cad_user]->active = 1;
+     $_SESSION['cad_user']->active = 1;
    }
    else {
-     $_SESSION[cad_user]->active = 0;
+     $_SESSION['cad_user']->active = 0;
    }
 
    
    try {
-     $_SESSION[cad_user]->save();
+     $_SESSION['cad_user']->save();
    }
    catch(CMDBException $e) {
      $foto->delete();
@@ -220,13 +223,13 @@ switch($_REQUEST[action]) {
 
    //tests
    $mail = new AMMailMessage;
-   $mail->addTo($_SESSION[cad_user]->email,$_SESSION[cad_user]->name);
+   $mail->addTo($_SESSION['cad_user']->email,$_SESSION['cad_user']->name);
    $mail->setHTMLMessage();
-   $mail->setSubject($_language[register_subject_email]);
+   $mail->setSubject($_language['register_subject_email']);
 
 
    if($auto_accept) {
-     $mensagem = $_language[register_accepted_email];
+     $mensagem = $_language['register_accepted_email'];
      $cadBox->add("<p align=center>$_language[register_ok]");
    }
    else {
@@ -236,11 +239,11 @@ switch($_REQUEST[action]) {
    //prepares the email to be sent
 
    //finds the user firstname
-   $temp = explode(" ",trim($_SESSION[cad_user]->name));
+   $temp = explode(" ",trim($_SESSION['cad_user']->name));
    $firstname = $temp[0];
 
    $keys = array("{FIRSTNAME}","{USERNAME}","{NAME}","{URL}","{IMG_URL}");
-   $values = array($firstname,$_SESSION[cad_user]->username,$_SESSION[cad_user]->name,$_CMAPP[url],$_CMAPP[imlang_url]);
+   $values = array($firstname,$_SESSION['cad_user']->username,$_SESSION['cad_user']->name,$_CMAPP['url'],$_CMAPP['imlang_url']);
    $mensagem = str_replace($keys,$values,$mensagem);
    $mail->setMessage($mensagem);
 
@@ -248,12 +251,12 @@ switch($_REQUEST[action]) {
      $mail->send();
    }
    catch(CMWEmailNotSend $e) {
-     $_REQUEST[frm_amerror] = "sending_email";
+     $_REQUEST['frm_amerror'] = "sending_email";
    }
    
-   unset($_SESSION[cad_user]);
+   unset($_SESSION['cad_user']);
 
-   $cadBox->setTitle($_language[pag_3]);
+   $cadBox->setTitle($_language['pag_3']);
 
 
    break;

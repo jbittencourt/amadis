@@ -17,6 +17,10 @@ if(empty($_REQUEST[frm_codeUser])) {
 }
 AMFinder::startChat($user->codeUser);
 
+// AMadis
+// Instant
+// Messenger
+
 $pag = new CMHtmlPage;
 
 $pag->requires("mensagens.css", CMHTMLObj::MEDIA_CSS);

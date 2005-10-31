@@ -42,18 +42,18 @@ class AMTIconList extends CMHTMLObj {
 	case self::PROJECT_LIST:
 	  $f = $item->image;
 	  $name = $item->title;
-	  $url = $_CMAPP[services_url].'/projetos/projeto.php?frm_codProjeto='.$item->codeProject;
+	  $url = $_CMAPP['services_url'].'/projetos/projeto.php?frm_codProjeto='.$item->codeProject;
 	  break;
 	  /* COMMUNITIES */
 	case self::COMMUNITY_LIST:
 	  $f = $item->image;
 	  $name = $item->name;
-	  $url = $_CMAPP[services_url].'/communities/community.php?frm_codeCommunity='.$item->code;
+	  $url = $_CMAPP['services_url'].'/communities/community.php?frm_codeCommunity='.$item->code;
 	  break;
 	case self::USER_LIST:
 	  $f = $item->foto;
 	  $name = $item->name;
-	  $url = $_CMAPP[services_url].'/webfolio/userinfo_details.php?frm_codeUser='.$item->codeUser;
+	  $url = $_CMAPP['services_url'].'/webfolio/userinfo_details.php?frm_codeUser='.$item->codeUser;
 	  break;
 	}
 

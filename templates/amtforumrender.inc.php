@@ -19,24 +19,24 @@ class AMTForumRender extends CMHTMLObj {
     $this->show_open = $show_open;
     $this->avaiable_themes =2;
 
-    $visit = $forum->lastVisit($_SESSION[user]->codeUser);
+    $visit = $forum->lastVisit($_SESSION['user']->codeUser);
     if(!empty($visit)) {
       $this->lastVisitTime = $visit->time;
     }
 
     //blue theme
-    $this->themes[0][ico_level][1] = $_CMAPP[images_url]."/forum_ico_topic.gif";
-    $this->themes[0][ico_level][2] = $_CMAPP[images_url]."/forum_icoblue_rply2.gif";
-    $this->themes[0][ico_level][3] = $_CMAPP[images_url]."/forum_icoblue_rply3.gif";
-    $this->themes[0][ico_level][4] = $_CMAPP[images_url]."/forum_icoblue_rply4.gif";
-    $this->themes[0][css_base_name] = "msg_level_A0";
+    $this->themes[0]['ico_level'][1] = $_CMAPP['images_url']."/forum_ico_topic.gif";
+    $this->themes[0]['ico_level'][2] = $_CMAPP['images_url']."/forum_icoblue_rply2.gif";
+    $this->themes[0]['ico_level'][3] = $_CMAPP['images_url']."/forum_icoblue_rply3.gif";
+    $this->themes[0]['ico_level'][4] = $_CMAPP['images_url']."/forum_icoblue_rply4.gif";
+    $this->themes[0]['css_base_name'] = "msg_level_A0";
 
     //red theme
-    $this->themes[1][ico_level][1] = $_CMAPP[images_url]."/forum_icored_topic.gif";
-    $this->themes[1][ico_level][2] = $_CMAPP[images_url]."/forum_icored_rply2.gif";
-    $this->themes[1][ico_level][3] = $_CMAPP[images_url]."/forum_icored_rply3.gif";
-    $this->themes[1][ico_level][4] = $_CMAPP[images_url]."/forum_icored_rply4.gif";
-    $this->themes[1][css_base_name] = "msg_level_B0";
+    $this->themes[1]['ico_level'][1] = $_CMAPP['images_url']."/forum_icored_topic.gif";
+    $this->themes[1]['ico_level'][2] = $_CMAPP['images_url']."/forum_icored_rply2.gif";
+    $this->themes[1]['ico_level'][3] = $_CMAPP['images_url']."/forum_icored_rply3.gif";
+    $this->themes[1]['ico_level'][4] = $_CMAPP['images_url']."/forum_icored_rply4.gif";
+    $this->themes[1]['css_base_name'] = "msg_level_B0";
 
 
   }
@@ -46,14 +46,14 @@ class AMTForumRender extends CMHTMLObj {
     global $_CMAPP, $_language;
 
     $obj = new CMHTMLObj;
-    $nc =  $theme[css_base_name];
+    $nc =  $theme['css_base_name'];
 
     if($level>4) { 
       $nc.="4 "; 
-      $img_arrow = $theme[ico_level][4];
+      $img_arrow = $theme['ico_level'][4];
     
     } else { 
-      $img_arrow = $theme[ico_level][$level];
+      $img_arrow = $theme['ico_level'][$level];
       $nc.="$level ";
     };
 
@@ -72,7 +72,7 @@ class AMTForumRender extends CMHTMLObj {
     $new = false;
 
     if(($this->lastVisitTime>0) && !($ignore_new)) {
-      if(($men->timePost>$this->lastVisitTime) && ($men->codeUser!=$_SESSION[user]->codeUser)) {
+      if(($men->timePost>$this->lastVisitTime) && ($men->codeUser!=$_SESSION['user']->codeUser)) {
 	$new = true;
 	$ignore_new = true;
       }
@@ -86,7 +86,7 @@ class AMTForumRender extends CMHTMLObj {
     $obj->add("<img src=\"".$img_arrow."\">$A_link<b>$men->title</b></a>");
     $obj->add("(");
     $obj->add(new AMTUserinfo($men->user->items[0],AMTUserinfo::LIST_USERNAME));
-    $obj->add(",&nbsp;".date($_language[date_format],$men->timePost).") &nbsp");
+    $obj->add(",&nbsp;".date($_language['date_format'],$men->timePost).") &nbsp");
     
     $obj->add("$A_link <img id=\"img_$msg_unique_name\" src=\"$_CMAPP[images_url]/$img_view\"></a>");
     if($level==1) {
@@ -142,11 +142,11 @@ class AMTForumRender extends CMHTMLObj {
 
 
     $campos_requisitados = array("title","body");
-    $form = new AMWSmartForm(AMForumMessage, "cad_post", $_SERVER[PHP_SELF],$campos_requisitados,array('parent','codeForum'));
+    $form = new AMWSmartForm('AMForumMessage', "cad_post", $_SERVER['PHP_SELF'],$campos_requisitados,array('parent','codeForum'));
     $form->cancel_button->setOnClick('Forum_cancelReply()');
 
     $form->addComponent("action", new CMWHidden("frm_action","A_post"));
-    $form->components[codeForum]->setValue($_REQUEST[frm_codeForum]);
+    $form->components['codeForum']->setValue($_REQUEST['frm_codeForum']);
     $form->setLabelClass("titforumresposta");
     $form->setRichTextArea("body");
     $form->setDesign(CMWFormEl::WFORMEL_DESIGN_OVER);   // muda as labels do smart form
@@ -226,7 +226,7 @@ class AMTForumRender extends CMHTMLObj {
       parent::addScript("Forum_displayReply('reply_forum_new_topic',0,'')");
     }
 
-    if($_SESSION[amadis][forum][visualization]=="open") {
+    if($_SESSION['amadis']['forum']['visualization']=="open") {
       parent::addPageEnd(CMHTMLObj::getScript("Forum_openAllMessages()"));
     }
     return parent::__toString();

@@ -7,7 +7,7 @@ class AMTCurso extends AMMain {
     global $_CMAPP;
     parent::__construct("roxinho");
 
-    $this->setImgId($_CMAPP[imlang_url]."/img_tit_oficinas.gif");
+    $this->setImgId($_CMAPP['imlang_url']."/img_tit_oficinas.gif");
 
     //$this->openNavMenu();
   }

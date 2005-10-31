@@ -11,9 +11,9 @@ class AMBUserMessages extends AMColorBox {
 
     $this->requires("contextmenu.js",self::MEDIA_JS);
 
-    $this->cProjects = $_SESSION[user]->getLastProjectsComments();
-    $this->cDiary = $_SESSION[user]->getLastDiaryComments();
-    //$this->cMessages = $_SESSION[user]->getLastMessages();
+    $this->cProjects = $_SESSION['user']->getLastProjectsComments();
+    $this->cDiary = $_SESSION['user']->getLastDiaryComments();
+    //$this->cMessages = $_SESSION['user']->getLastMessages();
   
    }
 

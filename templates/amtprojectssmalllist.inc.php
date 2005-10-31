@@ -33,7 +33,7 @@ class AMTProjectsSmallList extends CMHTMLObj {
     }
     else {
       parent::add("<tr>");
-      parent::add("<td>".$_language[no_project_found]);
+      parent::add("<td>".$_language['no_project_found']);
     }
     parent::add("</table>");
 

@@ -12,9 +12,9 @@ class AMTLibrary extends AMMain {
     $this->requires("library.js",CMHTMLObj::MEDIA_JS);
 
     if($libraryType == "project" || $libraryType == "course")
-      $this->setImgId($_CMAPP[imlang_url]."/top_biblioteca.gif");
+      $this->setImgId($_CMAPP['imlang_url']."/top_biblioteca.gif");
     else
-      $this->setImgId($_CMAPP[imlang_url]."/top_meusarquivos.gif");
+      $this->setImgId($_CMAPP['imlang_url']."/top_meusarquivos.gif");
       
     $this->openNavMenu();
   }

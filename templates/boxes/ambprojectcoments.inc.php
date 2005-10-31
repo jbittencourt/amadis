@@ -8,7 +8,7 @@ class AMBProjectComents extends AMSimpleBox implements CMActionListener {
     
     global $_CMAPP,$proj;
 
-    parent::__construct($_CMAPP[imlang_url]."/img_comentarios_recebidos.gif");
+    parent::__construct($_CMAPP['imlang_url']."/img_comentarios_recebidos.gif");
     $comments = $proj->listComments();
     $this->itens = $comments[0];
     
@@ -17,13 +17,15 @@ class AMBProjectComents extends AMSimpleBox implements CMActionListener {
   public function doAction() {
     
     global $pag, $_language, $proj;
-    
-    switch($_REQUEST[comments_action]) {
+
+    if(!isset($_REQUEST['comments_action'])) return false;
+
+    switch($_REQUEST['comments_action']) {
     case "A_make_comment":
       try {
 	$comment = new AMComment;
-	$comment->codeUser = $_SESSION[user]->codeUser;
-	$comment->desComentario = $_REQUEST[frm_desComentario];
+	$comment->codeUser = $_SESSION['user']->codeUser;
+	$comment->desComentario = $_REQUEST['frm_desComentario'];
 	$comment->tempo = time();
 	$comment->save();
 	try {
@@ -34,9 +36,9 @@ class AMBProjectComents extends AMSimpleBox implements CMActionListener {
 	}catch (CMException $e) {
 	  $comment->delete();
 	}
-	$pag->addMessage($_language[msg_save_comment_success]);
+	$pag->addMessage($_language['msg_save_comment_success']);
       } catch(CMException $e) {
-	$pag->addError($_language[error_not_save_comment]);
+	$pag->addError($_language['error_not_save_comment']);
       }
       break;
     }
@@ -58,13 +60,13 @@ class AMBProjectComents extends AMSimpleBox implements CMActionListener {
       }
     }else parent::add("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$_language[no_comments]<br>");
 
-    parent::add("<a href=\"".$_CMAPP[services_url]."/projetos/listprojects.php?list_action=A_list_comments&frm_codProjeto=".$proj->codeProject);
+    parent::add("<a href=\"".$_CMAPP['services_url']."/projetos/listprojects.php?list_action=A_list_comments&frm_codProjeto=".$proj->codeProject);
     parent::add("\" class=\"project_comment\">&raquo; $_language[more_comments]</a>");
     
-    if(!empty($_SESSION[user])) {
+    if(!empty($_SESSION['user'])) {
       $addFriendBox = new AMTShowHide("addFriend", "<br>&raquo; $_language[add_project_comment]", AMTShowHide::HIDE);
       $addFriendBox->setClass('project_comment');
-      $addFriendBox->add("<form method=\"post\" action=\"$_SERVER[PHP_SELF]\" name=\"add_comment\">"); //  Adicionar um coment
+      $addFriendBox->add("<form method=\"post\" action='$_SERVER[PHP_SELF]' name=\"add_comment\">"); //  Adicionar um coment
       $addFriendBox->add("<font class=texto>$_language[send_a_comment]</font><br>");
       $addFriendBox->add("<textarea cols=27 rows=5 name=\"frm_desComentario\"></textarea><br>");
       $addFriendBox->add("<input type=\"hidden\" name=\"comments_action\" value=\"A_make_comment\">");

@@ -9,13 +9,14 @@ class AMBPeopleInviteFriends extends CMHtmlObj implements CMActionListener {
   
   public function doAction() {
     global $_language;
+    if(!isset($_REQUEST['friend_action'])) $_REQUEST['friend_action']='';
 
-    switch($_REQUEST[friend_action]) {
+    switch($_REQUEST['friend_action']) {
     default:
       
       parent::add("<form action=$_SERVER[PHP_SELF]?friend_action=A_invite method=post name=form_invite>");
       
-      $list = $_SESSION[environment]->listNotMyFriendsUsers();
+      $list = $_SESSION['environment']->listNotMyFriendsUsers();
       if($list->__hasItems()) {
 	foreach($list as $item) {
 	  $i++;
@@ -38,7 +39,7 @@ class AMBPeopleInviteFriends extends CMHtmlObj implements CMActionListener {
        */
       $friend = new AMFriend;
       $friend->loadDataFromRequest();
-      $friend->codeUser = $_SESSION[user]->codeUser;
+      $friend->codeUser = $_SESSION['user']->codeUser;
       $friend->time = time();
       try{
 	$friend->save();

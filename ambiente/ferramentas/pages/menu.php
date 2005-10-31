@@ -1,5 +1,5 @@
 <?
-$_CMAPP[notrestricted] = 1;
+$_CMAPP['notrestricted'] = 1;
 include("../../config.inc.php");
 
 $pag = new AMHTMLPage;

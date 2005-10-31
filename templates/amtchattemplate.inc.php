@@ -5,14 +5,14 @@ class AMChatArea extends CMHtmlObj {
   var $campoDest,$campoSender, $campoTempo, $tempoSleep, $CHAT_cod_user;
  
   function AMChatArea($sala) {
-    $finder = $config_ini[Chat];
+    $finder = $config_ini['Chat'];
 
     $this->campoDest = "codDestino";
     $this->campoSender = "codRemetente";
     $this->campoTempo = "tempo";
 
     $this->sala = &$sala;
-    $this->CHAT_cod_user = $_SESSION[user]->codeUser;
+    $this->CHAT_cod_user = $_SESSION['user']->codeUser;
     $this->setSleepTime(4);
 
     $this->sala = &$sala;
@@ -37,7 +37,7 @@ class AMChatArea extends CMHtmlObj {
     global $_CMAPP;
     include_once("$_CMAPP[path]/lib/amchatmensagem.inc.php");
     $sql = "codSalaChat=".$this->sala->codSala." AND tempo > ".$tempo;//." AND codRemetente=".$codUser;
-    $this->query = new CMQuery(AMChatMensagem);
+    $this->query = new CMQuery('AMChatMensagem');
     $this->query->setFilter($sql);
     $mensagens = $this->query->execute();
     return $mensagens;
@@ -72,20 +72,20 @@ class AMChatArea extends CMHtmlObj {
   function drawMessage($men) {
   
     $user = new AMUser();
-    $user->codeUser = $men[campoSender];
+    $user->codeUser = $men['campoSender'];
     try{
       $user->load();
     }
     catch(CMDBNoRecord $e){
       echo "Usuario nao existe erro $e";
     }
-    $hora = date("H:i:s",$men[campoTempo]);
+    $hora = date("H:i:s",$men['campoTempo']);
 
     echo "<table width=\"510\" border=\"0\" noshade cellspacing=\"0\" cellpadding=\"0\">";
     echo "<tr>";
     echo "<td class=\"$men[desTag]\" valign=\"top\" class=\"perfil\" >";
     echo "<br> <b>$user->username</b>";
-    $acao = explode("<br>", $men[desMensagem]);
+    $acao = explode("<br>", $men['desMensagem']);
     
     echo "&nbsp; $acao[0]</td>";
     echo "<td valign=\"top\" width=\"70%\"class=\"$men[desTag]\">";
@@ -94,7 +94,7 @@ class AMChatArea extends CMHtmlObj {
     echo "</td></tr>";
     echo "</table>";
 
-    return (strlen($men[desMensagem])/40);
+    return (strlen($men['desMensagem'])/40);
   }
  
 
@@ -125,7 +125,7 @@ class AMChatArea extends CMHtmlObj {
       if (!empty($mensagens)) {
 	foreach($mensagens as $mensagem) {  
 	  $numLinhas = $this->drawMessage($mensagem);
-	  $tempoLastMessage = $mensagem[campoTempo];
+	  $tempoLastMessage = $mensagem['campoTempo'];
 	  //este o script que chama o scroll da tela
           $scroll= "\n<SCRIPT language=\"JavaScript\" type=\"text/javascript\">";
           $scroll.= " scrollTela(".$numLinhas.") ";

@@ -43,7 +43,7 @@ switch($_REQUEST[action]) {
    //formulary
    $form = new CMWSmartForm(AMUser,"cad_user",$_SERVER[PHP_SELF],$fields_rec);
 
-   if(is_a($_SESSION[cad_user],AMUser)) {
+   if($_SESSION[cad_user] instanceof AMUser) {
      $form->loadDataFromObject($_SESSION[cad_user]);
    }
 

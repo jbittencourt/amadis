@@ -6,7 +6,7 @@ class AMBProjectsArea extends CMHTMLObj {
   private $index_image;
   public function __construct($im=false) {
     parent::__construct();
-    $this->areas = $_SESSION[environment]->listAreas();
+    $this->areas = $_SESSION['environment']->listAreas();
 
     $this->index_image = $im;
   }
@@ -15,12 +15,12 @@ class AMBProjectsArea extends CMHTMLObj {
 
     global $_CMAPP;
     
-    $_language = $_CMAPP[i18n]->getTranslationArray("projects");
+    $_language = $_CMAPP['i18n']->getTranslationArray("projects");
 
     /*
      * URL de submit do form
      */
-    $url = $_CMAPP[services_url]."/projetos/listprojects.php";
+    $url = $_CMAPP['services_url']."/projetos/listprojects.php";
     
     /*
      *Buffering html of the box to output screen
@@ -34,8 +34,8 @@ class AMBProjectsArea extends CMHTMLObj {
     } else {
       $img = "img_projetos_area.gif";
     }
-    $buffer .= "<img src=\"".$_CMAPP[imlang_url]."/$img\"  height=\"22\" width=\"155\"><br>";
-    $buffer .= "<img src=\"".$_CMAPP[images_url]."/dot.gif\" border=\"0\" height=\"7\" width=\"1\"><br>\n";
+    $buffer .= "<img src=\"".$_CMAPP['imlang_url']."/$img\"  height=\"22\" width=\"155\"><br>";
+    $buffer .= "<img src=\"".$_CMAPP['images_url']."/dot.gif\" border=\"0\" height=\"7\" width=\"1\"><br>\n";
     $buffer .= "<font class=\"textoint\">&raquo; $_language[areas]<br><br>\n";
     $buffer .= "<select onChange=\"document.frm_prjtArea.submit();\" ";
     $buffer .= "name=\"frm_codArea\" style=\"position: relative; top: 0pt;\">\n";

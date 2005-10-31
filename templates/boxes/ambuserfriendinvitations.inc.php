@@ -9,7 +9,7 @@ class AMBUserFriendInvitations extends AMColorBox implements CMActionListener {
     parent::__construct("",self::COLOR_BOX_BEGE);
 
     try {
-      $this->invitations = $_SESSION[user]->listFriendsInvitations();
+      $this->invitations = $_SESSION['user']->listFriendsInvitations();
       ($this->invitations->__hasItems() ? $this->__hasItems = true : $this->__hasItems = false);
     }catch(AMWEFirstLogin $e) {
       $this->__hasItems = false;
@@ -25,19 +25,19 @@ class AMBUserFriendInvitations extends AMColorBox implements CMActionListener {
   public function doAction() {
     global $_CMAPP,$_language;
 
-    if(empty($_REQUEST[invfriend_action])) {
+    if(!isset($_REQUEST['invfriend_action'])) {
       return false;
     }
 
 
-    switch($_REQUEST[inv_action]) {
+    switch($_REQUEST['inv_action']) {
     case "A_accpect":
       //add the user to the project
       try {
-	$proj->addMember($_SESSION[user]->codeUser);
+	$proj->addMember($_SESSION['user']->codeUser);
       }
       catch(CMDBException $e) {
-	$err = new AMError($_language[error_joining_project],get_class($this));
+	$err = new AMError($_language['error_joining_project'],get_class($this));
 	return false;
       }
 
@@ -48,12 +48,12 @@ class AMBUserFriendInvitations extends AMColorBox implements CMActionListener {
       catch(CMDBException $e) {	
 note($e);
 	//if occur some problem, remove the user
-	$proj->removeMember($_SESSION[user]->codeUser);
-	$err = new AMError($_language[error_joining_project],get_class($this));
+	$proj->removeMember($_SESSION['user']->codeUser);
+	$err = new AMError($_language['error_joining_project'],get_class($this));
 	return false;
       }
       
-      $msg = new AMMessage($_language[msg_joined_project]." $proj->title.",get_class($this));
+      $msg = new AMMessage($_language['msg_joined_project']." $proj->title.",get_class($this));
       break;
     case "A_reject":
       try {
@@ -62,10 +62,10 @@ note($e);
       }
       catch(CMDBException $e) {
 	//if occur some problem, remove the user
-	$err = new AMError($_language[error_joining_project],get_class($this));
+	$err = new AMError($_language['error_joining_project'],get_class($this));
 	return false;
       }
-      $msg = new AMMessage($_language[msg_rejected_project]." $proj->title.",get_class($this));
+      $msg = new AMMessage($_language['msg_rejected_project']." $proj->title.",get_class($this));
       break;
     }
 
@@ -100,7 +100,7 @@ note($e);
 	parent::add("</td><td align=center>");
 
 	$time = $friend->time;
-	$link = $_CMAPP[services_url]."/webfolio/userinfo_details.php?frm_codeUser=".$user->codeUser;
+	$link = $_CMAPP['services_url']."/webfolio/userinfo_details.php?frm_codeUser=".$user->codeUser;
       
 	parent::add("<a href=\"$link&inv_time=$time&action=A_make_friend\" class=\"blue\">$_language[add_friend]</a><br>");
 	parent::add("</tr>");

@@ -8,8 +8,8 @@ class AMBAmadisNews extends AMColorBox {
     global $_CMAPP;
     parent::__construct("$_CMAPP[imlang_url]/box_novidades_amadis.gif", AMColorBox::COLOR_BOX_BEGE);
     try {
-      $this->nProjects = $_SESSION[user]->listNewsProjects();
-      $this->nCommunities = $_SESSION[user]->listNewsCommunities();
+      $this->nProjects = $_SESSION['user']->listNewsProjects();
+      $this->nCommunities = $_SESSION['user']->listNewsCommunities();
       $this->__hasItems = true;
     }catch (AMWEFirstLogin $e) {
       $this->__hasItems = false;

@@ -26,25 +26,25 @@ class AMBProjectOrfan extends AMColorBox implements CMActionListener {
   public function doAction() {
     global $_CMAPP,$_language;
 
-    if(empty($_REQUEST[po_action])) {
+    if(!isset($_REQUEST['po_action']) || (isset($_REQUEST['po_action']) && empty($_REQUEST['po_action']))) {
       return false;
     }
 
-    switch($_REQUEST[po_action]) {
+    switch($_REQUEST['po_action']) {
     case "A_adopt":
       //add the user to the project
       $group = $this->proj->getGroup();
       $group->force_add = true;
       try {
-	$group->addMember($_SESSION[user]->codeUser);
+	$group->addMember($_SESSION['user']->codeUser);
       }
       catch(CMDBException $e) {
-	$err = new AMError($_language[error_joining_user],get_class($this));
+	$err = new AMError($_language['error_joining_user'],get_class($this));
 	return false;
       }
 
       
-      $msg = new AMMessage($user->name." ".$_language[msg_project_adopted],get_class($this));
+      $msg = new AMMessage($user->name." ".$_language['msg_project_adopted'],get_class($this));
       $this->adopted = true;
       break;
     }
@@ -56,7 +56,7 @@ class AMBProjectOrfan extends AMColorBox implements CMActionListener {
 
     $proj = $this->proj;
 
-    $link = $_CMAPP[services_url]."/projetos/projeto.php?frm_codProjeto=$proj->codeProject";
+    $link = $_CMAPP['services_url']."/projetos/projeto.php?frm_codProjeto=$proj->codeProject";
     if($this->adopted) {
       CMHTMLPage::redirect($link);
       return false;

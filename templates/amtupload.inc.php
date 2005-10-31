@@ -1,6 +1,6 @@
 <?
 
-include($_CMAPP[path]."/templates/ammain.inc.php");
+include($_CMAPP['path']."/templates/ammain.inc.php");
 
 
 class AMTUpload extends AMMain {
@@ -12,7 +12,7 @@ class AMTUpload extends AMMain {
     global $_CMAPP;
     parent::__construct();
 
-    $this->setImgId($_CMAPP[imlang_url]."/$img_top");
+    $this->setImgId($_CMAPP['imlang_url']."/$img_top");
 
     $this->openNavMenu();
   }

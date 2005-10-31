@@ -8,28 +8,28 @@ class AMMainMenu extends CMHtmlObj {
     parent::__construct();
 
     //adiciona o item "inicial" no menu principal (se o usuario estiver logado)
-    $this->addItem($_CMAPP[url]."/index.php",
-		   array($_CMAPP[imlang_url]."/ico_inicial_off.gif",
-			 $_CMAPP[imlang_url]."/ico_inicial_on.gif",)
+    $this->addItem($_CMAPP['url']."/index.php",
+		   array($_CMAPP['imlang_url']."/ico_inicial_off.gif",
+			 $_CMAPP['imlang_url']."/ico_inicial_on.gif",)
 		   );
-    $this->addItem($_CMAPP[services_url]."/projetos/projects.php",
-		   array($_CMAPP[imlang_url]."/ico_projetos_off.gif",
-			 $_CMAPP[imlang_url]."/ico_projetos_on.gif",)
-		   );
-    
-    $this->addItem($_CMAPP[services_url]."/people/people.php",
-		   array($_CMAPP[imlang_url]."/ico_pessoas_off.gif",
-			 $_CMAPP[imlang_url]."/ico_pessoas_on.gif",)
-		   );
-    $this->addItem($_CMAPP[services_url]."/communities/communities.php",
-		   array($_CMAPP[imlang_url]."/ico_comunidades_off.gif",
-			 $_CMAPP[imlang_url]."/ico_comunidades_on.gif",)
+    $this->addItem($_CMAPP['services_url']."/projetos/projects.php",
+		   array($_CMAPP['imlang_url']."/ico_projetos_off.gif",
+			 $_CMAPP['imlang_url']."/ico_projetos_on.gif",)
 		   );
     
-    /**if(!empty($_SESSION[user])) {
-      $this->addItem($_CMAPP[services_url]."/admin/admin.php",
-		     array($_CMAPP[imlang_url]."/ico_administracao_off.gif",
-			   $_CMAPP[imlang_url]."/ico_administracao_on.gif",)
+    $this->addItem($_CMAPP['services_url']."/people/people.php",
+		   array($_CMAPP['imlang_url']."/ico_pessoas_off.gif",
+			 $_CMAPP['imlang_url']."/ico_pessoas_on.gif",)
+		   );
+    $this->addItem($_CMAPP['services_url']."/communities/communities.php",
+		   array($_CMAPP['imlang_url']."/ico_comunidades_off.gif",
+			 $_CMAPP['imlang_url']."/ico_comunidades_on.gif",)
+		   );
+    
+    /**if(!empty($_SESSION['user'])) {
+      $this->addItem($_CMAPP['services_url']."/admin/admin.php",
+		     array($_CMAPP['imlang_url']."/ico_administracao_off.gif",
+			   $_CMAPP['imlang_url']."/ico_administracao_on.gif",)
 		     );
     }**/
 
@@ -58,7 +58,7 @@ class AMMainMenu extends CMHtmlObj {
       $menu = array();
       foreach($this->itens as $k=>$item) {
 	$temp ="<td>";
-	if(is_a($item,CMHTMLObj)) {
+	if($item instanceof CMHTMLObj) {
 	  $temp.= $item->__toString();
 	}
 	else {
@@ -68,7 +68,7 @@ class AMMainMenu extends CMHtmlObj {
 	
       }
 
-      parent::add(implode("<td valign=bottom><img src=\"".$_CMAPP[images_url]."/menu_separador.gif\"></td>",$menu));
+      parent::add(implode("<td valign=bottom><img src=\"".$_CMAPP['images_url']."/menu_separador.gif\"></td>",$menu));
       
       parent::add("</tr></table>");
 

@@ -1,5 +1,15 @@
 var finderWindows = new Array();
 
+var AMFinderCallBack = {
+  gettimeout: function(result) {
+    alert('<p>'+result+'</p>');
+  },
+  getmodes: function(result) {
+    alert(result);
+  },
+  changemode: function(result) { alert(result); }
+}
+
 function Finder_openChatWindow(src,userId) {
   if(finderWindows[userId] == null) {
     var param = "resizable=no,width=590,height=435,status=no,location=no,scrollig=yes,toolbar=no,scrollbars=yes";
@@ -108,8 +118,9 @@ function Finder_removeAlert(userId, src) {
 
 function Finder_changeStatus(element, src) {
   //debugBrowserObject(element);
-  var handle = src+"/finder/finder.php?action=A_change_mode&amp;frm_mode="+element.value;
-  dcomSendRequest(handle);
+  //var handle = src+"/finder/finder.php?action=A_change_mode&amp;frm_mode="+element.value;
+  //dcomSendRequest(handle);
+  //AMFinder.chagemode(element.value);
 }
 
 
@@ -131,3 +142,6 @@ function Finder_sendMessage(form) {
   frame.src = url;
 
 }
+
+
+

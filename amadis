@@ -22,7 +22,7 @@ $short_options = "n:c:t:v:l:h";
 
 $options = Console_Getopt::getopt($argv,$short_options);
 
-if(is_a($options, "PEAR_Error")) {
+if($options instanceof PEAR_Error)) {
   die("Erro processing parameters: ".$options->message."\n");
 }
 

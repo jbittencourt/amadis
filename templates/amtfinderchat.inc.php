@@ -13,7 +13,7 @@ class AMTFinderChat extends AMChatTemplate {
     $this->fieldSender = "codeSender";
     $this->fieldTime = "time";
 
-    $this->CHAT_cod_user = $_SESSION[user]->codeUser;
+    $this->CHAT_cod_user = $_SESSION['user']->codeUser;
     $this->setSleepTime(4);
 
 
@@ -45,7 +45,7 @@ class AMTFinderChat extends AMChatTemplate {
 //     };
     
     $hora = date("h:i",$message->time);
-    if($message->codeSender == $_SESSION[user]->codeUser) { 
+    if($message->codeSender == $_SESSION['user']->codeUser) { 
       $class = "messageSender";
       $color = "#0000AA";
     } else {
@@ -64,12 +64,12 @@ class AMTFinderChat extends AMChatTemplate {
   
   function getNewMessages($time) {
 
-    $messages = $_SESSION[finder]->getNewMessages($this->to,$time);
+    $messages = $_SESSION['finder']->getNewMessages($this->to,$time);
     
     if($messages->__hasItems()) {
       foreach($messages as $item) {
 	
-	if(($item->codeRecipient==$_SESSION[user]->codeUser) &&
+	if(($item->codeRecipient==$_SESSION['user']->codeUser) &&
 	   ($item->status==AMFinderMessages::ENUM_STATUS_NOT_READ)) $item->markAsRead();
 
       }

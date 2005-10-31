@@ -22,27 +22,27 @@ class AMTCalendar extends CMHTMLObj {
     $this->year = (integer) $y;
 
     $this->label = array();
-    $this->label[1] = $_language[january];
-    $this->label[2] = $_language[february];
-    $this->label[3] = $_language[march];
-    $this->label[4] = $_language[april];
-    $this->label[5] = $_language[may];
-    $this->label[6] = $_language[june];
-    $this->label[7] = $_language[july];
-    $this->label[8] = $_language[august];
-    $this->label[9] = $_language[september];
-    $this->label[10] = $_language[october];
-    $this->label[11] = $_language[november];
-    $this->label[12] = $_language[december];
+    $this->label[1] = $_language['january'];
+    $this->label[2] = $_language['february'];
+    $this->label[3] = $_language['march'];
+    $this->label[4] = $_language['april'];
+    $this->label[5] = $_language['may'];
+    $this->label[6] = $_language['june'];
+    $this->label[7] = $_language['july'];
+    $this->label[8] = $_language['august'];
+    $this->label[9] = $_language['september'];
+    $this->label[10] = $_language['october'];
+    $this->label[11] = $_language['november'];
+    $this->label[12] = $_language['december'];
 
     $this->weekday = array();
-    $this->weekday[1] = $_language[sun];
-    $this->weekday[2] = $_language[mon];
-    $this->weekday[3] = $_language[tue];
-    $this->weekday[4] = $_language[wed];
-    $this->weekday[5] = $_language[thu];
-    $this->weekday[6] = $_language[fri];
-    $this->weekday[7] = $_language[sat];
+    $this->weekday[1] = $_language['sun'];
+    $this->weekday[2] = $_language['mon'];
+    $this->weekday[3] = $_language['tue'];
+    $this->weekday[4] = $_language['wed'];
+    $this->weekday[5] = $_language['thu'];
+    $this->weekday[6] = $_language['fri'];
+    $this->weekday[7] = $_language['sat'];
 
 
   }

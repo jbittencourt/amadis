@@ -12,7 +12,7 @@ class AMBProjLibrary extends AMColorBox {
     $this->proj = $proj;
     $this->library = $proj->getLibrary();
 
-    parent::__construct($_CMAPP[imlang_url]."/box_biblio_projeto_tit.gif",self::COLOR_BOX_PURPLE);
+    parent::__construct($_CMAPP['imlang_url']."/box_biblio_projeto_tit.gif",self::COLOR_BOX_PURPLE);
   }
 
   public function __toString() {
@@ -25,7 +25,7 @@ class AMBProjLibrary extends AMColorBox {
     $list = $ple->getLastFiles($this->limit);    
 
     if(!$list->__hasItems()){
-      parent::add($_language[no_files]);
+      parent::add($_language['no_files']);
     }
     else {
       parent::add("<font class='blt_subtitulo'>$_language[last_five]</font>");
@@ -81,7 +81,7 @@ class AMBProjLibrary extends AMColorBox {
 	  }	      
 	  break;
 	}
-	parent::add("<tr><td class='blt_col_a'><a href='".$_CMAPP[services_url]."/library/biblioteca.php?frm_type=projeto&frm_codeProjeto=$_REQUEST[frm_codProjeto]&opcao=download&codeArquivo=".$item->codeArquivo."'><img src='".$_CMAPP[media_url]."".$icon."'></a></td>");
+	parent::add("<tr><td class='blt_col_a'><a href='".$_CMAPP['services_url']."/library/biblioteca.php?frm_type=projeto&frm_codeProjeto=$_REQUEST[frm_codProjeto]&opcao=download&codeArquivo=".$item->codeArquivo."'><img src='".$_CMAPP['media_url']."".$icon."'></a></td>");
 	parent::add("<td class='blt_col_a'>&raquo; ".$item->nome."</td>");
 	parent::add("<td class='blt_col_a'>( ".date("d/m/Y",$item->tempo)." )</td></tr>");
       }

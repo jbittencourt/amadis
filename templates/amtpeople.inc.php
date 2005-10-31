@@ -8,8 +8,8 @@ class AMTPeople extends AMMain {
     
     global $_CMAPP;
     parent::__construct("green");
-
-    $this->setImgId($_CMAPP[imlang_url]."/top_pessoas.gif");
+    
+    $this->setImgId($_CMAPP['imlang_url']."/top_pessoas.gif");
     $this->requires("people.css",CMHTMLObj::MEDIA_CSS);
 
 

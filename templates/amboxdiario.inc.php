@@ -9,7 +9,6 @@ class AMBoxDiario extends CMHTMLObj {
   private $posts;
   protected $user;
 
-
   protected $month;
   protected $year;
 
@@ -22,7 +21,6 @@ class AMBoxDiario extends CMHTMLObj {
     $this->imagem = $imagem;
     $this->texto = $texto;
     $this->titulo = $titulo;
-    $this->autor_diario = $autor_diario;
     $this->requires("blog.js");
   }
 
@@ -38,7 +36,7 @@ class AMBoxDiario extends CMHTMLObj {
   public function __toString() {
     global $_CMAPP,$_language;
     
-    $url = $_CMAPP[images_url];
+    $url = $_CMAPP['images_url'];
 
     $js = "blog_handler_url = '$_CMAPP[services_url]/diario/comentarios.php';";
     $js.= "blog_delete_link = 'diario.php?frm_action=A_delete&frm_codePost=';";
@@ -75,7 +73,7 @@ class AMBoxDiario extends CMHTMLObj {
     parent::add("</div>");
    
     parent::add("<div id=\"diary_header\">");
-    if(empty($_REQUEST[frm_codeUser])) {
+    if(empty($_REQUEST['frm_codeUser'])) {
       parent::add(implode("\n",$this->cabecalho));
     }
     parent::add("</div>"); //diary header;
@@ -134,19 +132,19 @@ class AMBoxDiario extends CMHTMLObj {
 	}
 
 	
-	parent::add("align=\"absmiddle\" ><font class=\"titpost\">$post->titulo</font><font class=\"datapost\"> - ".date("h:i ".$_language[date_format],$post->tempo));
+	parent::add("align=\"absmiddle\" ><font class=\"titpost\">$post->titulo</font><font class=\"datapost\"> - ".date("h:i ".$_language['date_format'],$post->tempo));
 	parent::add("<a name=\"anchor_post_$post->codePost\" > </a> ");
 	parent::add("</font><br><img src=\"$url/dot.gif\" width=\"10\" height=\"7\" border=\"0\"><br>");
 	parent::add("<font class=\"txtdiario\">$post->texto</font><br>");
 	parent::add("<a class='diary_comment' href='$_CMAPP[services_url]/diario/diario.php?frm_codePost=$post->codePost#anchor_post_$post->codePost'>");
-	parent::add($_language[permanent_link].'</a>');
+	parent::add($_language['permanent_link'].'</a>');
 	parent::add("<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"100%\">");
 	parent::add("<tr>");
 
 	$link_comentarios = "javascript:Blog_toogleComments('$post->codePost')";
 
 	if($post->numComments==0) {
-	  if($_SESSION[user]) {
+	  if($_SESSION['user']) {
 	    parent::add("<td class=\"diary_comment_link\"><a class=\"diary_comment\" href=\"$link_comentarios\">");
 	    parent::add("$_language[aguardando_comentario] <img id=\"post_comments_$post->codePost\" src=\"$_CMAPP[images_url]/ico_seta_off_cmnt.gif\">");
 	    parent::add("</a></td>");
@@ -166,7 +164,7 @@ class AMBoxDiario extends CMHTMLObj {
 
 	$tempo_post = time() - $post->tempo;
 	if ($tempo_post < 86400){
-	  if($post->codeUser == $_SESSION[user]->codeUser) {
+	  if($post->codeUser == $_SESSION['user']->codeUser) {
 	    $link_editar = "postar.php?frm_codePost=$post->codePost&frm_action=editar";
 
 	    parent::add("<td align=\"right\"><a class=\"diary_edit\" href= $link_editar> <img  src=\"$_CMAPP[imlang_url]/icon_editar.gif\" border=\"0\" align=\"baseline\"></a>");

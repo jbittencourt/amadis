@@ -1,12 +1,12 @@
 <?
 include("../../config.inc.php");
 
-$_language = $_CMAPP[i18n]->getTranslationArray("webfolio");
+$_language = $_CMAPP['i18n']->getTranslationArray("webfolio");
 
 /**
  *CACHE WEBFOLIO
  */
-if(!isset($_SESSION[amadis][webfolio])) $_SESSION[amadis][webfolio] = array();
+if(!isset($_SESSION['amadis']['webfolio'])) $_SESSION['amadis']['webfolio'] = array();
 
 $pag = new AMTWebfolio(AMTWebfolio::WEBFOLIO_MY_WEBFOLIO);
 $box = new AMTwoColsLayout;
@@ -36,14 +36,14 @@ $box = new AMTwoColsLayout;
 //$box->add("Teste 2",AMTwoColsLayout::RIGHT);
 
 
-$foto = $_SESSION[user]->foto;
+$foto = $_SESSION['user']->foto;
 if(!empty($foto)) {
   $box->add(new AMTUserImage($foto),AMTwoColsLayout::LEFT);
 }
 
-$box->add("<p><font class=\"texto\"><b>".$_SESSION[user]->name."<br>".date($_language[date_format],$_SESSION[user]->datNascimento)."</b>", AMTwoColsLayout::LEFT);
+$box->add("<p><font class=\"texto\"><b>".$_SESSION['user']->name."<br>".date($_language['date_format'],$_SESSION['user']->datNascimento)."</b>", AMTwoColsLayout::LEFT);
 
-$box->add("<br>".$_SESSION[user]->email, AMTwoColsLayout::LEFT);
+$box->add("<br>".$_SESSION['user']->email, AMTwoColsLayout::LEFT);
 
 $box->add("</font>", AMTwoColsLayout::LEFT);
 
@@ -54,7 +54,7 @@ $box->add("<br><a href=\"$_CMAPP[services_url]/webfolio/changepassword.php\" cla
 
 //foruns that the user participate
 
-$forums = $_SESSION[user]->listLastModifiedForums();
+$forums = $_SESSION['user']->listLastModifiedForums();
 
 $box->add(new AMBForunsParticipate($forums),
 	  AMTwoColsLayout::LEFT);

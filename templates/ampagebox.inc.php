@@ -20,8 +20,8 @@ class AMPageBox extends CMHTMLObj {
     //generalizando o calculo da limit query
     //(page*n)+(n-1), page*n
     //    final        init
-
-    $this->pageId = $_REQUEST[page]*$this->numHitsFP;
+    if(!isset($_REQUEST['page'])) $_REQUEST['page']='';
+    $this->pageId = $_REQUEST['page']*$this->numHitsFP;
     
     $this->init =  $this->pageId;//+1;
     $this->final = $this->pageId+($this->numHitsFP);
@@ -55,7 +55,7 @@ class AMPageBox extends CMHTMLObj {
     //imprime paginacao
     if($this->numPages>0) {
       parent::add("<div align=right>");
-      if($_REQUEST[page]!=0) {
+      if($_REQUEST['page']!=0) {
 	parent::add("<a href=\"$_SERVER[PHP_SELF]?page=0&$this->requestVars\" class=\"cinza\">");
 	parent::add("&laquo;$_language[first]</a>");
       }
@@ -63,11 +63,11 @@ class AMPageBox extends CMHTMLObj {
       for($i=0; $i < $this->numPages; $i++) {
 	$linkSelected = "<span class=\"error\">".($i+1)."</span>";
 	$linkCommum = "<a href=\"$_SERVER[PHP_SELF]?page=$i&$this->requestVars\" class=\"cinza\">".($i+1)."</a>";
-	if($i==$_REQUEST[page]) parent::add($linkSelected);
+	if($i==$_REQUEST['page']) parent::add($linkSelected);
 	else parent::add($linkCommum);
 	
       }
-      if($_REQUEST[page]!=($i-1)) {
+      if($_REQUEST['page']!=($i-1)) {
 	parent::add("<a href=\"$_SERVER[PHP_SELF]?page=".($i-1)."&$this->requestVars\" class=\"cinza\">");
 	parent::add("$_language[last] &raquo;</a>");
       }

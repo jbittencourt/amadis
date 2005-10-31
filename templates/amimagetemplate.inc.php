@@ -36,7 +36,7 @@ abstract class  AMImageTemplate extends CMHTMLObj {
     case self::METHOD_SESSION:
       $rand = rand(0,100000);
       
-      $_SESSION[amadis][imageview][$rand] =serialize($this->imageObj) ;
+      $_SESSION['amadis']['imageview'][$rand] =serialize($this->imageObj) ;
       $url = "$_CMAPP[media_url]/imagewrapper.php?method=session&frm_id=$rand";
       break;
     }

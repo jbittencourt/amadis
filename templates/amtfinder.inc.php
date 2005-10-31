@@ -24,7 +24,7 @@ class AMFinder extends CMHTMLPage {
 
 
     
-    $this->setTitle($_language[finder]);
+    $this->setTitle($_language['finder']);
     $this->setBgImage("$urlimagens/quebra_cabeca_03.gif");
 
     parent::add("<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" align=\"left\" height=\"100%\" width=\"100%\" style=\"table-layout: fixed\" background=\"$urlimagens/quebra_cabeca_02.gif\">");

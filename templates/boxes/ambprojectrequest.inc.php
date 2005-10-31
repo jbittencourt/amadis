@@ -30,30 +30,30 @@ class AMBProjectRequest extends AMColorBox implements CMActionListener {
 
   public function doAction() {
     global $_CMAPP,$_language;
-    if(empty($_REQUEST[req_action])) {
+    if(!isset($_REQUEST['req_action']) || (isset($_REQUEST['req_action']) && empty($_REQUEST['req_action']))) {
       return false;
     }
     $group = $this->proj->getGroup();
-    switch($_REQUEST[req_action]) {
+    switch($_REQUEST['req_action']) {
     case "A_accept":
       //add the user to the project
       try {
-	$group->acceptRequest($_REQUEST[frm_codeGroupJoin],$_REQUEST[frm_text]);
-	$msg = new AMMessage($user->name." ".$_language[msg_user_added],get_class($this));
+	$group->acceptRequest($_REQUEST['frm_codeGroupJoin'],$_REQUEST['frm_text']);
+	$msg = new AMMessage($user->name." ".$_language['msg_user_added'],get_class($this));
       }
       catch(CMDBException $e) {
-	$err = new AMError($_language[error_joining_user],get_class($this));
+	$err = new AMError($_language['error_joining_user'],get_class($this));
 	return false;
       }
       break;
     case "A_reject":
       try {
-	$group->rejectRequest($_REQUEST[frm_codeGroupJoin],$_REQUEST[frm_text]);
-	$msg = new AMMessage($user->name.' '.$_language[msg_rejected_user],get_class($this));
+	$group->rejectRequest($_REQUEST['frm_codeGroupJoin'],$_REQUEST['frm_text']);
+	$msg = new AMMessage($user->name.' '.$_language['msg_rejected_user'],get_class($this));
       }
       catch(CMDBException $e) {
 	//if occur some problem, remove the user
-	$err = new AMError($_language[error_joining_user],get_class($this));
+	$err = new AMError($_language['error_joining_user'],get_class($this));
 	return false;
       }
       break;

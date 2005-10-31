@@ -28,12 +28,19 @@ class AMMain extends AMHTMLPage {
     $this->requires("dcom.js",self::MEDIA_JS);
     $this->requires("finder.js", self::MEDIA_JS);
     $this->requires("finder.css", self::MEDIA_CSS);
-
+    
     $this->main_menu = new AMMainMenu();
 
     $this->navmenu = new AMNavMenu();
 
     $this->leftMargin = 260;
+
+    /** Set the communicator array and class requires
+     *
+     */
+    $_SESSION['communicator'] = array();
+
+    $this->addCommunicatorHandler('AMFinder');
 
   }
 
@@ -116,6 +123,14 @@ class AMMain extends AMHTMLPage {
     $this->pathindicator = $path;
   }
 
+  /** Adds class handler to JPSpan Ajax Framework
+   *
+   */
+  function addCommunicatorHandler($classHandler) {
+    if(!array_search($classHandler, $_SESSION['communicator'])) {
+       $_SESSION['communicator'][] = $classHandler;
+    }
+  }
 
 
   public function __toString() {
@@ -127,11 +142,17 @@ class AMMain extends AMHTMLPage {
      *Imprime o centro da caixa
      **/
 
-    
+    /** Flush the communicators handlers
+     *
+     */
+    if(!empty($_SESSION['communicator'])) {
+      $this->requires("communicator.php?client");
+    }
+
     $this->force_newline=0;
 
-    $this->setIcon($_CMAPP[images_url]."/ico_pecinha.ico");
-    $this->setTitle($_language[amadis]);
+    $this->setIcon($_CMAPP['images_url']."/ico_pecinha.ico");
+    $this->setTitle($_language['amadis']);
 
     parent::add('<div id="amadis-global-wrapper">');
 
@@ -140,7 +161,7 @@ class AMMain extends AMHTMLPage {
 
     if(!empty($this->imgid)) {
       parent::add("<img src=\"".$this->imgid."\" border=0><br>");
-      parent::add('<img src="'.$_CMAPP[images_url].'/dot.gif" height=5>');
+      parent::add('<img src="'.$_CMAPP['images_url'].'/dot.gif" height=5>');
     }
     else {
       parent::add("&nbsp;");
@@ -181,14 +202,14 @@ class AMMain extends AMHTMLPage {
     if(!empty($errors)) {
       parent::add("<br>");
       foreach($errors as $num=>$message) {
-	parent::add(new AMAlertBox(AMAlertBox::ERROR,$message[message]));
+	parent::add(new AMAlertBox(AMAlertBox::ERROR,$message['message']));
       }
       parent::add("<br>");
     }
 
     if(!empty($messages)) {
       foreach($messages as $num=>$message) {
-	parent::add(new AMAlertBox(AMAlertBox::MESSAGE,$message[message]));
+	parent::add(new AMAlertBox(AMAlertBox::MESSAGE,$message['message']));
       }
       parent::add("<br>");
     }
@@ -205,17 +226,17 @@ class AMMain extends AMHTMLPage {
     parent::add('</div>');
 
     parent::add('<div id="amadis-logo">');
-    parent::add('<img src="'.$_CMAPP[images_url].'/pecas_amadis.png">');
+    parent::add('<img src="'.$_CMAPP['images_url'].'/pecas_amadis.png">');
     parent::add('</div>');
 
     parent::add('<div id="amadis-header">');
-    parent::add("<img  src=\"".$_CMAPP[images_url]."/img_cabecalho.gif\" border=\"0\" width=\"488\">");    
+    parent::add("<img  src=\"".$_CMAPP['images_url']."/img_cabecalho.gif\" border=\"0\" width=\"488\">");    
     parent::add('<div id="amadis-header-menu" >');
     parent::add($this->main_menu);
     parent::add('</div>');
     
     parent::add('<div id="amadis-header-line">');
-    parent::add('<img src="'.$_CMAPP[images_url].'/bg_linhas_lateral.gif">');
+    parent::add('<img src="'.$_CMAPP['images_url'].'/bg_linhas_lateral.gif">');
     parent::add('</div>');
     parent::add('</div>');
 
@@ -228,14 +249,14 @@ class AMMain extends AMHTMLPage {
     parent::add("<div id=\"amadis-footer\">");
     parent::add('<br>');
     parent::add("<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" align=\"left\" width=\"100%\">");
-    parent::add("<td valign=\"top\" background=\"".$_CMAPP[images_url]."/bg_fundo_cinza.gif\">&nbsp;</td>");
-    parent::add("<td background=\"".$_CMAPP[images_url]."/bg_fundo_cinza.gif\">&nbsp;</td>");
-    parent::add("<td background=\"".$_CMAPP[images_url]."/bg_fundo_cinza.gif\" height=\"35\">&nbsp;</td>");
-    parent::add("<td background=\"".$_CMAPP[images_url]."/bg_linhas_lateral2.gif\" width='10'>");
-    parent::add("<img src=\"".$_CMAPP[images_url]."/dot.gif\" width=\"7\" height=\"1\">");
+    parent::add("<td valign=\"top\" background=\"".$_CMAPP['images_url']."/bg_fundo_cinza.gif\">&nbsp;</td>");
+    parent::add("<td background=\"".$_CMAPP['images_url']."/bg_fundo_cinza.gif\">&nbsp;</td>");
+    parent::add("<td background=\"".$_CMAPP['images_url']."/bg_fundo_cinza.gif\" height=\"35\">&nbsp;</td>");
+    parent::add("<td background=\"".$_CMAPP['images_url']."/bg_linhas_lateral2.gif\" width='10'>");
+    parent::add("<img src=\"".$_CMAPP['images_url']."/dot.gif\" width=\"7\" height=\"1\">");
     parent::add("</td>");
-    parent::add("<tr><td valign=\"top\" colspan=\"5\" background=\"".$_CMAPP[images_url]."/bg_fundo_cinza2.gif\">");
-    parent::add("<img src=\"".$_CMAPP[images_url]."/dot.gif\" width=\"1\" height=\"5\">");
+    parent::add("<tr><td valign=\"top\" colspan=\"5\" background=\"".$_CMAPP['images_url']."/bg_fundo_cinza2.gif\">");
+    parent::add("<img src=\"".$_CMAPP['images_url']."/dot.gif\" width=\"1\" height=\"5\">");
     parent::add("</td></tr>");
 
     parent::add("</table>");
@@ -254,11 +275,12 @@ class AMMain extends AMHTMLPage {
     
     parent::addScript("initDCOM('$_CMAPP[media_url]/rte/blank.htm');");
     
-    if($_SESSION[environment]->logged) {
-      parent::addPageBegin(self::getScript("finder_url='$_CMAPP[services_url]/finder/finder.php'"));
-      parent::addScript("Finder_initFinder(finder_url);");
+    if($_SESSION['environment']->logged) {
+      parent::addPageBegin(self::getScript("var AMFinder = new amfinder(AMFinderCallBack);"));
       parent::addPageEnd("<div id=\"finderAlert\"></div>");
-      parent::addScript("Finder_chatSRC = '$_CMAPP[services_url]/finder/finder_chat.php'");
+      //parent::addPageBegin(self::getScript("finder_url='$_CMAPP[services_url]/finder/finder.php'"));
+      //parent::addScript("Finder_initFinder(finder_url);");
+      //parent::addScript("Finder_chatSRC = '$_CMAPP[services_url]/finder/finder_chat.php'");
     }
 
 
@@ -273,26 +295,26 @@ class AMMain extends AMHTMLPage {
 
   public static function getSearchButton() {
     global $_CMAPP,$_language;
-    return '<button type="submit"><img src="'.$_CMAPP[images_url].'/lupa.png"> '.$_language[search].'</button>';
+    return '<button type="submit"><img src="'.$_CMAPP['images_url'].'/lupa.png"> '.$_language['search'].'</button>';
   }
 
   public static function getAddFriendButton($codeUser) {
     global $_CMAPP,$_language;
-    $link = $_CMAPP[services_url]."/webfolio/userinfo_details.php?frm_codeUser=$codeUser";
-    return '<button class="button-as-link" type="button" onClick="AM_openURL(\''.$link.'\')"><img src="'.$_CMAPP[images_url].'/ico_webfolio.png"> '.$_language[visit_webfolio].'</button>';
+    $link = $_CMAPP['services_url']."/webfolio/userinfo_details.php?frm_codeUser=$codeUser";
+    return '<button class="button-as-link" type="button" onClick="AM_openURL(\''.$link.'\')"><img src="'.$_CMAPP['images_url'].'/ico_webfolio.png"> '.$_language['visit_webfolio'].'</button>';
   }
 
 
   public static function getViewPageButton($codeUser) {
     global $_CMAPP,$_language;
-    $link = $_CMAPP[services_url]."/pages/viewpage.php?frm_page=users/user_$codeUser&frm_codeUser=$codeUser";
-    return '<button class="button-as-link"type="button" onClick="AM_openURL(\''.$link.'\')"><img src="'.$_CMAPP[images_url].'/ico_ver_pagina.gif"> '.$_language[visit_page].'</button>';
+    $link = $_CMAPP['services_url']."/pages/viewpage.php?frm_page=users/user_$codeUser&frm_codeUser=$codeUser";
+    return '<button class="button-as-link"type="button" onClick="AM_openURL(\''.$link.'\')"><img src="'.$_CMAPP['images_url'].'/ico_ver_pagina.gif"> '.$_language['visit_page'].'</button>';
   }
 
   public static function getViewDiaryButton($codeUser) {
     global $_CMAPP,$_language;
     $link = "$_CMAPP[services_url]/diario/diario.php?frm_codeUser=$codeUser";
-    return '<button class="button-as-link" type="button" onClick="AM_openURL(\''.$link.'\')"><img src="'.$_CMAPP[images_url].'/ico_diario.gif"> '.$_language[visit_diary].'</button>';
+    return '<button class="button-as-link" type="button" onClick="AM_openURL(\''.$link.'\')"><img src="'.$_CMAPP['images_url'].'/ico_diario.gif"> '.$_language['visit_diary'].'</button>';
   }
   //-------------------
 

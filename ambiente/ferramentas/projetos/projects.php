@@ -1,15 +1,17 @@
 <?
 
-$_CMAPP[notrestricted] = 1;
+$_CMAPP['notrestricted'] = 1;
 
 include("../../config.inc.php");
 
 
-$_language = $_CMAPP[i18n]->getTranslationArray("projects");
+$_language = $_CMAPP['i18n']->getTranslationArray("projects");
 
 $pag = new AMTProjeto;
+if(!isset($_REQUEST['frm_action'])) $_REQUEST['frm_action']="";
+if(isset($_REQUEST['clear_cadProj'])) unset($_SESSION['cad_proj']);
 
-switch($_REQUEST[frm_action]) {
+switch($_REQUEST['frm_action']) {
  default:
 
    $pag->add("<br>");
@@ -28,7 +30,7 @@ switch($_REQUEST[frm_action]) {
    $box->add('<br>', AMTwoColsLayout::LEFT);
 
 
-   if($_SESSION[environment]->logged == 1){
+   if($_SESSION['environment']->logged == 1){
      $link = "<a href=\"$_CMAPP[services_url]/projetos/create.php\">";
      $link.= "<img border=0 src=\"$_CMAPP[imlang_url]/img_criar_novo_projeto.gif\"><br>";
      $link.= "</a>";
@@ -52,7 +54,7 @@ switch($_REQUEST[frm_action]) {
     */
    $box->add(new AMBProjectsSearch, AMTwoColsLayout::RIGHT);
 
-   if($_SESSION[environment]->logged == 1) {
+   if($_SESSION['environment']->logged == 1) {
      $box->add(new AMBProjectMine, AMTwoColsLayout::RIGHT);
    }
 

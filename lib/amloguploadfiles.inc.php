@@ -28,10 +28,10 @@ class AMLogUploadFiles extends CMObj {
                                                   self::ENUM_UPLOADTYPE_USER));
   }
   static public function getLastModifieds() {
-    $q = new CMQuery(AMLogUploadFiles);
+    $q = new CMQuery('AMLogUploadFiles');
     
     $j = new CMJoin(CMJoin::INNER);
-    $j->setClass(AMUser);
+    $j->setClass('AMUser');
     $j->on("AMLogUploadFiles::codeAnchor = AMUser::codeUser");
     
     $q->addJoin($j, "user");
@@ -40,10 +40,10 @@ class AMLogUploadFiles extends CMObj {
     $q->setLimit(0,5);
     
 
-    $q2 = new CMQuery(AMLogUploadFiles);
+    $q2 = new CMQuery('AMLogUploadFiles');
     
     $j = new CMJoin(CMJoin::INNER);
-    $j->setClass(AMProjeto);
+    $j->setClass('AMProjeto');
     $j->on("AMLogUploadFiles::codeAnchor = AMProjeto::codeProject");
     
     $q2->addJoin($j, "project");

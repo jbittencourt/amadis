@@ -1,14 +1,14 @@
 <?
-$_CMAPP[notrestricted] = True;
+$_CMAPP['notrestricted'] = True;
 
 include("../../config.inc.php");
-$_language = $_CMAPP[i18n]->getTranslationArray("webfolio");
+$_language = $_CMAPP['i18n']->getTranslationArray("webfolio");
 
 $pag = new CMHTMLObj;
 
 $pag->requires("lib.js", CMHTMLObj::MEDIA_JS);
 $user = new AMUser;
-$user->codeUser = $_REQUEST[frm_codeUser];
+$user->codeUser = (isset($_REQUEST['frm_codeUser'])? $_REQUEST['frm_codeUser'] : '');
 $user->load();
 
 
@@ -40,9 +40,9 @@ $pag->add("<br>");
 $pag->add("<div class=\"tooltip_line\"><a href=\"$where_to_go\">$_language[webfolio_visit]</a></div>");
 
 $pag->add("<!-- fim box perfil -->");
-if($user->codeUser != $_SESSION[user]->codeUser) {
+if($user->codeUser != $_SESSION['user']->codeUser) {
 
-  $status = $_SESSION[environment]->checkIsOnLine($user->codeUser);
+  $status = $_SESSION['environment']->checkIsOnLine($user->codeUser);
   $onclick = "onClick=\"window.Finder_openChatWindow('$_CMAPP[services_url]/finder/finder_chat.php', '$user->codeUser');\"";
   $pag->add("<div class=\"tooltip_line\">");
   switch($status) {

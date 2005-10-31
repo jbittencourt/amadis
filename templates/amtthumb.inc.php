@@ -12,7 +12,7 @@ class AMTThumb extends CMHTMLObj {
 
   public function getThumbURL() {
     global $_CMAPP;
-    return $_CMAPP[thumbs_url]."/$this->filename";
+    return $_CMAPP['thumbs_url']."/$this->filename";
   }
 
   public function __toString() {
