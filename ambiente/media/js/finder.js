@@ -1,19 +1,53 @@
 var finderWindows = new Array();
+var AMFinder_timeOut;
 
 var AMFinderCallBack = {
   gettimeout: function(result) {
     alert('<p>'+result+'</p>');
   },
-  getmodes: function(result) {
-    alert(result);
+  sendmessage: function(result) {
+    Finder_clearChatBox();
   },
-  changemode: function(result) { alert(result); }
+  getnewmessages: function(result) {
+    var chatFrame = AM_getElement("chat");
+    for(var i in result) {
+      switch(result[i].responseType) {
+      case "finder_alert":
+	//chatFrame.innerHTML += "<br><span style=''>"+AMFinder_lang[result[i].message]+"</span>";
+	chatFrame.innerHTML += "<br><span style='font-color: #FF0000'>"+result[i].message+"</span>";
+	break;
+
+      case "finder_timeout":
+	//chatFrame.innerHTML += "<br><span style=''>"+AMFinder_lang[result[i].message]+"</span>";
+	chatFrame.innerHTML += "<br><span class='finder_timeout'>"+result[i].message+"</span>";
+	//window.clearTimeout(AMFinder_timeOut);
+	break;
+
+      case "parse_messages":
+	var out = "";
+	out += "<br><span class='"+result[i].style+"'>";
+	out += result[i].username+"("+result[i].date+"): ";
+	out += result[i].message;
+	out += "</span>";
+
+	chatFrame.innerHTML += out;
+	    
+// 	echo "<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"><tr>\n";
+// 	echo "<td width=\"10%\" class=\"$class\"><font color=\"$color\">".$message->users[0]->username."</font>";
+// 	echo "<font size=-1>($hora)</font></td><td class=\"$class\">$message->message</td>\n";
+// 	echo "</table>\n";
+
+	break;
+      }
+    }
+  }
+  
 }
 
 function Finder_openChatWindow(src,userId) {
   if(finderWindows[userId] == null) {
     var param = "resizable=no,width=590,height=435,status=no,location=no,scrollig=yes,toolbar=no,scrollbars=yes";
-    finderWindows[userId] = window.open(src+"?frm_codeUser="+userId, "Finder_"+userId, param);
+    finderWindows[userId] = window.open(src, "Finder_"+userId, param);
   }else finderWindows[userId].focus();
 }
 
@@ -135,12 +169,9 @@ function Finder_sendMessage(form) {
   
   var recipient = form.elements['frm_codeRecipient'].value;
   var msg = form.elements['frm_message'].value;
-  var frame = AM_getElement('IFSendMessage');
-  alert(recipient);
-  var url = finder_url+"?action=A_send_message&frm_codeRecipient="+recipient+"&frm_message="+msg;
   
-  frame.src = url;
-
+  AMFinder.sendmessage(recipient, msg);
+  
 }
 
 
