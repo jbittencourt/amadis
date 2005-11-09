@@ -4,7 +4,7 @@ class AMColorBox extends AMAbstractBox {
   protected $theme;
   protected $class;
   protected $title;
-
+  
   const COLOR_BOX_BEGE        = "box_02";
   const COLOR_BOX_BLUE        = "box_01";
   const COLOR_BOX_BLUA        = "box_03";

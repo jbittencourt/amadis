@@ -1,4 +1,4 @@
-body {
+#chatBody {
        font: 0.7em Arial, Helvetica, sans-serif;
        background-color: #C3B6E4;
        padding: 3px;
@@ -18,7 +18,8 @@ body {
         top:15px;
         left:10px;
         scroll: vertical;
-        border: none;
+        border: 10px tiny solid; /* none; */
+        
         }
 
 .envio {
@@ -27,8 +28,8 @@ body {
          width: 120;
          height:70;
          position: absolute;
-         right:10;
-         bottom: 15px;	
+         right: 5px;
+         margin-top: 13px;	
          }
 
 .btenvio{
@@ -174,10 +175,16 @@ div.posicaoseta {
 .messageSender {
                  font: 0.7em Arial, Helvetica, sans-serif;
                  background-color: #DFE2FF;
+                 color: #0000AA;
                  }
 
 .messageRecipient {
                     font: 0.7em Arial, Helvetica, sans-serif;
                     background-color: #FFF;
+                    color: #298F23;
                     }
 
+.finder_timeout {
+                  font: 16px Arial, Helvetica, sans-serif;
+                  color: #FF0000;
+                  }

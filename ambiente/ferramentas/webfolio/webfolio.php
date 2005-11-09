@@ -14,10 +14,12 @@ $box = new AMTwoColsLayout;
 $pag->add("<img src=\"$_CMAPP[images_url]/dot.gif\" width=20 height=20>");
 
 //caixa para adicionar amigos
+$pag->add("<div id='friends_invitation'");
 $inv = new AMBUserFriendInvitations;
 if($inv->__hasInvitations()) { 
   $pag->add($inv);
 }
+$pag->add("</div>");
 
 //caixa de convites de projetos
 $inv = new AMBUserInvitations;

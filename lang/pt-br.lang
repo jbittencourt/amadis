@@ -93,6 +93,7 @@ search = "Buscar"
 
 
 add_friend = "Adicionar como amigo"
+not_add_friend  = "N&atilde;o adicionar como amigo"
 send_mail = "Enviar-lhe um E-Mail"
 page = "Ver a p&aacute;gina"
 no_user_found = "Nenhum usu&aacute;rio encontrado"
@@ -116,6 +117,9 @@ list_all_friends = "Listar todos os amigos"
 visit_webfolio = "Ver Webf&oacute;lio"
 visit_page = "Ver p&aacute;gina"
 visit_diary = "Ver di&aacute;rio"
+
+no_communities = "Voc&ecirc; n&atilde;o possui comunidades"
+
 [logs]
 new_user = " Novo(s) usu&aacute;rio foi cadastrado no AMADIS."
 
@@ -373,7 +377,8 @@ msg_rejected_project = "Voc&ecirc; rejeitou o pedido para fazer parte do projeto
 
 error_joining_project = "Ocorreu algum problema ao tentar aceitar o convite. Por favor tente novamente."
 error_invitation_user_failed = "N&atilde;o foi poss&iacute;vel adicionar o amigo!"
-error_invitation_user_success = "Amigo adicionado com sucesso!"
+msg_invitation_user_success = "Amigo adicionado com sucesso!"
+msg_invitation_reject_success = "";
 
 error_under_construction = "Esta ferramente encontra-se em constru&ccedil;&atilde;o"
 [changepassword]
@@ -635,7 +640,6 @@ search_communities_result = "Resultados para"
 community_join = "Juntar-me a esta comunidade"
 communities = "Comunidades"
 more_options = "Mais Op&ccedil;&otilde;es"
-no_communities = "Voc&ecirc; n&atilde;o possui comunidades"
 msg_community_created = "Comunidade criada com sucesso!"
 msg_community_updated ="Comunidade Atualizada com Sucesso"
 without_communities_news = "N&atilde;o h&aacute; entrada de not&iacute;cias nas comunidades"
@@ -795,6 +799,7 @@ send = "Enviar"
 finder = "Finder"
 reply_to = "Responder para "
 user_close_window = "A janela de conversa foi fechada."
+conversation_timeout = "A conversa tornou-se inativa!"
 
 [scraps]
 scraps_of = "Mensagens de"

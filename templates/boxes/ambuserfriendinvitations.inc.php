@@ -7,7 +7,7 @@ class AMBUserFriendInvitations extends AMColorBox implements CMActionListener {
   public function __construct() {
     global $_CMAPP;
     parent::__construct("",self::COLOR_BOX_BEGE);
-
+    
     try {
       $this->invitations = $_SESSION['user']->listFriendsInvitations();
       ($this->invitations->__hasItems() ? $this->__hasItems = true : $this->__hasItems = false);
@@ -75,20 +75,31 @@ note($e);
     global $_language,$_CMAPP;
 
     if($this->__hasItems) {
-      parent::add("<table border=0 cellspacing=1 cellpadding=2 width=\"100%\">");
-      $_first = true;
-    
-      foreach($this->invitations as $friend) {
-	if(!$_first) {
-	  parent::add("<tr><td colspan=4>");
-	  parent::add(new AMDotline("100%"));
-	}
       
+      $_first = true;
+      
+      $this->requires("alertbox.css", CMHTMLObj::MEDIA_CSS);
+      parent::addPageBegin(CMHTMLObj::getScript("EnvSession_numFriendsInvitation = ".$this->invitations->count().";"));
+
+      foreach($this->invitations as $friend) {
+
+	$user = $friend->invitation[0];
+	
+	parent::add("<div id='$user->codeUser'>");
+	parent::add("<table border=0 cellspacing=1 cellpadding=2 width=\"100%\">");
+	
 	//user image thumbnail
 	parent::add("<tr><td>");
-	$user = $friend->invitation[0];
-	parent::add(new AMTThumb($user->foto));
-
+	$thumb = new AMUserThumb;
+	$thumb->codeArquivo = $user->foto;
+	try {
+	  $thumb->load();
+	  parent::add($thumb->getView());
+	}
+	catch(CMDBException $e) {
+	  echo $e; die();
+	}
+	
 	//an empty column
 	parent::add("</td><td><img src=\"$_CMAPP[images_url]/dot.gif\" width=10>");
 
@@ -101,12 +112,27 @@ note($e);
 
 	$time = $friend->time;
 	$link = $_CMAPP['services_url']."/webfolio/userinfo_details.php?frm_codeUser=".$user->codeUser;
+
+	//error_invitation_user_failed = "N&atilde;o foi poss&iacute;vel adicionar o amigo!"
+	//msg_invitation_user_success = "Amigo adicionado com sucesso!"
+
+	$mkFriend = "AMEnvSession.makefriend($user->codeUser, $time, '', '$_language[msg_invitation_user_success]', '$_language[error_invitation_user_failed]');";
+	$rjFriend = "AMEnvSession.rejectfriend($user->codeUser, $time, '','');";
+
+	
+	parent::add("<a class='blue cursor' onClick=\"$mkFriend\">$_language[add_friend]</a><br>");
+	parent::add("<a class='blue cursor' onClick=\"$rjFriend\">$_language[not_add_friend]</a><br>");
+	
+	if($_first && $this->invitations->count() > 1) {
+	  parent::add("<tr><td colspan=4><br>");
+	  parent::add(new AMDotline("100%"));
+	}
       
-	parent::add("<a href=\"$link&inv_time=$time&action=A_make_friend\" class=\"blue\">$_language[add_friend]</a><br>");
 	parent::add("</tr>");
 	$_first = false;
+	parent::add("</table>");
+	parent::add("</div>");
       }
-      parent::add("</table>");
 
       return parent::__toString();
     }

@@ -28,7 +28,8 @@ class AMMain extends AMHTMLPage {
     $this->requires("dcom.js",self::MEDIA_JS);
     $this->requires("finder.js", self::MEDIA_JS);
     $this->requires("finder.css", self::MEDIA_CSS);
-    
+    $this->requires("envsession.js", self::MEDIA_JS);
+
     $this->main_menu = new AMMainMenu();
 
     $this->navmenu = new AMNavMenu();
@@ -41,6 +42,7 @@ class AMMain extends AMHTMLPage {
     $_SESSION['communicator'] = array();
 
     $this->addCommunicatorHandler('AMFinder');
+    $this->addCommunicatorHandler('AMEnvSession');
 
   }
 
@@ -274,6 +276,8 @@ class AMMain extends AMHTMLPage {
     parent::add("</div>");
     
     parent::addScript("initDCOM('$_CMAPP[media_url]/rte/blank.htm');");
+    
+    parent::addPageBegin(self::getScript("var AMEnvSession = new amenvsession(AMEnvSessionCallBack);"));
     
     if($_SESSION['environment']->logged) {
       parent::addPageBegin(self::getScript("var AMFinder = new amfinder(AMFinderCallBack);"));

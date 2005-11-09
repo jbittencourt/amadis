@@ -315,36 +315,36 @@ class AMUser extends CMUser {
   }
 
   public function listFriends() {
-    //note($_SESSION[friends]);
-    //if(!isset($_SESSION[amadis][friends])) {
+    //unset($_SESSION['amadis']['friends']);
+    if(!isset($_SESSION['amadis']['friends'])) {
 
-    $q = new CMQuery('AMUser');
+      $q = new CMQuery('AMUser');
+      
+      $j1 = new CMJoin(CMJoin::INNER);
+      $j1->setClass('AMFriend');
+      $j1->on("Friends.codeFriend=User.codeUser");
+      
+      $j2 = new CMJoin(CMJoin::INNER);
+      $j2->setClass('CMEnvSession');
+      $j2->on("EnvSession.codeUser = Friends.codeFriend");
+      
+      $q->addJoin($j1,"usuarios");
+      $q->addJoin($j2,"sessions");
+      
+      $timeOut = CMEnvSession::getTimeOut(time());
+      $q->setProjection("User.*");
+      $q->setFilter("Friends.codeUser= $this->codeUser AND Friends.status = '".AMFriend::ENUM_STATUS_ACCEPTED."'");
+      $q->setOrder("EnvSession.timeEnd DESC");
+      $q->groupBy("EnvSession.codeUser");
+      $ret = $q->execute();
     
-    $j1 = new CMJoin(CMJoin::INNER);
-    $j1->setClass('AMFriend');
-    $j1->on("Friends.codeFriend=User.codeUser");
+      //$_SESSION['amadis']['friends'] = $ret;
     
-    $j2 = new CMJoin(CMJoin::INNER);
-    $j2->setClass('CMEnvSession');
-    $j2->on("EnvSession.codeUser = Friends.codeFriend");
+      $_SESSION['amadis']['friends'] = serialize($ret);
+      
+    }else $ret = unserialize($_SESSION['amadis']['friends']);
     
-    $q->addJoin($j1,"usuarios");
-    $q->addJoin($j2,"sessions");
-    
-    $timeOut = CMEnvSession::getTimeOut(time());
-    $q->setProjection("User.*");
-    $q->setFilter("Friends.codeUser= $this->codeUser");// AND EnvSession.timeEnd < $timeOut");
-    $q->setOrder("EnvSession.timeEnd DESC");
-    $q->groupBy("EnvSession.codeUser");
-    $ret = $q->execute();
-    
-    $_SESSION['amadis']['friends'] = $ret;
-    
-    //$_SESSION[amadis][friends] = serialize($ret);
-    
-    //}else $ret = unserialize($_SESSION[amadis][friends]);
-    
-    //serialize($_SESSION[amadis][friends]);
+    //$_SESSION['amadis']['friends'] = serialize($_SESSION['amadis']['friends']);
     
     return $ret;
     
@@ -364,7 +364,7 @@ class AMUser extends CMUser {
   }
 
   public function listFriendsInvitations() {
-    if(!empty($_SESSION['last_session'])) {
+    if(empty($_SESSION['last_session'])) {
       $q = new CMQuery('AMFriend');
     
       $j = new CMJoin(CMJoin::LEFT);
@@ -372,7 +372,8 @@ class AMUser extends CMUser {
       $j->on("User.codeUser = Friends.codeUser");
       
       $q->addJoin($j, "invitation");
-      $q->setFilter("Friends.codeFriend = $this->codeUser AND Friends.time > ".$_SESSION['last_session']->timeEnd);
+      $q->setFilter("Friends.codeFriend = $this->codeUser AND Friends.status = '".AMFriend::ENUM_STATUS_NOT_ANSWERED."'");
+      
       return $q->execute();
 
     }else Throw new AMWEFirstLogin;

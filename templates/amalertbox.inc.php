@@ -4,7 +4,7 @@ Class AMAlertBox extends AMAbstractBox {
   
   protected $theme;
   protected $icon = true;
-  
+  protected $contents = array();
   const ALERT = "01";
   const DIALOG = "04";
   const MESSAGE = "02";

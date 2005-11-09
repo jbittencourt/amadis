@@ -12,7 +12,15 @@ $pag->add(CMHTMLObj::getScript("var AMFinder = new amfinder(AMFinderCallBack);")
 $pag->add(CMHTMLObj::getScript("function teste() { AMFinder.getmodes(); }"));
 
 $pag->add("<input type='button' name='check' value='Test' onclick='teste(); return false;'>");
-echo $pag;
+
+AMFinder::initFinder(34,39);
+$f = new AMFinder();
+$f->sendMessage(39,"teste forcado");
+$a = $f->getNewMessages(34,39);
+note($a);
+note($f);
+notelastquery();
+//echo $pag;
 
 die();
 if(empty($_SESSION['finder'])) {

@@ -1,5 +1,18 @@
 var finderWindows = new Array();
-var AMFinder_timeOut;
+
+
+function Finder_initChat() {
+  var cssMessages = window.document.createElement("LINK");
+  cssMessages.setAttribute("rel", "stylesheet");
+  cssMessages.setAttribute("href", "css/mensagens.css");
+
+  var chatFrame = AM_getElement("chat");
+  var chatDoc = AM_getIFrameDocument(chatFrame, "body");
+    
+  var head = chatDoc.getElementsByTagName("head");
+  head[0].appendChild(cssMessages);
+  
+}
 
 var AMFinderCallBack = {
   gettimeout: function(result) {
@@ -9,17 +22,23 @@ var AMFinderCallBack = {
     Finder_clearChatBox();
   },
   getnewmessages: function(result) {
+    
     var chatFrame = AM_getElement("chat");
+    var chatDoc = AM_getIFrameDocument(chatFrame, "body");
+
+    var msg = window.document.createElement("DIV");
+
+    //alert(result);
     for(var i in result) {
       switch(result[i].responseType) {
       case "finder_alert":
 	//chatFrame.innerHTML += "<br><span style=''>"+AMFinder_lang[result[i].message]+"</span>";
-	chatFrame.innerHTML += "<br><span style='font-color: #FF0000'>"+result[i].message+"</span>";
+	msg.innerHTML = "<br><span style='font-color: #FF0000'>"+result[i].message+"</span>";
 	break;
 
       case "finder_timeout":
 	//chatFrame.innerHTML += "<br><span style=''>"+AMFinder_lang[result[i].message]+"</span>";
-	chatFrame.innerHTML += "<br><span class='finder_timeout'>"+result[i].message+"</span>";
+	msg.innerHTML = "<br><span class='finder_timeout'>"+result[i].message+"</span>";
 	//window.clearTimeout(AMFinder_timeOut);
 	break;
 
@@ -30,7 +49,7 @@ var AMFinderCallBack = {
 	out += result[i].message;
 	out += "</span>";
 
-	chatFrame.innerHTML += out;
+	msg.innerHTML = out;
 	    
 // 	echo "<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"><tr>\n";
 // 	echo "<td width=\"10%\" class=\"$class\"><font color=\"$color\">".$message->users[0]->username."</font>";
@@ -40,6 +59,8 @@ var AMFinderCallBack = {
 	break;
       }
     }
+    
+    chatDoc.body.appendChild(msg);
   }
   
 }

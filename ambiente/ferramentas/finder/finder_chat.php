@@ -2,42 +2,52 @@
 
 include_once("../../config.inc.php");
 
-$_language = $_CMAPP[i18n]->getTranslationArray("finder");
+$_language = $_CMAPP['i18n']->getTranslationArray("finder");
 
-if(empty($_REQUEST[frm_codeUser])) {
+if(empty($_REQUEST['frm_codeUser'])) {
   die("Nao sei com quem conversar");
 }else {
   $user = new AMUser;
-  $user->codeUser = $_REQUEST[frm_codeUser];
+  $user->codeUser = $_REQUEST['frm_codeUser'];
   try {
     $user->load();
   }catch (CMDBNoRecord $e) {
     die($e->getMessage());
   }
 }
-AMFinder::startChat($user->codeUser);
+
+AMFinder::initFinder($_SESSION['user']->codeUser, $user->codeUser);
 
 // AMadis
 // Instant
 // Messenger
-
+include("cminterface/cmhtmlpage.inc.php");
 $pag = new CMHtmlPage;
 
 $pag->requires("mensagens.css", CMHTMLObj::MEDIA_CSS);
 $pag->requires("dcom.js", CMHTMLObj::MEDIA_JS);
 $pag->requires("lib.js", CMHTMLObj::MEDIA_JS);
 $pag->requires("finder.js", CMHTMLObj::MEDIA_JS);
+$pag->requires("communicator.php?client", CMHTMLOBJ::MEDIA_JS);
 
 $pag->setTitle("$user->username - $user->name");
-$pag->setOnClose("window.opener.Finder_closeFinder($user->codeUser);");
 
+//init Finder object
+$pag->addPageBegin(CMHTMLObj::getScript("var AMFinder = new amfinder(AMFinderCallBack);"));
+
+//setTimeOut to check new messages
+$script = "AMFinder_timeOut = self.setInterval('AMFinder.getnewmessages(".$_SESSION['user']->codeUser.", $user->codeUser)',".AMFinder::getSleepTime().")";
+
+$pag->addPageBegin(CMHTMLObj::getScript($script));
+$pag->setId("chatBody");
+//$pag->setOnClose("window.opener.Finder_closeFinder($user->codeUser);");
+$pag->setOnLoad("Finder_initChat();");
 $pag->add("<div id=\"chatcorpo\"> ");
 $pag->add("  <div id=\"area_mensagens\" class=\"sobre\"> ");
 $pag->add("    <div id=\"areatextochat\">");
 
 //box list messages
-$chatSrc = "$_CMAPP[services_url]/finder/finder_chat_loop.php?frm_tempo=".time()."&frm_codeUser=$_REQUEST[frm_codeUser]";
-$pag->add("      <iframe  id=\"chat\" src=\"$chatSrc\"></iframe>");
+$pag->add("      <iframe  id='chat' name='chat' src='$_CMAPP[media_url]/dcom.htm'></iframe>");
 
 $pag->add("    </div>");
 $pag->add("    <div id=\"seta1\" class=\"posicaoseta\"><img src=\"$_CMAPP[images_url]/box_msg_areachat_01.png\" width=\"14\" height=\"10\" border=\"0\"></div>");
@@ -64,7 +74,8 @@ $pag->add("<img class=\"setas\" src=\"$_CMAPP[images_url]/box_msg_setas.png\"><b
 
 //add a user sender thumbnail
 $userThumb = new AMUserThumb;
-$userThumb->codeArquivo = $_SESSION[user]->foto;
+$userThumb->codeArquivo = $_SESSION['user']->foto;
+
 try {
   $userThumb->load();
   $userThumbURL = $userThumb->thumb->getThumbURL();
@@ -73,7 +84,7 @@ try {
   $pag->add("$_language[error_loading_image]");
 }
 
-$pag->add($_SESSION[user]->username."<br>");
+$pag->add($_SESSION['user']->username."<br>");
 
 $pag->add("    </div>");
 $pag->add("<div id=\"footerlement\"><img src=\"$_CMAPP[images_url]/box_msg_pecas2.png\"></div>");
@@ -92,7 +103,6 @@ $pag->add("    </div>");
 $pag->add("  <div class=\"envio\">");
 
 $onClick = "onClick=\"Finder_sendMessage(AM_getElement('messageForm'))\"";
-$pag->addPageBegin(CMHTMLObj::getScript("finder_url='$_CMAPP[services_url]/finder/finder.php'"));
 
 $pag->add("    <input class=\"btenvio\" name=\"btenvio\" value=\"$_language[send]\" type=\"button\" $onClick>");
 $pag->add("  </div>");
@@ -101,10 +111,8 @@ $pag->add("    <div id=\"seta3\" class=\"posicaoseta\"><img src=\"$_CMAPP[images
 $pag->add("    <div id=\"seta4\" class=\"posicaoseta\"><img src=\"$_CMAPP[images_url]/box_msg_areaenvio_04.png\"></div>");
 $pag->add("  </div>");
 
-$pag->add("<div id=\"send_message\">");
-$pag->add("<iframe name=\"IFSendMessage\" id=\"IFSendMessage\" width=\"300\" height=\"200\" src=\"\"></iframe>");
 $pag->add("</div>");
-$pag->add("</div>");
+
 
 echo $pag;
 

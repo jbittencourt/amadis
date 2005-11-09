@@ -18,9 +18,27 @@ if(isset($_REQUEST['action'])) {
       $friend->codeFriend = $_REQUEST['frm_codeUser'];
       $friend->codeUser = $_SESSION['user']->codeUser;
       $friend->comentary = $_REQUEST['frm_comentary'];
+      $friend->status = AMFriend::ENUM_STATUS_ACCEPTED;
       $friend->time = time();
       $friend->save();
-      header("Location:$_SERVER[PHP_SELF]?frm_amerror=invitation_user_success&&frm_codeUser=$_REQUEST[frm_codeUser]");
+      header("Location:$_SERVER[PHP_SELF]?frm_ammsg=invitation_user_success&&frm_codeUser=$_REQUEST[frm_codeUser]");
+    }catch(CMException $e) {
+      header("Location:$_SERVER[PHP_SELF]?frm_amerror=invitation_user_failed&&frm_codeUser=$_REQUEST[frm_codeUser]");
+    }
+    break;
+  case "A_make_reject":
+    /**
+     *Adiciona um amigo
+     */
+    try {
+      $friend = new AMFriend;
+      $friend->codeFriend = $_REQUEST['frm_codeUser'];
+      $friend->codeUser = $_SESSION['user']->codeUser;
+      $friend->comentary = $_REQUEST['frm_comentary'];
+      $friend->status = AMFriend::ENUM_STATUS_REJECTED;
+      $friend->time = time();
+      $friend->save();
+      header("Location:$_SERVER[PHP_SELF]?frm_ammsg=invitation_user_success&&frm_codeUser=$_REQUEST[frm_codeUser]");
     }catch(CMException $e) {
       header("Location:$_SERVER[PHP_SELF]?frm_amerror=invitation_user_failed&&frm_codeUser=$_REQUEST[frm_codeUser]");
     }
