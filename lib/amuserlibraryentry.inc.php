@@ -56,5 +56,6 @@ class AMUserLibraryEntry extends CMObj {
     }
     return $this->libraryCode;
   }
+
 }
 ?>

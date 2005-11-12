@@ -31,7 +31,7 @@ class AMEnvSession {
     };
 
   }
-
+  /**
   public function getNewRequests() {
     
     $q = new CMQuery('AMFinderMessages');
@@ -40,7 +40,7 @@ class AMEnvSession {
     
     $q->setFilter($filter);
     
-    $result $q->execute();
+    $result =  $q->execute();
     if($result->__hasItems()) {
       foreach($result as $item) {
 	$id = $_SESSION['user']->codeUser."_$item->codeSender";
@@ -50,7 +50,7 @@ class AMEnvSession {
 							  "recipient"=>$item->codeSender,
 							  "time"=>time(),
 							  "wait"=>array(),
-							  "open"=>false;
+							  "open"=>false
 							  );
 	} else {
 	  $_SESSION['amadis']['FINDER_ROOM'][$id]['wait'][] = $item;
@@ -59,7 +59,7 @@ class AMEnvSession {
       }
     } else return 0;
     
-  }
+  }**/
 
   /**Retorna os modos de visualizacao do usuario
    *
