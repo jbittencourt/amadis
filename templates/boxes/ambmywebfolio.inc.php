@@ -24,16 +24,19 @@ class AMBMyWebfolio extends AMColorBox implements CMActionListener {
       //parent::add("<a href=\"$urlviewmsg\" class =\"cinza\">&raquo; ".$_language['read_my_messages']."</a><br>");
       
     }else {
-      $urlpage = $_CMAPP['services_url']."/pages/viewpage.php?frm_page=users/user_$_REQUEST[frm_codeUser]&frm_codeUser=$_REQUEST[frm_codeUser]";
-      $urlfriend = $_SERVER['PHP_SELF']."?frm_codeUser=$_REQUEST[frm_codeUser]&action=A_make_friend";
-      $urlemail = $_CMAPP['services_url']."/correio/message.php";
-      $urldiary = $_CMAPP['services_url'].'/diario/diario.php?frm_codeUser='.$_REQUEST['frm_codeUser'];
 
-      parent::add("<a href=\"$urlpage\" class =\"cinza\">&raquo; ".$_language['see_home_page']."</a><br>");
-      parent::add("<a href=\"$urldiary\" class =\"cinza\">&raquo; ".$_language['see_diary']."</a><br>");
+      $urlpage = $_CMAPP[services_url]."/pages/viewpage.php?frm_page=users/user_$_REQUEST[frm_codeUser]&frm_codeUser=$_REQUEST[frm_codeUser]";
+      $urlfriend = $_SERVER[PHP_SELF]."?frm_codeUser=$_REQUEST[frm_codeUser]&action=A_make_friend";
+      $urlemail = $_CMAPP[services_url]."/correio/message.php";
+      $urldiary = $_CMAPP[services_url].'/diario/diario.php?frm_codeUser='.$_REQUEST[frm_codeUser];
+      $urllibrary = $_CMAPP[services_url]."/library/library.php?frm_codeUser=".$_REQUEST[frm_codeUser]."";
 
-      if(!empty($_SESSION['user'])) {
-	parent::add("<a href=\"$urlemail\" class=\"cinza\">&raquo; ".$_language['send_email']."</a><br>");
+
+      parent::add("<a href=\"$urlpage\" class =\"cinza\">&raquo; ".$_language[see_home_page]."</a><br>");
+      parent::add("<a href=\"$urldiary\" class =\"cinza\">&raquo; ".$_language[see_diary]."</a><br>");
+      parent::add("<a href=\"$urllibrary\" class =\"cinza\">&raquo; ".$_language[see_library]."</a><br>");
+      if(!empty($_SESSION[user])) {
+	parent::add("<a href=\"$urlemail\" class=\"cinza\">&raquo; ".$_language[send_email]."</a><br>");
 	
 	if(!$_SESSION['user']->isMyFriend($_REQUEST['frm_codeUser'])) {
 	  $addFriendBox = new AMTShowHide("addFriend", "&raquo; $_language[add_friend]", AMTShowHide::HIDE);

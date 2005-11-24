@@ -11,6 +11,7 @@ class AMLibrary extends CMObj{
   public function setLibrary($lib){
     $this->code = $lib;    
   }
+
   public function busca($tipo){    
     
     $q = new CMQuery('AMArquivo', 'AMLibraryFiles');
@@ -109,8 +110,8 @@ class AMLibrary extends CMObj{
       $file->save();	//salva o arquivo
       $filelib->libraryCode = $this->code;
       $filelib->filesCode = $file->codeArquivo;
+      $filelib->time = time();
       $filelib->save();
-      notelastquery();
     }catch(CMException $e){
       die($e->getMessage());
     }  
@@ -166,6 +167,19 @@ class AMLibrary extends CMObj{
       return "false";
   }
 
+
+  public function listSharedFiles($limit){
+    try{
+      $q = new CMQuery(AMArquivo,AMLibraryFiles);
+      $q->setFilter("Arquivo.codeArquivo = FilesLibraries.filesCode AND FilesLibraries.libraryCode = '$this->code' AND FilesLibraries.active='y' and FilesLibraries.shared='y'");
+      if($limit > 0)
+	$q->setLimit('','$limit');
+      $q->setOrder('tempo desc');
+      $res = $q->execute();    
+      return $res;            
+    }catch(CMDBNoRecord $r){
+    }
+  }
 }
 
 ?>

@@ -7,20 +7,21 @@ class AMUserLibraryEntry extends CMObj {
     $this->setTable("UsersLibraries");
     $this->addField("userCode",CMObj::TYPE_INTEGER,11,1,0,0);
     $this->addField("libraryCode",CMObj::TYPE_INTEGER,11,1,0,0);
+    $this->addField("time",CMObj::TYPE_INTEGER,20,1,0,0);
 
     $this->addPrimaryKey("userCode");
     $this->addPrimaryKey("libraryCode");
   }
   
-  public function __construct(){
+  public function __construct($user){
     parent::__construct();
-    $this->user = $_SESSION[user]->codeUser;
+    $this->user = $user;
   }
   
   
   public function libraryExist(){  // confere se a biblioteca do usuario existe.. caso nao, ele cria uma
     //$l = new AMUserLibraryEntry;
-    $this->userCode = $_SESSION[user]->codeUser;
+    $this->userCode = $this->user;
     try{
       $this->load();
     }catch(CMDBNoRecord $w){

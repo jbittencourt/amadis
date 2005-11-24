@@ -13,9 +13,8 @@ class AMBProjectsArea extends CMHTMLObj {
   
   public function __toString() {
 
-    global $_CMAPP;
+    global $_CMAPP, $_language;
     
-    $_language = $_CMAPP['i18n']->getTranslationArray("projects");
 
     /*
      * URL de submit do form

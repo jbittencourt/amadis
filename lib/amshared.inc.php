@@ -1,5 +1,4 @@
 <?
-
 class AMShared {
 
   public function share($id){
@@ -15,13 +14,13 @@ class AMShared {
 
     $fileLib->filesCode = $fileCode;
     try{
-    $fileLib->load();
+      $fileLib->load();
     }catch(AMException $e){ echo $e->getMessage(); }
 
     //change all states  and set new variables..
     if($state == "shared"){  
       $newState = "unshared";      
-      $url = "$_CMAPP[media_url]/images/eye1.gif";
+      $url = "$_CMAPP[media_url]/images/img_blt_ico_eye_off.gif";
 
       //so, its shared at DB and i will set 'n' to the file to make it unshare
 
@@ -30,7 +29,7 @@ class AMShared {
     }
     else{
       $newState = "shared";
-      $url = "$_CMAPP[media_url]/images/eye.gif";
+      $url = "$_CMAPP[media_url]/images/img_blt_ico_eye_on.gif";
 
       //in this case, ill make the inverse..setting 'y' to the file
       
@@ -38,7 +37,6 @@ class AMShared {
     }
 
     $fileLib->save();
-
     $newId = $newState."_".$fileCode;
     
     //save it and return..
@@ -52,6 +50,5 @@ class AMShared {
   }
 
 }
-
 
 ?>

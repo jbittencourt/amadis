@@ -110,7 +110,7 @@ empty_search = "Voc&ecirc; deve preencher um par&acirc;metro para a busca"
 
 no_project_found = "Nenhum projeto foi encontrado nesta busca."
 error_cannot_find_user = "Esse usu&aacute;rio n&atilde;o existe."
-
+send = "Enviar"
 list_all_projects = "Listar todos os projetos"
 list_all_communities = "Listas todas as comunidades"
 list_all_friends = "Listar todos os amigos"
@@ -129,7 +129,7 @@ back_to_start = "Voltar para a tela inicial do AMADIS."
 [inicial]
 lec_text_1 = "O ambiente Amadis foi desenvolvido com intuito de conectar pessoas e id&eacute;ias. Nele voc&ecirc; pode compartilhar seus projetos com outros colegas, divulgar e discutir suas id&eacute;ias, buscar informa&ccedil;&otilde;es, encontrar parcerias de trabalho e ainda participar de cursos virtuais."
 
-
+areas = "Selecione uma das &aacute;reas para listar<br> os projetos referente ao t&oacute;pico:"
 error_session_timeout = "A sua sess&atilde;o espirou. Por favor, efetue o login novamente."
 error_cannot_register_logged = "Para poder realizar um novo cadastro no AMADIS, voc&ecirc; deve primeiro sair do ambiente."
 
@@ -253,6 +253,7 @@ see_my_home_page = "Ver a minha p&aacute;gina"
 publish_my_home_page = "Publicar a minha p&aacute;gina"
 see_home_page = "Ver p&aacute;gina"
 see_diary = "Ver di&aacute;rio"
+see_library = "Ver arquivos compartilhados"
 add_friend = "Adicionar como amigo"
 send_email = "Enviar um e-mail"
 send_a_comment = "Envie um coment&aacute;rio (Opcional)"
@@ -272,6 +273,8 @@ messages = "Mensagens"
 diary = "Di&aacute;rio"
 no_amadis_news = "N&atilde;o h&aacute; novidades"
 
+send = "Enviar"
+
 change_password = "Troca senha"
 project_invitation = "Voc&ecirc; foi convidado para participar do projeto";
 
@@ -288,6 +291,8 @@ webfolio_visit = "Ir para o Webf&oacute;lio"
 user_no_communities = "O usu&aacute; n&atilde; participa de nenhuma comunidade no momento."
 user_no_projects = "O usu&aacute; n&atilde; participa de nenhum projeto no momento."
 no_forums_events = "Nenhuma novidade nos f&oacute;runs"
+no_files_shared = "Nenhum arquivo compartilhado no momento "
+list_all_files = "Ver todos os arquivos compartilhados"
 init_chat = "Iniciar conversa"
 off_line_user = "Usu&aacute;rio desconectado"
 
@@ -380,7 +385,10 @@ error_invitation_user_failed = "N&atilde;o foi poss&iacute;vel adicionar o amigo
 msg_invitation_user_success = "Amigo adicionado com sucesso!"
 msg_invitation_reject_success = "";
 
-error_under_construction = "Esta ferramente encontra-se em constru&ccedil;&atilde;o"
+error_under_construction = "Esta ferramente encontra-se em
+constru&ccedil;&atilde;o"
+
+
 [changepassword]
 frm_password="Digite sua senha atual:"
 frm_new_password="Digite sua nova senha:"
@@ -464,6 +472,15 @@ error_aviso_not_found = "Ocorreu algum problema ao ler o aviso."
 change_password = "Troca senha"
 
 warning_amadis = "Avisos do AMADIS"
+
+
+
+[project_members]
+project = Projeto
+project_group_actual = "Equipe atual do Projeto"
+project_group_old = "Pessoas que j&aacute; participaram deste projeto."
+back_to_project = "Voltar para o projeto"
+
 
 [projects]
 project = "Projeto"
@@ -549,6 +566,7 @@ no_comments = "N&atilde;o h&aacute; coment&aacute;rios no projeto."
 no_news = "N&atilde;o h&aacute; not&iacute;cias no projeto."
 back_to_project = "Voltar para o projeto"
 
+
 [project_create]
 frm_title = "Nome do Projeto"
 frm_description = "Uma breve descri&ccedil;&atilde;o sobre o projeto"
@@ -571,12 +589,6 @@ pag_0 = "Dados Gerais"
 pag_1 = "&Aacute;reas do Conhecimento"
 pag_2 = "Foto do Projeto"
 pag_3 = "Concluir" 
-
-[project_members]
-project = Projeto
-project_group_actual = "Equipe atual do Projeto"
-project_group_old = "Pessoas que j&aacute; participaram deste projeto."
-back_to_project = "Voltar para o projeto"
 
 
 [project_invite_user]
@@ -757,9 +769,14 @@ error_forum_not_found = "O f&oacute;rum requisitado n&atilde;o existe."
 error_no_id = "O c&oacute;digo do f&oacute;rum n&atilde;o foi informado."
 error_message_not_posted = "Ocorreu um erro ao enviar sua mensagem. Por favor, tente novamente."
 
+[finder]
+finder = "Finder"
+reply_to = "Responder para "
+user_close_window = "A janela de conversa foi fechada."
+conversation_timeout = "A conversa tornou-se inativa!"
+
 
 [library]
-
 upload_file = "Enviar arquivo"
 view_file = "Visualizar arquivos"
 delete_file = "Apagar arquivo";
@@ -786,7 +803,6 @@ file_successful_sent = "Arquivo enviado com sucesso!"
 file_successful_delete = "Arquivo excluido com sucesso!"
 error_send_file = "Erro ao enviar o arquivo."
 
-
 bad_extension = "Extens&atilde;o n&atilde;o permitida pelo upload"
 files = "arquivos"
 name = "Nome"
@@ -794,12 +810,6 @@ date = "Data"
 size = "Tamanho"
 action = "A&ccedil;&otilde;es"
 send = "Enviar"
-
-[finder]
-finder = "Finder"
-reply_to = "Responder para "
-user_close_window = "A janela de conversa foi fechada."
-conversation_timeout = "A conversa tornou-se inativa!"
 
 [scraps]
 scraps_of = "Mensagens de"

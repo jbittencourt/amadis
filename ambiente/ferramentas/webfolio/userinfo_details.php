@@ -128,7 +128,7 @@ $pag->add($box3);
 $box4 = new AMColorBox("$_CMAPP[imlang_url]/box_wfamigos_tit.gif",AMColorBox::COLOR_BOX_PINK);
 
 $friends = $user->listFriends();
-if($comms->__hasItems()) {
+if($comms->__hasItems()) {  //----> pq esse teste!?!? ctrl c, ctrl v?
   $box4->add(new AMTIconList($friends,AMTIconList::USER_LIST,7));
   $box4->add("<br><a href='$_CMAPP[services_url]/communities/listcommunities.php'>&raquo; $_language[list_all_friends]</a>");
 } 
@@ -137,6 +137,10 @@ else {
 }
 
 $pag->add($box4);
+
+//shared files
+$box5 = new AMBUserLibrary($user);
+$pag->add($box5);
 
 
 echo $pag;

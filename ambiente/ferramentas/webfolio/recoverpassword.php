@@ -2,7 +2,7 @@
 $_CMAPP[notrestricted] = 1;
 include("../../config.inc.php");
 include($_CMAPP[path]."/templates/amtcadastro.inc.php");
-include($_CMAPP[path]."/templates/amcadbox.inc.php");
+include($_CMAPP[path]."/templates/amtcadbox.inc.php");
 include($_CMAPP[path]."/lib/amarquivo.inc.php");
 include($_CMAPP[path]."/lib/amimage.inc.php");
 include($_CMAPP[path]."/lib/amfoto.inc.php");
@@ -31,7 +31,7 @@ $_CMAPP[smartform][language] = $_language;
 
 
 //form box to interface
-$cadBox = new AMCadBox;
+$cadBox = new AMTCadBox;
 
 switch($_REQUEST[action]) {
 

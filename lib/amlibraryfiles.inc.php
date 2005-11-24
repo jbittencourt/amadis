@@ -4,6 +4,7 @@ class AMLibraryFiles extends CMObj {
   public function configure() {
     $this->setTable("FilesLibraries");
     $this->addField("filesCode",CMObj::TYPE_INTEGER,11,1,0,0);
+    $this->addField("time",CMObj::TYPE_INTEGER,20,1,0,0);
     $this->addField("libraryCode",CMObj::TYPE_INTEGER,11,1,0,0);
     $this->addField("referred",CMObj::TYPE_CHAR,1,1,0,0);
     $this->addField("active",CMObj::TYPE_CHAR,1,1,0,0);
