@@ -5,6 +5,7 @@ class AMBoxDiario extends CMHTMLObj {
   private $imagem;
   private $titulo;
   private $texto;
+  private $rsslink;
   private $cabecalho = array();
   private $posts;
   protected $user;
@@ -12,7 +13,7 @@ class AMBoxDiario extends CMHTMLObj {
   protected $month;
   protected $year;
 
-  public function __construct(CMContainer $list,$user,$titulo,$imagem=0,$texto="") {
+  public function __construct(CMContainer $list,$user,$titulo,$imagem=0,$texto="",$rsslink="") {
     parent::__construct(0,0);
 
     $this->posts = $list;
@@ -21,6 +22,7 @@ class AMBoxDiario extends CMHTMLObj {
     $this->imagem = $imagem;
     $this->texto = $texto;
     $this->titulo = $titulo;
+    $this->rsslink = $rsslink;
     $this->requires("blog.js");
   }
 
@@ -66,7 +68,9 @@ class AMBoxDiario extends CMHTMLObj {
 
     parent::add("</td>");
     parent::add("<td width=\"20\"><img src=\"$url/dot.gif\" width=\"20\" height=\"10\" border=\"0\"></td>");
-    parent::add("<td valign=\"top\"><font class=\"diary_title\">$this->titulo</font><br>");
+    parent::add("<td valign=\"top\"><font class=\"diary_title\">$this->titulo</font>");
+    parent::add("<acronym title=\"Really Simple Syndication\" style=\"border: 0px;\">");
+    parent::add("<a href=\"$this->rsslink\"><img src=\"$_CMAPP[images_url]/rss_feed.gif\" style=\"padding-left: 15px;\"></a></acronym><br />");
 
     parent::add("<div id=\"diary_header_text\">");
     parent::add($this->texto);

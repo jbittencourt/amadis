@@ -137,8 +137,10 @@ if(!empty($userDiario)) {
     $image = new AMTFotoDiario($profile->image);
   }
 
+
+  $rsslink="diarioRSS.php?frm_codeUser=".$userDiario->codeUser;
      
-  $caixa = new AMBoxDiario($posts,$userDiario->codeUser,$title,$image,$text);
+  $caixa = new AMBoxDiario($posts,$userDiario->codeUser,$title,$image,$text,$rsslink);
   $caixa->setDate($_REQUEST['frm_calMonth'],$_REQUEST['frm_calYear']);
   if(!empty($_SESSION['user'])) {
     if($userDiario->codeUser==$_SESSION['user']->codeUser) {
@@ -146,6 +148,8 @@ if(!empty($userDiario)) {
       $caixa->addCabecalho("<br> <a class=\"diary_header\" href=\"$linkEditar\" > &raquo; $_language[editar_diario] </a>");
     }
   }
+
+  $pag->setRSSFeed($rsslink,$title);
 
   $pag->add($caixa);
 } else {
