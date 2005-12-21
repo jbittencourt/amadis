@@ -144,12 +144,12 @@ if($count_all != 0 ){
       if($lista == 1){//caso seja a vez de listarmos a categoria de imagem temos a opcao de preview por thumbs
 	if($flag_on == 1){
 	  $flag_on = 0;
-	  $imgthumb = "$_CMAPP[media_url]/images/pt-br/icon_thumb_on.gif";
+	  $imgthumb = "$_CMAPP[media_url]/images/icon_thumb_on.gif";
 	  $imglink  = "$_SERVER[PHP_SELF]?frm_type=$_REQUEST[frm_type]&frm_codeProjeto=$_REQUEST[frm_codeProjeto]&flag_on=$flag_on"; 
 	}
 	else{
 	  $flag_on = 1;
-	  $imgthumb = "$_CMAPP[media_url]/images/pt-br/icon_thumb_off.gif";
+	  $imgthumb = "$_CMAPP[media_url]/images/icon_thumb_off.gif";
 	  $imglink  = "$_SERVER[PHP_SELF]?frm_type=$_REQUEST[frm_type]&frm_codeProjeto=$_REQUEST[frm_codeProjeto]&ver=thumbs&flag_on=$flag_on";
 	}
 	  $conteudo .= "<td valign='middle' align='right' width='320'><a href='$imglink'><img src='$imgthumb'></a></td>";

@@ -13,6 +13,12 @@ class AMAviso extends CMObj {
 
      $this->addPrimaryKey("codeAviso");
   }
+
+
+  public function listaAvisos(){
+    $q = new CMQuery(AMAviso);    
+    return $q->execute();
+  }
 }
 
 ?>

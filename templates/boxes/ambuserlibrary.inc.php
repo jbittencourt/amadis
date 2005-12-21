@@ -13,7 +13,7 @@ class AMBUserLibrary extends AMColorBox {
     $a = new AMUserLibraryEntry($user->codeUser);
     $this->library = $a->getLibrary($user->codeUser);
 
-    parent::__construct($_CMAPP['imlang_url']."/box_biblio_projeto_tit.gif",self::COLOR_BOX_PURPLE);
+    parent::__construct($_CMAPP['imlang_url']."/box_wfarquivos_tit.gif",self::COLOR_BOX_PURPLE);
   }
 
   public function __toString() {

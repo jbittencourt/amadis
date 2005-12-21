@@ -126,14 +126,21 @@ $box->add("<br>",AMTwoColsLayout::LEFT);
 // END of the members box.
 
 
+/*
+ *CADASTRO DE NOTICIAS
+ */
 
-$projItens = new AMBProjectItems;
-$box->add($projItens,AMTwoColsLayout::LEFT);
+$projNews = new AMBProjectNews($proj);
+$box->add($projNews,AMTwoColsLayout::LEFT);
 
 
 /**
  *FINAL DA COLUNA ESQUERDA
  **/
+
+$projItens = new AMBProjectItems;
+$box->add($projItens,AMTwoColsLayout::RIGHT);
+
 $box->add("<img src=\"".$_CMAPP['images_url']."/dot.gif\" width=\"20\" height=\"1\" border=\"0\">",
 	  AMTwoColsLayout::RIGHT);
 
@@ -179,12 +186,6 @@ $box->add($projComents,AMTwoColsLayout::RIGHT);
 
 $box->add("<br>",AMTwoColsLayout::RIGHT);
 
-/*
- *CADASTRO DE NOTICIAS
- */
-
-$projNews = new AMBProjectNews($proj);
-$box->add($projNews,AMTwoColsLayout::RIGHT);
 
 $pag->add($box);
 echo $pag;

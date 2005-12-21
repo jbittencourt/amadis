@@ -12,6 +12,7 @@ class AMCidade extends CMObj {
 
     $this->addPrimaryKey("codCidade");
   }
+
 }
 
 

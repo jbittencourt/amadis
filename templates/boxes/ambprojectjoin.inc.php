@@ -7,7 +7,7 @@ class AMBProjectJoin extends AMColorBox implements CMActionListener {
   public function __construct(AMProjeto $proj) {
     global $_CMAPP;
     $this->proj = $proj; 
-    parent::__construct($_CMAPP['imlang_url']."/box_edicao_projeto.gif",self::COLOR_BOX_GREEN);
+    parent::__construct($_CMAPP['imlang_url']."/box_participar_projeto.gif",self::COLOR_BOX_GREEN);
 
   }
 

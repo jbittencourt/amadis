@@ -120,8 +120,7 @@ class AMAmbiente extends CMEnvironment {
 
   public function listaAvisos() {
     $tempo = time();
-    $q = new CMQuery('AMAviso');
-    $q->setFilter(" tempoInicio<='$tempo' AND tempoFim>='time()'");
+    $q = new CMQuery('AMAviso');    
     return $q->execute();
   }
 

@@ -20,8 +20,10 @@ class AMBAvisos extends AMColorBox {
     }
     else {
       foreach($list as $item) {
-	$win = new CMWJSWin("$_CMAPP[services_url]/avisos/show.php?frm_codeAviso=$item->codeAviso",$item->titulo,300,300);
-	parent::add("&raquo; &nbsp; <a href=\"#\" onClick=\"". $win->__toString()."\" class=\"cinza\">$item->titulo</a>");
+	if($item->tempoFim >= time() ||($item->tempoFim - $item->tempoInicio) == 0){
+	  $win = new CMWJSWin("$_CMAPP[services_url]/avisos/show.php?frm_codeAviso=$item->codeAviso",$item->titulo,300,300);
+	  parent::add("&raquo; &nbsp; <a href=\"#\" onClick=\"". $win->__toString()."\" class=\"cinza\">$item->titulo</a><br>");
+	}
       }
     }
 

@@ -9,7 +9,7 @@ class AMArea extends CMObj {
     $this->addField("nomArea",CMObj::TYPE_VARCHAR,50,1,0,0);
     $this->addField("codPai",CMObj::TYPE_INTEGER,4,1,0,0);
     $this->addField("intGeracao",CMObj::TYPE_VARCHAR,1,1,0,0);
-
+    $this->addPrimaryKey("codArea");    
   }
   
   function listaProjetos() {
@@ -26,6 +26,11 @@ class AMArea extends CMObj {
      $q->setFilter("codPai = '$this->codArea'");
      return $q->execute();
    }
+
+  public function listaAreas(){
+    $q = new CMQuery(AMArea);
+    return $q->execute();
+  }
 
     
 }

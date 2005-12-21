@@ -20,6 +20,12 @@ class AMEstado extends CMObj {
     return $q->execute();
   }
 
+
+  public function listaEstados(){
+    $q = new CMQuery(AMEstado);
+    return $q->execute();
+  }
+
 }
 
 ?>

@@ -302,6 +302,28 @@ class AMMain extends AMHTMLPage {
     return '<button type="submit"><img src="'.$_CMAPP['images_url'].'/lupa.png"> '.$_language['search'].'</button>';
   }
 
+  public static function getChangePwButton($codeUser) {
+    global $_CMAPP,$_language;
+    
+    $link = $_CMAPP['services_url']."/admin/changepw.php?frm_codUser=$codeUser";
+    return '<button class="button-as-link" type="button" onClick="AM_openURL(\''.$link.'\')"><img src="'.$_CMAPP['images_url'].'/ico_ver_pagina.gif"> '.$_language['changepw_button'].'</button>';
+  }
+  
+  
+  public static function getChangeStatusButton($codeUser) {
+    global $_CMAPP,$_language;
+    
+      $link = $_CMAPP['services_url']."/admin/changestatus.php?frm_codUser=$codeUser";
+      return '<button class="button-as-link"type="button" onClick="AM_openURL(\''.$link.'\')"><img src="'.$_CMAPP['images_url'].'/ico_ver_pagina.gif"> '.$_language['changestatus_button'].'</button>';
+  }
+  
+  public static function getSendNotificationButton($codeUser){
+    global $_CMAPP,$_language;
+      
+      $link = $_CMAPP['services_url']."/admin/sendnotif.php?frm_codUser=$codeUser";
+      return '<button class="button-as-link"type="button" onClick="AM_openURL(\''.$link.'\')"><img src="'.$_CMAPP['images_url'].'/ico_ver_pagina.gif"> '.$_language['sendn_button'].'</button>';    
+  }
+
   public static function getAddFriendButton($codeUser) {
     global $_CMAPP,$_language;
     $link = $_CMAPP['services_url']."/webfolio/userinfo_details.php?frm_codeUser=$codeUser";
