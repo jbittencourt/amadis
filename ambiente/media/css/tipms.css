@@ -1,20 +1,20 @@
 /* CSS Document */
 
-body {
-       background-color: transparent;
-       padding: 3px;
-       margin: 0;
-       }
+/* body { */
+/*        background-color: transparent; */
+/*        padding: 3px; */
+/*        margin: 0; */
+/*        } */
 
-#tipms {
-         position:fixed; /*absolute;*/
-         top:0px;
-         right: 0px;
-         }
+/*  #tipms {  */
+/*          position:absolute; */
+/*          top:0px; */
+/*          right: 0px; */
+/*           }  */
 
 #tipmscorpo {
               position: relative;
-              background-image: url("../imagens/tipms_box_bg.png");
+              background-image: url("../../media/imagens/tipms_box_bg.png");
               background-repeat: no-repeat;
               background-color: #F2F2FE;
               padding: 3px;
@@ -25,11 +25,12 @@ body {
               border-style: solid;
               border-color: #D2D2FD;
               width: 126px;
+/*               height: 117px; */
               }
 
 #tipfooter {
              position: absolute;
-             left:-4;
+             left:-4px;
              bottom:-8;
              }
 
@@ -48,7 +49,7 @@ body {
                color: #7E7EC3;
                padding: 0px;
                left: 28px;
-               margin: 0;
+               margin: 0px;
                }
 
 .tipfoto {
@@ -75,3 +76,4 @@ body {
            }
 
 
+/* #finderAlert { border: solid red; } */

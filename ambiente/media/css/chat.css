@@ -1,74 +1,157 @@
-
+#chatWindow { background-color: #E1F7F9; margin: 0px; }
 
 /* CSSs referentes ao Chat */
 
+a.linkchat:link    {font-family: Arial, Helvetica, sans-serif;	font-size: 11px;	line-height: 22px;	color: #CC7474;	text-decoration: underline;}
+a.linkchat:visited {font-family: Arial, Helvetica, sans-serif;	font-size: 11px;	line-height: 22px;	color: #CC7474;	text-decoration: underline;}
+a.linkchat:active  {font-family: Arial, Helvetica, sans-serif;	font-size: 11px;	line-height: 22px;	color: #CC7474;	text-decoration: underline;}
+a.linkchat:hover   {font-family: Arial, Helvetica, sans-serif;	font-size: 11px;	line-height: 22px;	color: #8D5555;	text-decoration: underline;}
+
+.local {
+         text-decoration:underline;
+         color: #666666;
+         font-family:Arial;
+         font-size:13px;
+         line-height:20px;
+         position:relative;
+         }
+
+.tit_chat {
+            text-decoration:none;
+            color: #666666;
+            font-family:Arial;
+            font-size:13px;
+            line-height:20px;
+            position: relative;
+            }
+
+.groupTitle { 
+              font-family: Arial, Helvetica, sans-serif;
+              font-size: 18px;
+              line-height: 18px;
+              color: #CE3333;
+              }
+
 .titchat {
-font-family: Arial, Helvetica, sans-serif;
-font-size: 18px;
-line-height: 18px;
-color: #CE3333;
-}
-
-
-
+           font-family: Arial, Helvetica, sans-serif;
+           font-size: 18px;
+           line-height: 18px;
+           color: #CE3333;
+           position: absolute;
+           left: 142px;
+           background-color: #a5e8f0;
+           background-image: url("../images/img_chat_02.gif");
+           background-repeat: no-repeat;
+           background-position: right;
+           width: 100%;
+           height: 59px;
+           }
 
 .txtchat {
-font-family: Arial, Helvetica, sans-serif;
-font-size: 11px;
-line-height: 18px;
-color: #CC7474;
-}
+           font-family: Arial, Helvetica, sans-serif;
+           font-size: 11px;
+           line-height: 18px;
+           color: #CC7474;
+           }
 
 .txttitchat { 
-font-family: Arial, Helvetica, sans-serif;
-font-size: 20px;
-line-height: 20px;
-color: #339966;
-}
+              font-family: Arial, Helvetica, sans-serif;
+              font-size: 20px;
+              line-height: 20px;
+              color: #339966;
+              }
 
 .chatheader {
-font-family: Arial, Helvetica, sans-serif;
-font-size: 11px;
-line-height: 18px;
-color: #7B4E4E;
-}
+              font-family: Arial, Helvetica, sans-serif;
+              font-size: 11px;
+              line-height: 18px;
+              color: #7B4E4E;
+              position: fixed;
+              width: 100%;
+              height: 74px;
+              }
+
+.chat_header {
+              font-family: Arial, Helvetica, sans-serif;
+              font-size: 11px;
+              line-height: 18px;
+              color: #7B4E4E;
+              }
+
+.zigsaw { float:left; top:0px; position:absolute; height:74px; }
+.btnsair { right:5px; top:15px; position:absolute; border: 0px; cursor:pointer; }
 
 .datachat {
-font-family: Arial, Helvetica, sans-serif;
-font-size: 11px;
-font-weight: bold; 
-line-height: 18px;
-color: #006666;
-}
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11px;
+            font-weight: bold; 
+            line-height: 18px;
+            color: #006666;
+            }
 
+.chatbox { 
+           position:absolute;
+           left: 10px;
+           bottom: 86px;
+           top: 74px; 
+           width:98%; 
+           overflow-x: auto;
+           display: block;
+           } 
+
+.messagebox { display:table-row; }
+
+.sendbox{ position:absolute; bottom:0px; display: block; width:100%; height:85px; background-color:#fff; }
+.Isendbox{ position:absolute; top:0px; width:90%; height:90%; background-color:#fff; }
+
+.left { display:table-cell; width:15%; } 
+.right { display:table-cell; width:65%; }
+
+.message_left { position:inherit; left:10px; top:5px; font-family: verdana, Helvetica, sans-serif;}
+.message_right { position:absolute; top:5px; right:50px; font-family: verdana, Helvetica, sans-serif;}
+
+input[type=text], select { background-color:#a5e8f0; color:#000; }
+input[type=text]:focus, select:focus { background-color:#fff; color:#000; }
 
 
 .persona_01  { 
-               border-top-width: 1px;
-               border-bottom-width: 1px;
-               border-left-width: 0px; 
-               border-right-width: 1px;
-               border-style: solid; 
-               border-color: #E1F7F9;
-               background-color: #FFFFDF; 
-               padding: 7px; 
-               font-family: verdana, Helvetica, sans-serif;
-               font-size: 11px;
-               color: #666666;
+               border-top-width: 1px; border-bottom-width: 1px; border-left-width: 0px;
+               border-right-width: 1px; border-style: solid; border-color: #E1F7F9;
+               background-color: #FFFFDF; padding: 7px; font-family: verdana, Helvetica, sans-serif;
+               font-size: 11px; color: #666666; height: 35px;
                }
 
-.persona_02  { border-top-width: 1px; border-bottom-width: 1px; border-left-width: 0px; border-right-width: 1px;border-style: solid; border-color: #E1F7F9;background-color: #FFE2B1; padding: 7px; font-family: verdana, Helvetica, sans-serif;font-size: 11px;color: #666666;
+.persona_02  { 
+               border-top-width: 1px; border-bottom-width: 1px; border-left-width: 0px;
+               border-right-width: 1px;border-style: solid; border-color: #E1F7F9;
+               background-color: #FFE2B1; padding: 7px; font-family: verdana, Helvetica, sans-serif;
+               font-size: 11px;color: #666666;
                }
 
-.persona_03  { border-top-width: 1px; border-bottom-width: 1px; border-left-width: 0px; border-right-width: 1px;border-style: solid; border-color: #E1F7F9;background-color: #FFCB27; padding: 7px; font-family: verdana, Helvetica, sans-serif;font-size: 11px;color: #666666;
+.persona_03  { 
+               border-top-width: 1px; border-bottom-width: 1px; border-left-width: 0px;
+               border-right-width: 1px;border-style: solid; border-color: #E1F7F9;
+               background-color: #FFCB27; padding: 7px; font-family: verdana, Helvetica, sans-serif;
+               font-size: 11px;color: #666666;
                }
 
-.persona_04  { border-top-width: 1px; border-bottom-width: 1px; border-left-width: 0px; border-right-width: 1px;border-style: solid; border-color: #E1F7F9;background-color: #FFEE5E; padding: 7px; font-family: verdana, Helvetica, sans-serif;font-size: 11px;color: #666666;
+.persona_04  { 
+               border-top-width: 1px; border-bottom-width: 1px; border-left-width: 0px;
+               border-right-width: 1px;border-style: solid; border-color: #E1F7F9;
+               background-color: #FFEE5E; padding: 7px; font-family: verdana, Helvetica, sans-serif;
+               font-size: 11px;color: #666666;
                }
                
-.persona_05  { border-top-width: 1px; border-bottom-width: 1px; border-left-width: 0px; border-right-width: 1px;border-style: solid; border-color: #E1F7F9;background-color: #FFEE5E; padding: 7px; font-family: verdana, Helvetica, sans-serif;font-size: 11px;color: #666666;
+.persona_05  { 
+               border-top-width: 1px; border-bottom-width: 1px; border-left-width: 0px;
+               border-right-width: 1px;border-style: solid; border-color: #E1F7F9;
+               background-color: #FFEE5E; padding: 7px; font-family: verdana, Helvetica, sans-serif;
+               font-size: 11px;color: #666666;
                }
 
-.persona_06  { border-top-width: 1px; border-bottom-width: 1px; border-left-width: 0px; border-right-width: 1px;border-style: solid; border-color: #E1F7F9;background-color: #FAF8FA; padding: 7px; font-family: verdana, Helvetica, sans-serif;font-size: 11px;color: #666666;
+.persona_06  { 
+               border-top-width: 1px; border-bottom-width: 1px; border-left-width: 0px;
+               border-right-width: 1px;border-style: solid; border-color: #E1F7F9;
+               background-color: #FAF8FA; padding: 7px; font-family: verdana, Helvetica, sans-serif;
+               font-size: 11px;color: #666666;
                }
-

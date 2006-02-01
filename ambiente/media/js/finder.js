@@ -1,5 +1,3 @@
-var finderWindows = new Array();
-
 
 function Finder_initChat() {
   var cssMessages = window.document.createElement("LINK");
@@ -15,84 +13,81 @@ function Finder_initChat() {
 }
 
 var AMFinderCallBack = {
-  gettimeout: function(result) {
-    alert('<p>'+result+'</p>');
+  getonlineusers: function(result) {
+    if(result != 0) {
+      for(var i in result.data) {
+	if(isNaN(i)) continue;
+	status = (result.data[i]['flagEnded']=="FALSE" ? result.data[i]['visibility'] : "offline");
+	Finder_changeUserStatus("UserIco_"+i, result.src, status);
+      }
+    }
   },
-  sendmessage: function(result) {
-    Finder_clearChatBox();
-  },
+  closefinderchat: function(result) { },
   getnewmessages: function(result) {
     
     var chatFrame = AM_getElement("chat");
     var chatDoc = AM_getIFrameDocument(chatFrame, "body");
 
     var msg = window.document.createElement("DIV");
+    msg.setAttribute("id","messagesBox");
 
-    //alert(result);
     for(var i in result) {
       switch(result[i].responseType) {
       case "finder_alert":
 	//chatFrame.innerHTML += "<br><span style=''>"+AMFinder_lang[result[i].message]+"</span>";
-	msg.innerHTML = "<br><span style='font-color: #FF0000'>"+result[i].message+"</span>";
+	msg.innerHTML = "<br><div style='font-color: #FF0000'>"+result[i].message+"</div>";
+	chatDoc.body.appendChild(msg);
 	break;
 
       case "finder_timeout":
 	//chatFrame.innerHTML += "<br><span style=''>"+AMFinder_lang[result[i].message]+"</span>";
-	msg.innerHTML = "<br><span class='finder_timeout'>"+result[i].message+"</span>";
+	msg.innerHTML = "<br><div class='finder_timeout'>"+result[i].message+"</div>";
 	//window.clearTimeout(AMFinder_timeOut);
+	chatDoc.body.appendChild(msg);
 	break;
 
       case "parse_messages":
 	var out = "";
-	out += "<br><span class='"+result[i].style+"'>";
+	out += "<br><div class='"+result[i].style+"'>";
 	out += result[i].username+"("+result[i].date+"): ";
 	out += result[i].message;
-	out += "</span>";
+	out += "</div>";
 
 	msg.innerHTML = out;
-	    
-// 	echo "<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"><tr>\n";
-// 	echo "<td width=\"10%\" class=\"$class\"><font color=\"$color\">".$message->users[0]->username."</font>";
-// 	echo "<font size=-1>($hora)</font></td><td class=\"$class\">$message->message</td>\n";
-// 	echo "</table>\n";
-
+	chatDoc.body.appendChild(msg);    
 	break;
       }
     }
     
-    chatDoc.body.appendChild(msg);
   }
   
 }
 
-function Finder_openChatWindow(src,userId) {
-  if(finderWindows[userId] == null) {
-    var param = "resizable=no,width=590,height=435,status=no,location=no,scrollig=yes,toolbar=no,scrollbars=yes";
-    finderWindows[userId] = window.open(src, "Finder_"+userId, param);
-  }else finderWindows[userId].focus();
-}
+// function Finder_openChatWindow(src,userId) {
+//   if(finderWindows[userId] == null) {
+//     var param = "resizable=no,width=590,height=435,status=no,location=no,scrollig=yes,toolbar=no,scrollbars=yes";
+//     finderWindows[userId] = window.open(src, "Finder_"+userId, param);
+//   }else finderWindows[userId].focus();
+// }
 
 
-function AFinder_openChatWindow(e) {
+function Finder_openChatWindow(e) {
   var pos = this.id.lastIndexOf("_");
   var userId = this.id.substring((pos+1),this.id.length);
 
-  if(finderWindows[userId] == null) {
-
-    var src = Finder_chatSRC+"?frm_codeUser="+userId;
-    
-    var param = "resizable=no,width=590,height=435,status=no,location=no,scrollig=yes,toolbar=no,scrollbars=yes";
-    finderWindows[userId] = window.open(src, "Finder_"+userId, param);
+  if(ajaxSync.syncTableObjects['finderRoom_'+userId] != null) {
+    ajaxSync.syncTableObjects['finderRoom_'+userId][0].focus();
   }else {
-    finderWindows[userId].focus();
+    var param = "resizable=no,width=676,height=442,status=no,location=no,scrollig=yes,toolbar=no,scrollbars=yes";
+    var w = window.open(Finder_chatSRC+"?frm_codeUser="+userId, "finderRoom_"+userId, param);
+    ajaxSync.register(w, 'Finder_getNewMessages', 'finderRoom_'+userId, 'chat');//Finder_getNewMessages
+    //ajaxSync.syncTableObjects['finderRoom_17'][0].alert('asdfsf');
   }
 }
 
 function Finder_closeFinder(id) {
-  //finderWindows[id].close();
-  finderWindows[id] = null;
-  handler = finder_url+"?action=A_close_chat&frm_codeUser="+id;
-  dcomSendRequest(handler);
+  ajaxSync.unlink(id);
+  AMFinder.closefinderchat(id);
 }
 
 
@@ -108,28 +103,31 @@ function Finder_loadFinder(handler) {
 
 
 function Finder_changeUserStatus(id, src, status) {
-
   var userIco = AM_getElement(id);
-  
-  imgSRC = src+"/media/images";
+
+  imgSRC = src;
   
   switch (status) {
-  case "online":
+  case "VISIBLE":
     userIco.src = imgSRC+"/ico_user_on_line.png";
-    userIco.addEventListener('click',AFinder_openChatWindow,false);
+    userIco.addEventListener('click',Finder_openChatWindow,false);
     return(false);
-  case "offline":
-    userIco.src = imgSRC+"/ico_user_off_line.png";
-    userIco.removeEventListener('click',AFinder_openChatWindow,false);
-    return(false);
-  case "busy" :
+    break;
+  case "BUSY" :
     userIco.src = imgSRC+"/ico_user_ocupado.png";
-    userIco.addEventListener('click',AFinder_openChatWindow,false);
+    userIco.addEventListener('click',Finder_openChatWindow,false);
     return(false);
-  case "hidden" :
+    break;
+  case "HIDDEN" :
     userIco.src = imgSRC+"/ico_user_off_line.png";
-    userIco.addEventListener('click',AFinder_openChatWindow,false);
+    userIco.addEventListener('click',Finder_openChatWindow,false);
     return(false);
+    break;
+  default:
+    userIco.src = imgSRC+"/ico_user_off_line.png";
+    userIco.removeEventListener('click',Finder_openChatWindow,false);
+    return(false);
+    break;
   }
 
 }
@@ -195,5 +193,17 @@ function Finder_sendMessage(form) {
   
 }
 
+function Finder_getNewMessages() {
+  AMFinder.getnewmessages(senderId, recipientId);
+}
 
+var reSynctimeout;
+function reSync() {
+  alert("resyncing");
+  reSynctimeout = window.setTimeout('register();',5000);
+}
 
+function register() {
+  window.opener.ajaxSync.register(window, 'Finder_getNewMessages', window.name, 'chat');
+  window.clearTimeout(reSynctimeout);
+}

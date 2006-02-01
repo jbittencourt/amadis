@@ -1,3 +1,5 @@
+#messagesBox { border: 0px; width: 100%; }
+
 #chatBody {
        font: 0.7em Arial, Helvetica, sans-serif;
        background-color: #C3B6E4;
@@ -17,9 +19,9 @@
         height:93%;
         top:15px;
         left:10px;
-        scroll: vertical;
-        border: 10px tiny solid; /* none; */
-        
+        /* scroll: vertical; */
+        border: solid red 1px;
+
         }
 
 .envio {
@@ -173,15 +175,19 @@ div.posicaoseta {
                 }
 			
 .messageSender {
-                 font: 0.7em Arial, Helvetica, sans-serif;
+                 font: 1.0em Arial, Helvetica, sans-serif;
                  background-color: #DFE2FF;
                  color: #0000AA;
+                 width: 100%;
+                 height: 100%;
                  }
 
 .messageRecipient {
-                    font: 0.7em Arial, Helvetica, sans-serif;
+                    font: 1.0em Arial, Helvetica, sans-serif;
                     background-color: #FFF;
                     color: #298F23;
+                    width: 100%;
+                    height: 100%;
                     }
 
 .finder_timeout {

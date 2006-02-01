@@ -81,28 +81,63 @@ A.project_news:hover {
                        border: 2px #DDF0FB solid;
                       }
 
-.project_items  { 
-                       /* background-color: #E2F6FF; QUANDO TIVER COM O MOUSE EM CIMA*/
-                       background-color: white;                        
-                       border: 2px #DBF4FF solid;
-                       height: 48px;
-                       width: 48px; 
-                       text-align: center;
-                      }
-.project_items:hover  { 
+.project_items {
+                 background-color : #ffffff;
+                 border : 2px solid #dbf4ff;
+                 height : 48px;
+                 width : 48px;
+                 text-align : center;
+                 position : relative;
+                 background-repeat: no-repeat;
+                 background-position: 50% 25%;
+                 }
 
-                       background-color: #E2F6FF; 
-                       border: 2px #DBF4FF solid;
-                       height: 48px;
-                       width: 48px; 
-                       text-align: center;
-                      }
+.project_items:hover  { 
+                        background-color: #e2f6ff; 
+                        border: 2px solid #DBF4FF;
+                        height: 48px;
+                        width: 48px; 
+                        text-align: center;
+                        position:relative;
+                        background-repeat: no-repeat;
+                        background-position: 50% 25%;
+                        }
+
+/*Botao da pagina*/
+/*IE*/
+BUTTON#page { background-image: url("../images/icon_page_on.gif"); background-color: #e2f6ff; }
+
+BUTTON#page[class~=project_items] { background-image: url("../images/icon_page_off.gif"); background-color: #ffffff; }
+BUTTON#page[class~=project_items]:hover { background-image: url("../images/icon_page_on.gif"); background-color: #e2f6ff; }
+
+/*botao do diario */
+/*IE*/
+BUTTON#diary { background-image: url("../images/icon_diario_on.gif"); background-color: #e2f6ff; }
+
+BUTTON#diary[class~=project_items] { background-image: url("../images/icon_diario_off.gif"); background-color: #ffffff;  }
+BUTTON#diary[class~=project_items]:hover { background-image: url("../images/icon_diario_on.gif"); background-color: #e2f6ff; }
+
+/*botao dos foruns*/
+/*IE*/
+BUTTON#forum { background-image: url("../images/icon_forum_on.gif"); background-color: #e2f6ff; }
+
+BUTTON#forum[class~=project_items] { background-image: url("../images/icon_forum_off.gif"); background-color: #ffffff; }
+BUTTON#forum[class~=project_items]:hover { background-image: url("../images/icon_forum_on.gif"); background-color: #e2f6ff; }
+
+/*botao dos chats*/
+/*IE*/
+BUTTON#chat { background-image: url("../images/icon_chat_on.gif"); background-color: #e2f6ff; }
+
+BUTTON#chat[class~=project_items] { background-image: url("../images/icon_chat_off.gif"); background-color: #ffffff; }
+BUTTON#chat[class~=project_items]:hover { background-image: url("../images/icon_chat_on.gif"); background-color: #e2f6ff; }
+
 .project_items_text { 
                       font-family: Arial, Helvetica, sans-serif;
                       color: #018AAE;
                       font-size: 10px;
                       line-height: 14px;
-                      text-align: center;                     
+                      text-align: center;
+                      position: relative;
                       }
 
 .project_list_subtitle{ 

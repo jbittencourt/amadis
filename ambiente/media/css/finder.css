@@ -4,4 +4,12 @@
                position: fixed;
                top: 0px;
                right: 20px;
+               display: table;
                }
+
+#sendbox_window { 
+                  margin: 0px;
+                  }
+IFRAME { 
+         border: thin black 0px;
+         }
