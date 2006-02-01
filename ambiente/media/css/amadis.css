@@ -213,6 +213,11 @@ BODY IMG {
                   cursor: hand;
                   }
 
+.image-button { 
+                background: none;
+                border: none;
+                }
+
 .image-as-link { 
                   cursor: pointer;
                   cursor: hand;

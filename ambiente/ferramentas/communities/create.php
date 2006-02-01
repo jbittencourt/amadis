@@ -148,6 +148,7 @@ switch($_REQUEST[action]) {
      $_SESSION[cad_community]->image = $foto->codeArquivo;
    }
 
+
    //save the community
    try {
      $_SESSION[cad_community]->save();
@@ -166,23 +167,29 @@ switch($_REQUEST[action]) {
    }
 
 
-   $member = new AMCommunityMembers;
-   $member->codeCommunity = $_SESSION[cad_community]->code;
+   $member = new CMGroupMember;
+   $member->codeGroup = $_SESSION[cad_community]->codeGroup;
    $member->codeUser = $_SESSION[user]->codeUser;
-   $member->flagAdmin = AMCommunityMembers::ENUM_FLAGADMIN_ADMIN;
    $member->time = time();
-   
-   try {
-     $member->save();
-   }
-   catch(CMDBQueryError $e) {
-     if(!empty($foto)) {
-       $foto->delete();
-     }
-     $_SESSION[cad_community]->delete();
+   $member->save();
 
-     Header("Location: $_CMAPP[services_url]/communities/create.php?action=fatal_error&frm_amerror=save_failed");
-   }
+//    $member = new AMCommunityMembers;
+//    $member->codeCommunity = $_SESSION[cad_community]->code;
+//    $member->codeUser = $_SESSION[user]->codeUser;
+//    $member->flagAdmin = AMCommunityMembers::ENUM_FLAGADMIN_ADMIN;
+//    $member->time = time();
+   
+//    try {
+//      $member->save();
+//    }
+//    catch(CMDBQueryError $e) {
+//      if(!empty($foto)) {
+//        $foto->delete();
+//      }
+//      $_SESSION[cad_community]->delete();
+
+//      Header("Location: $_CMAPP[services_url]/communities/create.php?action=fatal_error&frm_amerror=save_failed");
+//    }
    
 
 

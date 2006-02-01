@@ -14,10 +14,6 @@
                border: thin dashed green;
                }
 
-#group-buttons { 
-                 float: right;
-                 }
-
 #accept-box  { 
                display: none;
                }
@@ -28,6 +24,7 @@
 
 .response-box { 
                 display: none;
+                float: right;
                 }                   
 
 .response-button TD { 
@@ -39,3 +36,7 @@
                        border: 0px;
                        background: transparent;
                        }
+
+.group-buttons { 
+                 float: right;
+                 }

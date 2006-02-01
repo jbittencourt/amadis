@@ -209,13 +209,12 @@ switch($_REQUEST['action']) {
 
    $cadBox->setTitle("<img src='$_CMAPP[imlang_url]/img_foto_projeto_txt.gif'>");
 
-   break; 
-
+   break;
  case "pag_3":
    
-   if(!empty($_SESSION['cad_foto'])) {  
-     $foto = unserialize($_SESSION['cad_foto']);
-
+   if(!empty($_SESSION[cad_foto])) {  
+     $foto = unserialize($_SESSION[cad_foto]);
+     
      if(($foto->state==CMObj::STATE_DIRTY) || ($foto->state==CMObj::STATE_NEW)) {
        $d = $foto->dados;
        if(!empty($d)) {
@@ -226,15 +225,15 @@ switch($_REQUEST['action']) {
 	 catch(CMDBException $e) {
 	   header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_picture");
 	 }
-		   
-	 $_SESSION['cad_proj']->image = $foto->codeArquivo;
+	 
+	 $_SESSION[cad_proj]->image = $foto->codeArquivo;
        }
      }
    }
-
+   
    //save the project
    try {
-     $_SESSION['cad_proj']->save();
+     $_SESSION[cad_proj]->save();
    }
    catch(CMDBException $e) {
      header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_user");
@@ -246,9 +245,9 @@ switch($_REQUEST['action']) {
    //save the areas
    $con = new CMContainer;
 
-   $proj_areas = $_SESSION['cad_proj']->listAreas();
+   $proj_areas = $_SESSION[cad_proj]->listAreas();
 
-   $tmp_areas = $_SESSION['cad_proj']->areas;
+   $tmp_areas = $_SESSION[cad_proj]->areas;
    $max = 0;
    foreach($tmp_areas as $code) {
      if($proj_areas->in($code)) {
@@ -257,7 +256,7 @@ switch($_REQUEST['action']) {
      }
      $temp = new AMProjetoArea;
      $temp->codArea = $code;
-     $temp->codProjeto = $_SESSION['cad_proj']->codeProject;
+     $temp->codProjeto = $_SESSION[cad_proj]->codeProject;
      $con->add($code,$temp);
      $max = max($max,$code);
    }
@@ -274,8 +273,8 @@ switch($_REQUEST['action']) {
 
    //forces the ins of the user in the group
    $member = new CMGroupMember;
-   $member->codeGroup = $_SESSION['cad_proj']->codeGroup;
-   $member->codeUser = $_SESSION['user']->codeUser;
+   $member->codeGroup = $_SESSION[cad_proj]->codeGroup;
+   $member->codeUser = $_SESSION[user]->codeUser;
    $member->time = time();
    $con->add($max+1,$member);
 
@@ -287,12 +286,12 @@ switch($_REQUEST['action']) {
      Header("Location: $_CMAPP[services_url]/projetos/create.php?action=fatal_error&frm_amerror=save_failed");
    }
    
-   $cod = $_SESSION['cad_proj']->codeProject;
-   unset($_SESSION['cad_proj']);
-   unset($_SESSION['cad_foto']);
+   $cod = $_SESSION[cad_proj]->codeProject;
+   unset($_SESSION[cad_proj]);
+   unset($_SESSION[cad_foto]);
    
    //if everything was ok, go the page of the project.
-   CMHTMLPage::redirect($_CMAPP['services_url'].'/projetos/projeto.php?frm_ammsg=project_created&frm_codProjeto='.$cod);
+   CMHTMLPage::redirect($_CMAPP[services_url].'/projetos/projeto.php?frm_ammsg=project_created&frm_codProjeto='.$cod);
    
    break;
 

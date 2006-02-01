@@ -19,6 +19,10 @@ $pag->add("<tr><TD colspan=\"3\" class=\"textoint\"><img src=\"".$_CMAPP['images
 $pag->add("</tr>");
 
 
+$pag->add("<APPLET  code=\"br.ufrgs.lec.amadis.applets.ProjectPulse.ProjectsPulse\" archive=\"$_CMAPP[url]/media/applets/ProjectsPulse.jar\" width=540 height=90>");
+$pag->add("<PARAM name=amadisurl VALUE=\"$_CMAPP[url]\">");
+$pag->add("</APPLET>");
+
 if(empty($_SESSION['user'])) {
   /**
    * QUERO ME CADASTRAR

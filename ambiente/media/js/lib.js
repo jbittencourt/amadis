@@ -7,6 +7,24 @@ var is_ie4 = (document.all && !is_dom) ? true : false;
 var is_nodyn = (!is_ns5 && !is_ns4 && !is_ie4 && !is_ie5) ? true : false;
 
 
+
+//AMADIS global javascript variables. This variables are inicialized in the
+//AMMain class
+
+var CMAPP = new Array();
+CMAPP['url']   = null;
+CMAPP['media_url']  = null;
+CMAPP['images_url'] = null;
+CMAPP['imlang_url'] = null;
+CMAPP['js_url']     = null;
+CMAPP['css_url']    = null;
+CMAPP['services_url']  = null;
+CMAPP['pages_url']  = null;
+CMAPP['thumbs_url']  = null;
+
+
+//Start of the functions
+
 function AM_getElement(id, doc) {
   if(doc == null) doc = document;
 
@@ -151,4 +169,89 @@ function AM_unregisterHandlerId(handlerId) {
 
 function AM_openURL(url) {
   window.location = url;
+}
+
+
+function AM_addCSSMessage() {
+  return '<link rel="stylesheet" type="text/css" href="../media/css/alertbox.css">';
+}
+
+
+function AM_addError(html_box) {
+  var error_div  = AM_getElement('errors_area');
+
+  error_div.innerHTML =   AM_addCSSMessage() + html_box;
+}
+
+
+function AM_addMessage(html_box) {
+  var error_div  = AM_getElement('messages_area');
+
+  error_div.innerHTML = AM_addCSSMessage() + html_box;
+}
+
+
+function AM_addCSSFile(file) {
+  var head = document.getElementsByTagName("HEAD")[0];
+  var link = document.createElement("LINK");
+  
+  link.type = "text/css";
+  link.rel = "stylesheet";
+  link.href = CMAPP['css_url']+"/"+file;
+
+  head.appendChild(link);
+}
+
+function AM_addJSFile(file) {
+  var head = document.getElementsByTagName("HEAD")[0];
+  var link = document.createElement("SCRIPT");
+  
+  link.type = "text/javascript";
+  link.src = CMAPP['js_url']+"/"+file;
+
+  head.appendChild(link);
+}
+
+
+function AM_parseRequires(requires) {
+
+  for(req in requires) {
+    
+    var item = requires[req];
+
+    switch(item.type) {
+    //CMHTMlObj::MEDIA_CSS
+    case 3: 
+      //test if the css file was alredy loaded
+      var el = document.getElementsByTagName("LINK");
+      for(var i in el) {
+	if(el[i].href==(CMAPP['css_url']+"/"+item.file)) break;
+      }
+
+      AM_addCSSFile(item.file);
+      break;
+
+    //CMHTMlObj::MEDIA_JS
+    case 2:
+      var el = document.getElementsByTagName("SCRIPT");
+      for(var i in el) {
+	if(el[i].src==(CMAPP['css_url']+"/"+item.file)) break;
+      }
+
+      AM_addCSSFile(item.file);
+      break;
+      
+    }
+  }
+ 
+}
+
+function AM_setLoading(div_name) {
+  div = AM_getElement(div_name);
+  div.innerHTML = "<img src='"+CMAPP['imlang_url']+"/load.gif'>";
+}
+
+function AM_unsetLoading(div_name, message) {
+  div = AM_getElement(div_name);
+  div.innerHTML = message;
 }

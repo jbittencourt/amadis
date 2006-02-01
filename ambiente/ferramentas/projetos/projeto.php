@@ -100,29 +100,7 @@ else {
 /*
  *EQUIPE DO PROJETO
  */
-$projMembers = $group->listActiveMembers();
-$orfan = false;
-$box->add("    <b>$_language[project_group]</b></font><br>",AMTwoColsLayout::LEFT);
-
-if($projMembers->__hasItems()) {
-  foreach($projMembers as $item) {
-    $temp = new AMTUserInfo($item);
-    $temp->setClass("text");
-    $box->add($temp,AMTwoColsLayout::LEFT);
-    $box->add("<br>",AMTwoColsLayout::LEFT);
-  }
-}
-else { 
-  $orfan = true;
-  $adopt = new AMBProjectOrfan($proj);
-  $adopt->setWidth($box->getWidth());
-  $pag->add($adopt);
-  $box->add($_language['no_members']."<br>",AMTwoColsLayout::LEFT);
-}
-
-$box->add("<a href=\"".$_CMAPP['services_url']."/projetos/members.php?frm_codProjeto=".$proj->codeProject."\"",AMTwoColsLayout::LEFT);
-$box->add(" class=\"green\">$_language[more_members]</a><br><br>",AMTwoColsLayout::LEFT);
-$box->add("<br>",AMTwoColsLayout::LEFT);
+$box->add(new AMBProjectGroup($proj),AMTwoColsLayout::LEFT);
 // END of the members box.
 
 

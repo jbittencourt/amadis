@@ -14,6 +14,7 @@ if(!empty($_REQUEST[frm_codeCommunity])) {
      $community->code = $_REQUEST[frm_codeCommunity];
      try{
        $community->load();
+       $group = $community->getGroup();
      }catch(CMDBNoRecord $e){
        $_REQUEST[frm_amerror] = "community_not_exists";
        
@@ -34,18 +35,18 @@ if(!empty($_REQUEST[frm_codeCommunity])) {
 
 //checks if the user is a member of the community
 if(!empty($_SESSION[user])) {
-  $isMember = $community->isMember($_SESSION[user]->codeUser);
+  $isMember = $group->isMember($_SESSION[user]->codeUser);
 }
 
 $_CMAPP[smartform][language] = $_language;
 
-// if($isMember) {
-//   $req = new AMBProjectRequest($community);
-//   if($req->hasRequests()) { 
-//     $req->setWidth($box->getWidth());
-//     $pag->add($req);
-//   }
-// }
+if($isMember) {
+  $req = new AMBCommunityRequest($community);
+  if($req->hasRequests()) { 
+    $req->setWidth($box->getWidth());
+    $pag->add($req);
+  }
+}
 
 
 
@@ -83,16 +84,17 @@ if($_SESSION[user] instanceof CMUser) {
     $box->add("<br>",AMTwoColsLayout::LEFT);
   }
 
-/*
- *CAIXA DE EDICAO DO PROJETO
- */
-
+  /*
+   *CAIXA DE EDICAO DO PROJETO
+   */
   if($community->isAdmin($_SESSION[user]->codeUser)) {
     $communityEdit = new AMBCommunityEdit;
     $box->add($communityEdit,AMTwoColsLayout::RIGHT);
   }
-  else {
-    //$box->add(new AMBProjectJoin($proj),AMTwoColsLayout::RIGHT);
+
+
+  if(!$group->isMember($_SESSION[user]->codeUser)) {
+    $box->add(new AMBCommunityJoin($community),AMTwoColsLayout::RIGHT);
   }
 
 }
@@ -101,7 +103,7 @@ if($_SESSION[user] instanceof CMUser) {
  *MEMBROS DA COMUNIDADE
  */
 $box->add("<br>", AMTwoColsLayout::RIGHT);
-$box->add(new AMBCommunityMembers, AMTwoColsLayout::RIGHT);
+$box->add(new AMBCommunityMembers($community), AMTwoColsLayout::RIGHT);
 
 $box->add("<br>", AMTwoColsLayout::RIGHT);
 $box->add(new AMBCommunityProjects, AMTwoColsLayout::RIGHT);
