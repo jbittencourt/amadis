@@ -78,6 +78,7 @@ class AMTCadBox extends CMHTMLObj {
   public function __toString() {
     global $_CMAPP;
 
+
     parent::add("<!-- inicio do cadBox -->");
     parent::add("<table id='cad-box' class='cad-box $this->class'>");
     parent::add("<tr>");

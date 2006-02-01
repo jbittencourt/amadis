@@ -1,4 +1,4 @@
-<?
+`<?
 
 /** Esta classe serve somente para gerenciar eventos do cliente,
  *  ligados a manipulacao da interface.

@@ -96,46 +96,6 @@ class AMUser extends CMUser {
     
   }
 
-//     $user = $this->codeUser;
-//     $sql = "codeUser=$user AND (flagAdmin='".AMCommunityMembers::ENUM_FLAGADMIN_ADMIN."' OR flagAdmin='".AMCommunityMembers::ENUM_FLAGADMIN_MEMBER."')";
-//     $q = new CMQuery(AMCommunityMembers);
-//     $q->setFilter($sql);
-//     $comunidades = $q->execute(); //contem as comunidades as quais o usuario faz parte
-
-
-//     $unico=TRUE;
-//     foreach($comunidades as $comunidade){
-//       if($unico){
-// 	$sql = "codComunidade=".$comunidade->codeCommunity;
-//       }
-//       else{
-// 	$sql.=" OR codComunidade=".$comunidade->codeCommunity;
-//       }
-//       $unico=FALSE;
-      
-//     } //$sql contem todo o sql para consultar na tabela comunidadeChats
-    
-//     $q = new CMQuery(AMComunidadeChats);
-//     $q->setFilter($sql);
-//     $salas = $q->execute();   //$salas contem a lista de todas as salas de chat de comunidades o que o usuario participa
-
-//     $unico=TRUE;
-//     $time = time();
-//     $limite = time()+300;
-//     unset($sql);
-//     foreach($salas as $sala){
-//       if($unico){
-// 	$sql = "(codSala=".$sala->codSala." AND (datInicio<$limite AND datFim>$time))";
-//       }
-//       else{
-// 	$sql .=" OR (codSala=".$sala->codSala." AND (datInicio<$limite AND datFim>$time))";
-//       }
-//       $unico=FALSE;
-//     }   // $sql contem todo o sql para consultar na tabela chat_sala
-
-//     $q = new CMQuery(AMChat);
-//     $q->setFilter($sql);
-//     $salas = $q->execute();
   
 
  
@@ -322,7 +282,7 @@ class AMUser extends CMUser {
       
       $j1 = new CMJoin(CMJoin::INNER);
       $j1->setClass('AMFriend');
-      $j1->on("Friends.codeFriend=User.codeUser");
+
       
       $j2 = new CMJoin(CMJoin::INNER);
       $j2->setClass('CMEnvSession');
@@ -330,21 +290,23 @@ class AMUser extends CMUser {
       
       $q->addJoin($j1,"usuarios");
       $q->addJoin($j2,"sessions");
+
+      $j1->on("Friends.codeFriend=User.codeUser");
       
       $timeOut = CMEnvSession::getTimeOut(time());
       $q->setProjection("User.*");
       $q->setFilter("Friends.codeUser= $this->codeUser AND Friends.status = '".AMFriend::ENUM_STATUS_ACCEPTED."'");
       $q->setOrder("EnvSession.timeEnd DESC");
       $q->groupBy("EnvSession.codeUser");
+
       $ret = $q->execute();
     
       //$_SESSION['amadis']['friends'] = $ret;
     
-      $_SESSION['amadis']['friends'] = serialize($ret);
+      //$_SESSION['amadis']['friends'] = serialize($ret);
       
     }else $ret = unserialize($_SESSION['amadis']['friends']);
     
-    //$_SESSION['amadis']['friends'] = serialize($_SESSION['amadis']['friends']);
     
     return $ret;
     
@@ -412,24 +374,24 @@ class AMUser extends CMUser {
 
 
   public function listProjects() {
-          $q = new CMQuery('AMProjeto');
-      $j = new CMJoin(CMJoin::INNER);
-      $j->setClass('CMGroup');
-      $j->on('AMProjeto::codeGroup=CMGroup::codeGroup');
-      $j->setFake();
-
-      $j2 = new CMJoin(CMJoin::LEFT);
-      $j2->setClass('CMGroupMember');
-      $j2->on('CMGroupMember::codeGroup=CMGroup::codeGroup');
-      $j2->setFake();
-
-      $q->addJoin($j, "grupos");
-      $q->addJoin($j2, "membros");
-
-      $q->setFilter('CMGroupMember::codeUser = '.$this->codeUser.' AND CMGroupMember::status="'.CMGroupMember::ENUM_STATUS_ACTIVE.'"');
-
-
-      return $q->execute();
+    $q = new CMQuery('AMProjeto');
+    $j = new CMJoin(CMJoin::INNER);
+    $j->setClass('CMGroup');
+    $j->on('AMProjeto::codeGroup=CMGroup::codeGroup');
+    $j->setFake();
+    
+    $j2 = new CMJoin(CMJoin::LEFT);
+    $j2->setClass('CMGroupMember');
+    $j2->on('CMGroupMember::codeGroup=CMGroup::codeGroup');
+    $j2->setFake();
+    
+    $q->addJoin($j, "grupos");
+    $q->addJoin($j2, "membros");
+    
+    $q->setFilter('CMGroupMember::codeUser = '.$this->codeUser.' AND CMGroupMember::status="'.CMGroupMember::ENUM_STATUS_ACTIVE.'"');
+    
+    
+    return $q->execute();
   }
 
   public function listMyProjects() {
@@ -547,17 +509,27 @@ class AMUser extends CMUser {
   }
 
   public function listCommunities() {
-      $q = new CMQuery('AMCommunities');
-
-      $j = new CMJoin(CMJoin::INNER);
-      $j->setClass('AMCommunityMembers');
-      $j->on("CommunityMembers.codeCommunity = Communities.code");
-      
-      $q->addJoin($j, "comunities");
-      $q->setFilter("codeUser = $this->codeUser");
-
-      return  $q->execute();
+    $q = new CMQuery("AMCommunities");
+    $j = new CMJoin(CMJoin::INNER);
+    $j->setClass("CMGroup");
+    $j->on('AMCommunities::codeGroup=CMGroup::codeGroup');
+    $j->setFake();
+    
+    $j2 = new CMJoin(CMJoin::LEFT);
+    $j2->setClass("CMGroupMember");
+    $j2->on('CMGroupMember::codeGroup=CMGroup::codeGroup');
+    $j2->setFake();
+    
+    $q->addJoin($j, "grupos");
+    $q->addJoin($j2, "membros");
+    
+    $q->setFilter('CMGroupMember::codeUser = '.$this->codeUser.' AND CMGroupMember::status="'.CMGroupMember::ENUM_STATUS_ACTIVE.'"');
+    
+    
+    return $q->execute();
   }
+
+
 
   /**
    *Lista as minhas comunidades utilizando um cache. Para o usuario atualmente loggado

@@ -96,6 +96,30 @@ class AMAmbiente extends CMEnvironment {
     return $q->execute(); 
   }
 
+  public function listSumaryProjects() {
+    $q = new CMQuery('AMProjeto');
+    $q->setOrder("hits desc");
+
+    $j = new CMJoin(CMJoin::LEFT);
+    $j->setClass(CMGroup);
+    $j->on('CMGroup::codeGroup=AMProjeto::codeGroup');
+    $j->setFake();
+    
+    $j2 = new CMJoin(CMJoin::LEFT);
+    $j2->setClass(CMGroupMember);
+    $j2->on('CMGroup::codeGroup=CMGroupMember::codeGroup');
+    $j2->setFake();
+
+    $q->addJoin($j,'fake1');
+    $q->addJoin($j2,'fake2');
+
+    $q->addVariable("numMembers","count(CMGroupMember::codeUser)");
+    $q->groupBy('AMProjeto::codeGroup');
+
+    Return $q->execute(); 
+  }
+
+
   public function listNewProjects($limit=3) {
     $q = new CMQuery('AMProjeto');
     $q->setOrder("time desc");
@@ -584,6 +608,33 @@ class AMAmbiente extends CMEnvironment {
       }
     }
     return $return;
+  }
+
+
+  public function getGroupsParents(CMContainer $groups) {
+    if($groups->count()==0)  return new CMContainer;
+
+    $q = new CMQuery(CMGroup);
+    $f = "";
+    foreach($groups as $group) {
+      if(!empty($f)) $f.= " or ";
+      $f.= "(codeGroup==$group->codeGroup)";
+    }
+    $q->setFilter($f);
+
+    $j1 = new CMJoin(CMJoin::LEFT);
+    $j1->setClass(AMProjeto);
+    $j1->on("AMProjeto::codeGroup==CMGroup::codeGroup");
+
+    $q->addJoin($j1,"project");
+
+    $j2 = new CMJoin(CMJoin::LEFT);
+    $j2->setClass(AMProjeto);
+    $j2->on("AMCommunities::codeGroup==CMGroup::codeGroup");
+
+    $q->addJoin($j2,"communitie");
+
+    return $q->execute();
   }
 
 }

@@ -47,8 +47,6 @@ class AMTUserInfo extends CMHTMLObj {
       $this->tip->setLink("#");
     }
 
-    
-
 
     $this->requires("userinfo.js",self::MEDIA_JS);
 
@@ -63,12 +61,12 @@ class AMTUserInfo extends CMHTMLObj {
 
     if(!self::$_inicialized) {
       self::$_inicialized = true;
-      parent::addPageEnd("<div style=\"display: none\">");
-      parent::addPageEnd("<iframe name=hiddenCOM id=hiddenCOM width=0 height=0 frameborder=0></iframe>");
-      parent::addPageEnd("</div>");
+
+      AMMain::addCommunicatorHandler('AMTUserinfoRender');
+
       $men = "<span class=\"text\">$_language[loading_user_info]</span>";
+      parent::addPageBegin(self::getScript("var AMTUserinfoRender = new amtuserinforender(AMTUserinfoRenderCallBack);"));
       parent::addPageEnd(CMHTMLObj::getScript("userinfo_url = '$_CMAPP[services_url]/webfolio/userinfo.php?frm_codeUser='; loading_message = '$men';"));
-      self::addPageEnd(CMHTMLObj::getScript("initAMUserinfo();"));
     }
 
     $u = $this->user;

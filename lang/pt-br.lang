@@ -42,6 +42,7 @@ people = "Pessoas"
 projects = "Projetos"
 communities = "Comunidades"
 courses = "Cursos"
+users = "Usu&aacute;rios"
 
 acesso_nao_permitido = "Acesso n&atilde;o permitido"
 acesso_negado = "Acesso negado"
@@ -98,7 +99,8 @@ send_mail = "Enviar-lhe um E-Mail"
 page = "Ver a p&aacute;gina"
 no_user_found = "Nenhum usu&aacute;rio encontrado"
 
-join_reason = "Justificativa do ingresso no projeto:"
+join_date = "Data em que se juntou a equipe:"
+join_reason = "Justificativa do ingresso na equipe:"
 approval = "Aprova&ccedil;&atilde;o da equipe:"
 
 finder_mode_VISIBLE = "Logado"
@@ -519,7 +521,7 @@ no_files = "Sem arquivos no momento"
 project_leave_confirm = "Voc&ecirc; tem certeza que deseja abandonar esse projeto?"
 project_not_projects = "Voc&ecirc; n&atilde;o possui nenhum projeto"
 projects_community = "Selecione uma comunidade para listar os projetos"
-project_join = "Juntar-me a esse Projeto"
+project_join = "Juntar-me a este Projeto"
 project_join_request = "Por qu&ecirc; voc&ecirc; deseja fazer parte desse projeto?"
 user_join_request = " deseja tornar-se membro deste projeto."
 list_projects = "Listagem dos projetos"
@@ -537,6 +539,7 @@ project_adopt = "Adotar este Projeto"
 project_adopt_confirm = "Voc&ecirc; tem certeza que deseja adotar esse projeto?"
 
 project_forum_title = "F&oacute;rum no Projeto"
+project_forum_create = "Cria F&oacute;rum no Projeto"
 
 frm_title = "Titulo da not&iacute;cia"
 frm_text = "Not&iacute;cia"
@@ -563,7 +566,7 @@ error_edit_not_allowed = "Voc&ecirc; s&oacute; pode editar os projetos nos quais
 msg_project_created = "O projeto foi criado com sucesso!"
 msg_join_request_send = "Sua solicita&ccedil;&atilde;o para juntar-se a esse projeto foi registrada, por favor, aguarde por uma resposta"
 msg_user_added = " foi aceito como membro deste projeto."
-msg_rejected_user = " foi rejeitado como membro deste projeto."
+msg_user_rejected = " foi rejeitado como membro deste projeto."
 msg_leave_project = " Voc&ecirc; n&atilde;o &eacute; mais membro do projeto "
 msg_project_adopted = "O projeto foi adotado com sucesso."
 
@@ -705,6 +708,18 @@ send_news = "Enviar novidade"
 
 communities_on_amadis = "Comunidades do AMADIS"
 no_communities_found = "Nenhuma comunidade encontrada"
+
+project_group_actual = "Equipe atual da Comunidade"
+project_group_old = "Pessoas que j&aacute; participaram desta comunidade."
+
+
+request_join_waiting = "Sua requisi&ccedil;&atilde;o para participar dessa comunidade est&aacute; aguardando por aprova&ccedil;&atilde;o."
+community_join = "Juntar-me a esta Comunidade"
+
+error_join_request = "Houve um erro ao registrar o seu pedido para juntar-se a comunidade. Por favor tente novamente"
+msg_join_request_send = "Sua solicita&ccedil;&atilde;o para juntar-se a este comunidade foi registrada, por favor, aguarde por uma resposta"
+error_no_explain_join_community = "Voc&ecirc; deve preencher os seus motivos para entrar nesta comunidade"
+
 
 [community_create]
 moderate = "Moderada"
@@ -849,3 +864,13 @@ send = "Enviar"
 [scraps]
 scraps_of = "Mensagens de"
 no_scraps = "Esse usu&aacute;rio ainda n&atilde;o possu&iacute; nenhuma mensagem."
+
+
+[acos]
+aco_search = "Procurar"
+
+aco_no_item = "Nenhum item dispon&iacute;vel"
+
+aco_no_friends = "Voc&ecirc; n&atilde;o possui amigos, realize uma busca pelos usu&aacute;rios que deseja encontrar."
+aco_no_projects = "Voc&ecirc;  n&atilde;o participa de nenhum projeto no momento. Realia uma busca para selecionar projetos."
+aco_no_communities = "Voc&ecirc;  n&atilde;o participa de nenhuma comunidade no momento. Realia uma busca para selecionar comunidades."

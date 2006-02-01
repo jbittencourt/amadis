@@ -16,35 +16,13 @@ class AMBForum extends CMHTMLObj {
     $this->forums = $forums;
     $this->forumName = $name;
     $this->requires("forum.css",CMHTMLObj::MEDIA_CSS);
+
   }
 
 
   public function __toString() {  
     global $_CMAPP, $proj, $_language;
 
-    //head of the table
-    parent::add("<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"500\">");
-
-    parent::add("<tr>");
-    parent::add("<td bgcolor=\"#f7f9f9\" width=\"10\"><img src=\"$_CMAPP[images_url]/box_forum_01.gif\" border=\"0\" height=\"10\" width=\"10\"></td>");
-    parent::add("<td bgcolor=\"#f7f9f9\"><img src=\"$_CMAPP[images_url]/dot.gif\" border=\"0\" height=\"10\" width=\"10\"></td>");
-    parent::add("<td bgcolor=\"#f7f9f9\" width=\"10\"><img src=\"$_CMAPP[images_url]/box_forum_02.gif\" border=\"0\" height=\"10\" width=\"10\"></td>");
-    parent::add("</tr>");
-
-    //title of the table
-    parent::add("<tr>");
-    parent::add("<td bgcolor=\"#f7f9f9\"><img src=\"$_CMAPP[images_url]/dot.gif\" border=\"0\" height=\"10\" width=\"10\"></td>");
-    parent::add("<td class=\"forum_project_title\" background=\"$_CMAPP[imlang_url]/img_foruns_web_bg.gif\" bgcolor=\"#f7f9f9\"><img src=\"$_CMAPP[images_url]/dot.gif\" align=\"middle\" border=\"0\" height=\"35\" width=\"40\">$_language[project_forum_title] $this->forumName</td>");
-    parent::add("<td bgcolor=\"#f7f9f9\"><img src=\"$_CMAPP[images_url]/dot.gif\" border=\"0\" height=\"10\" width=\"10\"></td>");
-    parent::add("</tr>");
-
-    //blank line
-    parent::add("<tr bgcolor=\"#f7f9f9\"><td colspan=\"3\"><img src=\"$_CMAPP[images_url]/dot.gif\" border=\"0\" height=\"30\" width=\"20\"></td></tr>");
-
-    //head of the internal table
-    parent::add("<tr bgcolor=\"#fafbfb\">");
-    parent::add("<td><img src=\"$_CMAPP[images_url]/dot.gif\" border=\"0\" height=\"10\" width=\"10\"></td>");
-    parent::add("<td valign=\"top\">");
 
     parent::add("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">");
     parent::add("<tbody><tr>");
@@ -86,23 +64,9 @@ class AMBForum extends CMHTMLObj {
 
     //blank space line
     parent::add("<tr><td colspan=\"3\"><img src=\"$_CMAPP[images_url]/dot.gif\" border=\"0\" height=\"30\" width=\"10\"></td></tr>");
-    //line with create forum image
-    parent::add("<tr><td colspan=\"3\" align=\"right\"><a href=\"$_CMAPP[services_url]/projetos/projectforums.php?frm_codeProject=$_REQUEST[frm_codeProject]&frm_action=A_create\"><img src=\"$_CMAPP[imlang_url]/img_novo_forum2.gif\" border=\"0\" height=\"36\" width=\"197\"></a></td></tr>");
 
     parent::add("</tbody></table>");
 
-    //line in the bottom of the second table
-    parent::add("<td><img src=\"$_CMAPP[images_url]/dot.gif\" border=\"0\" height=\"10\" width=\"10\"></td>");
-    
-    parent::add("</tr>");
-    parent::add("<tr>");
-    parent::add("<td><img src=\"$_CMAPP[images_url]/box_forum_03.gif\" border=\"0\" height=\"10\" width=\"10\"></td>");
-    parent::add("<td bgcolor=\"#f7f9f9\"><img src=\"$_CMAPP[images_url]/dot.gif\" border=\"0\" height=\"10\" width=\"10\"></td>");
-    parent::add("<td><img src=\"$_CMAPP[images_url]/box_forum_04.gif\" border=\"0\" height=\"10\" width=\"10\"></td>");
-    parent::add("</tr>");
-
-
-    parent::add("</tbody></table>");
     
     return parent::__toString();
   }

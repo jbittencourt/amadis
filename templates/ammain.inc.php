@@ -18,6 +18,7 @@ class AMMain extends AMHTMLPage {
   protected $navmenu;
   protected $auto_error_report = true;
   protected $pathindicator;
+  protected $alerts;
   
   function __construct($theme="") {
     global $_CMAPP;
@@ -121,6 +122,11 @@ class AMMain extends AMHTMLPage {
   }
 
 
+  function addAlert($message) {
+    $this->alerts[] = $message;
+  }
+
+
   function setPathIndicator(AMPathIndicator $path) {
     $this->pathindicator = $path;
   }
@@ -128,7 +134,7 @@ class AMMain extends AMHTMLPage {
   /** Adds class handler to JPSpan Ajax Framework
    *
    */
-  function addCommunicatorHandler($classHandler) {
+  static function addCommunicatorHandler($classHandler) {
     if(!array_search($classHandler, $_SESSION['communicator'])) {
        $_SESSION['communicator'][] = $classHandler;
     }
@@ -150,6 +156,23 @@ class AMMain extends AMHTMLPage {
     if(!empty($_SESSION['communicator'])) {
       $this->requires("communicator.php?client");
     }
+
+
+    /**
+      Initialize the variables that are defined in the lib.js with
+       the values that were read from the config.xml file by config.inc.php
+     **/
+    $js = "CMAPP['url']   = '$_CMAPP[url]';";
+    $js.= "CMAPP['media_url']  = '$_CMAPP[media_url]';";
+    $js.= "CMAPP['images_url'] = '$_CMAPP[images_url]';";
+    $js.= "CMAPP['imlang_url'] = '$_CMAPP[imlang_url]';";
+    $js.= "CMAPP['js_url']     = '$_CMAPP[js_url]';";
+    $js.= "CMAPP['css_url']    = '$_CMAPP[css_url]';";
+    $js.= "CMAPP['services_url']  = '$_CMAPP[services_url]';";
+    $js.= "CMAPP['pages_url']  = '$_CMAPP[pages_url]';";
+    $js.= "CMAPP['thumbs_url']  = '$_CMAPP[thumbs_url]';";
+    
+    $this->addPageBegin(CMHTMLObj::getScript($js));
 
     $this->force_newline=0;
 
@@ -200,7 +223,7 @@ class AMMain extends AMHTMLPage {
       parent::add("<br>");
     }
 
-
+    parent::add('<div id="erros_area">');
     if(!empty($errors)) {
       parent::add("<br>");
       foreach($errors as $num=>$message) {
@@ -208,13 +231,25 @@ class AMMain extends AMHTMLPage {
       }
       parent::add("<br>");
     }
+    parent::add('</div>');
 
+    parent::add('<div id="alerts_area">');
+    if(!empty($this->alerts)) {
+      foreach($this->alerts as $num=>$message) {
+	parent::add(new AMAlertBox(AMAlertBox::ALERT,$message));
+      }
+      parent::add("<br>");
+    }
+    parent::add('</div>');
+
+    parent::add('<div id="messages_area">');
     if(!empty($messages)) {
       foreach($messages as $num=>$message) {
 	parent::add(new AMAlertBox(AMAlertBox::MESSAGE,$message['message']));
       }
       parent::add("<br>");
     }
+    parent::add('</div>');
       
     if(!empty($this->pathindicator)) {
       parent::add($this->pathindicator);
@@ -297,9 +332,17 @@ class AMMain extends AMHTMLPage {
 
   //Static function that returns buttons that should be equal in all the system
 
-  public static function getSearchButton() {
+  public static function getSearchButton($onClick='',$id='searchButton') {
     global $_CMAPP,$_language;
-    return '<button type="submit"><img src="'.$_CMAPP['images_url'].'/lupa.png"> '.$_language['search'].'</button>';
+    $bt = "";
+    if(empty($onClick)) {
+      $bt = "<button id=\"$id\" type=\"submit\">";
+    } else {
+      $bt = "<button id=\"$id\" type=\"button\" onClick=\"$onClick\">";      
+    }
+    $bt.='<img src="'.$_CMAPP['images_url'].'/lupa.png"> '.$_language['search'].'</button>';
+
+    return $bt;
   }
 
   public static function getChangePwButton($codeUser) {

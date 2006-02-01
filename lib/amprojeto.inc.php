@@ -100,6 +100,9 @@ class AMProjeto extends CMObj {
     return $res;    
   }
 
+
+
+
   public function listNews($ini=0, $lenght=4) {
     $q = new CMQuery('AMProjectNews');
 

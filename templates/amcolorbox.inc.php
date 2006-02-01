@@ -4,6 +4,10 @@ class AMColorBox extends AMAbstractBox {
   protected $theme;
   protected $class;
   protected $title;
+  /**
+   * Force the title to be interpreted as a string and not as a img URL
+   **/
+  protected $forceTitleAsString = false;  
   
   const COLOR_BOX_BEGE        = "box_02";
   const COLOR_BOX_BLUE        = "box_01";
@@ -88,7 +92,7 @@ class AMColorBox extends AMAbstractBox {
     global $_CMAPP;
     
     parent::add("<!-- Begin AMColorBox -->");
-    parent::add('<div id="color-box-bounding">');
+    parent::add("<div id=\"$this->name\">");
     parent::add("<table id=\"color-table\" class='color_box $this->class'>");
     parent::add("<tbody>");
 
@@ -105,12 +109,25 @@ class AMColorBox extends AMAbstractBox {
 
     //title image
     if(!empty($this->title)) {
-      parent::add("<td valign=\"top\"><img src=\"".$this->title."\" ");
+      //test if the title is an image or is a string
+      $isURL = false;
+
+      //tests if the string is a valid url (based on the code found in the comments of http://br.php.net/function.parse-url)
+      if( preg_match( '/^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}'
+		      .'((:[0-9]{1,5})?\/.*)?$/i',$this->title) ){
+	$isURL = true;
+      }
+      
+      if($isURL && !$this->forceTitleAsString) {
+	parent::add("<td valign=\"top\"><img src=\"$this->title\" >");
+      } else {
+	parent::add("<td valign=\"top\">$this->title");
+      }
     }
     else {
-      parent::add("<td valign=\"top\"><img src=\"".$_CMAPP['images_url']."/dot.gif\" ");
+      parent::add("<td valign=\"top\"><img src=\"$_CMAPP[images_url]/dot.gif\" >");
     }
-    parent::add("border=\"0\"><br>");
+    parent::add("<br>");
     //end title image
 
     parent::add("<font class=\"textobox\">");

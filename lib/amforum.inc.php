@@ -18,10 +18,25 @@ class AMForum extends CMObj {
 
      $this->addField("code",CMObj::TYPE_INTEGER,20,1,0,1);
      $this->addField("name",CMObj::TYPE_VARCHAR,100,1,0,0);
+     $this->addField("aco",CMObj::TYPE_INTEGER,20,1,0,0);
      $this->addField("creationTime",CMObj::TYPE_INTEGER,20,1,0,0);
 
      $this->addPrimaryKey("code");
   }
+
+  public function save() {
+
+    if(($state==self::STATE_NEW) || ($state==self::STATE_DIRTY_NEW) ) {
+      $aco = new CMACO;
+      $aco->description = "Forum ".$this->name;
+      $aco->time = time();
+      $aco->save();
+    }
+
+    $this->aco = $aco->code;
+    parent::save();
+  }
+
 
   public function listMessages() {
 
@@ -83,6 +98,21 @@ class AMForum extends CMObj {
     }
     list($k,$r) = each($_SESSION[amadis][forum][visits][$this->code]->items);
     return $r;
+  }
+
+  /**
+   * Get the ACO of this Forum
+   **/
+  public function getACO() {
+    $aco = new CMACO;
+    $aco->code = $this->codeACO;
+    try {
+      $aco->load();
+    } catch(CMDBNoRecord $e) {
+      Throw new AMException('NO ACO Defined');
+    }
+
+    return $aco;
   }
 
 }

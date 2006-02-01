@@ -27,6 +27,7 @@ class AMCommunities extends CMObj {
      $this->addField("code",CMObj::TYPE_INTEGER,"20",1,0,0);
      $this->addField("description",CMObj::TYPE_VARCHAR,"255",1,0,0);
      $this->addField("name",CMObj::TYPE_VARCHAR,"30",1,0,0);
+     $this->addField("codeGroup",CMObj::TYPE_INTEGER,"20",1,0,0);
      $this->addField("status",CMObj::TYPE_ENUM,"12",1,"NOT_AUTHORIZED",0);
      $this->addField("flagAuth",CMObj::TYPE_ENUM,"10",1,"ALLOW",0);
      $this->addField("image",CMObj::TYPE_INTEGER,"20",1,0,0);
@@ -40,16 +41,28 @@ class AMCommunities extends CMObj {
                                               self::ENUM_STATUS_AUTHORIZED));
   }
 
-  public function isMember($codeUser) {
+  /** 
+   * Before save the community creates a group and relates it to 
+   * the new community
+   **/
+  public function save() {
+    if(($state==self::STATE_NEW) || ($state==self::STATE_DIRTY_NEW) ) {
+      //create a new group for the project
+      $group = new CMGroup;
+      $group->description = "Community ".$this->name;
+      $group->managed = CMGroup::ENUM_MANAGED_MANAGED;
+      $group->time = time();
+      try {
+	$group->save();
+      } catch(CMDBException $e) {
+	Throw new AMException("An error ocurred creating the project group.");
+      }
+      $this->codeGroup = $group->codeGroup;
+    }
     
-    $q = new CMQuery(AMCommunityMembers);
-    $q->setFilter("codeUser = $codeUser AND codeCommunity = $this->code");
-    $res = $q->execute();
-    
-    if($res->__hasItems()) return true;
-    else return false;
-
+    parent::save();
   }
+
 
   public function isAdmin($codeUser) {
 
@@ -151,6 +164,22 @@ class AMCommunities extends CMObj {
       break;
     }
     
+  }
+
+
+  /*********************
+   * Group managment
+   ********************/
+  public function getGroup() {
+    if(empty($_SESSION[AMADIS][Community][$this->code][group])) {
+      $g = new CMGroup;
+      $g->codeGroup = $this->codeGroup;
+      $g->load();
+      $_SESSION[AMADIS][Community][$this->code][group] = $g;
+    }  else {
+      $g = $_SESSION[AMADIS][Community][$this->code][group];
+    }
+    return $g;
   }
 
 
