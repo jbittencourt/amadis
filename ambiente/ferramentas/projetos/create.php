@@ -58,6 +58,10 @@ if(!empty($_REQUEST['frm_codeProjeto'])) {
     CMHTMLPage::redirect($_CMAPP['services_url']."/projetos/projeto.php?frm_codProjeto=$_REQUEST[frm_codeProjeto]&frm_amerror=edit_not_allowed");
   }
 }
+else { //caso seja um novo projeto
+  unset($_SESSION[cad_proj]);
+  unset($_SESSION[cad_foto]);
+}
 
 $el['default'] = $_language['pag_0'];
 $el['pag_1'] = $_language['pag_1'];
@@ -89,13 +93,14 @@ switch($_REQUEST['action']) {
    }else $_SESSION['cad_proj']='';
 
    $status = AMProjeto::listAvaiableStatus();
+   //   if(!empty($_REQUEST['frm_codeProjeto']))
    $form->setSelect("status",$status,"code","name");
    $form->addComponent("action",new CMWHidden("action","pag_1"));
 
 
 
    $cadBox->add($form);
-   $cadBox->setTitle("<img src='$_CMAPP[imlang_url]/img_dados_gerais.gif'>");
+   $cadBox->setTitle("<font class='txttitproj'>".$_language['general_data']."</font>");
 
    break;
       
