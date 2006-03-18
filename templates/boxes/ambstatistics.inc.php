@@ -19,6 +19,7 @@ class AMBStatistics extends AMBox {
     parent::add('<td id="stats_col">');
 
     $max = max($stats['communities'],$stats['people'],$stats['projects'],$stats['communities']);
+    if($max==0) $max = 1; //avoid division by zero
 
     $p_communities = ($stats['communities']/$max)*50;
     $p_people = ($stats['people']/$max)*50;
