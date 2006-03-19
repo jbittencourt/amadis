@@ -14,7 +14,7 @@ switch($_REQUEST['frm_action']) {
  default:
    //coluna da esquerda
 
-   $box->add("Aqui vai o texto sobre as comunidades<br>", AMTwoColsLayout::LEFT);
+   $box->add($_language['community_intro']."<br>", AMTwoColsLayout::LEFT);
    $box->add("<br><br>", AMTwoColsLayout::LEFT);
    //---
    if($_SESSION['environment']->logged == 1){
