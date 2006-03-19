@@ -3,22 +3,23 @@ class AMBUserLibrary extends AMColorBox {
 
   private $user;
   private $library;
-  private $limit = 5; //this var is to set how many results must appears in the box
+  private $limit; //this var is to set how many results must appears in the box
+  private $show_link; //if this var is set 1, show the link to 'show all shared files'
   
-  
-  public function __construct($user) {
+  public function __construct($user, $limit, $show) {
     global $_CMAPP;
     $this->requires("library.css",CMHTMLObj::MEDIA_CSS);
     $this->user = $user;
     $a = new AMUserLibraryEntry($user->codeUser);
     $this->library = $a->getLibrary($user->codeUser);
-
+    $this->limit = $limit;
+    $this->show_link = $show;
     parent::__construct($_CMAPP['imlang_url']."/box_wfarquivos_tit.gif",self::COLOR_BOX_PURPLE);
   }
 
   public function __toString() {
     global $_language, $_CMAPP;
-    $base_link = "../library/library.php?frm_type=&frm_codeUser=".$this->user->codeUser;
+    $base_link = "../library/library.php?frm_codeUser=".$this->user->codeUser;
 
 
     $ple = new AMLibrary();
@@ -88,7 +89,8 @@ class AMBUserLibrary extends AMColorBox {
 	parent::add("<td class='blt_box_p'>( ".date("d/m/Y",$item->tempo)." )</td></tr>");
       }
       parent::add("</table>");
-      parent::add("<br><a href='$base_link'><font class='blt_subtitulo'>&raquo; $_language[list_all_files]</font></a>");
+      if($this->show_link == 1)
+	parent::add("<br><a href='$base_link'><font class='blt_subtitulo'>&raquo; $_language[list_all_files]</font></a>");
     }
           
     

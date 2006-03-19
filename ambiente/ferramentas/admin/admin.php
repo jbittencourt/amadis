@@ -6,6 +6,8 @@ $_language = $_CMAPP[i18n]->getTranslationArray("admin");
 
 $pag = new AMTAdmin();
 
+$box_grande = new AMColorBox("",AMCOLORBOX::COLOR_BOX_BLUA);
+
 $box = new AMTwoColsLayout;
 
 //soh imprime se o usuario for super
@@ -27,7 +29,9 @@ $box->add(new AMBAdminUsers, AMTwoColsLayout::RIGHT);
 //}
 //else{ $pag->add($_language[access_denied]);}
 
-$pag->add($box);
+$box_grande->add($box);
+
+$pag->add($box_grande);
 
 echo $pag;
 

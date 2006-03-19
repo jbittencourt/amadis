@@ -10,16 +10,19 @@ $pag = new AMTCommunities;
 $box = new AMTwoColsLayout;
 
 if(!empty($_REQUEST[frm_codeCommunity])) {
-  $community = new AMCommunities;
-  $community->code = $_REQUEST[frm_codeCommunity];
-  try{
-    $community->load();
-    $group = $community->getGroup();
-  }catch(CMDBNoRecord $e){
-    $_REQUEST[frm_amerror] = "community_not_exists";    
-    echo $pag;
-    die();
-  }
+     $community = new AMCommunities;
+     $community->code = $_REQUEST[frm_codeCommunity];
+     try{
+       $community->load();
+       $group = $community->getGroup();
+     }catch(CMDBNoRecord $e){
+       $_REQUEST[frm_amerror] = "community_not_exists";
+       
+       //$pag->add("<br><div align=center><a href=\"".$_SERVER[HTTP_REFERER]."\" ");
+       //$pag->add("class=\"cinza\">".$_language[voltar]."</a></div><br>");
+       echo $pag;
+       die();
+     }
 } else { 
   $_REQUEST[frm_amerror] = "no_community_id";
   
@@ -63,17 +66,7 @@ $box->add("<font class=\"texto\">$community->description<br>",
 	  AMTwoColsLayout::LEFT);
 $box->add("<img src=\"".$_CMAPP[images_url]."/dot.gif\" border=\"0\" height=10 width=1><br>", AMTwoColsLayout::LEFT);
 
-$box->add("<br>", AMTwoColsLayout::LEFT);
-$box->add(new AMBCommunityMembers($community), AMTwoColsLayout::LEFT);
-
-/*
- *CADASTRO DE NOTICIAS
- */
-
-//if($isMember) {
-  $communityNews = new AMBCommunitiesNews(AMBCommunitiesNews::COMMUNITY_NEWS);
-  $box->add($communityNews,AMTwoColsLayout::LEFT);
-//}
+$box->add(new AMBCommunitiesNews(AMBCommunitiesNews::COMMUNITY_NEWS), AMTwoColsLayout::LEFT);
 
 /**
  *FINAL DA COLUNA ESQUERDA
@@ -85,33 +78,44 @@ $box->add(new AMBCommunityMembers($community), AMTwoColsLayout::LEFT);
 
 $box->add("<img src=\"".$_CMAPP[images_url]."/dot.gif\" width=\"20\" height=\"1\" border=\"0\">", AMTwoColsLayout::RIGHT);
 
-$box->add(new AMBCommunityItems,AMTwoColsLayout::RIGHT);
-$box->add("<br>",AMTwoColsLayout::RIGHT);
 if($_SESSION[user] instanceof CMUser) {
-  
+  if($community->isAdmin($_SESSION[user]->codeUser)) {
+    $box->add(new AMBCommunityItems,AMTwoColsLayout::LEFT);
+    $box->add("<br>",AMTwoColsLayout::LEFT);
+  }
+
   /*
    *CAIXA DE EDICAO DO PROJETO
    */
-  if($isMember){
-    if($community->isAdmin($_SESSION[user]->codeUser)) {
-      $communityEdit = new AMBCommunityEdit;
-      $box->add($communityEdit,AMTwoColsLayout::RIGHT);
-    }
+  if($community->isAdmin($_SESSION[user]->codeUser)) {
+    $communityEdit = new AMBCommunityEdit;
+    $box->add($communityEdit,AMTwoColsLayout::RIGHT);
   }
-  
-  
+
+
   if(!$group->isMember($_SESSION[user]->codeUser)) {
     $box->add(new AMBCommunityJoin($community),AMTwoColsLayout::RIGHT);
   }
-  
+
 }
 
 /*
- *RELATED PROJECTS
+ *MEMBROS DA COMUNIDADE
  */
+$box->add("<br>", AMTwoColsLayout::RIGHT);
+$box->add(new AMBCommunityMembers($community), AMTwoColsLayout::RIGHT);
 
 $box->add("<br>", AMTwoColsLayout::RIGHT);
 $box->add(new AMBCommunityProjects, AMTwoColsLayout::RIGHT);
+
+/*
+ *CADASTRO DE NOTICIAS
+ */
+
+// if($isMember) {
+//   $projNews = new AMBProjectNews($proj);
+//   $box->add($projNews,AMTwoColsLayout::RIGHT);
+// }
 
 $pag->add($box);
 echo $pag;

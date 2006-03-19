@@ -46,7 +46,7 @@ if($isMember) {
 }
 
 
-
+$proj_description = nl2br($proj->description);
 
 /*
  *INICIO DA PAGINA
@@ -66,7 +66,7 @@ $box->add("      <br>",
 $box->add("<img src=\"".$_CMAPP['images_url']."/dot.gif\" border=\"0\" height=\"10\" width=\"1\"><br>",
 	  AMTwoColsLayout::LEFT);
 
-$box->add("<font class=\"texto\">$_language[project]: $proj->title <br>$proj->description<br>",
+$box->add("<font class=\"texto\">$_language[project]: $proj->title <br>$proj_description<br>",
 	  AMTwoColsLayout::LEFT);
 $box->add("<img src=\"".$_CMAPP['images_url']."/dot.gif\" border=\"0\" height=\"10\" width=\"1\"><br>",
 	  AMTwoColsLayout::LEFT);
@@ -153,6 +153,10 @@ if($_SESSION['user'] instanceof CMUser) {
     $checkIfExist->libraryExist();
     $projLibrary = new AMBProjLibrary($proj);
     $box->add($projLibrary,AMTwoColsLayout::RIGHT);
+  }
+  else{
+    $shared = new AMBProjLibraryShare($proj,5,1);
+    $box->add($shared, AMTwoColsLayout::RIGHT);
   }
   $box->add("<br>",AMTwoColsLayout::RIGHT);  
 }

@@ -81,41 +81,52 @@ class AMBCommunitiesNews extends AMSimpleBox implements CMActionListener {
   }
 
   public function __toString() {
-    global $_CMAPP, $_language;
+    global $_CMAPP, $_language, $community;
     
     parent::add("<img src=\"$_CMAPP[images_url]/dot.gif\" width=\"10\" height=\"10\"><br>");
 
-    if($this->itens->__hasItems()) {
-      switch($this->type) {
-      case self::COMMUNITIES_NEWS :
+    
+    switch($this->type) {
+    case self::COMMUNITIES_NEWS :
+      if($this->itens->__hasItems()) {
 	foreach($this->itens as $item) {
-
+	  
 	  //parent::add("<br>");
-	
+	  
 	  $data = date("d/m/Y",$item->news[0]->time);
 	  parent::add("<a class =\"cinza\" href=\"$_CMAPP[services_url]/communities/viewnews.php?frm_codeNews=".$item->news[0]->code."\">");
 	  parent::add("\"".$item->news[0]->title."\" ($data) - ".$item->name);
-	
+	  
 	  parent::add("</a><br>");
 	}
-	break;
-
-      case self::COMMUNITY_NEWS :
+      }else parent::add("<br>".$_language[without_communities_news]);
+      break;
+      
+    case self::COMMUNITY_NEWS :
+      if($this->itens->__hasItems()) {
 	foreach($this->itens as $item) {
-	  
-	  //parent::add("<br>");
-	  
 	  $data = date("d/m/Y",$item->time);
-	  parent::add("<a class =\"cinza\" href=\"$_CMAPP[services_url]/communities/viewnews.php?frm_codeNews=$item->code\">");
-	  parent::add("<b>$item->title</b></a>: ".substr($item->text,0,30)."...<br>");
-	  
-	  parent::add("($data) - ". $item->users[0]->name ."<br>");
+	  parent::add("<a class =\"cinza\">");
+	  parent::add("<b>$item->title</b></a>: ".nl2br($item->text)." ".$_language['by']." ");
+	  parent::add(new AMTUserInfo($item->users[0],AMTUserInfo::LIST_USERNAME));
+	  parent::add("<br>");	  
 	}
-	parent::add($this->form);
+	parent::add("<a href='".$_CMAPP[services_url]."/communities/listcommunities.php?list_action=A_list_news&frm_codeCommunity=".$community->code."' class='community_view_news'>&raquo; ".$_language['see_all_news']."</a><br>");
+	
+      }else parent::add("<br>".$_language[without_communities_news]."<br>");
+      $group = $community->getGroup();
+      if($_SESSION['user'] instanceof CMObj) {
+	  if($group->isMember($_SESSION['user']->codeUser)) {
+	    $box = new AMTShowHide('add_new',"&raquo; $_language[add_news]",  AMTShowHide::HIDE);
+	    $box->setClass('community_add_news');
+	    $box->add($this->form);
+	    parent::add($box);
+	  }
+      }
 	break;
       }
-    }else parent::add("<br>".$_language[without_communities_news]);
     
+	
     
     return parent::__toString();
 

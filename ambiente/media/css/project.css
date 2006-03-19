@@ -70,7 +70,12 @@ A.project_news:hover {
                         border-spacing: 0px;
                         border: 0px;
                         }
-
+.txttitproj { 
+              font-family: Arial, Helvica, sans-serif;
+              font-size: 20px;
+              line-height: 20px;
+              color: #80BAC9;
+              }
 
 #project_list_2 { 
                   background-color: #FFFCFC;
@@ -80,12 +85,11 @@ A.project_news:hover {
                        background-color: white;
                        border: 2px #DDF0FB solid;
                       }
-
 .project_items {
                  background-color : #ffffff;
                  border : 2px solid #dbf4ff;
                  height : 48px;
-                 width : 48px;
+                 min-width : 48px;                 
                  text-align : center;
                  position : relative;
                  background-repeat: no-repeat;
@@ -96,7 +100,7 @@ A.project_news:hover {
                         background-color: #e2f6ff; 
                         border: 2px solid #DBF4FF;
                         height: 48px;
-                        width: 48px; 
+                        min-width: 48px; 
                         text-align: center;
                         position:relative;
                         background-repeat: no-repeat;

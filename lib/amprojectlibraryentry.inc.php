@@ -41,6 +41,16 @@ class AMProjectLibraryEntry extends CMObj {
       die();
     }
   }
+  
+  public function getLibrary($proj){
+    $this->projectCode = $proj;
+    try{
+      $this->load();
+    }catch(CMException $e){
+      echo $e;
+    }
+    return $this->libraryCode;
+  }
 
 }
 

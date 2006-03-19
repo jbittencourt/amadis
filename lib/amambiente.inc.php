@@ -1,6 +1,5 @@
 <?
 
-
 class AMAmbiente extends CMEnvironment {
 
 
@@ -23,7 +22,7 @@ class AMAmbiente extends CMEnvironment {
     
     return $resul;
   }
-
+  
   public function listAreas() {
     $q = new CMQuery('AMArea');
     $q->setOrder("nomArea asc");
@@ -279,21 +278,44 @@ class AMAmbiente extends CMEnvironment {
    *( CommunityMembers.codeCommunity = Communities.code ) GROUP BY codeCommunity
    */
   public function listBiggerCommunities($limit=5) {
+    //$q = new CMQuery('AMCommunities');    
+    //     $j = new CMJoin(CMJoin::LEFT);
+    //     $j->setClass('AMGroupMembers');
+    //     $j->on("AMCommunities::codeGroup = AMGroupMembers::codeCommunity");
+    //     $j->setFake();
+
+    //     $q->addJoin($j, "communities");
+    //     $q->addVariable("numItems","count(AMGroupMembers::codeUser)");
+    //     $q->groupBy("AMCommunities::code");
+    //     $q->setOrder("numItems desc");
+    //     $q->setLimit(0,$limit);
+    //     $q->setFilter("AMCommunities::status = '".AMCommunities::ENUM_STATUS_AUTHORIZED."'");
+
+    //    return $q->execute();
+
+    //nova consulta apos criacao dos grupos:
+    // SELECT Communities.*, count(*) AS numMembers from GroupMember LEFT JOIN Groups ON Groups.codeGroup=GroupMember.codeGroup INNER JOIN Communities ON Groups.codeGroup=Communities.codeGroup GROUP BY Groups.codeGroup ORDER BY 'numMembers' DESC LIMIT 0, 5 
+
     $q = new CMQuery('AMCommunities');
     
     $j = new CMJoin(CMJoin::LEFT);
-    $j->setClass('AMCommunityMembers');
-    $j->on("AMCommunities::code = AMCommunityMembers::codeCommunity");
-    $j->setFake();
+    $j->setClass('AMGroup');
+    $j->on("AMGroup::codeGroup = AMCommunities::codeGroup");
+    
+    $j1 = new CMJoin(CMJoin::INNER);
+    $j1->setClass('AMGroupMember');
+    $j1->on("AMGroupMember::codeGroup = AMCommunities::codeGroup");
 
-    $q->addJoin($j, "communities");
-    $q->addVariable("numItems","count(AMCommunityMembers::codeUser)");
-    $q->groupBy("AMCommunities::code");
-    $q->setOrder("numItems desc");
-    $q->setLimit(0,$limit);
-    $q->setFilter("AMCommunities::status = '".AMCommunities::ENUM_STATUS_AUTHORIZED."'");
+    $q->addJoin($j, "group");
+    $q->addJoin($j1, "communities");
+    $q->addVariable("numMembers", "count(*)");
+    $q->setFilter("AMGroupMember::status = 'ACTIVE'");
+    $q->groupBy("AMGroup::codeGroup");
+    $q->setOrder("numMembers DESC");
+    $q->setLimit(0,5);
 
     return $q->execute();
+
   }
 
   public function listNewComminities($limit=3) {
@@ -394,7 +416,8 @@ class AMAmbiente extends CMEnvironment {
     $q->addJoin($j, "pCommunity");
     $q->addJoin($j1, "community");
     $q->setCount();
-    $q->setFilter("Communities.status = '".AMCommunities::ENUM_STATUS_AUTHORIZED."'");
+    $q->setFilter("Communities.status = '".AMCommunities::ENUM_STATUS_AUTHORIZED."' AND Communities.code =". $codeCommunity);
+
     $result['count'] = $q->execute();
     
     $q = new CMQuery('AMProjeto');
@@ -408,7 +431,7 @@ class AMAmbiente extends CMEnvironment {
     $q->addVariable("numItems","count( Projects.codeProject)");
     
     $q->setLimit($ini, $length);
-    $q->setFilter("Communities.status = '".AMCommunities::ENUM_STATUS_AUTHORIZED."'");
+    $q->setFilter("Communities.status = '".AMCommunities::ENUM_STATUS_AUTHORIZED."' AND Communities.code =". $codeCommunity);
     $result[] = $q->execute();
     return $result;
   }

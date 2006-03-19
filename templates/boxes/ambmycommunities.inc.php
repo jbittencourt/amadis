@@ -21,7 +21,7 @@ class AMBMyCommunities extends AMColorBox {
 	parent::add("<a class=\"cinza\" href=\"$_CMAPP[services_url]/communities/community.php?frm_codeCommunity=$item->code\">");
 	parent::add("&raquo; $item->name</a><br>");
       }
-    } else parent::add("$_language[without_communities]");
+    } else {parent::add($_language['dont_have_communities']);}
     
     return parent::__toString();
 

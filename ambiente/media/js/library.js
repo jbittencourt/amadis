@@ -7,7 +7,11 @@ var AMSharedCallBack = {
     image.src = result.url;
     image.id  = result.id;
   }
+  version: function(result) {
+    alert("aeeeeeeee");
+  }
 }
+
 
 
 function Library_abrir(URL) {

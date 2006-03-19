@@ -524,8 +524,7 @@ class AMUser extends CMUser {
     $q->addJoin($j2, "membros");
     
     $q->setFilter('CMGroupMember::codeUser = '.$this->codeUser.' AND CMGroupMember::status="'.CMGroupMember::ENUM_STATUS_ACTIVE.'"');
-    
-    
+ 
     return $q->execute();
   }
 
@@ -535,16 +534,63 @@ class AMUser extends CMUser {
    *Lista as minhas comunidades utilizando um cache. Para o usuario atualmente loggado
    */
   public function listMyCommunities() {
-
+    
     if(!empty($_SESSION['amadis']['communities'])) {
       $list = unserialize($_SESSION['amadis']['communities']);
       serialize($_SESSION['amadis']['communities']);
     } else {
       $list = $this->listCommunities();
       $_SESSION['amadis']['communities'] = serialize($list);
+
     }
     
     return $list;
+  }
+
+    public function listCommunitiesInvitations() {
+      $q = new CMQuery('AMCommunities');
+      $j = new CMJoin(CMJoin::INNER);
+      $j->setClass('CMGroup');
+      $j->on('AMCommunities::codeGroup=CMGroup::codeGroup');
+      $j->setFake();
+
+      $j2 = new CMJoin(CMJoin::LEFT);
+      $j2->setClass('CMGroupMemberJoin');
+      $j2->on('CMGroupMemberJoin::codeGroup=CMGroup::codeGroup');
+
+      $q->addJoin($j, "group");
+      $q->addJoin($j2, 'invitation');
+
+      $f = 'CMGroupMemberJoin::codeUser = '.$this->codeUser;
+      $f.= ' AND CMGroupMemberJoin::status="'.CMGroupMemberJoin::ENUM_STATUS_NOT_ANSWERED.'"';
+      $f.= ' AND CMGroupMemberJoin::type="'.CMGroupMemberJoin::ENUM_TYPE_INVITATION.'"';
+
+      $q->setFilter($f);
+      return $q->execute();
+  }
+
+  public function listCommunitiesResponses() {
+      $q = new CMQuery('AMCommunities');
+      $j = new CMJoin(CMJoin::INNER);
+      $j->setClass('CMGroup');
+      $j->on('AMCommunities::codeGroup=CMGroup::codeGroup');
+      $j->setFake();
+
+      $j2 = new CMJoin(CMJoin::LEFT);
+      $j2->setClass('CMGroupMemberJoin');
+      $j2->on('CMGroupMemberJoin::codeGroup=CMGroup::codeGroup');
+
+      $q->addJoin($j, "group");
+      $q->addJoin($j2, 'invitation');
+
+      $f = 'CMGroupMemberJoin::codeUser = '.$this->codeUser;
+      $f.= ' AND CMGroupMemberJoin::status<>"'.CMGroupMemberJoin::ENUM_STATUS_NOT_ANSWERED.'"';
+      $f.= ' AND CMGroupMemberJoin::ackResponse="'.CMGroupMemberJoin::ENUM_ACKRESPONSE_NOT_ACK.'"';
+      $f.= ' AND CMGroupMemberJoin::type="'.CMGroupMemberJoin::ENUM_TYPE_REQUEST.'"';
+
+      $q->setFilter($f);
+
+      return $q->execute();
   }
 
   /**

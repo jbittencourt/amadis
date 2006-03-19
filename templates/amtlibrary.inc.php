@@ -13,6 +13,8 @@ class AMTLibrary extends AMMain {
 
     if($libraryType == "project" || $libraryType == "course")
       $this->setImgId($_CMAPP['imlang_url']."/top_biblioteca.gif");
+    elseif($libraryType == "shared")
+      $this->setImgId($_CMAPP['imlang_url']."/top_arquivoscompart.gif");
     else
       $this->setImgId($_CMAPP['imlang_url']."/top_meusarquivos.gif");
       

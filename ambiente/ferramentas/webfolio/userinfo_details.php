@@ -139,7 +139,7 @@ else {
 $pag->add($box4);
 
 //shared files
-$box5 = new AMBUserLibrary($user);
+$box5 = new AMBUserLibrary($user, 5, 1);
 $pag->add($box5);
 
 

@@ -35,7 +35,6 @@ class AMBProjectsArea extends CMHTMLObj {
     }
     $buffer .= "<img src=\"".$_CMAPP['imlang_url']."/$img\"  height=\"22\" width=\"155\"><br>";
     $buffer .= "<img src=\"".$_CMAPP['images_url']."/dot.gif\" border=\"0\" height=\"7\" width=\"1\"><br>\n";
-    $buffer .= "<font class=\"textoint\">&raquo; $_language[areas]<br><br>\n";
     $buffer .= "<select onChange=\"document.frm_prjtArea.submit();\" ";
     $buffer .= "name=\"frm_codArea\" style=\"position: relative; top: 0pt;\">\n";
     $buffer .= "<option selected value=\"\">[$_language[select_one]]</option>\n";
@@ -47,6 +46,7 @@ class AMBProjectsArea extends CMHTMLObj {
     $buffer .= "</select>\n";
     $buffer .= "<input type=\"hidden\" name=\"list_action\" value=\"A_list_areas\">\n";
     $buffer .= "</font>\n";
+    $buffer .= "<br><br><font class=\"textoint\">&raquo; $_language[areas]<br><br>\n";
     $buffer .= "</td>\n";
     $buffer .= "</tr>\n";
     $buffer .= "</form>\n";

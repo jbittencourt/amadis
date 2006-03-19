@@ -80,19 +80,17 @@ class AMLibrary extends CMObj{
   
   public function saveEntry(){
     $formName = $_REQUEST['nomeCampo']; // recebe o nome do campo de tipo 'file'
+    
     $tipo = explode("/", $_FILES[$formName]['type']);
+    
     $file_type =  explode(".",$_FILES[$formName]['name']);
-    /** $bad_ext = array("exe","bin","php","sh","com");  //lista de arquivos indevidos..
-
-    if( in_array($file_type[1] , $bad_ext) ){ // se o arquivo a ser enviado possui uma extensao nao permitida..
-      echo "Ops, tamanho ou tipo de arquivo invalido.<br>";
-    }
-    else{ //ta ok..pode enviar **/
+    
     $filelib = new AMLibraryFiles;
     $file = new AMArquivo;
   
   //preenche os capos do arquivo
     $file->nome = $_FILES[$formName]['name'];
+    $file->nome = str_replace(" ", "_",$file->nome);
     $file->tipoMime = $_FILES[$formName]['type'];
     $file->tamanho = $_FILES[$formName]['size'];
     $file->tempo = time();
@@ -146,7 +144,7 @@ class AMLibrary extends CMObj{
 
       $q = new CMQuery(AMArquivo,AMLibraryFiles);
       $q->setFilter("Arquivo.codeArquivo = FilesLibraries.filesCode AND FilesLibraries.libraryCode = '$this->code' AND FilesLibraries.active='y'");
-      $q->setLimit('','$limit');
+      $q->setLimit(0,$limit);
       $q->setOrder('tempo desc');
       $res = $q->execute();    
       return $res;            
@@ -168,17 +166,16 @@ class AMLibrary extends CMObj{
   }
 
 
-  public function listSharedFiles($limit){
+  public function listSharedFiles($limit){ //if the limit passed is 0, dont set limit
     try{
       $q = new CMQuery(AMArquivo,AMLibraryFiles);
       $q->setFilter("Arquivo.codeArquivo = FilesLibraries.filesCode AND FilesLibraries.libraryCode = '$this->code' AND FilesLibraries.active='y' and FilesLibraries.shared='y'");
       if($limit > 0)
-	$q->setLimit('','$limit');
+	$q->setLimit(0,$limit);
       $q->setOrder('tempo desc');
       $res = $q->execute();    
       return $res;            
-    }catch(CMDBNoRecord $r){
-    }
+    }catch(CMDBNoRecord $r){}
   }
 }
 

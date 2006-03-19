@@ -17,7 +17,14 @@ BODY IMG {
            border: 0px;
            }
 
-
+.admin_items  { 
+                       /* background-color: #E2F6FF; QUANDO TIVER COM O MOUSE EM CIMA*/
+                       background-color: #FFFCFC;                        
+                       border: 2px #71A4AF solid;
+                       height: 48px;
+                       width: 48px; 
+                       text-align: center;
+                      }
 /* MAIN MENU */
 
 #amadis-global-wrapper { 
@@ -165,6 +172,13 @@ BODY IMG {
   font-weight: bold;
 }
 
+.txttitproj { 
+              font-family: Arial, Helvica, sans-serif;
+              font-size: 20px;
+              line-height: 20px;
+              color: #80BAC9;
+              }
+
 .progress_normal {
   font-family: Verdana, Arial, Helvetica, sans-serif;
   font-size: 10px;
@@ -172,13 +186,6 @@ BODY IMG {
  color: #6BB9F2;
   font-weight: bold;
 }
-
-
-
- 
-
-
-
 
 
 #logout_button { 
@@ -202,7 +209,7 @@ BODY IMG {
                     }
 
 
-/* button that shoul apear like links */
+/* button that should apear like links */
 .button-as-link { 
                   width: 75px;
                   height: 50px;
@@ -212,7 +219,6 @@ BODY IMG {
                   cursor: pointer;
                   cursor: hand;
                   }
-
 .image-button { 
                 background: none;
                 border: none;

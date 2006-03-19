@@ -18,11 +18,11 @@ $pag->add("<tr><TD colspan=\"3\" class=\"textoint\"><img src=\"".$_CMAPP['images
 
 $pag->add("</tr>");
 
-
+/**
 $pag->add("<APPLET  code=\"br.ufrgs.lec.amadis.applets.ProjectPulse.ProjectsPulse\" archive=\"$_CMAPP[url]/media/applets/ProjectsPulse.jar\" width=540 height=90>");
 $pag->add("<PARAM name=amadisurl VALUE=\"$_CMAPP[url]\">");
 $pag->add("</APPLET>");
-
+**/
 if(empty($_SESSION['user'])) {
   /**
    * QUERO ME CADASTRAR
@@ -47,17 +47,22 @@ $box1->add("<a href='$_CMAPP[services_url]/projetos/listprojects.php'>&raquo; $_
 //new projects
 $projs = $_SESSION['environment']->listNewProjects();
 $box2 = new AMColorBox("$_CMAPP[imlang_url]/box_projnovos_tit.gif",AMColorBox::COLOR_BOX_DARKPURPLE);
-$box2->add(new AMTProjectsSmallList($projs));
-$box2->add("<a href='$_CMAPP[services_url]/projetos/listprojects.php'>&raquo; $_language[list_all_projects]</a>");
-
+if($projs->__hasItems()){
+  $box2->add(new AMTProjectsSmallList($projs));
+  $box2->add("<a href='$_CMAPP[services_url]/projetos/listprojects.php'>&raquo; $_language[list_all_projects]</a>");
+}
+else{ 
+  $box2->add($_language['no_project_found']); 
+}
 
 //new communities
 $comms = $_SESSION['environment']->listNewComminities();
 $box3 = new AMColorBox("$_CMAPP[imlang_url]/box_comunovas_tit.gif",AMColorBox::COLOR_BOX_YELLOW);
-$box3->add(new AMTCommunitySmallList($comms));
-$box3->add("<a href='$_CMAPP[services_url]/communities/listcommunities.inc.php'>&raquo; $_language[list_all_communities]</a>");
-
-
+if($comms->__hasItems()){ 
+  $box3->add(new AMTCommunitySmallList($comms));
+  $box3->add("<a href='$_CMAPP[services_url]/communities/listcommunities.php'>&raquo; $_language[list_all_communities]</a>");
+}
+else{ $box3->add($_language['no_community_found']); }
 $cols = new AMTwoColsLayout;
 
 $cols->add($box1,AMTwoColsLayout::LEFT);

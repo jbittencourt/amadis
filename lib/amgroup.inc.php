@@ -3,7 +3,7 @@
 class AMGroup extends CMObj {
 
    public function configure() {
-     $this->setTable("Group");
+     $this->setTable("Groups");
 
      $this->addField("codeGroup",CMObj::TYPE_INTEGER,20,1,0,0);
      $this->addField("description",CMObj::TYPE_VARCHAR,100,1,0,0);

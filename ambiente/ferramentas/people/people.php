@@ -22,9 +22,9 @@ switch($_REQUEST['frm_action']) {
    //coluna da direita
    //$box->add("Sample", AMTwoColsLayout::RIGHT);
    
-   $box->add(new AMBPeopleLastDiaryPosts, AMTwoColsLayout::RIGHT);
-   
+     
    $box->add(new AMBPeopleLastPagesModified, AMTwoColsLayout::RIGHT);
+   $box->add(new AMBPeopleLastDiaryPosts, AMTwoColsLayout::RIGHT);
    
    $pag->add($box);
    break;

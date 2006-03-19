@@ -8,8 +8,10 @@ $_language = $_CMAPP['i18n']->getTranslationArray("library");
 $page = new AMTLibrary("$_REQUEST[frm_type]");
 
 $page->addCommunicatorHandler("AMShared");
+//$page->addCommunicatorHandler("AMVersion");
 
 $page->addPageBegin(CMHTMLObj::getScript("var AMShare = new amshared(AMSharedCallBack)"));
+//$page->addPageBegin(CMHTMLObj::getScript("var AMVers = new amversion(AMVersionCallBack)"));
 
 $page->addPageBegin(CMHTMLOBJ::getScript("lang_wish_delete='$_language[wish_delete]'"));
 
@@ -84,6 +86,10 @@ $count_all = $count_img + $count_text + $count_audio + $count_video + $count_oth
 
 // viewer starts at this point
 
+$image1 = new AMLibraryThumb;
+$image1->codeArquivo = $imagem;
+$image1->load();	  	
+
 $ver = $_REQUEST["ver"];
 $flag_on = $_REQUEST["flag_on"];
 $conteudo .= "<table cellpadding='0' cellspacing='0' border='0'>";
@@ -98,8 +104,10 @@ $conteudo .= "</tr><tr><td><img src='$_CMAPP[media_url]/images/dot.gif' width='1
 $conteudo .= "<td valign='top'><table cellpadding='0' cellspacing='0' border='0' width='100%'>";
 $conteudo .= "<tr><td valign='top'><table cellpadding='0' cellspacing='0' border='0' width='280'><tr>";
 $conteudo .="<td class='titbiblioteca' background='$_CMAPP[media_url]/images/img_tit_biblioteca.gif'><img src='$_CMAPP[media_url]/images/dot.gif' width='42' height='37' border='0' align='absmiddle'>$titulo</td>";
-$conteudo .= "</tr></table></td><td align='right'><img src='$_CMAPP[media_url]/imagewrapper.php?method=db&frm_codeArquivo=$imagem' width=80% height=80% '></td>";
-$conteudo .= "</tr></table></td><td><img src='$_CMAPP[media_url]/images/dot.gif' width='10' height='10' border='0'></td>";
+$conteudo .= "</tr></table></td><td align='right'>";
+$page->add($conteudo);
+$page->add($image1->getView());
+$conteudo = "</td></tr></table></td><td><img src='$_CMAPP[media_url]/images/dot.gif' width='10' height='10' border='0'></td>";
 $conteudo .= "</tr>";
 //monta a interface da biblioteca, listando os arquivos, SE TIVER
 if($count_all != 0 ){
@@ -140,7 +148,7 @@ if($count_all != 0 ){
       $conteudo .= "<tr bgcolor='#F9F9FA'><td colspan='5' align='left' valign='top'><table cellpadding='0' cellspacing='0' border='0'>";
       $conteudo .= "<tr><td>";
       $conteudo .= "<img src='$_CMAPP[media_url]/images/img_blt_$title_icon.gif'border='0'></td>";
-      $conteudo .= "<td valign='top'><font class='blt_subtitulo'><img src='$_CMAPP[media_url]/images/dot.gif' width='12' height='13'><br>&nbsp;&nbsp;- $conta_arquivo  $_language[files]</font></td>";
+      $conteudo .= "<td valign='top' width='100'><font class='blt_subtitulo'><img src='$_CMAPP[media_url]/images/dot.gif' width='20' height='13'><br>&nbsp;&nbsp;- $conta_arquivo  $_language[files]</font></td>";
       if($lista == 1){//caso seja a vez de listarmos a categoria de imagem temos a opcao de preview por thumbs
 	if($flag_on == 1){
 	  $flag_on = 0;
@@ -152,7 +160,7 @@ if($count_all != 0 ){
 	  $imgthumb = "$_CMAPP[media_url]/images/icon_thumb_off.gif";
 	  $imglink  = "$_SERVER[PHP_SELF]?frm_type=$_REQUEST[frm_type]&frm_codeProjeto=$_REQUEST[frm_codeProjeto]&ver=thumbs&flag_on=$flag_on";
 	}
-	  $conteudo .= "<td valign='middle' align='right' width='320'><a href='$imglink'><img src='$imgthumb'></a></td>";
+	$conteudo .= "<td valign='middle' align='right'><img src='$_CMAPP[media_url]/images/dot.gif' width='300' height='13'><a href='$imglink' class='blt_subtitulo' style='text-decoration:none;'><img src='$imgthumb'> Miniaturas</a></td>";
       }
       $conteudo .= "</tr></table></td></tr>";				
       $conteudo .= "<tr><td colspan='5' background='$_CMAPP[media_url]/images/img_blt_pontilhado.gif'><img src='$_CMAPP[media_url]/images/dot.gif' width='1' height='1'></td></tr>";
@@ -251,7 +259,6 @@ if($count_all != 0 ){
 	    $link = "$_SERVER[PHP_SELF]?frm_type=$_REQUEST[frm_type]&frm_codeProjeto=$_REQUEST[frm_codeProjeto]&opcao=delete&id=$item->codeArquivo";
 	    $conteudo .= "<td class='blt_col_$cor_css' $js><a href='$_SERVER[PHP_SELF]?frm_type=$_REQUEST[frm_type]&frm_codeProjeto=$_REQUEST[frm_codeProjeto]&opcao=download&codeArquivo=$item->codeArquivo'><img src='$_CMAPP[media_url]/images/img_blt_ico_baixar.gif' width='17' height='14' alt='DOWNLOAD' border='0' hspace='2'></a><img onclick='Library_delFile($item->codeArquivo,\"$link\");' src='$_CMAPP[media_url]/images/img_blt_ico_excluir.gif' width='17' height='14' alt='EXCLUIR' border='0' class='cursor'>";
 
-	    //AQUI PRECISA VIR O TESTE PRA VER SE O ARQUIVO  EH COMPARTILHADO OU NAO...E FAZER A MANUTENCAO DOS OLHOS
 	    $share = $library->isShared($item->codeArquivo);
 
 	    if($share == "true"){	      
@@ -262,7 +269,10 @@ if($count_all != 0 ){
 	      $eyeicon = "img_blt_ico_eye_off.gif";
 	      $id_E = "unshared_$item->codeArquivo";
 	    }
-	    $conteudo .= "<img src=$_CMAPP[media_url]/images/$eyeicon id='$id_E' onClick = \"AMShare.share(this.id)\" alt='COMPARTILHAR' border='0' class='cursor'>";
+	    $conteudo .= "<img src='$_CMAPP[media_url]/images/$eyeicon' id='$id_E' onClick = \"AMShare.share(this.id)\" alt='COMPARTILHAR' border='0' class='cursor'>";
+
+	    //icone do versionador
+	    //	    $conteudo .= "<img src='$_CMAPP[media_url]/images/peca_on.gif' id='ide' onClick = \"AMVersion.version()\" border='0' class='cursor' width=14 height=14>";
     	    $conteudo .= "</td></tr>";	  
 	  }
 	}	
@@ -329,10 +339,10 @@ $conteudo .= "<td><img src='$_CMAPP[media_url]/images/box_biblio_04.gif' width='
 $conteudo .= "<tr><td colspan='3' bgcolor='#C3B6E4'><img src='$_CMAPP[media_url]/images/dot.gif' width='10' height='4' border='0'></td></tr>";
 $conteudo .= "<tr><td colspan='3' bgcolor='#E9E5F5' valign='top'><img src='$_CMAPP[media_url]/images/dot.gif' width='10' height='30' border='0'><br>";
 $conteudo .= "<table cellpadding='5' cellspacing='0' border='0' align='center'>";
-$conteudo .= "<tr><td><img src='$_CMAPP[media_url]/images/img_blt_enviarbiblio.gif'></td>";
-$conteudo .= "<td><form enctype='multipart/form-data' action='$_SERVER[PHP_SELF]' method='post' name='upload' onSubmit='Library_checkForm(this)'>";
-$conteudo .= "<input name='upload' type='file'><input type='hidden' name='nomeCampo' value='upload'><input type='hidden' name='MAX_FILE_SIZE' value='2048'><input type='hidden' name='frm_type' value='$_REQUEST[frm_type]'><input type='hidden' name='frm_codeProjeto' value='$_REQUEST[frm_codeProjeto]'><input type='hidden' name ='opcao' value ='save'></td>";
-$conteudo .= "<td><input type='submit' value='$_language[send]'></form></td></tr>";
+$conteudo .= "<tr><td><img src='$_CMAPP[media_url]/images/img_blt_enviarbiblio.gif'>";
+$conteudo .= "<form enctype='multipart/form-data' action='$_SERVER[PHP_SELF]' method='post' name='upload' onSubmit='Library_checkForm(this)'>";
+$conteudo .= "<td><input name='upload' type='file'><input type='hidden' name='nomeCampo' value='upload'><input type='hidden' name='MAX_FILE_SIZE' value='2048'><input type='hidden' name='frm_type' value='$_REQUEST[frm_type]'><input type='hidden' name='frm_codeProjeto' value='$_REQUEST[frm_codeProjeto]'><input type='hidden' name ='opcao' value ='save'></td>";
+$conteudo .= "<td valign='top'><input type='submit' value='$_language[send]'></form></td></tr>";
 $conteudo .= "</table><br></td></tr><tr>";
 $conteudo .= "<td bgcolor='#FFFFFF'><img src='$_CMAPP[media_url]/images/box_biblio_up01.gif' width='10' height='10' border='0'></td>";
 $conteudo .= "<td bgcolor='#E9E5F5'><img src='$_CMAPP[media_url]/images/dot.gif' width='1' height='1' border='0'></td>";

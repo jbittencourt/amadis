@@ -27,12 +27,18 @@ if($inv->__hasInvitations()) {
   $pag->add($inv);
 }
 
+//caixa de convites de comunidades
+$inv = new AMBCommunitiesInvitations;
+if($inv->__hasInvitations()) { 
+  $pag->add($inv);
+}
+
 //box for user rejects and accepts
+
 // $resp = new AMBUserResponses;
 // if($resp->__hasInvitations()) { 
 //   $pag->add($resp);
 // }
-
 
 $box = new AMTwoColsLayout;
 //$box->add("Teste 2",AMTwoColsLayout::RIGHT);
@@ -79,7 +85,6 @@ $box->add("<br>", AMTwoColsLayout::RIGHT);
 
 //box de novidades
 $box->add(new AMBAmadisNews, AMTwoColsLayout::RIGHT);
-
 
 $pag->add($box);
 echo $pag;

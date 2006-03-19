@@ -166,29 +166,40 @@ switch($_REQUEST[action]) {
      header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=creating_user_dir");
    }
 
-   if(empty($_REQUEST['frm_codeCommunity'])){
-     $member = new CMGroupMember;
-     $member->codeGroup = $_SESSION[cad_community]->codeGroup;
-     $member->codeUser = $_SESSION[user]->codeUser;
-     $member->time = time();
-     $member->save();
 
-     $adm = new AMCommunityMembers;
-     $adm->codeCommunity = $_SESSION[cad_community]->code;
-     $adm->codeUser = $_SESSION[user]->codeUser;
-     $adm->flagAdmin = AMCommunityMembers::ENUM_FLAGADMIN_ADMIN;
-     $adm->time = time();   
-     $adm->save();
-   }
-      
+   $member = new CMGroupMember;
+   $member->codeGroup = $_SESSION[cad_community]->codeGroup;
+   $member->codeUser = $_SESSION[user]->codeUser;
+   $member->time = time();
+   $member->save();
+
+//    $member = new AMCommunityMembers;
+//    $member->codeCommunity = $_SESSION[cad_community]->code;
+//    $member->codeUser = $_SESSION[user]->codeUser;
+//    $member->flagAdmin = AMCommunityMembers::ENUM_FLAGADMIN_ADMIN;
+//    $member->time = time();
+   
+//    try {
+//      $member->save();
+//    }
+//    catch(CMDBQueryError $e) {
+//      if(!empty($foto)) {
+//        $foto->delete();
+//      }
+//      $_SESSION[cad_community]->delete();
+
+//      Header("Location: $_CMAPP[services_url]/communities/create.php?action=fatal_error&frm_amerror=save_failed");
+//    }
+   
+
+
    $cod = $_SESSION[cad_community]->code;
    unset($_SESSION[cad_community]);
    unset($_SESSION[cad_image]);
    unset($_SESSION[amadis][communities]);
-
    //if everything was ok, go the page of the project.
 
-   header("Location: $_CMAPP[services_url]/communities/community.php?frm_codeCommunity=$cod&frm_ammsg=community_created");
+   header("Location: $_CMAPP[services_url]/communities/communities.php?frm_codeCommunity=$cod&frm_ammsg=community_created");
    
    break;
 

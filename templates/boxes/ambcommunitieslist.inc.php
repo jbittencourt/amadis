@@ -28,7 +28,7 @@ class AMBCommunitiesList extends AMPageBox implements CMActionListener {
   }
   
   public function __toString() {
-    global $_language;
+    global $_language, $_CMAPP;
 
     $t = "<table id='community_list'>";
     $ft = "</table>";
@@ -68,8 +68,8 @@ class AMBCommunitiesList extends AMPageBox implements CMActionListener {
 	$box->add("<a href=\"".$_CMAPP[services_url]."/communities/community.php?frm_codeCommunity=".$item->code);
 	$box->add("\" class=\"cinza\">".$item->name."</a><br>");
 	$box->add("</td><td class=\"texto\">".nl2br($item->description)."</td>");
-	$box->add("<td width=20%><a href=\"$_CMAPP[services_url]/communities/community.php?frm_codeCommunity=20&join_action=A_join\" class=\"blue\">");
-	$box->add("$_language[community_join]</a></td></tr>");
+	$box->add("<td width=20%><a href=\"$_CMAPP[services_url]/communities/community.php?frm_codeCommunity=".$item->code."\" class=\"blue\">");
+	$box->add("$_language[community_visit]</a></td></tr>");
       }
     }
     else {

@@ -254,3 +254,12 @@
 .box_pink #icon-el  { 
                        background: #FCF4F4;
                        }
+
+
+.box_titles { 
+              font-family: Arial, Helvetica, sans-serif;
+              font-size: 13px;
+              font-weight: bold;
+              line-height: 20px;
+              color: #557B83;          
+}

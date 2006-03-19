@@ -7,7 +7,7 @@ class AMBCommunityJoin extends AMColorBox implements CMActionListener {
   public function __construct(AMCommunities $community) {
     global $_CMAPP;
     $this->community = $community; 
-    parent::__construct($_CMAPP[imlang_url]."/img_itens_comunidade.gif",self::COLOR_BOX_LGREEN);
+    parent::__construct($_CMAPP[imlang_url]."/img_participar_comunidade.gif",self::COLOR_BOX_BEGE);
   }
 
   public function doAction() {

@@ -10,7 +10,7 @@ class AMBProjectNews extends AMSimpleBox implements CMActionListener {
     $this->project = $project;
     $news = $this->project->listNews();
     $this->items = $news[0];
-    
+
     parent::__construct($_CMAPP['imlang_url']."/img_novidades_projetos.gif");
   }
    
@@ -25,7 +25,7 @@ class AMBProjectNews extends AMSimpleBox implements CMActionListener {
 	
 	try{
 	  $news->save();
-	  header("Location:$_SERVER[PHP_SELF]?frm_codProjeto=".$this->project->codeProject."&frm_amerror=save_news_success");
+	  header("Location:$_SERVER[PHP_SELF]?frm_codProjeto=".$this->project->codeProject."&frm_ammsg=save_news_success");
 	}catch(CMDBException $e) {
 	  header("Location:$_SERVER[PHP_SELF]?frm_codProjeto=".$this->project->codeProject."&frm_amerror=not_save_news");
 	}

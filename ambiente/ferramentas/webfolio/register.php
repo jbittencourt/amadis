@@ -176,7 +176,6 @@ switch($_REQUEST['action']) {
    break;
  case "pag_3":
 
-   echo "merda!!!!";
    if(empty($_SESSION['cad_foto'])) {
      header("Location:$_SERVER[PHP_SELF]?action=pag_2&frm_amerror=picture_not_defined");
    }
@@ -208,9 +207,8 @@ switch($_REQUEST['action']) {
      $_SESSION['cad_user']->active = 0;
    }
 
-   
    try {
-     $_SESSION['cad_user']->save();
+     $_SESSION[cad_user]->save();
    }
    catch(CMDBException $e) {
      $foto->delete();

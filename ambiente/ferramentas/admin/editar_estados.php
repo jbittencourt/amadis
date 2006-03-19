@@ -9,15 +9,16 @@ $pag = new AMTAdmin();
 
 //soh imprime se o usuario for super
 //if ($_SESSION[usuario]->eMembroCategoria(ADMINISTRADOR_PLATAFORMA)) {
-$pag->add("<< Voltar");
-$box = new AMTwoColsLayout;
 
-$box2 = new AMBAdminCidades;
+$box = new AMTwoColsLayout;
 
 $box1 = new AMBAdminEstados;
 
+$box2 = new AMBAdminCidades;
+
 $box->add($box1,AMTwoColsLayout::LEFT);
 $box->add($box2,AMTwoColsLayout::RIGHT);
+
 $pag->add($box);
 
 //}

@@ -107,22 +107,13 @@ class AMColorBox extends AMAbstractBox {
     parent::add("<tr>");
     parent::add("<td id='bl'></td>");
 
-    //title image
+    //title image or text
     if(!empty($this->title)) {
-      //test if the title is an image or is a string
-      $isURL = false;
-
-      //tests if the string is a valid url (based on the code found in the comments of http://br.php.net/function.parse-url)
-      if( preg_match( '/^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}'
-		      .'((:[0-9]{1,5})?\/.*)?$/i',$this->title) ){
-	$isURL = true;
-      }
-      
-      if($isURL && !$this->forceTitleAsString) {
-	parent::add("<td valign=\"top\"><img src=\"$this->title\" >");
-      } else {
-	parent::add("<td valign=\"top\">$this->title");
-      }
+      $ext = substr($this->title, -3);
+      if( $ext == "jpg" || $ext == "gif" || $ext == "jpeg" || $ext == "png")
+	parent::add("<td valign=\"top\"><img src=\"".$this->title."\"border=\"0\">");
+      else
+	parent::add("<td valign=\"top\"><font class='color_box box_titles'>".$this->title."</font>"); 
     }
     else {
       parent::add("<td valign=\"top\"><img src=\"$_CMAPP[images_url]/dot.gif\" >");

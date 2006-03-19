@@ -39,7 +39,7 @@ switch($_REQUEST['frm_action']) {
 
 
    /*
-    *Projetos mais vizitados
+    *Projetos mais visitados
     */
 
    $box->add('<br>', AMTwoColsLayout::LEFT);

@@ -1,6 +1,6 @@
 <?
 /**
- * This box lists the active requests from users to join a project
+ * This box lists the active requests from users to join a community
  *
  * @autho Juliano Bittencourt <juliano@lec.ufrgs.br>
  **/
@@ -49,7 +49,7 @@ class AMBCommunityRequest extends AMColorBox implements CMActionListener {
     case "A_reject":
       try {
 	$group->rejectRequest($_REQUEST[frm_codeGroupJoin],$_REQUEST[frm_text]);
-	$msg = new AMMessage($user->name.' '.$_language[msg_rejected_user],get_class($this));
+	$msg = new AMMessage($user->name.' '.$_language[msg_user_rejected],get_class($this));
       }
       catch(CMDBException $e) {
 	//if occur some problem, remove the user

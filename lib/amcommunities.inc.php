@@ -46,7 +46,7 @@ class AMCommunities extends CMObj {
    * the new community
    **/
   public function save() {
-    if(($state==self::STATE_NEW) || ($state==self::STATE_DIRTY_NEW) ) {
+    if($this->state==self::STATE_NEW) {
       //create a new group for the project
       $group = new CMGroup;
       $group->description = "Community ".$this->name;
@@ -76,7 +76,13 @@ class AMCommunities extends CMObj {
       return false;
 
   }
-
+  
+  static function listAvaiableStatus() {
+    $q = new CMQuery('AMCommunityStatus');
+    $res = $q->execute();
+    return $res;    
+  }
+  
   public function listMembers($ini=0, $lenght=5) {
     $q = new CMQuery(AMUser);
     
@@ -120,6 +126,30 @@ class AMCommunities extends CMObj {
     $q->setFilter("CommunityNews.codeCommunity = $this->code");
     return $q->execute();
   }
+
+  
+  public function listForums() {
+    $q = new CMQuery('AMForum');
+    
+    $j = new CMJoin(CMJoin::INNER);
+    $j->setClass('AMCommunityForum');
+    $j->on("AMForum::code = AMCommunityForum::codeForum");
+    
+    $j2 = new CMJoin(CMJoin::LEFT);
+    $j2->on("AMForum::code=AMForumMessage::codeForum");
+    $j2->setClass('AMForumMessage');
+
+    $q->addJoin($j, "community");
+    $q->addJoin($j2, "messages");
+    $q->setFilter("codeCommunity=$this->code");
+    
+    $q->groupby("AMForum::code");
+    $q->addVariable("numMessages","count( AMForumMessage::code )");
+    $q->addVariable("lastMessageTime","max( AMForumMessage::timePost )");
+
+    return $q->execute();
+  }
+
 
   public function ListaMatriculas($lista="",$ini=0,$lenght=5){
     switch($lista){

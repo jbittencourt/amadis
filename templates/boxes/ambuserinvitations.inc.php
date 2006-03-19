@@ -11,7 +11,6 @@ class AMBUserInvitations extends AMColorBox implements CMActionListener {
 
   public function __construct() {
     global $_CMAPP;
-    //parent::__construct($_CMAPP[imlang_url]."/img_novidades_projetos.gif");
     parent::__construct("",self::COLOR_BOX_BLUE);
 
     try {
@@ -53,7 +52,7 @@ class AMBUserInvitations extends AMColorBox implements CMActionListener {
     case "A_accpect":
       //add the user to the project
       try {
-	$group->acceptInvitation($_REQUEST['inv_codeGroupMemberJoin']);
+	$group->acceptInvitation($_REQUEST['inv_codeGroupMemberJoin'], "");
 	unset($_SESSION['amadis']['projects']);
       }
       catch(CMGroupException $e) {
@@ -66,7 +65,7 @@ class AMBUserInvitations extends AMColorBox implements CMActionListener {
 
     case "A_reject":
       try {
-	$group->rejectInvitation($_REQUEST['inv_codeGroupMemberJoin']);
+	$group->rejectInvitation($_REQUEST['inv_codeGroupMemberJoin'], "");
       }
       catch(CMGroupException $e) {
 	$err = new AMError($_language['error_joining_project'],get_class($this));
@@ -80,7 +79,6 @@ class AMBUserInvitations extends AMColorBox implements CMActionListener {
 
   public function __toString() {
     global $_language,$_CMAPP;
-        
     if($this->__hasItems) {
       parent::add("<img src=\"$_CMAPP[images_url]/dot.gif\" width=20 height=20>");
       parent::add("<table border=0 cellspacing=1 cellpadding=2 width=\"100%\">");

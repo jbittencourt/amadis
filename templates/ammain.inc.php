@@ -349,22 +349,22 @@ class AMMain extends AMHTMLPage {
     global $_CMAPP,$_language;
     
     $link = $_CMAPP['services_url']."/admin/changepw.php?frm_codUser=$codeUser";
-    return '<button class="button-as-link" type="button" onClick="AM_openURL(\''.$link.'\')"><img src="'.$_CMAPP['images_url'].'/ico_ver_pagina.gif"> '.$_language['changepw_button'].'</button>';
+    return '<button class="admin_items button-as-link " type="button" onClick="AM_openURL(\''.$link.'\')"><img src="'.$_CMAPP['images_url'].'/ico_alt_senha.gif"> '.$_language['changepw_button'].'</button>';
   }
   
   
   public static function getChangeStatusButton($codeUser) {
     global $_CMAPP,$_language;
     
-      $link = $_CMAPP['services_url']."/admin/changestatus.php?frm_codUser=$codeUser";
-      return '<button class="button-as-link"type="button" onClick="AM_openURL(\''.$link.'\')"><img src="'.$_CMAPP['images_url'].'/ico_ver_pagina.gif"> '.$_language['changestatus_button'].'</button>';
+    $link = $_CMAPP['services_url']."/admin/changestatus.php?frm_codUser=$codeUser";
+    return '<button class="admin_items button-as-link " type="button" onClick="AM_openURL(\''.$link.'\')"><img src="'.$_CMAPP['images_url'].'/ico_alt_status.gif"> '.$_language['changestatus_button'].'</button>';
   }
   
   public static function getSendNotificationButton($codeUser){
     global $_CMAPP,$_language;
       
       $link = $_CMAPP['services_url']."/admin/sendnotif.php?frm_codUser=$codeUser";
-      return '<button class="button-as-link"type="button" onClick="AM_openURL(\''.$link.'\')"><img src="'.$_CMAPP['images_url'].'/ico_ver_pagina.gif"> '.$_language['sendn_button'].'</button>';    
+      return '<button class="admin_items button-as-link" type="button" onClick="AM_openURL(\''.$link.'\')"><img src="'.$_CMAPP['images_url'].'/ico_env_notificacao.gif"> '.$_language['sendn_button'].'</button>';    
   }
 
   public static function getAddFriendButton($codeUser) {
@@ -384,6 +384,13 @@ class AMMain extends AMHTMLPage {
     global $_CMAPP,$_language;
     $link = "$_CMAPP[services_url]/diario/diario.php?frm_codeUser=$codeUser";
     return '<button class="button-as-link" type="button" onClick="AM_openURL(\''.$link.'\')"><img src="'.$_CMAPP['images_url'].'/ico_diario.gif"> '.$_language['visit_diary'].'</button>';
+  }
+
+  public static function getTieButton($codeProject, $codeCommunity) {
+    global $_CMAPP,$_language;
+    $link = "$_CMAPP[services_url]/communities/tieproject.php?frm_codeCommunity=$codeComunity";
+    
+    return '<button class="button-as-link" type="button" onClick="AM_openURL(\''.$link.'\')"><img src="'.$_CMAPP['images_url'].'/ico_diario.gif"> '.$_language['tie_project'].'</button>';
   }
   //-------------------
 

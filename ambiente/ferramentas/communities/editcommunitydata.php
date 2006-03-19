@@ -2,6 +2,7 @@
 // Pedro Pimentel - 22-05-2005
 include("../../config.inc.php");
 $_language = $_CMAPP[i18n]->getTranslationArray("community_create");
+
 $pag = new AMTUpdateCommunity();   
 $_CMAPP[smartform] = array();
 $_CMAPP[smartform][language] = $_language;
@@ -25,8 +26,6 @@ function errorHandler($tipo,$_language){
   $pag = new AMTCommunities();  
   switch($tipo){
   case 0:
-
-
     $pag->addScript("window.alert('".$_language[error_no_community_id]."');location.href='../communities/communities.php'");
     break;
   case 1:
@@ -65,8 +64,6 @@ else{
     }
   }
 }
-
-
 
 
 //form box to interface
@@ -121,8 +118,6 @@ switch($_REQUEST[action]) {
 
      $_SESSION[atu_community]->loadDataFromRequest();
    }
-
-
 
    if(!empty($_FILES[frm_image])) {
      unset($_SESSION[cad_image]);
@@ -180,8 +175,6 @@ switch($_REQUEST[action]) {
      unset($_SESSION[cad_image]);
      unset($_SESSION[img_mod]);
    } 
-
-
 
    //salva a comunidade
    try {

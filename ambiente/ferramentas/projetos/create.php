@@ -82,7 +82,10 @@ switch($_REQUEST['action']) {
 
  default:
 
-   $fields_rec = array("title","description","status");
+   if(!empty($_REQUEST['frm_codeProjeto']))
+     $fields_rec = array("title","description","status");
+   else
+     $fields_rec = array("title","description");
       
    //formulary
    $form = new AMWSmartForm('AMProjeto',"cad_user",$_SERVER['PHP_SELF'],$fields_rec);
@@ -93,11 +96,10 @@ switch($_REQUEST['action']) {
    }else $_SESSION['cad_proj']='';
 
    $status = AMProjeto::listAvaiableStatus();
-   //   if(!empty($_REQUEST['frm_codeProjeto']))
-   $form->setSelect("status",$status,"code","name");
+   if(!empty($_REQUEST['frm_codeProjeto']))
+     $form->setSelect("status",$status,"code","name");
+   
    $form->addComponent("action",new CMWHidden("action","pag_1"));
-
-
 
    $cadBox->add($form);
    $cadBox->setTitle("<font class='txttitproj'>".$_language['general_data']."</font>");
@@ -176,6 +178,7 @@ switch($_REQUEST['action']) {
        foreach($_REQUEST['frm_codAreas'] as $area) {
 	 $temp[] = $area;
        }
+       note($_SESSION['cad_proj']);die();
        $_SESSION['cad_proj']->addVariable("areas",$temp);
      }
    }
