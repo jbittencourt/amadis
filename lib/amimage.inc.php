@@ -106,6 +106,10 @@ class AMImage extends AMArquivo {
 
   public function save() {
     global $_CMAPP;
+    
+    $dm = $this->getSize();
+    $s = round($this->tamanho/1024);
+    $this->metaDados = "$dm[x]|$dm[y]|$s";
 
     parent::save();
     //we must delete all the existing thumbnails of this image if the save was sucessfull

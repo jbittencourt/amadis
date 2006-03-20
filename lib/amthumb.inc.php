@@ -22,6 +22,11 @@ abstract class AMThumb extends AMImage {
   }
 
 
+  public function setSize($x="", $y="") {
+    $this->maxX = ($x=="" ? $this->maxX : $x);
+    $this->maxY = ($y=="" ? $this->maxY : $y);
+  }
+
   public function save() {
     global $_CMAPP;
 

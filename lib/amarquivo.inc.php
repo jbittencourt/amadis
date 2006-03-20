@@ -10,6 +10,7 @@ class AMArquivo extends CMObj {
      $this->addField("tipoMime",CMObj::TYPE_VARCHAR,100,1,0,0);
      $this->addField("tamanho",CMObj::TYPE_INTEGER,11,1,0,0);
      $this->addField("nome",CMObj::TYPE_VARCHAR,30,1,0,0);
+     $this->addField("metaDados",CMObj::TYPE_VARCHAR, 255,1,0,0);
      $this->addField("tempo",CMObj::TYPE_INTEGER,11,1,0,0);
 
      $this->addPrimaryKey("codeArquivo");

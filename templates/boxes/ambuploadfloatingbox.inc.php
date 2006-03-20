@@ -1,7 +1,8 @@
 <?
 
 class AMBUploadFloatingBox extends CMHTMLObj {
-  
+  protected $upload_type;
+
   public function __construct($theme="") {
     parent::__construct();
   }
@@ -58,10 +59,10 @@ class AMBUploadFloatingBox extends CMHTMLObj {
     
 
     //upload form
-    parent::add("<form action=\"".$_SERVER[PHP_SELF]."\" method=\"post\" enctype=\"multipart/form-data\"");
+    parent::add("<form action=\"".$_SERVER['PHP_SELF']."\" method=\"post\" enctype=\"multipart/form-data\"");
     parent::add(" onSubmit=\"return UploadCheckOverwrite(this, document.form_upload);\">");
     parent::add("<input type=hidden name=frm_codeProjeto value=$_REQUEST[frm_codeProjeto]>");
-    parent::add("<input type=hidden name=frm_codCourse value=$_REQUEST[frm_codCourse]>");
+    //parent::add("<input type=hidden name=frm_codCourse value=$_REQUEST[frm_codCourse]>");
     parent::add("<input type=hidden name=action value=A_send_files>");
     parent::add("<input type=hidden name=frm_dir value=$_REQUEST[frm_dir]>");
     parent::add("<input type=hidden name=frm_upload_type value=$_REQUEST[frm_upload_type]>");
@@ -69,8 +70,8 @@ class AMBUploadFloatingBox extends CMHTMLObj {
     
     parent::add("<span class=texto>$_language[send_files]</span><br>");
     
-    if(!empty($_REQUEST[frm_numFields])) {
-      for($i=0; $i<$_REQUEST[frm_numFields]; $i++) {
+    if(!empty($_REQUEST['frm_numFields'])) {
+      for($i=0; $i<$_REQUEST['frm_numFields']; $i++) {
 	parent::add("<input type=file name=frm_file_$i><br>");
       }
     } else {

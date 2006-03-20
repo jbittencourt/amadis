@@ -31,6 +31,28 @@ class AMFinderMessages extends CMObj {
 
     }
   }
+
+  /**
+   * Envia um mensagem para um usuario conectado
+   *
+   * @param string $mensagem Mensagem a ser enviada
+   * @param integer $para Codigo do usuario para quem se deseja enviar um mensagem
+   */
+  static public function sendMessage($recipient,$text) {
+    $message = new AMFinderMessages;
+    $message->codeSender = $_SESSION['user']->codeUser;
+    $message->codeRecipient = $recipient;
+    $message->message = $text;
+    $message->status = AMFinderMessages::ENUM_STATUS_NOT_READ;
+    $message->time = time();
+    try {
+      $message->save();
+    }catch(CMException $e ) {
+      return "not send message";
+    }
+    return "send message";
+  }
+
 }
 
 ?>

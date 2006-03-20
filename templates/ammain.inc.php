@@ -30,6 +30,7 @@ class AMMain extends AMHTMLPage {
     $this->requires("finder.js", self::MEDIA_JS);
     $this->requires("finder.css", self::MEDIA_CSS);
     $this->requires("envsession.js", self::MEDIA_JS);
+    $this->requires("tipms.css", self::MEDIA_CSS);
 
     $this->main_menu = new AMMainMenu();
 
@@ -37,13 +38,28 @@ class AMMain extends AMHTMLPage {
 
     $this->leftMargin = 260;
 
+    /** Set Finder hash table
+     *
+     */
+    if(!isset($_SESSION['amadis']['FINDER_ROOM']))
+      $_SESSION['amadis']['FINDER_ROOM'] = array();
+    
+    /** Set onLineUsers hash table
+     *
+     */
+    if(!isset($_SESSION['amadis']['onlineusers'])) 
+      $_SESSION['amadis']['onlineusers'] = array();
+    
     /** Set the communicator array and class requires
      *
      */
     $_SESSION['communicator'] = array();
 
-    $this->addCommunicatorHandler('AMFinder');
-    $this->addCommunicatorHandler('AMEnvSession');
+    self::addCommunicatorHandler('AMEnvSession');
+    self::addCommunicatorHandler('AMFinder');
+
+    //ajaxSync method
+    $this->setOnClose("ajaxSync.send();");
 
   }
 
@@ -179,9 +195,28 @@ class AMMain extends AMHTMLPage {
     $this->setIcon($_CMAPP['images_url']."/ico_pecinha.ico");
     $this->setTitle($_language['amadis']);
 
+    //logo
+    parent::add('<div id="amadis-logo"><img src="'.$_CMAPP['images_url'].'/pecas_amadis.png"></div>');
+	
+
+    //header
+    parent::add('<div id="amadis-header">');
+    parent::add("<img  src=\"".$_CMAPP['images_url']."/img_cabecalho.gif\" border=\"0\" width=\"488\">");    
+    parent::add('<div id="amadis-header-menu" >');
+    parent::add($this->main_menu);
+    parent::add('</div>');
+    
+    parent::add('<div id="amadis-header-line">');
+    parent::add('<img src="'.$_CMAPP['images_url'].'/bg_linhas_lateral.gif">');
+    parent::add('</div>');
+    parent::add('</div>');
+
     parent::add('<div id="amadis-global-wrapper">');
 
-    parent::add('<div id="content-column">');
+    //menu
+    parent::add($this->navmenu);
+
+    //parent::add('<div id="content-column">');
     parent::add('<div id="content">');
 
     if(!empty($this->imgid)) {
@@ -259,28 +294,9 @@ class AMMain extends AMHTMLPage {
     parent::add($this->contents);
 
 
-    parent::add('</div>');
-    parent::add('</div>');
+    parent::add('</div>');//content
 
-    parent::add('<div id="amadis-logo">');
-    parent::add('<img src="'.$_CMAPP['images_url'].'/pecas_amadis.png">');
-    parent::add('</div>');
-
-    parent::add('<div id="amadis-header">');
-    parent::add("<img  src=\"".$_CMAPP['images_url']."/img_cabecalho.gif\" border=\"0\" width=\"488\">");    
-    parent::add('<div id="amadis-header-menu" >');
-    parent::add($this->main_menu);
-    parent::add('</div>');
-    
-    parent::add('<div id="amadis-header-line">');
-    parent::add('<img src="'.$_CMAPP['images_url'].'/bg_linhas_lateral.gif">');
-    parent::add('</div>');
-    parent::add('</div>');
-
-
-    //menu
-    parent::add($this->navmenu);
-
+    //parent::add('</div>');//content-column
 
     //PAGE FOOTER
     parent::add("<div id=\"amadis-footer\">");
@@ -299,7 +315,6 @@ class AMMain extends AMHTMLPage {
     parent::add("</table>");
     parent::add('</div>');
 
-
     parent::add('</div>'); //global wrapper
 
     
@@ -316,10 +331,10 @@ class AMMain extends AMHTMLPage {
     
     if($_SESSION['environment']->logged) {
       parent::addPageBegin(self::getScript("var AMFinder = new amfinder(AMFinderCallBack);"));
-      parent::addPageEnd("<div id=\"finderAlert\"></div>");
-      //parent::addPageBegin(self::getScript("finder_url='$_CMAPP[services_url]/finder/finder.php'"));
-      //parent::addScript("Finder_initFinder(finder_url);");
-      //parent::addScript("Finder_chatSRC = '$_CMAPP[services_url]/finder/finder_chat.php'");
+      parent::addPageBegin(self::getScript("var Finder_chatSRC = '$_CMAPP[services_url]/finder/finder_chat.php';"));
+      
+      $this->setOnload("initEnvironment();");
+      
     }
 
 

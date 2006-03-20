@@ -10,9 +10,10 @@ class AMProjectLibraryEntry extends CMObj {
     $this->addPrimaryKey("libraryCode");
   }
  
-  public function __construct($project){
+  public function __construct($project=""){
     parent::__construct();
-    $this->projectCode = $project;
+    if(!empty($project))
+      $this->projectCode = $project;
   }
 
   public function libraryExist(){  // confere se a biblioteca do usuario existe.. caso nao, ele cria uma

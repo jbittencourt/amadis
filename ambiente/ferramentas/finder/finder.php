@@ -2,6 +2,13 @@
 
 include_once("../../config.inc.php");
 
+AMEnvSession::getFinderRequest();
+
+$f = new AMFinder;
+note($f->getNewMessages(34, 17));
+die();
+
+
 $pag = new AMMain;
 //$pag = new CMHTMLPage;
 $_language = $_CMAPP['i18n']->getTranslationArray("finder");

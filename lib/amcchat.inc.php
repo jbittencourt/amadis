@@ -1,6 +1,4 @@
 <?
-define('CHAT_ROOM', "chat_room");
-define('FINDER_ROOM', "finder_room");
 
 interface AMCChat {
 

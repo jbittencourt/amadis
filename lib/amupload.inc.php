@@ -35,7 +35,7 @@ class AMUpload {
     
     foreach($_REQUEST as $k=>$item) {
       if(substr($k, 0, 9) == "frm_file_") {
-	$file = $_SESSION[upload][current]."/$item";
+	$file = $_SESSION['upload']['current']."/$item";
 	if(file_exists($file)) {
 	  if(!is_dir($file)) {
 	    if(!unlink($file)) Throw new AMUECannotRemoveFile;
@@ -78,7 +78,7 @@ class AMUpload {
 
     if(!empty($_FILES)) {
       foreach($_FILES as $k=>$file) {
-	if($file[error] != 4) {
+	if($file['error'] != 4) {
 	  $rest = substr($k, 0,-2);
 	  if($rest == $fieldName || $k == $fieldName){
 	    if($moveFiles) {
@@ -89,18 +89,18 @@ class AMUpload {
       }
     }else Throw new AMEUFileDontUploaded;
 
-    $this->msgs[error] = $this->errors;
-    $this->msgs[files_exists] = $files_exists;
+    $this->msgs['error'] = $this->errors;
+    $this->msgs['files_exists'] = $files_exists;
     return $this->msgs;
 
   }
 
   public function moveFile($file) {
     if(empty($this->uploadDir)) Throw new AMUEUploadDirNotSpecified;
-    $file_name = $this->uploadDir."/".$file[name];
-    if(move_uploaded_file($file[tmp_name], $file_name)) {
+    $file_name = $this->uploadDir."/".$file['name'];
+    if(move_uploaded_file($file['tmp_name'], $file_name)) {
 	    
-      $this->filesUploaded[$file[name]] = "SUCCESS";
+      $this->filesUploaded[$file['name']] = "SUCCESS";
       
     }else $this->errors[] = explode(":", $this->getError($file));
   }
@@ -115,7 +115,7 @@ class AMUpload {
 
   private function getError($file){
     
-    switch($file[error]) {
+    switch($file['error']) {
     case UPLOAD_ERR_INI_SIZE:
       return "upload_err_ini_size:$file[name]";
       break;
@@ -147,12 +147,12 @@ class AMUpload {
       $i=0;
       foreach($dir as $item) {
        	$mime = $this->getMime($path."/".$item);
-	$dirMime[$i][mime] = $mime[0];
-	$dirMime[$i][name] = $item;
+	$dirMime[$i]['mime'] = $mime[0];
+	$dirMime[$i]['name'] = $item;
 	//timestamp
-       	$stat = stat($_SESSION[upload][current]."/".$item);
-	$dirMime[$i][time] = date("d/m/Y",$stat[mtime]);
-	$dirMime[$i][mime_info] = $_language[$mime[1]];
+       	$stat = stat($_SESSION['upload']['current']."/".$item);
+	$dirMime[$i]['time'] = date("d/m/Y",$stat['mtime']);
+	$dirMime[$i]['mime_info'] = $_language[$mime[1]];
 	$i++;  
       }
       return $dirMime;
@@ -225,9 +225,9 @@ class AMUpload {
     $file = array();
     foreach($_REQUEST as $k=>$item) {
       if(substr($k, 0, 9) == "frm_file_") {
-	$file[$i][mime] = $this->getMime($item);
-	$file[$i][path] = $_SESSION[upload][current]."/$item";
-	$file[$i][name] = $item;
+	$file[$i]['mime'] = $this->getMime($item);
+	$file[$i]['path'] = $_SESSION['upload']['current']."/$item";
+	$file[$i]['name'] = $item;
 	$i++;
       }
     }
@@ -235,9 +235,9 @@ class AMUpload {
   }
 
   public function toZip($files, $zipName) {
-    $command = "cd ".$_SESSION[upload][current]."; zip -r $zipName ";
+    $command = "cd ".$_SESSION['upload']['current']."; zip -r $zipName ";
     foreach($files as $file) {
-      $command .= $file[name]." ";
+      $command .= $file['name']." ";
     }
     
     return $command;
@@ -273,9 +273,9 @@ class AMUpload {
 	    $imgs[$file] = self::getImagesFromFolder("$dir$file");
 	}
 	if(ereg($ER, strtolower($file))){ 
-	  $imgs[$i][filename] = $file;
-	  $imgs[$i][src] = "$sufix/$file";
-	  $imgs[$i][url] = "$_CMAPP[pages_url]/$sufix/$file";
+	  $imgs[$i]['filename'] = $file;
+	  $imgs[$i]['src'] = "$sufix/$file";
+	  $imgs[$i]['url'] = "$_CMAPP[pages_url]/$sufix/$file";
 	}
 	$i++;
       }
@@ -289,7 +289,7 @@ class AMUpload {
    */
   static function getRAPaths($method = self::RELATIVE_PATHS) {
     
-    $folders = split("/",$_REQUEST[frm_dir]);
+    $folders = split("/",$_REQUEST['frm_dir']);
     
     $foldersP = array();
     $absolute = "";
@@ -300,8 +300,8 @@ class AMUpload {
     foreach($folders as $folder) {
       $absolute .= "$folder/";
       $relative = str_repeat("../",$j);
-      $foldersP[$i][absolute]  = $absolute;
-      $foldersP[$i][relative]  = $relative;
+      $foldersP[$i]['absolute']  = $absolute;
+      $foldersP[$i]['relative']  = $relative;
       $i++;
       $j--;
     }
@@ -316,14 +316,15 @@ class AMUpload {
   }
 
   static public function getRealPath($pathBase) {
-    $pathDir = $_SESSION[upload][current] = $pathBase;
-    $len = strlen($_SESSION[upload][current] = realpath($pathDir));
-    $real = realpath($pathDir.$_REQUEST[frm_dir]);
+    if(!isset($_REQUEST['frm_dir'])) $_REQUEST['frm_dir']='';
+    $pathDir = $_SESSION['upload']['current'] = $pathBase;
+    $len = strlen($_SESSION['upload']['current'] = realpath($pathDir));
+    $real = realpath($pathDir.$_REQUEST['frm_dir']);
     $temp = substr($real,0,$len);
     
-    if($_SESSION[upload][current] != $temp) {
+    if($_SESSION['upload']['current'] != $temp) {
       header("Location:$urlBase&frm_amerror=diretory_not_exists");
-    }else $_SESSION[upload][current] = $real;
+    }else $_SESSION['upload']['current'] = $real;
     
     return $real;
   }

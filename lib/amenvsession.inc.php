@@ -31,35 +31,73 @@ class AMEnvSession {
     };
 
   }
-  /**
-  public function getNewRequests() {
+
+
+  public function getFinderRequest() {
+    
+    //nao checar novas requisicoes para chats abertos
+    $sql = array();
+    foreach($_SESSION['amadis']['FINDER_ROOM'] as $item) {
+      if($item['open'] == 1) {
+	$sql[] = " codeSender != $item[recipient] ";
+      }
+    }
+    
+    $sql = implode(" AND ", $sql);
+    
     
     $q = new CMQuery('AMFinderMessages');
+
+    $projection  = "AMFinderMessages::code, AMFinderMessages::codeSender, AMFinderMessages::message, ";
+    $projection .= "AMUser::codeUser, AMUser::foto, AMUser::username";
+
+    $q->setProjection($projection);
+
+    $j = new CMJoin(CMJoin::INNER);
+    $j->setClass('AMUser');
+    $j->on("AMUser::codeUser = AMFinderMessages::codeSender");
+
+    $q->addJoin($j, "user");
     
-    $filter = "codeRecipient = ".$_SESSION['user']->codeUser." AND time >".(time()-6);
-    
+    if(!empty($sql)) {
+      $filter = "codeRecipient = ".$_SESSION['user']->codeUser." AND $sql AND AMFinderMessages::time > ".(time()-60);
+    }else $filter = "codeRecipient = ".$_SESSION['user']->codeUser." AND AMFinderMessages::time > ".(time()-60);
+
+
     $q->setFilter($filter);
     
-    $result =  $q->execute();
+    $result = $q->execute();
+ 
+    $ret = array();
+
     if($result->__hasItems()) {
       foreach($result as $item) {
-	$id = $_SESSION['user']->codeUser."_$item->codeSender";
 
-	if(isset($_SESSION['amadis']['FINDER_ROOM'][$id]) || empty($_SESSION['amadis']['FINDER_ROOM'][$id])) {
+	$id = $_SESSION['user']->codeUser."_$item->codeSender";
+	
+	$tip = new AMBFinderTip($item->user[0], $item);
+	
+	$ret[$item->codeSender] = array();
+	$ret[$item->codeSender]['tip'] = $tip->__toString();
+	$ret[$item->codeSender]['id'] = $id;
+
+	if(!isset($_SESSION['amadis']['FINDER_ROOM'][$id])) {
 	  $_SESSION['amadis']['FINDER_ROOM'][$id] = array("sender"=>$_SESSION['user']->codeUser,
 							  "recipient"=>$item->codeSender,
 							  "time"=>time(),
-							  "wait"=>array(),
-							  "open"=>false
+							  "wait"=>array($item->code=>serialize($item)),
+							  "open"=>0
 							  );
-	} else {
-	  $_SESSION['amadis']['FINDER_ROOM'][$id]['wait'][] = $item;
+	} else if($_SESSION['amadis']['FINDER_ROOM'][$id]['open'] == 0) {
+	  $_SESSION['amadis']['FINDER_ROOM'][$id]['wait'][$item->code] = serialize($item);
 	  $_SESSION['amadis']['FINDER_ROOM'][$id]['time'] = time();
-	}
+	} 
       }
+      return $ret;
+      
     } else return 0;
     
-  }**/
+  }
 
   /**Retorna os modos de visualizacao do usuario
    *

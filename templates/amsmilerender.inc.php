@@ -16,8 +16,8 @@ class AMSmileRender extends CMHTMLObj {
       $node = $_conf->app->interface->smilies;
 
       foreach($node->smile as $smile) {
-	$temp = $_CMAPP[images_url]."/smilies/".(string) $smile[image];
-	self::$_smilies[(string) $smile[key]] = "<img src=\"$temp\">";
+	$temp = $_CMAPP['images_url']."/smilies/".(string) $smile['image'];
+	self::$_smilies[(string) $smile['key']] = "<img src=\"$temp\">";
       }
       self::$_configured = 1;
     }

@@ -1,6 +1,6 @@
 var timeTable = new Array();
 timeTable['finder'] = 60000;
-timeTable['chat'] = 10000;
+timeTable['chat'] = 5000;
 
 var ajaxSync = {
   syncTableObjects:new Array(),
@@ -14,8 +14,8 @@ var ajaxSync = {
       var obj = this.syncTableObjects[i];
       var stringFunction = "ajaxSync.syncTableObjects['"+i+"'][0][ajaxSync.syncTableObjects['"+i+"'][1]]();";
       this.syncTable[i] = window.setInterval(stringFunction, timeTable[obj[2]]+overtime);
-      overtime += 5000;
-      alert(overtime);
+      overtime += 5000+Math.floor(Math.random()*11)+Math.floor(Math.random()*11);
+      //alert(timeTable[obj[2]]+overtime);
     }
   },
   register:function(obj, functionName, name, time) {
@@ -121,7 +121,7 @@ var AMEnvSessionCallBack = {
 	if(result[i].id != undefined) {
 	  var userInfo = document.createElement("DIV");
 	  userInfo.id = "finderAlert_"+result[i].id;
-	  
+	  //alert(result[i].id);
 	  userInfo.innerHTML = result[i].tip;
 	  
 	  userInfo.style.setProperty("display", "table", "");
@@ -162,8 +162,10 @@ function initEnvironment() {
 
   AMFinder.getonlineusers();
   AMFinder.reSync = function(){};
-  ajaxSync.register(AMFinder, "getonlineusers", "finderTimeOut", "finder");
-  ajaxSync.register(AMEnvSession, "getfinderrequest", "finderRequest", "finder");
+  AMEnvSession.reSync = function(){};
+
+//   ajaxSync.register(AMFinder, "getonlineusers", "finderTimeOut", "finder");
+//   ajaxSync.register(AMEnvSession, "getfinderrequest", "finderRequest", "finder");
 
   //var w = window.open('http://www.yahoo.com','win2');
   //ajaxSync.register(w, "focus", 'win2', 'chat');

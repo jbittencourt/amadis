@@ -212,9 +212,46 @@ class AMCommunities extends CMObj {
     return $g;
   }
 
+  public function getOpenRooms() {
+    $q = new CMQuery('AMChatRoom');
+
+    $j = new CMJoin(CMJoin::NATURAL);
+    $j->setClass('AMChatsCommunities');
+
+    $q->addJoin($j, "room");
+
+    $time = time();
+    $q->setFilter("codeCommunity = ".$this->code." AND beginDate <= $time AND endDate > $time");
+
+    return $q->execute();
+   
+  }
+
+  public function getMarkedChats() {
+    
+    $q = new CMQuery('AMChatRoom');
+    
+    $j = new CMJoin(CMJoin::NATURAL);
+    $j->setClass('AMChatsCommunities');
+    $j->fake = true;
+
+    $j1 = new CMJoin(CMJoin::INNER);
+    $j1->setClass('AMUser');
+    $j1->on("AMUser::codeUser = AMChatRoom::codeUser");
+
+    $q->addJoin($j1, "user");
+    $q->addJoin($j, "aux");
+    
+    $q->setProjection("ChatRoom.*, User.name");
+    $q->groupBy("AMChatRoom::codeRoom");
+    $q->setFilter("beginDate > ".time()." AND codeCommunity = $this->code");
+
+    return $q->execute();
+
+
+  }
+
 
 }
-
-
 
 ?>

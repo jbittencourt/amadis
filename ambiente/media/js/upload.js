@@ -14,7 +14,7 @@ function UploadDownload(form, dir, upload_type, codeProjeto, codCourse) {
   else {
     form.action += "?action=A_download&frm_upload_type="+upload_type+"&frm_dir="+dir;
     if(codeProjeto != "") form.action += "&frm_codeProjeto="+codeProjeto;
-    else if(codCourse != "") form.action += "&frm_codCourse="+codCourse;
+    //else if(codCourse != "") form.action += "&frm_codCourse="+codCourse;
     form.submit();
   }
   
@@ -88,7 +88,7 @@ function UploadDelete(fileId) {
     if(confirm(msg)) {
       form.action = form.action+"?action=A_delete&frm_upload_type="+upload_type+"&frm_dir="+dir;
       if(codeProjeto != "") form.action += "&frm_codeProjeto="+codeProjeto;
-      else if(codeCourse != "") form.action += "&frm_codCourse="+codeCourse;
+      //else if(codeCourse != "") form.action += "&frm_codCourse="+codeCourse;
       form.submit();
     }// else return false;
   }else alert(lang_not_selected_files);
@@ -105,7 +105,7 @@ function UploadNewFolder(urlBase, upload_type, dir, codeProjeto, codCourse) {
       url  = urlBase+"?action=A_create_dir&frm_upload_type="+upload_type;
       url += "&frm_dir="+dir+"&frm_dirName="+nomFolder;
       if(codeProjeto != "") url += "&frm_codeProjeto="+codeProjeto;
-      else if(codCourse != "") url += "&frm_codCourse="+codCourse;
+      //else if(codCourse != "") url += "&frm_codCourse="+codCourse;
       redirectPage(url);
     }
   }else {
@@ -138,7 +138,7 @@ function UploadOpenFolder(file) {
   param = file.split(",");
   url  = baseUrl+"?frm_dir=/"+param[0]+"&frm_upload_type="+upload_type;
   if(codeProjeto != '') url+= "&frm_codeProjeto="+codeProjeto;
-  if(codeCourse != '') url += "&frm_codeCourse="+codeCourse+"&"+path;
+  //if(codeCourse != '') url += "&frm_codeCourse="+codeCourse+"&"+path;
   location.href=url;
 }
 
@@ -146,7 +146,7 @@ function UploadUnzip(file) {
   param = file.split(",");
   path = "action=A_unzip_file&frm_filename="+param[0];
   url  = baseUrl+"?frm_dir="+dir+"&frm_upload_type="+upload_type+"&frm_codeProjeto="+codeProjeto;
-  url += "&frm_codeCourse="+codeCourse+"&"+path;
+  //url += "&frm_codeCourse="+codeCourse+"&"+path;
   location.href=url;
 }
 
@@ -166,7 +166,7 @@ function UploadEditFile(file) {
   url  = baseUrl+"?action=A_open_file&frm_upload_type="+upload_type;
   url += "&frm_dir="+dir+"&frm_filename="+param[0];
   if(codeProjeto != "") url += "&frm_codeProjeto="+codeProjeto;
-  else if(codeCourse != "") url += "&frm_codCourse="+codeCourse;
+  //else if(codeCourse != "") url += "&frm_codCourse="+codeCourse;
   redirectPage(url);
   
 }
@@ -209,7 +209,7 @@ function UploadNewFile() {
 	url  = baseUrl+"?action=A_create_file&frm_upload_type="+upload_type;
 	url += "&frm_dir="+dir+"&frm_filename="+nomFile;
 	if(codeProjeto != "") url += "&frm_codeProjeto="+codeProjeto;
-	else if(codeCourse != "") url += "&frm_codCourse="+codeCourse;
+	//else if(codeCourse != "") url += "&frm_codCourse="+codeCourse;
 	redirectPage(url);
       }
     }
@@ -317,8 +317,8 @@ function UploadGetSrcDir() {
 
   if(codeProjeto != '') {
     src += "codeProjeto="+codeProjeto+"&frm_upload_type=project";
-  }else if(codeCourse != '') {
-    src += "codeCourse="+codeCourse+"&frm_upload_type=course";
+  //}else if(codeCourse != '') {
+  //  src += "codeCourse="+codeCourse+"&frm_upload_type=course";
   }else {
     src += "frm_upload_type=user";
   }

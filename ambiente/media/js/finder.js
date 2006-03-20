@@ -63,12 +63,15 @@ var AMFinderCallBack = {
   
 }
 
-// function Finder_openChatWindow(src,userId) {
-//   if(finderWindows[userId] == null) {
-//     var param = "resizable=no,width=590,height=435,status=no,location=no,scrollig=yes,toolbar=no,scrollbars=yes";
-//     finderWindows[userId] = window.open(src, "Finder_"+userId, param);
-//   }else finderWindows[userId].focus();
-// }
+function Finder_openChatWindowTIP(userId) {
+  if(ajaxSync.syncTableObjects['finderRoom_'+userId] != null) {
+    ajaxSync.syncTableObjects['finderRoom_'+userId][0].focus();
+  }else {
+    var param = "resizable=no,width=676,height=442,status=no,location=no,scrollig=yes,toolbar=no,scrollbars=yes";
+    var w = window.open(Finder_chatSRC+"?frm_codeUser="+userId, "finderRoom_"+userId, param);
+    ajaxSync.register(w, 'Finder_getNewMessages', 'finderRoom_'+userId, 'chat');//Finder_getNewMessages
+  }
+}
 
 
 function Finder_openChatWindow(e) {

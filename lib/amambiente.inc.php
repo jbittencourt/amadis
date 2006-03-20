@@ -483,8 +483,8 @@ class AMAmbiente extends CMEnvironment {
    *
    * Toda a vez que um usuario autentica-se no AMADIS o CMEnvironment grava uma informacao de tempo
    * referente a ele. Essa informacao e associada com o session_id da secao do browser. Depois de
-   * um timeout definidio no arquivo de config.ini, se o usuario nao retornar a navegar, sua sessao e
-   * dada como encerrada e o flagEncerrado e setado para 1.
+   * um timeout definidio no arquivo de config.xml, se o usuario nao retornar a navegar, sua sessao e
+   * dada como encerrada e o flagEnded e setado para 1.
    * @return class Retorna uma CMContainer com as informacoes de sessao de cada usuario. Note que nao sao retornados os AMUsers, esses devem ser construido pelos usuarios a partir da propriedade CMEnvSession->codeUser.
    */
   public function getOnLineUsers($camposProj="") {
@@ -493,6 +493,7 @@ class AMAmbiente extends CMEnvironment {
     
     //$filter = "EnvSession.flagEnded = '".CMEnvSession::ENUM_FLAGENDED_NOT_ENDED."'";
     $filter  = "Friends.codeUser = ".$_SESSION['user']->codeUser;//." AND EnvSession.timeEnd < ".CMEnvSession::getTimeout(time());
+    $filter .= " AND Friends.status = '".AMFriend::ENUM_STATUS_ACCEPTED."'";
     $filter .= " AND EnvSession.flagEnded = '".CMEnvSession::ENUM_FLAGENDED_NOT_ENDED."'";
  
     $q->setProjection("EnvSession.*");

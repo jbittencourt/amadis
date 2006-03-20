@@ -225,6 +225,9 @@ class AMTForumRender extends CMHTMLObj {
     if(empty($messages)) {
       parent::addScript("Forum_displayReply('reply_forum_new_topic',0,'')");
     }
+    
+    if(!isset($_SESSION['amadis']['forum']['visualization'])) 
+      $_SESSION['amadis']['forum']['visualization'] = "close";
 
     if($_SESSION['amadis']['forum']['visualization']=="open") {
       parent::addPageEnd(CMHTMLObj::getScript("Forum_openAllMessages()"));

@@ -17,13 +17,13 @@ class AMWRichTextArea extends CMWFormEl {
     $this->setName($name);
     $this->width = $width;
     $this->height = $height;
-    $this->prop[value] = $value;
+    $this->prop['value'] = $value;
   }
 
 
   function safeContent() {    
     //returns safe code for preloading in the RTE
-    $tmpString = $this->prop[value];
+    $tmpString = $this->prop['value'];
 
 
     //Convert all types of single quotes
@@ -55,7 +55,7 @@ class AMWRichTextArea extends CMWFormEl {
     }
 
     if(!self::$_initialized) {
-      $this->addPageBegin("<script>initRTE('".$_CMAPP[images_url]."/rte/', '$_CMAPP[media_url]/rte/', '', true);</script>");
+      $this->addPageBegin("<script>initRTE('$_CMAPP[images_url]/rte/', '$_CMAPP[media_url]/rte/', '', true);</script>");
       self::$_initialized = true;
     }
 

@@ -104,37 +104,43 @@ class AMNavMenu extends CMHTMLObj {
       if($_SESSION['amadis']['menus']['friends']==1) {
 	$tree->open();
       }
-
+      //note($_SESSION);
       if($friends->__hasItems()) {
+
 	foreach($friends as $friend) {
- 	  $str="";
-	  
-	  switch($_SESSION['amadis']['FINDER_ROOM']) {
-	  case  AMFinder::FINDER_NORMAL_MODE :
-	    $ico = $_CMAPP['images_url']."/ico_user_on_line.png";
-	    $onClick = "onclick=\"Finder_openChatWindow('$_CMAPP[services_url]/finder/finder_chat.php?frm_codeUser=$friend->codeUser', $friend->codeUser);\"";
-	    break;
-	  case  AMFinder::FINDER_BUSY_MODE :
-	    $ico = $_CMAPP['images_url']."/ico_user_ocupado.png";
-	    $onClick = "onclick=\"Finder_openChatWindow('$_CMAPP[services_url]/finder/finder_chat.php?frm_codeUser=$friend->codeUser', $friend->codeUser);\"";
-	    break;
-	  case  AMFinder::FINDER_HIDDEN_MODE :
-	    $ico = $_CMAPP['images_url']."/ico_user_off_line.png";
-	    $onClick = "onclick=\"Finder_openChatWindow('$_CMAPP[services_url]/finder/finder_chat.php?frm_codeUser=$friend->codeUser', $friend->codeUser);\"";
-	    break;
-	  default:
-	    $ico = $_CMAPP['images_url']."/ico_user_off_line.png";
-	    $onClick = "onclick=\"Finder_openChatWindow('$_CMAPP[services_url]/finder/finder_chat.php?frm_codeUser=$friend->codeUser', $friend->codeUser);\"";
-	    //$onClick = "";
-	    break;
+	  if(!isset($_SESSION['amadis']['onlineusers'][$friend->codeUser])) {
+	    $_SESSION['amadis']['onlineusers'][$friend->codeUser] = array();
+	    $_SESSION['amadis']['onlineusers'][$friend->codeUser]['flagEnded'] = CMEnvSession::ENUM_FLAGENDED_ENDED;
+	    $_SESSION['amadis']['onlineusers'][$friend->codeUser]['visibility'] = AMFinder::FINDER_NORMAL_MODE;
 	  }
-	  //$onClick = "";
-	  //$ico = "";
-	  $icoOnline = "<img id=\"UserIco_$friend->codeUser\" alfign=\"middle\" src=\"$ico\" $onClick>";
+	  
+	  if($_SESSION['amadis']['onlineusers'][$friend->codeUser]['flagEnded'] == CMEnvSession::ENUM_FLAGENDED_NOT_ENDED) {
+
+	    switch($_SESSION['amadis']['onlineusers'][$friend->codeUser]['visibility']) {
+	    case AMFinder::FINDER_NORMAL_MODE:
+	      $ico = "$_CMAPP[images_url]/ico_user_on_line.png";
+	      $onClick = "onclick=\"Finder_openChatWindow('$_CMAPP[services_url]/finder/finder_chat.php?frm_codeUser=$friend->codeUser', '".$_SESSION['user']->codeUser."_$friend->codeUser');\"";
+	      break;
+	    case  AMFinder::FINDER_BUSY_MODE :
+	      $ico = $_CMAPP['images_url']."/ico_user_ocupado.png";
+	      $onClick = "onclick=\"Finder_openChatWindow('$_CMAPP[services_url]/finder/finder_chat.php?frm_codeUser=$friend->codeUser', '".$_SESSION['user']->codeUser."_$friend->codeUser');\"";
+	      break;
+	    case  AMFinder::FINDER_HIDDEN_MODE :
+	      $ico = $_CMAPP['images_url']."/ico_user_off_line.png";
+	      $onClick = "onclick=\"Finder_openChatWindow('$_CMAPP[services_url]/finder/finder_chat.php?frm_codeUser=$friend->codeUser', '".$_SESSION['user']->codeUser."_$friend->codeUser');\"";
+	      break;
+	    }
+	    
+	  } else {
+	    $ico = $_CMAPP['images_url']."/ico_user_off_line.png";
+	    $onClick="";
+	    //$onClick = "onclick=\"Finder_openChatWindow('$_CMAPP[services_url]/finder/finder_chat.php?frm_codeUser=$friend->codeUser', '".$_SESSION['user']->codeUser."_$friend->codeUser');\"";
+	    
+	  }
+	  $icoOnline = "<img id=\"UserIco_$friend->codeUser\" align=\"middle\" src=\"$ico\" $onClick>";
 	  $tree->add("$icoOnline<a class=\"mnlateral\" href=\"".$_CMAPP['services_url']."/webfolio/userinfo_details.php?frm_codeUser=$friend->codeUser\"> $friend->name $str</a><br>");
-      }
-    }
-      else {
+	}
+      } else {
 	$tree->add("<font class=\"texto\">$_language[no_friends]</font>");
       }
       
@@ -222,8 +228,9 @@ class AMNavMenu extends CMHTMLObj {
 
 		
     //end of items
-    parent::add('</div>');
     parent::add('<div id="footer-menu"><img src="'.$_CMAPP['images_url'].'/img_footer_menu.gif"></div>');
+    parent::add('</div>');
+
     parent::add('</div>');
  
    

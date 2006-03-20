@@ -243,9 +243,47 @@ class AMProjeto extends CMObj {
     }
     return $projlib->libraryCode;
   }
+  
+  public function getOpenRooms() {
+    $q = new CMQuery('AMChatRoom');
+
+    $j = new CMJoin(CMJoin::NATURAL);
+    $j->setClass('AMChatsProject');
+
+    $q->addJoin($j, "room");
+
+    $time = time();
+    $q->setFilter("codeProject = ".$this->codeProject." AND beginDate <= $time AND endDate > $time");
+
+    return $q->execute();
+   
+  }
+
+  public function getMarkedChats() {
+    
+    $q = new CMQuery('AMChatRoom');
+    
+    $j = new CMJoin(CMJoin::NATURAL);
+    $j->setClass('AMChatsProject');
+    $j->fake = true;
+
+    $j1 = new CMJoin(CMJoin::INNER);
+    $j1->setClass('AMUser');
+    $j1->on("AMUser::codeUser = AMChatRoom::codeUser");
+
+    $q->addJoin($j1, "user");
+    $q->addJoin($j, "aux");
+    
+    $q->setProjection("ChatRoom.*, User.name");
+    $q->groupBy("AMChatRoom::codeRoom");
+    $q->setFilter("beginDate > ".time()." AND codeProject = $this->codeProject");
+
+    return $q->execute();
+
+
+  }
 
 }
-
 
 /**
  * Auxiliary classes for AMProject
@@ -289,7 +327,6 @@ class AMProjetoComentario extends CMObj {
     $this->addPrimaryKey("codComentario");
   }
 }
-
 
 
 

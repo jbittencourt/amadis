@@ -275,39 +275,40 @@ class AMUser extends CMUser {
   }
 
   public function listFriends() {
-    //unset($_SESSION['amadis']['friends']);
+    unset($_SESSION['amadis']['friends']);
     if(!isset($_SESSION['amadis']['friends'])) {
-
+      
       $q = new CMQuery('AMUser');
       
       $j1 = new CMJoin(CMJoin::INNER);
       $j1->setClass('AMFriend');
 
       
-      $j2 = new CMJoin(CMJoin::INNER);
-      $j2->setClass('CMEnvSession');
-      $j2->on("EnvSession.codeUser = Friends.codeFriend");
+      //$j2 = new CMJoin(CMJoin::INNER);
+      //$j2->setClass('CMEnvSession');
+      //$j2->on("EnvSession.codeUser = Friends.codeFriend");
       
       $q->addJoin($j1,"usuarios");
-      $q->addJoin($j2,"sessions");
+      //$q->addJoin($j2,"sessions");
 
-      $j1->on("Friends.codeFriend=User.codeUser");
       
-      $timeOut = CMEnvSession::getTimeOut(time());
-      $q->setProjection("User.*");
+      //$timeOut = CMEnvSession::getTimeOut(time());
       $q->setFilter("Friends.codeUser= $this->codeUser AND Friends.status = '".AMFriend::ENUM_STATUS_ACCEPTED."'");
-      $q->setOrder("EnvSession.timeEnd DESC");
-      $q->groupBy("EnvSession.codeUser");
-
+      //$q->setOrder("EnvSession.timeEnd DESC");
+      //$q->groupBy("EnvSession.codeUser");
+      
+      //$q->setProjection("User.*, EnvSession.*");
+      
       $ret = $q->execute();
-    
-      //$_SESSION['amadis']['friends'] = $ret;
-    
-      //$_SESSION['amadis']['friends'] = serialize($ret);
+      
+      $_SESSION['amadis']['friends'] = $ret;
+      
+      $_SESSION['amadis']['friends'] = serialize($ret);
       
     }else $ret = unserialize($_SESSION['amadis']['friends']);
     
-    
+    //$_SESSION['amadis']['friends'] = $_SESSION['amadis']['friends'];
+
     return $ret;
     
   }  
@@ -694,7 +695,7 @@ class AMUser extends CMUser {
 
     return $q->execute();
   }
-
+  
 }
 
 ?>

@@ -53,24 +53,23 @@ class AMMainMenu extends CMHtmlObj {
     global $_CMAPP;
     
     if(!empty($this->itens)) {
-      parent::add("<table valign=bottom cellspacing=0 cellpadding=0><tr>");
-
+      parent::add("<div class='menuitems'>");
+	  parent::add("<table valign=bottom cellspacing=0 cellpadding=0><tr>");
       $menu = array();
       foreach($this->itens as $k=>$item) {
-	$temp ="<td>";
-	if($item instanceof CMHTMLObj) {
-	  $temp.= $item->__toString();
-	}
-	else {
-	  $temp.= $item;
-	}
-	$menu[]= $temp."</td>";
-	
+		$temp ="<td>";
+		if($item instanceof CMHTMLObj) {
+	  		$temp.= $item->__toString();
+		} else {
+		  $temp.= $item;
+		}
+		$menu[]= $temp."</td>";
       }
 
       parent::add(implode("<td valign=bottom><img src=\"".$_CMAPP['images_url']."/menu_separador.gif\"></td>",$menu));
       
       parent::add("</tr></table>");
+	  parent::add("</div>");
 
     }
 

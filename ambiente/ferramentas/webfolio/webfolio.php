@@ -73,8 +73,10 @@ $box->add(new AMBForunsParticipate($forums),
 $box->add("<br>", AMTwoColsLayout::LEFT);
 $box->add(new AMBUserMessages, AMTwoColsLayout::LEFT);
 
-$box->add("<br>", AMTwoColsLayout::LEFT);
+
+//$box->add("<br>", AMTwoColsLayout::LEFT);
 //$box->add(new AMBChatsUser, AMTwoColsLayout::LEFT);
+
 
 
 $box->add(new AMBMyWebfolio, AMTwoColsLayout::RIGHT);

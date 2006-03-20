@@ -49,7 +49,7 @@ class AMBForum extends CMHTMLObj {
       parent::add("<td class=\"forum_project_col\" id=\"a2\" align=\"center\">$item->numMessages</td>");
       parent::add("<td class=\"forum_project_col\" id=\"a1\" align=\"center\">");
       if($item->lastMessageTime>0) {
-	 parent::add(date($_language[date_format],$item->lastMessageTime));
+	 parent::add(date($_language['date_format'],$item->lastMessageTime));
       }
       parent::add("</td>");
       parent::add("</tr>");

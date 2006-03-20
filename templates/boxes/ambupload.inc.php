@@ -1,6 +1,6 @@
 <?
 
-include($_CMDEVEL[path]."/cminterface/widgets/cmwjswin.inc.php");
+include("cminterface/widgets/cmwjswin.inc.php");
 
 class AMBUpload extends CMHTMLObj {
 
@@ -72,7 +72,7 @@ class AMBUpload extends CMHTMLObj {
      */
   
     if(!empty($this->dir)) {
-     
+      $i=0;
       foreach($this->dir as $item) {
 	
 	if($i%2) $color="#EFF4FF";
@@ -87,31 +87,33 @@ class AMBUpload extends CMHTMLObj {
 	$js  = "document.getElementById('frm_chk_row_$i').checked = ";
 	$js .= "(document.getElementById('frm_chk_row_$i').checked ? false : true);";
 	
-	switch($_REQUEST[frm_upload_type]) {
+	switch($_REQUEST['frm_upload_type']) {
 	
 	case "project":
-	  $popUrlBase = self::getScript("popUrlBase = '$_CMAPP[pages_url]/projetos/projeto_".$_REQUEST[frm_codeProjeto].$_REQUEST[frm_dir]."';");
+	  $popUrlBase = self::getScript("popUrlBase = '$_CMAPP[pages_url]/projetos/projeto_".$_REQUEST['frm_codeProjeto'].$_REQUEST['frm_dir']."';");
 	  break;
 	
 	case "user":
-	  $popUrlBase = self::getScript("popUrlBase = '$_CMAPP[pages_url]/users/user_".$_SESSION[user]->codeUser.$_REQUEST[frm_dir]."';");
+	  $popUrlBase = self::getScript("popUrlBase = '$_CMAPP[pages_url]/users/user_".$_SESSION['user']->codeUser.$_REQUEST['frm_dir']."';");
 
 	  break;
 	}
 	
 	//id do arquivo
 	$id = "Upload_$item[mime]|$item[name]|".$i."|$item[mime]";	
-
+	
 	parent::add("<tr $jsHO>");
 	
 	parent::add("  <td bgcolor=\"$color\" valign=\"top\" width=\"10\" class=\"texto\">");
-	parent::add("    <input onClick=\"$jsC\" name=\"frm_file_$item[name]\" id=\"frm_chk_row_$i\" ");
+	parent::add("    <input name=\"frm_file_$item[name]\" id=\"frm_chk_row_$i\" ");
+	//parent::add("    <input onClick=\"$jsC\" name=\"frm_file_$item[name]\" id=\"frm_chk_row_$i\" ");
 	parent::add("    value=\"$item[name]\" align=\"center\" type=\"checkbox\">");
 	parent::add("  </td>");
 	parent::add("  <td bgcolor=\"$color\" onMouseDown='' class=\"texto\">");
 	
-	switch($item[mime]) {
+	switch($item['mime']) {
 	default:
+	  if(!isset($link)) $link='';
 	  parent::add("    <a id='$id' onClick=\"$link\" class='curso'>");
 	  parent::add("    <img id='$id' border=0 src=\"$_CMAPP[images_url]/icon_$item[mime].gif\" align=\"middle\"></a> ");
 	  parent::add("    <a id='$id' onClick=\"$link\" href=\"#\" class=\"cinza\">$item[name]</a>");
@@ -139,8 +141,9 @@ class AMBUpload extends CMHTMLObj {
     parent::addPageBegin(self::getScript("numItems = '$i';"));
     parent::addPageBegin(self::getScript("dir = '$_REQUEST[frm_dir]';"));
     parent::addPageBegin(self::getScript("upload_type = '$_REQUEST[frm_upload_type]';"));
+    if(!isset($_REQUEST['frm_codeProjeto'])) $_REQUEST['frm_codeProjeto'] = '';
     parent::addPageBegin(self::getScript("codeProjeto = '$_REQUEST[frm_codeProjeto]';"));
-    parent::addPageBegin(self::getScript("codeCourse = '$_REQUEST[frm_codeCourse]';"));
+    //parent::addPageBegin(self::getScript("codeCourse = '$_REQUEST[frm_codeCourse]';"));
 
     //variaveis de linguagem
     parent::addPageBegin(self::getScript("lang_fields_to_delete = '$_language[fields_to_delete]';"));
@@ -166,7 +169,7 @@ class AMBUpload extends CMHTMLObj {
     parent::add("<table cellpadding='0' cellspacing='0' border='0' width='100%'>");
     parent::add("   <tr>");
     parent::add("   <td align='left' valign='top'>");
-    parent::add("<img class='cursor' onClick='AM_getElement(\"upload_box\").style.visibility=\"visible\"' src='$_CMAPP[imlang_url]/box_up_enviar.gif'><img class='cursor' onClick='UploadDownload(document.form_upload, \"$_REQUEST[frm_dir]\",\"$_REQUEST[frm_upload_type]\",\"$_REQUEST[frm_codeProjeto]\",\"$_REQUEST[frm_codeCourse]\");' src='$_CMAPP[imlang_url]/box_up_baixar.gif'>");
+    parent::add("<img class='cursor' onClick='AM_getElement(\"upload_box\").style.visibility=\"visible\"' src='$_CMAPP[imlang_url]/box_up_enviar.gif'><img class='cursor' onClick='UploadDownload(document.form_upload, \"$_REQUEST[frm_dir]\",\"$_REQUEST[frm_upload_type]\",\"$_REQUEST[frm_codeProjeto]\",\"\");' src='$_CMAPP[imlang_url]/box_up_baixar.gif'>");
     parent::add("</td>");
     parent::add("   <td align='right'>");
     parent::add("   <table cellpadding='0' cellspacing='10' border='0' align='right'>");
@@ -177,8 +180,8 @@ class AMBUpload extends CMHTMLObj {
     parent::add("      <td valign=\"top\"><img class='cursor' onClick='UploadDelete();'");//document.form_upload, '$i', ");
     //    parent::add("'$_REQUEST[frm_dir]', '$_REQUEST[frm_upload_type]','$_REQUEST[frm_codeProjeto]', '$_REQUEST[frm_codCourse]')\" ");
     parent::add(" src=\"$_CMAPP[imlang_url]/bt_arq_excluir.gif\" border=0></td>");
-    parent::add("      <td valign=\"top\"><img class='cursor' onClick=\"UploadNewFolder('$_SEVER[PHP_SELF]', ");
-    parent::add("'$_REQUEST[frm_upload_type]', '$_REQUEST[frm_dir]','$_REQUEST[frm_codeProjeto]','$_REQUEST[frm_codCourse]');\" ");
+    parent::add("      <td valign=\"top\"><img class='cursor' onClick=\"UploadNewFolder('$_SERVER[PHP_SELF]', ");
+    parent::add("'$_REQUEST[frm_upload_type]', '$_REQUEST[frm_dir]','$_REQUEST[frm_codeProjeto]','');\" ");
     parent::add("src=\"$_CMAPP[imlang_url]/bt_arq_novapasta.gif\" border=0></td>");
 
     parent::add("   </tr>");

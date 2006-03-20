@@ -141,7 +141,8 @@ function writeRichText(rte, html, width, height, buttons, readOnly) {
       document.writeln('		<td><div id="hilitecolor_' + rte + '"><img class="rteImage" src="' + imagesPath + 'bgcolor.gif" width="25" height="24" alt="Background Color" title="Background Color" onClick="dlgColorPalette(event,\'' + rte + '\', \'hilitecolor\', \'\')"></div></td>');
       document.writeln('		<td><img class="rteVertSep" src="' + imagesPath + 'blackdot.gif" width="1" height="20" border="0" alt=""></td>');
       document.writeln('		<td><img class="rteImage" src="' + imagesPath + 'hyperlink.gif" width="25" height="24" alt="Insert Link" title="Insert Link" onClick="dlgInsertLink(\'' + rte + '\', \'link\')"></td>');
-      document.writeln('		<td><img class="rteImage" src="' + imagesPath + 'image.gif" width="25" height="24" alt="Add Image" title="Add Image" onClick="addImage(\'' + rte + '\')"></td>');
+//      document.writeln('		<td><img class="rteImage" src="' + imagesPath + 'image.gif" width="25" height="24" alt="Add Image" title="Add Image" onClick="addImage(\'' + rte + '\')"></td>');
+      document.writeln('		<td><img class="rteImage" src="' + imagesPath + 'image.gif" width="25" height="24" alt="Add Image" title="Add Image" onClick="dlgInsertImage(\'' + rte + '\', \'image\')"></td>');
       document.writeln('		<td><div id="table_' + rte + '"><img class="rteImage" src="' + imagesPath + 'insert_table.gif" width="25" height="24" alt="Insert Table" title="Insert Table" onClick="dlgInsertTable(\'' + rte + '\', \'table\', \'\')"></div></td>');
       if (isIE) {
 	document.writeln('		<td><img class="rteImage" src="' + imagesPath + 'spellcheck.gif" width="25" height="24" alt="Spell Check" title="Spell Check" onClick="checkspell()"></td>');
@@ -453,9 +454,17 @@ function setColor(color) {
   showHideElement('cp' + rte, "hide");
 }
 
+function dlgInsertImage(rte, command) {
+  //function to open/close insert table dialog
+  //save current values
+  parent.command = command;
+  currentRTE = rte;
+  InsertImage = popUpWin(includesPath + 'insert_image.php', 'InsertImage', 460, 622, '');
+}
+
 function addImage(rte) {
   //function to add image
-  imagePath = prompt('Enter Image URL:', 'http://');				
+  imagePath = prompt('Enter Image URL:', 'http://');
   if ((imagePath != null) && (imagePath != "")) {
     rteCommand(rte, 'InsertImage', imagePath);
   }
@@ -686,3 +695,4 @@ function lowerButton(e) {
     el.className = 'rteImageLowered';
   }
 }
+

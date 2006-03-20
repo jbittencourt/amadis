@@ -78,7 +78,7 @@ class AMLibrary extends CMObj{
     }      
   }
   
-  public function saveEntry(){
+  public function saveEntry($ret=true){
     $formName = $_REQUEST['nomeCampo']; // recebe o nome do campo de tipo 'file'
     
     $tipo = explode("/", $_FILES[$formName]['type']);
@@ -104,17 +104,18 @@ class AMLibrary extends CMObj{
     if(empty($d)) {
       return false;
     }
-    try{
+    try {
       $file->save();	//salva o arquivo
       $filelib->libraryCode = $this->code;
       $filelib->filesCode = $file->codeArquivo;
       $filelib->time = time();
       $filelib->save();
+
     }catch(CMException $e){
       die($e->getMessage());
     }  
     //} //aqui fecha o if la de cima, qnd eu testo a ext do arquivo..
-    return true;
+    return $ret;
   }//fecha function salva
 
 
@@ -142,7 +143,7 @@ class AMLibrary extends CMObj{
   public function getLastFiles($limit){
     try{
 
-      $q = new CMQuery(AMArquivo,AMLibraryFiles);
+      $q = new CMQuery('AMArquivo','AMLibraryFiles');
       $q->setFilter("Arquivo.codeArquivo = FilesLibraries.filesCode AND FilesLibraries.libraryCode = '$this->code' AND FilesLibraries.active='y'");
       $q->setLimit(0,$limit);
       $q->setOrder('tempo desc');

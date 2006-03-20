@@ -17,7 +17,8 @@ if(empty($_REQUEST['frm_codeUser'])) {
 }
 
 AMFinder::initFinder($_SESSION['user']->codeUser, $user->codeUser);
-
+$_SESSION['communicator'][] = 'AMFinder';
+$_SESSION['amadis']['FINDER_ROOM'][$_SESSION['user']->codeUser."_$user->codeUser"]['open'] = 1;
 // AMadis
 // Instant
 // Messenger
@@ -36,11 +37,15 @@ $pag->setTitle("$user->username - $user->name");
 $pag->addPageBegin(CMHTMLObj::getScript("var AMFinder = new amfinder(AMFinderCallBack);"));
 
 //setTimeOut to check new messages
-$script = "AMFinder_timeOut = self.setInterval('AMFinder.getnewmessages(".$_SESSION['user']->codeUser.", $user->codeUser)',".AMFinder::getSleepTime().")";
+//$script = "AMFinder_timeOut = self.setInterval('AMFinder.getnewmessages(".$_SESSION['user']->codeUser.", $user->codeUser)',".AMFinder::getSleepTime().")";
+
+$script  = "var senderId='".$_SESSION['user']->codeUser."'\n";
+$script .= "var recipientId='".$user->codeUser."';";
 
 $pag->addPageBegin(CMHTMLObj::getScript($script));
+
 $pag->setId("chatBody");
-//$pag->setOnClose("window.opener.Finder_closeFinder($user->codeUser);");
+$pag->setOnClose("window.opener.Finder_closeFinder('finderRoom_$user->codeUser');");
 $pag->setOnLoad("Finder_initChat();");
 $pag->add("<div id=\"chatcorpo\"> ");
 $pag->add("  <div id=\"area_mensagens\" class=\"sobre\"> ");
@@ -91,22 +96,9 @@ $pag->add("<div id=\"footerlement\"><img src=\"$_CMAPP[images_url]/box_msg_pecas
 $pag->add("  </div>");
 $pag->add("  <div id=\"area_enviarmsg\">");
 
-$pag->add("    <form name=\"messageForm\" id=\"messageForm\">");
-$pag->add("    <input type=\"hidden\" name=\"action\" value=\"A_send_message\">");
-$pag->add("    <input type=\"hidden\" name=\"frm_codeRecipient\" value=\"$user->codeUser\">");
+$style = "style='border: 0px; width: 99%; height: 110px;' overflow:hidden;";
+$pag->add("<iframe src='$_CMAPP[services_url]/finder/sendbox.php?frm_codeUser=$user->codeUser' $style></iframe>");
 
-$pag->add("    <div id=\"main_enviarmsg\">");
-$pag->add("      <textarea id=\"frm_message\" name=\"frm_message\" cols=\"45\" rows=\"3\"></textarea>");
-$pag->add("      <input type=\"checkbox\" id=\"autoScroll\" checked>");
-
-$pag->add("    </div>");
-$pag->add("  <div class=\"envio\">");
-
-$onClick = "onClick=\"Finder_sendMessage(AM_getElement('messageForm'))\"";
-
-$pag->add("    <input class=\"btenvio\" name=\"btenvio\" value=\"$_language[send]\" type=\"button\" $onClick>");
-$pag->add("  </div>");
-$pag->add("    </form>");
 $pag->add("    <div id=\"seta3\" class=\"posicaoseta\"><img src=\"$_CMAPP[images_url]/box_msg_areaenvio_03.png\"></div>");
 $pag->add("    <div id=\"seta4\" class=\"posicaoseta\"><img src=\"$_CMAPP[images_url]/box_msg_areaenvio_04.png\"></div>");
 $pag->add("  </div>");
