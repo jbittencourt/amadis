@@ -28,10 +28,10 @@ if($inv->__hasInvitations()) {
 }
 
 //caixa de convites de comunidades
-$inv = new AMBCommunitiesInvitations;
-if($inv->__hasInvitations()) { 
-  $pag->add($inv);
-}
+// $inv = new AMBCommunitiesInvitations;
+// if($inv->__hasInvitations()) { 
+//   $pag->add($inv);
+// }
 
 //box for user rejects and accepts
 
