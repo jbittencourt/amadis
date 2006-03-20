@@ -1,0 +1,124 @@
+/*INSERT IMAGE BOX---------------------------------------------*/
+BODY { 
+  background: #FFF3F3;
+  margin: 20px;
+  }
+
+#listBox { 
+  border: solid 1px #E0E0E0;
+  width: 417px;
+  height: 314px;
+  overflow: auto;
+  background: #F3F3F3;
+  }
+
+#listBox ul { 
+  margin: 0px;
+  padding: 0px;
+  font-family: Arial, Helvetica, Sans;
+  font-size: 14px;
+  cursor: pointer;
+/*   cursor: hand; */
+  }
+
+#listBox ul li { 
+  list-style-position: inside;
+  background: #F3F3F3;
+  border: solid 1px #E0E0E0;
+  padding: 5px;
+  padding-left:16px;
+
+  }
+
+/* #listBox ul li:hover {  */
+/*   background: #FCFCFC; */
+/*   } */
+
+#listBox ul span { 
+  background: #FCFCFC;
+  border-left: solid #E0E0E0 1px;
+  border-right: solid #E0E0E0 1px;
+  }
+
+.MyBib { 
+  color: #7B5FCC;
+  list-style-image: url("../images/arrowMBib.gif");
+  }
+
+.Proj { 
+  color: #669999;
+  list-style-image: url("../images/arrowProj.gif");
+  }
+
+.Upload { 
+  color: #CC3333;
+  list-style-image: url("../images/arrowUpload.gif");
+  }
+
+.Internet { 
+  color: #CC9966;
+  list-style-image: url("../images/arrowInternet.gif");
+  }
+
+#listBox li.Normal { background: #F3F3F3; }
+#listBox li.Normal:hover { background: #FCFCFC; }
+
+#listBox li.Selected { background: #FCFCFC; }
+
+#netBox { 
+  border-bottom: solid #E0E0E0 1px;
+  padding: 5px;
+  }
+
+INPUT {
+  background: #F3F3F3;
+  color: #000000;
+  }
+INPUT:focus { 
+  background: #FCFCFC;
+  }
+  
+BUTTON { 
+  background:none;
+  border: solid 0px;
+  cursor: pointer;
+  /* cursor: hand; */
+  }
+
+SPAN { 
+  display: none;  
+  }
+
+IFRAME {
+  border: 0px;
+  width: 410px;
+  height:130px;
+  }
+
+.item {
+  margin: 0px;
+  padding: 3px;
+  padding-left: 100px;
+  background-repeat: no-repeat;
+  background-position: 20px 5px;
+  font-size: 10px;
+  position: relative;
+  }
+
+SPAN div.item:hover { 
+  border: solid green 1px;
+  }
+
+.buttonOK { 
+  position: absolute;
+  top: 24px;
+  right: 0px;
+  }
+
+.item a { 
+  color: #9A6360;
+  }
+
+.item a:hover { 
+  color: #EC9995;
+  }
