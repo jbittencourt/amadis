@@ -8,10 +8,8 @@ $_language = $_CMAPP['i18n']->getTranslationArray("library");
 $page = new AMTLibrary("$_REQUEST[frm_type]");
 
 $page->addCommunicatorHandler("AMShared");
-//$page->addCommunicatorHandler("AMVersion");
 
 $page->addPageBegin(CMHTMLObj::getScript("var AMShare = new amshared(AMSharedCallBack)"));
-//$page->addPageBegin(CMHTMLObj::getScript("var AMVers = new amversion(AMVersionCallBack)"));
 
 $page->addPageBegin(CMHTMLOBJ::getScript("lang_wish_delete='$_language[wish_delete]'"));
 
@@ -160,7 +158,7 @@ if($count_all != 0 ){
 	  $imgthumb = "$_CMAPP[media_url]/images/icon_thumb_off.gif";
 	  $imglink  = "$_SERVER[PHP_SELF]?frm_type=$_REQUEST[frm_type]&frm_codeProjeto=$_REQUEST[frm_codeProjeto]&ver=thumbs&flag_on=$flag_on";
 	}
-	$conteudo .= "<td valign='middle' align='right'><img src='$_CMAPP[media_url]/images/dot.gif' width='300' height='13'><a href='$imglink' class='blt_subtitulo' style='text-decoration:none;'><img src='$imgthumb'> Miniaturas</a></td>";
+	$conteudo .= "<td valign='middle' align='right'><img src='$_CMAPP[media_url]/images/dot.gif' width='300' height='13'><a href='$imglink' class='blt_subtitulo' style='text-decoration:none;'><img src='$imgthumb'> $_language[thumbs]</a></td>";
       }
       $conteudo .= "</tr></table></td></tr>";				
       $conteudo .= "<tr><td colspan='5' background='$_CMAPP[media_url]/images/img_blt_pontilhado.gif'><img src='$_CMAPP[media_url]/images/dot.gif' width='1' height='1'></td></tr>";

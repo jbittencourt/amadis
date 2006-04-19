@@ -997,8 +997,9 @@ audio_file = "&Aacute;udio"
 video_file = "V&iacute;deo"
 other_file = "Outros"
 list_all_files = "Listar todos os arquivos"
+thumbs = "Miniaturas";
 isShared = "Compartilhado"
-wish_delete = "Voc&ecirc; tem certeza que deseja deletar este arquivo?"
+wish_delete = "Voce tem certeza que deseja deletar este arquivo?"
 
 no_img = "N&atilde;o temos imagens no momento"
 no_docs = "N&atilde;o temos textos no momento"
