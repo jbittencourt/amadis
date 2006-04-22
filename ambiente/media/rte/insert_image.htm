@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>Insert Link</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script language="JavaScript" type="text/javascript">
+<!--
+function AddImage() {
+	var oForm = document.imageForm;
+	
+	//validate form
+	if (oForm.imageURL.value == '') {
+		alert('Please choose a image or enter a url.');
+		return false;
+	}
+	if (oForm.tipText.value == '') {
+		alert('Please enter tip text.');
+		return false;
+	}
+	
+	//var html = '<img src="' + document.linkForm.url.value + '">';
+	var html = "<img src='"+document.imageForm.imageURL.value+"' alt='"+document.imageForm.tipText.value+"'>";
+	
+	window.opener.insertHTML(html);
+	window.close();
+	return true;
+}
+
+function loadLibraryImages() {
+  var src = "chooser.php?";
+  rexp = /frm_codeForum=[0-9]{1,}/;
+  var param = rexp(opener.location.href);
+  src += param;
+  document.getElementById("ichooseI").src = src;
+}
+//-->
+</script>
+</head>
+
+<body style="margin: 10px; background: #D3D3D3;" onLoad="loadLibraryImages();">
+
+<form name="imageForm" onSubmit="return AddImage();">
+<table cellpadding="4" cellspacing="0" border="0">
+	<tr>
+		<td align="right">URL:</td>
+		<td><input name="imageURL" type="text" id="imageURL" size="40"></td>
+	</tr>
+	<tr>
+		<td align="right">Legenda:</td>
+		<td><input name="tipText" type="text" id="tipText" size="40"></td>
+	</tr>
+	<tr><td colspan=2>Escolha a imagem:</td></tr>
+	<tr>
+	        <td colspan=2>
+		    <iframe name="ichooseI" id="ichooseI" frameborder="0" style="border: 1px solid gray;" height="220" width="420" src=""></iframe>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3" align="center">
+			<input type="submit" value="Insert Image" />
+			<input type="button" value="Cancel" onClick="window.close();" />
+		</td>
+	</tr>
+</table>
+</form>
+</body>
+</html>
