@@ -49,13 +49,14 @@ class AMBProjectItems extends AMColorBox {
   public static function getDiaryButton($proj){
     global $_CMAPP,$_language;
     
-    $urldiary = "";
-    $button  = "<button id='diary' class='project_items button-as-link' type='button' onclick=\"AM_openURL('')\">";
+    $urldiary = $_CMAPP['services_url']."/agregador/agregador.php?frm_codProjeto=".$proj;
+    $button  = "<button id='diary' class='project_items button-as-link' type='button' onclick=\"AM_openURL('$urldiary')\">";
     $button .= "<img src='$_CMAPP[images_url]/dot.gif' height='25px;'><br>";
     $button .= "<span class='project_items_text'> $_language[project_link_diarybutton]</span>";
     $button .= "</button>";
     return $button;
   }
+
 
   public function __toString() {
     
@@ -63,15 +64,7 @@ class AMBProjectItems extends AMColorBox {
     
     /*    
      *Buffering html of the box to output screen
-
-    $urlpage = $_CMAPP['services_url']."/pages/viewpage.php?frm_page=projetos/projeto_".$proj->codeProject."&frm_codProjeto=".$proj->codeProject;
-    $urlforum = $_CMAPP['services_url']."/projetos/projectforums.php?frm_codeProject=".$proj->codeProject;
-    $urlchat = $_CMAPP['services_url']."/projetos/chat.php?frm_codeProject=".$proj->codeProject;
-    
-    parent::add("<a href=\"$urlpage\" class=\"green\">&raquo; ".$_language['project_link_page']."</a><br>");
-    parent::add("<a href=\"$urlforum\" class =\"green\">&raquo; ".$_language['project_link_forum']."</a><br>");
-    parent::add("<a href=\"$urlchat\" class =\"green\">&raquo; ".$_language['project_link_chat']."</a><br>");
-*/  
+     */
 	
     parent::add($this->getPageButton($proj->codeProject));
     parent::add($this->getDiaryButton($proj->codeProject));
