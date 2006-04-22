@@ -5,10 +5,17 @@ var Chat_alerts = new Array();
 var createChatTimeout;
 
 var AMChatCallBack = {
-  verifynameexists: function(result) {
-    if(result == 1) {
-      window.clearTimeout(createChatTimeout);
-      chkName = false;
+  verifynameexists: function(result) {},
+  createchatroom: function(result) {
+    var table = AM_getElement("create_chat_box");
+    var alertBox = window.document.createElement("DIV");
+    alertBox.setAttribute("id", "create_chat_alert");
+    alertBox.innerHTML = result.msg;
+    
+    table.parentNode.insertBefore(alertBox, table);
+
+    switch(result.error) {
+    case "repeated_name":
       var name = AM_getElement('frm_room_name');
       var msg = window.document.createElement("SPAN");
       msg.innerHTML = "*Este nome j&aacute; est&aacute; sendo utilizado!<br>";
@@ -18,25 +25,11 @@ var AMChatCallBack = {
       changeBgColor(name.parentNode, Chat_alertColor);
       name.parentNode.insertBefore(msg, name);
       name.focus();
-    }
-  },
-  createchatroom: function(result) {
-    window.clearTimeout(createChatTimeout);
-    
-    var table = AM_getElement("create_chat_box");
-    
-    var alertBox = window.document.createElement("DIV");
-    alertBox.setAttribute("id", "create_chat_alert");
-    alertBox.innerHTML = result.msg;
-    
-    table.parentNode.insertBefore(alertBox, table);
-
-    var chat = window.document.createElement("DIV");
-    chat.setAttribute("id","room_"+result.obj.code);
-    
-    switch(result.error) {
+      break;
     case "saved":
-      //alert(result.tmp);
+      var chat = window.document.createElement("DIV");
+      chat.setAttribute("id","room_"+result.obj.code);
+
       if(result.type == 'no_scheduled') {
 	var openedChats = AM_getElement("openedChatRooms");
 
@@ -93,7 +86,7 @@ function Chat_saveChat(form) {
   var type = form.elements['frm_type'];
 
   if(name.value.length != 0) {
-    AMChat.verifynameexists(name.value);
+    //AMChat.verifynameexists(name.value);
   } else if(!chkName){
     chkName = true;
     var msg = window.document.createElement("SPAN");
@@ -132,13 +125,14 @@ function Chat_saveChat(form) {
     beginDate.value = 0;
     endDate.value = 0;
   }
+  
+  var param = new Array(name.value, subject.value, beginDate.value,
+		    endDate.value, infinity.checked, type.value,
+		    language_save_chat_success, language_save_chat_error,
+		    code.value
+		    );
 
-  createChatTimeout = window.setTimeout(function() {
-    AMChat.createchatroom(name.value, subject.value, beginDate.value, endDate.value, infinity.checked, type,
-			  language_save_chat_success, language_save_chat_error, code.value);
-  }
-					, 2000);
-
+  AMChat.createchatroom(param);
   return false;
 }
 
@@ -171,6 +165,8 @@ function Chat_openChat(codeRoom, type, url) {
     var w = window.open(url+"?frm_codeRoom="+codeRoom, "chatRoom_"+codeRoom, "width=540, height=620, resizable=false");
     ajaxSync.register(w, 'Chat_getNewMessages', 'chatRoom_'+codeRoom, 'chat');
   }
+
+
 }
 
 function Chat_closeChat() {

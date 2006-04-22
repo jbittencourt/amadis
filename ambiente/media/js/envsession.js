@@ -155,24 +155,15 @@ var openChat = new Array();
 
 function initEnvironment() {
 
-  finderAlert = window.document.createElement("DIV");
-  finderAlert.setAttribute("id","finderAlert");
+  //finderAlert = window.document.createElement("DIV");
+  //finderAlert.setAttribute("id","finderAlert");
 
-  window.document.body.appendChild(finderAlert);
+  //window.document.body.appendChild(finderAlert);
 
-  AMFinder.getonlineusers();
-  AMFinder.reSync = function(){};
+  //AMFinder.getonlineusers();
+  //AMFinder.getfinderrequest();
+  //AMFinder.reSync = function(){};
   AMEnvSession.reSync = function(){};
-
-//   ajaxSync.register(AMFinder, "getonlineusers", "finderTimeOut", "finder");
-//   ajaxSync.register(AMEnvSession, "getfinderrequest", "finderRequest", "finder");
-
-  //var w = window.open('http://www.yahoo.com','win2');
-  //ajaxSync.register(w, "focus", 'win2', 'chat');
-  //ajaxSync.register(AMEnvSession, "getfinderrequest", "finderTimeOut", 'finder');
-  //ajaxSync.register(AMEnvSession, "getfinderrequest", "finderTime");
-  //EnvSession_finderRequestTimeout = window.setInterval("getFinderRequest();",10000);
-  
 }
 
 function getFinderRequest() {

@@ -1,54 +1,61 @@
 <?
 //put the absolute amadis path here
-$_CMAPP[path] = "{COMPLETE_HERE}";
+$_CMAPP[path] = "AMADIS_PATH";
 
 //put here the absolute cmdevel path here
-$_CMDEVEL[path] = "{COMPLETE_HERE}";
+$_CMDEVEL[path] = "CMDEVEL_PATH";
 
+//put here the absolute jpspan path here
+$_JPSPAN['path'] = "JPSPAN_PATH";
 
 /**
  * START OF THE OBRIGATORY INCLUDES
  **/
 
+/**
+ * START OF THE OBRIGATORY INCLUDES
+ **/
 
 //include the class loader function
-include("$_CMAPP[path]/classload.inc.php");
+include($_CMAPP['path']."/classload.inc.php");
+
+//include JPSpan AJAX Framework;
+include("jpspan.inc.php");
 
 //PATHs dos servicos da aplicacao
-$_CMAPP[services_path] = $_CMAPP[path]."/ambiente/amservices";
+$_CMAPP['services_path'] = $_CMAPP['path']."/ambiente/amservices";
 
-include($_CMDEVEL[path]."/cmdevel.inc.php");
+include($_CMDEVEL['path']."/cmdevel.inc.php");
 include("cmpersistence.inc.php");
 include("cmapp.inc.php");
 include("cminterface.inc.php");
 include("cmwebservice/cmwsmartform.inc.php");
-
 //load the exception file, that contation many exceptions, so
 //the classes can't be resolved by the classloader(__autoload)
-include("$_CMAPP[path]/lib/exceptions/amexceptions.inc.php");
+include($_CMAPP['path']."/lib/exceptions/amexceptions.inc.php");
 
 
 /**
  * PARSING THE config.xml FILE AND LOAD OF DEFAULT VARS.
  **/
-$_CMAPP[config_file] = $_CMAPP[path]."/etc/config.xml";
+$_CMAPP['config_file'] = $_CMAPP['path']."/etc/config.xml";
 
 try {
-  $_CMAPP[config] = new CMConfig($_CMAPP[config_file]);
+  $_CMAPP['config'] = new CMConfig($_CMAPP['config_file']);
 }
 catch (CMErrorLoadingConfigFile $e) {
   die($e->getMessage());
 }
 
-$_conf = $_CMAPP[config]->getObj();
-$_CMAPP[url]   = (string) $_conf->app[0]->urls[0]->base;
-$_CMAPP[media_url]  = (string) $_conf->app[0]->urls[0]->media;
-$_CMAPP[images_url] = (string) $_conf->app[0]->urls[0]->images;
-$_CMAPP[js_url]     = (string) $_conf->app[0]->urls[0]->js;
-$_CMAPP[css_url]    = (string) $_conf->app[0]->urls[0]->css;
-$_CMAPP[services_url]  = (string) $_conf->app[0]->urls[0]->services;
-$_CMAPP[pages_url]  = (string) $_conf->app[0]->urls[0]->pages;
-$_CMAPP[thumbs_url]  = (string) $_conf->app[0]->urls[0]->thumbnails;
+$_conf = $_CMAPP['config']->getObj();
+$_CMAPP['url']   = (string) $_conf->app[0]->urls[0]->base;
+$_CMAPP['media_url']  = (string) $_conf->app[0]->urls[0]->media;
+$_CMAPP['images_url'] = (string) $_conf->app[0]->urls[0]->images;
+$_CMAPP['js_url']     = (string) $_conf->app[0]->urls[0]->js;
+$_CMAPP['css_url']    = (string) $_conf->app[0]->urls[0]->css;
+$_CMAPP['services_url']  = (string) $_conf->app[0]->urls[0]->services;
+$_CMAPP['pages_url']  = (string) $_conf->app[0]->urls[0]->pages;
+$_CMAPP['thumbs_url']  = (string) $_conf->app[0]->urls[0]->thumbnails;
 
 /**
  * define a profile for the system
@@ -62,35 +69,37 @@ define("PROFILE_LOW_PROCESSING", "low_processing");
 $method = (string) $_conf->app[0]->general[0]->profile;
 switch($method) {
  case  PROFILE_LOW_PROCESSING:
-   $_CMAPP[profile] = PROFILE_LOW_PROCESSING; break;
+   $_CMAPP['profile'] = PROFILE_LOW_PROCESSING; break;
  case PROFILE_LOW_TRAFFIC:
-   $_CMAPP[profile] =  PROFILE_LOW_TRAFFIC; break;
+   $_CMAPP['profile'] =  PROFILE_LOW_TRAFFIC; break;
  default:
    Throw new AMException("The profile config in config.xml should be ".PROFILE_LOW_PROCESSING." or ".PROFILE_LOW_TRAFFIC.".");
 }
   
 
 
-$_CMAPP[environment] = $_conf->app->environment;
-// $_CMAPP[finder] = $_conf->app->finder;
-// $_CMAPP[language] = $_conf->app->language;
+$_CMAPP['environment'] = $_conf->app->environment;
+$_CMAPP['finder'] = $_conf->app->finder;
+
 
 /**
 * Conecta com o banco de dados
 **/
 try {
-  $_CMAPP[db] = new CMDBConnection($_CMAPP[config]);
+  $_CMAPP['db'] = new CMDBConnection($_CMAPP['config']);
 }
 catch (CMDBCannotConnect $e) {
   die($e->getMessage());
 }
 
 
+
 session_name($_conf->app[0]->session->name);
 session_start();
 
-if(empty($_SESSION[environment])) {
-  $_SESSION[environment] = new AMAmbiente();
+
+if(empty($_SESSION['environment'])) {
+  $_SESSION['environment'] = new AMAmbiente();
 
 }
 
@@ -102,47 +111,51 @@ if(empty($_SESSION[environment])) {
 
 if($_conf->app->languages->active == 1) {
   include("cminterface/cmi18n.inc.php");
-  $_CMAPP[i18n] = new CMi18n;
+  $_CMAPP['i18n'] = new CMi18n;
 }
 
 //set uma url para as imagens relativas a sua linguagem. \xc9 importante
 //para suportar imagens em varias linguas
-$_CMAPP[imlang_url] = $_CMAPP[images_url]."/".$_CMAPP[i18n]->getActualLang();
-
-
+$_CMAPP['imlang_url'] = $_CMAPP['images_url']."/".$_CMAPP['i18n']->getActualLang();
 
 
 //colocar o login aqui, servirá para que mais tarde o logon possa ocorrer em qualquer página.
-switch($_REQUEST[login_action]) {
- case "A_login":
-   try {
-     $_SESSION[environment]->login($_REQUEST[frm_username],$_REQUEST[frm_password]);
-   }
-   catch(CMLoginFailure $e) {
-     $file = basename($_SERVER[SCRIPT_FILENAME]);
-     if($file!="loginfailure.php") {
-       $_SESSION[login_failed_trying_to_access] = $file;
-     }
-     Header("Location: ".$_CMAPP[url]."/loginfailure.php?frm_amerror=invalid_login");
-   }
+if(isset($_REQUEST['login_action'])) {
+  switch($_REQUEST['login_action']) {
+  case "A_login":
+    try {
+      $_SESSION['environment']->login($_REQUEST['frm_username'],$_REQUEST['frm_password']);
+    }
+    catch(CMLoginFailure $e) {
+      $file = basename($_SERVER['SCRIPT_FILENAME']);
+      if($file!="loginfailure.php") {
+	$_SESSION['login_failed_trying_to_access'] = $file;
+      }
+      Header("Location: ".$_CMAPP['url']."/loginfailure.php?frm_amerror=invalid_login");
+    }
+    
+    break;
    
-   break;
- case "A_logout":
-   $_SESSION[environment]->logout();
-   Header("Location: ".$_CMAPP[url]."/index.php");
-   break;   
-}
-
-
-if($_SESSION[environment]->logged) {
-   $_SESSION[session]->update();
-}
-else {
-  if(!$_CMAPP[notrestricted]) {
-    Header("Location: ".$_CMAPP[url]."/index.php?frm_amerror=session_timeout");
+  case "A_logout":
+    $_SESSION['environment']->logout();
+    Header("Location: ".$_CMAPP[url]."/index.php");
+    break;   
   }
 }
 
+
+if($_SESSION['environment']->logged) {
+  $_SESSION['session']->update();
+}
+else {
+  if(!$_CMAPP['notrestricted']) {
+    Header("Location: ".$_CMAPP['url']."/index.php?frm_amerror=session_timeout");
+  }
+}
+
+if(basename($_SERVER['SCRIPT_FILENAME']) != "index.php") {
+  $_CMAPP['form_login_action'] = $_SERVER['PHP_SELF'];
+}else $_CMAPP['form_login_action'] = $_CMAPP['services_url']."/webfolio/webfolio.php";
 
 
 ?>

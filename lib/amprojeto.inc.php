@@ -253,7 +253,7 @@ class AMProjeto extends CMObj {
     $q->addJoin($j, "room");
 
     $time = time();
-    $q->setFilter("codeProject = ".$this->codeProject." AND beginDate <= $time AND endDate > $time");
+    $q->setFilter("chatType='".AMChatRoom::ENUM_CHAT_TYPE_PROJECT."' AND codeProject = ".$this->codeProject." AND beginDate <= $time AND endDate > $time");
 
     return $q->execute();
    

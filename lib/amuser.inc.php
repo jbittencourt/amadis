@@ -275,13 +275,14 @@ class AMUser extends CMUser {
   }
 
   public function listFriends() {
-    unset($_SESSION['amadis']['friends']);
+    //unset($_SESSION['amadis']['friends']);
     if(!isset($_SESSION['amadis']['friends'])) {
       
       $q = new CMQuery('AMUser');
       
       $j1 = new CMJoin(CMJoin::INNER);
       $j1->setClass('AMFriend');
+      $j1->on("AMUser::codeUser = AMFriend::codeFriend");
 
       
       //$j2 = new CMJoin(CMJoin::INNER);

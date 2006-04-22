@@ -221,7 +221,7 @@ class AMCommunities extends CMObj {
     $q->addJoin($j, "room");
 
     $time = time();
-    $q->setFilter("codeCommunity = ".$this->code." AND beginDate <= $time AND endDate > $time");
+    $q->setFilter("chatType='".AMChatRoom::ENUM_CHAT_TYPE_COMMUNITY."' AND codeCommunity = ".$this->code." AND beginDate <= $time AND endDate > $time");
 
     return $q->execute();
    

@@ -28,6 +28,7 @@ $box = new AMBChat;
 $box->setOpenRoomsImg("box_chat_salas_abertas.gif");
 $box->setThumb(new AMTCommunityImage($community->image));
 $box->setTitle($community->name);
+$box->setToolType(AMChatRoom::ENUM_CHAT_TYPE_COMMUNITY, $community->code);
 
 $openRooms = $community->getOpenRooms();
 

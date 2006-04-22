@@ -44,7 +44,7 @@ class AMBChat extends CMHTMLObj {
     $this->title = $title;
   }
 
-  public function setTool($type, $code) {
+  public function setToolType($type, $code) {
     $this->type = $type;
     $this->code = $code;
   }

@@ -12,7 +12,25 @@ class AMChat {
     
   }
 
-  public function createChatRoom($name, $subject, $beginDate, $endDate, $infinity, $type, $msg, $err, $codeProject) {
+  public function createChatRoom($param) {
+    $name = $param[0];
+    $subject = $param[1];
+    $beginDate = $param[2];
+    $endDate = $param[3];
+    $infinity = $param[4];
+    $type = $param[5];
+    $msg = $param[6];
+    $err = $param[7];
+    $code = $param[8];
+
+    $ret = array();
+    
+    if($this->verifyNameExists($name)) {
+      $ret['error'] = "repeated_name";
+      $box = new AMAlertBox(AMAlertBox::ERROR, $err);
+      $ret['msg'] = $box->__toString();
+      return $ret;
+    }
 
     $dFactor = 3600; //esta eh a diferenca entre o timestamp do javascript e do php
     $chatRoom = new AMChatRoom;
@@ -21,8 +39,6 @@ class AMChat {
     $chatRoom->chatType = $type;
     $chatRoom->codeUser = $_SESSION['user']->codeUser;
     $chatRoom->time = time();
-
-    $ret = array();
 
     $chatRoom->infinity = ($infinity ? "1" : "0");
 
@@ -45,28 +61,44 @@ class AMChat {
       $ret['error'] = "saved";
       $box = new AMAlertBox(AMAlertBox::MESSAGE, $msg);
 
-      try{
-	$rel = new AMChatsProject;      
-	$rel->codeRoom = $chatRoom->codeRoom;
-	$rel->codeProject = $codeProject;
-	$rel->save();
-      }catch(CMException $e) {
-	$chatRoom->delete();
-	$ret['error'] = "not_saved";
-	$box = new AMAlertBox(AMAlertBox::ERROR, $err."<br>ChatProject::".$e->getMessage());
-      }
+      switch($type) {
+      case AMChatRoom::ENUM_CHAT_TYPE_PROJECT:
+	try{
+	  $rel = new AMChatsProject;      
+	  $rel->codeRoom = $chatRoom->codeRoom;
+	  $rel->codeProject = $code;
+	  $rel->save();
+	}catch(CMException $e) {
+	  $chatRoom->delete();
+	  $ret['error'] = "not_saved";
+	  $box = new AMAlertBox(AMAlertBox::ERROR, $err."<br>ChatProject::".$e->getMessage());
+	}
+	break;
 
+      case AMChatRoom::ENUM_CHAT_TYPE_COMMUNITY:
+	try{
+	  $rel = new AMChatsCommunities;      
+	  $rel->codeRoom = $chatRoom->codeRoom;
+	  $rel->codeCommunity = $code;
+	  $rel->save();
+	}catch(CMException $e) {
+	  $chatRoom->delete();
+	  $ret['error'] = "not_saved";
+	  $box = new AMAlertBox(AMAlertBox::ERROR, $err."<br>ChatCommunity::".$e->getMessage());
+	}
+	break;
+      }
     }catch(CMException $e) {
       $ret['error'] = "not_saved";
       $box = new AMAlertBox(AMAlertBox::ERROR, $err."<br>ChatRoom::".$e->getMessage());
     }
-    
+      
     $ret['msg'] = $box->__toString();
-
+      
     $date = getDate($chatRoom->beginDate);
-    
+      
     $ret['obj'] = array("code"=>$chatRoom->codeRoom, "name"=>$chatRoom->name, "subject"=>$chatRoom->description, "init"=>$date);
-
+      
     return $ret;
   }
   
