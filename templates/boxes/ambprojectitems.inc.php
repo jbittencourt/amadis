@@ -67,7 +67,7 @@ class AMBProjectItems extends AMColorBox {
      */
 	
     parent::add($this->getPageButton($proj->codeProject));
-    parent::add($this->getDiaryButton($proj->codeProject));
+    //parent::add($this->getDiaryButton($proj->codeProject));
     parent::add($this->getForumButton($proj->codeProject));
     parent::add($this->getChatButton($proj->codeProject));
       
