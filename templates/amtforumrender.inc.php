@@ -3,10 +3,12 @@
 class AMTForumRender extends CMHTMLObj {
 
   protected $forum;
+  protected $aco;
   protected $avaiable_themes;
   protected $themes;
   protected $show_open;
   protected $lastVisitTime = -1;
+  protected $privs;
 
   public function __construct(AMForum $forum,$show_open=array()) {
     global $_CMAPP;
@@ -15,6 +17,7 @@ class AMTForumRender extends CMHTMLObj {
 
     parent::__construct();
     $this->forum = $forum;
+    $this->aco = $forum->getACO();
 
     $this->show_open = $show_open;
     $this->avaiable_themes =2;
@@ -39,11 +42,31 @@ class AMTForumRender extends CMHTMLObj {
     $this->themes[1]['css_base_name'] = "msg_level_B0";
 
 
+    //mount an array with the privileges of the user
+    //to make the code more legible
+    //I assume that if this object is rendered
+    //the user alredy has rights to view the forum
+    $this->privs['post'] = ($this->aco->testUserPrivilege($_SESSION['user']->codeUser, AMForum::PRIV_ALL) ||
+		      $this->aco->testUserPrivilege($_SESSION['user']->codeUser, AMForum::PRIV_POST) );
+
+    $this->privs['delete'] = ($this->aco->testUserPrivilege($_SESSION['user']->codeUser, AMForum::PRIV_ALL) ||
+			$this->aco->testUserPrivilege($_SESSION['user']->codeUser, AMForum::PRIV_DELETE) );
+
+    $this->privs['edit'] = ($this->aco->testUserPrivilege($_SESSION['user']->codeUser, AMForum::PRIV_ALL) ||
+		      $this->aco->testUserPrivilege($_SESSION['user']->codeUser, AMForum::PRIV_EDIT) );
+
+    $this->privs['conf'] = $this->aco->testUserPrivilege($_SESSION['user']->codeUser, AMForum::PRIV_ALL);
   }
 
-
+  /**
+   * This function draw a message and all its children.
+   *
+   **/
   private function drawMessage($men,$theme,$level=1,$ignore_new=false) {
     global $_CMAPP, $_language;
+
+
+
 
     $obj = new CMHTMLObj;
     $nc =  $theme['css_base_name'];
@@ -96,13 +119,20 @@ class AMTForumRender extends CMHTMLObj {
 
     //message body  
     $obj->add("<div id=\"$msg_unique_name\" style=\"padding-top: 6px; position:relative; display:$dsp;\"><span id='body_$msg_unique_name'>".$men->body."</span>");
-    //reply button
-    $obj->add("<br><a href=\"#reply_$msg_unique_name\" onClick=\"Forum_displayReply('reply_$msg_unique_name',$men->code,'RE:$men->title')\"><img vspace=\"10\" hspace=\"12\" align=\"middle\" src=\"$_CMAPP[imlang_url]/forum_ico_responder.gif\" border=0></a>");
+
+    //test if user has privileges to post a message
+    if($this->privs['post']) {
+      $obj->add("<br><a href=\"#reply_$msg_unique_name\" onClick=\"Forum_displayReply('reply_$msg_unique_name',$men->code,'RE:$men->title')\"><img vspace=\"10\" hspace=\"12\" align=\"middle\" src=\"$_CMAPP[imlang_url]/forum_ico_responder.gif\" border=0></a>");
+    }
 
     //edit and delete buttons
     if(empty($men->children)) {
-      $obj->add("<a href='#reply_$msg_unique_name' onClick=\"Forum_displayEdit('reply_$msg_unique_name',$men->code,'$men->title')\"> <img vspace=\"\10\" hspace=\"12\" align=\"middle\" src=\"$_CMAPP[imlang_url]/icon_editar.gif\" border=0></a>");
-      $obj->add("<a href='#reply_$msg_unique_name' onClick=\"Forum_deleteMessage($men->code,$_REQUEST[frm_codeForum])\"> <img vspace=\"\10\" hspace=\"12\" align=\"middle\" src=\"$_CMAPP[imlang_url]/icon_excluir.gif\" border=0></a>");
+      if($this->privs['edit']) {
+	$obj->add("<a href='#reply_$msg_unique_name' onClick=\"Forum_displayEdit('reply_$msg_unique_name',$men->code,'$men->title')\"> <img vspace=\"\10\" hspace=\"12\" align=\"middle\" src=\"$_CMAPP[imlang_url]/icon_editar.gif\" border=0></a>");
+      }
+      if($this->privs['delete']) {
+	$obj->add("<a href='#reply_$msg_unique_name' onClick=\"Forum_deleteMessage($men->code,$_REQUEST[frm_codeForum])\"> <img vspace=\"\10\" hspace=\"12\" align=\"middle\" src=\"$_CMAPP[imlang_url]/icon_excluir.gif\" border=0></a>");
+      }
     }
 
 
@@ -128,6 +158,8 @@ class AMTForumRender extends CMHTMLObj {
     return $obj;
   }
 
+
+
   public function __toString() {
     global $_CMAPP,$_language;
 
@@ -141,21 +173,23 @@ class AMTForumRender extends CMHTMLObj {
     parent::addScript("delete_url = '$_CMAPP[services_url]/forum/forum.php'; message_forum_delete = '$_language[delete_message]';");
 
 
-    $campos_requisitados = array("title","body");
-    $form = new AMWSmartForm('AMForumMessage', "cad_post", $_SERVER['PHP_SELF'],$campos_requisitados,array('parent','codeForum'));
-    $form->cancel_button->setOnClick('Forum_cancelReply()');
-
-    $form->addComponent("action", new CMWHidden("frm_action","A_post"));
-    $form->components['codeForum']->setValue($_REQUEST['frm_codeForum']);
-    $form->setLabelClass("titforumresposta");
-    $form->setRichTextArea("body");
-    $form->setDesign(CMWFormEl::WFORMEL_DESIGN_OVER);   // muda as labels do smart form
-
-    parent::add("<div id=reference_div style='display: none'>");
-    parent::add($form);
-    parent::add("</div>");
-
-
+    //POST BOX
+    if($this->privs['post']) {
+      $campos_requisitados = array("title","body");
+      $form = new AMWSmartForm('AMForumMessage', "cad_post", $_SERVER['PHP_SELF'],$campos_requisitados,array('parent','codeForum'));
+      $form->cancel_button->setOnClick('Forum_cancelReply()');
+      
+      $form->addComponent("action", new CMWHidden("frm_action","A_post"));
+      $form->components['codeForum']->setValue($_REQUEST['frm_codeForum']);
+      $form->setLabelClass("titforumresposta");
+      $form->setRichTextArea("body");
+      $form->setDesign(CMWFormEl::WFORMEL_DESIGN_OVER);   // muda as labels do smart form
+      
+      parent::add("<div id=reference_div style='display: none'>");
+      parent::add($form);
+      parent::add("</div>");
+    }
+    //END OF THE POST BOX
 
     parent::add("<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"98%\">");
     parent::add("<tr>");
@@ -174,12 +208,17 @@ class AMTForumRender extends CMHTMLObj {
     parent::add("<td class=\"forum_title\"><img src=\"$_CMAPP[images_url]/dot.gif\" width=\"1\" height=\"12\" border=\"0\"><br>".$this->forum->name);
     
     parent::add("<td align=right>");
-    parent::add("<a href=\"javascript:Forum_toogleAllMessages('$_CMAPP[services_url]/forum/handlevisualization.php')\"><img id=\"img_handle_all\" src=\"$_CMAPP[imlang_url]/bt_forum_abrir_todos.png\"></b>");
+    //open all messages button
+    parent::add("<a href=\"javascript:Forum_toogleAllMessages('$_CMAPP[services_url]/forum/handlevisualization.php')\"><img id=\"img_handle_all\" src=\"$_CMAPP[imlang_url]/bt_forum_abrir_todos.png\"></a");
+
+    //edit forum button
+    parent::add("&nbsp; <a href=\"$_SERVER[PHP_SELF]?frm_codeForum=$_REQUEST[frm_codeForum]&frm_action=A_forum_edit\"><img src=\"$_CMAPP[imlang_url]/bt_forum_editar.png\"></a>");
+
     parent::add("</td>");
     
     parent::add("</td>");
     
-    //continua
+    //continue
     parent::add("</tr>");
     parent::add("</table></td>");
     parent::add("<td bgcolor=\"#FAFBFB\"><img src=\"$_CMAPP[images_url]/dot.gif\" width=\"10\" height=\"10\" border=\"0\"></td>");
@@ -216,11 +255,13 @@ class AMTForumRender extends CMHTMLObj {
     parent::add("</table>");
 
     //new topic button
-    parent::add("<div class=\"forum_novo_topico\">");
-    parent::add("<a href=\"#anchor_reply_forum_new_topic\" onClick=\"displayReply('reply_forum_new_topic',0,'')\"><img src=\"$_CMAPP[imlang_url]/bt_forum_novo_topico.png\"></a>");
-    parent::add("<a name=\"anchor_reply_forum_new_topic\"><div id=\"reply_forum_new_topic\" class=\"box_forum_resposta\" style=\"position:relative; display:none;\"></div>");
-    
-    parent::add("</div>");
+    if($this->privs['post']) {
+      parent::add("<br><div class=\"forum_novo_topico\">");
+      parent::add("<a href=\"#anchor_reply_forum_new_topic\" onClick=\"Forum_displayReply('reply_forum_new_topic',0,'')\"><img src=\"$_CMAPP[imlang_url]/bt_forum_novo_topico.png\"></a>");
+      parent::add("<a name=\"anchor_reply_forum_new_topic\"><div id=\"reply_forum_new_topic\" class=\"box_forum_resposta\" style=\"position:relative; display:none;\"></div>");
+      
+      parent::add("</div>");
+    }
 
     if(empty($messages)) {
       parent::addScript("Forum_displayReply('reply_forum_new_topic',0,'')");

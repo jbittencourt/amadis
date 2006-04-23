@@ -45,7 +45,13 @@ class AMBForum extends CMHTMLObj {
     foreach($this->forums as $item) {
 
       parent::add("<tr>");
-      parent::add("<td class=\"forum_project_col\" id=\"a1\"><a href=\"$link$item->code\">$item->name</a></td>");
+      parent::add("<td class=\"forum_project_col\" id=\"a1\"><a href=\"$link$item->code\">$item->name</a>");
+
+//       //temporary edit forum privileges (REMOVE)
+//       parent::add("<A href='$_SERVER[PHP_SELF]?frm_action=edit_privs'>(privil&eacute;gios)</a>");
+//       //END
+
+
       parent::add("<td class=\"forum_project_col\" id=\"a2\" align=\"center\">$item->numMessages</td>");
       parent::add("<td class=\"forum_project_col\" id=\"a1\" align=\"center\">");
       if($item->lastMessageTime>0) {

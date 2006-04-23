@@ -37,14 +37,12 @@ if(!empty($_REQUEST[frm_action])) {
     $box->add("<br/>");
 
     $box->add("<FORM ACTION='$_SERVER[PHP_SELF]'>");
+    $box->setWidth("500px");
     $box->add("<INPUT TYPE=hidden NAME=frm_codeCommunity value='$_REQUEST[frm_codeCommunity]'>");
     $box->add("<INPUT TYPE=hidden NAME=frm_action value='A_make'>");
     $box->add("$_language[frm_name] <INPUT TYPE=text NAME=frm_name VALUE='$_REQUEST[frm_name]'>");
 
-    $aco = new CMACO();
-    $acorender = new AMACORender($aco);
-    $box->add($acorender);
-
+    $box->add("<P style='text-align: right'><BUTTON TYPE=SUBMIT CLASS='image-button'><IMG SRC='$_CMAPP[imlang_url]/bt_criar_forum.gif'></BUTTON>");
     $box->add("</FORM>");
 
     $pag->add($box);
@@ -58,10 +56,15 @@ if(!empty($_REQUEST[frm_action])) {
     $forum->creationTime = time();
     $forum->save();
     
-    $link = new AMProjectForum;
+    $link = new AMCommunityForum;
     $link->codeForum = $forum->code;
-    $link->codeProject = $_REQUEST[frm_codeProject];
+    $link->codeCommunity = $_REQUEST[frm_codeCommunity];
     $link->save();
+
+    $aco = $forum->getACO();
+    $aco->addGroupPrivilege($co->codeGroup,AMForum::PRIV_ALL);
+    $aco->addWorldPrivilege(AMForum::PRIV_VIEW);
+
 
     $link = "$_CMAPP[services_url]/forum/forum.php?frm_codeForum=$forum->code";
     CMHtmlPage::redirect($link);

@@ -92,7 +92,8 @@ class AMColorBox extends AMAbstractBox {
     global $_CMAPP;
     
     parent::add("<!-- Begin AMColorBox -->");
-    parent::add("<div id=\"$this->name\">");
+    if($this->width!=0) $w = "style='width: $this->width'";
+    parent::add("<div id=\"$this->name\" $w>");
     parent::add("<table id=\"color-table\" class='color_box $this->class'>");
     parent::add("<tbody>");
 

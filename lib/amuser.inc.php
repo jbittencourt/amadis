@@ -274,8 +274,27 @@ class AMUser extends CMUser {
     return $q1->execute();
   }
 
+  /**
+   * Add a new friend to this user. If this user is the logged user, clear its friends cache.
+   **/
+  public function addFriend($codeUser, $commentary) {
+
+    $friend = new AMFriend;
+    $friend->codeFriend = $codeUser;
+    $friend->codeUser = $this->codeUser;
+    $friend->comentary = $commentary;
+    $friend->status = AMFriend::ENUM_STATUS_ACCEPTED;
+    $friend->time = time();
+    $friend->save();
+    
+
+    if($_SESSION['user']->codeUser == $this->codeUser) {
+      unset($_SESSION['amadis']['friends']);
+    }
+  }
+
+
   public function listFriends() {
-    //unset($_SESSION['amadis']['friends']);
     if($_SESSION['user']->codeUser != $this->codeUser) {
       $q = new CMQuery('AMUser');
       
@@ -316,13 +335,11 @@ class AMUser extends CMUser {
       
       $ret = $q->execute();
       
-      $_SESSION['amadis']['friends'] = $ret;
-      
       $_SESSION['amadis']['friends'] = serialize($ret);
       
-    }else $ret = unserialize($_SESSION['amadis']['friends']);
-    
-    //$_SESSION['amadis']['friends'] = $_SESSION['amadis']['friends'];
+    }else {
+      $ret = unserialize($_SESSION['amadis']['friends']);
+    }
 
     return $ret;
     

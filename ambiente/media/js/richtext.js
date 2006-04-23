@@ -171,7 +171,7 @@ function writeRichText(rte, html, width, height, buttons, readOnly) {
 
 
 function initPalleteDlg(rte) { 
-  document.writeln('<iframe width="154" height="104" id="cp' + rte + '" style="position:absolute; visibility:hidden;" src="' + includesPath + 'palette.htm" marginwidth="0" marginheight="0" scrolling="no"></iframe>');
+  document.writeln('<iframe width="154" height="104" id="cp' + rte + '" class="rteDlg" src="' + includesPath + 'palette.htm" marginwidth="0" marginheight="0" scrolling="no"></iframe>');
 }
 
 function getFrameHTML(rte,innerHtml) {

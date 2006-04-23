@@ -155,8 +155,8 @@ if($_SESSION['user'] instanceof CMUser) {
     $box->add($projLibrary,AMTwoColsLayout::RIGHT);
   }
   else{
-    $shared = new AMBProjLibraryShare($proj,5,1);
-    $box->add($shared, AMTwoColsLayout::RIGHT);
+//     $shared = new AMBProjLibraryShare($proj,5,1);
+//     $box->add($shared, AMTwoColsLayout::RIGHT);
   }
   $box->add("<br>",AMTwoColsLayout::RIGHT);  
 }

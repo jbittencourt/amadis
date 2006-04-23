@@ -638,23 +638,26 @@ class AMAmbiente extends CMEnvironment {
   public function getGroupsParents(CMContainer $groups) {
     if($groups->count()==0)  return new CMContainer;
 
+
+    
+
     $q = new CMQuery(CMGroup);
     $f = "";
     foreach($groups as $group) {
       if(!empty($f)) $f.= " or ";
-      $f.= "(codeGroup==$group->codeGroup)";
+      $f.= "(CMGroup::codeGroup=$group->codeGroup)";
     }
     $q->setFilter($f);
 
     $j1 = new CMJoin(CMJoin::LEFT);
     $j1->setClass(AMProjeto);
-    $j1->on("AMProjeto::codeGroup==CMGroup::codeGroup");
+    $j1->on("AMProjeto::codeGroup=CMGroup::codeGroup");
 
     $q->addJoin($j1,"project");
 
     $j2 = new CMJoin(CMJoin::LEFT);
-    $j2->setClass(AMProjeto);
-    $j2->on("AMCommunities::codeGroup==CMGroup::codeGroup");
+    $j2->setClass(AMCommunities);
+    $j2->on("AMCommunities::codeGroup=CMGroup::codeGroup");
 
     $q->addJoin($j2,"communitie");
 

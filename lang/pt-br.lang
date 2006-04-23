@@ -228,7 +228,7 @@ post_delete = "Voc&ecirc; realmente deseja apagar esta nota no di&aacute;rio?"
 comments_dont_exists = "Esta nota ainda n&atilde;o possui coment&aacute;rios"
 
 diary_amadis = "Di&aacute;rios do AMADIS"
-diary_empty = "Este Di&aacute;rio n&atilde;o possui notas."
+diary_empty = "Este Di&aacute;rio n&atilde;o possui posts neste m&ecirc;s."
 profile_not_saved = "N&atilde;o foi poss&iacute;vel salvar sua altera&ccedil&atilde;o no Di&aacute;rio."
 write_comment = "Escrever um Coment&aacute;rio para este Di&aacute;rio"
 edit_profile = "Editar dados do meu Di&aacute;rio"
@@ -965,19 +965,25 @@ frm_title = "T&iacute;tulo do F&oacute;rum"
 frm_body = "Corpo da Mensagem"
 
 frm_name = "Nome do F&oacute;rum"
-frm_open = "Permitir que pessoas de fora do grupo participem deste f&oacute;rum"
+
+privs_all = "Administrador do F&oacute;rum"
+privs_post = "Enviar Mensagens"
+privs_view = "Ver as Mensagens"
+privs_delete = "Excluir as Mensagens"
 
 messages = "Mensagens"
 no_messages = "Este F&oacute;rum ainda n&atilde;o possu&iacute; mensagens."
 delete_message = "Voc&ecirc; realmente deseja excluir essa mensagem?"
+msg_forum_edited = "O F&oacute;rum foi alterado com sucesso."
 msg_message_posted = "Sua mensagem foi enviada com sucesso."
 msg_message_edit = "Sua mensagem foi editada com sucesso."
 
 
-
+error_no_privileges = "Voc&ecirc; n&atilde;o possui privil&eacute;gios para ver esse f&oacute;rum"
 error_forum_not_found = "O f&oacute;rum requisitado n&atilde;o existe."
 error_no_id = "O c&oacute;digo do f&oacute;rum n&atilde;o foi informado."
 error_message_not_posted = "Ocorreu um erro ao enviar sua mensagem. Por favor, tente novamente."
+error_cannot_edit_forum = "N&atilde;o foi poss&iacute;vel editar o f&oacute;rum devido a um erro desconhecido."
 
 [finder]
 finder = "Finder"
@@ -1028,6 +1034,7 @@ no_scraps = "Esse usu&aacute;rio ainda n&atilde;o possu&iacute; nenhuma mensagem
 
 
 [acos]
+aco_title = "Permiss&otilde;es"
 aco_search = "Procurar"
 
 aco_no_item = "Nenhum item dispon&iacute;vel"
@@ -1035,3 +1042,5 @@ aco_no_item = "Nenhum item dispon&iacute;vel"
 aco_no_friends = "Voc&ecirc; n&atilde;o possui amigos, realize uma busca pelos usu&aacute;rios que deseja encontrar."
 aco_no_projects = "Voc&ecirc;  n&atilde;o participa de nenhum projeto no momento. Realia uma busca para selecionar projetos."
 aco_no_communities = "Voc&ecirc;  n&atilde;o participa de nenhuma comunidade no momento. Realia uma busca para selecionar comunidades."
+
+aco_privs_world = "Todos no AMADIS"

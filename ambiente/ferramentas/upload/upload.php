@@ -15,7 +15,7 @@ $_language['error_diretory_created_success'] = str_replace("{DIR}","<u>".$_REQUE
 							   $_language['error_diretory_created_success']);
 
 $urlBase  = $_CMAPP['services_url']."/upload/upload.php?frm_upload_type=".$_REQUEST['frm_upload_type'];
-$pathBase = $_CMAPP['path']."/ambiente/paginas";
+$pathBase = (string) $_conf->app[0]->paths[0]->pages;
 
 switch($_REQUEST['frm_upload_type']) {
 

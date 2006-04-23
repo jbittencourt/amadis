@@ -10,15 +10,22 @@
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  **/
 
-class AMForum extends CMObj {
+class AMForum extends CMObj implements  CMACLAppInterface {
 
+  const PRIV_ALL = "all";
+  const PRIV_VIEW = "view";
+  const PRIV_POST = "post";
+  const PRIV_DELETE = "delete";
+  const PRIV_EDIT = "edit";
 
-   public function configure() {
+  private $cacheACO;
+
+  public function configure() {
      $this->setTable("Forums");
 
      $this->addField("code",CMObj::TYPE_INTEGER,20,1,0,1);
      $this->addField("name",CMObj::TYPE_VARCHAR,100,1,0,0);
-     $this->addField("aco",CMObj::TYPE_INTEGER,20,1,0,0);
+     $this->addField("codeACO",CMObj::TYPE_INTEGER,20,1,0,0);
      $this->addField("creationTime",CMObj::TYPE_INTEGER,20,1,0,0);
 
      $this->addPrimaryKey("code");
@@ -26,14 +33,15 @@ class AMForum extends CMObj {
 
   public function save() {
 
-    if(($state==self::STATE_NEW) || ($state==self::STATE_DIRTY_NEW) ) {
-      $aco = new CMACO;
+    if(($this->state==self::STATE_NEW) || ($this->state==self::STATE_DIRTY_NEW) ) {
+      $aco = new CMACO($this);
       $aco->description = "Forum ".$this->name;
       $aco->time = time();
       $aco->save();
+      
+      $this->codeACO = $aco->code;
     }
 
-    $this->aco = $aco->code;
     parent::save();
   }
 
@@ -104,15 +112,33 @@ class AMForum extends CMObj {
    * Get the ACO of this Forum
    **/
   public function getACO() {
-    $aco = new CMACO;
-    $aco->code = $this->codeACO;
+    if(!empty($this->cacheACO)) return $this->cacheACO;
+    $this->cacheACO = new CMACO($this);
+    $this->cacheACO->code = $this->codeACO;
     try {
-      $aco->load();
+      $this->cacheACO->load();
     } catch(CMDBNoRecord $e) {
       Throw new AMException('NO ACO Defined');
     }
 
-    return $aco;
+    return $this->cacheACO;
+  }
+
+  public function listPrivileges() {
+    return  array(self::PRIV_ALL, 
+		  self::PRIV_POST, 
+		  self::PRIV_VIEW,
+		  self::PRIV_EDIT,
+		  self::PRIV_DELETE);
+  }
+
+  public function listPrivilegesMessages() {
+    $_lang = $_CMAPP[i18n]->getTranslationArray("forum");
+    return array( self::PRIV_ALL=>$_lang['privs_all'],
+		  self::PRIV_POST=>$_lang['privs_post'],
+		  self::PRIV_VIEW=>$_lang['privs_view'],
+		  self::PRIV_EDIT=>$_lang['privs_edit'],
+		  self::PRIV_DELETE=>$_lang['privs_delete']);
   }
 
   /**Get Images from library of a forum
