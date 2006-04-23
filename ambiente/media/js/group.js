@@ -18,7 +18,6 @@ var AMBProjectJoinActionCallBack = {
 var AMBGroupRequestActionCallBack = {
 
   handleResponse: function(result) {
-    
     AM_parseRequires(result.requires);
     if(result.success==true) {
       AM_addMessage(result.message);
@@ -35,8 +34,8 @@ var AMBGroupRequestActionCallBack = {
   },
 
   accept: function(result) {
-    return this.handleResponse(result);
     loadProjectGroup(result.group)
+    return this.handleResponse(result);
   },
 
   reject: function(result) {

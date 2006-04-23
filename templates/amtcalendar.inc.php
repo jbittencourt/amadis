@@ -36,13 +36,13 @@ class AMTCalendar extends CMHTMLObj {
     $this->label[12] = $_language['december'];
 
     $this->weekday = array();
-    $this->weekday[1] = $_language['sun'];
-    $this->weekday[2] = $_language['mon'];
-    $this->weekday[3] = $_language['tue'];
-    $this->weekday[4] = $_language['wed'];
-    $this->weekday[5] = $_language['thu'];
-    $this->weekday[6] = $_language['fri'];
-    $this->weekday[7] = $_language['sat'];
+    $this->weekday[1] = $_language['mon'];
+    $this->weekday[2] = $_language['tue'];
+    $this->weekday[3] = $_language['wed'];
+    $this->weekday[4] = $_language['thu'];
+    $this->weekday[5] = $_language['fri'];
+    $this->weekday[6] = $_language['sat'];
+    $this->weekday[7] = $_language['sun'];
 
 
   }
