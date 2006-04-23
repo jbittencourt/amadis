@@ -253,7 +253,7 @@ switch($_REQUEST['action']) {
    }
    
    unset($_SESSION['cad_user']);
-
+   unset($_SESSION['user']);
    $cadBox->setTitle($_language['pag_3']);
 
 

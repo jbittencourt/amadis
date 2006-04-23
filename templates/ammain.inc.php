@@ -302,21 +302,21 @@ class AMMain extends AMHTMLPage {
 
     parent::add('</div>'); //global wrapper
 
-    parent::add("<div id=\"amadis-footer\">");
-    parent::add('<br>');
-    parent::add("<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" align=\"left\" width=\"100%\">");
-    parent::add("<td valign=\"top\" background=\"".$_CMAPP['images_url']."/bg_fundo_cinza.gif\">&nbsp;</td>");
-    parent::add("<td background=\"".$_CMAPP['images_url']."/bg_fundo_cinza.gif\">&nbsp;</td>");
-    parent::add("<td background=\"".$_CMAPP['images_url']."/bg_fundo_cinza.gif\" height=\"35\">&nbsp;</td>");
-    parent::add("<td background=\"".$_CMAPP['images_url']."/bg_linhas_lateral2.gif\" width='10'>");
-    parent::add("<img src=\"".$_CMAPP['images_url']."/dot.gif\" width=\"7\" height=\"1\">");
-    parent::add("</td>");
-    parent::add("<tr><td valign=\"top\" colspan=\"5\" background=\"".$_CMAPP['images_url']."/bg_fundo_cinza2.gif\">");
-    parent::add("<img src=\"".$_CMAPP['images_url']."/dot.gif\" width=\"1\" height=\"5\">");
-    parent::add("</td></tr>");
+//     parent::add("<div id=\"amadis-footer\">");
+//     parent::add('<br>');
+//     parent::add("<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" align=\"left\" width=\"100%\">");
+//     parent::add("<td valign=\"top\" background=\"".$_CMAPP['images_url']."/bg_fundo_cinza.gif\">&nbsp;</td>");
+//     parent::add("<td background=\"".$_CMAPP['images_url']."/bg_fundo_cinza.gif\">&nbsp;</td>");
+//     parent::add("<td background=\"".$_CMAPP['images_url']."/bg_fundo_cinza.gif\" height=\"35\">&nbsp;</td>");
+//     parent::add("<td background=\"".$_CMAPP['images_url']."/bg_linhas_lateral2.gif\" width='10'>");
+//     parent::add("<img src=\"".$_CMAPP['images_url']."/dot.gif\" width=\"7\" height=\"1\">");
+//     parent::add("</td>");
+//     parent::add("<tr><td valign=\"top\" colspan=\"5\" background=\"".$_CMAPP['images_url']."/bg_fundo_cinza2.gif\">");
+//     parent::add("<img src=\"".$_CMAPP['images_url']."/dot.gif\" width=\"1\" height=\"5\">");
+//     parent::add("</td></tr>");
 
-    parent::add("</table>");
-    parent::add('</div>');
+//     parent::add("</table>");
+//     parent::add('</div>');
     
     //this div forces the inclusion of an AMTUserinfo in the page
     //this force the inclusion of the file, so on the fly pages(like comments in diary)
