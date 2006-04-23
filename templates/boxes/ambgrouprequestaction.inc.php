@@ -63,6 +63,7 @@ class AMBGroupRequestAction {
 		  'message'=>'',
 		  'group'=>$codeGroup,
 		  'blockMessage'=>'');
+
     try {
       $group = new CMGroup;
       $group->codeGroup = $codeGroup;
@@ -88,7 +89,7 @@ class AMBGroupRequestAction {
     catch(CMDBException $e) {
       $msg = new AMAlertBox(AMAlertBox::ERROR,$_language['error_joining_user']);
     }
-
+    return $ret;
     $ret['requires'] = $msg->getRequires();
     $ret['message'] = $msg->__toString();
     return $ret;

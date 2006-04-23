@@ -276,6 +276,20 @@ class AMUser extends CMUser {
 
   public function listFriends() {
     //unset($_SESSION['amadis']['friends']);
+    if($_SESSION['user']->codeUser != $this->codeUser) {
+      $q = new CMQuery('AMUser');
+      
+      $j1 = new CMJoin(CMJoin::INNER);
+      $j1->setClass('AMFriend');
+      $j1->on("AMUser::codeUser = AMFriend::codeFriend");
+
+      $q->addJoin($j1,"usuarios");
+
+      $q->setFilter("Friends.codeUser= $this->codeUser AND Friends.status = '".AMFriend::ENUM_STATUS_ACCEPTED."'");
+      
+      return $q->execute();
+      
+    }
     if(!isset($_SESSION['amadis']['friends'])) {
       
       $q = new CMQuery('AMUser');
