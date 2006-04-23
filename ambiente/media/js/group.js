@@ -18,7 +18,7 @@ var AMBProjectJoinActionCallBack = {
 var AMBGroupRequestActionCallBack = {
 
   handleResponse: function(result) {
-    alert(result);
+    
     AM_parseRequires(result.requires);
     if(result.success==true) {
       AM_addMessage(result.message);

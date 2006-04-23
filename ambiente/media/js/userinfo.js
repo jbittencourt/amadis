@@ -8,7 +8,7 @@ var AMTUserinfoRenderCallBack = {
   render: function(result) {
     div = AM_getElement("toolTipSpan");
     div.innerHTML = result;
-    
+
     return;
   }
 }

@@ -330,8 +330,8 @@ class AMMain extends AMHTMLPage {
     parent::addPageBegin(self::getScript("var AMEnvSession = new amenvsession(AMEnvSessionCallBack);"));
     
     if($_SESSION['environment']->logged) {
-      parent::addPageBegin(self::getScript("var AMFinder = new amfinder(AMFinderCallBack);"));
-      parent::addPageBegin(self::getScript("var Finder_chatSRC = '$_CMAPP[services_url]/finder/finder_chat.php';"));
+      //parent::addPageBegin(self::getScript("var AMFinder = new amfinder(AMFinderCallBack);"));
+      //parent::addPageBegin(self::getScript("var Finder_chatSRC = '$_CMAPP[services_url]/finder/finder_chat.php';"));
       
       $this->setOnload("initEnvironment();");
       
