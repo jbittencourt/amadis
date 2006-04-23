@@ -40,7 +40,7 @@ class AMUserLibraryEntry extends CMObj {
     try{
       $library->save();
       //adiciona esta nova biblioteca ao usuario que esta sendo cadastrado
-      $this->userCode =  $_SESSION[user]->codeUser;
+      $this->userCode =  $this->user;
       $this->libraryCode = $library->code;      
       $this->save();      
     }catch(AMException $e){ 
@@ -52,8 +52,8 @@ class AMUserLibraryEntry extends CMObj {
     $this->userCode = $user;
     try{
       $this->load();
-    }catch(CMException $e){
-      echo $e;
+    }catch(CMDBNoRecord $w){
+      $this->newLibrary();
     }
     return $this->libraryCode;
   }
