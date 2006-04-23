@@ -2,13 +2,9 @@
 var AMSharedCallBack = {
 
   share: function(result) {
-    //alert(result);
     var image = AM_getElement(result.oldId);
     image.src = result.url;
     image.id  = result.id;
-  }
-  version: function(result) {
-    alert("aeeeeeeee");
   }
 }
 
