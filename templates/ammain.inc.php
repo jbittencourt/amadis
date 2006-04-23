@@ -294,11 +294,14 @@ class AMMain extends AMHTMLPage {
     parent::add($this->contents);
 
 
+    //PAGE FOOTER
+
     parent::add('</div>');//content
 
     //parent::add('</div>');//content-column
 
-    //PAGE FOOTER
+    parent::add('</div>'); //global wrapper
+
     parent::add("<div id=\"amadis-footer\">");
     parent::add('<br>');
     parent::add("<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" align=\"left\" width=\"100%\">");
@@ -314,9 +317,6 @@ class AMMain extends AMHTMLPage {
 
     parent::add("</table>");
     parent::add('</div>');
-
-    parent::add('</div>'); //global wrapper
-
     
     //this div forces the inclusion of an AMTUserinfo in the page
     //this force the inclusion of the file, so on the fly pages(like comments in diary)

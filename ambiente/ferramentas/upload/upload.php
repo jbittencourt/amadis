@@ -225,7 +225,8 @@ switch($_REQUEST['action']) {
    $pag->addPageBegin(CMHTMLObj::getScript("lang_cancel = '$_language[cancel]';"));
    $pag->addPageBegin(CMHTMLObj::getScript("imlang_url = '$_CMAPP[imlang_url]';"));
    $pag->addPageBegin(CMHTMLObj::getScript("images_url = '$_CMAPP[images_url]';"));
-
+   $pag->addPageBegin(CMHTMLObj::getScript("chooserUrl = '$_CMAPP[services_url]/upload/choose_image.php';"));
+ 
    $form = new CMWSmartForm("","form_file", $_SERVER['PHP_SELF']);
 
    $form->setSubmitOff();
@@ -234,8 +235,10 @@ switch($_REQUEST['action']) {
    $form->addComponent("file_content", new CMWHTMLArea("frm_file_content",400,550));
    $form->addComponent("upload_type", new CMWHidden("frm_upload_type", $_REQUEST['frm_upload_type']));
    $form->addComponent("dir", new CMWHidden("frm_dir", $_REQUEST['frm_dir']));
-   if(isset($_REQUEST['frm_codeProjeto'])) 
+   if(isset($_REQUEST['frm_codeProjeto'])) {
      $form->addComponent("codeProjeto", new CMWHidden("frm_codeProjeto", $_REQUEST['frm_codeProjeto']));
+     $pag->addPageBegin(CMHTMLObj::getScript("var codeProjeto = '$_REQUEST[frm_codeProjeto]';"));
+   } else $pag->addPageBegin(CMHTMLObj::getScript("var codeProjeto = '';"));
    //$form->addComponent("codeCourse", new CMWHidden("frm_codeCourse", $_REQUEST['frm_codeCourse']));
    $form->addComponent("filename", new CMWHidden("frm_filename",$_REQUEST['frm_filename']));
    $form->addComponent("action", new CMWHidden("action","A_save_file"));
@@ -256,7 +259,7 @@ switch($_REQUEST['action']) {
    $pag->addPageBegin(CMHTMLObj::getScript("lang_cancel = '$_language[cancel]';"));
    $pag->addPageBegin(CMHTMLObj::getScript("imlang_url = '$_CMAPP[imlang_url]';"));
    $pag->addPageBegin(CMHTMLObj::getScript("images_url = '$_CMAPP[images_url]';"));
-   $pag->addPageBegin(CMHTMLObj::getScript("codeProjeto = '$_REQUEST[codeProjeto]';"));
+   $pag->addPageBegin(CMHTMLObj::getScript("codeProjeto = '$_REQUEST[frm_codeProjeto]';"));
    //$pag->addPageBegin(CMHTMLObj::getScript("codeCourse = '$_REQUEST[codeCourse]';"));
    $pag->addPageBegin(CMHTMLObj::getScript("chooserUrl = '$_CMAPP[services_url]/upload/choose_image.php';"));
 

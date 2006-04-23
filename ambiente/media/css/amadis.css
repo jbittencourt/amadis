@@ -27,13 +27,6 @@ BODY IMG {
   }
 /* MAIN MENU */
 
-#amadis-global-wrapper { 
-  position: relative;
-  top: -108px;
-  background-image: url("../images/img_dot_blue.gif");
-  background-repeat: repeat-y;
-  }
-
 #amadis-logo { 
   position: absolute;
   left: 2px;
@@ -69,18 +62,6 @@ BODY IMG {
   float: right;
   }
 
-#amadis-footer { 
-  position: relative;
-  height: 50px;
-  bottom: 8px;
-  margin-top:131px;
-  /* background: url("../images/img_dot_blue.gif") repeat-y 10% 0%; */
-  padding: 0px;
-  padding-left: 19px;
-  /* border: solid red thin; */
-  }
-
-
 #nav-menu { 
   position: relative;
   /* top: 131px; */
@@ -88,6 +69,7 @@ BODY IMG {
   left: 19px;
   width: 197px;
   /* border:solid thin red; */
+  z-index:10;
   }
   
 #column-one {  
@@ -112,9 +94,12 @@ BODY IMG {
 #content { 
   position: relative;
   top: 110px;
-  margin-left: 230px;
+  height: 100%;
+  padding-left: 230px;
   margin-right: 10px;
-/*   border: solid thin red; */
+  z-index:9;
+  background: url("../images/img_dot_blue.gif") repeat-y;
+/*    border: solid thin red;  */
   }
   
 #footer-menu { 
@@ -132,6 +117,21 @@ BODY IMG {
   background-repeat: repeat-x;
   height: 7px;
   width: 100%;
+  }
+
+#amadis-global-wrapper { 
+  position: relative;
+  top: -108px;
+  background: url("../images/img_dot_blue.gif") repeat-y;
+  }
+
+#amadis-footer { 
+  display:none;
+  position: absolute;
+  height: 50px;
+  bottom:0px; !important
+  background: url("../images/img_dot_blue.gif") repeat-y;
+  /* border: solid red thin; */
   }
 
 
