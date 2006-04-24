@@ -28,23 +28,18 @@ if($letra != ""){
     foreach($res as $item){
       $conteudo .= "<tr>"; 
       $conteudo .= "<td width = '80'>";
-      $f = $item->foto;
-      if($f!=0) {
-	$pag->add($conteudo);
-	$thumb = new AMUserThumb;
-	$thumb->codeArquivo = $item->foto;
-	try {
-	  $thumb->load();
-	  $pag->add($thumb->getView());
-	}
-	catch(CMDBException $e) {
-	  echo $e; die();
-	}
+
+      $pag->add($conteudo);
+      $thumb = new AMUserThumb;
+      $thumb->codeArquivo = (integer) $item->foto;
+      try {
+	$thumb->load();
+	$pag->add($thumb->getView());
       }
-      else {
-	$pag->add($conteudo);
-	$pag->add("&nbsp;");			
-      }    
+      catch(CMDBException $e) {
+	echo $e; die();
+      }
+
       $pag->add("</td><td>");
       $pag->add(new AMTUserInfo($item));
       $conteudo = "</td>";

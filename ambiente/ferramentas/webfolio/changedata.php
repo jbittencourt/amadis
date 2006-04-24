@@ -35,13 +35,18 @@ switch($_REQUEST['action']) {
    if(empty($_SESSION['cad_user'])) {
      $_SESSION['cad_user'] = clone $_SESSION['user'];
      $_SESSION['cad_foto'] = new AMUserFoto();
-     $_SESSION['cad_foto']->codeArquivo = $_SESSION['cad_user']->foto;
-     try {
-       $_SESSION['cad_foto']->load();
+     $_SESSION['cad_foto']->codeArquivo = (integer) $_SESSION['cad_user']->foto;
+     if(empty($_SESSION['cad_foto']->codeArquivo)) {
+       $_SESSION['cad_foto'] = new AMUserFoto();
+     } else {
+       try {
+	 $_SESSION['cad_foto']->load();
+       }
+       catch(CMDBNoRecord $e) {
+	 $_SESSION['cad_foto'] = new AMUserFoto();
+       };
      }
-     catch(CMDBNoRecord $e) {
-       $_SESSION['cad_foto'] = new AMFoto();
-     };
+     
      $_SESSION['cad_foto']=serialize($_SESSION['cad_foto']);
    }
    
@@ -102,7 +107,9 @@ switch($_REQUEST['action']) {
 
 
    if(isset($_FILES['frm_foto']) && !empty($_FILES['frm_foto'])) {
-     $_SESSION['cad_foto'] = unserialize($_SESSION['cad_foto']);
+     $ustemp= unserialize($_SESSION['cad_foto']);
+     if($ustemp!=false) $_SESSION['cad_foto']=$ustemp;
+
      try {
        $_SESSION['cad_foto']->loadImageFromRequest("frm_foto");
      }
@@ -116,6 +123,7 @@ switch($_REQUEST['action']) {
    }
    else {
      $foto = unserialize($_SESSION['cad_foto']);
+     if($foto===false) $foto = $_SESSION['cad_foto'];
      $view = $foto->getView();
    }
 
@@ -145,8 +153,9 @@ switch($_REQUEST['action']) {
    }
 
    $foto = unserialize($_SESSION['cad_foto']);
+   if($foto===false) $foto = $_SESSION['cad_foto'];
 
-   if($foto->state==CMObj::STATE_DIRTY) {
+   if($foto->state==CMObj::STATE_DIRTY || $foto->state==CMObj::STATE_NEW) {
      try {
        $foto->save(); 
        $_SESSION['cad_user']->foto = $foto->codeArquivo;

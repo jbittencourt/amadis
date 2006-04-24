@@ -181,9 +181,10 @@ switch($_REQUEST['action']) {
    }
    
    $foto = unserialize($_SESSION['cad_foto']);
+   if($foto===false) $foto = $_SESSION['cad_foto'];
 
    
-   if($foto->state==CMObj::STATE_DIRTY || $foto->state==CMObj::STATE_NEW) {
+   if($foto->state==CMObj::STATE_DIRTY) {
 
      $foto->tempo = time();
      try {
@@ -193,7 +194,8 @@ switch($_REQUEST['action']) {
        header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_picture");
      }
 
-     $_SESSION['cad_user']->foto = $foto->codeArquivo;
+     if($foto != AMUserFoto::DEFAULT_IMAGE)
+       $_SESSION['cad_user']->foto = $foto->codeArquivo;
    }
 
    //verifica se o ambiente esta configurado para aceitar o cadastro

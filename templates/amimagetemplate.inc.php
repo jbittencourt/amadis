@@ -6,7 +6,7 @@ abstract class  AMImageTemplate extends CMHTMLObj {
   const METHOD_DB=0;
   const METHOD_SESSION=1;
   
-  private $codeArquivo;
+  protected $codeArquivo;
   private $imageObj;
   private $method;
 

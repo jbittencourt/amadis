@@ -3,7 +3,7 @@
 
 class AMUserFoto extends AMFoto {
 
-  private $default_image = 1;     //the default user image is coded with number 1 in the databse
+  const DEFAULT_IMAGE = 1;     //the default user image is coded with number 1 in the databse
 
   public function __construct() {
     parent::__construct();
@@ -23,7 +23,7 @@ class AMUserFoto extends AMFoto {
       return new AMTUserImage($this,AMImageTemplate::METHOD_SESSION);
     case CMObj::STATE_NEW:
       if($this->dados == "") {
-	return new AMTUserImage($this->default_image);
+	return new AMTUserImage(self::DEFAULT_IMAGE);
       }
       else {
 	return new AMTUserImage($this,AMImageTemplate::METHOD_SESSION);

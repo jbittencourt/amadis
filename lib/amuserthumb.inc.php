@@ -8,6 +8,14 @@ class AMUserThumb extends AMThumb {
     $this->maxY = 60;
   }
 
+  public function load() {
+    $tmp = $this->codeArquivo;
+    if(empty($tmp)) {
+      $this->codeArquivo = AMUserFoto::DEFAULT_IMAGE;
+    }
+    return parent::load();
+  }
+
 }
 
 ?>

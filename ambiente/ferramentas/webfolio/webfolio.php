@@ -45,9 +45,7 @@ $box = new AMTwoColsLayout;
 
 
 $foto = $_SESSION['user']->foto;
-if(!empty($foto)) {
-  $box->add(new AMTUserImage($foto),AMTwoColsLayout::LEFT);
-}
+$box->add(new AMTUserImage($foto),AMTwoColsLayout::LEFT);
 
 $box->add("<p><font class=\"texto\"><b>".$_SESSION['user']->name."<br>".date($_language['date_format'],$_SESSION['user']->datNascimento)."</b>", AMTwoColsLayout::LEFT);
 
