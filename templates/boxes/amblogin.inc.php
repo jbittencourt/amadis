@@ -9,7 +9,6 @@ class AMBLogin extends AMMenuBox {
   public function __construct() {
     parent::__construct();
     self::requires("login.css",CMHTMLObj::MEDIA_CSS);
-
     foreach($_REQUEST as $k=>$item) {
       if($k != "AMADIS" && $k != "frm_username" && $k != "frm_password" && $k != "submit") {
 	$this->requestVars[] = "<input type=\"hidden\" name=\"$k\" value=\"$item\">";
@@ -20,7 +19,7 @@ class AMBLogin extends AMMenuBox {
   function __toString() {
     global $_CMAPP;
 
-
+    
     $formAction = $_CMAPP['form_login_action'];
 
     parent::add("<div id=\"login\">");

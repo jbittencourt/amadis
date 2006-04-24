@@ -69,6 +69,7 @@ switch($_REQUEST['action']) {
       
  case "pag_1":
    //checa os dados do usuario, pra ver se nao existe o usuario
+   $_REQUEST['frm_username'] = strtolower($_REQUEST['frm_username']);
    $user = new AMUser;
    $user->username = $_REQUEST['frm_username'];
    try {
@@ -78,9 +79,17 @@ switch($_REQUEST['action']) {
      unset($user);
    }
 
-   $fields_rec = array("name","datNascimento","email","endereco","codCidade","cep","telefone","aboutMe");
+   
+   $complete = (int) $_conf->app->environment->use_complete_register_form;
+   if($complete) 
+     $fields_rec = array("name", "email", "datNascimento", "codCidade", "endereco", "cep", "telefone", "aboutMe");
+   else
+     $fields_rec = array("name","email", "datNascimento", "codCidade","aboutMe");
+   
    $form = new AMWSmartForm('AMUser', "cad_user", $_SERVER['PHP_SELF'], $fields_rec);
 
+
+   $form->setWidgetOrder($fields_rec);
 
    if(!($_SESSION['cad_user'] instanceof AMUser)) {
      //if this is the first submit, create an object in the session to store the user data
@@ -101,6 +110,7 @@ switch($_REQUEST['action']) {
       
    //campo cidade
    $cidades = $_SESSION['environment']->listaCidades();
+   
    $form->setSelect("codCidade",$cidades,"codCidade","nomCidade");
    $form->components['codCidade']->addOption(0,$_language['escolher_cidade']);
 
@@ -127,7 +137,6 @@ switch($_REQUEST['action']) {
    break;
 
  case "pag_2":
-
 
    if(!($_SESSION['cad_user'] instanceof AMUser)) {
      header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=fatal");

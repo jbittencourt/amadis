@@ -28,7 +28,7 @@ class AMBPeopleSearchUsers extends AMPageBox implements CMActionListener {
     
     case "listing" :
       
-      $result = $_SESSION['environment']->searchUsers($_REQUEST['frm_search'], $this->init, $this->numHitsFP);
+      $result = $_SESSION['environment']->searchUsers(trim($_REQUEST['frm_search']), $this->init, $this->numHitsFP);
       
       $this->numItems = $result['count'];
       $this->itens = $result[0];

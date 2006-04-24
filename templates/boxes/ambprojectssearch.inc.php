@@ -25,7 +25,7 @@ class AMBProjectsSearch extends AMPageBox implements CMActionListener {
       parent::add($box);
       break;
     case "listing" :
-      $result = $_SESSION['environment']->searchProjects($_REQUEST['frm_search'], $this->init, $this->numHitsFP);
+      $result = $_SESSION['environment']->searchProjects(trim($_REQUEST['frm_search']), $this->init, $this->numHitsFP);
       
       $this->numItems = $result['count'];
       $this->itens = $result[0];
