@@ -26,12 +26,12 @@ class AMMainMenu extends CMHtmlObj {
 			 $_CMAPP['imlang_url']."/ico_comunidades_on.gif",)
 		   );
     
-    if(!empty($_SESSION['user'])) {
-      $this->addItem($_CMAPP['services_url']."/admin/admin.php",
-		     array($_CMAPP['imlang_url']."/ico_administracao_off.gif",
-			   $_CMAPP['imlang_url']."/ico_administracao_on.gif",)
-		     );
-    }
+//     if(!empty($_SESSION['user'])) {
+//       $this->addItem($_CMAPP['services_url']."/admin/admin.php",
+// 		     array($_CMAPP['imlang_url']."/ico_administracao_off.gif",
+// 			   $_CMAPP['imlang_url']."/ico_administracao_on.gif",)
+// 		     );
+//     }
 
   }
 

@@ -198,7 +198,8 @@ switch($_REQUEST['action']) {
 
    //verifica se o ambiente esta configurado para aceitar o cadastro
    //automaticamente
-   $auto_accept = $_conf->app->environment->auto_accept_subscrib;
+
+   $auto_accept = 1; //(boolean) $_conf->app->environment->auto_accept_subscrib;
    
    if($auto_accept) {
      $_SESSION['cad_user']->active = 1;
@@ -231,7 +232,7 @@ switch($_REQUEST['action']) {
      $cadBox->add("<p align=center>$_language[register_ok]");
    }
    else {
-     $cadBox->add("<p align=center>$_language[register_wait]");
+     $cadBox->add("<p align=center>a$_language[register_wait]");
    }
 
    //prepares the email to be sent
@@ -243,6 +244,7 @@ switch($_REQUEST['action']) {
    $keys = array("{FIRSTNAME}","{USERNAME}","{NAME}","{URL}","{IMG_URL}");
    $values = array($firstname,$_SESSION['cad_user']->username,$_SESSION['cad_user']->name,$_CMAPP['url'],$_CMAPP['imlang_url']);
    $mensagem = str_replace($keys,$values,$mensagem);
+   
    $mail->setMessage($mensagem);
 
    try {

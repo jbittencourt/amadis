@@ -173,6 +173,8 @@ class AMMain extends AMHTMLPage {
       $this->requires("communicator.php?client");
     }
 
+    $this->setIcon($_CMAPP['images_url']."/ico_pecinha.ico");
+    $this->setTitle($_language['amadis']);
 
     /**
       Initialize the variables that are defined in the lib.js with
@@ -192,8 +194,6 @@ class AMMain extends AMHTMLPage {
 
     $this->force_newline=0;
 
-    $this->setIcon($_CMAPP['images_url']."/ico_pecinha.ico");
-    $this->setTitle($_language['amadis']);
 
     //logo
     parent::add('<div id="amadis-logo"><img src="'.$_CMAPP['images_url'].'/pecas_amadis.png"></div>');

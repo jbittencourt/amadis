@@ -32,10 +32,6 @@ class AMArquivo extends CMObj {
 
   }
 
-  public function save() {
-    $this->dados = addslashes($this->dados);
-    parent::save();
-  }
 
 
 }

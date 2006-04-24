@@ -39,7 +39,7 @@ if(!empty($_REQUEST[action])) {
 	$old_image->delete();
       } catch (CMDBException $exception) {
 	//hummm, some problem ocured. I will ignore the problem.
-	//som lost image will remain in the dabatase. I will be
+	//so lost image will remain in the dabatase. I will be
 	//cool  to log this information for the admin
       }
       
@@ -56,6 +56,7 @@ if(!empty($_REQUEST[action])) {
       break;
     }
     Header("Location: $_CMAPP[services_url]/diario/diario.php?frm_ammsg=profile_edit_success&frm_type=user");
+    die();
     break;
 
  case "fatal_error":
