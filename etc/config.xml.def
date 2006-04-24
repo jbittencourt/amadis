@@ -18,6 +18,7 @@
       <use_md5_password>1</use_md5_password>
       <store_plain_password>0</store_plain_password>
       <auto_accept_subscribe>0</auto_accept_subscribe>
+      <use_complete_register_form>0</use_complete_register_form>
    </environment>
    <session>
       <name>AMADIS</name>
