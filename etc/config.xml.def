@@ -63,7 +63,78 @@
    </tools>
    <interface>
      <smilies>
-        <smile key=":)" image="face-smile.png" />
+	<smile key=":-#" image="47_47.gif" />
+	<smile key="8o|" image="48_48.gif" />
+	<smile key="8-|" image="49_49.gif" />
+	<smile key="^o)" image="50_50.gif" />
+	<smile key=":-*" image="51_51.gif" />
+	<smile key="+o(" image="52_52.gif" />
+	<smile key="(sn)" image="53_53.gif" />
+	<smile key="(pl)" image="55_55.gif" />
+	<smile key="(||)" image="56_56.gif" />
+	<smile key="(pi)" image="57_57.gif" />
+	<smile key="(so)" image="58_58.gif" />
+	<smile key="(au)" image="59_59.gif" />
+	<smile key="(ap)" image="60_60.gif" />
+	<smile key="(um)" image="61_61.gif" />
+	<smile key="(ip)" image="62_62.gif" />
+	<smile key="(co)" image="63_63.gif" />
+	<smile key="(mp)" image="64_64.gif" />
+	<smile key="(st)" image="66_66.gif" />
+	<smile key="(mo)" image="69_69.gif" />
+	<smile key="(bah)" image="70_70.gif" />
+	<smile key="8-)" image="71_71.gif" />
+	<smile key="*-)" image="72_72.gif" />
+	<smile key="(li)" image="73_73.gif" />
+	<smile key="<:o)" image="74_74.gif" />
+	<smile key="|-)" image="77_77.gif" />
+	<smile key="(A)" image="angel_smile.gif" />
+	<smile key=":@" image="angry_smile.gif" />
+	<smile key=":[" image="bat.gif" />
+	<smile key="(B)" image="beer_mug.gif" />
+	<smile key="(U)" image="broken_heart.gif" />
+	<smile key="(^)" image="cake.gif" />
+	<smile key="(P)" image="camera.gif" />
+	<smile key="(@)" image="cat.gif" />
+	<smile key="(O)" image="clock.gif" />
+	<smile key="(C)" image="coffe.gif" />
+	<smile key=":S" image="confused_smile.gif" />
+	<smile key=":'(" image="cry_smile.gif" />
+	<smile key="(6)" image="devil_smile.gif" />
+	<smile key="(&)" image="dog.gif" />
+	<smile key="(E)" image="envelope.gif" />
+	<smile key="(~)" image="film.gif" />
+	<smile key="(X)" image="girl.gif" />
+	<smile key="(})" image="girl_hug.gif" />
+	<smile key="(Z)" image="guy.gif" />
+	<smile key="({)" image="guy_hug.gif" />
+	<smile key="(L)" image="heart.gif" />
+	<smile key="(K)" image="kiss.gif" />
+	<smile key="(I)" image="lightbulb.gif" />
+	<smile key="(D)" image="martini.gif" />
+	<smile key="(M)" image="messenger.gif" />
+	<smile key="(S)" image="moon.gif" />
+	<smile key="(8)" image="note.gif" />
+	<smile key=":-O" image="omg_smile.gif" />
+	<smile key="(T)" image="phone.gif" />
+	<smile key="(G)" image="present.gif" />
+	<smile key=":$" image="red_smile.gif" />
+	<smile key=":)" image="regular_smile.gif" />
+	<smile key="=)" image="regular_smile.gif" />
+	<smile key="(F)" image="rose.gif" />
+	<smile key=":(" image="sad_smile.gif" />
+	<smile key="=(" image="sad_smile.gif" />
+	<smile key="(H)" image="shades_smile.gif" />
+	<smile key="(*)" image="star.gif" />
+	<smile key=":D" image="teeth_smile.gif" />
+	<smile key="=D" image="teeth_smile.gif"/>
+	<smile key="(N)" image="thumbs_down.gif" />
+	<smile key="(Y)" image="thumbs_up.gif" />
+	<smile key=":P" image="tongue_smile.gif" />
+	<smile key="=P" image="tongue_smile.gif" />
+	<smile key=":|" image="what_smile.gif" />
+	<smile key="(W)" image="wilted_rose.gif" />
+	<smile key=";)" image="wink_smile.gif" />
      </smilies>
    </interface>
 </app>
