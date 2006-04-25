@@ -34,7 +34,7 @@ if(empty($_REQUEST['method'])) {
 switch($_REQUEST['method']) {
  case "db":
    $imagem = new AMArquivo;
-   $imagem->codeArquivo = $_REQUEST['frm_codeArquivo'];
+   $imagem->codeArquivo = (integer) $_REQUEST['frm_codeArquivo'];
    Try {
      $imagem->load();
    }
