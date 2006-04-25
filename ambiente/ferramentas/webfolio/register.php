@@ -193,8 +193,7 @@ switch($_REQUEST['action']) {
    if($foto===false) $foto = $_SESSION['cad_foto'];
 
    
-   if($foto->state==CMObj::STATE_DIRTY) {
-
+   if(($foto->state==CMObj::STATE_DIRTY) || ($foto->state==CMObj::STATE_DIRTY_NEW)) {
      $foto->tempo = time();
      try {
        $foto->save(); 

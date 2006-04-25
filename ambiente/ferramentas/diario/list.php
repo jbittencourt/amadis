@@ -1,7 +1,6 @@
 <?
 $_CMAPP[notrestricted] = True;
 include("../../config.inc.php");
-include($_CMDEVEL[path]."/cmwebservice/cmwsmartform.inc.php");
 
 $_language = $_CMAPP[i18n]->getTranslationArray("diary");
 $_CMAPP[smartform] = array();
