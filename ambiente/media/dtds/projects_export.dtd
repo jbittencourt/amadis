@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : projects_export.dtd
+    Created on : 13 de Dezembro de 2005, 17:18
+    Author     : juliano
+    Description:
+        Purpose of the document follows.
+
+    TODO define vocabulary identification data
+    PUBLIC ID  : -//vendor//vocabulary//EN
+    SYSTEM ID  : http://server/path/projects_export.dtd
+-->
+
+<!ELEMENT projects (project*)>
+<!ELEMENT project (title,hits,members)>
+<!ELEMENT code (#PCDATA)>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT hits (#PCDATA)>
+<!ELEMENT members (#PCDATA)>
+<!ELEMENT recentness (#PCDATA)>
+
+<!ATTLIST project userproject CDATA #IMPLIED>
