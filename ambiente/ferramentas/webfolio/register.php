@@ -132,6 +132,8 @@ switch($_REQUEST['action']) {
 
    
    $cadBox->setTitle($_language['pag_1']);
+   $msg = "<b>$_language[your_username]</b><b style='font-size:17px; color:red'>$_REQUEST[frm_username]</b>";
+   $cadBox->add(new AMAlertBox(AMAlertBox::ALERT, $msg));
    $cadBox->add($form);
    
    break;
