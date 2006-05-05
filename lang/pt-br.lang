@@ -165,6 +165,7 @@ frm_foto = "Selecione um arquivo com uma foto sua."
 
 try_again = "Tente Novamente"
 
+your_username = "Seu nome de usu&aacute;rio &eacute;: ";
 register_ok = "Seu cadastro foi efetuado com sucesso. Para acessar o AMADIS, basta agora entra com seu nome de usu&aacute;rio e senha no menu ao lado."
 register_wait = "Seu pedido de cadastro foi efetuado com sucesso e aguarda aprova&ccedil;&atilde;o do administrador. Assim que ele for aceito, uma mensagem ser&aacute; enviada para o e-mail que voc&ecirc; cadastrou."
 
