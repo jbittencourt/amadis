@@ -125,7 +125,7 @@ function UploadOpenFile(file) {
     handle = window.open(popUrlBase+"/"+param[0],"viewFile", "width=500, height=400, scrollbars=no, status=no");
     break;
    case "html":
-     handle = window.open(popUrlBase+"/"+param[0],"viewFile", "width=700, height=600, status=no, srollbars=auto");
+     handle = window.open(popUrlBase+"/"+param[0],"viewFile", "width=700, height=600, scrollbars=yes");
     break;
   default:
     handle = window.open(popUrlBase+"/"+param[0],"viewFile", "width=700, height=600, status=no, scrollbars=auto");
