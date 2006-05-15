@@ -153,7 +153,7 @@ else {
   }
 }
 
-if(basename($_SERVER['SCRIPT_FILENAME']) != "index.php" && basename($_SERVER['SCRIPT_FILENAME']) != "register.php") {
+if(!ereg("(index|register|recoverpassword)",basename($_SERVER['SCRIPT_FILENAME']))) {
   $_CMAPP['form_login_action'] = $_SERVER['PHP_SELF'];
 }else $_CMAPP['form_login_action'] = $_CMAPP['services_url']."/webfolio/webfolio.php";
 

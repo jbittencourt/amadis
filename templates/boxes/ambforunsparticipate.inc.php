@@ -1,4 +1,8 @@
 <?
+/**
+ * @package AMADIS
+ * @subpackage AMBoxes
+ */
 
 class AMBForunsParticipate extends CMHTMLObj {
   

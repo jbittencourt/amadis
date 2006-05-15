@@ -1,6 +1,8 @@
 <?
-
-
+/**
+ * @package AMADIS
+ * @subpackage AMTemplates
+ */
 
 class AMNenhum extends AMMain {
   

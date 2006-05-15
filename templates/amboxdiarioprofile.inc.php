@@ -1,4 +1,8 @@
 <?
+/**
+ * @package AMADIS
+ * @subpackage AMBoxes
+ */
 
 class AMBoxDiarioProfile extends CMHTMLObj {
 

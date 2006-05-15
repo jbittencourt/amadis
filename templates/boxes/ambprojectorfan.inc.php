@@ -3,6 +3,8 @@
 /**
  * This box lists the active requests from users to join a project
  *
+ * @package AMADIS
+ * @subpackage AMBoxes
  * @autho Juliano Bittencourt <juliano@lec.ufrgs.br>
  **/
 class AMBProjectOrfan extends AMColorBox implements CMActionListener {

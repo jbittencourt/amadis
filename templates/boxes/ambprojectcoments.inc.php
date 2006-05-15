@@ -1,4 +1,8 @@
 <?
+ /**
+ * @package AMADIS
+ * @subpackage AMBoxes
+ */
 
 class AMBProjectComents extends AMSimpleBox implements CMActionListener {
   

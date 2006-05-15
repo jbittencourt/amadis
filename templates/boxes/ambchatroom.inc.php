@@ -1,4 +1,8 @@
 <?
+/**
+ * @package AMADIS
+ * @subpackage AMBoxes
+ */
 
 class AMBChatRoom extends CMHTMLPage {
   protected $room, $toolName;

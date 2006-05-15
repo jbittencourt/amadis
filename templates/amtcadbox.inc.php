@@ -1,5 +1,8 @@
 <?
-
+/**
+ * @package AMADIS
+ * @subpackage AMBoxes
+ */
 
 class AMTCadBox extends CMHTMLObj {
 

@@ -1,4 +1,8 @@
 <?
+/**
+ * @package AMADIS
+ * @subpackage AMTemplates
+ */
 
 
 class AMTCommunities extends AMMain {

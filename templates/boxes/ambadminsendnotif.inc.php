@@ -1,4 +1,9 @@
 <?
+/**
+ * @package AMADIS
+ * @subpackage AMBoxes
+ */
+
 class AMBAdminSendNotif extends AMColorBox {
 
   public function __construct() {

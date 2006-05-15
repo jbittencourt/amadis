@@ -1,4 +1,16 @@
 <?
+/**
+ * Main file to management of the files hosteds in AMADIS
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
+ * @package AMADIS
+ * @subpackage AMUpload
+ * @category AMVisualization
+ * @version 0.1
+ * @author Robson Mendonca <robson@lec.ufrgs.br>
+ * @see AMUpload, AMBUpload
+ */
 
 include("../../config.inc.php");
 include("ambupload.inc.php");

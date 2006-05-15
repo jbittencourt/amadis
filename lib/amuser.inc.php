@@ -1,4 +1,17 @@
 <?
+/**
+ * The users class.
+ * This class manage all actions of a user in the environment.
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
+ * @package AMADIS
+ * @subpackage AM
+ * @category AMDBClass
+ * @version 1.0
+ * @author Juliano Bittencourt <juliano@lec.ufrgs.br>, Robson Mendonca <robson@lec.ufrgs.br>
+ * @see CMUser, CMEnvinronment
+ */
 
 class AMUser extends CMUser {
 
@@ -99,7 +112,15 @@ class AMUser extends CMUser {
 
   
 
- 
+  /**
+   * This function save a new user in AMADIS DB.
+   * It too create a new folder to publish your html pages or documents.
+   * If the operation fail, throw a AMException and register in AMADIS log system.
+   *
+   * @access public
+   * @param void
+   * @return void
+   */ 
   public function save() {
     global $_conf, $_CMDEVEL;
     $state = $this->state;
@@ -131,7 +152,11 @@ class AMUser extends CMUser {
    * Generates a random  password with lowercase letter and numbers.
    *
    * This script has been adapted from http://64.233.167.104/search?q=cache:s_bo4OuRdE0J:melbourne.ug.php.net/content/view/52/76/+php+generate+password&hl=en&client=firefox
-   *
+   * 
+   * @access public
+   * @param $len - Length of the string
+   * @param $mode - Generation mode
+   * @return void
    **/
   public function randomPassword($len=4,$mode=self::RPASS_LOWERCASE_NUMBERS_N) {
     $chars=array();
@@ -277,7 +302,12 @@ class AMUser extends CMUser {
 
   /**
    * Add a new friend to this user. If this user is the logged user, clear its friends cache.
-   **/
+   * 
+   * @access public
+   * @param $codeUser - AMADIS user_id
+   * @param $commentary - A short message to new friend =)
+   * @return void
+   */
   public function addFriend($codeUser, $commentary) {
 
     $friend = new AMFriend;
@@ -286,9 +316,24 @@ class AMUser extends CMUser {
     $friend->comentary = $commentary;
     $friend->status = AMFriend::ENUM_STATUS_ACCEPTED;
     $friend->time = time();
-    $friend->save();
     
-
+    try {
+      $friend->save();
+    
+      $f = new AMFriend;
+      $f->codeFriend = $this->codeUser;
+      $f->codeUser = $codeUser;
+      $f->comentary = $comentary;
+      $f->status = AMFriend::ENUM_STATUS_NOT_ANSWERED;
+      $f->time = time();
+      try {
+	$f->save();
+      }catch(CMException $e) {
+	//tratar excessao
+      }
+    }catch(CMException $e) {
+      //tratar excessao
+    }
     if($_SESSION['user']->codeUser == $this->codeUser) {
       unset($_SESSION['amadis']['friends']);
     }
@@ -346,10 +391,14 @@ class AMUser extends CMUser {
     
   }  
   
-  /*
-   * Funcao de confirmacao de amigos do usuario. 
-   * Implementacao do algoritmo Golum de reconhecimento de amigos
-   * dentre os usuarios do ambiente. "AMADIS is my friend"
+  /**
+   * Confirmation function to user friends
+   * Golum algorithm implementation of the friends recognise
+   * among environment users. "AMADIS is my friend? It's like us?"
+   *
+   * @access public
+   * @param int $codeUser - AMADIS user_id
+   * @return Boolean - Confirmation of the test =P 
    */
   public function isMyFriend($codeUser) {
     $friends = $this->listFriends();
@@ -359,16 +408,23 @@ class AMUser extends CMUser {
     return $ret;
   }
 
+  /**
+   * List of invitation maked for AMADIS user that become you frind =)
+   *
+   * @access public
+   * @param void
+   * @return CMContainer - List of the invitations
+   */
   public function listFriendsInvitations() {
     if(empty($_SESSION['last_session'])) {
-      $q = new CMQuery('AMFriend');
+      $q = new CMQuery('AMUser');
     
       $j = new CMJoin(CMJoin::LEFT);
-      $j->setClass('AMUser');
-      $j->on("User.codeUser = Friends.codeUser");
+      $j->setClass('AMFriend');
+      $j->on("User.codeUser = Friends.codeFriend");
       
       $q->addJoin($j, "invitation");
-      $q->setFilter("Friends.codeFriend = $this->codeUser AND Friends.status = '".AMFriend::ENUM_STATUS_NOT_ANSWERED."'");
+      $q->setFilter("Friends.codeUser = $this->codeUser AND Friends.status = '".AMFriend::ENUM_STATUS_NOT_ANSWERED."'");
       
       return $q->execute();
 
@@ -376,8 +432,12 @@ class AMUser extends CMUser {
   }
   
   /**
-   * @param int $m Month
-   * @param int $y Year
+   * List post for a diary
+   *
+   * @access public
+   * @param int $m - Month
+   * @param int $y - Year
+   * @return CMContainer - List of post from a diary
    **/
   public function listDiaryPosts ($m,$y){
     $query=new CMQuery('AMDiarioPost');
@@ -406,7 +466,13 @@ class AMUser extends CMUser {
     return $query->execute();
   }
 
-
+  /**
+   * List project of the a user
+   *
+   * @access public
+   * @param void
+   * @return CMContainer - List of the projects from a diary
+   **/
   public function listProjects() {
     $q = new CMQuery('AMProjeto');
     $j = new CMJoin(CMJoin::INNER);
@@ -708,18 +774,40 @@ class AMUser extends CMUser {
   }
 
 
-  public function listMyMessages() {
+  /**
+   * List public messages(scraps)
+   *
+   * @access public
+   * @param int $ini - Initial row of DB_CURSOR
+   * @param int $lenght - Number of rows will return
+   * @return Array CMContainer and number of AFFECTED_ROWS
+   */
+  public function listMyMessages($ini=0, $lenght=10) {
     $q = new CMQuery('AMUserMessages');
-    $q->setFilter('AMUserMessages::codeTo='.$this->codeUser);
-    $q->setOrder('AMUserMessages::time DESC');
+
+    $filter = 'AMUserMessages::codeTo='.$this->codeUser;
+    $order = 'AMUserMessages::time DESC';
+
+    $q->setFilter($filter);
+    $q->setOrder($order);
 
     $j = new CMJoin(CMJoin::INNER);
     $j->setClass('AMUser');
     $j->using("codeUser");
 
     $q->addJoin($j,'author');
+    
+    $q->setCount();
+    $count = $q->execute();
+    
+    $q = new CMQuery('AMUserMessages');
+    $q->setFilter($filter);
+    $q->setOrder($order);
+    $q->addJoin($j, 'author');
 
-    return $q->execute();
+    $q->setLimit($ini, $lenght);
+
+    return array('count'=>$count, $q->execute());
   }
   
 }

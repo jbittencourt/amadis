@@ -1,4 +1,9 @@
 <?
+/**
+ * @package AMADIS
+ * @subpackage AMBoxes
+ */
+
 class AMBAdminUsersList extends AMTCadBox {
 
   protected $itens;

@@ -1,4 +1,8 @@
 <?
+/**
+ * @package AMADIS
+ * @subpackage AMBoxes
+ */
 
 include("cminterface/widgets/cmwjswin.inc.php");
 

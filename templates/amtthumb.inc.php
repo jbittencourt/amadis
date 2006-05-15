@@ -1,4 +1,8 @@
 <?
+/**
+ * @package AMADIS
+ * @subpackage AMTemplates
+ */
 
 
 class AMTThumb extends CMHTMLObj {

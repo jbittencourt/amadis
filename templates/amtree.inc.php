@@ -1,4 +1,8 @@
 <?
+/**
+ * @package AMADIS
+ * @subpackage AMTemplates
+ */
 
 include("cminterface/widgets/cmwtreenode.inc.php");
 

@@ -1,4 +1,9 @@
 <?
+ /**
+ * @package AMADIS
+ * @subpackage AMBoxes
+ */
+
 class AMBProjLibrary extends AMColorBox {
 
   private $proj;

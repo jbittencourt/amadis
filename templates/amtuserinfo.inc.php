@@ -8,6 +8,8 @@ include("cminterface/widgets/cmwtip.inc.php");
  * uses the user real name as link text, but an alternative
  * text can be used, passing an argument to the constructor.
  *
+ * @package AMADIS
+ * @subpackage AMTemplates
  * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
  **/
 class AMTUserInfo extends CMHTMLObj {

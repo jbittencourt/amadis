@@ -1,4 +1,9 @@
 <?
+/**
+ * @package AMADIS
+ * @subpackage AMTemplates
+ */
+
 class AMTLibraryFoto extends AMImageTemplate {
 
   public function __toString() {

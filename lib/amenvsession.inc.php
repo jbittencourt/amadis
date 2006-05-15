@@ -1,23 +1,38 @@
 <?
-
-/** Esta classe serve somente para gerenciar eventos do cliente,
- *  ligados a manipulacao da interface.
+/**
+ * This class make management events of the client interface.
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
+ * @package AMADIS
+ * @subpackage AMCommunication
+ * @category AMAjax
+ * @version 1.0
+ * @author Robson Mendonca <robson@lec.ufrgs.br>
  */
+
 class AMEnvSession {
   
+  /**
+   * Change menu status, to opened or closed.
+   * This function affects only AMNavMenu
+   *
+   * @param string $name - menuItem name
+   * @param string $status - menuItem status
+   * @see AMNavMenu
+   */
   public function changeMenuStatus($name, $status) {
     $_SESSION['amadis']['menus'][$name] = $status;
   }
 
   /**
-   * Muda o modo do usuario.
+   * Change the user mode visualization.
    *
-   * O modo do usuario deve estar dentro do array $this->modos. Ele faz a alteracao necesseria
-   * no campo visibilidade da tabela sessao_ambiente(RDSessaoAMbiente). A secao do usuario esta 
-   * registrada em $_SESSION[ambiente].
+   * The user mode must be in a array $this->modos. It make the necessary change
+   * in the visibility field of the CMEnvSession class. The user session is registered in
+   * $_SESSION[environment] variable.
    *
-   * @Param string $mensagem Mensagem a ser enviada
-   * @param integer $para Codigo do usuario para quem se deseja enviar um mensagem
+   * @param string $mode - Visualization mode
    */
   public function changeMode($mode) {
     
@@ -99,8 +114,12 @@ class AMEnvSession {
     
   }
 
-  /**Retorna os modos de visualizacao do usuario
+  /**
+   * Get the visualization modes for a user
    *
+   * @access static public
+   * @param void
+   * @return Array $modes - list of visualization modes
    */
   static public function getModes() {
     global $_language;
@@ -113,7 +132,17 @@ class AMEnvSession {
     
   }
   
-
+  /**
+   * Add a user as a friend.
+   *
+   * @access public
+   * @param $codeUser - AMADIS user_id
+   * @param $time - Unixtime when a user was added
+   * @param $comentary - A litle comment for a user
+   * @param $msg - The programer success-message
+   * @param $msg_err - The programer error_message
+   * @return Array $ret - success/error message to user
+   */
   public function makeFriend($codeUser, $time, $comentay, $msg, $msg_err) {
 
     $ret = array("divId"=>$codeUser);
@@ -122,6 +151,7 @@ class AMEnvSession {
       $friend = new AMFriend;
       $friend->codeFriend = $codeUser;
       $friend->codeUser = $_SESSION['user']->codeUser;
+      $friend->load();
       if(!empty($comentary)) {
 	$friend->comentary = $_REQUEST['frm_comentary'];
       }
@@ -140,6 +170,17 @@ class AMEnvSession {
 
   }
 
+  /**
+   * Reject a friend invitation.
+   *
+   * @access public
+   * @param $codeUser - AMADIS user_id
+   * @param $time - Unixtime when a user was added
+   * @param $comentary - A litle comment for a user
+   * @param $msg - The programer success-message
+   * @param $msg_err - The programer error_message
+   * @return Array $ret - Success/error message to user
+   */
   public function rejectFriend($codeUser, $time, $msg, $msg_err) {
 
     $ret = array("divId"=>$codeUser);

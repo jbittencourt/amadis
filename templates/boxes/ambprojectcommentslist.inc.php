@@ -1,4 +1,8 @@
 <?
+ /**
+ * @package AMADIS
+ * @subpackage AMBoxes
+ */
 
 class AMBProjectCommentsList extends AMListBox {
 

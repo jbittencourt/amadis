@@ -1,4 +1,8 @@
 <?
+/**
+ * @package AMADIS
+ * @subpakage AMTemplates
+ */
 
 class AMACORender extends CMHTMLObj {
 

@@ -1,4 +1,8 @@
 <?
+/**
+ * @package AMADIS
+ * @subpackage AMTemplates
+ */
 
 
 class AMTUserImage extends AMImageTemplate {

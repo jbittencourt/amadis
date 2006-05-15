@@ -1,4 +1,9 @@
 <?
+/**
+ * @package AMADIS
+ * @subpackage AMBoxes
+ */
+
 class AMBCommunityList extends AMPageBox implements CMActionListener {
 
   private $itens = array();

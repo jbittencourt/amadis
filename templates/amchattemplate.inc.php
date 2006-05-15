@@ -1,15 +1,12 @@
 <?
 /**
- */
-/**
  * Template para a interface de um chat.
  * @author Juliano Bittencourt <juliano@edu.ufrgs.br>
  * @access public
  * @abstract
  * @version 0.5
- * @package rddevel
- * @subpackage interface
- * @see RDObj
+ * @package AMADIS
+ * @subpackage AMTemplates
  */
 abstract class AMChatTemplate extends CMHTMLObj {
   public $fieldRecipient,$fieldSender;

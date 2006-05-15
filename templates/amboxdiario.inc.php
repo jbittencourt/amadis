@@ -1,7 +1,14 @@
 <?
 
+/**
+ * The AMBoxDiario is a box that list blog entries.
+ *
+ * @package AMADIS
+ * @subpackage AMBoxes
+ *
+ **/
 class AMBoxDiario extends CMHTMLObj {
-
+  
   private $imagem;
   private $titulo;
   private $texto;
@@ -89,7 +96,10 @@ class AMBoxDiario extends CMHTMLObj {
     parent::add("</div>"); //diary header;
 
     $calendar = new AMTCalendar($this->month,$this->year);
-    $calendar->setMoveLink("$_CMAPP[services_url]/diario/diario.php?frm_codeUser=$this->user&");
+    if(!empty($_REQUEST['frm_codeUser']))
+      $calendar->setMoveLink("$_CMAPP[services_url]/diario/diario.php?frm_codeUser=$this->user&");
+    else
+      $calendar->setMoveLink("$_CMAPP[services_url]/diario/diario.php?");
     
     parent::add("</td>");
     parent::add("<td width=\"20\"><img src=\"$url/dot.gif\" width=\"20\" height=\"10\" border=\"0\"></td>");

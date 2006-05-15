@@ -1,4 +1,9 @@
 <?
+/**
+ * @package AMADIS
+ * @subpackage AMTemplates
+ */
+
 class AMTShowHide extends CMHTMLObj { 
   
   const SHOW = "true";

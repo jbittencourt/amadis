@@ -46,9 +46,9 @@ if(isset($_REQUEST['action'])) {
       $message->codeUser = $_SESSION['user']->codeUser;
       $message->time = time();  
       $message->save();
-      $pag->addError($_language['error_message_send_success']);
+      $pag->addMessage($_language['error_message_send_success']);
     }catch (CMException $e) {
-      $pag->addError($_language['error_message_not_send']."<br>".$_language['error_contact_admin']);
+      $pag->addError($_language['error_message_not_send']."<br>".$_language['error_contact_admin'], $e->getMessage());
     }
     break;
   }

@@ -1,4 +1,8 @@
 <?
+/**
+ * @package AMADIS
+ * @subpakage AMTemplates
+ */
 
 class AMACOListRender extends CMHTMLObj {
 

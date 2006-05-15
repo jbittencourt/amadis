@@ -1,4 +1,8 @@
 <?
+/**
+ * @package AMADIS
+ * @subpackage AMTemplates
+ */
 
 class AMWRichTextArea extends CMWFormEl {
   protected static $_initialized=false;

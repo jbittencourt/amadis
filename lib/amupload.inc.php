@@ -150,7 +150,7 @@ class AMUpload {
 	$dirMime[$i]['mime'] = $mime[0];
 	$dirMime[$i]['name'] = $item;
 	//timestamp
-       	$stat = stat($_SESSION['upload']['current']."/".$item);
+       	$stat = @stat($_SESSION['upload']['current']."/".$item);
 	$dirMime[$i]['time'] = date("d/m/Y",$stat['mtime']);
 	$dirMime[$i]['mime_info'] = $_language[$mime[1]];
 	$i++;  
@@ -160,6 +160,9 @@ class AMUpload {
     
   }
 
+  public function getDir() {
+    return $this->dir;
+  }
 
   private function getMime($fileName){
     

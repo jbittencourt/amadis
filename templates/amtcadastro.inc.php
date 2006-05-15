@@ -1,5 +1,8 @@
 <?
-
+/**
+ * @package AMADIS
+ * @subpackage AMTemplates
+ */
 
 class AMTCadastro extends AMMain {
   

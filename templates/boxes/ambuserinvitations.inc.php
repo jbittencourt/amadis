@@ -3,7 +3,11 @@
 /**
  *Este eh box de aviso de convite e aviso de requisicao de entrada
  *para um projeto.
+ * 
+ * @package AMADIS
+ * @subpackage AMBoxes
  */
+
 
 class AMBUserInvitations extends AMColorBox implements CMActionListener {
     

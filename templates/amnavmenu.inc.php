@@ -1,6 +1,18 @@
 <?
+/**
+ * Vertical Menu, with link to webfolio, blog, files, etc. 
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
+ * @package AMADIS
+ * @subpackage Core
+ * @category AMTemplate
+ * @version 1.0
+ * @author Juliano Bittencout <juliano@lec.ufrgs.br>
+ * @see AMMain, AMMainMenu
+ */
 
-class AMNavMenu extends CMHTMLObj {
+class  AMNavMenu extends CMHTMLObj {
   public $locked;
   private $lines;
 
@@ -186,6 +198,12 @@ class AMNavMenu extends CMHTMLObj {
    * the menu to put an image (orange trace) connecting the item to the blue line.
    * The third parameter force the menu to draw an empty line(height=20) after the
    * the item.
+   *
+   * @param String $line - Line been added
+   * @param Boolean $connector - Force put an image in menu
+   * @param Boolean $forceEmptyLineAfter - Force add an empty line after new item in menu
+   * @param String $bg - Background color
+   * @return Void
    **/
   public function add($line,$connector=false,$forceEmptyLineAfter=false,$bg="") {
     $this->lines[] = array("line"=>$line,

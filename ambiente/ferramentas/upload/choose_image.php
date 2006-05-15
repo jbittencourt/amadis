@@ -1,4 +1,16 @@
 <?
+/**
+ * Chooser a image to insert in a page
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
+ * @package AMADIS
+ * @subpackage AMUpload
+ * @category AMVisualization
+ * @version 0.1
+ * @author Robson Mendonca <robson@lec.ufrgs.br>
+ */
+
 include("../../config.inc.php");
 
 $pag = new CMHTMLPage;
@@ -7,6 +19,7 @@ $pag->requires("lib.js", CMHTMLObj::MEDIA_JS);
 
 $script  = "function sendImageSrc(src) {\n ";
 $script .= "  parent.document.getElementById('f_url').value = src;\n";
+//$script .= "parent.document.getElementById('f_alt').value = src;\n";
 $script .= "  parent.onPreview();\n";
 $script .= " }\n";
 

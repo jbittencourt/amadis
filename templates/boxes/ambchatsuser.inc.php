@@ -2,10 +2,17 @@
 /**
  * Box that list the chats that are in progress or scheduled in the projects or communities of the user 
  *
- * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
  * @package AMADIS
- * @subpackage AMBoxes
- **/
+ * @subpackage AMChat
+ * @category AMBoxes
+ * @version 1.0
+ * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
+ * @see AMColorBox
+ */
+
 class AMBChatsUser extends AMColorBox {
   
   private $cProjects, $cDiary, $cMessages;
@@ -22,7 +29,7 @@ class AMBChatsUser extends AMColorBox {
   }
 
 
-  /***
+  /**
    * Render a list of elements that contains chat rooms
    *
    * @param object $rooms An CMContainer where each element contain a variable rooms with a list of chats.

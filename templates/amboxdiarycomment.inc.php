@@ -1,4 +1,9 @@
 <?
+/**
+ * @package AMADIS
+ * @subpackage AMBoxes
+ */
+
 class AMBoxDiaryComment extends CMHTMLObj {
 
   private $contents;

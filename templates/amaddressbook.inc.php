@@ -1,5 +1,8 @@
 <?
-
+/**
+ * @package AMADIS
+ * @subpakage AMTemplates
+ */
 
 class AMAddressBook extends CMPage {
 

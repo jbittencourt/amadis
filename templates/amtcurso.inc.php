@@ -1,4 +1,8 @@
 <?php
+/**
+ * @package AMADIS
+ * @subpackage AMTemplates
+ */
 
 // Pedro Pimentel - 22/02/2005 - zukunft@gmail.com
 

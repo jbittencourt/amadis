@@ -1,4 +1,8 @@
 <?
+/**
+ * @package AMADIS
+ * @subpackage AMBoxes
+ */
  
 class AMBCommunityItems extends AMColorBox {
   

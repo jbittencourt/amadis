@@ -1,5 +1,8 @@
 <?
-
+/**
+ * @package AMADIS
+ * @subpackage AMBoxes
+ */
 
 class AMMenuBox extends CMHTMLObj {
 

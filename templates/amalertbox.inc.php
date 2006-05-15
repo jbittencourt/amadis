@@ -1,4 +1,9 @@
 <?
+/**
+ * @package AMADIS
+ * @subpackage AMBoxes
+ */
+
 
 Class AMAlertBox extends AMAbstractBox {
   

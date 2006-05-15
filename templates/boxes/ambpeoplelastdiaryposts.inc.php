@@ -1,4 +1,8 @@
 <?
+ /**
+ * @package AMADIS
+ * @subpackage AMBoxes
+ */
 
 class AMBPeopleLastDiaryPosts extends AMColorBox implements CMActionListener {
 

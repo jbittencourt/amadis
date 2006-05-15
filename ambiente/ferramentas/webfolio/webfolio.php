@@ -1,4 +1,16 @@
 <?
+/**
+ * Webfolio of the user
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
+ * @package AMADIS
+ * @subpackage Core
+ * @category AMVisualization
+ * @version 1.0
+ * @author Juliano Bittencourt <juliano@lec.ufrgs.br>, Robson Mendonca <robson@lec.ufrgs.br>
+ * @see AMTWebfolio, AMTwoColsLayout, AMBuserFriendInvitations, AMBuserInvitations, AMBAvisos, AMBAmadisNews, AMTuserImage
+ */
 include("../../config.inc.php");
 
 $_language = $_CMAPP['i18n']->getTranslationArray("webfolio");

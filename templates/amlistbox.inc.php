@@ -1,5 +1,9 @@
 <?
-/** Listagem generica com thumbnails de usuarios ou projetos
+/** 
+ * Listagem generica com thumbnails de usuarios ou projetos
+ *
+ * @package AMADIS
+ * @subpackage AMBoxes
  * @param items CMContainer
  * @param title String
  * @param theme AMTCadBox themes constants

@@ -1,4 +1,16 @@
 <?
+/**
+ * Box to send files to server
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
+ * @package AMADIS
+ * @subpackage AMUpload
+ * @category AMBox
+ * @version 0.1
+ * @author Robson Mendonca <robson@lec.ufrgs.br>
+ * @see AMUpload, AMBUpload, AMBUploadCreateDiretory, AMBUploadFloatingBox
+ */
 
 class AMBUploadSendFiles extends CMHTMLObj {
 

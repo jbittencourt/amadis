@@ -1,4 +1,8 @@
 <?
+ /**
+ * @package AMADIS
+ * @subpackage AMBoxes
+ */
 
 class AMBPeopleInviteFriends extends CMHtmlObj implements CMActionListener {
 

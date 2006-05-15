@@ -1,4 +1,8 @@
 <?
+/**
+ * @package AMADIS
+ * @subpackage AMBoxes
+ */
 
 abstract class AMSimpleBox extends CMHTMLObj {
   

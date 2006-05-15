@@ -1,5 +1,8 @@
 <?
-
+/**
+ * @package AMADIS
+ * @subpackage AMBoxes
+ */
 abstract class AMAbstractBox extends CMHTMLObj {
 
   public $width;

@@ -1,5 +1,18 @@
 <?
 
+/**
+ * Main listing box
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
+ * @package AMADIS
+ * @subpackage AMUpload
+ * @category AMBox
+ * @version 0.1
+ * @author Robson Mendonca <robson@lec.ufrgs.br>
+ * @see AMUpload, AMBUploadFloatingBox, AMBUploadCreateDiretory, AMBUploadSendFiles
+ */
+
 include("cminterface/widgets/cmwjswin.inc.php");
 
 class AMBUpload extends CMHTMLObj {
@@ -166,29 +179,31 @@ class AMBUpload extends CMHTMLObj {
     parent::add("  <br>");
 
     //////////////////////////////////
-    parent::add("<table cellpadding='0' cellspacing='0' border='0' width='100%'>");
-    parent::add("   <tr>");
-    parent::add("   <td align='left' valign='top'>");
-    parent::add("<img class='cursor' onClick='AM_getElement(\"upload_box\").style.visibility=\"visible\"' src='$_CMAPP[imlang_url]/box_up_enviar.gif'><img class='cursor' onClick='UploadDownload(document.form_upload, \"$_REQUEST[frm_dir]\",\"$_REQUEST[frm_upload_type]\",\"$_REQUEST[frm_codeProjeto]\",\"\");' src='$_CMAPP[imlang_url]/box_up_baixar.gif'>");
-    parent::add("</td>");
-    parent::add("   <td align='right'>");
-    parent::add("   <table cellpadding='0' cellspacing='10' border='0' align='right'>");
-    parent::add("   <tr>");
-    parent::add("   <td valign='top'><img class='cursor' onClick='UploadNewFile();' src='$_CMAPP[imlang_url]/bt_arq_novo.gif'></td>");
-//     parent::add("   <td valign='top'><img src='$_CMAPP[imlang_url]/bt_arq_copiar.gif'></td>");
-//     parent::add("   <td valign='top'><img src='$_CMAPP[imlang_url]/bt_arq_colar.gif'></td>");
-    parent::add("      <td valign=\"top\"><img class='cursor' onClick='UploadDelete();'");//document.form_upload, '$i', ");
-    //    parent::add("'$_REQUEST[frm_dir]', '$_REQUEST[frm_upload_type]','$_REQUEST[frm_codeProjeto]', '$_REQUEST[frm_codCourse]')\" ");
-    parent::add(" src=\"$_CMAPP[imlang_url]/bt_arq_excluir.gif\" border=0></td>");
-    parent::add("      <td valign=\"top\"><img class='cursor' onClick=\"UploadNewFolder('$_SERVER[PHP_SELF]', ");
-    parent::add("'$_REQUEST[frm_upload_type]', '$_REQUEST[frm_dir]','$_REQUEST[frm_codeProjeto]','');\" ");
-    parent::add("src=\"$_CMAPP[imlang_url]/bt_arq_novapasta.gif\" border=0></td>");
+    if(!isset($_REQUEST[frm_page])) {
+      parent::add("<table cellpadding='0' cellspacing='0' border='0' width='100%'>");
+      parent::add("   <tr>");
+      parent::add("   <td align='left' valign='top'>");
+      parent::add("<img class='cursor' onClick='AM_getElement(\"upload_box\").style.visibility=\"visible\"' src='$_CMAPP[imlang_url]/box_up_enviar.gif'><img class='cursor' onClick='UploadDownload(document.form_upload, \"$_REQUEST[frm_dir]\",\"$_REQUEST[frm_upload_type]\",\"$_REQUEST[frm_codeProjeto]\",\"\");' src='$_CMAPP[imlang_url]/box_up_baixar.gif'>");
+      parent::add("</td>");
+      parent::add("   <td align='right'>");
+      parent::add("   <table cellpadding='0' cellspacing='10' border='0' align='right'>");
+      parent::add("   <tr>");
+      parent::add("   <td valign='top'><img class='cursor' onClick='UploadNewFile();' src='$_CMAPP[imlang_url]/bt_arq_novo.gif'></td>");
+      //     parent::add("   <td valign='top'><img src='$_CMAPP[imlang_url]/bt_arq_copiar.gif'></td>");
+      //     parent::add("   <td valign='top'><img src='$_CMAPP[imlang_url]/bt_arq_colar.gif'></td>");
+      parent::add("      <td valign=\"top\"><img class='cursor' onClick='UploadDelete();'");//document.form_upload, '$i', ");
+      //    parent::add("'$_REQUEST[frm_dir]', '$_REQUEST[frm_upload_type]','$_REQUEST[frm_codeProjeto]', '$_REQUEST[frm_codCourse]')\" ");
+      parent::add(" src=\"$_CMAPP[imlang_url]/bt_arq_excluir.gif\" border=0></td>");
+      parent::add("      <td valign=\"top\"><img class='cursor' onClick=\"UploadNewFolder('$_SERVER[PHP_SELF]', ");
+      parent::add("'$_REQUEST[frm_upload_type]', '$_REQUEST[frm_dir]','$_REQUEST[frm_codeProjeto]','');\" ");
+      parent::add("src=\"$_CMAPP[imlang_url]/bt_arq_novapasta.gif\" border=0></td>");
 
-    parent::add("   </tr>");
-    parent::add("   </table>");
-    parent::add("   </td>");
-    parent::add("   </tr>");
-    parent::add("</table>");
+      parent::add("   </tr>");
+      parent::add("   </table>");
+      parent::add("   </td>");
+      parent::add("   </tr>");
+      parent::add("</table>");
+    }
     //////////////////////////////////
 
     parent::add("      </td>");

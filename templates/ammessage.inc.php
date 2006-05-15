@@ -8,6 +8,8 @@
  * by any class, an exibed to the user. Usualy AMMain is reponsable for
  * show the messages. 
  * 
+ * @package AMADIS
+ * @subpackage AMError
  * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
  **/
 

@@ -1,4 +1,8 @@
 <?
+/**
+ * @package AMADIS
+ * @subpackage AMBoxes
+ */
 
 
 class AMTCommunityCadBox extends AMTCadBox {

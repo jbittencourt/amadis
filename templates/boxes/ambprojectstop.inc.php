@@ -1,4 +1,9 @@
 <?
+ /**
+ * @package AMADIS
+ * @subpackage AMBoxes
+ */
+
 class AMBProjectsTop extends CMHTMLObj {
 
   private $links = array();

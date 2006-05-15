@@ -1,4 +1,9 @@
 <?
+/**
+ * @package AMADIS
+ * @subpackage AMBoxes
+ */
+
 class AMBAdminChgPw extends AMColorBox {
 
   public function __construct() {

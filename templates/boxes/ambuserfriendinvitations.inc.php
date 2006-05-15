@@ -1,5 +1,16 @@
 <?
-
+/**
+ * Invitations friends box
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
+ * @package AMADIS
+ * @subpackage Core
+ * @category AMCategoria
+ * @version 1.0
+ * @author Robson Mendonca <robson@lec.ufrgs.br>
+ * @see AMColorBox, CMActionListener
+ */
 class AMBUserFriendInvitations extends AMColorBox implements CMActionListener {
     
   protected $invitations, $__hasItems;
@@ -17,6 +28,13 @@ class AMBUserFriendInvitations extends AMColorBox implements CMActionListener {
    
   }
 
+  /**
+   * Check is have new invitations
+   *
+   * @access public
+   * @param Void
+   * @return Boolean AMBUserFriendInvitations::__hasItems;
+   */
   public function __hasInvitations() {
     return $this->__hasItems;
   }
@@ -46,7 +64,7 @@ class AMBUserFriendInvitations extends AMColorBox implements CMActionListener {
 	$inv->save();
       }
       catch(CMDBException $e) {	
-note($e);
+	note($e);
 	//if occur some problem, remove the user
 	$proj->removeMember($_SESSION['user']->codeUser);
 	$err = new AMError($_language['error_joining_project'],get_class($this));
@@ -80,18 +98,17 @@ note($e);
       
       $this->requires("alertbox.css", CMHTMLObj::MEDIA_CSS);
       parent::addPageBegin(CMHTMLObj::getScript("EnvSession_numFriendsInvitation = ".$this->invitations->count().";"));
-
       foreach($this->invitations as $friend) {
 
 	$user = $friend->invitation[0];
 	
-	parent::add("<div id='$user->codeUser'>");
+	parent::add("<div id='$friend->codeUser'>");
 	parent::add("<table border=0 cellspacing=1 cellpadding=2 width=\"100%\">");
 	
 	//user image thumbnail
 	parent::add("<tr><td>");
 	$thumb = new AMUserThumb;
-	$thumb->codeArquivo = $user->foto;
+	$thumb->codeArquivo = $friend->foto;
 	try {
 	  $thumb->load();
 	  parent::add($thumb->getView());
@@ -105,19 +122,19 @@ note($e);
 
 	//invitation text
 	parent::add("</td><td class=\"texto\">");
-	parent::add("<span class=\"cinza\">$friend->comentary</span><br>");
+	parent::add("<span class=\"cinza\">$user->comentary</span><br>");
 	parent::add("$_language[friend_invitation] ");
-	parent::add("<a class=\"blue\" href=\"$_CMAPP[services_url]/webfolio/userinfo_details.php?frm_codeUser=$user->codeUser\">$user->username</a>.");
+	parent::add("<a class=\"blue\" href=\"$_CMAPP[services_url]/webfolio/userinfo_details.php?frm_codeUser=$friend->codeUser\">$friend->username</a>.");
 	parent::add("</td><td align=center>");
 
 	$time = $friend->time;
-	$link = $_CMAPP['services_url']."/webfolio/userinfo_details.php?frm_codeUser=".$user->codeUser;
+	$link = $_CMAPP['services_url']."/webfolio/userinfo_details.php?frm_codeUser=".$friend->codeUser;
 
 	//error_invitation_user_failed = "N&atilde;o foi poss&iacute;vel adicionar o amigo!"
 	//msg_invitation_user_success = "Amigo adicionado com sucesso!"
 
-	$mkFriend = "AMEnvSession.makefriend($user->codeUser, $time, '', '$_language[msg_invitation_user_success]', '$_language[error_invitation_user_failed]');";
-	$rjFriend = "AMEnvSession.rejectfriend($user->codeUser, $time, '','');";
+	$mkFriend = "AMEnvSession.makefriend($friend->codeUser, $time, '', '$_language[msg_invitation_user_success]', '$_language[error_invitation_user_failed]');";
+	$rjFriend = "AMEnvSession.rejectfriend($friend->codeUser, $time, '','');";
 
 	
 	parent::add("<a class='blue cursor' onClick=\"$mkFriend\">$_language[add_friend]</a><br>");

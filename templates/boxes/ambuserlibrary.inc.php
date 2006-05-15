@@ -1,4 +1,9 @@
 <?
+ /**
+ * @package AMADIS
+ * @subpackage AMBoxes
+ */
+
 class AMBUserLibrary extends AMColorBox {
 
   private $user;

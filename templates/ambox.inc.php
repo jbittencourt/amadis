@@ -1,5 +1,8 @@
 <?
-
+/**
+ * @package AMADIS
+ * @subpackage AMBoxes
+ */
 
 class AMBox extends AMAbstractBox {
 

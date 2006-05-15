@@ -1,4 +1,17 @@
 <?
+/**
+ * Visualization of diary
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
+ * @package AMADIS
+ * @subpackage AMDiary
+ * @category AMVisualization
+ * @version 1.0
+ * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
+ * @see AMDiarioPost, AMDiarioComentario
+ */
+
 $_CMAPP['notrestricted'] = True;
 include("../../config.inc.php");
 
@@ -142,7 +155,8 @@ if(!empty($userDiario)) {
      
   $caixa = new AMBoxDiario($posts,$userDiario->codeUser,$title,$image,$text);
   $caixa->setDate($_REQUEST['frm_calMonth'],$_REQUEST['frm_calYear']);
-  if(!empty($_SESSION['user'])) {
+  $date = getdate(time());
+  if(!empty($_SESSION['user']) && ($_REQUEST['frm_calMonth']==$date['mon']) && ($_REQUEST['frm_calYear']==$date['year'])) {
     if($userDiario->codeUser==$_SESSION['user']->codeUser) {
       $caixa->addCabecalho("<br> <a class=\"diary_header\" href=\"postar.php\" > &raquo; $_language[escrever_nota] </a>");
       $caixa->addCabecalho("<br> <a class=\"diary_header\" href=\"$linkEditar\" > &raquo; $_language[editar_diario] </a>");

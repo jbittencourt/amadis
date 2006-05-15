@@ -1,4 +1,8 @@
 <?php
+/**
+ * @package AMADIS
+ * @subpackage AMTemplates
+ */
 
 
 class AMTCurso extends AMMain {

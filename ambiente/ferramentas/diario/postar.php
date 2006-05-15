@@ -25,7 +25,7 @@ if(!empty($_REQUEST[frm_action])) {
       $post->codeUser = $_SESSION[user]->codeUser;
     }
     $post->loadDataFromRequest(); 
-    
+    $post->texto = stripslashes($_REQUEST['frm_texto']);
     try{
       $post->save();
       header("Location: diario.php?frm_ammsg=post_success"); 

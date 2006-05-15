@@ -1,4 +1,8 @@
 <?
+/**
+ * @package AMADIS
+ * @subpackage AMTemplates
+ */
 
 class AMMainMenu extends CMHtmlObj {
   private $itens;

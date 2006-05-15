@@ -1,4 +1,9 @@
 <?
+/**
+ * @package AMADIS
+ * @subpackage AMTemplates
+ */
+
 require_once 'Calendar/Month/Weekdays.php';
 
 

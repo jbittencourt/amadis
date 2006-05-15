@@ -8,6 +8,8 @@
  * the navigation menu (navmenu), and loading the default css and
  * javascript files.
  *
+ * @package AMADIS
+ * @subpackage AMTemplates
  * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
  * @see AMNavMenu
  **/
@@ -117,13 +119,16 @@ class AMMain extends AMHTMLPage {
    *   header($_CMAPP[services_url]."/projetos/create.php?frm_amerror=project_exists");
    * </code>
    * 
-   * This function will search for an key in the language file named error_projeto_exists. Note
-   * that the error message should be in global  or in the selected language section.
+   * This function will search for an key in the language file named error_projet_exists. Note
+   * that the error message should be in global or in the selected language section.
+   *
+   * If a debug option is enable, a new AMError is gerenated to show a exception messages.
+   * This form is better to show messages errors to developers, without affect final users.
    *
    * @param String $message The message suffix 
    **/
-  function addError($message) {
-    $err = new AMError($message,"AMMain");
+  function addError($message, $e) {
+    $err = new AMError($message,"AMMain", $e);
   }
 
   /**
@@ -235,15 +240,13 @@ class AMMain extends AMHTMLPage {
 	if(!is_array($_REQUEST["frm_amerror"])) {
 	  $_REQUEST["frm_amerror"] = array($_REQUEST["frm_amerror"]);
 	}
-	     ;
+	
 	foreach($_REQUEST["frm_amerror"] as $error) {
 	  $errors[] = array("message"=>$_language["error_$error"],
-			  "thrower"=>"request");
+			    "thrower"=>"request");
 	}
-
       }
     }
-    
 
     $messages = AMMessage::getMessages();
     if(!empty($_REQUEST["frm_ammsg"])) {
@@ -261,8 +264,10 @@ class AMMain extends AMHTMLPage {
     parent::add('<div id="erros_area">');
     if(!empty($errors)) {
       parent::add("<br>");
+      $debug_mode = (int) $_CMAPP['environment']->debug_mode;
       foreach($errors as $num=>$message) {
 	parent::add(new AMAlertBox(AMAlertBox::ERROR,$message['message']));
+	if($debug_mode) parent::add(new AMAlertBox(AMAlertBox::ERROR, $message['exception']));
       }
       parent::add("<br>");
     }
@@ -337,10 +342,10 @@ class AMMain extends AMHTMLPage {
       
     }
 
-
+    AMError::commit();
     return parent::__toString();
 
-
+ 
 
   }
 

@@ -1,4 +1,8 @@
 <?
+/**
+ * @package AMADIS
+ * @subpackage AMTemplates
+ */
 
 include($_CMAPP['path']."/templates/ammain.inc.php");
 
