@@ -28,13 +28,12 @@ if($inv->__hasInvitations()) {
 }
 
 //caixa de convites de comunidades
-// $inv = new AMBCommunitiesInvitations;
-// if($inv->__hasInvitations()) { 
-//   $pag->add($inv);
-// }
+$inv = new AMBCommunitiesInvitations;
+if($inv->__hasInvitations()) { 
+  $pag->add($inv);
+}
 
 //box for user rejects and accepts
-
 // $resp = new AMBUserResponses;
 // if($resp->__hasInvitations()) { 
 //   $pag->add($resp);
@@ -43,7 +42,9 @@ if($inv->__hasInvitations()) {
 $box = new AMTwoColsLayout;
 //$box->add("Teste 2",AMTwoColsLayout::RIGHT);
 
-
+/*********************
+ * LEFT COLUMN
+ ********************/
 $foto = $_SESSION['user']->foto;
 $box->add(new AMTUserImage($foto),AMTwoColsLayout::LEFT);
 
@@ -58,25 +59,23 @@ $box->add("<p><a href=\"$_CMAPP[services_url]/webfolio/changedata.php\" class=\"
 
 $box->add("<br><a href=\"$_CMAPP[services_url]/webfolio/changepassword.php\" class=\"blue\">$_language[change_password]</a><p>", AMTwoColsLayout::LEFT);
 
-//foruns that the user participate
 
+//foruns that the user participate
 $forums = $_SESSION['user']->listLastModifiedForums();
 
 $box->add(new AMBForunsParticipate($forums),
 	  AMTwoColsLayout::LEFT);
 
-//box de mensagens no correio
-//$box->add(new AMBMailMessages, AMTwoColsLayout::LEFT);
 
+//Chats in that are happening or in the agenda of
+//the  projects or communities that the user participates
 $box->add("<br>", AMTwoColsLayout::LEFT);
-$box->add(new AMBUserMessages, AMTwoColsLayout::LEFT);
+$box->add(new AMBChatsUser, AMTwoColsLayout::LEFT);
 
 
-//$box->add("<br>", AMTwoColsLayout::LEFT);
-//$box->add(new AMBChatsUser, AMTwoColsLayout::LEFT);
-
-
-
+/*********************
+ * RIGHT COLUMN
+ ********************/
 $box->add(new AMBMyWebfolio, AMTwoColsLayout::RIGHT);
 $box->add("<br>", AMTwoColsLayout::RIGHT);
 //box de avisos
@@ -86,7 +85,12 @@ $box->add("<br>", AMTwoColsLayout::RIGHT);
 //box de novidades
 $box->add(new AMBAmadisNews, AMTwoColsLayout::RIGHT);
 
+$box->add("<br>", AMTwoColsLayout::LEFT);
+$box->add(new AMBUserMessages, AMTwoColsLayout::RIGHT);
+
+
 $pag->add($box);
 echo $pag;
+
 
 ?>

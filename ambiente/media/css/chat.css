@@ -155,3 +155,19 @@ input[type=text]:focus, select:focus { background-color:#fff; color:#000; }
                background-color: #FAF8FA; padding: 7px; font-family: verdana, Helvetica, sans-serif;
                font-size: 11px;color: #666666;
                }
+
+
+.chats_list_parent {
+	padding-left: 15px;
+	style-list-image: url("../images/img_arrow.gif");
+}
+
+.chats_list {
+	magin-left: 5px;
+	padding-left: 0px;
+}
+
+.chats_list LI {
+	list-style: none;
+}
+

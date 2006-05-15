@@ -1,6 +1,5 @@
 <?
 
-
 class AMUser extends CMUser {
 
   const RPASS_LOWERCASE=1;
@@ -44,54 +43,56 @@ class AMUser extends CMUser {
  
   
   function getUserProjectChats() {
-    $q = new CMQuery('AMChat');
-    
-    $j1 = new CMJoin(CMJoin::INNER);
-    $j1->setClass('AMProjetoChats');
-    $j1->on("AMProjetoChats::codSala = AMChat::codSala");
-    $j1->setFake();
 
+    $q = new CMQuery('AMProjeto');
+
+    $j1 = new CMJoin(CMJoin::INNER);
+    $j1->setClass('AMChatsProject');
+    $j1->on("AMProjeto::codeProject = AMChatsProject::codeProject"); 
+    $j1->setFake();
+    
     $j2 = new CMJoin(CMJoin::INNER);
-    $j2->setClass('AMProjeto');
-    $j2->on("AMProjeto::codeProject = AMProjetoChats::codProjeto"); 
-    $j2->setFake();
+    $j2->setClass('AMChatRoom');
+    $j2->on("AMChatsProject::codeRoom = AMChatRoom::codeRoom");
     
     $j3 = new CMJoin(CMJoin::INNER);
     $j3->setClass('CMGroupMember');
     $j3->on("CMGroupMember::codeGroup=AMProjeto::codeGroup");
     $j3->setFake();
 
+    $t = time();
+    $q->setFilter("CMGroupMember::codeUser = $this->codeUser AND (AMChatRoom::beginDate>$t OR AMChatRoom::endDate>$t)");
 
-    $q->setFilter("CMGroupMember::codeUser = $this->codeUser");
-
-    $q->addJoin($j1,"j1");
-    $q->addJoin($j2,"j2");
-    $q->addJoin($j3,"j3");
-
+    $q->addJoin($j1,'j1');
+    $q->addJoin($j2,"rooms");
+    $q->addJoin($j3,'j3');
     return $q->execute();
-
   }
 
   function getUserCommunityChats(){
-    $q = new CMQuery('AMChat');
-    
-    $j1 = new CMJoin(CMJoin::INNER);
-    $j1->setClass('AMCommunitiesChat');
-    $j1->on("AMCommunitiesChat::codSala = AMChat::codSala");
-    $j1->setFake();
 
+    $q = new CMQuery('AMCommunities');
+
+    $j1 = new CMJoin(CMJoin::INNER);
+    $j1->setClass('AMChatsCommunities');
+    $j1->on("AMCommunities::code = AMChatsCommunities::codeCommunity"); 
+    $j1->setFake();
+    
+    $j2 = new CMJoin(CMJoin::INNER);
+    $j2->setClass('AMChatRoom');
+    $j2->on("AMChatsCommunities::codeRoom = AMChatRoom::codeRoom");
+    
     $j3 = new CMJoin(CMJoin::INNER);
     $j3->setClass('CMGroupMember');
-    $j3->on("CMGroupMember::codeGroup=AMProjeto::codeGroup");
+    $j3->on("CMGroupMember::codeGroup=AMCommunities::codeGroup");
     $j3->setFake();
 
+    $t = time();
+    $q->setFilter("CMGroupMember::codeUser = $this->codeUser AND (AMChatRoom::beginDate>$t OR AMChatRoom::endDate>$t)");
 
-    $q->setFilter("CMGroupMember::codeUser = $this->codeUser");
-
-    $q->addJoin($j1,"j1");
-
-    $q->addJoin($j3,"j3");
-
+    $q->addJoin($j1,'j1');
+    $q->addJoin($j2,"rooms");
+    $q->addJoin($j3,'j3');
     return $q->execute();
     
   }
@@ -644,59 +645,52 @@ class AMUser extends CMUser {
    *ultimo login.
    */
   public function getLastProjectsComments() {
-    if(!empty($_SESSION['last_session'])) {  
-      $q = new CMQuery(AMProjeto);
-      
-      $j = new CMJoin(CMJoin::INNER);
-      $j->on("Projects.codeProject = ProjetoComentario.codProjeto");
-      $j->setClass('AMProjectComment');
-      
-      $j2 = new CMJoin(CMJoin::INNER);
-      $j2->on("Projects.title = Groups.description");
-      $j2->setClass('CMGroup');
-      
-      $j3 = new CMJoin(CMJoin::INNER);
-      $j3->on("GroupMember.codeGroup = Groups.codeGroup");
-      $j3->setClass('CMGroupMember');
-
-      $j4 = new CMJoin(CMJoin::INNER);
-      $j4->on("Comentarios.codComentario = ProjetoComentario.codComentario");
-      $j4->setClass('AMComment');
-      
-      $q->addJoin($j, "pcomments");
-      $q->addJoin($j2, "group");
-      $q->addJoin($j3, "members");
-      $q->addJoin($j4,"comments");
-      
-      $q->setFilter("Comentarios.tempo < ".$_SESSION[last_session]->timeEnd." AND GroupMember.codeUser=$this->codeUser");
-      
-      $q->groupby("Projects.codeProject");
-      $q->addVariable("numMessages","count( ProjetoComentario.codComentario)");
-      
-      return $q->execute();
-      
-
-    } else return new CMContainer; // Throw new AMWEFirstLogin;
-
+    $q = new CMQuery(AMProjeto);
+    
+    $j = new CMJoin(CMJoin::INNER);
+    $j->on("AMProjeto::codeProject = AMProjectComment::codProjeto");
+    $j->setClass('AMProjectComment');
+    
+    $j2 = new CMJoin(CMJoin::INNER);
+    $j2->on("AMProjeto::codeGroup = CMGroup::codeGroup");
+    $j2->setClass('CMGroup');
+    
+    $j3 = new CMJoin(CMJoin::INNER);
+    $j3->on("CMGroupMember::codeGroup = CMGroup::codeGroup");
+    $j3->setClass('CMGroupMember');
+    
+    $j4 = new CMJoin(CMJoin::INNER);
+    $j4->on("AMComment::codComentario = AMProjectComment::codComentario");
+    $j4->setClass('AMComment');
+    
+    $q->addJoin($j, "pcomments");
+    $q->addJoin($j2, "group");
+    $q->addJoin($j3, "members");
+    $q->addJoin($j4,"comments");
+    
+    $q->setFilter("AMComment::tempo > ".$_SESSION[last_session]->timeEnd." AND CMGroupMember::codeUser=$this->codeUser");
+    
+    $q->groupby("AMProjeto::codeProject");
+    $q->addVariable("numMessages","count( AMProjectComment::codComentario)");
+    
+    return $q->execute();
   }
 
   public function getLastDiaryComments() {
-    if(!empty($_SESSION['last_session'])) {
-      $q = new CMQuery('AMDiarioPost');
-      
-      $j = new CMJoin(CMJoin::INNER);
-      $j->on("DiarioPosts.codePost = DiarioComentario.codePost");
-      $j->setClass('AMDiarioComentario');
-      
-      $q->addJoin($j, "comments");
-      
-      $q->setFilter("DiarioComentario.time > ".$_SESSION['last_session']->timeEnd." AND DiarioPosts.codeUser=$this->codeUser");
-      
-      $q->groupby("DiarioPosts.codeUser");
-      $q->addVariable("numMessages","count( DiarioComentario.codComment)");
-      
-      return $q->execute();
-    } else return new CMContainer;//Throw new AMWEFirstLogin;
+    $q = new CMQuery('AMDiarioPost');
+    
+    $j = new CMJoin(CMJoin::INNER);
+    $j->on("DiarioPosts.codePost = DiarioComentario.codePost");
+    $j->setClass('AMDiarioComentario');
+    
+    $q->addJoin($j, "comments");
+    
+    $q->setFilter("DiarioComentario.time > ".$_SESSION['last_session']->timeEnd." AND DiarioPosts.codeUser=$this->codeUser");
+    
+    $q->groupby("DiarioPosts.codeUser");
+    $q->addVariable("numMessages","count( AMDiarioComentario::codComment)");
+
+    return $q->execute();
   }
 
   public function getLastMessages() {

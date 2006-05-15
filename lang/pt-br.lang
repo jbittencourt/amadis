@@ -40,15 +40,19 @@ amadis = "AMADIS - Ambiente Virtual de Aprendizagem"
 
 people = "Pessoas"
 projects = "Projetos"
+project = "Projeto"
 communities = "Comunidades"
+community = "Comunidade"
 courses = "Cursos"
 users = "Usu&aacute;rios"
+diary = "Di&aacute;rio"
 
 user = "usu&aacute;rio"
 acesso_nao_permitido = "Acesso n&atilde;o permitido"
 acesso_negado = "Acesso negado"
-erro_geral = "Ocorreu um erro durante o processamento."
 contact_errors = "Caso persista o erro, entre em contato com o administrador do ambiente."
+
+fatal_error = "Ocorreu um problema s&eacute;rio ao executa o AMADIS. Por favor, entre em contato com o administrador do site para corrigir o problema."
 
 sair = "Sair"
 entrar = "Entrar"
@@ -81,7 +85,6 @@ user_info = "Informa&ccedil;&otilde;es sobre o usu&aacute;rio"
 loading_user_info = "Carregando os dados do usu&aacute;rio. Por favor aguarde..."
 
 #sections of the plataform
-projects = Projetos
 courses = Cursos
 news = Classificados
 
@@ -248,6 +251,8 @@ error_post_not_delete = "N&atilde;o foi possivel deletar esta nota!"
 error_post_does_not_exist = "Esse post n&atilde;o existe ou foi apagado"
 error_user_not_logged = "Voc&ecirc; precisa estar logado no sistema para acessar seu di&aacute;rio pessoal";
 
+
+
 [Correio]
 frm_destinatario = "Destinat&aacute;rio de minha mensagem:"
 frm_assunto = "Assunto da minha mensagem:"
@@ -279,7 +284,6 @@ access_email = "acessar o e-mail"
 empty_inbox = "N&atilde;o h&aacute; novas mensagens"
 no_comments = "N&atilde;o h&aacute; coment&aacute;rios."
 messages = "Mensagens"
-diary = "Di&aacute;rio"
 no_amadis_news = "N&atilde;o h&aacute; novidades"
 
 send = "Enviar"
@@ -302,8 +306,11 @@ comunidade ";
 msg_user_added = " foi aceito como membro desta comunidade."
 msg_user_rejected = " foi rejeitado como membro deste projeto."
 
-project_comments = "coment&aacute;rios em"
-project_comment = "coment&aacute;rio em"
+project_comments = "novos coment&aacute;rios no projeto"
+project_comment = "novo coment&aacute;rio no projeto"
+
+diary_comments = "novos coment&aacute;rios no post"
+diary_comment = "novo coment&aacute;rio no post"
 
 forum_list_more = "Ver todos os F&oacute;runs"
 webfolio_visit = "Ir para o Webf&oacute;lio"
@@ -320,7 +327,7 @@ off_line_user = "Usu&aacute;rio desconectado"
 save_chat = "Salvar o chat da sala ?"
 init_date_chat = "Coloque a data de in&iacute;cio do seu chat"
 end_date_chat = "Coloque a data de final do seu chat"
-infinity_chat = "Marter este chat sempre aberto"
+infinity_chat = "Manter este chat sempre aberto"
 enter_room_name = "Escolha um nome para sua sala:"
 enter_room_subject = "Escolha o assunto da sala:"
 create_chat_room = "Criar Sala"
@@ -342,6 +349,9 @@ no_chats_open = "N&atilde;o h&aacute; chats ocorrendo."
 no_marked_chats = "N&atilde;o h&aacute; chats marcados."
 save_chat_error = "Erro ao savar o chat"
 save_chat_success = "Chat salvo com Sucesso!"
+scheduled_chat = "chat agendado"
+in_progress_chat = "chat em andamento"
+no_chats = "N&atilde;o h&aacute; nenhum chat marcado ou ocorrendo no momento."
 
 [chatroom]
 access_denied = "Acesso Negado ! N&aatilde;o existe c&oacute;digo na sala"
@@ -502,14 +512,12 @@ warning_amadis = "Avisos do AMADIS"
 
 
 [project_members]
-project = Projeto
 project_group_actual = "Equipe atual do Projeto"
 project_group_old = "Pessoas que j&aacute; participaram deste projeto."
 back_to_project = "Voltar para o projeto"
 
 
 [projects]
-project = "Projeto"
 project_intro = "Na &aacute;rea de PROJETOS do Amadis voc&ecirc;
 &eacute; livre para criar seus desafios de pesquisa. A
 partir da cria&ccedil;&atilde;o de um projeto, &eacute;
