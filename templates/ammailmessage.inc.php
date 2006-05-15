@@ -7,7 +7,7 @@ class AMMailMessage extends CMWSimpleMail {
 
   public function __construct() {
     global $_conf;
-    parent::__construct("AMADIS",(string) $_conf->app->general->admin_email);
+    parent::__construct((string) $_conf->app->general->admin_email,"AMADIS");
   }
 
   public function setMessage($message) {

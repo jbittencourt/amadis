@@ -12,7 +12,6 @@ class AMTDiario extends AMMain {
 
     $this->setImgId($_CMAPP['imlang_url']."/top_diario.gif");
     
-    $this->openNavMenu();
   }
 }
 

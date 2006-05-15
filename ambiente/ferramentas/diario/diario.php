@@ -96,6 +96,7 @@ else {
     
     $_REQUEST['frm_calMonth'] = date("m",$post->tempo);
     $_REQUEST['frm_calYear'] = date("Y",$post->tempo);  
+
   }
 
 }
@@ -138,9 +139,8 @@ if(!empty($userDiario)) {
   }
 
 
-  $rsslink="diarioRSS.php?frm_codeUser=".$userDiario->codeUser;
      
-  $caixa = new AMBoxDiario($posts,$userDiario->codeUser,$title,$image,$text,$rsslink);
+  $caixa = new AMBoxDiario($posts,$userDiario->codeUser,$title,$image,$text);
   $caixa->setDate($_REQUEST['frm_calMonth'],$_REQUEST['frm_calYear']);
   if(!empty($_SESSION['user'])) {
     if($userDiario->codeUser==$_SESSION['user']->codeUser) {

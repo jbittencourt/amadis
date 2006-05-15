@@ -6,6 +6,7 @@ class AMBoxDiario extends CMHTMLObj {
   private $titulo;
   private $texto;
   private $rsslink;
+  private $openCommentsPost;
   private $cabecalho = array();
   private $posts;
   protected $user;
@@ -13,7 +14,7 @@ class AMBoxDiario extends CMHTMLObj {
   protected $month;
   protected $year;
 
-  public function __construct(CMContainer $list,$user,$titulo,$imagem=0,$texto="",$rsslink="") {
+  public function __construct(CMContainer $list,$user,$titulo,$imagem=0,$texto="") {
     parent::__construct(0,0);
 
     $this->posts = $list;
@@ -22,7 +23,7 @@ class AMBoxDiario extends CMHTMLObj {
     $this->imagem = $imagem;
     $this->texto = $texto;
     $this->titulo = $titulo;
-    $this->rsslink = $rsslink;
+    $this->rsslink =  "diarioRSS.php?frm_codeUser=".$user;
     $this->requires("blog.js");
   }
 
@@ -33,6 +34,11 @@ class AMBoxDiario extends CMHTMLObj {
   public function setDate($m,$y) {
     $this->month =$m;
     $this->year = $y;
+  }
+
+  public static function getPermanentLink($post) {
+    global $_CMAPP;
+    return "$_CMAPP[services_url]/diario/diario.php?frm_codePost=$post->codePost#anchor_post_$post->codePost";
   }
  
   public function __toString() {
@@ -139,23 +145,25 @@ class AMBoxDiario extends CMHTMLObj {
 	parent::add("align=\"absmiddle\" ><font class=\"titpost\">$post->titulo</font><font class=\"datapost\"> - ".date("h:i ".$_language['date_format'],$post->tempo));
 	parent::add("<a name=\"anchor_post_$post->codePost\" > </a> ");
 	parent::add("</font><br><img src=\"$url/dot.gif\" width=\"10\" height=\"7\" border=\"0\"><br>");
-	parent::add("<font class=\"txtdiario\">$post->texto</font><br>");
-	parent::add("<a class='diary_comment' href='$_CMAPP[services_url]/diario/diario.php?frm_codePost=$post->codePost#anchor_post_$post->codePost'>");
+	parent::add("<font class=\"txtdiario\">");
+	parent::add(new AMSmileRender($post->texto));
+	parent::add("</font><br>");
+	parent::add("<a class='diary_comment' href='".self::getPermanentLink($post)."'>");
 	parent::add($_language['permanent_link'].'</a>');
 	parent::add("<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"100%\">");
 	parent::add("<tr>");
 
-	$link_comentarios = "javascript:Blog_toogleComments('$post->codePost')";
-
+	$link_comentarios = "Blog_toogleComments('$post->codePost')";
+	
 	if($post->numComments==0) {
 	  if($_SESSION['user']) {
-	    parent::add("<td class=\"diary_comment_link\"><a class=\"diary_comment\" href=\"$link_comentarios\">");
+	    parent::add("<td class=\"diary_comment_link\"><a class=\"diary_comment\" href=\"javascript:$link_comentarios\">");
 	    parent::add("$_language[aguardando_comentario] <img id=\"post_comments_$post->codePost\" src=\"$_CMAPP[images_url]/ico_seta_off_cmnt.gif\">");
 	    parent::add("</a></td>");
 	  }
 	}
 	else {
-	  $l = "<a class=\"diary_comment\" href=\"$link_comentarios\">";
+	  $l = "<a class=\"diary_comment\" href=\"javascript:$link_comentarios\">";
 	  parent::add("<td class=\"diary_comment_link\">");
 	  parent::add("$l $_language[comentarios]($post->numComments) <img id=\"post_comments_$post->codePost\" src=\"$_CMAPP[images_url]/ico_seta_off_cmnt.gif\"></a>");
 	  parent::add("</td>");

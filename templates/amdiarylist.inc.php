@@ -71,8 +71,6 @@ class AMDiaryList extends AMPageBox {
 	$box->add(new AMTUserInfo($item));
 	$box->add("</td>");
 	$box->add("<td><span class='texto'>".date("$_language[hour_format] $_language[date_format]",$item->lastPostTime)."</a></span></td\>");
-	//     $box->add("<td><a href=# class=blue>$_language[send_mail]</a></td>");
-	//     $box->add("<td><a href=\"$_CMAPP[services_url]/webfolio/page.php?frm_codeUser=$item->codeUser\" class=blue>$_language[page]</a></td>");
 	$box->add("</tr>");
       }
     }
