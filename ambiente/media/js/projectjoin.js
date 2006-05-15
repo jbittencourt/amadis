@@ -10,7 +10,7 @@ var AMBProjectGroupActionCallBack = {
 
 }
 
-function loadProjrectGroup(group) {
+function loadProjectGroup(group) {
   AM_setLoading("projectGroupList");
   AMBProjectGroup.listgroup(group);
 } 
