@@ -1,9 +1,15 @@
 <?
-/**
- * @package AMADIS
- * @subpackage AMBoxes
- */
 
+/**
+ * Colorized boxes =)
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
+ * @package AMADIS
+ * @subpackage Core
+ * @version 1.0
+ * @author Robson Mendonca <robson@lec.ufrgs.br>
+ */
 class AMColorBox extends AMAbstractBox {
 
   protected $theme;

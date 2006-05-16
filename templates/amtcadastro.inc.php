@@ -1,9 +1,15 @@
 <?
-/**
- * @package AMADIS
- * @subpackage AMTemplates
- */
 
+/**
+ * Template to register user page
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
+ * @package AMADIS
+ * @subpackage Core
+ * @version 1.0
+ * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
+ */
 class AMTCadastro extends AMMain {
   
 

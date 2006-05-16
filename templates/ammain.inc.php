@@ -9,7 +9,7 @@
  * javascript files.
  *
  * @package AMADIS
- * @subpackage AMTemplates
+ * @subpackage Core
  * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
  * @see AMNavMenu
  **/
@@ -342,8 +342,9 @@ class AMMain extends AMHTMLPage {
       
     }
 
-    AMError::commit();
-    return parent::__toString();
+    $html = parent::__toString();
+    AMLog::commit();
+    return $html;
 
  
 

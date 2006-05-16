@@ -1,7 +1,13 @@
 <?
 /**
+ * AMACORender
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
  * @package AMADIS
- * @subpakage AMTemplates
+ * @subpackage AMACO
+ * @version 1.0
+ * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
  */
 
 class AMACORender extends CMHTMLObj {

@@ -1,9 +1,15 @@
 <?
-/**
- * @package AMADIS
- * @subpackage AMTemplates
- */
 
+/**
+ * @ignore
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
+ * @package AMADIS
+ * @subpackage AMDiary
+ * @version 1.0
+ * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
+ */
 class AMCorreio extends AMMain {
   
 

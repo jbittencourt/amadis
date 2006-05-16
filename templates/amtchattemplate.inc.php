@@ -1,9 +1,15 @@
 <?php
-/**
- * @package AMADIS
- * @subpackage AMTemplates
- */
 
+/**
+ * The AMBoxDiario is a box that list blog entries.
+ * @ignore
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
+ * @package AMADIS
+ * @subpackage AMDiary
+ * @version 1.0
+ * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
+ */
 class AMChatArea extends CMHtmlObj {
 
   var $campoDest,$campoSender, $campoTempo, $tempoSleep, $CHAT_cod_user;

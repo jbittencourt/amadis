@@ -1,9 +1,15 @@
 <?
-/**
- * @package AMADIS
- * @subpackage AMBoxes
- */
 
+/**
+ * A simple and litle box =P
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
+ * @package AMADIS
+ * @subpackage Core
+ * @version 1.0
+ * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
+ */
 abstract class AMSimpleBox extends CMHTMLObj {
   
   private $title;

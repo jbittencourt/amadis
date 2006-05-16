@@ -162,9 +162,8 @@ if(!empty($userDiario)) {
       $caixa->addCabecalho("<br> <a class=\"diary_header\" href=\"$linkEditar\" > &raquo; $_language[editar_diario] </a>");
     }
   }
-
+  $rsslink = $_CMAPP[services_url]."/diario/diarioRSS.php?frm_codeUser=$userDiario->codeUser";
   $pag->setRSSFeed($rsslink,$title);
-
   $pag->add($caixa);
 } else {
   $pag->addError($_language['error_user_not_logged']);

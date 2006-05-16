@@ -1,9 +1,15 @@
 <?
-/**
- * @package AMADIS
- * @subpackage AMTemplates
- */
 
+/**
+ * 
+ * @ignore
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
+ * @package AMADIS
+ * @subpackage Core
+ * @version 1.0
+ * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
+ */
 class AMPaginas extends AMMain {
 
   function __construct() {
@@ -18,7 +24,6 @@ class AMPaginas extends AMMain {
 
     $this->setImgId($_CMAPP[imlang_url]."/img_top_paginas.gif");
 
-    $this->openNavMenu();
   }
 }
 

@@ -1,9 +1,15 @@
 <?
-/**
- * @package AMADIS
- * @subpackage AMTemplates
- */
 
+/**
+ * Path indicator, to register a path in an action
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
+ * @package AMADIS
+ * @subpackage Core
+ * @version 1.0
+ * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
+ */
 
 class AMPathIndicator extends CMHTMLObj {
 

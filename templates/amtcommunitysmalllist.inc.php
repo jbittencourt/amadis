@@ -1,9 +1,15 @@
 <?
-/**
- * @package AMADIS
- * @subpackage AMBoxes
- */
 
+/**
+ * Smaall list of the communities showed in the initial page AMADIS
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
+ * @package AMADIS
+ * @subpackage AMCommunity
+ * @version 1.0
+ * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
+ */
 class AMTCommunitySmallList extends CMHTMLObj {
 
   protected $items;

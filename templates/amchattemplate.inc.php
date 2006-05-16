@@ -1,6 +1,7 @@
 <?
 /**
  * Template para a interface de um chat.
+ * @ignore
  * @author Juliano Bittencourt <juliano@edu.ufrgs.br>
  * @access public
  * @abstract

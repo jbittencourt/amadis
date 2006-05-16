@@ -1,7 +1,14 @@
 <?
+
 /**
+ * List of communities
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
  * @package AMADIS
- * @subpackage AMBoxes
+ * @subpackage AMCommunity
+ * @version 1.0
+ * @author Robson Mendonca <robson@lec.ufrgs.br>
  */
 
 class AMBCommunityList extends AMPageBox implements CMActionListener {

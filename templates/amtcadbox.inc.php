@@ -1,9 +1,15 @@
 <?
-/**
- * @package AMADIS
- * @subpackage AMBoxes
- */
 
+/**
+ * Register box template
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
+ * @package AMADIS
+ * @subpackage Core
+ * @version 1.0
+ * @author Robson Mendonca <robson@lec.ufrgs.br>
+ */
 class AMTCadBox extends CMHTMLObj {
 
   const DEFAULT_THEME = 1;

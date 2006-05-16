@@ -1,4 +1,16 @@
 <?
+/**
+ * Visualization pages menu
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
+ * @package AMADIS
+ * @subpackage AMUpload
+ * @version 1.0
+ * @author Robson Mendonca <robson@lec.ufrgs.br>
+ * @see AMHTMLPage,AMViewPageMenu
+ */
+
 $_CMAPP['notrestricted'] = 1;
 include("../../config.inc.php");
 

@@ -1,9 +1,15 @@
 <?
-/**
- * @package AMADIS
- * @subpackage AMTemplates
- */
 
+/**
+ * Template to agregator
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
+ * @package AMADIS
+ * @subpackage AMAgregator
+ * @version 1.0
+ * @author Daniel M. Basso <daniel@basso.inf.br>
+ */
 class AMTAgregador extends AMMain {
   
 
@@ -16,7 +22,6 @@ class AMTAgregador extends AMMain {
 
     $this->setImgId($_CMAPP['imlang_url']."/top_projetos.gif");
     
-    $this->openNavMenu();
   }
 }
 

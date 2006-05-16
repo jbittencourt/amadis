@@ -1,9 +1,16 @@
 <?
-/**
- * @package AMADIS
- * @subpackage AMBoxes
- */
 
+/**
+ * List of the projects
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
+ * @package AMADIS
+ * @subpackage AMProject
+ * @version 1.0
+ * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
+ * @see AMListBox
+ */
 class AMProjectList extends AMListBox {
 
   public function __construct(CMContainer $items,$title,$type=AMTCadBox::CADBOX_SEARCH) {

@@ -1,5 +1,7 @@
 <?
-
+/**
+ * @ignore
+ */
 
 class AMFinderChatTemplate extends RDChatTemplate {
   var $para,$emotions_tr,$config_ini;

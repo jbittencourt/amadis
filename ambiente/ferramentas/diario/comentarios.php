@@ -1,4 +1,17 @@
 <?
+/**
+ * Visualization of diary/blog comments
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
+ * @package AMADIS
+ * @subpackage AMDiary
+ * @category AMVisualization
+ * @version 1.0
+ * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
+ * @see AMDiarioPost, AMDiarioComentario
+ */
+
 $_CMAPP[notrestricted] = True;
 include("../../config.inc.php");
 

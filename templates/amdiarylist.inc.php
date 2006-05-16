@@ -1,9 +1,16 @@
 <?
-/**
- * @package AMADIS
- * @subpackage AMBoxes
- */
 
+/**
+ * List of the diaries in AMADIS.
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
+ * @package AMADIS
+ * @subpackage AMDiary
+ * @version 1.0
+ * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
+ * @see AMPageBox, AMTCadBox
+ */
 class AMDiaryList extends AMPageBox {
 
   public function __construct() {

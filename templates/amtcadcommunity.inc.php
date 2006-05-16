@@ -1,9 +1,15 @@
 <?
-/**
- * @package AMADIS
- * @subpackage AMTemplates
- */
 
+/**
+ * Register Community template
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
+ * @package AMADIS
+ * @subpackage AMCommunity
+ * @version 1.0
+ * @author Robson Mendonca <robson@lec.ufrgs.br>
+ */
 
 class AMTCadCommunity extends AMMain {
   
@@ -14,7 +20,6 @@ class AMTCadCommunity extends AMMain {
 
     $this->setImgId($_CMAPP['imlang_url']."/top_cadastro_comunidade.gif");
 
-    $this->openNavMenu();
 
   }
 }

@@ -1,4 +1,17 @@
 <?
+/**
+ * Post a entry in the diary
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
+ * @package AMADIS
+ * @subpackage AMDiary
+ * @category AMVisualization
+ * @version 1.0
+ * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
+ * @see AMDiarioPost, AMDiarioComentario
+ */
+
 include("../../config.inc.php");
 
 $_language = $_CMAPP[i18n]->getTranslationArray("diary");

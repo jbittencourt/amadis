@@ -1,7 +1,13 @@
 <?
 /**
+ * Agregator blogs visualization box
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
  * @package AMADIS
- * @subpackage AMBoxes
+ * @subpackage AMAgregator
+ * @version 1.0
+ * @author Daniel M. Basso <daniel@basso.inf.br>
  */
 
 class AMBoxAgregador extends CMHTMLObj {

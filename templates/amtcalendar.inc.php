@@ -1,9 +1,16 @@
 <?
-/**
- * @package AMADIS
- * @subpackage AMTemplates
- */
 
+/**
+ * Show a calendar used in the blogs
+ * This class requires PEAR::Calendar package
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
+ * @package AMADIS
+ * @subpackage Core
+ * @version 1.0
+ * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
+ */
 require_once 'Calendar/Month/Weekdays.php';
 
 

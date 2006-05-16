@@ -1,4 +1,16 @@
 <?
+/**
+ * Visualization pages as listing, when a index.(html|htm|php) was notFounded.
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
+ * @package AMADIS
+ * @subpackage AMUpload
+ * @version 1.0
+ * @author Robson Mendonca <robson@lec.ufrgs.br>
+ * @see CMHTMLPage,AMUpload, AMBdirList
+ */
+
 $_CMAPP['notrestricted'] = 1;
 include("../../config.inc.php");
 

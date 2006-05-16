@@ -1,9 +1,17 @@
 <?
 /**
+ * The AMTwoColsLayout, break a AMADIS layout in two cols of the contents.
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
  * @package AMADIS
- * @subpackage AMTemplates
+ * @subpackage Core
+ * @category AMBoxes
+ * @version 1.0
+ * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
+ * @see CMHTMLObj
+ * example amtwocolslayout.ex.php Litle example code
  */
-
 
 class AMTwoColsLayout extends CMHTMLObj {
 

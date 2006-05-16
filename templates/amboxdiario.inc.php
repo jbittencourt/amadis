@@ -3,10 +3,13 @@
 /**
  * The AMBoxDiario is a box that list blog entries.
  *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
  * @package AMADIS
- * @subpackage AMBoxes
- *
- **/
+ * @subpackage AMDiary
+ * @version 1.0
+ * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
+ */
 class AMBoxDiario extends CMHTMLObj {
   
   private $imagem;

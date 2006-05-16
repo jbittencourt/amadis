@@ -1,7 +1,14 @@
 <?
+
 /**
+ * List projects of the communities
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
  * @package AMADIS
- * @subpackage AMBoxes
+ * @subpackage AMCommunity
+ * @version 1.0
+ * @author Cristiano S. Basso <csbasso@lec.ufrgs.br>
  */
 
 class AMBCommunityProjects extends AMSimpleBox {

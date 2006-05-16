@@ -1,9 +1,14 @@
 <?
 /**
+ * A simple dot line
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
  * @package AMADIS
- * @subpackage AMTemplates
+ * @subpackage Core
+ * @version 1.0
+ * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
  */
-
 class AMDotLine extends CMHtmlObj {
  
   private $fullWidth;

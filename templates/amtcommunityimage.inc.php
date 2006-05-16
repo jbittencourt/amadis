@@ -1,9 +1,16 @@
 <?
-/**
- * @package AMADIS
- * @subpackage AMTemplates
- */
 
+/**
+ * Thumbnail community template
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
+ * @package AMADIS
+ * @subpackage AMCommunity
+ * @version 1.0
+ * @author Robson Mendonca <robson@lec.ufrgs.br>
+ * @see AMImageTemplate
+ */
 
 class AMTCommunityImage extends AMImageTemplate {
  

@@ -1,9 +1,15 @@
 <?
-/**
- * @package AMADIS
- * @subpackage AMTemplates
- */
 
+/**
+ * Chat page template
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
+ * @package AMADIS
+ * @subpackage AMChat
+ * @version 1.0
+ * @author Robson Mendonca <robson@lec.ufrgs.br>
+ */
 class AMTChat extends AMMain {
   
 

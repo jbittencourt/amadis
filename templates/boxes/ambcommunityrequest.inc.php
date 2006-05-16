@@ -2,8 +2,11 @@
 /**
  * This box lists the active requests from users to join a community
  *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
  * @package AMADIS
- * @subpackage AMBoxes
+ * @subpackage AMCommunity
+ * @version 1.0
  * @autho Juliano Bittencourt <juliano@lec.ufrgs.br>
  **/
 class AMBCommunityRequest extends AMColorBox implements CMActionListener {

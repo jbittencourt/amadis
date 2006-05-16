@@ -9,12 +9,9 @@
  * show the messages. 
  * 
  * @access public
- * @param $message - Error message
- * @param $class - CSS style to user message
- * @param $e - Exception message throw for CMDevel or AMAPI
  * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
  * @package AMADIS
- * @subpkage AMError
+ * @subpkage AMErrorReport
  **/
 
 class AMError {
@@ -24,39 +21,18 @@ class AMError {
    */
   static protected $errors = array();
 
-  public function __construct($message,$class, $e) {
-
+  /**
+   *
+   * @param String $message - Error message
+   * @param String $class - CSS style to user message
+   */
+  public function __construct($message,$class, $e='') {
+    
     self::$errors[] = array("message"=>$message,
 			    "thrower"=>$class,
-			    "exception"=>$e);
+			    );
   }
 
-  /**
-   * Register errors message in erro.log file
-   *
-   * @access public 
-   * @static
-   * @param void
-   * @return void
-   */
-  public static function commit() {
-    global $_conf;
-    $path = (string) $_conf->app[0]->paths[0]->log;
-    
-    if(!empty(self::$errors)) {
-      @$flog = fopen($path, "a");
-      $errs = array();
-      foreach(self::$errors as $e) {
-	$h = "3";// Hour for time zone goes here e.g. +7 or -4, just remove the + or -
-	$hm = $h * 60;
-	$ms = $hm * 60;
-	$gmdate = gmdate("M d Y H:i:s ", time()-($ms)); // the "-" can be switched to a plus if that's what your time zone is.
-	$errs[] = "$gmdate - MESSAGE:$e[message]|Exception:$e[exception]\n";
-      }
-      @fwrite($flog, implode("\n", $errs));
-      @fclose($flog);
-    }
-  }
 
   /**
    * @access public 

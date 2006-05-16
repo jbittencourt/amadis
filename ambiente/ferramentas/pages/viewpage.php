@@ -2,14 +2,19 @@
 /** 
  * This file do a visualization of the webpages hosted in AMADIS.
  *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
  * @package AMADIS
- * @subpackage AMPages
- * @category Visualization
+ * @subpackage AMUpload
+ * @version 1.0
+ * @author Robson Mendonca <robson@lec.ufrgs.br>
  */
 $_CMAPP['notrestricted'] = 1;
 include("../../config.inc.php");
 
-echo "<html><head><title>AMADIS - Ambiente Virtual de Aprendizagem</title></head>";
+$_language = $_CMAPP['i18n']->getTranslationArray("upload");
+
+echo "<html><head><title>$_languge[amadis]</title></head>";
 
 echo "<frameset rows='45,*' border='0'>";
 echo "<frame id='ammenu' src='$_CMAPP[services_url]/pages/menu.php?$_SERVER[QUERY_STRING]'>";

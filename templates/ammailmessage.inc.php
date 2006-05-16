@@ -1,7 +1,15 @@
 <?
+
 /**
+ * Front end to send an email.
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
  * @package AMADIS
- * @subpackage AMTemplates
+ * @subpackage Core
+ * @version 1.0
+ * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
+ * @see CMWSimpleMail
  */
 
 include("cmwebservice/cmwemail.inc.php");
