@@ -176,12 +176,14 @@ function Chat_closeChat() {
 }
 
 function Chat_getNewMessages() {
+  
+  AMChat.oParent.Async(AMChatCallBack);
   AMChat.getnewmessages(Chat_codeRoom);
+  
 }
-
 var reSynctimeout;
 function reSync() {
-  alert("resyncing");
+  //alert("resyncing");
   reSynctimeout = window.setTimeout('register();',5000);
 }
 

@@ -521,6 +521,7 @@ back_to_project = "Voltar para o projeto"
 
 
 [projects]
+edit_blogs_list = "&raquo; Editar lista de blogs"
 project_intro = "Na &aacute;rea de PROJETOS do Amadis voc&ecirc;
 &eacute; livre para criar seus desafios de pesquisa. A
 partir da cria&ccedil;&atilde;o de um projeto, &eacute;

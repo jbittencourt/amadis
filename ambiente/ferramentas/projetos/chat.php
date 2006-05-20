@@ -13,6 +13,8 @@ AMMain::addCommunicatorHandler('AMChat');
 
 $pag->addPageBegin(CMHTMLObj::getScript("var AMChat = new amchat(AMChatCallBack);"));
 
+//$pag->add(CMHTMLObj::getScript("AM_debugBrowserObject(AMChat);"));
+
 $pag->add("<br>");
 
 $proj = new AMProjeto;

@@ -95,15 +95,16 @@ function AM_loadIframeIntoDiv(iframe,div) {
 
 function AM_debugBrowserObject(obj) {
   var outPut;
-  document.write("<table cellspacing=0 cellpadding=0 border=1>");
-  document.write("<tr><td><b>Property</b></td><td><b>Type</b></td></tr>");
+  //outPut  = "<table cellspacing=0 cellpadding=0 border=1>";
+  //outPut += "<tr><td><b>Property</b></td><td><b>Type</b></td></tr>";
   for (var i in obj) {
     var property = obj[i];
-    out += "<tr><td>"+i+"</td>";
-    out += "<td>"+property+"</td></tr>";
+    out += i+"###";
+    out += property+"<br>";
    
   }
-  out += "</table>";
+  //out += "</table>";
+  document.write(out);
   debug = document.createElement("DIV");
   debug.innerHTML = out;
   document.body.appendChild(debug);

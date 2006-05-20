@@ -1,12 +1,20 @@
 <?
+/**
+ * Visualization of the RSS Feeds to projects
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
+ * @package AMADIS
+ * @subpackage AMAgregator
+ * @version 1.0
+ * @author Daniel M. Basso <daniel@basso.inf.br>
+ */
+
 $_CMAPP['notrestricted'] = True;
 include("../../config.inc.php");
 include('lastRSS.php');
 
 $_language = $_CMAPP['i18n']->getTranslationArray("projects");
-//$_language = $_CMAPP['i18n']->getTranslationArray("diary");
-$_CMAPP['smartform'] = array();
-$_CMAPP['smartform']['language'] = $_language;
 
 $pag = new AMTAgregador();
 
@@ -63,10 +71,8 @@ $pag->add(new AMTProjectImage($proj->image));
 $pag->add("</td>");
 if ($isMember) {
   $pag->add("<td><span style=\"padding-left: 30px;\">");
-  $pag->add("<a href=\"$urledit\" class =\"green\">&raquo; Editar lista de blogs</a></span></td>");
+  $pag->add("<a href=\"$urledit\" class =\"green\">$_language[edit_blogs_list]</a></span><br>");
 }
-$pag->add("</tr></table><br/>");
-
 
 
 // load some RSS file
@@ -76,35 +82,39 @@ $q = new CMQuery('AMProjectBlogs');
 $q->setFilter("AMProjectBlogs::codeProject=".$_REQUEST['frm_codProjeto']);
 $blogs=$q->execute();
 
-foreach($blogs as $blog) {
+if($blogs->__hasItems()) {
+  $link = "if(this.value!=0) ";
+  $link .= "location.href='$_CMAPP[services_url]/agregador/agregador.php?frm_codProjeto=$_REQUEST[frm_codProjeto]&frm_codeBlog='+this.value";
 
-  if ($rs = $rss->get($blog->address)) {
-    $caixa = new AMBoxAgregador($rs,$userDiario->codeUser,"",0);
+  $pag->add("&nbsp;&nbsp;<select name='blogs' onChange=\"$link\">");
+  $pag->add("<option value=0>$_language[select_one]</option>");
+  
+  foreach($blogs as $blog) {
+    $pag->setRSSFeed($blog->address, $blog->title);
+    if($blog->codeBlog == $_REQUEST[frm_codeBlog])
+      $b = $blog;
+    $pag->add("<option value='$blog->codeBlog'>$blog->title</option>");
+  }
+  
+  $pag->add("</select>");
+}
+
+$pag->add("</tr></table><br/>");
+
+if(!isset($b)) {
+  $k = array_keys($blogs->items);
+  $b = $blogs->items[$k[0]];
+}
+if(!empty($blog)) {
+  if ($rs = $rss->get($b->address)) {
+    $caixa = new AMBoxAgregador($rs,$b->address,"",0);
     $pag->add($caixa);
   } else {
-    $pag->add('Error: RSS file "'.$blog->address.'" not found...');
+    $pag->add('Error: RSS file "'.$b->address.'" not found...');
   }
-
-}
-/*
-if ($rs = $rss->get('http://gnomedesktop.org/node/feed')) {
-  //if ($rs = $rss->get('http://www.freshfolder.com/rss.php')) {
-//  if ($rs = $rss->get('http://lothlorien.lec.ufrgs.br/~dmbasso/ferramentas/diario/diarioRSS.php?frm_codeUser=103')) {
-  $caixa = new AMBoxAgregador($rs,$userDiario->codeUser,"xawaskaaaaaa",0);
-  $pag->add($caixa);
-} else {
-  $pag->add('Error: RSS file not found...');
 }
 
-// http://lothlorien.lec.ufrgs.br/~dmbasso/ferramentas/diario/diarioRSS.php?frm_codeUser=95
-if ($rs = $rss->get('http://lothlorien.lec.ufrgs.br/~dmbasso/ferramentas/diario/diarioRSS.php?frm_codeUser=103')) {
-  $caixa = new AMBoxAgregador($rs,$userDiario->codeUser,"xawaskaaaaaa",0);
-  $pag->add($caixa);
-} else {
-  $pag->add('Error: RSS file not found...');
-}
 
-*/
 echo $pag; 
 
 ?>

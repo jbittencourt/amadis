@@ -16,14 +16,14 @@ class AMBoxAgregador extends CMHTMLObj {
   private $titulo;
   private $cabecalho = array();
   private $posts;
-  protected $user;
+  protected $address;
 
 
-  public function __construct($list,$user,$titulo,$imagem) {
+  public function __construct($list,$address,$titulo,$imagem) {
     parent::__construct(0,0);
 
     $this->posts = $list;
-    $this->user = $user;
+    $this->address = $address;
 
     $this->imagem = $imagem;
     $this->titulo = $titulo;
@@ -41,7 +41,7 @@ class AMBoxAgregador extends CMHTMLObj {
 
 
     parent::add("<img src=\"$url/dot.gif\" width=20 height=20>");
-    parent::add("<table cellpadding=\"0\" cellspacing=\"0\"  width=100%>");
+    parent::add("<table cellpadding=\"0\" cellspacing=\"0\"  width='99%'>");
     parent::add("<tr>");
     parent::add("<td width=\"20\"><img src=\"$url/box_diario_01.gif\" width=\"20\" height=\"18\" border=\"0\"></td>");
     parent::add("<td background=\"$url/box_diario_bgtop.gif\"><img src=\"$url/dot.gif\" width=\"20\" height=\"18\" border=\"0\"></td>");
@@ -59,12 +59,16 @@ class AMBoxAgregador extends CMHTMLObj {
 
     parent::add("</td>");
     parent::add("<td width=\"20\"><img src=\"$url/dot.gif\" width=\"20\" height=\"10\" border=\"0\"></td>");
-    parent::add("<td valign=\"top\"><font class=\"diary_title\">".$this->posts[title]."</font>");
+    parent::add("<td valign=\"top\"><span class=\"diary_title\">".$this->posts[title]);
+    parent::add("<acronym title=\"Really Simple Syndication\" style=\"border: 0px;\">");
+    parent::add("<a href=\"".$this->address."\"><img src=\"$_CMAPP[images_url]/rss_feed.gif\" style=\"padding-left: 15px;\"></a></acronym><br />");
+
+    parent::add("</span>");
 
     parent::add("<div id=\"diary_header_text\">");
     parent::add($this->posts[description]);
     parent::add("</div>");
-   
+
     
     parent::add("</td>");
     parent::add("<td width=\"20\"><img src=\"$url/dot.gif\" width=\"20\" height=\"10\" border=\"0\"></td>");
@@ -105,9 +109,9 @@ class AMBoxAgregador extends CMHTMLObj {
 
 
       parent::add("<td valign=\"top\" cellpadding=\"10\"><a href=\"".$post[link]."\"><img src=\"$url/diario_markclaro.gif\" ");
-      parent::add("align=\"absmiddle\" ><font class=\"titpost\">".$post[title]."</font></a><font class=\"datapost\"> - ".$post[pubDate]);
-      parent::add("</font><br/>");
-      parent::add("<font class=\"txtdiario\">".html_entity_decode($post[description])."</font></td>");
+      parent::add("align=\"absmiddle\" ><span class=\"titpost\">".$post[title]."</span></a><span class=\"datapost\"> - ".$post[pubDate]);
+      parent::add("</span><br/>");
+      parent::add("<span class=\"txtdiario\">".html_entity_decode($post[description])."</span></td>");
 
       if ($par) {
 	parent::add("<td background=\"$url/box_diario_bgrigth.gif\"></td></tr>");
