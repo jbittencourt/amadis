@@ -16,17 +16,40 @@ $_language = $_CMAPP[i18n]->getTranslationArray("community_create");
 
 
 $pag = new AMTEditCommunity();
+//if there is a community alredy in the session, and you
+//are trying to edit other community, this means that in
+//the last time, the final user don't completed the
+//process. So I must unset the session community
+//to force the script to load a new one.
+if($_SESSION['updating_community'] instanceof AMCommunities) {
+  if($_SESSION['updating_community']->code!=$_REQUEST['frm_codeCommunity']) {
+    unset($_SESSION['updating_community']);
+  }
+}
 
 /*
  *Load language module
  */
-
-if(!($_SESSION[community] instanceof AMCommunities)){
-  $_SESSION[community] = new AMCommunities;
-  $_SESSION[community]->code = $_REQUEST['frm_codeCommunity'];
+if(!($_SESSION['updating_community'] instanceof AMCommunities)){
+  $_SESSION['updating_community'] = new AMCommunities;
+  $_SESSION['updating_community']->code = $_REQUEST['frm_codeCommunity'];
   try{
-    $_SESSION[community]->load();
-  }catch(AMException $e){}
+    $_SESSION['updating_community']->load();
+  }catch(CMDBNoRecord $e) {
+    unset($_SESSION['updating_community']);
+    $location  = $_CMAPP[services_url]."/communities/communities.php?frm_amerror=community_not_exists";
+    $location .= "&frm_codProjeto=".$_REQUEST[frm_codProjeto];
+    CMHTMLPage::redirect($location);
+  }
+
+  $temp = $_SESSION['updating_community']->image;
+  $_SESSION['cad_image'] = new AMCommunityImage;
+
+  if(!empty($temp)) {
+    
+    $_SESSION['cad_image']->codeArquivo = (integer) $_SESSION['updating_community']->image;
+    $_SESSION['cad_image']->load();
+  };
 }
 
 $el["default"] = $_language[pag_0];
@@ -51,13 +74,20 @@ switch($_REQUEST[action]) {
    $conteudo.= "<input type=hidden name=frm_artificio value='yes'>";
    $conteudo.= "<table cellpadding='2' cellspacing='1' width='70%'><tbody><tr><td></td></tr><tr><td>";
    $conteudo.= $_language[frm_name];
-   $conteudo.= "<br><input name='frm_name' id='frm_name' value='".$_SESSION[community]->name."' size='30' maxlength='30' type='text'>";
+   $conteudo.= "<br><input name='frm_name' id='frm_name' value='".$_SESSION['updating_community']->name."' size='30' maxlength='30' type='text'>";
    $conteudo.= "</td></tr><tr><td>";
    $conteudo.= $_language[frm_description];
-   $conteudo.= "<br><textarea name='frm_description' id='frm_description' rows='5' cols='35'>".$_SESSION[community]->description."</textarea>";
+   $conteudo.= "<br><textarea name='frm_description' id='frm_description' rows='5' cols='35'>".$_SESSION['updating_community']->description."</textarea>";
    $conteudo.= "</td></tr><tr><td>";
-   $conteudo.= "<br>".$_language['public']."&nbsp;<input name='frm_flagAuth' id='frm_flagAuth' value='ALLOW' checked='checked' type='radio'>";
-   $conteudo.= "<br>".$_language['moderate']."&nbsp;<input name='frm_flagAuth' id='frm_flagAuth' value='REQUEST' type='radio'>";
+
+   if($_SESSION['updating_community']->flagAuth=='ALLOW') {
+     $flaAuthAllow="checked";
+   } else {
+     $flaAuthRequest="checked";
+   }
+   $conteudo.= "<br>".$_language['public']."&nbsp;<input name='frm_flagAuth' id='frm_flagAuth' value='ALLOW' $flaAuthAllow type='radio'>";
+   $conteudo.= "<br>".$_language['moderate']."&nbsp;<input name='frm_flagAuth' id='frm_flagAuth' value='REQUEST' $flaAuthRequest type='radio'>";
+
    $conteudo.= "</td></tr><tr><td><table align='right'><tbody><tr><td>";
    $conteudo.= "&nbsp;<input name='cancelar' id='cancelar' value='".$_language['cancel']."' type='button'>";
    $conteudo.= "</td><td>";
@@ -72,34 +102,23 @@ switch($_REQUEST[action]) {
       
  case "pag_1":
 
-   if(!empty($_REQUEST['frm_artificio'])){
-     //popula os campos num novo obj
-     $_SESSION[tempcommunity] = new AMCommunities;
-     $_SESSION[tempcommunity]->name = $_REQUEST['frm_name'];
-     $_SESSION[tempcommunity]->description = $_REQUEST['frm_description'];
-     $_SESSION[tempcommunity]->flagAuth = $_REQUEST['frm_flagAuth'];
-     $_SESSION[tempcommunity]->codeGroup = $_SESSION[community]->codeGroup;
-   }
+   
+   $_SESSION['updating_community']->loadDataFromRequest();
 
    //image stufff
-   
-   $_SESSION[cad_image] = new AMCommunityImage;
-   try {
-     if(!empty($_FILES[frm_image])) 
-       $_SESSION[cad_image]->loadImageFromRequest("frm_image");
-     else{       
-       $_SESSION[cad_image]->codeArquivo = $_SESSION[community]->image;
-       $_SESSION[cad_image]->load();
+   if(!empty($_FILES['frm_image'])) {
+     try {
+       $_SESSION['cad_image']->loadImageFromRequest("frm_image");
+     } catch(AMEImage $e) {
+       header("Location:$_SERVER[PHP_SELF]?action=pag_1&frm_amerror=invalid_image_type");
      }
-   }
-   catch(AMEImage $e) {
-     header("Location:$_SERVER[PHP_SELF]?action=pag_1&frm_amerror=invalid_image_type");
-   }
-   $view = $_SESSION[cad_image]->getView();
+   };
+
+   $view = $_SESSION['cad_image']->getView();
    $cadBox->add("<p align=center>");
    $cadBox->add($view);
    
-   $_SESSION[cad_image]=serialize($_SESSION[cad_image]);
+   $_SESSION['cad_image']=serialize($_SESSION['cad_image']);
    
    //get the image types that are allowed in this installation of gd+php
    $types = AMImage::getValidImageExtensions();
@@ -107,64 +126,58 @@ switch($_REQUEST[action]) {
    $cadBox->add("<form name=cad_user method=post action=\"$_SERVER[PHP_SELF]\" enctype=\"multipart/form-data\">");
    $cadBox->add("<input type=hidden name=action value=pag_1>");
    $cadBox->add("<input type=hidden name=frm_codeCommunity value=$_REQUEST[frm_codeCommunity]>");
-   $cadBox->add("<p align=center>".$_language[frm_image]);
-   $cadBox->add("&nbsp;".$_language[valid_image_types]." ".implode(", ",$types).".");
+   $cadBox->add("<p align=center>".$_language['frm_image']);
+   $cadBox->add("&nbsp;".$_language['valid_image_types']." ".implode(", ",$types).".");
    $cadBox->add("<br><input type=file name=frm_image onChange=\"this.form.submit()\">");
    $cadBox->add("<br><input type=submit onClick=\"this.form['action'].value='pag_2'\" value=\"$_language[next]\">");
    $cadBox->add("</form>");
 
 
 
-   $cadBox->setTitle($_language[community_pic]);
+   $cadBox->setTitle($_language['community_pic']);
 
    break;
 
  case "pag_2":
 
-   
-   if(!empty($_SESSION[cad_image])) {  
-     $foto = unserialize($_SESSION[cad_image]);
+
+   $foto = unserialize($_SESSION['cad_image']);
+   if($foto==false) $foto = $_SESSION['cad_image'];
+
+   if(($foto->state==CMObj::STATE_DIRTY) || ($foto->state==CMObj::STATE_DIRTY_NEW)) {
      $foto->tempo = time();
      try {
-       $foto->save();
+       $foto->save(); 
      }
      catch(CMDBException $e) {
        header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_picture");
      }
-
-     $_SESSION[tempcommunity]->image = $foto->codeArquivo;
+     $_SESSION['updating_community']->image = (integer) $foto->codeArquivo;
    }
-
+   
    //if arrives here, we havnt changes in the object
 
-   $_SESSION[community]->name = $_SESSION[tempcommunity]->name;
-   $_SESSION[community]->description = $_SESSION[tempcommunity]->description;
-   $_SESSION[community]->flagAuth = $_SESSION[tempcommunity]->flagAuth;
-   $_SESSION[community]->image = $_SESSION[tempcommunity]->image;
-   //   $_SESSION[community]->state = 
-
    //save the community
-   try {
-     $_SESSION[community]->save();
-   }
-   catch(CMDBException $e) {
-     if(!empty($foto)) {
-       $foto->delete();
+   if($_SESSION['updating_community']->state==CMObj::STATE_DIRTY) {
+     try {
+       $_SESSION['updating_community']->save();
      }
-     header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_user");
-   }
-   catch(AMException $e) {
-     if(!empty($foto)) {
-       $foto->delete();
+     catch(CMDBException $e) {
+       if($foto->state==CMObj::STATE_PERSISTENT) {
+	 $foto->delete();
+       }
+       header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_user");
      }
-     header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=creating_user_dir");
+     catch(AMException $e) {
+       if($foto->state==CMObj::STATE_PERSISTENT) {
+	 $foto->delete();
+       }
+       header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=creating_user_dir");
+     }
    }
 
-   $cod = $_SESSION[community]->code;
-   unset($_SESSION[community]);
-   unset($_SESSION[tempcommunity]);
-   unset($_SESSION[cad_image]);
-
+   $cod = $_SESSION['updating_community']->code;
+   unset($_SESSION['updating_community']);
    //if everything was ok, go the page of the project.
 
    header("Location: $_CMAPP[services_url]/communities/community.php?frm_codeCommunity=$cod&frm_ammsg=community_updated");

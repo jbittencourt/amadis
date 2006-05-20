@@ -33,7 +33,7 @@ if(!empty($_REQUEST['frm_codeProjeto'])) {
   try {
     $_SESSION['cad_proj']->load();
   }
-  catch(CMObjException $e) {}
+  catch(CMObjException $e) { }
 
 
   if(isset($_REQUEST['frm_codAreas']) && is_array($_REQUEST['frm_codAreas'])) {
@@ -45,14 +45,14 @@ if(!empty($_REQUEST['frm_codeProjeto'])) {
     }
     $_SESSION['cad_proj']->addVariable("areas",$tmp_areas);
   }
-  $_SESSION['cad_foto'] = new AMProjImage;
-  $_SESSION['cad_foto']->codeArquivo = $_SESSION['cad_proj']->image;
+  $_SESSION['cad_foto']->codeArquivo = (integer) $_SESSION['cad_proj']->image;
   try {
     $_SESSION['cad_foto']->load();
-  }catch (CMDBNoRecord $e) {
-       
-  }
-     
+  }  catch (CMDBNoRecord $e) {
+    $_SESSION['cad_foto'] = new AMProjImage;
+  }  catch (CMDBQueryError $e) {
+    $_SESSION['cad_foto'] = new AMProjImage;
+  }     
 
   if(!$group->isMember($_SESSION['user']->codeUser)) {
     CMHTMLPage::redirect($_CMAPP['services_url']."/projetos/projeto.php?frm_codProjeto=$_REQUEST[frm_codeProjeto]&frm_amerror=edit_not_allowed");
@@ -137,7 +137,7 @@ switch($_REQUEST['action']) {
    $form->addComponent("acao", new CMWHidden("action","pag_2"));
 
    if($_SESSION['cad_proj'] instanceof CMObj) {
-     if($_SESSION['cad_proj']->state!=CMObj::STATE_NEW) {
+     if($_SESSION['cad_proj']->state!=CMObj::STATE_DIRTY_NEW) {
        try {
 	 $proj_areas = $_SESSION['cad_proj']->listAreas();
 	 $areas->sub($proj_areas);
@@ -212,28 +212,25 @@ switch($_REQUEST['action']) {
    break;
  case "pag_3":
    
-   if(!empty($_SESSION[cad_foto])) {  
-     $foto = unserialize($_SESSION[cad_foto]);
+   $foto = unserialize($_SESSION['cad_foto']);
+   if($foto==false) $foto = $_SESSION['cad_foto'];
+
      
-     if(($foto->state==CMObj::STATE_DIRTY) || ($foto->state==CMObj::STATE_NEW)) {
-       $d = $foto->dados;
-       if(!empty($d)) {
-	 $foto->tempo = time();
-	 try {
-	   $foto->save(); 
-	 }
-	 catch(CMDBException $e) {
-	   header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_picture");
-	 }
-	 
-	 $_SESSION[cad_proj]->image = $foto->codeArquivo;
-       }
+   if(($foto->state==CMObj::STATE_DIRTY) || ($foto->state==CMObj::STATE_DIRTY_NEW)) {
+     $foto->tempo = time();
+     try {
+       $foto->save(); 
      }
+     catch(CMDBException $e) {
+       header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_picture");
+     }
+     
+     $_SESSION['cad_proj']->image = (integer) $foto->codeArquivo;
    }
    
    //save the project
    try {
-     $_SESSION[cad_proj]->save();
+     $_SESSION['cad_proj']->save();
    }
    catch(CMDBException $e) {
      header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_user");

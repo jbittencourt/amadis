@@ -1,5 +1,15 @@
 <?
-
+/**
+ * This class models a file that should be stored in the database.
+ * 
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access  private
+ * @package AMADIS
+ * @subpackage Core
+ * @version 1.0
+ * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
+ * @see AMImage
+ **/
 class AMArquivo extends CMObj {
 
    public function configure() {
@@ -16,7 +26,18 @@ class AMArquivo extends CMObj {
      $this->addPrimaryKey("codeArquivo");
   }
 
-
+  /**
+   * Load an image from the request to the object.
+   *
+   * PHP handles files uploads with a predefined bidimensional array $_FILES. This
+   * array contains various informations about the file being uploaded and a pointer
+   * to the temporary file in the servers filesystem. This information should be handled
+   * by the user to store the file in it's persistent location. This method, handles this
+   * process, using the information provided by PHP and Apache to fill the AMArquivo
+   * properties.
+   *
+   * @param string $inputName The name of the <INPUT type=file> element in the form.
+   **/
   public function loadFileFromRequest($formName) {
     $this->nome = $_FILES[$formName]['name'];
     $this->tipoMime = $_FILES[$formName]['type'];

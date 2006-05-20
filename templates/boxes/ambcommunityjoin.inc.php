@@ -32,6 +32,7 @@ class AMBCommunityJoin extends AMColorBox implements CMActionListener {
       if(!empty($_REQUEST[frm_text])) {
 	$group = $this->community->getGroup();
 	try {
+	  
 	  $group->userRequestJoin($_SESSION[user]->codeUser,$_REQUEST[frm_text]);
 	}
 	catch(CMDBException $e) {

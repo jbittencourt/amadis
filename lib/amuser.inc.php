@@ -53,6 +53,43 @@ class AMUser extends CMUser {
       return FALSE;
     }
   }
+
+  /**
+   * This function save a new user in AMADIS DB.
+   * It too create a new folder to publish your html pages or documents.
+   * If the operation fail, throw a AMException and register in AMADIS log system.
+   *
+   * @access public
+   * @param void
+   * @return void
+   */ 
+  public function save() {
+    global $_conf, $_CMDEVEL;
+    $state = $this->state;
+    parent::save();
+
+    if($state==self::STATE_NEW) {
+      include($_CMDEVEL['path']."/cmvfs.inc.php");
+    
+      $path = (String) $_conf->app->paths->pages;
+      if(empty($path)) {
+	Throw new AMException("Cannot save user because the pages dir is not correctly configured. Please, verify your config.xml");
+      }
+      $path .= "/users/user_".$this->codeUser;
+
+      //if the this doesn't exists, so we can create it, otherwise generate an exception.
+      try {
+	$dir = new CMvfsLocal($path);
+	$this->delete();
+	Throw new AMException("You are trying to create a user directory that alredy exists.");
+      } catch(CMvfsFileNotFound $e) {
+	$dir = new CMvfsLocal($path,0);  //create but not verify if the dir exists
+	$dir->register();
+      }
+    }
+
+  }
+
  
   
   function getUserProjectChats() {
@@ -111,43 +148,6 @@ class AMUser extends CMUser {
   }
 
   
-
-  /**
-   * This function save a new user in AMADIS DB.
-   * It too create a new folder to publish your html pages or documents.
-   * If the operation fail, throw a AMException and register in AMADIS log system.
-   *
-   * @access public
-   * @param void
-   * @return void
-   */ 
-  public function save() {
-    global $_conf, $_CMDEVEL;
-    $state = $this->state;
-    parent::save();
-
-    if($state==self::STATE_NEW) {
-      include($_CMDEVEL['path']."/cmvfs.inc.php");
-    
-      $path = (String) $_conf->app->paths->pages;
-      if(empty($path)) {
-	Throw new AMException("Cannot save user because the pages dir is not correctly configured. Please, verify your config.xml");
-      }
-      $path .= "/users/user_".$this->codeUser;
-
-      //if the this doesn't exists, so we can create it, otherwise generate an exception.
-      try {
-	$dir = new CMvfsLocal($path);
-	$this->delete();
-	Throw new AMException("You are trying to create a user directory that alredy exists.");
-      } catch(CMvfsFileNotFound $e) {
-	$dir = new CMvfsLocal($path,0);  //create but not verify if the dir exists
-	$dir->register();
-      }
-    }
-
-  }
-
   /**
    * Generates a random  password with lowercase letter and numbers.
    *

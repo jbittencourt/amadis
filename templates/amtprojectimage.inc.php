@@ -1,22 +1,28 @@
 <?
 
 /**
- * Thumbnail to a project
+ * Default vizualization of a project image.
+ *
+ * This class render a project image with the custom css.
  *
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
- * @access public
+ * @access  private
  * @package AMADIS
  * @subpackage AMProject
  * @version 1.0
  * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
- * @see AMImageTemplate
- */
-
+ * @see AMImageTemplate, AMProjImage
+ **/
 class AMTProjectImage extends AMImageTemplate {
  
 
   public function __toString() {
     global $_CMAPP;
+
+    $cod = $this->codeArquivo;
+    if(empty($cod)) {
+      $this->codeArquivo = AMProjImage::DEFAULT_IMAGE;
+    }
 
     $url = $this->getImageURL();
     parent::add("<img src=\"$url\" class=\"project_box\">");

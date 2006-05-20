@@ -192,8 +192,7 @@ switch($_REQUEST['action']) {
    }
    
    $foto = unserialize($_SESSION['cad_foto']);
-   if($foto===false) $foto = $_SESSION['cad_foto'];
-
+   if($foto==false) $foto = $_SESSION['cad_foto'];
    
    if(($foto->state==CMObj::STATE_DIRTY) || ($foto->state==CMObj::STATE_DIRTY_NEW)) {
      $foto->tempo = time();
@@ -203,15 +202,12 @@ switch($_REQUEST['action']) {
      catch(CMDBException $e) {
        header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_picture");
      }
-
-     if($foto != AMUserFoto::DEFAULT_IMAGE)
-       $_SESSION['cad_user']->foto = $foto->codeArquivo;
+     $_SESSION['cad_user']->foto = (integer) $foto->codeArquivo;
    }
 
    //verifica se o ambiente esta configurado para aceitar o cadastro
    //automaticamente
-
-   $auto_accept = 1; //(boolean) $_conf->app->environment->auto_accept_subscrib;
+   $auto_accept =  $_conf->app->environment->auto_accept_subscribe;
    
    if($auto_accept) {
      $_SESSION['cad_user']->active = 1;
@@ -221,7 +217,7 @@ switch($_REQUEST['action']) {
    }
 
    try {
-     $_SESSION[cad_user]->save();
+     $_SESSION['cad_user']->save();
    }
    catch(CMDBException $e) {
      $foto->delete();
@@ -231,6 +227,7 @@ switch($_REQUEST['action']) {
      $foto->delete();
      header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=creating_user_dir");
    }
+
 
    //tests
    $mail = new AMMailMessage;

@@ -1,10 +1,17 @@
 <?
 /**
+ * The default vizualization of the user picture.
+ *
+ * This class render a user picture inside a gigsaw.
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access  private
  * @package AMADIS
- * @subpackage AMTemplates
+ * @subpackage Core
+ * @version 1.0
+ * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
+ * @see AMFoto, AMArquivo, AMUserFoto
  */
-
-
 class AMTUserImage extends AMImageTemplate {
 
 

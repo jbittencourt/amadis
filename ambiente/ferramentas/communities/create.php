@@ -12,7 +12,7 @@
  **/
 include("../../config.inc.php");
 
-$_language = $_CMAPP[i18n]->getTranslationArray("community_create");
+$_language = $_CMAPP['i18n']->getTranslationArray("community_create");
 
 
 $pag = new AMTCadCommunity();
@@ -21,22 +21,22 @@ $pag = new AMTCadCommunity();
  *Load language module
  */
     
-$_CMAPP[smartform] = array();
-$_CMAPP[smartform][language] = $_language;
+$_CMAPP['smartform'] = array();
+$_CMAPP['smartform']['language'] = $_language;
     
 
 $el["default"] = $_language[pag_0];
 $el[pag_1] = $_language[pag_1];
 $el[pag_2] = $_language[pag_2];
 $ind =  new AMPathIndicator($el);
-$ind->setState($_REQUEST[action]);
+$ind->setState($_REQUEST['action']);
 $pag->setPathIndicator($ind);
 
 
 //form box to interface
 $cadBox = new AMTCommunityCadBox("", AMTCadBox::COMMUNITY_THEME);
 
-switch($_REQUEST[action]) {
+switch($_REQUEST['action']) {
 
  default:
 
@@ -47,8 +47,8 @@ switch($_REQUEST[action]) {
    
    $form->setWidgetOrder($fields_rec);
    
-   if($_SESSION[cad_community] instanceof CMObj) {
-     $form->loadDataFromObject($_SESSION[cad_community]);
+   if($_SESSION['cad_community'] instanceof CMObj) {
+     $form->loadDataFromObject($_SESSION['cad_community']);
    }
    
    $flagAuth = array(AMCommunities::ENUM_FLAGAUTH_ALLOW=>"$_language[public]",
@@ -56,7 +56,7 @@ switch($_REQUEST[action]) {
 		     );
    
    $form->setRadioGroup("flagAuth",$flagAuth);
-   $form->components[flagAuth]->setValue(AMCommunities::ENUM_FLAGAUTH_ALLOW);
+   $form->components['flagAuth']->setValue(AMCommunities::ENUM_FLAGAUTH_ALLOW);
    
    $form->addComponent("action",new CMWHidden("action","pag_1"));
    
@@ -64,20 +64,20 @@ switch($_REQUEST[action]) {
    $form->addComponent("description",$descrip);
 
    $cadBox->add($form);
-   $cadBox->setTitle($_language[general_data]);
+   $cadBox->setTitle($_language['general_data']);
    
    break;
       
  case "pag_1":
 
-   if(!empty($_REQUEST[frm_name])) {
+   if(!empty($_REQUEST['frm_name'])) {
      $community = new AMCommunities;
-     $community->name = $_REQUEST[frm_name];
+     $community->name = $_REQUEST['frm_name'];
      try {
        $community->load();
        
-       $_SESSION[cad_community] = new AMCommunities;
-       $_SESSION[cad_community]->loadDataFromRequest();
+       $_SESSION['cad_community'] = new AMCommunities;
+       $_SESSION['cad_community']->loadDataFromRequest();
        
        header("Location:$_SERVER[PHP_SELF]?frm_amerror=community_exists");
      }catch (CMDBNoRecord $e) {
@@ -85,33 +85,33 @@ switch($_REQUEST[action]) {
      }   
    }
 
-   if(!($_SESSION[cad_community] instanceof AMCommunities)) {
+   if(!($_SESSION['cad_community'] instanceof AMCommunities)) {
      //if this is the first submit, create an object in the session to store the user data
-     $_SESSION[cad_community] = new AMCommunities();
-     $_SESSION[cad_community]->loadDataFromRequest();
-     $_SESSION[cad_community]->time = time();
+     $_SESSION['cad_community'] = new AMCommunities();
+     $_SESSION['cad_community']->loadDataFromRequest();
+     $_SESSION['cad_community']->time = time();
    }
    else {
      //if the user hit back, fill the from with the data from the session object
-     $_SESSION[cad_community]->loadDataFromRequest();
+     $_SESSION['cad_community']->loadDataFromRequest();
    }
 
    //image stufff
-   if(!empty($_FILES[frm_image])) {
-     $_SESSION[cad_image] = new AMCommunityImage;
+   if(!empty($_FILES['frm_image'])) {
+     $_SESSION['cad_image'] = new AMCommunityImage;
 
      try {
-       $_SESSION[cad_image]->loadImageFromRequest("frm_image");
+       $_SESSION['cad_image']->loadImageFromRequest("frm_image");
      }
      catch(AMEImage $e) {
        header("Location:$_SERVER[PHP_SELF]?action=pag_1&frm_amerror=invalid_image_type");
      }
 
-     $view = $_SESSION[cad_image]->getView();
+     $view = $_SESSION['cad_image']->getView();
      $cadBox->add("<p align=center>");
      $cadBox->add($view);
 
-     $_SESSION[cad_image]=serialize($_SESSION[cad_image]);
+     $_SESSION['cad_image']=serialize($_SESSION['cad_image']);
    }
 
 
@@ -120,38 +120,40 @@ switch($_REQUEST[action]) {
 
    $cadBox->add("<form name=cad_user method=post action=\"$_SERVER[PHP_SELF]\" enctype=\"multipart/form-data\">");
    $cadBox->add("<input type=hidden name=action value=pag_1>");
-   $cadBox->add("<p align=center>".$_language[frm_image]);
-   $cadBox->add("&nbsp;".$_language[valid_image_types]." ".implode(", ",$types).".");
+   $cadBox->add("<p align=center>".$_language['frm_image']);
+   $cadBox->add("&nbsp;".$_language['valid_image_types']." ".implode(", ",$types).".");
    $cadBox->add("<br><input type=file name=frm_image onChange=\"this.form.submit()\">");
    $cadBox->add("<br><input type=submit onClick=\"this.form['action'].value='pag_2'\" value=\"$_language[next]\">");
    $cadBox->add("</form>");
 
 
 
-   $cadBox->setTitle($_language[community_pic]);
+   $cadBox->setTitle($_language['community_pic']);
 
    break;
 
  case "pag_2":
 
-   
-   if(!empty($_SESSION[cad_image])) {  
-     $foto = unserialize($_SESSION[cad_image]);
+
+   $foto = unserialize($_SESSION['cad_image']);
+   if($foto==false) $foto = $_SESSION['cad_image'];
+
+     
+   if(($foto->state==CMObj::STATE_DIRTY) || ($foto->state==CMObj::STATE_DIRTY_NEW)) {
      $foto->tempo = time();
      try {
-       $foto->save();
+       $foto->save(); 
      }
      catch(CMDBException $e) {
        header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_picture");
      }
-
-     $_SESSION[cad_community]->image = $foto->codeArquivo;
+     
+     $_SESSION['cad_community']->image = (integer) $foto->codeArquivo;
    }
-
 
    //save the community
    try {
-     $_SESSION[cad_community]->save();
+     $_SESSION['cad_community']->save();
    }
    catch(CMDBException $e) {
      if(!empty($foto)) {
@@ -168,23 +170,23 @@ switch($_REQUEST[action]) {
 
    if(empty($_REQUEST['frm_codeCommunity'])){
      $member = new CMGroupMember;
-     $member->codeGroup = $_SESSION[cad_community]->codeGroup;
-     $member->codeUser = $_SESSION[user]->codeUser;
+     $member->codeGroup = (integer) $_SESSION['cad_community']->codeGroup;
+     $member->codeUser =  (integer) $_SESSION['user']->codeUser;
      $member->time = time();
      $member->save();
 
      $adm = new AMCommunityMembers;
-     $adm->codeCommunity = $_SESSION[cad_community]->code;
-     $adm->codeUser = $_SESSION[user]->codeUser;
+     $adm->codeCommunity = $_SESSION['cad_community']->code;
+     $adm->codeUser = $_SESSION['user']->codeUser;
      $adm->flagAdmin = AMCommunityMembers::ENUM_FLAGADMIN_ADMIN;
      $adm->time = time();   
      $adm->save();
    }
       
-   $cod = $_SESSION[cad_community]->code;
-   unset($_SESSION[cad_community]);
-   unset($_SESSION[cad_image]);
-   unset($_SESSION[amadis][communities]);
+   $cod = $_SESSION['cad_community']->code;
+   unset($_SESSION['cad_community']);
+   unset($_SESSION['cad_image']);
+   unset($_SESSION['amadis']['communities']);
 
    //if everything was ok, go the page of the project.
 

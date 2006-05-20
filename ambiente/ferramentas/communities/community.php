@@ -70,10 +70,8 @@ $box->add(new AMBCommunityMembers($community), AMTwoColsLayout::LEFT);
  *CADASTRO DE NOTICIAS
  */
 
-//if($isMember) {
-  $communityNews = new AMBCommunitiesNews(AMBCommunitiesNews::COMMUNITY_NEWS);
-  $box->add($communityNews,AMTwoColsLayout::LEFT);
-//}
+$communityNews = new AMBCommunitiesNews(AMBCommunitiesNews::COMMUNITY_NEWS);
+$box->add($communityNews,AMTwoColsLayout::LEFT);
 
 /**
  *FINAL DA COLUNA ESQUERDA

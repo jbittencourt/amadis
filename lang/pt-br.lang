@@ -406,6 +406,7 @@ frm_datInscricaoFim = "Fim das Inscri&ccedil;&otilde;es"
 [errors]
 error_course_not_exists = "O curso requisitado n&atilde;o existe!"
 error_project_not_exists = "O projeto requisitado n&atilde;o existe!"
+error_community_not_exists = "A comunidade requisitada n&atilde;o existe!"
 error_not_a_project_member = "Voc&ecirc; n&atilde;o &eacute; um membro deste projeto."
 error_not_a_course_member = "Voc&ecirc; n&atilde;o &eacute; um participante deste curso."
 

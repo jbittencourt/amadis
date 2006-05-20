@@ -1,5 +1,4 @@
 <?
-
 /**
  * This class models a picture(foto) or image that is stored in the database.
  * 
@@ -9,10 +8,14 @@
  * properties definitions. The resize finds the best match of size withou distortion
  * of the original image.
  *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access  private
+ * @package AMADIS
+ * @subpackage Core
+ * @version 1.0
  * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
- * @see AMArquivo
+ * @see AMArquivo, AMArquivo, AMUserFoto
  **/
-
 abstract class AMFoto extends AMImage {
 
   protected $maxX = "200";

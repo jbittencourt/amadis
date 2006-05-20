@@ -34,7 +34,8 @@ if(!empty($_REQUEST[action])) {
     }
 
     $image = $_SESSION[diary_profile_image];
-    if($image->state==CMObj::STATE_NEW) {
+    if(($image->state==CMObj::STATE_NEW) ||
+       ($image->state==CMObj::STATE_DIRTY_NEW)) {
       try {
 	$image->save();
       } catch(CMDBException $e) {

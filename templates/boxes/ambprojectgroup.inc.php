@@ -33,7 +33,7 @@ class AMBProjectGroup extends AMAbstractBox {
     parent::add("<a href=\"".$_CMAPP['services_url']."/projetos/members.php?frm_codProjeto=".$this->proj->codeProject."\"");
     parent::add(" class=\"green\">$_language[more_members]</a><br><br>");
 
-    $js = 'loadProjrectGroup("'.$this->proj->codeGroup.'");';
+    $js = 'loadProjectGroup("'.$this->proj->codeGroup.'");';
     //parent::add(CMHTMLObj::addScript("AM_debugBrowserObject(AMBProjectGroup);"));
     parent::add(CMHTMLObj::addScript($js));
 

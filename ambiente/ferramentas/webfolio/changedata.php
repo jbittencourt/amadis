@@ -51,7 +51,12 @@ switch($_REQUEST['action']) {
    }
    
 
-   $fields_rec = array("name","datNascimento","email","endereco","codCidade","cep","telefone","aboutMe");
+   $complete = (int) $_conf->app->environment->use_complete_register_form;
+   if($complete) 
+     $fields_rec = array("name", "email", "datNascimento", "codCidade", "endereco", "cep", "telefone", "aboutMe");
+   else
+     $fields_rec = array("name","email", "datNascimento", "codCidade","aboutMe");
+
    $form = new AMWSmartForm('AMUser', "cad_user", $_SERVER['PHP_SELF'], $fields_rec);
    $form->loadDataFromObject($_SESSION['cad_user']);
          
@@ -155,7 +160,7 @@ switch($_REQUEST['action']) {
    $foto = unserialize($_SESSION['cad_foto']);
    if($foto===false) $foto = $_SESSION['cad_foto'];
 
-   if($foto->state==CMObj::STATE_DIRTY || $foto->state==CMObj::STATE_NEW) {
+   if($foto->state==CMObj::STATE_DIRTY || $foto->state==CMObj::STATE_DIRTY_NEW) {
      try {
        $foto->save(); 
        $_SESSION['cad_user']->foto = $foto->codeArquivo;

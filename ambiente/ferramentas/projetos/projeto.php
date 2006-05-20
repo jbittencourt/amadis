@@ -18,7 +18,7 @@ if(isset($_REQUEST['frm_codProjeto']) && !empty($_REQUEST['frm_codProjeto'])) {
      }catch(CMDBNoRecord $e){
        $location  = $_CMAPP[services_url]."/projetos/projeto.php?frm_amerror=project_not_exists";
        $location .= "&frm_codProjeto=".$_REQUEST[frm_codProjeto];
-       header("Location:$location");
+       CMHTMLPage::redirect($location);
      }
 } else { 
   $_REQUEST['frm_amerror'] = "any_project_id";

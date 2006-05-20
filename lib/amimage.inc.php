@@ -1,9 +1,20 @@
 <?
-
-
+/**
+ * This class models image that should be stored in the database.
+ * 
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access  private
+ * @package AMADIS
+ * @subpackage Core
+ * @version 1.0
+ * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
+ * @see AMArquivo, AMFoto
+ **/
 class AMImage extends AMArquivo {
 
-
+  /**
+   * Return an array with the images type that are supported by GD.
+   **/
   public static function getValidImageTypes() {
     $validTypes = array();
     $info = gd_info();
@@ -15,7 +26,9 @@ class AMImage extends AMArquivo {
     return $validTypes;
   }
 
-
+  /**
+   * Return an array with the images extensions relative to the images types supported by GD.
+   **/
   public static function getValidImageExtensions() {
     $types = AMImage::getValidImageTypes();
     $extensions = array();
@@ -36,9 +49,20 @@ class AMImage extends AMArquivo {
     }
   }
 
-
-  public function loadImageFromRequest($formname) {
-    $name = $_FILES[$formname]['name'];
+  /**
+   * Load an image from the request to the object.
+   *
+   * PHP handles files uploads with a predefined bidimensional array $_FILES. This
+   * array contains various informations about the file being uploaded and a pointer
+   * to the temporary file in the servers filesystem. This information should be handled
+   * by the user to store the file in it's persistent location. This method, handles this
+   * process, using the information provided by PHP and Apache to fill the AMArquivo
+   * properties. This method also tests if the image is a valid image type.
+   *
+   * @param string $inputName The name of the <INPUT type=file> element in the form.
+   **/
+  public function loadImageFromRequest($inputName) {
+    $name = $_FILES[$inputName]['name'];
     $parts = explode(".",$name);
     $extension = strtolower($parts[count($parts)-1]);
 
@@ -47,15 +71,27 @@ class AMImage extends AMArquivo {
       Throw new AMEImage;
     }
 
-    parent::loadFileFromRequest($formname);
+    parent::loadFileFromRequest($inputName);
   }
 
+  /**
+   * Return the size in pixels of the image.
+   *
+   * Return an array in the format ('x'=>,'y'=>) with the size
+   * in pixels of the image.
+   **/
   public function getSize() {
     $im = imagecreatefromstring($this->dados);
     return array("x"=>imagesx($im),
 		 "y"=>imagesy($im));
   }
 
+  /**
+   * Resize the image.
+   *
+   * @param integer $x1 The new width of the image.
+   * @param integer $y1 The new height of the image.
+   **/
   public function resize($x1,$y1) {
     //calculate proportions
     $size = $this->getSize();
@@ -104,6 +140,14 @@ class AMImage extends AMArquivo {
   }
 
 
+  /**
+   * Overloding of the CMObj::save() method.
+   *
+   * This overloding of the CMObj::save() method performs two operations.
+   * In first place it fill the metada about the image. In second, if
+   * this image is not new, if deletes all the thumbnails of this images,
+   * if they exists.
+   **/
   public function save() {
     global $_CMAPP;
     
@@ -114,15 +158,17 @@ class AMImage extends AMArquivo {
     parent::save();
     //we must delete all the existing thumbnails of this image if the save was sucessfull
     //see AMThumb for more information about thumbnail generation
-    $p = AMThumb::getImagesPattern($this->codeArquivo);
+    if($this->state!=CMObj::STATE_NEW) {
+      $p = AMThumb::getImagesPattern($this->codeArquivo);
 
-    $_conf = $_CMAPP['config']->getObj();
-    $path =  (string) $_conf->app[0]->paths[0]->thumbnails;
-    $handle = opendir($path);
-    
-    while (($file = readdir($handle))!==false) {
-      if(ereg($p,$file)) {
-	unlink($path.'/'.$file);
+      $_conf = $_CMAPP['config']->getObj();
+      $path =  (string) $_conf->app[0]->paths[0]->thumbnails;
+      $handle = opendir($path);
+      
+      while (($file = readdir($handle))!==false) {
+	if(ereg($p,$file)) {
+	  unlink($path.'/'.$file);
+	}
       }
     }
   }
