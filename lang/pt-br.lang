@@ -265,10 +265,12 @@ change_personal_data = "Alterar meus dados pessoais"
 change_password = "Trocar senha"
 
 see_my_home_page = "Ver a minha p&aacute;gina"
+see_my_album = "Ver meu &aacute;lbum"		 
 publish_my_home_page = "Publicar a minha p&aacute;gina"
 see_home_page = "Ver p&aacute;gina"
 see_diary = "Ver di&aacute;rio"
 see_library = "Ver arquivos compartilhados"
+see_album = "Ver &Aacute;lbum"
 add_friend = "Adicionar como amigo"
 send_email = "Enviar um e-mail"
 send_a_comment = "Envie um coment&aacute;rio (Opcional)"
@@ -324,6 +326,20 @@ no_files_shared = "Nenhum arquivo compartilhado no momento "
 list_all_files = "Ver todos os arquivos compartilhados"
 init_chat = "Iniciar conversa"
 off_line_user = "Usu&aacute;rio desconectado"
+
+
+[album]
+
+userImages = "Imagens de ";
+noPhotos = "Este usu&aacute;rio ainda n&atilde;o tem fotos!";
+file_successful_sent = "Foto armazenada com sucesso!"
+error_send_file = "Problemas ao enviar a foto, tente novamente!<br>
+Veja se a extens&atilde;o do arquivo (ex.:'.jpg') est&aacute; correta"
+
+comment = "Insira um coment&aacute;rio para a imagem"
+photo = "Especifique uma foto do seu computador:"
+update= "Atualizar"
+
 
 [chat]
 save_chat = "Salvar o chat da sala ?"
@@ -531,6 +547,10 @@ f&oacute;runs e chats, agregar informa&ccedil;&otilde;es de outros
 di&aacute;rio da Internet ao projeto. Por meio dessas
 ferramentas, facilita-se a troca de id&eacute;ias entre os membros das
 comunidades, instigando o desenvolvimento dos saberes de cada um."
+
+projects_pages = "P&aacute;ginas de projetos"
+see_home_page =  "Ver P&aacute;gina"
+see_all_pages = "Listar todas as p&aacute;ginas de projeto"
 
 areas = "Selecione uma das &aacute;reas para listar<br> os projetos referente ao t&oacute;pico:"
 any_area = "Nenhuma &aacute;rea cadastrada"
@@ -871,9 +891,15 @@ last_diary_posts = "&Uacute;ltimas postagens em di&aacute;rios"
 list_all_diaries = "Listar todos os di&aacute;rios pessoais"
 more_options = "Mais Op&ccedil;&otilde;es"
 see_home_page = "Ver p&aacute;gina"
+see_all_pages = "Listar todas as p&aacute;ginas pessoais"
 users_pages = "P&aacute;ginas de usu&aacute;rios"
 projects_pages = "P&aacute;ginas de projetos"
 no_user_loggeds = "Nenhum usu&aacute;rio logado."
+
+people_welcome_text = "Nesta &aacute;rea, voc&ecirc; pode localizar as
+pessoas que integram o Amadis e ver quem est&aacute;
+logado. Al&eacute;m disso, &eacute; poss&iacute;vel localizar as
+p&aacute;ginas e os di&aacute;rios atualizados recentemente."
 
 [admin]
 
