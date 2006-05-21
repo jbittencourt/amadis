@@ -1,0 +1,120 @@
+
+/* CSSs referentes a Comunidades */
+
+.titcomunidade {
+	       font-family: Arial, Helvetica, sans-serif;
+	       font-size:18px;
+	       line-height: 20px;
+	       color: #666633;
+}
+.txttitcomunidade {
+		  font-family: Arial, Helvetica, sans-serif;
+		  font-size:18px;
+		  line-height: 20px;
+		  color: #B6B640;
+}
+
+a.boxlinkcomun {
+	       font-family: Arial, Helvetica, sans-serif;
+	       font-size: 11px;
+	       line-height: 20px;
+	       color: #666633;
+	       text-decoration: underline;
+}
+
+.boxcomunidade {
+	       border: 2px solid #C6C67A;
+}
+
+/* REFERENTE AS LISTAGENS */
+
+
+#thumb { 
+         border: #E2E24F solid;
+         }
+
+#communitiy_list { 
+               border-collapse: collapse;
+               text-align: center;
+               width: 100%;
+               }
+
+#community_list A { 
+                 color: #666600;
+                 }
+
+.community_list_line { 
+                height: 90px;
+                }
+
+.community_list_line TD { 
+                   padding: 0px;
+                   border-spacing: 0px;
+                   border: 0px;
+                   }
+
+
+#community_list_2 { 
+                    background-color: #FBFADC;
+                 }
+#community_list BUTTON { 
+                       background-color: white;
+                       border: 2px #F0F0D3 solid;
+                      }
+.community_add_news { 
+                      font-family: Arial, Helvetica, sans-serif;
+                      font-size: 11px;
+                      line-height: 20px;
+                      color: #CC9966;
+                      text-decoration: none;
+                      }
+.community_view_news { 
+                      font-family: Arial, Helvetica, sans-serif;
+                      font-size: 11px;
+                      line-height: 20px;
+                      color: #CC9966;
+                      text-decoration: underline;
+                      }
+.community_items { 
+                   background-color : #fafaf8;
+                   border : 2px solid #C6C67A;
+                   height : 48px;
+                   width : 48px;
+                   text-align : center;
+                   position : relative;
+                   background-repeat: no-repeat;
+                   background-position: 50% 25%;
+                   }
+
+.community_items1 { 
+                   background-color : #fafaf8;
+                   border : 2px solid #C6C67A;
+                   height : 48px;
+                   width : 75px;
+                   text-align : center;
+                   position : relative;
+                   background-repeat: no-repeat;
+                   background-position: 50% 25%;
+                   }
+
+.community_items:hover  { 
+                          background-color: #fafaea; 
+                          border: 2px solid #e2e24f;
+                          height: 48px;
+                          width: 48px; 
+                          text-align: center;
+                          position:relative;
+                          background-repeat: no-repeat;
+                          background-position: 50% 25%;
+                          }
+
+.community_items1:hover  { 
+                          background-color: #fafaea; 
+                          border: 2px solid #e2e24f;
+                          height: 48px;
+                          width: 75px; 
+                          text-align: center;
+                          position:relative;
+                          background-repeat: no-repeat;
+                          background-position: 50% 25%;
+                          }
