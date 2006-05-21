@@ -46,7 +46,7 @@ class AMCommunities extends CMObj {
    * the new community
    **/
   public function save() {
-    if($this->state==self::STATE_NEW) {
+    if(($this->state==self::STATE_NEW) || ($this->state==self::STATE_DIRTY_NEW) ) {
       //create a new group for the project
       $group = new CMGroup;
       $group->description = "Community ".$this->name;

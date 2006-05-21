@@ -37,7 +37,7 @@ class AMBProjectsArea extends CMHTMLObj {
     } else {
       $img = "img_projetos_area.gif";
     }
-    $buffer .= "<img src=\"".$_CMAPP['imlang_url']."/$img\"  height=\"22\" width=\"155\"><br>";
+    $buffer .= "<img src=\"".$_CMAPP['imlang_url']."/$img\"><br>";
     $buffer .= "<img src=\"".$_CMAPP['images_url']."/dot.gif\" border=\"0\" height=\"7\" width=\"1\"><br>\n";
     $buffer .= "<select onChange=\"document.frm_prjtArea.submit();\" ";
     $buffer .= "name=\"frm_codArea\" style=\"position: relative; top: 0pt;\">\n";

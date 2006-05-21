@@ -1,4 +1,14 @@
 <?
+/**  
+ *  Relates files -> libraries
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
+ * @package AMADIS
+ * @subpackage AMLibrary
+ * @version 1.0
+ * @author Cristiano S Basso <csbasso@lec.ufrgs.br>
+ */
+
 class AMLibraryFiles extends CMObj {
 
   public function configure() {

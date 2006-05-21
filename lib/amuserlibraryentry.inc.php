@@ -1,4 +1,16 @@
 <?
+
+/** 
+ *  Manage user's libraries
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access public
+ * @package AMADIS
+ * @subpackage AMLibrary
+ * @version 1.0
+ * @author Cristiano S Basso <csbasso@lec.ufrgs.br>
+ */
+
+
 class AMUserLibraryEntry extends CMObj {
 
   protected $user;

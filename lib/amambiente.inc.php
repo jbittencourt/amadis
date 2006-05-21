@@ -320,7 +320,7 @@ class AMAmbiente extends CMEnvironment {
 
   public function listNewComminities($limit=3) {
     $q = new CMQuery('AMCommunities');
-    $q->setOrder("time DESC");
+    $q->setOrder("time ASC");
     $q->setLimit(0,$limit);
     return $q->execute();
   }

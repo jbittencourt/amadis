@@ -31,7 +31,7 @@ class AMBProjectsTop extends CMHTMLObj {
      */
     $buffer  = "<table cellspacing=0 cellpadding=0 border=0>";
     $buffer .= "<tr><td>";
-    $buffer .= "<img src=\"".$_CMAPP['imlang_url']."/img_projetos_visitados.gif\" border=\"0\" height=\"22\" width=\"190\"><br>";
+    $buffer .= "<img src=\"".$_CMAPP['imlang_url']."/img_projetos_visitados.gif\" border=\"0\"><br>";
     $buffer .= "<img src=\"".$_CMAPP['images_url']."/dot.gif\" border=\"0\" height=\"7\" width=\"1\"><br>";
     if(!empty($this->links)) {
       foreach($this->links as $item) {
