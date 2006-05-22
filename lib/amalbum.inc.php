@@ -36,7 +36,7 @@ class  AMAlbum extends CMObj {
   public function saveEntry(){
     $formName = $_REQUEST['nomeCampo']; // recebe o nome do campo de tipo 'file'
     
-    $file = new AMArquivo;
+    $file = new AMImage;
   
     //preenche os capos do arquivo
 
@@ -68,7 +68,11 @@ class  AMAlbum extends CMObj {
     $d = $file->dados;
     if(empty($d))      
       return false;
-    
+
+    $tam = $file->getSize();
+    if($tam['x'] > 700)
+      $file->resize(700,800);
+      
     try {
       $file->save();	//salva o arquivo
       $this->codePhoto = $file->codeArquivo;
@@ -77,7 +81,7 @@ class  AMAlbum extends CMObj {
       $this->time = time();
       $this->save();
     }catch(CMException $e){
-      die($e->getMessage());
+      new AMLog('AMAlbum', $e->getMessage());
     }  
   }
   
