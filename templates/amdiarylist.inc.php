@@ -14,9 +14,9 @@
 class AMDiaryList extends AMPageBox {
 
   public function __construct() {
-    parent::__construct(10);
+    parent::__construct(5);
   }
-  
+
 
   public function init($list,$count) {
     $this->numItems = $count;
@@ -25,9 +25,9 @@ class AMDiaryList extends AMPageBox {
 
   public function __toString() {
     global $_language,$_CMAPP;
-
-    $box = new AMTCadbox($_language[diary_amadis], AMTCadBox::CADBOX_LIST,AMTCadBox::DIARY_THEME);
-    $box->add("<table id=\"diary_list\">");
+    
+    $box = new AMTCadbox($_language['diary_amadis'], AMTCadBox::CADBOX_LIST,AMTCadBox::DIARY_THEME);
+    $box->add("<table id=\"diary_list\" bgcolor='#F9F8FD'>");
     if($this->itens->__hasItems()) {
       $i = 0;
       foreach($this->itens as $item) {
@@ -35,7 +35,7 @@ class AMDiaryList extends AMPageBox {
 	if(($i%2)==1) "diary_list_2";
 	$i++;
 	$box->add("<tr id=\"$id\" class=\"diary_list_line\">");
-
+	
 	$profile = "";
 	//if the user has alredy filled their diary profile
 	$test = $item->profile;
@@ -43,7 +43,7 @@ class AMDiaryList extends AMPageBox {
 	  $it = $item->profile->getIterator();
 	  $profile = $it->current();
 	}
-
+	
 	//print the diary image or, if empty, the user image
 	$box->add("<td>");
 	$f =0;
