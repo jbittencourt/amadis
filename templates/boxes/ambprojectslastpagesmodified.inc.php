@@ -31,7 +31,7 @@ class AMBProjectsLastPagesModified extends AMColorBox {
       parent::add("<img src='$_CMAPP[media_url]/images/dot.gif' width='1' height='7' border='0'>");
       parent::add(new AMDotLine);
 
-      parent::add("<img src='$_CMAPP[images_url]/icon_projetos.gif'> ".$_language['see_all_pages']);
+      parent::add("<img src='$_CMAPP[images_url]/icon_projetos.gif'> <a href='".$_CMAPP['services_url']."/pages/listpages.php?frm_type=projects' class='projBlue'>".$_language['see_all_pages']."</a>");
     }
   
     
