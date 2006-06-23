@@ -529,6 +529,11 @@ change_password = "Troca senha"
 warning_amadis = "Avisos do AMADIS"
 
 
+[pages]
+
+all_pages = "Listagem das P&aacute;ginas"
+users_pages = "P&aacute;ginas dos usu&aacute;rios"
+
 
 [project_members]
 project_group_actual = "Equipe atual do Projeto"
@@ -1045,6 +1050,14 @@ list_all_files = "Listar todos os arquivos"
 thumbs = "Miniaturas";
 isShared = "Compartilhado"
 wish_delete = "Voce tem certeza que deseja deletar este arquivo?"
+
+legends = "Legenda da biblioteca"
+file_download = "Download do arquivo"
+file_del = "Excluir o arquivo da biblioteca"
+leg_unshare = "Arquivo n&atilde;o est&aacute; compartilhado, para compartilh&aacute;-l&ocirc; clique neste icone."
+leg_share = "Arquivo compartilhado, para descompartilh&aacute;-l&ocirc; clique neste icone."
+leg_thumb = "Clique neste icone para ativar a visualiza&ccedil;&atilde;o de imagens por miniaturas"
+leg_thumboff = "Clique neste icone para desativar a visualiza&ccedil;&atilde;o de imagens por miniaturas"
 
 no_img = "N&atilde;o temos imagens no momento"
 no_docs = "N&atilde;o temos textos no momento"
