@@ -332,7 +332,14 @@ else{
 }
 $conteudo .= "<td><img src='$_CMAPP[media_url]/images/dot.gif' width='10' height='10' border='0'></td></tr>";
 $conteudo .= "<tr><td><img src='$_CMAPP[media_url]/images/box_biblio_03.gif' width='10' height='10' border='0'></td>";
-$conteudo .= "<td><img src='$_CMAPP[media_url]/images/dot.gif' width='10' height='10' border='0'></td>";
+$conteudo .= "<td><div><a href='#' onClick='AM_togleDivDisplay(\"hideShowState\")' class='blt_subtitulo'>".$_language['legends']."</a>";
+$conteudo .= "<span id='hideShowState' style='display:none'><img src='$_CMAPP[media_url]/images/img_blt_ico_baixar.gif'> - ". $_language['file_download'];
+$conteudo .= "<br><img src='$_CMAPP[media_url]/images/img_blt_ico_excluir.gif'> -". $_language['file_del'];
+$conteudo .= "<br><img src='$_CMAPP[media_url]/images/img_blt_ico_eye_off.gif'> - ". $_language['leg_unshare'];
+$conteudo .= "<br> <img src='$_CMAPP[media_url]/images/img_blt_ico_eye_on.gif'> - ".$_language['leg_share'];
+$conteudo .= "<br> <img src='$_CMAPP[media_url]/images/icon_thumb_off.gif'> - ".$_language['leg_thumb'];
+$conteudo .= "<br> <img src='$_CMAPP[media_url]/images/icon_thumb_on.gif'> - ".$_language['leg_thumboff'];
+$conteudo .= "</span></div><img src='$_CMAPP[media_url]/images/dot.gif' width='10' height='10' border='0'></td>";
 $conteudo .= "<td><img src='$_CMAPP[media_url]/images/box_biblio_04.gif' width='10' height='10' border='0'></td></tr>";
 $conteudo .= "<tr><td colspan='3' bgcolor='#C3B6E4'><img src='$_CMAPP[media_url]/images/dot.gif' width='10' height='4' border='0'></td></tr>";
 $conteudo .= "<tr><td colspan='3' bgcolor='#E9E5F5' valign='top'><img src='$_CMAPP[media_url]/images/dot.gif' width='10' height='30' border='0'><br>";
