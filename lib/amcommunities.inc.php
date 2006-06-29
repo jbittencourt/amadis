@@ -25,7 +25,7 @@ class AMCommunities extends CMObj {
      $this->setTable("Communities");
 
      $this->addField("code",CMObj::TYPE_INTEGER,"20",1,0,0);
-     $this->addField("description",CMObj::TYPE_VARCHAR,"255",1,0,0);
+     $this->addField("description",CMObj::TYPE_TEXT,65535,1,0,0);
      $this->addField("name",CMObj::TYPE_VARCHAR,"30",1,0,0);
      $this->addField("codeGroup",CMObj::TYPE_INTEGER,"20",1,0,0);
      $this->addField("status",CMObj::TYPE_ENUM,"12",1,"NOT_AUTHORIZED",0);
