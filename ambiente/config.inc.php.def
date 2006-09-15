@@ -119,7 +119,7 @@ if($_conf->app->languages->active == 1) {
 $_CMAPP['imlang_url'] = $_CMAPP['images_url']."/".$_CMAPP['i18n']->getActualLang();
 
 
-//colocar o login aqui, servirá para que mais tarde o logon possa ocorrer em qualquer página.
+//colocar o login aqui, servirï¿½ para que mais tarde o logon possa ocorrer em qualquer pï¿½gina.
 if(isset($_REQUEST['login_action'])) {
   switch($_REQUEST['login_action']) {
   case "A_login":
@@ -157,5 +157,8 @@ if(!ereg("(index|register|recoverpassword)",basename($_SERVER['SCRIPT_FILENAME']
   $_CMAPP['form_login_action'] = $_SERVER['PHP_SELF'];
 }else $_CMAPP['form_login_action'] = $_CMAPP['services_url']."/webfolio/webfolio.php";
 
+//include XOAD AJAX Framework;
+define('XOAD_AUTOHANDLE', true);
+include("$_CMAPP[path]/ambiente/media/lib/xoad/xoad.php");
 
 ?>

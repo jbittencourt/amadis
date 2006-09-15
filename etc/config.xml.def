@@ -19,6 +19,7 @@
       <store_plain_password>0</store_plain_password>
       <auto_accept_subscribe>0</auto_accept_subscribe>
       <use_complete_register_form>0</use_complete_register_form>
+      <debug_mode>0</debug>
    </environment>
    <session>
       <name>AMADIS</name>
@@ -37,6 +38,7 @@
    <paths>
       <pages>COMPLETE_WITH_YOUR_PATH/ambiente/paginas</pages>
       <thumbnails>COMPLETE_WITH_YOUR_PATH/ambiente/media/thumbnails</thumbnails>	
+      <cache>COMPLETE_WITH_YOUT_PATH/cache</cache>
    </paths>
    <database>
       <driver>mysql</driver>
