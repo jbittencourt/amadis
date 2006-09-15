@@ -28,7 +28,7 @@ class AMBoxAgregador extends CMHTMLObj {
         $this->isMember = $isMember;
 
         $this->requires("diary.css", self::MEDIA_CSS);
-
+		$this->requires("aggregator.css", self::MEDIA_CSS);
     }
     
     /**
@@ -65,8 +65,8 @@ class AMBoxAgregador extends CMHTMLObj {
 
 		//top of box
         parent::add("<div class='box_aggregator_top'>");
-        parent::add("<img class='left' src='$_CMAPP[images_url]/box_agregator/box_diarioproj_01.gif'>");
-        parent::add("<img class='right' src='$_CMAPP[images_url]/box_agregator/box_diarioproj_02.gif'>");
+        parent::add("<img class='left' src='$_CMAPP[images_url]/box_aggregator/box_diarioproj_01.gif'>");
+        parent::add("<img class='right' src='$_CMAPP[images_url]/box_aggregator/box_diarioproj_02.gif'>");
         parent::add("</div>");
 		//banner box
         parent::add("<div class='box_aggregator_banner'>");
@@ -84,8 +84,8 @@ class AMBoxAgregador extends CMHTMLObj {
 
 		//bottom of banner box
         parent::add("<div class='box_aggregator_banner_bottom'>");
-        parent::add("<img class='left' src='$_CMAPP[images_url]/box_agregator/box_diarioproj_03s.gif'>");
-        parent::add("<img class='right' src='$_CMAPP[images_url]/box_agregator/box_diarioproj_04s.gif'>");
+        parent::add("<img class='left' src='$_CMAPP[images_url]/box_aggregator/box_diarioproj_03s.gif'>");
+        parent::add("<img class='right' src='$_CMAPP[images_url]/box_aggregator/box_diarioproj_04s.gif'>");
         parent::add("</div>");
 
 		//content box
@@ -101,7 +101,7 @@ class AMBoxAgregador extends CMHTMLObj {
 
             if($par) {
                 parent::add("<div class='entry'>");
-                parent::add("<img src='$_CMAPP[images_url]/box_agregator/img_diarioproj_mark.gif' align='absmiddle' >");
+                parent::add("<img src='$_CMAPP[images_url]/box_aggregator/img_diarioproj_mark.gif' align='absmiddle' >");
                 parent::add("<a href='".$post[link]."'><span class='titpost'>".$post[title]."</span></a><span class='datapost'> - ".$post[pubDate]);
                 parent::add("</span><br/>");
                 parent::add("<span class='txtdiario'>");
@@ -110,7 +110,7 @@ class AMBoxAgregador extends CMHTMLObj {
                 parent::add("</div>");
             } else {
                 parent::add("<div class='box_aggregator_internal_top'>");
-                parent::add("<img class='left' src='$_CMAPP[images_url]/box_agregator/box_diarioproj_int_01.gif'>");
+                parent::add("<img class='left' src='$_CMAPP[images_url]/box_aggregator/box_diarioproj_int_01.gif'>");
                 parent::add("</div>");
                 parent::add("<div class='box_aggregator_internal_content'>");
                 parent::add("<div class='entry'>");
@@ -125,13 +125,13 @@ class AMBoxAgregador extends CMHTMLObj {
                 parent::add("</div>");
                 parent::add("</div>");
                 parent::add("<div class='box_aggregator_internal_bottom'>");
-                parent::add("<img class='left' src='$_CMAPP[images_url]/box_agregator/box_diarioproj_int_03.gif'>");
+                parent::add("<img class='left' src='$_CMAPP[images_url]/box_aggregator/box_diarioproj_int_03.gif'>");
                 parent::add("</div>");
             }
             $par=!$par;
         }
         parent::add("<div class='box_aggregator_footer'>");
-        parent::add("<img class='left' src='$_CMAPP[images_url]/box_agregator/box_diarioproj_03.gif'>");
+        parent::add("<img class='left' src='$_CMAPP[images_url]/box_aggregator/box_diarioproj_03.gif'>");
         parent::add("</div>");
         parent::add("</div><br>");
 
