@@ -7,9 +7,7 @@ $_language = $_CMAPP['i18n']->getTranslationArray("library");
 
 $page = new AMTLibrary("$_REQUEST[frm_type]");
 
-$page->addCommunicatorHandler("AMShared");
-
-$page->addPageBegin(CMHTMLObj::getScript("var AMShare = new amshared(AMSharedCallBack)"));
+AMMain::addXOADHandler('AMShared', 'AMShare');
 
 $page->addPageBegin(CMHTMLOBJ::getScript("lang_wish_delete='$_language[wish_delete]'"));
 
@@ -267,7 +265,7 @@ if($count_all != 0 ){
 	      $eyeicon = "img_blt_ico_eye_off.gif";
 	      $id_E = "unshared_$item->codeArquivo";
 	    }
-	    $conteudo .= "<img src='$_CMAPP[media_url]/images/$eyeicon' id='$id_E' onClick = \"AMShare.share(this.id)\" alt='COMPARTILHAR' border='0' class='cursor'>";
+	    $conteudo .= "<img src='$_CMAPP[media_url]/images/$eyeicon' id='$id_E' onClick = \"AMShare.share(this.id, AMSharedCallBack.onShare)\" alt='COMPARTILHAR' border='0' class='cursor'>";
 
 	    //icone do versionador
 	    //	    $conteudo .= "<img src='$_CMAPP[media_url]/images/peca_on.gif' id='ide' onClick = \"AMVersion.version()\" border='0' class='cursor' width=14 height=14>";
@@ -328,7 +326,7 @@ if($count_all != 0 ){
    }
  }
 else{
-  $page->addError($_language["no_all"]);// nao tem nada para ser mostrado...bib vazia
+  $page->addError($_language["no_all"], "");// nao tem nada para ser mostrado...bib vazia
 }
 $conteudo .= "<td><img src='$_CMAPP[media_url]/images/dot.gif' width='10' height='10' border='0'></td></tr>";
 $conteudo .= "<tr><td><img src='$_CMAPP[media_url]/images/box_biblio_03.gif' width='10' height='10' border='0'></td>";

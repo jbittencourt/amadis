@@ -54,9 +54,9 @@ switch($_REQUEST['frm_action']) {
     */
    $box->add(new AMBProjectsSearch, AMTwoColsLayout::RIGHT);
 
-   if($_SESSION['environment']->logged == 1) {
-     $box->add(new AMBProjectMine, AMTwoColsLayout::RIGHT);
-   }
+//   if($_SESSION['environment']->logged == 1) {
+//     $box->add(new AMBProjectMine, AMTwoColsLayout::RIGHT);
+//   }
 
    $box->add(new AMBProjectsArea, AMTwoColsLayout::RIGHT);
    $box->add('<br><br>', AMTwoColsLayout::RIGHT);

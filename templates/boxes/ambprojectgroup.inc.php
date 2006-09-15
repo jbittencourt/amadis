@@ -17,13 +17,12 @@ class AMBProjectGroup extends AMAbstractBox {
     $this->proj = $proj;
     $this->group = $proj->getGroup(); 
 
+    AMMain::addXOADHandler('AMBProjectGroupAction', 'AMBProjectGroup');
+    
   }
 
   public function __toString() {
     global $_language,$_CMAPP;
-
-    AMMain::addCommunicatorHandler('AMBProjectGroupAction');
-    parent::add(CMHTMLObj::getScript("var AMBProjectGroup = new ambprojectgroupaction(AMBProjectGroupActionCallBack);"));
 
     parent::add("<b>$_language[project_group]</b></font><br>");
 
@@ -34,7 +33,7 @@ class AMBProjectGroup extends AMAbstractBox {
     parent::add(" class=\"green\">$_language[more_members]</a><br><br>");
 
     $js = 'loadProjectGroup("'.$this->proj->codeGroup.'");';
-    //parent::add(CMHTMLObj::addScript("AM_debugBrowserObject(AMBProjectGroup);"));
+
     parent::add(CMHTMLObj::addScript($js));
 
     return parent::__toString();

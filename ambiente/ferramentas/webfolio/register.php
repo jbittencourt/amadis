@@ -200,7 +200,7 @@ switch($_REQUEST['action']) {
        $foto->save(); 
      }
      catch(CMDBException $e) {
-       header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_picture");
+         //header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_picture");
      }
      $_SESSION['cad_user']->foto = (integer) $foto->codeArquivo;
    }

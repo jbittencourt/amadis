@@ -133,8 +133,8 @@ class AMBUserFriendInvitations extends AMColorBox implements CMActionListener {
 	//error_invitation_user_failed = "N&atilde;o foi poss&iacute;vel adicionar o amigo!"
 	//msg_invitation_user_success = "Amigo adicionado com sucesso!"
 
-	$mkFriend = "AMEnvSession.makefriend($friend->codeUser, $time, '', '$_language[msg_invitation_user_success]', '$_language[error_invitation_user_failed]');";
-	$rjFriend = "AMEnvSession.rejectfriend($friend->codeUser, $time, '','');";
+	$mkFriend = "AMEnvSession.makeFriend($friend->codeUser, $time, '', '$_language[msg_invitation_user_success]', '$_language[error_invitation_user_failed]', AMEnvSessionCallBack.onMakeFriend);";
+	$rjFriend = "AMEnvSession.rejectFriend($friend->codeUser, $time, '','', AMEnvSessionCallBack.onRejectFriend);";
 
 	
 	parent::add("<a class='blue cursor' onClick=\"$mkFriend\">$_language[add_friend]</a><br>");

@@ -5,7 +5,7 @@ var loading_message = "Loading userinfo data";
 
 var AMTUserinfoRenderCallBack = {
 
-  render: function(result) {
+  onRender: function(result) {
     div = AM_getElement("toolTipSpan");
     div.innerHTML = result;
 
@@ -16,7 +16,8 @@ var AMTUserinfoRenderCallBack = {
 
 //function amuserinfo(user,name,email,dtnas,media) {
 function amuserinfo(user) { 
-  AMTUserinfoRender.render(user);
+  AMTUserinfoRender.onRenderError = AM_callBack.onError;
+  AMTUserinfoRender.render(user, AMTUserinfoRenderCallBack.onRender);
   return loading_message;
 }
 

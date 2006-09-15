@@ -34,6 +34,7 @@ class AMColorBox extends AMAbstractBox {
   const COLOR_BOX_YELLOW      = "box_11";
   const COLOR_BOX_YELLOWB     = "box_13";
   const COLOR_BOX_PINK        = "box_14";
+  const COLOR_BOX_TURQUESA    = "box_15";
 
   public function __construct($title,$theme){
     parent::__construct("240","left");
@@ -45,6 +46,9 @@ class AMColorBox extends AMAbstractBox {
     $this->title = $title;
 
     switch ($theme) {
+    case self::COLOR_BOX_TURQUESA :
+      $this->class = "box_turquesa";
+      break;
     case self::COLOR_BOX_BEGE:
       $this->class = "box_bege";
       break;

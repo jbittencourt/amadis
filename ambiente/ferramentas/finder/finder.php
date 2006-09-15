@@ -2,10 +2,16 @@
 
 include_once("../../config.inc.php");
 
-AMEnvSession::getFinderRequest();
+//AMEnvSession::getFinderRequest();
+
+AMFinder::initFinder("34_17");
 
 $f = new AMFinder;
-note($f->getNewMessages(34, 17));
+
+note($f->getNewMessages("34_17"));
+
+$e = new AMEnvSession;
+note($e->getFinderRequest());
 die();
 
 

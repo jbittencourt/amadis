@@ -13,8 +13,8 @@
 class AMNenhum extends AMMain {
   
 
-  function __construct($mostratitulo="1") {
-    global $_CMAPP
+  public function __construct($mostratitulo="1") {
+    global $_CMAPP;
     parent::__construct();
 
 

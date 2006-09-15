@@ -11,7 +11,7 @@
  * @author Robson Mendonca <robson@lec.ufrgs.br>
  */
 
-class AMEnvSession {
+class AMEnvSession implements AMAjax {
   
   /**
    * Change menu status, to opened or closed.
@@ -24,7 +24,7 @@ class AMEnvSession {
   public function changeMenuStatus($name, $status) {
     $_SESSION['amadis']['menus'][$name] = $status;
   }
-
+  
   /**
    * Change the user mode visualization.
    *
@@ -49,7 +49,7 @@ class AMEnvSession {
 
 
   public function getFinderRequest() {
-    
+
     //nao checar novas requisicoes para chats abertos
     $sql = array();
     foreach($_SESSION['amadis']['FINDER_ROOM'] as $item) {
@@ -57,7 +57,7 @@ class AMEnvSession {
 	$sql[] = " codeSender != $item[recipient] ";
       }
     }
-    
+
     $sql = implode(" AND ", $sql);
     
     
@@ -80,11 +80,11 @@ class AMEnvSession {
 
 
     $q->setFilter($filter);
-    
-    $result = $q->execute();
- 
-    $ret = array();
 
+    $result = $q->execute();
+    notelastquery();
+    $ret = array();
+    
     if($result->__hasItems()) {
       foreach($result as $item) {
 
@@ -131,7 +131,7 @@ class AMEnvSession {
     return $modes;
     
   }
-  
+
   /**
    * Add a user as a friend.
    *
@@ -201,6 +201,12 @@ class AMEnvSession {
 
     return $ret;
 
+  }
+
+  public function xoadGetMeta() {
+    $methods = array('changeMenuStatus', 'changeMode', 'getFinderRequest', 'getModes', 'makeFriend', 'rejectFriend');
+    XOAD_Client::mapMethods($this, $methods);
+    XOAD_Client::publicMethods($this, $methods);
   }
 
 }

@@ -24,7 +24,7 @@ class AMBFinderTip extends CMHTMLObj {
     parent::add("<div id=\"tipmscorpo\">");
     //user image
     $userThumb = new AMFinderTipThumb();
-    $userThumb->codeArquivo = $this->user->foto;
+    $userThumb->codeArquivo = ($this->user->foto==0 ? AMUser::DEFAULT_FOTO : $this->user->foto);
     try {
       $userThumb->load();
       $userThumbURL = $userThumb->thumb->getThumbURL();
@@ -43,8 +43,9 @@ class AMBFinderTip extends CMHTMLObj {
     parent::add("<div id=\"tipfala\">$this->message</div>");
     
     //reply to
-    $onClick  = "onclick=\"Finder_openChatWindowTIP('".$this->user->codeUser."');";
-    $onClick .= " Finder_removeAlert('finderAlert_".$_SESSION['user']->codeUser."_".$this->user->codeUser."');\"";
+    $sessionId = $_SESSION['user']->codeUser."_".$this->user->codeUser;
+    $onClick  = "onclick=\"Finder_openChatWindow('$sessionId');";
+    $onClick .= " Finder_removeAlert('finderAlert_$sessionId');\"";
 
     parent::add("<img class=\"tipbtmsg\" src=\"$_CMAPP[images_url]/tipms_box_btmsg.png\" $onClick>");
     parent::add("<div id=\"tipresposta\">$_language[reply_to] <br>");

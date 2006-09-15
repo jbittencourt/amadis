@@ -18,10 +18,13 @@ class AMTCadBox extends CMHTMLObj {
   const PEOPLE_THEME = 4;
   const DIARY_THEME = 5;
   const WEBFOLIO_THEME = 6;
+  const ALBUM_THEME = 7;
 
   const CADBOX_SEARCH = "_busca";
   const CADBOX_LIST = "_listar";
   const CADBOX_CREATE = "_criar";
+  const CADBOX_IMAGE = "_image";
+  const CADBOX_ZOOM = "_zoom";
   const CADBOX_DEFAULT = "";
 
   protected $image, $titulo, $theme, $class, $titlecss;
@@ -69,7 +72,12 @@ class AMTCadBox extends CMHTMLObj {
       $this->image = "box_cad_diario_01$image.gif";
       $this->class = 'cad-box-diary';
       break;
-
+    case AMTCadBox::ALBUM_THEME:
+      $this->titlecss = "album_title";
+      $this->theme = "box_cad_album";
+      $this->image = "box_cad_album_01$image.gif";
+      $this->class = 'cad-box-album';
+      break;
     }
   }
 

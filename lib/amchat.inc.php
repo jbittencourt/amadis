@@ -1,6 +1,6 @@
 <?php
 
-class AMChat {
+class AMChat implements AMAjax {
 
   public function verifyNameExists($name){
     $q = new CMQuery('AMChatRoom');
@@ -102,13 +102,12 @@ class AMChat {
       
     return $ret;
   }
-  
+
   public function leaveRoom($codeRoom, $codeConnection, $text) {
     AMChatConnection::leaveRoom($codeRoom, $codeConnection, $text);
   }
   
   public function getNewMessages($codeRoom) {
-    
     $q = new CMQuery('AMChatMessages');
     $q->setProjection("AMChatMessages::*, AMUser::username");
     
@@ -142,7 +141,15 @@ class AMChat {
       }
     } else return 0;
     return $return;
-  }  
+  }
+
+  public function xoadGetMeta() {
+    $methods = array('verifyNameExists', 'createChatRoom', 'leaveRoom', 'getNewMessages');
+    XOAD_Client::mapMethods($this, $methods);
+    
+    XOAD_Client::publicMethods($this, $methods);
+  }
+
 }  
 
 ?>

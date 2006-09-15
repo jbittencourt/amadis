@@ -1,7 +1,7 @@
 
 
 var AMBProjectGroupActionCallBack = {
-  listgroup: function(result) {
+  onListGroup: function(result) {
     AM_parseRequires(result.requires);
 
     div = AM_getElement('projectGroupList');
@@ -12,7 +12,8 @@ var AMBProjectGroupActionCallBack = {
 
 function loadProjectGroup(group) {
   AM_setLoading("projectGroupList");
-  AMBProjectGroup.listgroup(group);
+  AMBProjectGroup.onListGroupError = AM_callBack.onError;
+  AMBProjectGroup.listGroup(group, AMBProjectGroupActionCallBack.onListGroup);
 } 
 
 /*
@@ -23,7 +24,7 @@ function loadProjectGroup(group) {
 
 
 var AMBProjectJoinActionCallBack = {
-  join: function(result) {
+  onJoin: function(result) {
     AM_parseRequires(result.requires);
 
     div = AM_getElement('project_join');
@@ -42,6 +43,7 @@ function sendProjectJoin() {
   project = form.frm_codeProject.value;
 
   AM_setLoading("project_join");
-  AMBProjectJoin.join(project,text);
+  AMBProjectJoin.onJoinError = AM_callBack.onError;
+  AMBProjectJoin.join(project,text,AMBProjectJoinActionCallBack.onJoin);
 }
 

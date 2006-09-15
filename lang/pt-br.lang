@@ -126,6 +126,8 @@ visit_page = "Ver p&aacute;gina"
 visit_diary = "Ver di&aacute;rio"
 
 no_communities = "Voc&ecirc; n&atilde;o possui comunidades"
+create_project = "Criar um novo projeto"
+create_community = "Criar nova comunidade"
 
 [logs]
 new_user = " Novo(s) usu&aacute;rio foi cadastrado no AMADIS."
@@ -542,7 +544,8 @@ back_to_project = "Voltar para o projeto"
 
 
 [projects]
-edit_blogs_list = "&raquo; Editar lista de blogs"
+config_aggregator = "&raquo; Configurar Agregador"
+select_sources = "&raquo; Selecionar fontes RSS"
 project_intro = "Na &aacute;rea de PROJETOS do Amadis voc&ecirc;
 &eacute; livre para criar seus desafios de pesquisa. A
 partir da cria&ccedil;&atilde;o de um projeto, &eacute;

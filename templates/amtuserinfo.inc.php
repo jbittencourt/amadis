@@ -64,11 +64,12 @@ class AMTUserInfo extends CMHTMLObj {
     if(!self::$_inicialized) {
       self::$_inicialized = true;
 
-      AMMain::addCommunicatorHandler('AMTUserinfoRender');
-
+      //AMMain::addCommunicatorHandler('AMTUserinfoRender');
+      
       $men = "<span class=\"text\">$_language[loading_user_info]</span>";
-      parent::addPageBegin(self::getScript("var AMTUserinfoRender = new amtuserinforender(AMTUserinfoRenderCallBack);"));
-      parent::addPageEnd(CMHTMLObj::getScript("userinfo_url = '$_CMAPP[services_url]/webfolio/userinfo.php?frm_codeUser='; loading_message = '$men';"));
+      parent::addPageBegin(self::getScript("var AMTUserinfoRender = ".XOAD_Client::register(new AMTUserinfoRender)));
+      //parent::addPageBegin(self::getScript("var AMTUserinfoRender = new amtuserinforender(AMTUserinfoRenderCallBack);"));
+      //parent::addPageEnd(CMHTMLObj::getScript("userinfo_url = '$_CMAPP[services_url]/webfolio/userinfo.php?frm_codeUser='; loading_message = '$men';"));
     }
 
     $u = $this->user;

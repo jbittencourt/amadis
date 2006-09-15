@@ -15,6 +15,7 @@ $pag->setId("sendbox_window");
 $pag->requires("finder.css", CMHTMLObj::MEDIA_CSS);
 $pag->requires("mensagens.css", CMHTMLObj::MEDIA_CSS);
 $pag->requires("lib.js", CMHTMLObj::MEDIA_JS);
+//$pag->setOnload("window.parent.restoreConnection();");
 
 $pag->add("<form name='messageForm' id='messageForm' action='$_SERVER[PHP_SELF]'>");
 $pag->add("<input type='hidden' name='action' value='A_send_message'>");

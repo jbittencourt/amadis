@@ -1,13 +1,11 @@
-
 var AMSharedCallBack = {
 
-  share: function(result) {
+  onShare: function(result) {
     var image = AM_getElement(result.oldId);
     image.src = result.url;
     image.id  = result.id;
   }
 }
-
 
 
 function Library_abrir(URL) {

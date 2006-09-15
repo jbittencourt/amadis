@@ -2,71 +2,10 @@ var timeTable = new Array();
 timeTable['finder'] = 60000;
 timeTable['chat'] = 5000;
 
-var ajaxSync = {
-  syncTableObjects:new Array(),
-  syncTable:new Array(),
-  lock:false,
-  interval:"",
-  sync:function() {
-    this.syncTable = new Array();
-    var overtime=0;
-    for(var i in this.syncTableObjects) {
-      var obj = this.syncTableObjects[i];
-      var stringFunction = "ajaxSync.syncTableObjects['"+i+"'][0][ajaxSync.syncTableObjects['"+i+"'][1]]();";
-      this.syncTable[i] = window.setInterval(stringFunction, timeTable[obj[2]]+overtime);
-      overtime += 5000+Math.floor(Math.random()*11)+Math.floor(Math.random()*11);
-      //alert(timeTable[obj[2]]+overtime);
-    }
-  },
-  register:function(obj, functionName, name, time) {
-    this.syncTableObjects[name] = new Array(obj, functionName, time);
-    this.clear();
-    this.sync();
-  },
-  clear:function() {
-    if(this.syncTable.length > 0) {
-      for(var i in this.syncTable) {
-	window.clearInterval(this.syncTable[i]);
-      }
-    }
-  },
-  unlink:function(name) {
-    window.clearInterval(this.syncTable[name]);
-    delete(this.syncTableObjects[name]);
-  },
-  send:function() {
-    for(var i in this.syncTableObjects) {
-      this.syncTableObjects[i][0].reSync();
-    }
-  },
-  kill:function() {
-    for(var i in this.syncTableObjects) {
-      if(typeof(this.syncTableObjects[i]) == 'window') {
-	this.syncTableObjects[i].close();
-      }else this.syncTableObjects[i] = null;
-    }
-  }
-};
-
-/**
- *Esta eh uma funcao abstrata que deve ser implementada no seu cliente de chat.
- *Ela eh chamada pelo metodo ajaxSync::send(), isso serve para que nao tenhamos 
- *colisoes no tunel de comunicacao do JPSpan AJAX Framework.
- */
-
-// abstract var register = function(){};
-
-/**
- *Esta eh uma funcao abstrata que deve ser implementada no seu cliente de chat.
- *Ela eh chamada pelo metodo ajaxSync::send(), isso serve para que nao tenhamos 
- *colisoes no tunel de comunicacao do JPSpan AJAX Framework.
- */
-
-// abstract var reSync = function(){};
-
 var alertClear = new Array();
 var EnvSession_numFriendsInvitation;
 var EnvSession_timeoutHandler;
+var Finder_window = null;;
 
 function EnvSession_timeout(param) {
   EnvSession_timeoutHandler = window.setTimeout(param,15000);
@@ -91,9 +30,7 @@ function clearAlerts(timeout) {
 
 
 var AMEnvSessionCallBack = {
-  changemenustatus: function() { },
-  changemode: function() { },
-  makefriend: function(result) {
+  onMakeFriend: function(result) {
     var div = AM_getElement(result.divId);
     var node = window.document.createElement("DIV");
     node.innerHTML = result.msg;
@@ -103,7 +40,7 @@ var AMEnvSessionCallBack = {
     EnvSession_numFriendsInvitation--;
     clearAlerts("timeout");
   },
-  rejectfriend: function(result) {
+  onRejectFriend: function(result) {
     var div = AM_getElement(result.divId);
     div.parentNode.removeChild(div);
 
@@ -111,8 +48,7 @@ var AMEnvSessionCallBack = {
     clearAlerts("clear");
 
   },
-  getfinderrequest: function(result) {
-
+  onGetFinderRequest: function(result) {
     if(result != 0) {
       var top = 0;
       var box = AM_getElement("finderAlert");
@@ -145,8 +81,8 @@ var AMEnvSessionCallBack = {
 function changeMenuStatus(menu,menu_name) {
   var status = eval(menu_name+'_open');
   
-  AMEnvSession.changemenustatus(menu, status);
-  
+  AMEnvSession.onChangeMenuStatusError=AM_callBack.onError;
+  AMEnvSession.changeMenuStatus(menu,status);
 }
 
 var EnvSession_finderRequestTimeout, finderAlert;
@@ -155,21 +91,24 @@ var openChat = new Array();
 
 function initEnvironment() {
 
-  //finderAlert = window.document.createElement("DIV");
-  //finderAlert.setAttribute("id","finderAlert");
+  finderAlert = window.document.createElement("DIV");
+  finderAlert.setAttribute("id","finderAlert");
 
-  //window.document.body.appendChild(finderAlert);
-
-  //AMFinder.getonlineusers();
-  //AMFinder.getfinderrequest();
-  //AMFinder.reSync = function(){};
-  AMEnvSession.reSync = function(){};
+  window.document.body.appendChild(finderAlert);
+  
+  AMFinder.getOnlineUsers(AMEnvSessionCallBack.onGetOnlineUsers);
+  AMEnvSession.getFinderRequest(AMEnvSessionCallBack.onGetFinderRequest);
 }
 
 function getFinderRequest() {
- 
-  AMEnvSession.getfinderrequest();
-  
+  AMEnvSession.onGetFinderRequestError = function (result) {
+    alert(result);
+  };
+  try {
+    AMEnvSession.getFinderRequest(AMEnvSessionCallBack.onGetFinderRequest);
+  }catch(Exception) {
+    AM_callBack.onError(Exception);
+  }
 }
 
 function Finder_removeAlert(id) {

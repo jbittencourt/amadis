@@ -41,7 +41,7 @@ $pag->add("<div class=\"tooltip_line\"><a href=\"$where_to_go\">$_language[webfo
 
 $pag->add("<!-- fim box perfil -->");
 if($user->codeUser != $_SESSION['user']->codeUser) {
-
+  
   $status = $_SESSION['environment']->checkIsOnLine($user->codeUser);
   $onclick = "onClick=\"window.Finder_openChatWindow('$_CMAPP[services_url]/finder/finder_chat.php', '$user->codeUser');\"";
   $pag->add("<div class=\"tooltip_line\">");

@@ -12,12 +12,13 @@
 
 $_CMAPP['notrestricted'] = True;
 include("../../config.inc.php");
-include('lastRSS.php');
+include("lastRSS.php");
 
 $_language = $_CMAPP['i18n']->getTranslationArray("projects");
 
 $pag = new AMTAgregador();
-
+$pag->loadDynapi();
+$pag->addNotification(AMMain::getChangePwButton(1));
 //checks if the user is a member of the project
 if(isset($_REQUEST['frm_codProjeto']) && !empty($_REQUEST['frm_codProjeto'])) {
   $proj = new AMProjeto;
@@ -27,7 +28,7 @@ if(isset($_REQUEST['frm_codProjeto']) && !empty($_REQUEST['frm_codProjeto'])) {
     $group = $proj->getGroup();
   }catch(CMDBNoRecord $e){
     $location  = $_CMAPP[services_url]."/projetos/projeto.php?frm_amerror=project_not_exists";
-    $location .= "&frm_codProjeto=".$_REQUEST[frm_codProjeto];
+    $location .= "&frm_codProjeto=".$_REQUEST['frm_codProjeto'];
     header("Location:$location");
   }
 } else {
@@ -45,61 +46,30 @@ if(!empty($_SESSION['user'])) {
   if(!$isMember) $proj->hit();
 }
 
-if(isset($_REQUEST['frm_codProjeto']) && !empty($_REQUEST['frm_codProjeto'])) {
-  $proj = new AMProjeto;
-  $proj->codeProject = $_REQUEST['frm_codProjeto'];
-  try{
-    $proj->load();
-    $group = $proj->getGroup();
-  }catch(CMDBNoRecord $e){
-    $location  = $_CMAPP[services_url]."/projetos/projeto.php?frm_amerror=project_not_exists";
-    $location .= "&frm_codProjeto=".$_REQUEST[frm_codProjeto];
-    header("Location:$location");
-  }
-} else {
-  $_REQUEST['frm_amerror'] = "any_project_id";
-
-  $pag->add("<br><div align=center><a href=\"".$_SERVER['HTTP_REFERER']."\" ");
-  $pag->add("class=\"cinza\">".$_language['back']."</a></div><br>");
-  echo $pag;
-  die();
-}
-
-$pag->add("<font class=\"project_title\">$_language[project]: ".$proj->title."</font><br/><br/>");
-$pag->add("<table><tr><td>");
-$pag->add(new AMTProjectImage($proj->image));
-$pag->add("</td>");
-if ($isMember) {
-  $pag->add("<td><span style=\"padding-left: 30px;\">");
-  $pag->add("<a href=\"$urledit\" class =\"green\">$_language[edit_blogs_list]</a></span><br>");
-}
-
 
 // load some RSS file
-$rss = new lastRSS; 
+$rss = new lastRSS;
 
-$q = new CMQuery('AMProjectBlogs');
-$q->setFilter("AMProjectBlogs::codeProject=".$_REQUEST['frm_codProjeto']);
-$blogs=$q->execute();
+$rss->cache_dir = CACHE_DIR;
+$rss->cache_time = 3600; // one hour
 
+$blogs = AMAgregatorFacade::getSources($_REQUEST['frm_codProjeto']);
 if($blogs->__hasItems()) {
   $link = "if(this.value!=0) ";
   $link .= "location.href='$_CMAPP[services_url]/agregador/agregador.php?frm_codProjeto=$_REQUEST[frm_codProjeto]&frm_codeBlog='+this.value";
 
-  $pag->add("&nbsp;&nbsp;<select name='blogs' onChange=\"$link\">");
-  $pag->add("<option value=0>$_language[select_one]</option>");
+  //$pag->add("&nbsp;&nbsp;<select name='blogs' onChange=\"$link\">");
+  //$pag->add("<option value=0>$_language[select_one]</option>");
   
   foreach($blogs as $blog) {
     $pag->setRSSFeed($blog->address, $blog->title);
     if($blog->codeBlog == $_REQUEST[frm_codeBlog])
       $b = $blog;
-    $pag->add("<option value='$blog->codeBlog'>$blog->title</option>");
+    //$pag->add("<option value='$blog->codeBlog'>$blog->title</option>");
   }
-  
-  $pag->add("</select>");
+  //$pag->add("</select>");
 }
 
-$pag->add("</tr></table><br/>");
 
 if(!isset($b)) {
   $k = array_keys($blogs->items);
@@ -107,8 +77,10 @@ if(!isset($b)) {
 }
 if(!empty($blog)) {
   if ($rs = $rss->get($b->address)) {
-    $caixa = new AMBoxAgregador($rs,$b->address,"",0);
-    $pag->add($caixa);
+    $box = new AMBoxAgregador($rs,$b->address,$isMember);
+    $box->setHeader($proj);
+    $box->addFilter($b->agregator->items[0]->keywords);
+    $pag->add($box);
   } else {
     $pag->add('Error: RSS file "'.$b->address.'" not found...');
   }

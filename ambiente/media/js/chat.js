@@ -5,8 +5,7 @@ var Chat_alerts = new Array();
 var createChatTimeout;
 
 var AMChatCallBack = {
-  verifynameexists: function(result) {},
-  createchatroom: function(result) {
+  onCreateChatRoom: function(result) {
     var table = AM_getElement("create_chat_box");
     var alertBox = window.document.createElement("DIV");
     alertBox.setAttribute("id", "create_chat_alert");
@@ -60,7 +59,7 @@ var AMChatCallBack = {
       break;
     }
   },
-  getnewmessages:function(result) {
+  onGetNewMessages:function(result) {
     var chatBox = AM_getElement("chatBox");
     if(result != 0) {
       for(var i=0; i < result.length; i++) {
@@ -70,7 +69,6 @@ var AMChatCallBack = {
       }
     }
   },
-  leaveroom:function() {}
 }
 
 var chkSubject=false;
@@ -85,9 +83,7 @@ function Chat_saveChat(form) {
   var code = form.elements['frm_code'];
   var type = form.elements['frm_type'];
 
-  if(name.value.length != 0) {
-    //AMChat.verifynameexists(name.value);
-  } else if(!chkName){
+  if(!chkName){
     chkName = true;
     var msg = window.document.createElement("SPAN");
     msg.innerHTML = "*Preencha com o nome para sala!<br>";
@@ -100,7 +96,7 @@ function Chat_saveChat(form) {
   
   if(subject.value.length == 0 && !chkSubject) {
     chkSubject = true;
-    
+
     var msg = window.document.createElement("SPAN");
     msg.innerHTML = "*Preencha com o assunto da sala!<br>";
     msg.style.setProperty("color", Chat_originalColor,"");
@@ -126,13 +122,19 @@ function Chat_saveChat(form) {
     endDate.value = 0;
   }
   
-  var param = new Array(name.value, subject.value, beginDate.value,
-		    endDate.value, infinity.checked, type.value,
-		    language_save_chat_success, language_save_chat_error,
-		    code.value
-		    );
-
-  AMChat.createchatroom(param);
+  var param = new Array(name.value,
+			subject.value,
+			beginDate.value,
+			endDate.value,
+			infinity.checked,
+			type.value,
+			language_save_chat_success,
+			language_save_chat_error,
+			code.value
+			);
+  
+  AMChat.onCreateChatRoomError = AM_callBack.onError;
+  AMChat.createChatRoom(param, AMChatCallBack.onCreateChatRoom);
   return false;
 }
 
@@ -159,36 +161,23 @@ function Chat_clearAlert(id) {
 }
 
 function Chat_openChat(codeRoom, type, url) {
-  if(ajaxSync.syncTableObjects['chatRoom_'+codeRoom] != null) {
-    ajaxSync.syncTableObjects['chatRoom_'+codeRoom][0].focus();
-  }else {
-    var w = window.open(url+"?frm_codeRoom="+codeRoom, "chatRoom_"+codeRoom, "width=540, height=620, resizable=false");
-    ajaxSync.register(w, 'Chat_getNewMessages', 'chatRoom_'+codeRoom, 'chat');
-  }
-
-
+  var w = window.open(url+"?frm_codeRoom="+codeRoom, "chatRoom_"+codeRoom, "width=540, height=620, resizable=false");
 }
 
+
+
 function Chat_closeChat() {
-  AMChat.leaveroom(Chat_codeRoom, Chat_codeConnection, language_exit_room);
-  window.opener.ajaxSync.unlink(window.name);
+  AMChat.leaveRoom(Chat_codeRoom, Chat_codeConnection, language_exit_room);
   window.close();
 }
 
 function Chat_getNewMessages() {
-  
-  AMChat.oParent.Async(AMChatCallBack);
-  AMChat.getnewmessages(Chat_codeRoom);
-  
-}
-var reSynctimeout;
-function reSync() {
-  //alert("resyncing");
-  reSynctimeout = window.setTimeout('register();',5000);
+  //AMChat.onGetNewMessagesError = AM_callBack.onError;
+  try{ 
+    AMChat.getNewMessages(Chat_codeRoom, AMChatCallBack.onGetNewMessages);
+  }catch(Exception) {
+    alert(Exception.message);
+  }
 }
 
-function register() {
-  window.opener.ajaxSync.register(window, 'Chat_getNewMessages', window.name, 'chat');
-  window.clearTimeout(reSynctimeout);
-}
 

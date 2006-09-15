@@ -173,7 +173,7 @@ $admins = $escola->listaAdmins();
 
   $pag->imprime();
   
-}
+
 
 
 

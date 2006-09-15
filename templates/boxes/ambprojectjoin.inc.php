@@ -14,16 +14,15 @@ class AMBProjectJoin extends AMColorBox {
     parent::__construct($_CMAPP['imlang_url']."/box_participar_projeto.gif",self::COLOR_BOX_GREEN);
 
     $this->requires("projectjoin.js",self::MEDIA_JS);
+
+	AMMain::addXOADHandler('AMBProjectJoinAction', 'AMBProjectJoin');
+      
   }
 
 
   public function __toString() {
     global $_CMAPP,$_language;
     $group = $this->proj->getGroup();
-
-    AMMain::addCommunicatorHandler('AMBProjectJoinAction');
-    
-    parent::add(CMHTMLObj::getScript("var AMBProjectJoin = new ambprojectjoinaction(AMBProjectJoinActionCallBack);"));
 
     parent::add("<div id='project_join'>");
     if(!$group->hasRequestedJoin($_SESSION['user']->codeUser)) {

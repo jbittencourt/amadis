@@ -4,7 +4,7 @@
  * @subpackage AMTemplates
  */
 
-class AMTUserInfoRender {
+class AMTUserInfoRender implements AMAjax {
 
 
   public function render($codeUser) {
@@ -49,35 +49,39 @@ class AMTUserInfoRender {
 
     $pag->add("<!-- fim box perfil -->");
 
-//     if($user->codeUser != $_SESSION['user']->codeUser) {
+    if($user->codeUser != $_SESSION['user']->codeUser) {
 
-//       $status = $_SESSION['environment']->checkIsOnLine($user->codeUser);
-//       $onclick = "onClick=\"window.Finder_openChatWindow('$_CMAPP[services_url]/finder/finder_chat.php', '$user->codeUser');\"";
-//       $pag->add("<div class=\"tooltip_line\">");
-//       switch($status) {
+      $status = $_SESSION['environment']->checkIsOnLine($user->codeUser);
+      $onclick = "onclick=\"Finder_openChatWindow('".$_SESSION['user']->codeUser."_$user->codeUser');\"";
+
+      //$onclick = "onClick=\"Finder_openChatWindow('$_CMAPP[services_url]/finder/finder_chat.php', '$user->codeUser');\"";
+      $pag->add("<div class=\"tooltip_line\">");
+
+      switch($status) {
+	
+      case "0":
+	$pag->add("<img id='UserIco_$user->codeUser' src=\"$_CMAPP[images_url]/ico_user_off_line.png\">");
+	$pag->add("<a class=\"ini_conversa cursor\">$_language[off_line_user]</a>");
+	break;
+
+      case AMFinder::FINDER_NORMAL_MODE :
+	$pag->add("<img id='UserIco_$user->codeUser' $onclick src=\"$_CMAPP[images_url]/ico_user_on_line.png\">");
+	$pag->add("<a $onclick class=\"ini_conversa cursor\">$_language[init_chat]</a>");
+	break;
   
-//       case AMFinder::FINDER_NORMAL_MODE :
-// 	$pag->add("<img id='UserIco_$user->codeUser' $onclick src=\"$_CMAPP[images_url]/ico_user_on_line.png\">");
-// 	$pag->add("<a $onclick class=\"ini_conversa cursor\">$_language[init_chat]</a>");
-// 	break;
-  
-//       case AMFinder::FINDER_BUSY_MODE :
-// 	$pag->add("<img id='UserIco_$user->codeUser' $onclick src=\"$_CMAPP[images_url]/ico_user_ocupado.png\">");
-// 	$pag->add("<a $onclick class=\"ini_conversa cursor\">$_language[init_chat]</a>");
-// 	break;
+      case AMFinder::FINDER_BUSY_MODE :
+	$pag->add("<img id='UserIco_$user->codeUser' $onclick src=\"$_CMAPP[images_url]/ico_user_ocupado.png\">");
+	$pag->add("<a $onclick class=\"ini_conversa cursor\">$_language[init_chat]</a>");
+	break;
     
-//       case AMFinder::FINDER_HIDDEN_MODE :
-// 	$pag->add("<img id='UserIco_$user->codeUser' $onclick src=\"$_CMAPP[images_url]/ico_user_ocupado.png\">");
-// 	$pag->add("<a $onclick class=\"ini_conversa cursor\">$_language[init_chat]</a>");
-// 	break;
-//       default:
-// 	$pag->add("<img id='UserIco_$user->codeUser' src=\"$_CMAPP[images_url]/ico_user_off_line.png\">");
-// 	$pag->add("<a class=\"ini_conversa cursor\">$_language[off_line_user]</a>");
-// 	break;
-    
-//       }
-//       $pag->add("</div>");
-//     }
+      case AMFinder::FINDER_HIDDEN_MODE :
+	$pag->add("<img id='UserIco_$user->codeUser' $onclick src=\"$_CMAPP[images_url]/ico_user_off_line.png\">");
+	$pag->add("<a $onclick class=\"ini_conversa cursor\">$_language[init_chat]</a>");
+	break;
+	
+      }
+      $pag->add("</div>");
+    }
 
 
 
@@ -97,6 +101,11 @@ class AMTUserInfoRender {
     return $pag->__toString();
   }
 
+  public function xoadGetMeta() {
+    $methods = array('render');
+    XOAD_Client::mapMethods($this, $methods);
+    XOAD_Client::publicMethods($this, $methods);
+  }
 
 }
 

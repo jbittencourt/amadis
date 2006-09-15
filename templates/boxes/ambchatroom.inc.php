@@ -18,6 +18,10 @@ class AMBChatRoom extends CMHTMLPage {
 
   public function __toString() {
     global $_CMAPP;
+    
+    parent::addPageBegin(XOAD_Utilities::header("$_CMAPP[media_url]/lib/xoad"));
+    parent::addPageBegin(self::getScript("var AMChat = ".XOAD_Client::register(new AMChat)));
+    
     parent::add("<!-- header flutuante -->");
     parent::add("<div class='chatheader'>");
 
@@ -27,7 +31,7 @@ class AMBChatRoom extends CMHTMLPage {
 
     parent::add("<span class='titchat'>");
     parent::add("<img src='$_CMAPP[images_url]/img_chat_balao.gif'>&nbsp;");
-    parent::add("<span class='tit_chat'> <b>".$this->room->name."</b></span");
+    parent::add("<span class='tit_chat'> <b>".$this->room->name."</b></span>");
     //parent::add("<br>no projeto <a href='#' class='local'>Portas da Felicidade</a>.</span>");
     parent::add("</div>");
 

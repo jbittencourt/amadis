@@ -114,8 +114,8 @@ class AMForum extends CMObj implements  CMACLAppInterface {
   public function getACO() {
     if(!empty($this->cacheACO)) return $this->cacheACO;
     $this->cacheACO = new CMACO($this);
-    $this->cacheACO->code = $this->codeACO;
     try {
+      $this->cacheACO->code = $this->codeACO;
       $this->cacheACO->load();
     } catch(CMDBNoRecord $e) {
       Throw new AMException('NO ACO Defined');

@@ -9,7 +9,7 @@ var GroupMembersRequestCount=0;
 
 var AMBProjectJoinActionCallBack = {
 
-  join: function(result) {
+  onJoin: function(result) {
   },
 
 }
@@ -25,7 +25,7 @@ var AMBGroupRequestActionCallBack = {
       
       GroupMembersRequestCount--;
       if(GroupMembersRequestCount==0) {
-	AM_hiddeDiv('projectRequestBox');
+	    AM_hiddeDiv('projectRequestBox');
       }
     }
     else {
@@ -33,13 +33,13 @@ var AMBGroupRequestActionCallBack = {
     }
   },
 
-  accept: function(result) {
+  onAccept: function(result) {
     loadProjectGroup(result.group)
-    return this.handleResponse(result);
+    return AMBGroupRequestActionCallBack.handleResponse(result);
   },
 
-  reject: function(result) {
-    return this.handleResponse(result);
+  onReject: function(result) {
+    return AMBGroupRequestActionCallBack.handleResponse(result);
   }
 
 
@@ -71,7 +71,8 @@ function acceptUserJoin(codeRequest,codeGroup,codeUser) {
   text = form.frm_text.value;
 
   AM_setLoading('accept-box-'+codeRequest);
-  AMBGroupRequest.accept(codeRequest,codeGroup,codeUser,text);
+  AMBGroupRequest.onAcceptError = AM_callBack.onError;
+  AMBGroupRequest.accept(codeRequest,codeGroup,codeUser,text, AMBGroupRequestActionCallBack.onAccept);
 }
 
 
@@ -81,7 +82,8 @@ function rejectUserJoin(codeRequest,codeGroup,codeUser) {
   text = form.frm_text.value;
 
   AM_setLoading('reject-box-'+codeRequest);
-  AMBGroupRequest.reject(codeRequest,codeGroup,codeUser,text);
+  AMBGroupRequest.onRejectError = AM_callBack.onError;
+  AMBGroupRequest.reject(codeRequest,codeGroup,codeUser,text, AMBGroupRequestActionCallBack.onReject);
 }
 
 

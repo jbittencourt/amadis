@@ -30,7 +30,7 @@ class AMProjeto extends CMObj {
     unset($_SESSION['amadis']['projects']);
     $state = $this->state;
 
-    if(($state==self::STATE_NEW) || ($state==self::STATE_DIRTY_NEW) ) {
+    if($state==self::STATE_NEW || $state==self::STATE_DIRTY_NEW) {
       //create a new group for the project
       $group = new CMGroup;
       $group->description = "Project ".$this->title;
@@ -330,6 +330,9 @@ class AMProjetoComentario extends CMObj {
 
 class AMProjectBlogs extends CMObj {
 
+	const ENUM_INTERNAL_SOURCE = "INTERNAL_SOURCE";
+	const ENUM_EXTERNAL_SOURCE = "EXTERNAL_SOURCE";
+    
   public function configure() {
     $this->setTable("ProjectBlogs");
 
@@ -337,10 +340,14 @@ class AMProjectBlogs extends CMObj {
     $this->addField("codeProject",CMObj::TYPE_INTEGER,11,1,0,0);
     $this->addField("address",CMObj::TYPE_VARCHAR,256,1,0,0);
     $this->addField("title",CMObj::TYPE_VARCHAR,200,1,0,0);
-    $this->addField("filter",CMObj::TYPE_VARCHAR,256,1,0,0);
+    $this->addField("type", CMObj::TYPE_ENUM,"12",1,"INTERNAL_SOURCE",0);
     $this->addField("postCount",CMObj::TYPE_INTEGER,11,1,0,0);
 
     $this->addPrimaryKey("codeBlog");
+    
+    $this->setEnumValidValues("type",array(self::ENUM_INTERNAL_SOURCE,
+                                           self::ENUM_EXTERNAL_SOURCE));
+    
   }
 }
 

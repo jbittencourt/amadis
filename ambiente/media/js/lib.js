@@ -1,4 +1,4 @@
-var is_dom = (document.getElementById) ? true : false;
+is_dom = (document.getElementById) ? true : false;
 var is_ns5 = ((navigator.userAgent.indexOf("Gecko")>-1) && is_dom) ? true: false;
 var is_ie5 = ((navigator.userAgent.indexOf("MSIE")>-1) && is_dom) ? true : false;
 var is_ns4 = (document.layers && !is_dom) ? true : false;
@@ -256,3 +256,36 @@ function AM_unsetLoading(div_name, message) {
   div = AM_getElement(div_name);
   div.innerHTML = message;
 }
+
+AM_callBack = {
+  onError : function (result) {
+    var e = document.CreateElement('DIV');
+    e.innerHTML = result.message;
+    AM_getElement('erros_area').appendChild(e);
+  }
+};
+var lyr;
+function openWindow() {
+	lyr = new DynLayer(null,270,210,400,210,"#000000");
+	//lyr.setID("target");
+	//lyr.setOverflow("none");
+	lyr.setZIndex(500);
+
+	//block main window
+	//Screen.lock();
+
+	//lyr.setHTML("&nbsp;Teste MERDAAAAAAA!!!!!<a onClick='lyr._destroy();'>teste</a>");
+
+	lyr.slideTo(470,330,10,1);
+	DragEvent.enableDragEvents(lyr);
+	dynapi.document.addChild(lyr,'target');
+	
+	w = new DynLayer();
+	w.setBgColor('silver');
+	w.setSize(130,130);
+	w.setLocation(250,50);
+	dynapi.document.addChild(w);
+	w.slideTo(500, 100);
+	DragEvent.enableDragEvents(w);
+}
+

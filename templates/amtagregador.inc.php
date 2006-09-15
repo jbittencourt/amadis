@@ -18,9 +18,9 @@ class AMTAgregador extends AMMain {
     parent::__construct("bege");
 
     $this->requires("project.css",self::MEDIA_CSS);
-    $this->requires("diary.css",self::MEDIA_CSS);
+    $this->requires("agregator.css",self::MEDIA_CSS);
 
-    $this->setImgId($_CMAPP['imlang_url']."/top_projetos.gif");
+    $this->setImgId($_CMAPP['imlang_url']."/top_agregador.gif");
     
   }
 }

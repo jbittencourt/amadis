@@ -97,10 +97,9 @@ BODY IMG {
   height: 100%;
   padding-left: 230px;
   margin-right: 10px;
-  /*z-index:9;*/
+  min-height: 400px;
   background: url("../images/img_dot_blue.gif") repeat-y;
-/*    border: solid thin red;  */
-  }
+}
   
 #footer-menu { 
   position: absolute;
@@ -123,15 +122,15 @@ BODY IMG {
   position: relative;
   top: -108px;
   background: url("../images/img_dot_blue.gif") repeat-y;
-  }
+}
 
 #amadis-footer { 
   display:none;
   position: absolute;
-  height: 50px;
+  height: 40px;
   bottom:0px; !important
   background: url("../images/img_dot_blue.gif") repeat-y;
-  /* border: solid red thin; */
+  clear: both;
   }
 
 
@@ -509,3 +508,12 @@ a.cinza:hover {
 .cursor { 
   cursor: pointer;
   }
+
+#notification_area {
+	position:absolute;
+	top: 0px;
+	right: 0px;
+	width: 250px;
+	height: 50px;
+
+}

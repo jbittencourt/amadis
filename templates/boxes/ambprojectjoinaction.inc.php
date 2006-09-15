@@ -4,7 +4,7 @@
  * @subpackage AMBoxes
  */
 
-class AMBProjectJoinAction {
+class AMBProjectJoinAction implements AMAjax {
 
   public function join($project,$text) {
     global $_CMAPP;
@@ -46,8 +46,13 @@ class AMBProjectJoinAction {
 
     return $ret;
   }
-
-
+  
+    public function xoadGetMeta() {
+        $methods = array('join');
+        XOAD_Client::mapMethods($this, $methods);
+        XOAD_Client::publicMethods($this, $methods);
+    }
+     
 }
 
 

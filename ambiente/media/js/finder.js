@@ -1,10 +1,12 @@
+var AMFinder_Timeout;
+var AMFinder_lang = new Array();
 
 function Finder_initChat() {
   var cssMessages = window.document.createElement("LINK");
   cssMessages.setAttribute("rel", "stylesheet");
   cssMessages.setAttribute("href", "css/mensagens.css");
 
-  var chatFrame = AM_getElement("chat");
+  var chatFrame = AM_getElement("chat_34_17");
   var chatDoc = AM_getIFrameDocument(chatFrame, "body");
     
   var head = chatDoc.getElementsByTagName("head");
@@ -13,7 +15,26 @@ function Finder_initChat() {
 }
 
 var AMFinderCallBack = {
-  getonlineusers: function(result) {
+  onAddChat: function (result) {
+    if(result['success'] == 1) {
+      var tab = document.createElement("SPAN");
+      tab.setAttribute('class', 'active_finder');
+      tab.setAttribute('id', 'Tab_'+result.sessionId);
+      tab.setAttribute('onClick', "Finder_toggleChatTab('"+result.sessionId+"');");
+      tab.innerHTML = result.username;
+      ChatTabs.appendChild(tab);
+
+      var div = document.createElement("DIV");
+      div.setAttribute("id", "ChatTab_"+result.sessionId);
+      div.innerHTML = result.box;
+      div.style.display = 'block';
+      if(Finder_show != null) AM_togleDivDisplay(Finder_show);
+      
+      ChatContainer.appendChild(div);
+      Finder_show = div.id;
+    }
+  },
+  onGetOnlineUsers: function(result) {
     if(result != 0) {
       for(var i in result.data) {
 	if(isNaN(i)) continue;
@@ -22,86 +43,64 @@ var AMFinderCallBack = {
       }
     }
   },
-  closefinderchat: function(result) { },
-  getnewmessages: function(result) {
+  onGetNewMessages: function(result) {
     
-    var chatFrame = AM_getElement("chat");
-    var chatDoc = AM_getIFrameDocument(chatFrame, "body");
-
     var msg = window.document.createElement("DIV");
     msg.setAttribute("id","messagesBox");
-
+    var chatDoc = AM_getElement("chat_"+result.sessionId);
+    
     for(var i in result) {
       switch(result[i].responseType) {
       case "finder_alert":
-	//chatFrame.innerHTML += "<br><span style=''>"+AMFinder_lang[result[i].message]+"</span>";
 	msg.innerHTML = "<br><div style='font-color: #FF0000'>"+result[i].message+"</div>";
-	chatDoc.body.appendChild(msg);
+	//chatDoc.body.appendChild(msg);
+	chatDoc.appendChild(msg);
+	//chatDoc.scrollTop += chatDoc.scrollHeight;
 	break;
 
       case "finder_timeout":
-	//chatFrame.innerHTML += "<br><span style=''>"+AMFinder_lang[result[i].message]+"</span>";
-	msg.innerHTML = "<br><div class='finder_timeout'>"+result[i].message+"</div>";
-	//window.clearTimeout(AMFinder_timeOut);
-	chatDoc.body.appendChild(msg);
+	//msg.innerHTML = "<br><span class='finder_timeout'>"+AMFinder_lang[result[i].message]+"</span>";
+	msg.innerHTML = "<br><div class='finder_timeout'>"+AMFinder_lang[result[i].message]+"</div>";
+	window.clearInterval(eval("AMFinder_Timeout_"+result.sessionId));
+	chatDoc.appendChild(msg);
+	chatDoc.scrollTop += chatDoc.scrollHeight;
+	//chatFrame.contentWindow.scrollBy(0,1000);
+	Finder_tabAlert(result.sessionId, 'offline_finder', true);
 	break;
 
       case "parse_messages":
+	Finder_tabAlert(result.sessionId, 'alert_finder', false);
 	var out = "";
 	out += "<br><div class='"+result[i].style+"'>";
 	out += result[i].username+"("+result[i].date+"): ";
 	out += result[i].message;
 	out += "</div>";
-
-	msg.innerHTML = out;
-	chatDoc.body.appendChild(msg);    
+	
+	msg.innerHTML += out;
+	chatDoc.appendChild(msg);
+	chatDoc.scrollTop += chatDoc.scrollHeight;
+	//chatFrame.contentWindow.scrollBy(0,1000);
 	break;
       }
     }
     
   }
-  
 }
 
-function Finder_openChatWindowTIP(userId) {
-  if(ajaxSync.syncTableObjects['finderRoom_'+userId] != null) {
-    ajaxSync.syncTableObjects['finderRoom_'+userId][0].focus();
-  }else {
+function Finder_openChatWindow(sessionId) {
+  if(Finder_window != null) {
+    Finder_window.Finder_loadTab(sessionId);
+    Finder_window.focus();
+    return false;
+  } else {
+    var userIds = sessionId.split("_");
     var param = "resizable=no,width=676,height=442,status=no,location=no,scrollig=yes,toolbar=no,scrollbars=yes";
-    var w = window.open(Finder_chatSRC+"?frm_codeUser="+userId, "finderRoom_"+userId, param);
-    ajaxSync.register(w, 'Finder_getNewMessages', 'finderRoom_'+userId, 'chat');//Finder_getNewMessages
-  }
-}
-
-
-function Finder_openChatWindow(e) {
-  var pos = this.id.lastIndexOf("_");
-  var userId = this.id.substring((pos+1),this.id.length);
-
-  if(ajaxSync.syncTableObjects['finderRoom_'+userId] != null) {
-    ajaxSync.syncTableObjects['finderRoom_'+userId][0].focus();
-  }else {
-    var param = "resizable=no,width=676,height=442,status=no,location=no,scrollig=yes,toolbar=no,scrollbars=yes";
-    var w = window.open(Finder_chatSRC+"?frm_codeUser="+userId, "finderRoom_"+userId, param);
-    ajaxSync.register(w, 'Finder_getNewMessages', 'finderRoom_'+userId, 'chat');//Finder_getNewMessages
-    //ajaxSync.syncTableObjects['finderRoom_17'][0].alert('asdfsf');
+    Finder_window = window.open(Finder_chatSRC+"?frm_codeUser="+userIds[1], "Finder_ChatRoom", param);
   }
 }
 
 function Finder_closeFinder(id) {
-  ajaxSync.unlink(id);
-  AMFinder.closefinderchat(id);
-}
-
-
-function Finder_initFinder(handler) {
-  string="Finder_loadFinder('"+handler+"');";
-  id = setTimeout(string, 2000);
-}
-
-function Finder_loadFinder(handler) {
-  dcomSendRequest(handler);
-  clearTimeout(id);
+  AMFinder.closeFinderChat(id);
 }
 
 
@@ -172,41 +171,65 @@ function Finder_removeAlert(userId, src) {
 }
 
 
-function Finder_changeStatus(element, src) {
-  //debugBrowserObject(element);
-  //var handle = src+"/finder/finder.php?action=A_change_mode&amp;frm_mode="+element.value;
-  //dcomSendRequest(handle);
-  //AMFinder.chagemode(element.value);
-}
-
-
 function Finder_clearChatBox() {
   box = AM_getElement("frm_message");
   box.value=null;
   box.focus();
 }
 
-function Finder_sendMessage(form) {
-
-  
-  var recipient = form.elements['frm_codeRecipient'].value;
-  var msg = form.elements['frm_message'].value;
-  
-  AMFinder.sendmessage(recipient, msg);
-  
+function restoreConnection() {
+  if(AMFinder_Timeout==null) {
+    AMFinder.updateTimeOut(senderId+"_"+recipientId,'',function(result){});
+    AMFinder_Timeout = window.setInterval("Finder_getNewMessages();", 5000);
+  }
 }
 
-function Finder_getNewMessages() {
-  AMFinder.getnewmessages(senderId, recipientId);
+function Finder_getNewMessages(sessionId) {
+
+  try {
+    AMFinder.getNewMessages(sessionId, AMFinderCallBack.onGetNewMessages);
+  }catch(Exception) {
+    alert(Exception.message);
+  }
 }
 
-var reSynctimeout;
-function reSync() {
-  alert("resyncing");
-  reSynctimeout = window.setTimeout('register();',5000);
+var Finder_show=null;;
+function Finder_tabAlert(sessionId, style, CForce) {
+  if(Finder_show == "ChatTab_"+sessionId && CForce==false) return false;
+  var tab = AM_getElement("Tab_"+sessionId);
+  tab.setAttribute('class', style);
 }
 
-function register() {
-  window.opener.ajaxSync.register(window, 'Finder_getNewMessages', window.name, 'chat');
-  window.clearTimeout(reSynctimeout);
+function Finder_toggleChatTab(sessionId) {
+  var id = "ChatTab_"+sessionId;
+  if(Finder_show == id) return false;
+  AM_togleDivDisplay(Finder_show);
+  AM_togleDivDisplay(id);
+  
+  var tab = AM_getElement('Tab_'+sessionId);
+  if(tab.getAttribute('class') == "alert_finder") tab.setAttribute('class','active_finder');
+
+  Finder_show = id;
+}
+
+
+function Finder_conversation(sessionId) {
+  this.sessionId = sessionId;
+  this.closeFinder = Finder_closeFinder(sessionId);
+  this.chatTab = "ChatTab_"+sessionId;
+  this.getNewMessages = AMFinder.getNewMessages;
+  this.httpRequest = eval("AMFinder_"+sessionId);
+  alert(this.httpRequest);
+  Finder_register(this);
+}
+
+
+Finder_conversations = new Array();
+function Finder_register(obj) {
+  Finder_conversations[obj.sessionId] = obj;
+  Finder_loadTab(obj.sessionId);
+}
+
+function Finder_loadTab(id) {
+  AMFinder.addChat(id, AMFinderCallBack.onAddChat);
 }

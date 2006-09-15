@@ -15,6 +15,7 @@ abstract class AMListBox extends AMTCadBox {
   const PEOPLE = 0;
   const PROJECT = 1;
   const COMMUNITY = 2;
+  const ALBUM = 3;
 
   protected $itens;
   protected $class_prefix;
@@ -35,6 +36,9 @@ abstract class AMListBox extends AMTCadBox {
       $box_theme = AMTCadBox::COMMUNITY_THEME;
       $this->class_prefix = 'community';
       break;
+    case self::ALBUM:
+      $box_theme = AMTCadBox::ALBUM_THEME;
+      $this->class_prefix = 'album';
     }
 
     parent::__construct($title, $type, $box_theme);

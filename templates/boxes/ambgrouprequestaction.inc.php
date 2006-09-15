@@ -5,7 +5,7 @@
  */
 
 
-class AMBGroupRequestAction {
+class AMBGroupRequestAction implements AMAjax {
 
   static public $_lang;
 
@@ -99,7 +99,11 @@ class AMBGroupRequestAction {
     return $ret;
   }
 
-
+  public function xoadGetMeta() {
+      $methods = array('accept', 'reject');
+      XOAD_Client::mapMethods($this, $methods);
+      XOAD_Client::publicMethods($this, $methods);
+  }
 }
 
 ?>

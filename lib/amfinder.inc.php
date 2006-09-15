@@ -12,7 +12,7 @@
  * @subpackage finder
  * @see  AMFinderMessage, AMFinderChatRoom
  */
-class AMFinder { //implements AMCChat {
+class AMFinder implements AMAjax {
 
   /**
    * Constantes que definem o modo de visibilidade do finder
@@ -31,28 +31,29 @@ class AMFinder { //implements AMCChat {
   protected $mode, $openChats;
   protected $time, $timeOut, $sleepTime;
 
-  static public function initFinder($sender, $recipient) {
+  static public function initFinder($sessionId) {
     global $_CMAPP;
     
-    $id = $sender."_".$recipient;
-
+    $ids = explode("_", $sessionId);
+    
     if(!isset($_SESSION['amadis']['FINDER_ROOM']))
       $_SESSION['amadis']['FINDER_ROOM'] = array();
 
-    if(!isset($_SESSION['amadis']['FINDER_ROOM'][$id])) {
-      $_SESSION['amadis']['FINDER_ROOM'][$id] = array("sender"=>$sender,
-						      "recipient"=>$recipient,
+    if(!isset($_SESSION['amadis']['FINDER_ROOM'][$sessionId])) {
+      $_SESSION['amadis']['FINDER_ROOM'][$sessionId] = array("sender"=>$ids[0],
+						      "recipient"=>$ids[1],
 						      "time"=>time(),
 						      "wait"=>array(),
 						      "open"=>1
 						      );
     } else {
-      $time = $_SESSION['amadis']['FINDER_ROOM'][$id]['time'];
+      $time = $_SESSION['amadis']['FINDER_ROOM'][$sessionId]['time'];
       $timeout = time()-((int) $_CMAPP['finder']->timeout);
       if($time >= $timeout) {
-	$_SESSION['amadis']['FINDER_ROOM'][$id]['time'] = time();
-      }else $_SESSION['amadis']['FINDER_ROOM'][$id]['open'] = 0; 
+	$_SESSION['amadis']['FINDER_ROOM'][$sessionId]['time'] = time();
+      }else $_SESSION['amadis']['FINDER_ROOM'][$sessionId]['open'] = 0; 
     }
+    
   }
 
   
@@ -63,8 +64,8 @@ class AMFinder { //implements AMCChat {
     else return false;
   }
   
-  public function updateTimeOut($session, $time) {
-    $_SESSION['amadis']['FINDER_ROOM'][$session]['time'] = $time;
+  public function updateTimeOut($session, $time="") {
+    $_SESSION['amadis']['FINDER_ROOM'][$session]['time'] = (empty($time) ? time() : $time);
   }
 
   public function closeFinderChat($idSession) {
@@ -82,7 +83,30 @@ class AMFinder { //implements AMCChat {
   
   }
 
-  public function addChat($type, $code) { }
+  public function addChat($sessionId) {
+    self::initFinder($sessionId);
+    $this->updateTimeOut($sessionId, time());
+    
+    $ret = array();
+    
+    $userId = explode("_", $sessionId);
+    
+    $user = new AMUser;
+    $user->codeUser = $userId[1];
+    try {
+      $user->load();
+      $box = new AMBFinderConversation($user, $sessionId);
+      $ret['box'] = $box->__toString();
+      $ret['success'] = 1;
+      $ret['username'] = $user->username;
+    }catch(CMException $e) {
+      $ret['message'] = "<div class='error'>".$e->getMessage()."</div>";
+      $ret['success'] = 0;
+    }
+    $ret['sessionId'] = $sessionId;
+    return $ret;
+  }
+
   public function addUserChat($codeUser, $codeUser, $typeRoom) { }
   
   public function getTimeOut() {
@@ -100,7 +124,7 @@ class AMFinder { //implements AMCChat {
    * @return mixed  Retorna um CMContainer dos usu?rios atualmente conetados ou um RDError
    * @see AMuser, AMAMbiente
    */
-  static function getOnlineUsers() {
+  static public function getOnlineUsers() {
     global $_CMAPP;
     if(empty($_SESSION['environment'])) 
       throw new AMEFinderEmptyEnvironment;
@@ -135,13 +159,14 @@ class AMFinder { //implements AMCChat {
   }
 
 
-  public function getNewMessages($sender, $recipient) {
+  public function getNewMessages($sessionId) {
+    $users = explode("_", $sessionId);
+    $sender = $users[0];
+    $recipient = $users[1];
+    
+    if($this->checkTimeOut($sessionId)) {
+      $time = $_SESSION['amadis']['FINDER_ROOM'][$sessionId]['time'];
 
-    $idSession = $sender."_$recipient";
-
-    if($this->checkTimeOut($idSession)) {
-      $time = $_SESSION['amadis']['FINDER_ROOM'][$idSession]['time'];
-      
       $q = new CMQuery('AMFinderMessages');
       
       $j = new CMJoin(CMJoin::INNER);
@@ -158,29 +183,29 @@ class AMFinder { //implements AMCChat {
       $q->setFilter($filter);
       
       $list = $q->execute();
-
+      
       //parse na lista de mensagens em espera
       
-      if(!empty($_SESSION['amadis']['FINDER_ROOM'][$idSession]['wait'])) {
-	foreach($_SESSION['amadis']['FINDER_ROOM'][$idSession]['wait'] as $k=>$item) {
+      if(!empty($_SESSION['amadis']['FINDER_ROOM'][$sessionId]['wait'])) {
+	foreach($_SESSION['amadis']['FINDER_ROOM'][$sessionId]['wait'] as $k=>$item) {
 	  $list->add($k,unserialize($item));
-	  unset($_SESSION['amadis']['FINDER_ROOM'][$idSession]['wait'][$k]);
+	  unset($_SESSION['amadis']['FINDER_ROOM'][$sessionId]['wait'][$k]);
 	}
       }
-      
+
       if($list->__hasItems()) {
-	$this->updateTimeOut($idSession, time());
-	return $this->drawMessages($list);
+	$this->updateTimeOut($sessionId, time());
+	return $this->drawMessages($list, $sessionId);
       } else return 0;
       
     } else {
-      $this->closeFinderChat($idSession);
-      return $this->drawMessages("conversation_timeout");
+      $this->closeFinderChat($sessionId);
+      return $this->drawMessages("conversation_timeout", $sessionId);
     }
   }
 
 
-  public function drawMessages($messages) {
+  public function drawMessages($messages, $sessionId) {
     $msg  = array();
 
     if($messages instanceof CMContainer) {
@@ -196,7 +221,6 @@ class AMFinder { //implements AMCChat {
 	} else {
 	  $tmp['style'] = "messageRecipient";
 	}
-	
 	$msg[] = $tmp;
       }
     } else {
@@ -205,16 +229,25 @@ class AMFinder { //implements AMCChat {
       case "conversation_timeout":
 
 	$msg[] = array("responseType"=>"finder_timeout",
-		       "message"=>$messages
+		       "message"=>$messages,
 		       );
 	break;
       }
     }
-    
+    $msg['sessionId'] = $sessionId;
     return $msg;
   }
 
-}
+  public function xoadGetMeta() {
+    $methods = array('initFinder', 'addChat', 'checkTimeOut', 'updateTimeOut', 'closeFinderChat', 'setSleepTime', 'getSleepTime',
+		     'addChat', 'addUserChat', 'getOnlineUsers', 'getNewMessages', 'drawMessages');
+    XOAD_Client::mapMethods($this, $methods);
 
+    $publicMethods = array('checkTimeOut', 'addChat', 'closeFinderChat', 'drawMessage', 'getNewMessages', 'getOnlineUsers', 'updateTimeOut');
+    XOAD_Client::publicMethods($this, $publicMethods);
+    
+  }
+
+}
 
 ?>

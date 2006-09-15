@@ -16,6 +16,8 @@ class AMBChat extends CMHTMLObj {
     global $_CMAPP, $_language;
 
     parent::__construct();
+    
+    AMMain::addXOADHandler('AMChat', 'AMChat');
 
     $this->requires("chat.css", CMHTMLObj::MEDIA_CSS);
     $this->requires("alertbox.css", CMHTMLObj::MEDIA_CSS);
@@ -73,7 +75,7 @@ class AMBChat extends CMHTMLObj {
 
     parent::add("   <td valign=\"top\">");
     parent::add("<img src=\"$_CMAPP[images_url]/dot.gif\" width=\"7\" height=\"7\" border=\"0\"><br>");
-    parent::add("<form name='create_chat' id='create_chat' onSubmit='return Chat_saveChat(this);'>");
+    parent::add("<form name='create_chat' id='create_chat' onSubmit='return Chat_saveChat(this); return false;'>");
     parent::add("       <table cellpadding=\"3\" cellspacing=\"0\" border=\"0\">");
     parent::add("       <tr>");
 

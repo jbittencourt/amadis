@@ -15,8 +15,8 @@ class AMProjectForums extends CMObj {
    public function configure() {
      $this->setTable("ProjectForums");
 
-     $this->addField("codeProject",,"0",1,0,0);
-     $this->addField("codeForum",,"0",1,0,0);
+     $this->addField("codeProject",CMObj::TYPE_INTEGER,"0",1,0,0);
+     $this->addField("codeForum",CMObj::TYPE_INTEGER,"0",1,0,0);
 
      $this->addPrimaryKey("codeProject");
      $this->addPrimaryKey("codeForum");
