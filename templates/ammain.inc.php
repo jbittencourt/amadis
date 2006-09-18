@@ -1,5 +1,4 @@
-<?
-
+<?php
 /**
  * The AMMain is the main template in AMADIS.
  *
@@ -13,7 +12,8 @@
  * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
  * @see AMNavMenu
  **/
-class AMMain extends AMHTMLPage {
+class AMMain extends AMHTMLPage 
+{
     protected $main_menu;
     protected $contents;
     protected $slidein;
@@ -23,13 +23,13 @@ class AMMain extends AMHTMLPage {
     protected $alerts, $dynapi, $notifications = array();
     protected static $XOADHandlers = array();
 
-    function __construct($theme="") {
+    function __construct($theme="") 
+    {
         global $_CMAPP;
         parent::__construct();
 
         $this->requires("tooltip.css",self::MEDIA_CSS);
         $this->requires("lib.js",self::MEDIA_JS);
-        $this->requires("dcom.js",self::MEDIA_JS);
         $this->requires("finder.js", self::MEDIA_JS);
         $this->requires("finder.css", self::MEDIA_CSS);
         $this->requires("envsession.js", self::MEDIA_JS);
@@ -60,31 +60,32 @@ class AMMain extends AMHTMLPage {
         $_SESSION['XOADHandlers'] = array();
     }
 
-
-    function openNavMenu() {  }
-
-    public function closeNavMenu() {  }
     
-    function add($line) {
+    function add($line) 
+    {
         $this->contents[] = $line;
     }
 
-	public function loadDynapi() {
-		$this->dynapi = true;
-		$this->requires("ext/dynapi/src/dynapi.js", self::MEDIA_JS);
-	}
+    public function loadDynapi() 
+    {
+        $this->dynapi = true;
+        $this->requires("ext/dynapi/src/dynapi.js", self::MEDIA_JS);
+    }
 
-    function setMenuSuperior($img1,$img2,$img3) {
+    function setMenuSuperior($img1,$img2,$img3) 
+    {
         $this->tema[0]= $img1;
         $this->tema[1]= $img2;
         $this->tema[2]= $img3;
     }
 
-    function setImgId($img) {
+    function setImgId($img) 
+    {
         $this->imgid = $img;
     }
-
-    function setLeftMargin($w) {
+    
+    function setLeftMargin($w) 
+    {
         $this->leftMargin = $w;
     }
 
@@ -97,7 +98,8 @@ class AMMain extends AMHTMLPage {
    * request and transform it in an error. This function 
    * makes the actual page to ignore the frm_amerror.
    **/
-    public function disableAutoError() {
+    public function disableAutoError() 
+    {
         $this->auto_error_report = 0;
     }
 
@@ -123,8 +125,11 @@ class AMMain extends AMHTMLPage {
    * This form is better to show messages errors to developers, without affect final users.
    *
    * @param String $message The message suffix 
+   * @param object $e An associated exception
+   * @see AMMain::addMessage(), AMMain::addAlert()
    **/
-    function addError($message, $e) {
+    function addError($message, $e) 
+    {
         $err = new AMError($message,"AMMain", $e);
     }
 
@@ -135,29 +140,38 @@ class AMMain extends AMHTMLPage {
    * standard message and not an error message. It can look to the
    * actual request searching for an frm_ammgs parameter.
    **/
-    function addMessage($message) {
+    function addMessage($message) 
+    {
         $msg = new AMMessage($message,"AMMain");
     }
 
-
-    function addAlert($message) {
-        $this->alerts[] = $message;
+  /**
+   * Adds an alert box to this page.
+   *
+   * This function is very similar to addError, except that it adds an
+   * alert message and not an error message. It can look to the
+   * actual request searching for an frm_amalert parameter.
+   *
+   * @see AMMain::addError()
+   **/
+    function addAlert($message)
+    {
+        $msg = new AMAlert($message);
     }
 
-
-    function setPathIndicator(AMPathIndicator $path) {
+  /**
+   * Sets the path indicator to this page.
+   *
+   * The path indicatior is a interface unit that
+   * display to the user a series os steps being walked
+   * and in wich step the user actualy is.
+   *
+   * @see AMPathIndicator
+   * @param AMPathIndicator $path An object describing the actual path.
+   **/
+    function setPathIndicator(AMPathIndicator $path)
+    {
         $this->pathindicator = $path;
-    }
-
-  /** 
-   * Adds class handler to JPSpan Ajax Framework
-   * JPSpan will substitute for XOAD Ajax Framework
-   * @deprecated
-   */
-    public static function addCommunicatorHandler($classHandler) {
-        if(!array_search($classHandler, $_SESSION['communicator'])) {
-            $_SESSION['communicator'][] = $classHandler;
-        }
     }
 
   /**
@@ -165,35 +179,37 @@ class AMMain extends AMHTMLPage {
    *
    * @param String $handler - Name of the class that will be used for XOAD
    */
-    public static function addXOADHandler($class, $handlerName) {
+    public static function addXOADHandler($class, $handlerName) 
+    {
         $_SESSION['XOADHandlers'][$class] = $handlerName;
     }
 
-    public static function getXOADHandlers() {
+    public static function getXOADHandlers() 
+    {
         return $_SESSION['XOADHandlers'];
     }
     
-	public function addNotification($notification) {
-    	$this->notifications[] = $notification;
-	}
-	
-	public function getNotifications() {
-	    return $this->notifications;
-	}
+    public function addNotification($notification) 
+    {
+        $this->notifications[] = $notification;
+    }
     
-    public function __toString() {
+    public function getNotifications() 
+    {
+        return $this->notifications;
+    }
+    
+    public function __toString() 
+    {
         global $_CMAPP,$_language;
 
 
-        $contents = "";
-    /**
-     *Imprime o centro da caixa
+    /** 
+     * Flush the communicators handlers
      **/
 
-    /** Flush the communicators handlers
-     *
-     */
-        if(!empty($_SESSION['communicator'])) {
+        if(!empty($_SESSION['communicator'])) 
+        {
             $this->requires("communicator.php?client");
         }
 
@@ -201,8 +217,8 @@ class AMMain extends AMHTMLPage {
         $this->setTitle($_language['amadis']);
 
     /**
-      Initialize the variables that are defined in the lib.js with
-       the values that were read from the config.xml file by config.inc.php
+     * Initialize the variables that are defined in the lib.js with
+     * the values that were read from the config.xml file by config.inc.php
      **/
         $js = "CMAPP['url']   = '$_CMAPP[url]';\n";
         $js.= "CMAPP['media_url']  = '$_CMAPP[media_url]';\n";
@@ -214,18 +230,17 @@ class AMMain extends AMHTMLPage {
         $js.= "CMAPP['pages_url']  = '$_CMAPP[pages_url]';\n";
         $js.= "CMAPP['thumbs_url']  = '$_CMAPP[thumbs_url]';\n";
 
-        
+
         $this->addPageBegin(CMHTMLObj::getScript($js));
 
         if($this->dynapi) {
             $js .= "dynapi.library.setPath('$_CMAPP[js_url]/ext/dynapi/src/');\n"
-            	. "dynapi.library.include('dynapi.api');"
-            	. "dynapi.library.include('dynapi.api.ext');";
+            . "dynapi.library.include('dynapi.api');"
+            . "dynapi.library.include('dynapi.api.ext');";
             $this->addPageBegin(CMHTMLObj::getScript($js));
         }
         
         $this->force_newline=0;
-
 
     //logo
         parent::add('<div id="amadis-logo"><img src="'.$_CMAPP['images_url'].'/pecas_amadis.png"></div>');
@@ -248,7 +263,6 @@ class AMMain extends AMHTMLPage {
     //menu
         parent::add($this->navmenu);
 
-    //parent::add('<div id="content-column">');
         parent::add('<div id="content">');
 
         if(!empty($this->imgid)) {
@@ -261,8 +275,14 @@ class AMMain extends AMHTMLPage {
 
         parent::add('<div id="dashed-line"></div>');
 
+    /**
+     * Adds the error messages to the page, if there is any. It
+     * searchs for the AMErrors intantiated and error messages 
+     * passed by the URL with the frm_amerror.
+     **/
         $errors = AMError::getErrors();
         if($this->auto_error_report) {
+      //search if there is some error passed by the url
             if(!empty($_REQUEST["frm_amerror"])) {
                 if(!is_array($_REQUEST["frm_amerror"])) {
                     $_REQUEST["frm_amerror"] = array($_REQUEST["frm_amerror"]);
@@ -275,6 +295,11 @@ class AMMain extends AMHTMLPage {
             }
         }
 
+    /**
+     * Adds the messages to the page, if there is any. It
+     * searchs for the AMMessage intantiated and messages 
+     * passed by the URL with the frm_ammessage.
+     **/
         $messages = AMMessage::getMessages();
         if(!empty($_REQUEST["frm_ammsg"])) {
             if(!is_array($_REQUEST["frm_ammsg"])) {
@@ -287,17 +312,18 @@ class AMMain extends AMHTMLPage {
             }
             parent::add("<br>");
         }
+
         
         //notification area
-		parent::add("<div id='notification_area' align='right'>");
-		$notifications = $this->getNotifications();
-		if(!empty($notifications)) {
-			parent::add(implode("&nbsp;", $notifications));
-		}
-		
-		parent::add("</div>");
+        parent::add("<div id='notification_area' align='right'>");
+        $notifications = $this->getNotifications();
+        if(!empty($notifications)) {
+            parent::add(implode("&nbsp;", $notifications));
+        }
+        
+        parent::add("</div>");
 
-		parent::add('<div id="erros_area">');
+        parent::add('<div id="erros_area">');
         if(!empty($errors)) {
             parent::add("<br>");
             $debug_mode = (int) $_CMAPP['environment']->debug_mode;
@@ -330,6 +356,7 @@ class AMMain extends AMHTMLPage {
         if(!empty($this->pathindicator)) {
             parent::add($this->pathindicator);
         }
+       
 
 
         parent::add($this->contents);
@@ -395,7 +422,9 @@ class AMMain extends AMHTMLPage {
 
   //Static function that returns buttons that should be equal in all the system
 
-    public static function getSearchButton($onClick='',$id='searchButton') {
+
+    public static function getSearchButton($onClick='',$id='searchButton')
+    {
         global $_CMAPP,$_language;
         $bt = "";
         if(empty($onClick)) {
@@ -408,7 +437,8 @@ class AMMain extends AMHTMLPage {
         return $bt;
     }
 
-    public static function getChangePwButton($codeUser) {
+    public static function getChangePwButton($codeUser)
+    {
         global $_CMAPP,$_language;
 
         $link = $_CMAPP['services_url']."/admin/changepw.php?frm_codUser=$codeUser";
@@ -416,47 +446,55 @@ class AMMain extends AMHTMLPage {
     }
     
     
-    public static function getChangeStatusButton($codeUser) {
+    public static function getChangeStatusButton($codeUser)
+    {
         global $_CMAPP,$_language;
 
         $link = $_CMAPP['services_url']."/admin/changestatus.php?frm_codUser=$codeUser";
         return '<button class="admin_items button-as-link " type="button" onClick="AM_openURL(\''.$link.'\')"><img src="'.$_CMAPP['images_url'].'/ico_alt_status.gif"> '.$_language['changestatus_button'].'</button>';
     }
     
-    public static function getSendNotificationButton($codeUser){
+    public static function getSendNotificationButton($codeUser)
+    {
         global $_CMAPP,$_language;
 
         $link = $_CMAPP['services_url']."/admin/sendnotif.php?frm_codUser=$codeUser";
         return '<button class="admin_items button-as-link" type="button" onClick="AM_openURL(\''.$link.'\')"><img src="'.$_CMAPP['images_url'].'/ico_env_notificacao.gif"> '.$_language['sendn_button'].'</button>';
     }
 
-    public static function getAddFriendButton($codeUser) {
+    public static function getAddFriendButton($codeUser)
+    {
         global $_CMAPP,$_language;
         $link = $_CMAPP['services_url']."/webfolio/userinfo_details.php?frm_codeUser=$codeUser";
         return '<button class="button-as-link" type="button" onClick="AM_openURL(\''.$link.'\')"><img src="'.$_CMAPP['images_url'].'/ico_webfolio.png"> '.$_language['visit_webfolio'].'</button>';
     }
 
 
-    public static function getViewPageButton($codeUser) {
+    public static function getViewPageButton($codeUser)
+    {
         global $_CMAPP,$_language;
         $link = $_CMAPP['services_url']."/pages/viewpage.php?frm_page=users/user_$codeUser&frm_codeUser=$codeUser";
         return '<button class="button-as-link"type="button" onClick="AM_openURL(\''.$link.'\')"><img src="'.$_CMAPP['images_url'].'/ico_ver_pagina.gif"> '.$_language['visit_page'].'</button>';
     }
 
-    public static function getViewDiaryButton($codeUser) {
+    public static function getViewDiaryButton($codeUser)
+    {
         global $_CMAPP,$_language;
         $link = "$_CMAPP[services_url]/diario/diario.php?frm_codeUser=$codeUser";
         return '<button class="button-as-link" type="button" onClick="AM_openURL(\''.$link.'\')"><img src="'.$_CMAPP['images_url'].'/ico_diario.gif"> '.$_language['visit_diary'].'</button>';
     }
 
-    public static function getTieButton($codeProject, $codeCommunity) {
+    public static function getTieButton($codeProject, $codeCommunity)
+    {
         global $_CMAPP,$_language;
         $link = "$_CMAPP[services_url]/communities/tieproject.php?frm_codeCommunity=$codeComunity";
 
         return '<button class="button-as-link" type="button" onClick="AM_openURL(\''.$link.'\')"><img src="'.$_CMAPP['images_url'].'/ico_diario.gif"> '.$_language['tie_project'].'</button>';
     }
-  //-------------------
+
+    
+    
 
 }
 
-?>
+
