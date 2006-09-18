@@ -9,9 +9,12 @@
 <app>
    <general>
        <admin_email>admin@yourdomain.org</admin_email>
-	<!-- The profile can be "low_traffic" ir "low_processing" -->
-       <profile>low_traffic</profile>
+       <version>1.2.1</version>
    </general>
+   <libs>
+      <lib name="cmdevel" path="/cmdevel" />
+      <lib name="xoad" path="/ambiente/media/libs/xoad" />
+   </libs>
    <environment>
       <plataform>1</plataform>
       <plataform_name>AMADIS</plataform_name>
