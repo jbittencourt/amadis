@@ -1,7 +1,7 @@
 <?php
 
 
-class AMProjetoChats extends CMObj{
+class AMProjectChats extends CMObj{
   
   public function configure() {
      $this->setTable("projetoChats");

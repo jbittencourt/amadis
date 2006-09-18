@@ -9,7 +9,7 @@
  * @category AMVisualization
  * @version 1.0
  * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
- * @see AMDiaryList, AMAmbiente
+ * @see AMDiaryList, AMEnvironment
  */
 
 $_CMAPP[notrestricted] = True;
@@ -23,7 +23,7 @@ $_CMAPP[smartform][language] = $_language;
 $pag = new AMTDiario();
 
 $box = new AMDiaryList;
-$items = AMAmbiente::listDiaries($box->getInitial(),$box->getFinal());
+$items = $_SESSION['environment']->listDiaries($box->getInitial(),$box->getFinal());
 $box->init($items[data],$items[count]);
 $pag->add($box);
 echo $pag; 

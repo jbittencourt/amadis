@@ -11,7 +11,7 @@
  * @access public
  * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
  * @package AMADIS
- * @subpkage AMErrorReport
+ * @subpkage AMStateMessages
  **/
 
 class AMError {
@@ -23,13 +23,15 @@ class AMError {
 
   /**
    *
-   * @param String $message - Error message
-   * @param String $class - CSS style to user message
+   * @param String $message  Error message
+   * @param String $thrower  The script that is generating the error.
+   * @param Exception $e     The exception that caused the error.
    */
-  public function __construct($message,$class, $e='') {
+  public function __construct($message,$thrower, $e='') {
     
     self::$errors[] = array("message"=>$message,
-			    "thrower"=>$class,
+			    "thrower"=>$thrower,
+			    "exception"=>$e
 			    );
   }
 

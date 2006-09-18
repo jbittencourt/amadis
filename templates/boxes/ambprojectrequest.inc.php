@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * This box lists the active requests from users to join a project
  *
@@ -6,12 +6,14 @@
  * @subpackage AMBoxes
  * @autho Juliano Bittencourt <juliano@lec.ufrgs.br>
  **/
-class AMBProjectRequest extends AMColorBox {
+class AMBProjectRequest extends AMColorBox
+{
     
     protected $requests;
     protected $proj;
 
-    public function __construct(AMProjeto $proj) {
+    public function __construct(AMProject $proj)
+    {
         global $_CMAPP;
 
         $this->requires("group.css",CMHTMLObj::MEDIA_CSS);
@@ -30,11 +32,13 @@ class AMBProjectRequest extends AMColorBox {
 
     }
 
-    public function hasRequests() {
+    public function hasRequests()
+    {
         return $this->requests->__hasItems();
     }
 
-    public function __toString() {
+    public function __toString()
+    {
         global $_language,$_CMAPP;
 
         $_first = true;
@@ -54,6 +58,7 @@ class AMBProjectRequest extends AMColorBox {
             }
             
       //user foto thumbnail
+
             parent::add("<div id='request-$code'>");
             parent::add("<table border=0 cellspacing=1 cellpadding=2 width=\"100%\">");
             parent::add("<tr><td>");
@@ -124,5 +129,3 @@ class AMBProjectRequest extends AMColorBox {
     }
 
 }
-
-?>

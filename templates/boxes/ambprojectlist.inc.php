@@ -84,7 +84,7 @@ class AMBProjectList extends AMPageBox implements CMActionListener {
       //header("Location:$_SERVER[PHP_SELF]?frm_amerror=under_construction&list_action=fatal_error");
       if(!empty($_REQUEST['frm_codProjeto'])) {
 	
-	$proj = new AMProjeto;
+	$proj = new AMProject;
 	$proj->codeProject = $_REQUEST['frm_codProjeto'];
 	try {
 	  $proj->load();
@@ -113,7 +113,7 @@ class AMBProjectList extends AMPageBox implements CMActionListener {
 
       if(!empty($_REQUEST['frm_codProjeto'])) {
 	
-	$proj = new AMProjeto;
+	$proj = new AMProject;
 	$proj->codeProject = $_REQUEST['frm_codProjeto'];
 	try {
 	  $proj->load();

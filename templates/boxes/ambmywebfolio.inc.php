@@ -54,8 +54,8 @@ class AMBMyWebfolio extends AMColorBox implements CMActionListener {
       parent::add("<a href='$urlviewalbum' class ='cinza'>&raquo; ".$_language['see_album']."</a><br>");
       parent::add("<a href='$urlviewmsg' class ='cinza'>&raquo; ".$_language['read_messages']."</a><br>");
       
-      if(!empty($_SESSION['user'])) {
-	parent::add("<a href='$urlemail' class='cinza'>&raquo; ".$_language['send_email']."</a><br>");
+      if(!empty($_SESSION[user])) {
+	//parent::add("<a href='$urlemail' class='cinza'>&raquo; ".$_language[send_email]."</a><br>");
 	
 	if(!$_SESSION['user']->isMyFriend($_REQUEST['frm_codeUser'])) {
 	  $addFriendBox = new AMTShowHide("addFriend", "&raquo; $_language[add_friend]", AMTShowHide::HIDE);

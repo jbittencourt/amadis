@@ -20,8 +20,6 @@ class AMTLibrary extends AMMain {
       $this->setImgId($_CMAPP['imlang_url']."/top_arquivoscompart.gif");
     else
       $this->setImgId($_CMAPP['imlang_url']."/top_meusarquivos.gif");
-      
-    $this->openNavMenu();
   }
 }
 

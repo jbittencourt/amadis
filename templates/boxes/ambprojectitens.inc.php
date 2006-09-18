@@ -4,7 +4,7 @@
  * @subpackage AMBoxes
  */
 
-class AMProjetoItensBox extends AMColorBox {
+class AMProjectItensBox extends AMColorBox {
   
   private $link = array();
     

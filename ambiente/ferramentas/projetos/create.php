@@ -27,14 +27,14 @@ $_CMAPP['smartform']['language'] = $_language;
 
 //if is editing an project, load the data in the object
 if(!empty($_REQUEST['frm_codeProjeto'])) {
-  $_SESSION['cad_proj'] = new AMProjeto;
+  $_SESSION['cad_proj'] = new AMProject;
   $_SESSION['cad_proj']->codeProject = $_REQUEST['frm_codeProjeto'];
-  $group = $_SESSION['cad_proj']->getGroup();
   try {
     $_SESSION['cad_proj']->load();
   }
   catch(CMObjException $e) { }
 
+  $group = $_SESSION['cad_proj']->getGroup();
 
   if(isset($_REQUEST['frm_codAreas']) && is_array($_REQUEST['frm_codAreas'])) {
     //I use a temp var to store the areas because a construction of the type 
@@ -45,6 +45,8 @@ if(!empty($_REQUEST['frm_codeProjeto'])) {
     }
     $_SESSION['cad_proj']->addVariable("areas",$tmp_areas);
   }
+
+  $_SESSION['cad_foto'] = new AMProjImage;
   $_SESSION['cad_foto']->codeArquivo = (integer) $_SESSION['cad_proj']->image;
   try {
     $_SESSION['cad_foto']->load();
@@ -53,7 +55,6 @@ if(!empty($_REQUEST['frm_codeProjeto'])) {
   }  catch (CMDBQueryError $e) {
     $_SESSION['cad_foto'] = new AMProjImage;
   }     
-
   if(!$group->isMember($_SESSION['user']->codeUser)) {
     CMHTMLPage::redirect($_CMAPP['services_url']."/projetos/projeto.php?frm_codProjeto=$_REQUEST[frm_codeProjeto]&frm_amerror=edit_not_allowed");
   }
@@ -81,14 +82,14 @@ switch($_REQUEST['action']) {
    $fields_rec = array("title","description","status");
       
    //formulary
-   $form = new AMWSmartForm('AMProjeto',"cad_user",$_SERVER['PHP_SELF'],$fields_rec);
+   $form = new AMWSmartForm('AMProject',"cad_user",$_SERVER['PHP_SELF'],$fields_rec);
    $form->setCancelUrl("$_CMAPP[services_url]/projetos/projects.php?clear_cadProj");
 
    if(isset($_SESSION['cad_proj']) && ($_SESSION['cad_proj'] instanceof CMObj)) {
      $form->loadDataFromObject($_SESSION['cad_proj']);
    }else $_SESSION['cad_proj']='';
 
-   $status = AMProjeto::listAvaiableStatus();
+   $status = AMProject::listAvaiableStatus();
    $form->setSelect("status",$status,"code","name");
    $form->addComponent("action",new CMWHidden("action","pag_1"));
 
@@ -103,13 +104,13 @@ switch($_REQUEST['action']) {
 
 
 
-   if((!($_SESSION['cad_proj'] instanceof AMProjeto))||($_SESSION['cad_proj']->state==CMObj::STATE_NEW) || ($_REQUEST['frm_title']!=$_SESSION['cad_proj']->title)) {
-     $proj = new AMProjeto;
+   if((!($_SESSION['cad_proj'] instanceof AMProject))||($_SESSION['cad_proj']->state==CMObj::STATE_NEW) || ($_REQUEST['frm_title']!=$_SESSION['cad_proj']->title)) {
+     $proj = new AMProject;
      $proj->title = $_REQUEST['frm_title'];
      try {
        $proj->load();
        
-       $_SESSION['cad_proj'] = new AMProjeto;
+       $_SESSION['cad_proj'] = new AMProject;
        $_SESSION['cad_proj']->loadDataFromRequest();
        
        header("Location:$_SERVER[PHP_SELF]?frm_amerror=proj_exists");
@@ -118,11 +119,11 @@ switch($_REQUEST['action']) {
      }   
    }
 
-   $form = new AMWSmartForm('AMProjeto',"select_areas",$_SERVER['PHP_SELF']);
+   $form = new AMWSmartForm('AMProject',"select_areas",$_SERVER['PHP_SELF']);
 
-   if(!($_SESSION['cad_proj'] instanceof AMProjeto)) {
+   if(!($_SESSION['cad_proj'] instanceof AMProject)) {
      //if this is the first submit, create an object in the session to store the user data
-     $_SESSION['cad_proj'] = new AMProjeto();
+     $_SESSION['cad_proj'] = new AMProject();
      $_SESSION['cad_proj']->loadDataFromRequest();
      $_SESSION['cad_proj']->time = time();
    }
@@ -137,7 +138,7 @@ switch($_REQUEST['action']) {
    $form->addComponent("acao", new CMWHidden("action","pag_2"));
 
    if($_SESSION['cad_proj'] instanceof CMObj) {
-     if($_SESSION['cad_proj']->state!=CMObj::STATE_DIRTY_NEW) {
+     if($_SESSION['cad_proj']->state!=CMObj::STATE_DIRTY_NEW && $_SESSION['cad_proj']->state!=CMObj::STATE_NEW) {
        try {
 	 $proj_areas = $_SESSION['cad_proj']->listAreas();
 	 $areas->sub($proj_areas);
@@ -177,7 +178,8 @@ switch($_REQUEST['action']) {
  
   
    //image stufff
-   $_SESSION['cad_foto'] = new AMProjImage;
+   if((!$_SESSION['cad_foto'] instanceof AMProjImage))
+     $_SESSION['cad_foto'] = new AMProjImage;
 
    if(!empty($_FILES['frm_foto'])) {
      try {
@@ -251,7 +253,7 @@ switch($_REQUEST['action']) {
        $proj_areas->remove($code);
        continue;
      }
-     $temp = new AMProjetoArea;
+     $temp = new AMProjectArea;
      $temp->codArea = $code;
      $temp->codProjeto = $_SESSION[cad_proj]->codeProject;
      $con->add($code,$temp);

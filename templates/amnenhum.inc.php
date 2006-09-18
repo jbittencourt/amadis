@@ -1,5 +1,4 @@
-<?
-
+<?php
 /**
  * A empty template to pages of AMADIS
  *
@@ -10,7 +9,8 @@
  * @version 1.0
  * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
  */
-class AMNenhum extends AMMain {
+class AMNenhum extends AMMain 
+{
   
 
   public function __construct($mostratitulo="1") {
@@ -24,8 +24,6 @@ class AMNenhum extends AMMain {
 
 
     $this->setImgId($_CMAPP[imlang_url]."/img_top_diario.gif");
-
-    $this->openNavMenu();
   }
 }
 

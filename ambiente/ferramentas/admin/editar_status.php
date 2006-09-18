@@ -30,7 +30,7 @@ if ($_SESSION[usuario]->eMembroCategoria(ADMINISTRADOR_PLATAFORMA)) {
 
   //salva os dados postados do formulario
   if ($_REQUEST[acao] == "A_apaga") {
-    $apaga = new AMProjetoStatus($_REQUEST[frm_codStatus]);
+    $apaga = new AMProjectStatus($_REQUEST[frm_codStatus]);
     $projs = $apaga->listaProjetos();
 
     //nao permite que se apague a area se tiver usuario cadastrado nela
@@ -48,7 +48,7 @@ if ($_SESSION[usuario]->eMembroCategoria(ADMINISTRADOR_PLATAFORMA)) {
 
   if($_REQUEST[acao] == "A_salvar") {
 
-    $save = new AMProjetoStatus($_REQUEST[frm_codStatus]);
+    $save = new AMProjectStatus($_REQUEST[frm_codStatus]);
 
     //verifica se a area jah existe caso esteja sendo cadsatrada uma nova area
     if ($save->nomArea == "") {
@@ -77,13 +77,13 @@ if ($_SESSION[usuario]->eMembroCategoria(ADMINISTRADOR_PLATAFORMA)) {
     //se frm_codStatus nao tiver vazio eh porque um status  jah foi selecionado
     $campos_ausentes = "";
     $campos_hidden = array("codStatus");
-    $form = new WSmartForm("AMProjetoStatus","form1","editar_status.php?acao=A_salvar",$campos_ausentes,$campos_hidden);
+    $form = new WSmartForm("AMProjectStatus","form1","editar_status.php?acao=A_salvar",$campos_ausentes,$campos_hidden);
     $form->setCancelUrl("editar_status.php");
     $form->setDesign(WFORMEL_DESIGN_OVER);
     $form->setLabelClass("fontgray");
 
     if ($_REQUEST[frm_codStatus] != "new") {
-      $area = new AMProjetoStatus($_REQUEST[frm_codStatus]);
+      $area = new AMProjectStatus($_REQUEST[frm_codStatus]);
       $form->loadDataFromObject($area);
     }
     

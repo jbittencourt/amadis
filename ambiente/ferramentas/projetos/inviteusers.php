@@ -24,7 +24,7 @@ if(empty($_REQUEST[frm_codeProjeto])) {
   Header("Location: $_CMAPP[services_url]/projetos/projects.php?frm_amerror=project_code_does_not_exists");
 }
 
-$proj = new AMProjeto;
+$proj = new AMProject;
 $proj->codeProject = $_REQUEST[frm_codeProjeto];
 try {
   $proj->load();
@@ -146,7 +146,9 @@ if(!empty($_avaiable) && $_avaiable->__hasItems()) {
     $box->add('<td>');
     //user picture
     $thumb = new AMUserThumb;
-    $thumb->codeArquivo = $item->foto;
+    $f = $item->foto;
+    If(empty($f)) $f = AMUserFoto::DEFAULT_IMAGE;
+    $thumb->codeArquivo = $f;
     try {
       $thumb->load();
     } catch(CMDBNoRecord $e) { }

@@ -10,6 +10,7 @@
  * @subpackage Core
  * @version 1.0
  * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
+ * @deprected Use AMTextRender instead.
  */
 
 class AMSmileRender extends CMHTMLObj {

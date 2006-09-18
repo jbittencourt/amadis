@@ -9,9 +9,9 @@ class AMUserThumb extends AMThumb {
   }
 
   public function load() {
-    $tmp = $this->codeArquivo;
+    $tmp = $this->codeFile;
     if(empty($tmp)) {
-      $this->codeArquivo = AMUserFoto::DEFAULT_IMAGE;
+      $this->codeFile = AMUserFoto::DEFAULT_IMAGE;
     }
     return parent::load();
   }

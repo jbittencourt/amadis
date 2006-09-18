@@ -16,7 +16,6 @@ class AMTForum extends AMMain {
     $this->setImgId($_CMAPP['imlang_url']."/top_forum.gif");
     $this->requires("forum.css",CMHTMLObj::MEDIA_CSS);
 
-    $this->openNavMenu();
   }
 }
 

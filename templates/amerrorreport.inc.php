@@ -4,7 +4,7 @@
  * 
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  * @access public
- * @subpackage AMErrorReport
+ * @subpackage AMStateMessages
  * @version 1.0
  * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
  * @package AMADIS

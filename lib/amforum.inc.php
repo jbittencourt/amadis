@@ -141,66 +141,6 @@ class AMForum extends CMObj implements  CMACLAppInterface {
 		  self::PRIV_DELETE=>$_lang['privs_delete']);
   }
 
-  /**Get Images from library of a forum
-   *
-   */
-  public static function loadImageLibrary() {
-
-    $lib = new AMuserLibraryEntry($_SESSION['user']->codeUser);
-    $lib = $lib->getLibrary($_SESSION['user']->codeUser);
-
-    $q = new CMQuery(AMArquivo);
-    
-    $j = new CMJoin(CMJoin::INNER);
-    $j->setClass(AMLibraryFiles);
-    $j->on("filesCode = codeArquivo");
-    
-    $q->addJoin($j, "lib");
-    $q->setProjection("AMArquivo::codeArquivo, AMArquivo::tipoMime, AMArquivo::nome, AMArquivo::metaDados, AMLibraryFiles::*");
-    $q->setFilter("libraryCode = $lib AND Arquivo.tipoMime LIKE 'image%'");
-    return $q->execute();
-  }
-  
-  public static function loadProjectImageLibrary() {
-
-    $q = new CMQuery(AMLibraryFiles);
-
-    $j = new CMJoin(CMJoin::LEFT);
-    $j->setClass(AMProjectLibraryEntry);
-    $j->on("AMLibraryFiles::libraryCode = AMProjectLibraryEntry::libraryCode");
-    $j->setFake();
-
-    $j2 = new CMJoin(CMJoin::LEFT);
-    $j2->setClass(AMArquivo);
-    $j2->on("AMArquivo::codeArquivo = AMLibraryFiles::filesCode");
-    
-    $j3 = new CMJoin(CMJoin::LEFT);
-    $j3->setClass(AMProjeto);
-    $j3->on("AMProjectLibraryEntry::projectCode = AMProjeto::codeProject");
-    
-    $j4 = new CMJoin(CMJoin::INNER);
-    $j4->setClass('CMGroup');
-    $j4->on('AMProjeto::codeGroup=CMGroup::codeGroup');
-    $j4->setFake();
-    
-    $j5 = new CMJoin(CMJoin::LEFT);
-    $j5->setClass('CMGroupMember');
-    $j5->on('CMGroupMember::codeGroup=CMGroup::codeGroup');
-    $j5->setFake();
-    
-    $q->addJoin($j, "pjlib");
-    $q->addJoin($j2, "files");
-    $q->addJoin($j3, "proj");
-    $q->addJoin($j4, "grupos");
-    $q->addJoin($j5, "membros");
-    
-    $q->setProjection("AMLibraryFiles::filesCode, AMProjeto::title, AMProjeto::codeProject, AMArquivo::codeArquivo, AMArquivo::tipoMime, AMArquivo::metaDados, AMArquivo::nome");
-    
-    $q->setFilter('CMGroupMember::codeUser = '.$_SESSION['user']->codeUser.' AND CMGroupMember::status="'.CMGroupMember::ENUM_STATUS_ACTIVE.'" AND filesCode != "NULL" AND tipoMime LIKE "image%"');
-    
-    return $q->execute();
-
-  }
 }
 
 

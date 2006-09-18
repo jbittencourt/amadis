@@ -19,11 +19,6 @@ class AMTProjectImage extends AMImageTemplate {
   public function __toString() {
     global $_CMAPP;
 
-    $cod = $this->codeArquivo;
-    if(empty($cod)) {
-      $this->codeArquivo = AMProjImage::DEFAULT_IMAGE;
-    }
-
     $url = $this->getImageURL();
     parent::add("<img src=\"$url\" class=\"project_box\">");
     

@@ -9,7 +9,7 @@
  * show the messages. 
  * 
  * @package AMADIS
- * @subpackage AMError
+ * @subpackage AMStateMessages
  * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
  **/
 

@@ -39,7 +39,7 @@ class AMBUserInvitations extends AMColorBox implements CMActionListener {
     }
 
     try {
-      $proj = new AMProjeto;
+      $proj = new AMProject;
       $proj->codeProject = $_REQUEST['inv_codeProject'];
       $proj->load();
       
@@ -96,7 +96,9 @@ class AMBUserInvitations extends AMColorBox implements CMActionListener {
 	//project image thumbnail
 	parent::add("<tr><td>");
 	$thumb = new AMProjectThumb;
-	$thumb->codeArquivo = $proj->image;
+	$f = $proj->image;
+	if(empty($f)) $f = AMProjImage::DEFAULT_IMAGE;
+	$thumb->codeArquivo = $f;
 	try {
 	  $thumb->load();
 	} catch(CMDBNoRecord $e) {}

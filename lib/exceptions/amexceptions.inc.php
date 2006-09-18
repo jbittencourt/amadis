@@ -15,6 +15,13 @@ class AMEImage extends AMException {
 
 }
 
+class AMExceptionFile extends AMException {
+
+  public function __construct($file) {
+    parent::__construct("Could not load the file $file.");
+  }
+}
+
 class AMUECannotCreateDir extends AMException {
   public function __construct($dirName) {
     parent::__construct("Cannot create dir: ".$dirName);

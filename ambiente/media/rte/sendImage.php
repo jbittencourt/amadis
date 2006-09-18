@@ -22,42 +22,41 @@ if(isset($_REQUEST['action']) && $_REQUEST['action'] == "A_sendImage") {
   $filelib = new AMLibraryFiles;
   $file = new AMImage;
   if(isset($_REQUEST[codeArquivo])) {
-    $file->codeArquivo = $_REQUEST[codeArquivo];
+    $file->codeFile = $_REQUEST[codeArquivo];
     $file->load();
     $file->state = CMObj::STATE_DIRTY;
   }
 
   //preenche os capos do arquivo
   $file->loadFileFromRequest("file");
-  $file->tempo = time();
+  $file->time = time();
   
   if($_FILES['file']['tmp_name'] == "")
     return false;
   
-  $file->dados  = implode("",file($_FILES['file']['tmp_name']));
+  //  $file->data  = implode("",file($_FILES['file']['tmp_name']));
   
   try{
-
     $file->save();
-    $codeArquivo = $file->codeArquivo;
+    $codeArquivo = $file->codeFile;
     if(!isset($_REQUEST[codeArquivo])) {
       $filelib->libraryCode = $lib;
-      $filelib->filesCode = $file->codeArquivo;
+      $filelib->filesCode = $file->codeFile;
       $filelib->time = time();
       $filelib->save();
     }
 
     $thumb = new AMLibraryThumb;
-    $thumb->codeArquivo = $file->codeArquivo;
+    $thumb->codeFile = $file->codeFile;
     $thumb->load();
     $url = $thumb->thumb->getThumbUrl();
-    $meta = explode("|", $file->metaDados);
+    $meta = explode("|", $file->metadata);
     
-    $click = "parent.AddImage('../../media/thumb.php?frm_image=$file->codeArquivo&action=library',document.getElementById('legend').value);";
+    $click = "parent.AddImage('../../media/thumb.php?frm_image=$file->codeFile&action=library',document.getElementById('legend').value);";
     
     $out[] = "<div class='item' style=\"background-image: url('$url');\">";
     $out[] = "  <div>";
-    $out[] = "    $file->nome<br>$meta[0]x$meta[1] px / {$meta[2]}KB";
+    $out[] = "    $file->name<br>$meta[0]x$meta[1] px / {$meta[2]}KB";
     $out[] = "    <p><a onClick=\"var leg = document.getElementById('legenda'); if(leg.style.display =='block') leg.style.display='none'; else leg.style.display='block';\">&raquo;Legenda</a></p>";
     $out[] = "  </div>";
     $out[] = "  <div class='buttonOK'><button onClick=\"$click\"><img src='../images/buttonOK.gif'></button></div>";
@@ -69,9 +68,7 @@ if(isset($_REQUEST['action']) && $_REQUEST['action'] == "A_sendImage") {
     $pag->add(implode("\n", $out));
 
   } catch (CMException $e) {
-    echo $e->getMessage();
-    $pag->add($_language[error_send_file]);
-    notelastquery();
+    $pag->addError($_language[error_send_file]);
   }
 
 }

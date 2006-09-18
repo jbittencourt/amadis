@@ -1,20 +1,5 @@
-<?
-//Check if AMADIS is correctly configured
-if(!file_exists('config.inc.php')) header('Location: install.php');
-else {
-  include('install_suport.php');
-  $basedir = substr(getcwd(), 0, -9);
-  $pBase = getPerms($basedir."/ambiente");
-  $pMedia = getPerms($basedir."/ambiente/media");
-
-  if($pBase == "www" && $pMedia == "www") {
-    echo "<b style='color:red;'> You need unset writable the following diretories:</b><br> \n";
-    echo "<b>Execute the commands below in terminal:</b><br>\n";
-    echo "<h4><i>chmod 755 $basedir/ambiente<br>chmod 755 $basedir/ambiente/media</i></h4>\n";
-    die();
-  }
-}
-$_CMAPP['notrestricted']=1;
+<?php
+$_CMAPP['notrestricted']=true;
 include("config.inc.php");
 include($_CMAPP['path']."/templates/aminicial.inc.php");
 

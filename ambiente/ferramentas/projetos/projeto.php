@@ -10,7 +10,7 @@ $box = new AMTwoColsLayout;
 
 
 if(isset($_REQUEST['frm_codProjeto']) && !empty($_REQUEST['frm_codProjeto'])) {
-     $proj = new AMProjeto;
+     $proj = new AMProject;
      $proj->codeProject = $_REQUEST['frm_codProjeto'];
      try{
        $proj->load();
@@ -58,7 +58,8 @@ $box->add("<font class=\"project_title\">$_language[project]: ".$proj->title."<b
 $box->add("<img src=\"".$_CMAPP['images_url']."/dot.gif\" border=\"0\" height=\"10\" width=\"1\"><br>",
 	  AMTwoColsLayout::LEFT);
 
-$box->add(new AMTProjectImage($proj->image),
+$image = AMProjectImage::getImage($proj);
+$box->add($image,
 	  AMTwoColsLayout::LEFT);
 
 $box->add("      <br>",

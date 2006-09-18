@@ -1,5 +1,7 @@
 <?
 /**
+ * Template for the webfolio.
+ *
  * @package AMADIS
  * @subpackage AMTemplates
  */
@@ -14,8 +16,6 @@ class AMTWebfolio extends AMMain {
     
     $this->requires("webfolio.css",CMHTMLObj::MEDIA_CSS);
     $this->setImgId($_CMAPP['imlang_url']."/$type");
-
-    $this->openNavMenu();
 
   }
 }

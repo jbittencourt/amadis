@@ -39,13 +39,13 @@ switch($_REQUEST['frm_upload_type']) {
    $upload_type = "name=frm_codeProjeto value=$_REQUEST[frm_codeProjeto]";
 
    try {
-     $proj = new AMProjeto;
+     $proj = new AMProject;
      $proj->codeProject = $_REQUEST['frm_codeProjeto'];
      $proj->load();
 
      $pag->setTitle($proj->title);
      $thumb = new AMUploadThumb;
-     $thumb->codeArquivo = $proj->image;
+     $thumb->codeArquivo = ($proj->image==0 ? 2: $proj->image);
      $thumb->load();
      $pag->setThumb($thumb->thumb->getThumbURL());
 

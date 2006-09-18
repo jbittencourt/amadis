@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Short descrition
  *
@@ -9,19 +9,19 @@
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  **/
 
-class AMProjectForums extends CMObj {
+class AMProjectForums extends CMObj
+{
+    public function configure()
+    {
+        $this->setTable("ProjectForums");
 
+        $this->addField("codeProject",CMObj::TYPE_INTEGER,"0",1,0,0);
+        $this->addField("codeForum",CMObj::TYPE_INTEGER,"0",1,0,0);
 
-   public function configure() {
-     $this->setTable("ProjectForums");
+        $this->addPrimaryKey("codeProject");
+        $this->addPrimaryKey("codeForum");
 
-     $this->addField("codeProject",CMObj::TYPE_INTEGER,"0",1,0,0);
-     $this->addField("codeForum",CMObj::TYPE_INTEGER,"0",1,0,0);
-
-     $this->addPrimaryKey("codeProject");
-     $this->addPrimaryKey("codeForum");
-
-  }
+    }
 }
 
 //put your functions here

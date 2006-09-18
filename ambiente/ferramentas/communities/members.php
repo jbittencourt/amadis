@@ -36,6 +36,7 @@ $group = $community->getGroup();
 $active_members = $group->listActiveMembers();
 $retired_members = $group->listRetiredMembers();
 
+
 $pag->add("<br><span class=\"titcomunidade\">$_language[community]: ".$community->name."<br></span>");
 $pag->add("<a  href=\"".$_CMAPP[services_url]."/communities/community.php?frm_codeCommunity=".$community->code."\" class=\"green\">$_language[back_to_community]</a>");
 $pag->add("<br><br>");

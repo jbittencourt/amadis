@@ -1,8 +1,6 @@
 <?
 include "../../config.inc.php"; 
 
-include("$_CMAPP[path]/templates/amtfotolibrary.inc.php");
-
 $_language = $_CMAPP['i18n']->getTranslationArray("library");
 
 $page = new AMTLibrary("$_REQUEST[frm_type]");
@@ -15,11 +13,12 @@ switch($_REQUEST["frm_type"]) {
  case "project" :
    $libprojz = new AMProjectLibraryEntry($_REQUEST["frm_codeProjeto"]);
    $libprojz->libraryExist();
-   $proj = new AMProjeto;
+   $proj = new AMProject;
    $proj->codeProject = $_REQUEST["frm_codeProjeto"];
    $proj->load();
    $titulo = "Projeto $proj->title";
    $imagem = $proj->image;
+   if(empty($imagem)) $imagem = AMProjImage::DEFAULT_IMAGE;
    //pega o id da lib do proj
    $lib = $proj->getLibrary();
    break;
@@ -30,10 +29,11 @@ switch($_REQUEST["frm_type"]) {
    $a->libraryExist(); //testa se existe a biblioteca desse usuario e se nao, ele cria ela
    $user = $_SESSION["user"]->codeUser;
    $titulo = $_SESSION["user"]->name;
-   $imagem = $_SESSION["user"]->foto;
+   $imagem = AMUserPicture::getImage($_SESSION["user"]);
    //pega o id da bib do user
    $lib = $a->getLibrary("$user");
    break;
+
 }
 
 $library = new AMLibrary;
@@ -56,15 +56,13 @@ switch( $_REQUEST["opcao"] ){
    $page->addMessage($_language["file_successful_delete"]);
    break;
  case "download":
-   $file = new AMArquivo;
-   $file->codeArquivo = $_REQUEST["codeArquivo"];
+   $file = new AMFile;
+   $file->codeFile = $_REQUEST["codeArquivo"];
    $file->load();
-   $file->nome = addslashes($file->nome);
-   header("Content-Type: application/octet-stream");
-   header("Content-Disposition:attachment; filename=$file->nome");
-   header("Content-Length: ".$file->tamanho);
-   header("Content-Transfer-Encoding: binary");
-   echo $file->dados;
+
+   $down = new AMTFileDownload($file);
+   echo $down;
+
    break;
  case "share":
    break;
@@ -83,7 +81,7 @@ $count_all = $count_img + $count_text + $count_audio + $count_video + $count_oth
 // viewer starts at this point
 
 $image1 = new AMLibraryThumb;
-$image1->codeArquivo = $imagem;
+$image1->codeFile = $imagem;
 $image1->load();	  	
 
 $ver = $_REQUEST["ver"];
@@ -173,7 +171,7 @@ if($count_all != 0 ){
 	  $conteudo .= "</tr>";
 	  foreach($ret as $item){
 	    //arruma os icones..
-	    $mimeType = explode("/",$item->tipoMime);
+	    $mimeType = explode("/",$item->mimetype);
 	    switch($mimeType[1]){
 	    case "pdf":
 	      $icon = "$_CMAPP[media_url]/images/icon_pdf.gif";
@@ -233,7 +231,7 @@ if($count_all != 0 ){
 	      $cor = 1;
 	    }
 	    //arruma o tamanho do arquivo para mostra em kb, nao em bytes.
-	    $size = $item->tamanho / 1024;	    
+	    $size = $item->size / 1024;	    
 	    $size = explode(".",$size); 
 	    if($size[0] == 0){
 	      $resto = str_split($size[1],1);
@@ -245,25 +243,25 @@ if($count_all != 0 ){
 	      }
 	    }
 	    //------
-	    $conteudo .= "<tr id='library_item_$item->codeArquivo' >";
-	    $js = "Library_toogleHighlightLine('$item->codeArquivo','$cor_css')";
+	    $conteudo .= "<tr id='library_item_$item->codeFile' >";
+	    $js = "Library_toogleHighlightLine('$item->codeFile','$cor_css')";
 	    $js = "onMouseover=\"$js\" onMouseout=\"$js\"";
 	    $conteudo .= "<td class='blt_col_$cor_css' $js width='13'><img src='$icon'></td>";
-	    $conteudo .= "<td class='blt_col_$cor_css' $js id='first_column'>&raquo; $item->nome</td>";
-	    $conteudo .= "<td class='blt_col_$cor_css' $js> ".date("d/m/Y",$item->tempo)."</td>";
+	    $conteudo .= "<td class='blt_col_$cor_css' $js id='first_column'>&raquo; $item->name</td>";
+	    $conteudo .= "<td class='blt_col_$cor_css' $js> ".date("d/m/Y",$item->time)."</td>";
 	    $conteudo .= "<td class='blt_col_$cor_css' $js> $size[0]  Kb</td>";
-	    $link = "$_SERVER[PHP_SELF]?frm_type=$_REQUEST[frm_type]&frm_codeProjeto=$_REQUEST[frm_codeProjeto]&opcao=delete&id=$item->codeArquivo";
-	    $conteudo .= "<td class='blt_col_$cor_css' $js><a href='$_SERVER[PHP_SELF]?frm_type=$_REQUEST[frm_type]&frm_codeProjeto=$_REQUEST[frm_codeProjeto]&opcao=download&codeArquivo=$item->codeArquivo'><img src='$_CMAPP[media_url]/images/img_blt_ico_baixar.gif' width='17' height='14' alt='DOWNLOAD' border='0' hspace='2'></a><img onclick='Library_delFile($item->codeArquivo,\"$link\");' src='$_CMAPP[media_url]/images/img_blt_ico_excluir.gif' width='17' height='14' alt='EXCLUIR' border='0' class='cursor'>";
+	    $link = "$_SERVER[PHP_SELF]?frm_type=$_REQUEST[frm_type]&frm_codeProjeto=$_REQUEST[frm_codeProjeto]&opcao=delete&id=$item->codeFile";
+	    $conteudo .= "<td class='blt_col_$cor_css' $js><a href='$_SERVER[PHP_SELF]?frm_type=$_REQUEST[frm_type]&frm_codeProjeto=$_REQUEST[frm_codeProjeto]&opcao=download&codeFile=$item->codeFile'><img src='$_CMAPP[media_url]/images/img_blt_ico_baixar.gif' width='17' height='14' alt='DOWNLOAD' border='0' hspace='2'></a><img onclick='Library_delFile($item->codeFile,\"$link\");' src='$_CMAPP[media_url]/images/img_blt_ico_excluir.gif' width='17' height='14' alt='EXCLUIR' border='0' class='cursor'>";
 
-	    $share = $library->isShared($item->codeArquivo);
+	    $share = $library->isShared($item->codeFile);
 
 	    if($share == "true"){	      
 	      $eyeicon = "img_blt_ico_eye_on.gif";
-	      $id_E = "shared_$item->codeArquivo";
+	      $id_E = "shared_$item->codeFile";
 	    }
 	    else{
 	      $eyeicon = "img_blt_ico_eye_off.gif";
-	      $id_E = "unshared_$item->codeArquivo";
+	      $id_E = "unshared_$item->codeFile";
 	    }
 	    $conteudo .= "<img src='$_CMAPP[media_url]/images/$eyeicon' id='$id_E' onClick = \"AMShare.share(this.id, AMSharedCallBack.onShare)\" alt='COMPARTILHAR' border='0' class='cursor'>";
 
@@ -291,23 +289,23 @@ if($count_all != 0 ){
 	    }
 	    $broke_line++;	   
 	    $thumb = new AMLibraryThumb;
-	    $thumb->codeArquivo = $item->codeArquivo;
+	    $thumb->codeFile = $item->codeFile;
 	    $thumb->load();	  	    
 	    
 	    $conteudo .=  "<td class='blt_col_$cor_css' width='120' align='center'><br>";
 	    $page->add($conteudo);
 	    $page->add($thumb->getView());
-	    $conteudo = "<br>$item->nome<br> <a href='$_SERVER[PHP_SELF]?frm_type=$_REQUEST[frm_type]&frm_codeProjeto=$_REQUEST[frm_codeProjeto]&opcao=download&codeArquivo=$item->codeArquivo'><img src='$_CMAPP[media_url]/images/img_blt_ico_baixar.gif'></a><img onclick='Library_delFile($item->codeArquivo,\"$link\");' src='$_CMAPP[media_url]/images/img_blt_ico_excluir.gif' class='cursor'>";
+	    $conteudo = "<br>$item->name<br> <a href='$_SERVER[PHP_SELF]?frm_type=$_REQUEST[frm_type]&frm_codeProjeto=$_REQUEST[frm_codeProjeto]&opcao=download&codeFile=$item->codeFile'><img src='$_CMAPP[media_url]/images/img_blt_ico_baixar.gif'></a><img onclick='Library_delFile($item->codeFile,\"$link\");' src='$_CMAPP[media_url]/images/img_blt_ico_excluir.gif' class='cursor'>";
 	    
-	    $share = $library->isShared($item->codeArquivo);
+	    $share = $library->isShared($item->codeFile);
 	    
 	    if($share == "true"){	      
 	      $eyeicon = "img_blt_ico_eye_on.gif";
-	      $id_E = "shared_$item->codeArquivo";
+	      $id_E = "shared_$item->codeFile";
 	    }
 	    else{
 	      $eyeicon = "img_blt_ico_eye_off.gif";
-	      $id_E = "unshared_$item->codeArquivo";
+	      $id_E = "unshared_$item->codeFile";
 	    }
 	    $conteudo .= "<img src=$_CMAPP[media_url]/images/$eyeicon id='$id_E' onClick = \"AMShare.share(this.id)\" alt='COMPARTILHAR' border='0' class='cursor'>";
 	    

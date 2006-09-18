@@ -21,12 +21,13 @@
  * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
  **/
 
-abstract class  AMImageTemplate extends CMHTMLObj {
+abstract class  AMImageTemplate extends CMHTMLObj 
+{
 
   const METHOD_DB=0;
   const METHOD_SESSION=1;
   
-  protected $codeArquivo;
+  protected $codeFile;
   private $imageObj;
   private $method;
 
@@ -34,23 +35,24 @@ abstract class  AMImageTemplate extends CMHTMLObj {
    * Constructor of the class.
    *
    * There are some observations that the developer should be aware when extending this
-   * class. Since PHP 5 don't support polimorphism, the value of $code can be interpreted 
-   * in two diferent ways. If $method is METHOD_DB, $code is the code of a file in the
-   * database, modeled by the class AMArquivo. If the $method is METHOD_SESSION, $code is
+   * class. Since PHP 5 don't support polimorphism, the value of $value can be interpreted 
+   * in two diferent ways. If $method is METHOD_DB, $value is the code of a file in the
+   * database, modeled by the class AMFile. If the $method is METHOD_SESSION, $value is
    * interpreted as a AMImage.
    *
-   * @param mixed $code If method is METHOD_DB, the value is code of the file in the databe. Otherwise is an object of the type AMArquivo
+   * @param mixed $value If method is METHOD_DB, the value is code of the file in the databe. Otherwise is an object of the type AMFile
    * @param integer $method The method that should be used to handle the vizualization of the image
    **/
-  public function __construct($code,$method=self::METHOD_DB) {
+  public function __construct($value,$method=self::METHOD_DB) 
+  {
     parent::__construct();
     $this->method = $method;
     
     if($method==self::METHOD_DB) {
-      $this->codeArquivo = $code;
+      $this->codeFile = $value;
     }
     elseif($method==self::METHOD_SESSION) {
-      $this->imageObj= $code;
+      $this->imageObj= $value;
     }
     else {
       Throw new AMException("Image render method not recognized.");
@@ -60,13 +62,16 @@ abstract class  AMImageTemplate extends CMHTMLObj {
 
   /**
    * Return the URL to the image, considering the method choosen by the user.
+   * 
+   * @return string The url to the image.
    **/
-  public function getImageURL() {
+  public function getImageURL() 
+  {
     global $_CMAPP;
     $url = "";
     switch($this->method) {
     case self::METHOD_DB:
-      $url = "$_CMAPP[media_url]/imagewrapper.php?method=db&frm_codeArquivo=".$this->codeArquivo;
+      $url = "$_CMAPP[media_url]/imagewrapper.php?method=db&frm_codeArquivo=".$this->codeFile;
       break;
     case self::METHOD_SESSION:
       $rand = rand(0,100000);
@@ -81,4 +86,3 @@ abstract class  AMImageTemplate extends CMHTMLObj {
 }
 
 
-?>

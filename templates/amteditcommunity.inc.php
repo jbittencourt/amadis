@@ -10,8 +10,6 @@ class AMTEditCommunity extends AMMain {
 
     $this->setImgId($_CMAPP['imlang_url']."/top_editar_comunidade.gif");
 
-    $this->openNavMenu();
-
   }
 }
 

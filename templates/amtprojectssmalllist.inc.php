@@ -1,5 +1,4 @@
 <?
-
 /**
  * Small project list, to show in AMADIS initial page
  *
@@ -28,9 +27,7 @@ class AMTProjectsSmallList extends CMHTMLObj {
       foreach($this->items as $proj) {
 	parent::add("<tr>");
 	parent::add("<td>");
-	$img = new AMProjectThumb(true);
-	$img->codeArquivo = $proj->image;
-	$img->load();
+	$img = AMProjectImage::getThumb($proj,true);
 	parent::add($img->getView());
 	parent::add("<td>");
 	$text = substr($proj->description,0,50);

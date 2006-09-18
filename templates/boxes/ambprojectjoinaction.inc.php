@@ -12,7 +12,7 @@ class AMBProjectJoinAction implements AMAjax {
     $_language = $_CMAPP['i18n']->getTranslationArray('projects');
 
 
-    $proj = new AMProjeto;
+    $proj = new AMProject;
     $proj->codeProject = $project;
     try {
       $proj->load();

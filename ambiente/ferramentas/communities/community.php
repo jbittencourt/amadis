@@ -15,6 +15,7 @@ if(!empty($_REQUEST[frm_codeCommunity])) {
   try{
     $community->load();
     $group = $community->getGroup();
+    $aco = $community->getACO();
   }catch(CMDBNoRecord $e){
     $_REQUEST[frm_amerror] = "community_not_exists";    
     echo $pag;
@@ -29,15 +30,22 @@ if(!empty($_REQUEST[frm_codeCommunity])) {
   die();
 }
 
-
 //checks if the user is a member of the community
 if(!empty($_SESSION[user])) {
   $isMember = $group->isMember($_SESSION[user]->codeUser);
 }
 
-$_CMAPP[smartform][language] = $_language;
 
-if($isMember) {
+if($_SESSION['user'] instanceof CMUser) {
+  $canAdmin = $aco->testUserPrivilege($_SESSION['user']->codeUser,
+				      AMCommunities::PRIV_ADMIN);
+  $canAddUsers = $aco->testUserPrivilege($_SESSION['user']->codeUser,
+					 AMCommunities::PRIV_ADD_USERS);
+} else {
+  $canAdmin = false;
+  $canAddUsers = false;
+}
+if($canAdmin || $canAddUser) {
   $req = new AMBCommunityRequest($community);
   if($req->hasRequests()) { 
     $req->setWidth($box->getWidth());
@@ -55,7 +63,8 @@ if($isMember) {
 $box->add("<font class=\"txttitcomunidade\">$_language[community]:<br> ".$community->name."<br>", AMTwoColsLayout::LEFT);
 $box->add("<img src=\"".$_CMAPP[images_url]."/dot.gif\" border=\"0\" height=10 width=1><br>", AMTwoColsLayout::LEFT);
 
-$box->add(new AMTCommunityImage($community->image), AMTwoColsLayout::LEFT);
+$image = AMCommunityImage::getImage($community);
+$box->add(new AMTCommunityImage($image), AMTwoColsLayout::LEFT);
 
 $box->add("<br>", AMTwoColsLayout::LEFT);
 $box->add("<img src=\"".$_CMAPP[images_url]."/dot.gif\" border=\"0\" height=10 width=1><br>", AMTwoColsLayout::LEFT);
@@ -91,14 +100,9 @@ if($_SESSION[user] instanceof CMUser) {
    *CAIXA DE EDICAO DO PROJETO
    */
   if($isMember){
-    if($community->isAdmin($_SESSION[user]->codeUser)) {
-      $communityEdit = new AMBCommunityEdit;
-      $box->add($communityEdit,AMTwoColsLayout::RIGHT);
-    }
-  }
-  
-  
-  if(!$group->isMember($_SESSION[user]->codeUser)) {
+    $communityEdit = new AMBCommunityEdit($community);
+    $box->add($communityEdit,AMTwoColsLayout::RIGHT);
+  } else {
     $box->add(new AMBCommunityJoin($community),AMTwoColsLayout::RIGHT);
   }
   

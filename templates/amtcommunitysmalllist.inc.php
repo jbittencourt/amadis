@@ -28,10 +28,12 @@ class AMTCommunitySmallList extends CMHTMLObj {
       foreach($this->items as $comm) {
 	parent::add("<tr>");
 	parent::add("<td>");
-	$img = new AMCommunityThumb(true);
-	$img->codeArquivo = $comm->image;
-	$img->load();
-	parent::add($img->getView());
+	try {
+	  $img = AMCommunityImage::getThumb($comm,true);
+	  parent::add($img->getView());
+	}catch(CMException $e) {
+
+	}
 	parent::add("<td>");
 	$text = substr($comm->description,0,50);
 	if($text!=$comm->description) {

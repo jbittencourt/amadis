@@ -14,7 +14,7 @@ switch($_REQUEST[frm_type]) {
    
    $libprojz = new AMProjectLibraryEntry($_REQUEST["frm_codeProjeto"]);
    $libprojz->libraryExist();
-   $proj = new AMProjeto;
+   $proj = new AMProject;
    $proj->codeProject = $_REQUEST["frm_codeProjeto"];
    $proj->load();
    $box = new AMBProjLibraryShare($proj, 0, 0);

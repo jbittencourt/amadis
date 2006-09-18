@@ -13,9 +13,24 @@ class AMBLogin extends AMMenuBox {
   public function __construct() {
     parent::__construct();
     self::requires("login.css",CMHTMLObj::MEDIA_CSS);
+
+    
+    //variables of the request that should not be propagated to the
+    //next request
+    $erase_vars[] = 'AMADIS';
+    $erase_vars[] = 'frm_username';
+    $erase_vars[] = 'frm_password';
+    $erase_vars[] = 'frm_ammessage';
+    $erase_vars[] = 'frm_amerror';
+    $erase_vars[] = 'frm_amalert';
+
+    //the login box propagate the request vars to the login
+    //so the user doesn't need can remain visiting the current
+    //page withou lost the context. If only test for variables that should
+    //the propagate in the $erase_vars array
     foreach($_REQUEST as $k=>$item) {
-      if($k != "AMADIS" && $k != "frm_username" && $k != "frm_password" && $k != "submit") {
-	$this->requestVars[] = "<input type=\"hidden\" name=\"$k\" value=\"$item\">";
+      if(!in_array($k,$erase_vars)) {
+	$this->requestVars[$k] = $item;
       }
     }
   }
@@ -69,8 +84,8 @@ class AMBLogin extends AMMenuBox {
     parent::add("</table></div>");
 
     if(!empty($this->requestVars)) {
-      foreach($this->requestVars as $item) {
-	parent::add($item);
+      foreach($this->requestVars as $k=>$item) {
+	parent::add("<input type=\"hidden\" name=\"$k\" value=\"$item\">");
       }
     }
     

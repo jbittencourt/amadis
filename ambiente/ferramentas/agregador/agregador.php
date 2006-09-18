@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Visualization of the RSS Feeds to projects
  *
@@ -21,7 +21,7 @@ $pag->loadDynapi();
 $pag->addNotification(AMMain::getChangePwButton(1));
 //checks if the user is a member of the project
 if(isset($_REQUEST['frm_codProjeto']) && !empty($_REQUEST['frm_codProjeto'])) {
-  $proj = new AMProjeto;
+  $proj = new AMProject;
   $proj->codeProject = $_REQUEST['frm_codProjeto'];
   try{
     $proj->load();

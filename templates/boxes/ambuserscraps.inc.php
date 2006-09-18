@@ -78,8 +78,8 @@ class AMBUserScraps extends AMPageBox implements CMActionListener {
 	$thumb->load();
       
 	$box->add($thumb->getView());
-
 	$box->add('<td valign=top>');
+	$men->author[0]->codeUser=$men->codeUser;
 	$box->add(new AMTUserInfo($men->author[0]));
 	$box->add(':<br>'.$men->message);
 	$box->add('<td valign=top>');

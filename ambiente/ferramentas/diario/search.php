@@ -7,7 +7,7 @@ $_language = $_CMAPP[i18n]->getTranslationArray("diary");
 $_CMAPP[smartform] = array();
 $_CMAPP[smartform][language] = $_language;
 
-$items = AMAmbiente::listDiaries();
+$items = $_SESSION['environment']->listDiaries();
 
 
 $pag = new AMTDiario();

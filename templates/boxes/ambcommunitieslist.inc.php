@@ -60,21 +60,8 @@ class AMBCommunitiesList extends AMPageBox implements CMActionListener {
 
 	$box->add("<tr id='$id' class=\"community_list_line\"><td>");
 
-	$f = $item->image;
-	if($f!=0) {
-	  $thumb = new AMCommunityThumb;
-	  $thumb->codeArquivo = $item->image;
-	  try {
-	    $thumb->load();
-	    $box->add($thumb->getView());
-	  }
-	  catch(CMDBException $e) {
-	    echo $e; die();
-	  }
-	}
-	else {
-	  $box->add("&nbsp;");
-	}
+	$thumb = AMCommunityImage::getThumb($item->image);
+	$box->add($thumb->getView());
 
 
 	$box->add("<td width=20%>");

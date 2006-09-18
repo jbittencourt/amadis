@@ -116,27 +116,7 @@ function AM_changeImage(id,varImg) {
 }
 
 var AM_editorButtons = [];
-/*  Button example to HTMLArea toolbar
- *
- *  button = {name:"btn-name",        //button name
- *	    separator: "linebreak",   //toolbar separator [separator, space, linebreak, textindicator]
- *	    properties: ["btn-label", //button label
- *			 "tooltip",   //tooltip
- *			 "image.gif", //button image
- *			 false        //disable in text mode
- *	    ],
- *	    regInfo: {
- *	      id       : "btn-name",         // the ID of your button
- *	      tooltip  : "tip",              // the tooltip
- *	      image    : "image.gif",        // image to be displayed in the toolbar
- *	      textMode : false,              // disabled in text mode
- *	      action   : function(editor) {  // called when the button is clicked
- *		//put your action script here
- *	      },
- *	      // will be disabled if outside a <p> element
- *	    }
- * };
- */
+
 function AM_registerEditorButtons(button) {
   
   if(typeof button != "object") {
@@ -183,7 +163,6 @@ function AM_addError(html_box) {
 
   error_div.innerHTML =   AM_addCSSMessage() + html_box;
 }
-
 
 function AM_addMessage(html_box) {
   var error_div  = AM_getElement('messages_area');

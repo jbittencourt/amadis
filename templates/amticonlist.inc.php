@@ -44,33 +44,31 @@ class AMTIconList extends CMHTMLObj {
 	switch($this->type) {
 	  /* PROJECTS */
 	case self::PROJECT_LIST:
-	  $f = $item->image;
+	  $f = AMProjectImage::getImage($item);;
 	  $name = $item->title;
 	  $url = $_CMAPP['services_url'].'/projetos/projeto.php?frm_codProjeto='.$item->codeProject;
 	  break;
 	  /* COMMUNITIES */
 	case self::COMMUNITY_LIST:
-	  $f = $item->image;
+	  $f = AMCommunityImage::getImage($item);
 	  $name = $item->name;
 	  $url = $_CMAPP['services_url'].'/communities/community.php?frm_codeCommunity='.$item->code;
 	  break;
 	case self::USER_LIST:
-	  $f = $item->foto;
+	  $f = AMUserPicture::getImage($item);
 	  $name = $item->name;
 	  $url = $_CMAPP['services_url'].'/webfolio/userinfo_details.php?frm_codeUser='.$item->codeUser;
 	  break;
 	}
 
-	if($f!=0) {
-	  $thumb = new AMIconThumb;
-	  $thumb->codeArquivo = $f;
-	  try {
-	    $thumb->load();
-	    $icon = $thumb->getView();
-	  }
-	  catch(CMDBException $e) {
-	    echo $e; die();
-	  }
+	$thumb = new AMIconThumb;
+	$thumb->codeFile = $f;
+	try {
+	  $thumb->load();
+	  $icon = $thumb->getView();
+	}
+	catch(CMDBException $e) {
+	  echo $e; die();
 	}
 	
 

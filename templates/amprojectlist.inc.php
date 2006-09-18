@@ -1,7 +1,7 @@
 <?
 
 /**
- * List of the projects
+ * A list of projects inside an AMTCadBox.
  *
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  * @access public
@@ -9,14 +9,21 @@
  * @subpackage AMProject
  * @version 1.0
  * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
- * @see AMListBox
+ * @see AMListBox, AMTCadBox
  */
 class AMProjectList extends AMListBox {
 
+
+  /**
+   *
+   * @param CMContainter $item A container of projects to be listed.
+   * @param string $title The title of the box.
+   * @param integer $type The type the box. See AMTCabox for possible values.
+   *
+   * @see AMTCadbox
+   **/
   public function __construct(CMContainer $items,$title,$type=AMTCadBox::CADBOX_SEARCH) {
-
     parent::__construct($items,$title, self::PROJECT, $type);
-
   }
   
 
@@ -36,22 +43,9 @@ class AMProjectList extends AMListBox {
 	parent::add("<tr id=\"$id\" class=\"project_list_line\">");
 	  
 	parent::add("<td>");
-	$f = $item->image;
-	if($f!=0) {
-	  $thumb = new AMProjectThumb;
-	  $thumb->codeArquivo = $item->image;
-	  try {
-	    $thumb->load();
-	    parent::add($thumb->getView());
-	  }
-	  catch(CMDBException $e) {
-	    echo $e; die();
-	  }
-	}
-	else {
-	  parent::add("&nbsp;");
-			
-	}
+	
+	$thumb = AMProjectImage::getThumb($item);
+	parent::add($thumb->getView());
 	  
 
 	parent::add("<td width=40%>");

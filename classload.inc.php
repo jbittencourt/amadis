@@ -9,7 +9,7 @@ function __autoload($class_name) {
   try {
     __cmautoload($class_name);
   } catch(CMException $e) {
-    include($filename);
+    @include($filename);
   }
 }
 

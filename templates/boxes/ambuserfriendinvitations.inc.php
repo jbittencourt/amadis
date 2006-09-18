@@ -108,7 +108,9 @@ class AMBUserFriendInvitations extends AMColorBox implements CMActionListener {
 	//user image thumbnail
 	parent::add("<tr><td>");
 	$thumb = new AMUserThumb;
-	$thumb->codeArquivo = $friend->foto;
+	$f  = $friend->foto;
+	if(empty($f)) $f = AMUserFoto::DEFAULT_IMAGE;
+	$thumb->codeArquivo = $f;
 	try {
 	  $thumb->load();
 	  parent::add($thumb->getView());

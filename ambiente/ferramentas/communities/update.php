@@ -46,8 +46,7 @@ if(!($_SESSION['updating_community'] instanceof AMCommunities)){
   $_SESSION['cad_image'] = new AMCommunityImage;
 
   if(!empty($temp)) {
-    
-    $_SESSION['cad_image']->codeArquivo = (integer) $_SESSION['updating_community']->image;
+    $_SESSION['cad_image']->codeFile = (integer) $_SESSION['updating_community']->image;
     $_SESSION['cad_image']->load();
   };
 }
@@ -105,15 +104,20 @@ switch($_REQUEST[action]) {
    
    $_SESSION['updating_community']->loadDataFromRequest();
 
+   //unserialize the image
+   $foto = unserialize($_SESSION['cad_image']);
+   if($foto==false) $foto = $_SESSION['cad_image'];
+   $_SESSION['cad_image'] = $foto;
+ 
    //image stufff
    if(!empty($_FILES['frm_image'])) {
      try {
-       $_SESSION['cad_image']->loadImageFromRequest("frm_image");
+       $_SESSION['cad_image']->loadImageFromRequest('frm_image');
      } catch(AMEImage $e) {
        header("Location:$_SERVER[PHP_SELF]?action=pag_1&frm_amerror=invalid_image_type");
      }
    };
-
+   
    $view = $_SESSION['cad_image']->getView();
    $cadBox->add("<p align=center>");
    $cadBox->add($view);
@@ -145,14 +149,14 @@ switch($_REQUEST[action]) {
    if($foto==false) $foto = $_SESSION['cad_image'];
 
    if(($foto->state==CMObj::STATE_DIRTY) || ($foto->state==CMObj::STATE_DIRTY_NEW)) {
-     $foto->tempo = time();
+     $foto->time = time();
      try {
        $foto->save(); 
      }
      catch(CMDBException $e) {
        header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_picture");
      }
-     $_SESSION['updating_community']->image = (integer) $foto->codeArquivo;
+     $_SESSION['updating_community']->image = (integer) $foto->codeFile;
    }
    
    //if arrives here, we havnt changes in the object

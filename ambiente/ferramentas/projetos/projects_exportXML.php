@@ -41,6 +41,8 @@ Foreach($projects as $proj) {
   $xproj->appendChild($dom->createElement('hits',utf8_encode($proj->hits)));
   $xproj->appendChild($dom->createElement('members',utf8_encode($proj->numMembers)));
   $xproj->appendChild($dom->createElement('recentness',utf8_encode($proj->time)));
+  $xproj->appendChild($dom->createElement('forumMessages',utf8_encode($proj->numForumMessages)));
+  $xproj->appendChild($dom->createElement('mostRecentForumMessage',utf8_encode($proj->lastTimeForumMessage)));
   $root->appendChild($xproj);
 }
 

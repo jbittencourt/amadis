@@ -29,7 +29,7 @@ var AMBGroupRequestActionCallBack = {
       }
     }
     else {
-      AM_addMessage(result.message);
+      AM_addError(result.message);
     }
   },
 

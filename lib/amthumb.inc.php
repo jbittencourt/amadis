@@ -7,7 +7,7 @@ abstract class AMThumb extends AMImage {
   
   public function load() {
 
-    $this->name_file = "image_".$this->maxX."_".$this->maxY."_".$this->codeArquivo.".png";
+    $this->name_file = "image_".$this->maxX."_".$this->maxY."_".$this->codeFile.".png";
     if(!$this->checkThumbExists()) {
       parent::load();
       $this->save();
@@ -29,11 +29,19 @@ abstract class AMThumb extends AMImage {
   public function save() {
     global $_CMAPP;
 
-    $this->resize($this->maxX, $this->maxY);
-    $_conf = $_CMAPP['config']->getObj();
+    try {
+      $this->resize($this->maxX, $this->maxY);
+    } catch(AMException $e) {
+      /**
+       * @todo Add an error image when the thumbnail cannot be genereated.
+       **/
+      return false;
+    }
+
+    $_conf = $_CMAPP['config'];
     $path =  (string) $_conf->app[0]->paths[0]->thumbnails;
     $image = fopen($path.'/'.$this->name_file, "w+");
-    $w = fwrite($image, $this->dados);
+    $w = fwrite($image, $this->data);
     fclose($image);
   }
 
@@ -44,7 +52,7 @@ abstract class AMThumb extends AMImage {
 
   protected function checkThumbExists() {
     global $_CMAPP;
-    $_conf = $_CMAPP['config']->getObj();
+    $_conf = $_CMAPP['config'];
     $path =  (string) $_conf->app[0]->paths[0]->thumbnails;
     if(file_exists($path.'/'.$this->name_file)) return true;
     else return false;

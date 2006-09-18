@@ -69,7 +69,7 @@ class AMBMyForums extends CMHtmlObj {
 
       parent::add("<tr>");
       parent::add("<td class=\"forum_project_col\" id=\"a1\"><a href=\"$link$item->code\">$item->name</a></td>");
-      parent::add("<td class=\"forum_project_col\" id=\"a2\" align=\"center\">$item->newMessages</td>");
+      parent::add("<td class=\"forum_project_col\" id=\"a2\" align=\"center\">$item->numMessages</td>");
       parent::add("</tr>");
 
       if($line_color_name == "01") {

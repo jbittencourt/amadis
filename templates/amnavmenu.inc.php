@@ -1,6 +1,6 @@
-<?
+<?php
 /**
- * Vertical Menu, with link to webfolio, blog, files, etc. 
+ * Vertical Menu that point to the user personal tools and links.
  *
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  * @access public
@@ -12,12 +12,15 @@
  * @see AMMain, AMMainMenu
  */
 
-class  AMNavMenu extends CMHTMLObj {
+class  AMNavMenu extends CMHTMLObj
+{
     public $locked;
     private $lines;
 
 
-    function __construct() {
+
+    function __construct()
+    {
         global $_CMAPP,$_language;
         parent::__construct();
     //precisa pq usa o wtreenode
@@ -32,7 +35,7 @@ class  AMNavMenu extends CMHTMLObj {
             $box = new AMMenuBox;
             $box->add("<a href=\"$_CMAPP[services_url]/webfolio/recoverpassword.php\" ><img src=\"$_CMAPP[imlang_url]/img_esqueci.gif\" border=0></a>");
             $this->add($box,true,false);
-   
+  
         }
         else {
 
@@ -77,7 +80,7 @@ class  AMNavMenu extends CMHTMLObj {
 
       // MY DIARY
             $img = "<img src=\"$_CMAPP[imlang_url]/mn_meu_meudiario.gif\" border=0>";
-            $this->add("<a href=\"$_CMAPP[services_url]/diario/diario.php\">$img</a>");
+            $this->add("<a href=\"$_CMAPP[services_url]/diario/blog.php\">$img</a>");
 
       // MY LIBRARY
             $img = "<img src=\"$_CMAPP[imlang_url]/mn_meus_arquivos.gif\" border=0>";
@@ -85,7 +88,6 @@ class  AMNavMenu extends CMHTMLObj {
 
       // MY PROJECTS
             $projects  = $_SESSION['user']->listMyProjects();
-
             $temp = "<img border=\"0\" src=\"".$_CMAPP['imlang_url']."/mn_meu_meusprojetos.gif\">";
 
             $tree = new AMTree($temp);
@@ -145,7 +147,7 @@ class  AMNavMenu extends CMHTMLObj {
                     } else {
                         $ico = $_CMAPP['images_url']."/ico_user_off_line.png";
                         $onClick = "";
-	  
+	 
                     }
                     $icoOnline = "<img id=\"UserIco_$friend->codeUser\" align=\"middle\" src=\"$ico\" $onClick>";
                     $tree->add("$icoOnline<a class=\"mnlateral\" href=\"".$_CMAPP['services_url']."/webfolio/userinfo_details.php?frm_codeUser=$friend->codeUser\"> $friend->name $str</a><br>");
@@ -155,8 +157,6 @@ class  AMNavMenu extends CMHTMLObj {
             }
             
             $this->add($tree,false,false,$_CMAPP['images_url']."/mn_bgmeus.gif");
-
-      //MY_COMMUNITIES
             $communities = $_SESSION['user']->listMyCommunities();
             $temp = "<img src=\"$_CMAPP[imlang_url]/mn_minhas_comunidades.gif\" border=0>";
             $tree = new AMTree($temp);
@@ -171,7 +171,7 @@ class  AMNavMenu extends CMHTMLObj {
             if($communities->__hasItems()) {
                 foreach($communities as $communitie) {
                     $str="";
-	 
+
                     $tree->add("<a class=\"mnlateral\" href=\"".$_CMAPP['services_url']."/communities/community.php?frm_codeCommunity=$communitie->code\" class=\"mnlateral\">&raquo; $communitie->name $str</a><br>");
                 }
             }
@@ -179,10 +179,7 @@ class  AMNavMenu extends CMHTMLObj {
                 $tree->add("<font class=\"texto\">$_language[no_communities]</font>");
             }
             $this->add($tree,false,false,$_CMAPP['images_url']."/mn_bgmeus.gif");
-
-     //FOOTER
             $this->add("<img src=\"$_CMAPP[imlang_url]/mn_box_footer.gif\" border=0>");
-
 
         }
     }
@@ -203,7 +200,8 @@ class  AMNavMenu extends CMHTMLObj {
    * @param String $bg - Background color
    * @return Void
    **/
-    public function add($line,$connector=false,$forceEmptyLineAfter=false,$bg="") {
+    public function add($line,$connector=false,$forceEmptyLineAfter=false,$bg="")
+    {
         $this->lines[] = array("line"=>$line,
 			   "connector"=>$connector,
 			   "line_after"=>$forceEmptyLineAfter,
@@ -212,7 +210,8 @@ class  AMNavMenu extends CMHTMLObj {
     }
 
 
-    public function __toString() {
+    public function __toString()
+    {
         global $_CMAPP,$_language;
 
     //adds the items inside the menu
@@ -246,10 +245,9 @@ class  AMNavMenu extends CMHTMLObj {
     //end of items
         parent::add('<div id="footer-menu"><img src="'.$_CMAPP['images_url'].'/img_footer_menu.gif"></div>');
         parent::add('</div>');
-
         parent::add('</div>');
 
-  
+
         return parent::__toString();
 
     }
@@ -257,5 +255,3 @@ class  AMNavMenu extends CMHTMLObj {
 }
 
 
-
-?>

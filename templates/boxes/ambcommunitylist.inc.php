@@ -37,29 +37,12 @@ class AMBCommunityList extends AMPageBox implements CMActionListener {
       
 
       break;
-      
-    case "A_list_projects" :
-      $result = $_SESSION['environment']->listProjectsCommunity($_REQUEST['frm_codeCommunity']);
-      $this->numItems = $result['count'];
-      $this->itens = $result[0];
-      if($this->itens->__hasItems()) {
- 	list(,$item) = each($this->itens->items);
- 	$communities = $item->community;
- 	list(,$community) = each($communities->items);
-	
- 	reset($this->itens);       
-       }
-
-      $title = "$_language[list_projects_community] ".$community->name;
-      $box = new AMProjectList($this->itens,$title, AMTCadBox::CADBOX_LIST);
-      break;
-
 
     case "A_list_comments" :
       //header("Location:$_SERVER[PHP_SELF]?frm_amerror=under_construction&list_action=fatal_error");
       if(!empty($_REQUEST['frm_codProjeto'])) {
 	
-	$proj = new AMProjeto;
+	$proj = new AMProject;
 	$proj->codeProject = $_REQUEST['frm_codProjeto'];
 	try {
 	  $proj->load();

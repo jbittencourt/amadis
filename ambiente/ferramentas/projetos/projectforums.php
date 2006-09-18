@@ -8,7 +8,7 @@ $pag = new AMTProjeto;
 $pag->requires("forum.css",CMHTMLObj::MEDIA_CSS);
 
 if(!empty($_REQUEST[frm_codeProject])) {
-     $proj = new AMProjeto;
+     $proj = new AMProject;
      $proj->codeProject = $_REQUEST[frm_codeProject];
      try{
        $proj->load();

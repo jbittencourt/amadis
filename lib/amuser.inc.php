@@ -13,46 +13,31 @@
  * @see CMUser, CMEnvinronment
  */
 
-class AMUser extends CMUser {
+class AMUser extends CMUser 
+{
 
     const RPASS_LOWERCASE=1;
     const RPASS_LOWERCASE_NUMBERS=2;
     const RPASS_LOWERCASE_UPPERCASE_NUMBERS=3;
     const RPASS_LOWERCASE_NUMBERS_N=4;
     const RPASS_NUMBERS=5;
-    const DEFAULT_FOTO=0;
 
-    public function configure() {
+    public function configure() 
+    {
         parent::configure();
 
     //estes sao campos especificos do AMUser que nao estao presentes 
     //no CMUser
         $this->addField("email",CMObj::TYPE_VARCHAR,100,1,0,0);
-        $this->addField("endereco",CMObj::TYPE_VARCHAR,150,1,0,0);
-        $this->addField("codCidade",CMObj::TYPE_INTEGER,11,1,0,0);
+        $this->addField("address",CMObj::TYPE_VARCHAR,150,1,0,0);
+        $this->addField("codeCity",CMObj::TYPE_INTEGER,11,1,0,0);
         $this->addField("cep",CMObj::TYPE_VARCHAR,9,1,0,0);
-        $this->addField("telefone",CMObj::TYPE_VARCHAR,15,1,0,0);
         $this->addField("aboutMe",CMObj::TYPE_TEXT,65535,1,0,0);
         $this->addField("url",CMObj::TYPE_VARCHAR,150,1,0,0);
-        $this->addField("datNascimento",CMObj::TYPE_INTEGER,20,1,0,0);
+        $this->addField("birthDate",CMObj::TYPE_INTEGER,20,1,0,0);
 
     //in the database, exists an default photo, wich code is 1, so default foto is 1.
-        $this->addField("foto",CMObj::TYPE_INTEGER,20,1,1,0);
-    }
-
-    function isLoggedChat($codSala){
-        $user = $this->codeUser;
-        $sql = "codSala=$codSala AND codUser=$user AND flaOnline=1";
-        $q = new CMQuery('AMChatConnection');
-        $q->setFilter($sql);
-        $res = $q->execute();
-
-
-        if ($res->__hasItems()){
-            return TRUE;
-        }else{
-            return FALSE;
-        }
+        $this->addField("picture",CMObj::TYPE_INTEGER,20,1,1,0);
     }
 
   /**
@@ -64,10 +49,12 @@ class AMUser extends CMUser {
    * @param void
    * @return void
    */ 
-    public function save() {
+    public function save() 
+    {
         global $_conf, $_CMDEVEL;
         $state = $this->state;
-    	parent::save();
+        parent::save();
+
         if($state==self::STATE_NEW || $state==self::STATE_DIRTY_NEW) {
             include($_CMDEVEL['path']."/cmvfs.inc.php");
 
@@ -77,7 +64,7 @@ class AMUser extends CMUser {
             }
             $path .= "/users/user_".$this->codeUser;
 
-      		//if the this doesn't exists, so we can create it, otherwise generate an exception.
+      //if the this doesn't exists, so we can create it, otherwise generate an exception.
             try {
                 $dir = new CMvfsLocal($path);
                 $this->delete();
@@ -90,15 +77,15 @@ class AMUser extends CMUser {
 
     }
 
-    
-    
-    function getUserProjectChats() {
+       
+    function getUserProjectChats() 
+    {
 
-        $q = new CMQuery('AMProjeto');
+        $q = new CMQuery('AMProject');
 
         $j1 = new CMJoin(CMJoin::INNER);
         $j1->setClass('AMChatsProject');
-        $j1->on("AMProjeto::codeProject = AMChatsProject::codeProject");
+        $j1->on("AMProject::codeProject = AMChatsProject::codeProject");
         $j1->setFake();
 
         $j2 = new CMJoin(CMJoin::INNER);
@@ -107,7 +94,7 @@ class AMUser extends CMUser {
 
         $j3 = new CMJoin(CMJoin::INNER);
         $j3->setClass('CMGroupMember');
-        $j3->on("CMGroupMember::codeGroup=AMProjeto::codeGroup");
+        $j3->on("CMGroupMember::codeGroup=AMProject::codeGroup");
         $j3->setFake();
 
         $t = time();
@@ -119,7 +106,8 @@ class AMUser extends CMUser {
         return $q->execute();
     }
 
-    function getUserCommunityChats(){
+    function getUserCommunityChats()
+    {
 
         $q = new CMQuery('AMCommunities');
 
@@ -147,7 +135,6 @@ class AMUser extends CMUser {
 
     }
 
-    
   /**
    * Generates a random  password with lowercase letter and numbers.
    *
@@ -158,7 +145,8 @@ class AMUser extends CMUser {
    * @param $mode - Generation mode
    * @return void
    **/
-    public function randomPassword($len=4,$mode=self::RPASS_LOWERCASE_NUMBERS_N) {
+    public function randomPassword($len=4,$mode=self::RPASS_LOWERCASE_NUMBERS_N) 
+    {
         $chars=array();
         $chars2=array();
         if ($mode > 1){
@@ -206,13 +194,29 @@ class AMUser extends CMUser {
         $this->password = $passwd;
     }
 
+    public function listForums() 
+    {
+      
+        $q = new CMQuery('AMForum');    
+        $q->setFilter("AMForumMessage::codeUser=$this->codeUser");      
+        $j = new CMJoin(CMJoin::LEFT);
+        $j->setClass('AMForumMessage');
+        $j->on("AMForum::code=AMForumMessage::codeForum");
+        $j->setFake();
+        $q->addJoin($j,"fake");
+
+        $q->addVariable("numMessages","count(AMForumMessage::code)");
+        $q->groupBy("AMForum::code");
+        return $q->execute();
+    }
 
 
-    public function listLastModifiedForums() {
+    public function listLastModifiedForums() 
+    {
 
     /**
      This function generates this SQL;
-     (
+     
       SELECT Forums.*, count(ForumMessages.code) AS newMessage 
       FROM Forums
       LEFT  JOIN ForumMessages
@@ -220,37 +224,13 @@ class AMUser extends CMUser {
       WHERE 
       ForumMessages.timePost > ALL (SELECT ForumVisits.time 
                                        FROM ForumVisits
- 	   			       WHERE ForumVisits.codeUser=77)
+ 	   			       WHERE ForumVisits.codeUser=$codeUser)
       AND
       Forums.code IN (SELECT codeForum
                       FROM ForumMessages
-	 	      WHERE codeUser=77) 
+	 	      WHERE codeUser=$codeUser) 
       GROUP BY Forums.code
-     )
-     UNION 
-     (
-       SELECT *, 0 as newMessage
-       FROM Forums
-       WHERE code <> ANY (SELECT Forums.code
-                          FROM Forums
-                          LEFT  JOIN ForumMessages
-                          ON (Forums.code=ForumMessages.codeForum)
-                          WHERE 
-                          ForumMessages.timePost > ALL (SELECT ForumVisits.time 
-                                                        FROM ForumVisits
-                              	 	   	        WHERE ForumVisits.codeUser=77)
-                          AND
-                          Forums.code IN (SELECT codeForum
-                                          FROM ForumMessages
-                                   	  WHERE codeUser=77) 
-                          GROUP BY Forums.code
-                         ) 
-       AND Forums.code  IN (
-                            SELECT codeForum
-                            FROM ForumMessages
-                            WHERE codeUser =77
-                           )
-     )
+     
     **/
 
     //This consult was wery hard to imagine, since I'm not a Wizard of SQL.
@@ -258,8 +238,7 @@ class AMUser extends CMUser {
     // Second, it must select the forum that the user visited
     // and, last, it must ignore the messages that the user send, because he alredy nows that this message
     // is new.
-
-
+  
         $sq1 = new CMQuery('AMForumVisit');
         $sq1->setProjection("AMForumVisit::time");
         $sq1->setFilter("AMForumVisit::codeUser=$this->codeUser AND AMForumVisit::codeForum=AMForum::code");
@@ -267,7 +246,6 @@ class AMUser extends CMUser {
         $sq2 = new CMQuery('AMForumMessage');
         $sq2->setProjection("codeForum");
         $sq2->setFilter("codeUser=$this->codeUser");
-
         $q1 = new CMQuery('AMForum');
         $q1->setProjection("AMForum::*");
 
@@ -283,20 +261,6 @@ class AMUser extends CMUser {
 
         $q1->setFilter("AMForumMessage::codeUser<>$this->codeUser AND AMForumMessage::timePost > ALL ",$sq1," AND AMForum::code IN ",$sq2);
 
-
-        $sq3 = new CMQuery('AMForumMessage');
-    //    $sq3->addJoin($j,"fake");
-
-        $sq3->setProjection("AMForumMessage::codeForum");
-        $sq3->setFilter("AMForumMessage::codeUser<>$this->codeUser AND  AMForumMessage::timePost > ALL ",$sq1," AND AMForum::code IN ",$sq2);
-
-        $q2 = new CMQuery('AMForum');
-        $q2->setProjection("AMForum::*");
-        $q2->addVariable("newMessages","0");
-        $q2->setFilter("AMForum::code <> ALL ",$sq3," AND AMForum::code IN ",$sq2);
-
-        $q1->union($q2);
-
         return $q1->execute();
     }
 
@@ -308,7 +272,8 @@ class AMUser extends CMUser {
    * @param $commentary - A short message to new friend =)
    * @return void
    */
-    public function addFriend($codeUser, $commentary) {
+    public function addFriend($codeUser, $commentary) 
+    {
 
         $friend = new AMFriend;
         $friend->codeFriend = $codeUser;
@@ -340,7 +305,8 @@ class AMUser extends CMUser {
     }
 
 
-    public function listFriends() {
+    public function listFriends() 
+    {
         if($_SESSION['user']->codeUser != $this->codeUser) {
             $q = new CMQuery('AMUser');
 
@@ -400,7 +366,8 @@ class AMUser extends CMUser {
    * @param int $codeUser - AMADIS user_id
    * @return Boolean - Confirmation of the test =P 
    */
-    public function isMyFriend($codeUser) {
+    public function isMyFriend($codeUser) 
+    {
         $friends = $this->listFriends();
         if(!empty($friends->items[$codeUser])) $ret = true;
         else $ret = false;
@@ -415,7 +382,8 @@ class AMUser extends CMUser {
    * @param void
    * @return CMContainer - List of the invitations
    */
-    public function listFriendsInvitations() {
+    public function listFriendsInvitations() 
+    {
         if(empty($_SESSION['last_session'])) {
             $q = new CMQuery('AMUser');
 
@@ -439,8 +407,9 @@ class AMUser extends CMUser {
    * @param int $y - Year
    * @return CMContainer - List of post from a diary
    **/
-    public function listDiaryPosts ($m,$y){
-        $query=new CMQuery('AMDiarioPost');
+    public function listBlogPosts ($m,$y)
+    {
+        $query=new CMQuery('AMBlogPost');
 
         $date_start = mktime(0,0,0,$m,1,$y);
 
@@ -451,18 +420,38 @@ class AMUser extends CMUser {
         $date_end = mktime(0,0,0,++$m,1,$y);
 
         $j2 = new CMJoin(CMJoin::LEFT);
-        $j2->on("AMDiarioPost::codePost=AMDiarioComentario::codePost");
+        $j2->on("AMBlogPost::codePost=AMBlogComment::codePost");
         $j2->setFake();
-        $j2->setClass('AMDiarioComentario');
+        $j2->setClass('AMBlogComment');
 
         $query->addJoin($j2, "comentarios");
 
-        $query->groupby("AMDiarioPost::codePost");
-        $query->addVariable("numComments","count( AMDiarioComentario::codComment )");
+        $query->groupby("AMBlogPost::codePost");
+        $query->addVariable("numComments","count( AMBlogComment::codeComment )");
 
-        $query->setFilter("AMDiarioPost::codeUser=$this->codeUser AND tempo>=$date_start AND tempo < $date_end");
-        $query->setOrder("AMDiarioPost::tempo desc");
+        $query->setFilter("AMBlogPost::codeUser=$this->codeUser AND time>=$date_start AND tempo < $date_end");
+        $query->setOrder("AMBlogPost::tempo desc");
+        
 
+        return $query->execute();
+    }
+
+    
+    public function listLastBlogPosts() 
+    {
+        $query=new CMQuery('AMBlogPost');
+        $j2 = new CMJoin(CMJoin::LEFT);
+        $j2->on("AMBlogPost::codePost=AMBlogComment::codePost");
+        $j2->setFake();
+        $j2->setClass('AMBlogComment');
+        $query->groupby("AMBlogPost::codePost");
+        $query->addVariable("numComments","count( AMBlogComment::codeComment )");
+
+        
+        $query->setOrder("AMBlogPost::tempo desc");
+        $query->setLimit(0,20);
+        $query->setFilter("AMBlogPost::codeUser=$this->codeUser");
+        
         return $query->execute();
     }
 
@@ -473,11 +462,12 @@ class AMUser extends CMUser {
    * @param void
    * @return CMContainer - List of the projects from a diary
    **/
-    public function listProjects() {
-        $q = new CMQuery('AMProjeto');
+    public function listProjects() 
+    {
+        $q = new CMQuery('AMProject');
         $j = new CMJoin(CMJoin::INNER);
         $j->setClass('CMGroup');
-        $j->on('AMProjeto::codeGroup=CMGroup::codeGroup');
+        $j->on('AMProject::codeGroup=CMGroup::codeGroup');
         $j->setFake();
 
         $j2 = new CMJoin(CMJoin::LEFT);
@@ -494,7 +484,8 @@ class AMUser extends CMUser {
         return $q->execute();
     }
 
-    public function listMyProjects() {
+    public function listMyProjects() 
+    {
         if(empty($_SESSION['amadis']['projects'])) {
             $ret = $this->listProjects();
             $_SESSION['amadis']['projects'] = serialize($ret);
@@ -506,13 +497,15 @@ class AMUser extends CMUser {
         return $ret;
     }
 
-    public function listProjectsInvitations() {
-        $q = new CMQuery('AMProjeto');
+    public function listProjectsInvitations() 
+    {
+        $q = new CMQuery('AMProject');
         $j = new CMJoin(CMJoin::INNER);
         $j->setClass('CMGroup');
-        $j->on('AMProjeto::codeGroup=CMGroup::codeGroup');
+        $j->on('AMProject::codeGroup=CMGroup::codeGroup');
         $j->setFake();
 
+        
         $j2 = new CMJoin(CMJoin::LEFT);
         $j2->setClass('CMGroupMemberJoin');
         $j2->on('CMGroupMemberJoin::codeGroup=CMGroup::codeGroup');
@@ -530,12 +523,12 @@ class AMUser extends CMUser {
         return $q->execute();
     }
 
-
-    public function listProjectsResponses() {
-        $q = new CMQuery('AMProjeto');
+    public function listProjectsResponses() 
+    {
+        $q = new CMQuery('AMProject');
         $j = new CMJoin(CMJoin::INNER);
         $j->setClass('CMGroup');
-        $j->on('AMProjeto::codeGroup=CMGroup::codeGroup');
+        $j->on('AMProject::codeGroup=CMGroup::codeGroup');
         $j->setFake();
 
         $j2 = new CMJoin(CMJoin::LEFT);
@@ -560,17 +553,17 @@ class AMUser extends CMUser {
    * List the news(noticias) from the projects that the current user participate
    *
    **/
-    public function listNewsProjects() {
-
-        $q = new CMQuery('AMProjeto');
+    public function listNewsProjects() 
+    {
+        $q = new CMQuery('AMProject');
 
         $j = new CMJoin(CMJoin::INNER);
         $j->setClass('AMProjectNews');
-        $j->on("AMProjectNews::codeProject = AMProjeto::codeProject");
+        $j->on("AMProjectNews::codeProject = AMProject::codeProject");
 
         $j1 = new CMJoin(CMjoin::INNER);
         $j1->setClass('CMGroupMember');
-        $j1->on("AMProjeto::codeGroup = CMGroupMember::codeGroup");
+        $j1->on("AMProject::codeGroup = CMGroupMember::codeGroup");
 
         $q->addJoin($j, "news");
         $q->addJoin($j1, "members");
@@ -583,32 +576,44 @@ class AMUser extends CMUser {
     }
 
   /**
-   *List the news from the communities that the current user participate
+   * List the news from the communities that the current user participate
    */
-    public function listNewsCommunities() {
+    public function listNewsCommunities() 
+    {
 
         $q = new CMQuery('AMCommunities');
 
         $j = new CMJoin(CMJoin::INNER);
         $j->setClass('AMCommunityNews');
-        $j->on("CommunityNews.codeCommunity = Communities.code");
+        $j->on('AMCommunityNews::codeCommunity = AMCommunities::code');
 
-        $j1 = new CMJoin(CMJoin::INNER);
-        $j1->setClass('AMCommunityMembers');
-        $j1->on("CommunityNews.codeCommunity = CommunityMembers.codeCommunity");
+        $j1= new CMJoin(CMJoin::INNER);
+        $j1->setClass('CMGroup');
+        $j1->on('CMGroup::codeGroup=AMCommunities::codeGroup');
+        $j1->setFake();
+
+        $j2 = new CMJoin(CMJoin::INNER);
+        $j2->setClass('CMGroupMember');
+        $j2->on('CMGroup::codeGroup=CMGroupMember::codeGroup');
+        $j2->setFake();
+
+
 
         $q->addJoin($j, "news");
-        $q->addJoin($j1, "members");
+        $q->addJoin($j1);
+        $q->addJoin($j2);
 
-        $q->setFilter("CommunityMembers.codeUser = $this->codeUser");
-        $q->setOrder("CommunityNews.time desc");
+        $q->setFilter("CMGroupMember::codeUser = $this->codeUser");
+        $q->setOrder("AMCommunityNews::time desc");
         $q->setLimit(0,3);
+
 
         return $q->execute();
 
     }
 
-    public function listCommunities() {
+    public function listCommunities() 
+    {
         $q = new CMQuery("AMCommunities");
         $j = new CMJoin(CMJoin::INNER);
         $j->setClass("CMGroup");
@@ -633,7 +638,8 @@ class AMUser extends CMUser {
   /**
    *Lista as minhas comunidades utilizando um cache. Para o usuario atualmente loggado
    */
-    public function listMyCommunities() {
+    public function listMyCommunities() 
+    {
         
         if(!empty($_SESSION['amadis']['communities'])) {
             $list = unserialize($_SESSION['amadis']['communities']);
@@ -647,7 +653,8 @@ class AMUser extends CMUser {
         return $list;
     }
 
-    public function listCommunitiesInvitations() {
+    public function listCommunitiesInvitations() 
+    {
         $q = new CMQuery('AMCommunities');
         $j = new CMJoin(CMJoin::INNER);
         $j->setClass('CMGroup');
@@ -669,7 +676,8 @@ class AMUser extends CMUser {
         return $q->execute();
     }
 
-    public function listCommunitiesResponses() {
+    public function listCommunitiesResponses() 
+    {
         $q = new CMQuery('AMCommunities');
         $j = new CMJoin(CMJoin::INNER);
         $j->setClass('CMGroup');
@@ -710,15 +718,16 @@ class AMUser extends CMUser {
    *Faz contagem de novos comentarios dos meus projetos desde
    *ultimo login.
    */
-    public function getLastProjectsComments() {
-        $q = new CMQuery(AMProjeto);
+    public function getLastProjectsComments() 
+    {
+        $q = new CMQuery('AMProject');
 
         $j = new CMJoin(CMJoin::INNER);
-        $j->on("AMProjeto::codeProject = AMProjectComment::codProjeto");
+        $j->on("AMProject::codeProject = AMProjectComment::codProjeto");
         $j->setClass('AMProjectComment');
 
         $j2 = new CMJoin(CMJoin::INNER);
-        $j2->on("AMProjeto::codeGroup = CMGroup::codeGroup");
+        $j2->on("AMProject::codeGroup = CMGroup::codeGroup");
         $j2->setClass('CMGroup');
 
         $j3 = new CMJoin(CMJoin::INNER);
@@ -734,32 +743,34 @@ class AMUser extends CMUser {
         $q->addJoin($j3, "members");
         $q->addJoin($j4,"comments");
 
-        $q->setFilter("AMComment::tempo > ".$_SESSION[last_session]->timeEnd." AND CMGroupMember::codeUser=$this->codeUser");
+        $q->setFilter("AMComment::tempo > ".$_SESSION['last_session']->timeEnd." AND CMGroupMember::codeUser=$this->codeUser");
 
-        $q->groupby("AMProjeto::codeProject");
+        $q->groupby("AMProject::codeProject");
         $q->addVariable("numMessages","count( AMProjectComment::codComentario)");
 
         return $q->execute();
     }
 
-    public function getLastDiaryComments() {
-        $q = new CMQuery('AMDiarioPost');
+    public function getLastBlogComments() 
+    {
+        $q = new CMQuery('AMBlogPost');
 
         $j = new CMJoin(CMJoin::INNER);
-        $j->on("DiarioPosts.codePost = DiarioComentario.codePost");
-        $j->setClass('AMDiarioComentario');
+        $j->on("AMBlogPost::codePost = AMBlogComment::codePost");
+        $j->setClass('AMBlogComment');
 
         $q->addJoin($j, "comments");
 
-        $q->setFilter("DiarioComentario.time > ".$_SESSION['last_session']->timeEnd." AND DiarioPosts.codeUser=$this->codeUser");
+        $q->setFilter("AMBlogComment::time > ".$_SESSION['last_session']->timeEnd." AND AMBlogPost::codeUser=$this->codeUser");
 
-        $q->groupby("DiarioPosts.codeUser");
-        $q->addVariable("numMessages","count( AMDiarioComentario::codComment)");
+        $q->groupby("AMBlogPost::codeUser");
+        $q->addVariable("numMessages","count( AMBlogComment::codComment)");
 
         return $q->execute();
     }
 
-    public function getLastMessages() {
+    public function getLastMessages() 
+    {
         if(!empty($_SESSION['last_session'])) {
             $q = new CMQuery('AMUserMessages');
 
@@ -782,7 +793,8 @@ class AMUser extends CMUser {
    * @param int $lenght - Number of rows will return
    * @return Array CMContainer and number of AFFECTED_ROWS
    */
-    public function listMyMessages($ini=0, $lenght=10) {
+    public function listMyMessages($ini=0, $lenght=10) 
+    {
         $q = new CMQuery('AMUserMessages');
 
         $filter = 'AMUserMessages::codeTo='.$this->codeUser;
@@ -812,4 +824,3 @@ class AMUser extends CMUser {
     
 }
 
-?>

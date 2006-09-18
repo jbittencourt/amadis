@@ -1,4 +1,15 @@
 <?
+/**
+ * This file register a new user to the environment.
+ *
+ * LICENSE: Licensed under GPL
+ *
+ * @license    http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @version    $Id$
+ * @since      File available since Release 1.2.0
+ * @author     Juliano Bittencourt <juliano@lec.ufrgs.br>
+ */
+
 $_CMAPP['notrestricted'] = 1;
 include("../../config.inc.php");
 
@@ -35,8 +46,6 @@ if(!isset($_REQUEST['action'])) $_REQUEST['action'] = "";
 switch($_REQUEST['action']) {
 
  default:
-
-
    $fields_rec = array("username");
       
    //formulary
@@ -103,8 +112,6 @@ switch($_REQUEST['action']) {
      $form->loadDataFromObject($_SESSION['cad_user']);
    }
 
-   
-      
    $form->addOnSubmitAction("email_validate(this['frm_email'])");
 
       
@@ -155,7 +162,7 @@ switch($_REQUEST['action']) {
      $_language['error_cannot_contact_email_server'] = str_replace("{EMAIL}",$_SESSION['cad_user']->email,$_language['error_cannot_contact_email_server']);
    }
 
-   $_SESSION['cad_foto'] = new AMUserFoto;
+   $_SESSION['cad_foto'] = new AMUserPicture;
 
    if(!empty($_FILES['frm_foto'])) {
      try {
@@ -260,7 +267,7 @@ switch($_REQUEST['action']) {
      $mail->send();
    }
    catch(CMWEmailNotSend $e) {
-     $_REQUEST['frm_amerror'] = "sending_email";
+     $_REQUEST['frm_amalert'] = "sending_email";
    }
    
    unset($_SESSION['cad_user']);
@@ -279,4 +286,3 @@ switch($_REQUEST['action']) {
 $pag->add($cadBox);
 echo $pag;
 
-?>

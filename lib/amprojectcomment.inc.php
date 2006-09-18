@@ -1,4 +1,4 @@
-<?
+<?php
 
 class AMProjectComment extends CMObj {
 
@@ -13,4 +13,3 @@ class AMProjectComment extends CMObj {
   }
 }
 
-?>

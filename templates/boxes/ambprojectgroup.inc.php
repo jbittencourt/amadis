@@ -10,7 +10,7 @@ class AMBProjectGroup extends AMAbstractBox {
   public $group;
   public $proj; 
 
-  public function __construct(AMProjeto $proj) {
+  public function __construct(AMProject $proj) {
     $this->requires("projectjoin.js");
 
     parent::__construct("ProjectGroupList");

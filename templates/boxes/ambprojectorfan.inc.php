@@ -13,7 +13,7 @@ class AMBProjectOrfan extends AMColorBox implements CMActionListener {
   protected $proj;
   protected $adopted = false;
 
-  public function __construct(AMProjeto $proj) {
+  public function __construct(AMProject $proj) {
     global $_CMAPP;
     //parent::__construct($_CMAPP[imlang_url]."/img_novidades_projetos.gif");
     $this->proj = $proj;

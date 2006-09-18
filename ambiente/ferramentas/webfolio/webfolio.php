@@ -1,9 +1,10 @@
-<?
+<?php
 /**
- * Webfolio of the user
+ * User's Webfolio.
+ * 
+ * This script provides a visualization of the user's webfolio by it's owner.
  *
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
- * @access public
  * @package AMADIS
  * @subpackage Core
  * @category AMVisualization
@@ -57,19 +58,23 @@ $box = new AMTwoColsLayout;
 /*********************
  * LEFT COLUMN
  ********************/
-$foto = $_SESSION['user']->foto;
+$foto = AMUserPicture::getImage($_SESSION['user']);
 $box->add(new AMTUserImage($foto),AMTwoColsLayout::LEFT);
 
-$box->add("<p><font class=\"texto\"><b>".$_SESSION['user']->name."<br>".date($_language['date_format'],$_SESSION['user']->datNascimento)."</b>", AMTwoColsLayout::LEFT);
+$box->add("<p><span class=\"texto\"><b>". $_SESSION['user']->name."<br>" . date($_language['date_format'],(integer) $_SESSION['user']->birthDate) . "</b>"
+		  , AMTwoColsLayout::LEFT);
 
 $box->add("<br>".$_SESSION['user']->email, AMTwoColsLayout::LEFT);
 
 $box->add("</font>", AMTwoColsLayout::LEFT);
 
 
-$box->add("<p><a href=\"$_CMAPP[services_url]/webfolio/changedata.php\" class=\"blue\">$_language[change_personal_data]</a>", AMTwoColsLayout::LEFT);
-
-$box->add("<br><a href=\"$_CMAPP[services_url]/webfolio/changepassword.php\" class=\"blue\">$_language[change_password]</a><p>", AMTwoColsLayout::LEFT);
+$box->add("<p><a href=\"$_CMAPP[services_url]/webfolio/changedata.php\" class=\"blue\">$_language[change_personal_data]</a>",
+			 AMTwoColsLayout::LEFT);
+$box->add("<br><a href=\"$_CMAPP[services_url]/webfolio/changePicture.php\" class=\"blue\">$_language[change_picture]</a>", 
+			AMTwoColsLayout::LEFT);
+$box->add("<br><a href=\"$_CMAPP[services_url]/webfolio/changepassword.php\" class=\"blue\">$_language[change_password]</a><p>", 
+			AMTwoColsLayout::LEFT);
 
 
 //foruns that the user participate
@@ -103,6 +108,3 @@ $box->add(new AMBUserMessages, AMTwoColsLayout::RIGHT);
 
 $pag->add($box);
 echo $pag;
-
-
-?>

@@ -11,7 +11,7 @@ $_language = $_CMAPP[i18n]->getTranslationArray("project_members");
 $pag = new AMTProjeto;
 
 if(!empty($_REQUEST[frm_codProjeto])) {
-  $proj = new AMProjeto;
+  $proj = new AMProject;
   $proj->codeProject = $_REQUEST[frm_codProjeto];
   try{
     $proj->load();

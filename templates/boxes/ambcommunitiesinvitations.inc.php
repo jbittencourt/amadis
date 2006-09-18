@@ -100,7 +100,7 @@ class AMBCommunitiesInvitations extends AMColorBox implements CMActionListener {
 	//project image thumbnail
 	parent::add("<tr><td>");
 	$thumb = new AMCommunityThumb;
-	$thumb->codeArquivo = $co->image;
+	$thumb->codeArquivo = ($co->image==0 ? 3 : $co->image);
 	try {
 	  $thumb->load();
 	} catch(CMDBNoRecord $e) {}

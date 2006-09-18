@@ -10,7 +10,7 @@ class AMBProjectEdit extends AMColorBox implements CMActionListener {
   protected $proj;
   protected $abandoned=false;
     
-  public function __construct(AMProjeto $proj) {
+  public function __construct(AMProject $proj) {
     global $_CMAPP;
     $this->proj = $proj;
     //img_novidades_projetos.gif

@@ -1,6 +1,6 @@
 <?php
 
-$_CMAPP[notrestricted] = 1;
+$_CMAPP['notrestricted'] = 1;
 
 include("../config.inc.php");
 
@@ -33,8 +33,8 @@ if(empty($_REQUEST['method'])) {
 
 switch($_REQUEST['method']) {
  case "db":
-   $imagem = new AMArquivo;
-   $imagem->codeArquivo = (integer) $_REQUEST['frm_codeArquivo'];
+   $imagem = new AMFile;
+   $imagem->codeFile = (integer) $_REQUEST['frm_codeArquivo'];
    Try {
      $imagem->load();
    }
@@ -51,14 +51,13 @@ switch($_REQUEST['method']) {
    break;
  case "session":
    $imagem = unserialize($_SESSION['amadis']['imageview'][$_REQUEST['frm_id']]);
-   //unset($_SESSION[amadis][imageview][frm_id]);
    break;
 }
 
-$d = $imagem->dados;
+$d = $imagem->data;
 if (!empty($d)) {
-  header("Content-Type: ".$imagem->tipoMime);
-  echo $imagem->dados;
+  header("Content-Type: ".$imagem->mimetype);
+  echo $imagem->data;
 }
 else {
   error();

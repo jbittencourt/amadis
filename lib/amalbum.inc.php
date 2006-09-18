@@ -52,20 +52,20 @@ class  AMAlbum extends CMObj {
       return false;
     
 
-    $file->nome = $_FILES[$formName]['name'];
-    $file->nome = str_replace(" ", "_",$file->nome);
-    $file->tipoMime = $_FILES[$formName]['type'];
-    $file->tamanho = $_FILES[$formName]['size'];
-    $file->tempo = time();   
+    $file->name = $_FILES[$formName]['name'];
+    $file->name = str_replace(" ", "_",$file->nome);
+    $file->mimetype = $_FILES[$formName]['type'];
+    $file->size = $_FILES[$formName]['size'];
+    $file->time = time();   
 
     
     if($_FILES[$formName]['tmp_name'] == "")
       return false;
     
     
-    $file->dados  = implode("",file($_FILES[$formName]['tmp_name']));
+    $file->data  = implode("",file($_FILES[$formName]['tmp_name']));
     
-    $d = $file->dados;
+    $d = $file->data;
     if(empty($d))      
       return false;
 
@@ -75,7 +75,7 @@ class  AMAlbum extends CMObj {
       
     try {
       $file->save();	//salva o arquivo
-      $this->codePhoto = $file->codeArquivo;
+      $this->codePhoto = $file->codeFile;
       $this->codeUser = $_SESSION['user']->codeUser;
       $this->comments = $_REQUEST['comment'];
       $this->time = time();
@@ -106,8 +106,8 @@ class  AMAlbum extends CMObj {
     try{
       $this->load();
     }catch(CMException $e){}
-    $file = new AMArquivo;    
-    $file->codeArquivo = $id;    
+    $file = new AMFile;    
+    $file->codeFile = $id;    
     try{
       $file->load();  
       $this->delete();

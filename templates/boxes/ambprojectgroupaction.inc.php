@@ -1,10 +1,11 @@
-<?
+<?php
  /**
  * @package AMADIS
  * @subpackage AMProject
  */
 
-class AMBProjectGroupAction implements AMAjax{
+class AMBProjectGroupAction implements AMAjax
+{
     static public $_lang;
 
     public function __construct() {
@@ -70,7 +71,8 @@ class AMBProjectGroupAction implements AMAjax{
         return $ret;
     }
     
-    public function xoadGetMeta() {
+    public function xoadGetMeta()
+    {
         $methods = array('listGroup');
         XOAD_Client::mapMethods($this, $methods);
 
@@ -78,5 +80,3 @@ class AMBProjectGroupAction implements AMAjax{
     }
 
 }
-
-?>

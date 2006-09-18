@@ -80,8 +80,10 @@ class AMBCommunityRequest extends AMColorBox implements CMActionListener {
       //user foto thumbnail
       parent::add("<tr><td>");
       $thumb = new AMUserThumb;
-      $thumb->codeArquivo = $user->foto;
-      $thumb->load();
+      try {
+        $thumb->codeArquivo = ($user->foto==0 ? 1 : $user->foto);
+        $thumb->load();
+      }catch(CMException $e) { }
       parent::add($thumb->getView());
 
       //an empty column

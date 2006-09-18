@@ -1,7 +1,8 @@
 <?
 
 /**  
- *  Thumbs to Library
+ * Thumbs to Library
+ *
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  * @access public
  * @package AMADIS

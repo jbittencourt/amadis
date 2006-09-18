@@ -1,6 +1,6 @@
 <?
 /**
- * @package AMADIS
+ * @Package AMADIS
  * @subpackage AMBoxes
  */
 
@@ -53,21 +53,9 @@ class AMUserList extends AMTCadBox {
 	$i++;
 	parent::add("<tr id=\"$id\" class=\"".$this->class_prefix."_list_line\">");	  
 	parent::add("<td width = '80'>");
-	$f = $item->foto;
-	if($f!=0) {
-	  $thumb = new AMUserThumb;
-	  $thumb->codeArquivo = $item->foto;
-	  try {
-	    $thumb->load();
-	    parent::add($thumb->getView());
-	  }
-	  catch(CMDBException $e) {
-	    echo $e; die();
-	  }
-	}
-	else {
-	  parent::add("&nbsp;");			
-	}
+	$thumb = AMUserPicture::getThumb($item);
+	parent::add($thumb->getView());
+
 	parent::add("<td>");
 	parent::add(new AMTUserInfo($item));
 	parent::add("</td>");
@@ -75,7 +63,7 @@ class AMUserList extends AMTCadBox {
 	parent::add("<td width='90'>".AMMain::getViewPageButton($item->codeUser));
 	parent::add("<td width='90'>".AMMain::getViewDiaryButton($item->codeUser));
 	parent::add("</tr>");
-
+	
 	
 	
 	if($item->isVariableDefined('request')) {
@@ -84,14 +72,14 @@ class AMUserList extends AMTCadBox {
 	  parent::add("<td align='left' valign='top' colspan = '5'><br><font class='project_list_subtitle'>".$_language[join_date]."</font>");
 	  parent::add(date($_language[date_format],$req->timeResponse)."</td>");
 	  parent::add("</tr>");
-
-
+	  
+	  
 	  parent::add("<tr id=\"$id\" class=\"".$this->class_prefix."_list_line_int\">");
 	  parent::add("<td align='left' valign='top' colspan = '5'><br><font class='project_list_subtitle'>$_language[join_reason]</font>");
 	  parent::add("<br><img src='$_CMAPP[media_url]/images/dot.gif' width='1' height='12' border='0'>");
 	  parent::add($req->textRequest."</td>");
 	  parent::add("</tr>");
-
+	  
 	  parent::add("<tr id=\"$id\" class=\"".$this->class_prefix."_list_line\">");
 	  parent::add("<td align='left' valign='top' colspan = '5'><br><font class='project_list_subtitle'>".$_language[approval]."</font>");
 	  parent::add("<br>".$req->textResponse."</td>");

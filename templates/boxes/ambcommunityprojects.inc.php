@@ -36,7 +36,7 @@ class AMBCommunityProjects extends AMSimpleBox {
 	parent::add("<a href=\"$_CMAPP[services_url]/projetos/projeto.php?frm_codProjeto=$item->codeProject\" class=\"cinza\">$item->title</a>");
 	parent::add("<br>");
       }
-      parent::add("<a href=\"".$_CMAPP[services_url]."/communities/listcommunities.php?frm_codeCommunity=".$community->code."&list_action=A_list_projects\" class=\"cinza\">&nbsp;&nbsp;$_language[more_projects]</a><br><br>");
+      parent::add("<a href='".$_CMAPP[services_url]."/communities/listcommunityprojects.php?frm_codeCommunity=".$community->code."' class='cinza'>&nbsp;&nbsp;$_language[more_projects]</a><br><br>");
     }
     else { 
       parent::add("&nbsp;&nbsp;&nbsp;".$_language[no_projects]."<br><br>");

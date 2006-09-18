@@ -17,7 +17,6 @@ class AMTPeople extends AMMain {
     $this->requires("people.css",CMHTMLObj::MEDIA_CSS);
 
 
-    $this->openNavMenu();
   }
 }
 

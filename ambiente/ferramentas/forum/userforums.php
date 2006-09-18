@@ -1,11 +1,11 @@
-<?
+<?php
 include("../../config.inc.php");
 
-$_language = $_CMAPP[i18n]->getTranslationArray("projects");
+$_language = $_CMAPP["i18n"]->getTranslationArray("projects");
 
 $pag = new AMTProjeto;
 
-if(!empty($_REQUEST[frm_codeUser])) {
+if(array_key_exists("frm_codeUser", $_REQUEST)) {
   $user = new AMUser;
   $user->codeUser = $_REQUEST[frm_codeUser];
 
@@ -18,13 +18,12 @@ if(!empty($_REQUEST[frm_codeUser])) {
   
 }
 else {
-  $user = $_SESSION[user];
+  $user = $_SESSION["user"];
 } 
 
 
-
 $pag->add("<br><br>");
-$forums = $user->listLastModifiedForums();
+$forums = $user->listForums();
 
 $pag->add(new AMBMyForums($user->name, $forums));
 

@@ -25,6 +25,7 @@ class AMFriend extends CMObj {
     $this->addField("time",CMObj::TYPE_INTEGER,"20",1,0,0);
     
     $this->addPrimaryKey("codeUser");
+    $this->addPrimaryKey("codeFriend");
   
     $this->setEnumValidValues("status",array(self::ENUM_STATUS_NOT_ANSWERED,
 					     self::ENUM_STATUS_REJECTED,

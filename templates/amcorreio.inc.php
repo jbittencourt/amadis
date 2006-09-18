@@ -19,8 +19,6 @@ class AMCorreio extends AMMain {
 
 
     $this->setImgId("$urlimlang/img_tit_correio.gif");
-    $this->openNavMenu();
-
   }
 }
 

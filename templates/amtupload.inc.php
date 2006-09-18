@@ -17,8 +17,6 @@ class AMTUpload extends AMMain {
     parent::__construct();
 
     $this->setImgId($_CMAPP['imlang_url']."/$img_top");
-
-    $this->openNavMenu();
   }
   
   public function setTitle($title) {

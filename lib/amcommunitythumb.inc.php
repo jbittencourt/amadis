@@ -14,6 +14,9 @@ class AMCommunityThumb extends AMThumb {
     }
   }
 
+
+
+
 }
 
 ?>

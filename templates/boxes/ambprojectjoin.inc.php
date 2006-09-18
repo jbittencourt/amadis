@@ -8,7 +8,7 @@ class AMBProjectJoin extends AMColorBox {
 
   protected $proj;
 
-  public function __construct(AMProjeto $proj) {
+  public function __construct(AMProject $proj) {
     global $_CMAPP;
     $this->proj = $proj; 
     parent::__construct($_CMAPP['imlang_url']."/box_participar_projeto.gif",self::COLOR_BOX_GREEN);

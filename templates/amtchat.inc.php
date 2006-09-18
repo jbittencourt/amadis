@@ -19,8 +19,6 @@ class AMTChat extends AMMain {
     parent::__construct("vermelho");
     
     $this->setImgId($_CMAPP['imlang_url']."/top_chat_amadis.gif"); 
-    $this->openNavMenu();
-    //$this->requires("divs.js");
   }
 }
 

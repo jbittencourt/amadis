@@ -81,6 +81,7 @@ if(!empty($_REQUEST['frm_action'])) {
   case "A_post":
     $message = new AMForumMessage;
     $message->loadDataFromRequest();
+    $message->body = stripslashes($message->body);
     $message->codeUser = $_SESSION['user']->codeUser;
     $message->timePost = time();
 
@@ -103,7 +104,7 @@ if(!empty($_REQUEST['frm_action'])) {
       $pag->addError($_language['error_message_not_posted']);
     }
     
-    $message->body = $_REQUEST['frm_body'];
+    $message->body = stripslashes($message->body);
     $message->title = $_REQUEST['frm_title'];
 
     try {

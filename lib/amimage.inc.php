@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * This class models image that should be stored in the database.
  * 
@@ -8,46 +8,49 @@
  * @subpackage Core
  * @version 1.0
  * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
- * @see AMArquivo, AMFoto
+ * @see AMFile, AMPicture
  **/
-class AMImage extends AMArquivo {
+class AMImage extends AMFile
+{
 
   /**
    * Return an array with the images type that are supported by GD.
    **/
-  public static function getValidImageTypes() {
-    $validTypes = array();
-    $info = gd_info();
-    
-    if(($info['GIF Read Support']==true) and ($info['GIF Create Support']==true)) $validTypes[] = IMAGETYPE_GIF;
-    if($info['JPG Support']==true) $validTypes[] = IMAGETYPE_JPEG;
-    if($info['PNG Support']==true) $validTypes[] = IMAGETYPE_PNG;
+    public static function getValidImageTypes()
+    {
+        $validTypes = array();
+        $info = gd_info();
 
-    return $validTypes;
-  }
+        if(($info['GIF Read Support']==true) and ($info['GIF Create Support']==true)) $validTypes[] = IMAGETYPE_GIF;
+        if($info['JPG Support']==true) $validTypes[] = IMAGETYPE_JPEG;
+        if($info['PNG Support']==true) $validTypes[] = IMAGETYPE_PNG;
+
+        return $validTypes;
+    }
 
   /**
    * Return an array with the images extensions relative to the images types supported by GD.
    **/
-  public static function getValidImageExtensions() {
-    $types = AMImage::getValidImageTypes();
-    $extensions = array();
+    public static function getValidImageExtensions()
+    {
+        $types = AMImage::getValidImageTypes();
+        $extensions = array();
 
-    if(!empty($types)) {
-      foreach($types as $imagetype) {
-	switch($imagetype) {
-	case IMAGETYPE_GIF    : $extensions[] = 'gif'; break;
-	case IMAGETYPE_JPEG    : $extensions[] = 'jpg'; $extensions[] = 'jpeg'; break;
-	case IMAGETYPE_PNG    : $extensions[] = 'png'; break;
-	}
-      }
-      
-      return $extensions;
-      
-    } else {
-      Throw new AMException("Cannot find any valid image type.");
+        if(!empty($types)) {
+            foreach($types as $imagetype) {
+                switch($imagetype) {
+                    case IMAGETYPE_GIF    : $extensions[] = 'gif'; break;
+                    case IMAGETYPE_JPEG    : $extensions[] = 'jpg'; $extensions[] = 'jpeg'; break;
+                    case IMAGETYPE_PNG    : $extensions[] = 'png'; break;
+                }
+            }
+            
+            return $extensions;
+
+        } else {
+            Throw new AMException("Cannot find any valid image type.");
+        }
     }
-  }
 
   /**
    * Load an image from the request to the object.
@@ -61,18 +64,19 @@ class AMImage extends AMArquivo {
    *
    * @param string $inputName The name of the <INPUT type=file> element in the form.
    **/
-  public function loadImageFromRequest($inputName) {
-    $name = $_FILES[$inputName]['name'];
-    $parts = explode(".",$name);
-    $extension = strtolower($parts[count($parts)-1]);
+    public function loadImageFromRequest($inputName)
+    {
+        $name = $_FILES[$inputName]['name'];
+        $parts = explode(".",$name);
+        $extension = strtolower($parts[count($parts)-1]);
 
-    $valid = self::getValidImageExtensions();
-    if(!in_array($extension,$valid)) { 
-      Throw new AMEImage;
+        $valid = self::getValidImageExtensions();
+        if(!in_array($extension,$valid)) {
+            Throw new AMEImage;
+        }
+
+        parent::loadFileFromRequest($inputName);
     }
-
-    parent::loadFileFromRequest($inputName);
-  }
 
   /**
    * Return the size in pixels of the image.
@@ -80,11 +84,17 @@ class AMImage extends AMArquivo {
    * Return an array in the format ('x'=>,'y'=>) with the size
    * in pixels of the image.
    **/
-  public function getSize() {
-    $im = imagecreatefromstring($this->dados);
-    return array("x"=>imagesx($im),
+    public function getSize()
+    {
+        $d = $this->data;
+        if(empty($d)) {
+            Throw new AMException('Empty image data');
+        }
+
+        $im = imagecreatefromstring($this->data);
+        return array("x"=>imagesx($im),
 		 "y"=>imagesy($im));
-  }
+    }
 
   /**
    * Resize the image.
@@ -92,11 +102,12 @@ class AMImage extends AMArquivo {
    * @param integer $x1 The new width of the image.
    * @param integer $y1 The new height of the image.
    **/
-  public function resize($x1,$y1) {
+    public function resize($x1,$y1)
+    {
     //calculate proportions
-    $size = $this->getSize();
-    $x0 = $size['x'];
-    $y0 = $size['y'];
+        $size = $this->getSize();
+        $x0 = $size['x'];
+        $y0 = $size['y'];
 
     //compute the new dimmensions of the image considering
     //the requested new dimensions and mantaining the
@@ -106,38 +117,39 @@ class AMImage extends AMArquivo {
     // xc,yc = computed new size of the image
 
 
-    $dx = $x1/$x0;
-    $dy = $y1/$y0;
+        $dx = $x1/$x0;
+        $dy = $y1/$y0;
 
-    if($dx<$dy) {
-      $xc = $x1;
-      $yc = round($y0*$dx);
-    }
-    else {
-      $xc = round($x0*$dy);
-      $yc = $y1;
-    }
-    
+        if($dx<$dy) {
+            $xc = $x1;
+            $yc = round($y0*$dx);
+        }
+        else {
+            $xc = round($x0*$dy);
+            $yc = $y1;
+        }
+        
     //resizing image
 
-    $img_src = imagecreatefromstring($this->dados);
-    $img_dst = ImageCreateTrueColor($xc,$yc);
+        $img_src = imagecreatefromstring($this->data);
+        $img_dst = ImageCreateTrueColor($xc,$yc);
 
-    $src_width = imagesx($img_src);
-    $src_height = imagesy($img_src);
+        $src_width = imagesx($img_src);
+        $src_height = imagesy($img_src);
 
-    imagecopyresampled($img_dst,$img_src,0,0,0,0,$xc,$yc,$src_width, $src_height);
+        imagecopyresampled($img_dst,$img_src,0,0,0,0,$xc,$yc,$src_width, $src_height);
 
 
     //captures the image
-    ob_start();
-    Imagepng($img_dst);
-    $this->dados = ob_get_contents();
-    $this->tipoMime = "image/png";
+        ob_start();
+        Imagepng($img_dst);
+        $this->data = ob_get_contents();
+        $this->mimetype = "image/png";
     //clear the buffer
-    ob_end_clean();
+        ob_end_clean();
 
-  }
+    }
+
 
 
   /**
@@ -148,30 +160,32 @@ class AMImage extends AMArquivo {
    * this image is not new, if deletes all the thumbnails of this images,
    * if they exists.
    **/
-  public function save() {
-    global $_CMAPP;
-    
-    $dm = $this->getSize();
-    $s = round($this->tamanho/1024);
-    $this->metaDados = "$dm[x]|$dm[y]|$s";
+    public function save()
+    {
+        global $_CMAPP;
 
-    parent::save();
+        $dm = $this->getSize();
+        $s = round($this->size/1024);
+        $this->metadata = "$dm[x]|$dm[y]|$s";
+
+        $old_state = $this->state;
+        parent::save();
     //we must delete all the existing thumbnails of this image if the save was sucessfull
     //see AMThumb for more information about thumbnail generation
-    if($this->state!=CMObj::STATE_NEW) {
-      $p = AMThumb::getImagesPattern($this->codeArquivo);
+        if($old_state==CMObj::STATE_DIRTY) {
+            $p = AMThumb::getImagesPattern($this->codeFile);
 
-      $_conf = $_CMAPP['config']->getObj();
-      $path =  (string) $_conf->app[0]->paths[0]->thumbnails;
-      $handle = opendir($path);
-      
-      while (($file = readdir($handle))!==false) {
-	if(ereg($p,$file)) {
-	  unlink($path.'/'.$file);
-	}
-      }
+            $_conf = $_CMAPP['config'];
+            $path =  (string) $_conf->app[0]->paths[0]->thumbnails;
+            $handle = opendir($path);
+
+            while (($file = readdir($handle))!==false) {
+                if(ereg($p,$file)) {
+                    unlink($path.'/'.$file);
+                }
+            }
+        }
     }
-  }
 
 
 }

@@ -16,21 +16,21 @@ switch($_REQUEST['action']) {
    if(isset($_REQUEST['thumb'])) $image = new AMLibraryThumb;
    else $image = new AMImage;
 
-   $image->codeArquivo = $_REQUEST['frm_image'];
+   $image->codeFile = $_REQUEST['frm_image'];
    try {
      $image->load();
      if($image instanceof AMThumb) {
        $dados = $image->getView();
      }
-     else $dados = $image->dados;
-     header("Content-type: $image->tipoMime");
+     else $dados = $image->data;
+     header("Content-type: $image->mimetype");
      echo $dados;
    }catch (CMException $e) {
 
      notfound();
    }
    break;
-
+   
  default:
    $imagePath = $_CMAPP['path']."/ambiente/paginas/$_REQUEST[frm_image]";
 

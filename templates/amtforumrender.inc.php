@@ -122,7 +122,9 @@ class AMTForumRender extends CMHTMLObj {
     }
 
     //message body  
-    $obj->add("<div id=\"$msg_unique_name\" style=\"padding-top: 6px; position:relative; display:$dsp;\"><span id='body_$msg_unique_name'>".$men->body."</span>");
+    $obj->add("<div id=\"$msg_unique_name\" style=\"padding-top: 6px; position:relative; display:$dsp;\"><span id='body_$msg_unique_name'>");
+    $obj->add($men->body);
+    $obj->add("</span>");
 
     //test if user has privileges to post a message
     if($this->privs['post']) {

@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * The AMBoxDiarioProfile is a box that shown thumbnail user and your blogname
@@ -6,11 +6,12 @@
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  * @access public
  * @package AMADIS
- * @subpackage AMDiary
+ * @subpackage AMBlog
  * @version 1.0
  * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
  */
-class AMBoxDiarioProfile extends CMHTMLObj {
+class AMBoxDiarioProfile extends CMHTMLObj 
+{
 
   private $imagem_url;
   private $titulo;

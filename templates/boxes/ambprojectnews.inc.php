@@ -57,6 +57,7 @@ class AMBProjectNews extends AMSimpleBox implements CMActionListener {
 	parent::add("&nbsp;<font class=\"textoint\"><b>".$item->title.":</b>&nbsp;");
 	parent::add(nl2br($item->text));
 	parent::add(' '.$_language['by'].' ');
+	$item->autor->items[0]->codeUser = $item->codeUser;
 	parent::add(new AMTUserInfo($item->autor->items[0],AMTUserInfo::LIST_USERNAME));
 	parent::add("<br>");
       }

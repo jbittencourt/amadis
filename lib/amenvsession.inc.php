@@ -152,16 +152,19 @@ class AMEnvSession implements AMAjax {
       $friend->codeFriend = $codeUser;
       $friend->codeUser = $_SESSION['user']->codeUser;
       $friend->load();
-      if(!empty($comentary)) {
-	$friend->comentary = $_REQUEST['frm_comentary'];
-      }
       $friend->status = AMFriend::ENUM_STATUS_ACCEPTED;
       $friend->time = time();
-      $friend->save();
-      unset($_SESSION['amadis']['friends']);
-      $box = new AMAlertBox(AMAlertBox::MESSAGE, $msg);
+      try {
+        $friend->save();
+        unset($_SESSION['amadis']['friends']);
+        $box = new AMAlertBox(AMAlertBox::MESSAGE, $msg);
+      }catch(CMException $e) {
+        $box = new AMAlertBox(AMAlertBox::ERROR, $msg_err);
+        new AMLog("AMEnvSession::makeFriend", $e->getMessage());
+      }
     }catch(CMException $e) {
       $box = new AMAlertBox(AMAlertBox::ERROR, $msg_err);
+      new AMLog("AMEnvSession::makeFriend", $e->getMessage());
     }
     
     $ret['msg'] = $box->__toString();

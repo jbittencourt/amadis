@@ -43,8 +43,8 @@ class AMLogUploadFiles extends CMObj {
     $q2 = new CMQuery('AMLogUploadFiles');
     
     $j = new CMJoin(CMJoin::INNER);
-    $j->setClass('AMProjeto');
-    $j->on("AMLogUploadFiles::codeAnchor = AMProjeto::codeProject");
+    $j->setClass('AMProject');
+    $j->on("AMLogUploadFiles::codeAnchor = AMProject::codeProject");
     
     $q2->addJoin($j, "project");
     $q2->setOrder("AMLogUploadFiles::time DESC");

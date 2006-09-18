@@ -66,12 +66,10 @@ try{
 }
 
 
-$foto = $user->foto;
-if(!empty($foto)) {
-  $box->add(new AMTUserImage($foto),AMTwoColsLayout::LEFT);
-}
+$foto = AMUserPicture::getImage($user);
+$box->add(new AMTUserImage($foto),AMTwoColsLayout::LEFT);
 
-$box->add("<p><span class=\"texto\"><b>".$user->name."<br>".date($_language['date_format'],$user->datNascimento)."</b>", AMTwoColsLayout::LEFT);
+$box->add("<p><span class=\"texto\"><b>".$user->name."<br>".date($_language['date_format'],(integer) $user->datNascimento)."</b>", AMTwoColsLayout::LEFT);
 
 $box->add('<br><span class="texto"><br>'.$user->aboutMe.'<br></span>',
 	  AMTwoColsLayout::LEFT);

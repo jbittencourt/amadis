@@ -9,7 +9,7 @@ $pag = new AMTChat;
 
 $pag->add("<br>");
 
-$proj = new AMProjeto;
+$proj = new AMProject;
 $proj->codeProject = $_REQUEST['frm_codeProject'];
 try {
   $proj->load();
