@@ -480,17 +480,17 @@ CHARACTER SET utf8 COLLATE utf8_general_ci;
 DROP TABLE IF EXISTS `amadis`.`FilesLibraries`;
 CREATE TABLE `amadis`.`FilesLibraries` (
   `codeLibrary` INT(11) NOT NULL DEFAULT '0',
-  `filesCode` BIGINT(20) NOT NULL DEFAULT '0',
+  `codeFile` BIGINT(20) NOT NULL DEFAULT '0',
   `time` BIGINT(20) NOT NULL DEFAULT '0',
   `referred` CHAR(1) NOT NULL DEFAULT 'n',
   `active` CHAR(1) NOT NULL DEFAULT 'y',
   `shared` CHAR(1) NOT NULL DEFAULT 'n',
-  PRIMARY KEY (`filesCode`, `codeLibrary`),
+  PRIMARY KEY (`codeFile`, `codeLibrary`),
   FOREIGN KEY `FKlibraryonFilesLibraries` (`codeLibrary`)
     REFERENCES `amadis`.`Library` (`code`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  FOREIGN KEY `FKfilesonFilesLibraries` (`filescode`)
+  FOREIGN KEY `FKfilesonFilesLibraries` (`codeFile`)
     REFERENCES `amadis`.`Files` (`codeFile`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
