@@ -870,7 +870,7 @@ ROW_FORMAT = Compact
 CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 DROP TABLE IF EXISTS `amadis`.`UsersLibraries`;
-CREATE TABLE `amadis`.`userslibraries` (
+CREATE TABLE `amadis`.`UsersLibraries` (
   `codeLibrary` INT(11) NOT NULL DEFAULT '0',
   `codeUser` BIGINT(20) NOT NULL DEFAULT '0',
   PRIMARY KEY (`codeLibrary`, `codeUser`),
