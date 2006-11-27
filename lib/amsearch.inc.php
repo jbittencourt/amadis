@@ -1,4 +1,4 @@
-<?
+<?php
 class AMSearch {
 
   private $search, $searchtext;
@@ -77,4 +77,3 @@ class AMSearch {
     return $this->sqlWhere;
   }
 }
-?>

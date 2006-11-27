@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * This class make management events of the client interface.
  *
@@ -213,5 +213,3 @@ class AMEnvSession implements AMAjax {
   }
 
 }
-
-?>

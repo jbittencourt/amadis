@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Model an invitation or request to be member of a project.
  *
@@ -41,7 +41,3 @@ class AMCommunityProjectJoin extends CMObj {
 					      self::ENUM_STATUS_ACEPTED));
   }
 }
-
-//put your functions here
-
-?>

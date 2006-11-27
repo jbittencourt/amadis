@@ -1,4 +1,4 @@
-<?
+<?php
 
 class AMGroupMember extends CMObj {
 
@@ -14,5 +14,3 @@ class AMGroupMember extends CMObj {
      $this->addPrimaryKey("codeUser");
   }
 }
-
-?>

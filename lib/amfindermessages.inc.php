@@ -1,4 +1,4 @@
-<?
+<?php
 
 class AMFinderMessages extends CMObj {
 
@@ -54,5 +54,3 @@ class AMFinderMessages extends CMObj {
   }
 
 }
-
-?>

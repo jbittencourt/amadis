@@ -1,4 +1,4 @@
-<?
+<?php
 
 class AMGroup extends CMObj {
 
@@ -32,5 +32,3 @@ class AMGroup extends CMObj {
     return $res;    
   }
 }
-
-?>

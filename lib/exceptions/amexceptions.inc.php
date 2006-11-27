@@ -1,4 +1,4 @@
-<?
+<?php
 
 class AMException extends CMException {
   public function __construct($message) {
@@ -87,6 +87,3 @@ class AMWEFirstLogin extends AMException {
     parent::__construct("This is a user first login.");
   }
 }
-
-
-?>

@@ -1,4 +1,4 @@
-<?
+<?php
 
 class AMChatRoom extends CMObj{  
 
@@ -38,4 +38,3 @@ class AMChatRoom extends CMObj{
     return $q->execute();
   }
 }
-?>

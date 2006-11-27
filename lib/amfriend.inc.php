@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Model an friend selected by the user.
  *
@@ -33,7 +33,3 @@ class AMFriend extends CMObj {
 
   }
 }
-
-//put your functions here
-
-?>

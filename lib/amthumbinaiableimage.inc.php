@@ -1,4 +1,4 @@
-<?
+<?php
 
 interface AMThumbinaiableImage {
   
@@ -11,5 +11,3 @@ interface AMThumbinaiableImage {
   static public function getThumb($obj,$smallthumb=false);
 
 }
-
-?>

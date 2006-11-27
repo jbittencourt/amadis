@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Class that implements the Forums Table
  *
@@ -142,6 +142,3 @@ class AMForum extends CMObj implements  CMACLAppInterface {
   }
 
 }
-
-
-?>

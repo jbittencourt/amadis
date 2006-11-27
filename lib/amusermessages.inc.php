@@ -1,4 +1,4 @@
-<?
+<?php
 
 class AMUserMessages extends CMObj {
 
@@ -14,5 +14,3 @@ class AMUserMessages extends CMObj {
      $this->addPrimaryKey("code");
   }
 }
-
-?>

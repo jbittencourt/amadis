@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * This class models a file that is be stored in the database.
  * 
@@ -52,8 +52,4 @@ class AMFile extends CMObj {
     }
 
   }
-
-
 }
-
-?>

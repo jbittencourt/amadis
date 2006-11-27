@@ -1,4 +1,4 @@
-<?
+<?php
 
 class AMFinderChatRoom extends CMObj {
 
@@ -36,5 +36,3 @@ class AMFinderChatRoom extends CMObj {
   }
 
 }
-
-?>

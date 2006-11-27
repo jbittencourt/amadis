@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * Agregator keywords filters.
@@ -24,4 +24,3 @@ class AMAgregator extends CMObj {
     
   }
 }
-?> 

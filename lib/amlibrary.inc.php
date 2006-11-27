@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  *
@@ -38,19 +38,19 @@ class  AMLibrary extends CMObj{
 
     switch( $tipo ){
     case "img":
-      $q->setFilter("(AMFile::codeFile = AMLibraryFiles::filesCode ) AND (AMFile::mimetype LIKE 'image/%') AND (AMLibraryFiles::libraryCode = '$this->code') AND AMLibraryFiles::active='y'");
+      $q->setFilter("(AMFile::codeFile = AMLibraryFiles::codeFile ) AND (AMFile::mimetype LIKE 'image/%') AND (AMLibraryFiles::codeLibrary = '$this->code') AND AMLibraryFiles::active='y'");
       break;
     case "docs":
-      $q->setFilter("(AMFile::codeFile = AMLibraryFiles::filesCode ) AND (AMFile::mimetype = 'application/msword' OR AMFile::mimetype LIKE 'text/%' OR AMFile::mimetype = 'application/vnd.sun.xml.writer' OR AMFile::mimetype = 'application/pdf') AND (AMLibraryFiles::libraryCode = '$this->code') AND AMLibraryFiles::active='y'");
+      $q->setFilter("(AMFile::codeFile = AMLibraryFiles::codeFile ) AND (AMFile::mimetype = 'application/msword' OR AMFile::mimetype LIKE 'text/%' OR AMFile::mimetype = 'application/vnd.sun.xml.writer' OR AMFile::mimetype = 'application/pdf') AND (AMLibraryFiles::codeLibrary = '$this->code') AND AMLibraryFiles::active='y'");
       break;    
     case "video":
-      $q->setFilter("(AMFile::codeFile = AMLibraryFiles::filesCode ) AND (AMFile::mimetype LIKE 'video/%'OR AMFile::mimetype = 'application/x-shockwave-flash') AND (AMLibraryFiles::libraryCode = '$this->code') AND AMLibraryFiles::active='y'");
+      $q->setFilter("(AMFile::codeFile = AMLibraryFiles::codeFile ) AND (AMFile::mimetype LIKE 'video/%'OR AMFile::mimetype = 'application/x-shockwave-flash') AND (AMLibraryFiles::codeLibrary = '$this->code') AND AMLibraryFiles::active='y'");
       break;
     case "audio":
-      $q->setFilter("(AMFile::codeFile = AMLibraryFiles::filesCode ) AND (AMFile::mimetype LIKE 'audio/%') AND (AMLibraryFiles::libraryCode = '$this->code') AND AMLibraryFiles::active='y'");
+      $q->setFilter("(AMFile::codeFile = AMLibraryFiles::codeFile ) AND (AMFile::mimetype LIKE 'audio/%') AND (AMLibraryFiles::codeLibrary = '$this->code') AND AMLibraryFiles::active='y'");
       break;
     case "outros":
-      $q->setFilter("(AMFile::codeFile = AMLibraryFiles::filesCode ) AND (AMFile::mimetype NOT LIKE 'audio/%' AND AMFile::mimetype NOT LIKE 'video/%' AND AMFile::mimetype != 'application/x-shockwave-flash' AND AMFile::mimetype NOT LIKE 'image/%' AND AMFile::mimetype != 'application/msword' AND AMFile::mimetype NOT LIKE 'text/%' AND AMFile::mimetype != 'application/vnd.sun.xml.writer' AND AMFile::mimetype != 'application/pdf') AND (AMLibraryFiles::libraryCode = '$this->code') AND AMLibraryFiles::active='y'");
+      $q->setFilter("(AMFile::codeFile = AMLibraryFiles::codeFile ) AND (AMFile::mimetype NOT LIKE 'audio/%' AND AMFile::mimetype NOT LIKE 'video/%' AND AMFile::mimetype != 'application/x-shockwave-flash' AND AMFile::mimetype NOT LIKE 'image/%' AND AMFile::mimetype != 'application/msword' AND AMFile::mimetype NOT LIKE 'text/%' AND AMFile::mimetype != 'application/vnd.sun.xml.writer' AND AMFile::mimetype != 'application/pdf') AND (AMLibraryFiles::codeLibrary = '$this->code') AND AMLibraryFiles::active='y'");
       break;
     default:
       break;
@@ -75,19 +75,19 @@ class  AMLibrary extends CMObj{
     $q = new CMQuery('AMFile','AMLibraryFiles');
     
     if($mimeType == "image"){
-      $q->setFilter("(AMFile::codeFile = AMLibraryFiles::filesCode ) AND (AMFile::mimetype LIKE 'image/%') AND (AMLibraryFiles::libraryCode = '$this->code') AND (AMLibraryFiles::active = 'y')");
+      $q->setFilter("(AMFile::codeFile = AMLibraryFiles::codeFile ) AND (AMFile::mimetype LIKE 'image/%') AND (AMLibraryFiles::codeLibrary = '$this->code') AND (AMLibraryFiles::active = 'y')");
     }
     if($mimeType == "text"){
-      $q->setFilter("(AMFile::codeFile = AMLibraryFiles::filesCode ) AND (AMFile::mimetype = 'application/msword' OR AMFile::mimetype LIKE 'text/%' OR AMFile::mimetype = 'application/vnd.sun.xml.writer' OR AMFile::mimetype = 'application/pdf') AND (AMLibraryFiles::libraryCode = '$this->code') AND AMLibraryFiles::active='y'");
+      $q->setFilter("(AMFile::codeFile = AMLibraryFiles::codeFile ) AND (AMFile::mimetype = 'application/msword' OR AMFile::mimetype LIKE 'text/%' OR AMFile::mimetype = 'application/vnd.sun.xml.writer' OR AMFile::mimetype = 'application/pdf') AND (AMLibraryFiles::codeLibrary = '$this->code') AND AMLibraryFiles::active='y'");
     }
     if($mimeType == "audio"){
-      $q->setFilter("(AMFile::codeFile = AMLibraryFiles::filesCode ) AND (AMFile::mimetype LIKE 'audio/%') AND (AMLibraryFiles::libraryCode = '$this->code') AND AMLibraryFiles::active='y'");
+      $q->setFilter("(AMFile::codeFile = AMLibraryFiles::codeFile ) AND (AMFile::mimetype LIKE 'audio/%') AND (AMLibraryFiles::codeLibrary = '$this->code') AND AMLibraryFiles::active='y'");
     }
     if($mimeType == "video"){
-      $q->setFilter("(AMFile::codeFile = AMLibraryFiles::filesCode ) AND (AMFile::mimetype LIKE 'video/%'OR AMFile::mimetype = 'application/x-shockwave-flash') AND (AMLibraryFiles::libraryCode = '$this->code') AND AMLibraryFiles::active='y'");
+      $q->setFilter("(AMFile::codeFile = AMLibraryFiles::codeFile ) AND (AMFile::mimetype LIKE 'video/%'OR AMFile::mimetype = 'application/x-shockwave-flash') AND (AMLibraryFiles::codeLibrary = '$this->code') AND AMLibraryFiles::active='y'");
     }
     if($mimeType == "other"){
-      $q->setFilter("(AMFile::codeFile = AMLibraryFiles::filesCode ) AND (AMFile::mimetype NOT LIKE 'audio/%' AND AMFile::mimetype NOT LIKE 'video/%' AND AMFile::mimetype != 'application/x-shockwave-flash' AND AMFile::mimetype NOT LIKE 'image/%' AND AMFile::mimetype != 'application/msword' AND AMFile::mimetype NOT LIKE 'text/%' AND AMFile::mimetype != 'application/vnd.sun.xml.writer' AND AMFile::mimetype != 'application/pdf') AND (AMLibraryFiles::libraryCode = '$this->code') AND AMLibraryFiles::active='y'");
+      $q->setFilter("(AMFile::codeFile = AMLibraryFiles::codeFile ) AND (AMFile::mimetype NOT LIKE 'audio/%' AND AMFile::mimetype NOT LIKE 'video/%' AND AMFile::mimetype != 'application/x-shockwave-flash' AND AMFile::mimetype NOT LIKE 'image/%' AND AMFile::mimetype != 'application/msword' AND AMFile::mimetype NOT LIKE 'text/%' AND AMFile::mimetype != 'application/vnd.sun.xml.writer' AND AMFile::mimetype != 'application/pdf') AND (AMLibraryFiles::codeLibrary = '$this->code') AND AMLibraryFiles::active='y'");
     }
     $q->setCount();
     $ok = $q->execute();
@@ -103,7 +103,7 @@ class  AMLibrary extends CMObj{
     global $_CMAPP;
 
     $q = new CMQuery(AMFile,AMLibraryFiles);
-    $q->setFilter("(AMFile::codeFile = AMLibraryFiles::filesCode ) AND (AMFile::mimetype LIKE 'image/%') AND (AMLibraryFiles::libraryCode = '$this->code') AND AMLibraryFiles::active='y'");
+    $q->setFilter("(AMFile::codeFile = AMLibraryFiles::codeFile ) AND (AMFile::mimetype LIKE 'image/%') AND (AMLibraryFiles::codeLibrary = '$this->code') AND AMLibraryFiles::active='y'");
     $q->setOrder('AMFile::name');
     $res = $q->execute();    
     if($res->__hasItems()){
@@ -133,8 +133,8 @@ class  AMLibrary extends CMObj{
     
     try {
       $file->save();	//salva o arquivo
-      $filelib->libraryCode = $this->code;
-      $filelib->filesCode = $file->codeFile;
+      $filelib->codeLibrary = $this->code;
+      $filelib->codeFile = $file->codeFile;
       $filelib->time = time();
       $filelib->save();
     }catch(CMException $e){
@@ -154,7 +154,7 @@ class  AMLibrary extends CMObj{
 
   public function deleta($id){
     $filelib = new AMLibraryFiles;    
-    $filelib->filesCode = $id;
+    $filelib->codeFile = $id;
     $filelib->load();
     
     if($filelib->referred == "y"){ 
@@ -177,7 +177,7 @@ class  AMLibrary extends CMObj{
   public function getLastFiles($limit){
     try{
       $q = new CMQuery('AMFile','AMLibraryFiles');
-      $q->setFilter("AMFile::codeFile = AMLibraryFiles::filesCode AND AMLibraryFiles::libraryCode = '$this->code' AND AMLibraryFiles::active='y'");
+      $q->setFilter("AMFile::codeFile = AMLibraryFiles::codeFile AND AMLibraryFiles::codeLibrary = '$this->code' AND AMLibraryFiles::active='y'");
       $q->setLimit(0,$limit);
       $q->setOrder('AMFile::time desc');
       $res = $q->execute();    
@@ -191,7 +191,7 @@ class  AMLibrary extends CMObj{
    **/
   public function isShared($fileCode){
     $filelib = new AMLibraryFiles;
-    $filelib->filesCode = $fileCode;
+    $filelib->codeFile = $fileCode;
     try{
     $filelib->load();
     }catch(AMException $e){ return "false"; }
@@ -208,7 +208,7 @@ class  AMLibrary extends CMObj{
   public function listSharedFiles($limit){ //if the limit passed is 0, dont set limit
     try{
       $q = new CMQuery(AMFile,AMLibraryFiles);
-      $q->setFilter("AMFile::codeFile = AMLibraryFiles::filesCode AND AMLibraryFiles::libraryCode = '$this->code' AND AMLibraryFiles::active='y' and AMLibraryFiles::shared='y'");
+      $q->setFilter("AMFile::codeFile = AMLibraryFiles::codeFile AND AMLibraryFiles::codeLibrary = '$this->code' AND AMLibraryFiles::active='y' and AMLibraryFiles::shared='y'");
       if($limit > 0)
 	$q->setLimit(0,$limit);
       $q->setOrder('AMFile::time desc');
@@ -230,11 +230,11 @@ class  AMLibrary extends CMObj{
     
     $j = new CMJoin(CMJoin::INNER);
     $j->setClass(AMLibraryFiles);
-    $j->on("filesCode = codeFile");
+    $j->on("codeFile = codeFile");
     
     $q->addJoin($j, "lib");
     $q->setProjection("AMFile::codeFile, AMFile::mimetype, AMFile::name, AMFile::metadata, AMLibraryFiles::*");
-    $q->setFilter("libraryCode = $lib AND AMFile::mimetype LIKE 'image%'");
+    $q->setFilter("codeLibrary = $lib AND AMFile::mimetype LIKE 'image%'");
     return $q->execute();
   }
   
@@ -243,16 +243,16 @@ class  AMLibrary extends CMObj{
 
     $j = new CMJoin(CMJoin::LEFT);
     $j->setClass(AMProjectLibraryEntry);
-    $j->on("AMLibraryFiles::libraryCode = AMProjectLibraryEntry::libraryCode");
+    $j->on("AMLibraryFiles::codeLibrary = AMProjectLibraryEntry::codeLibrary");
     $j->setFake();
 
     $j2 = new CMJoin(CMJoin::LEFT);
     $j2->setClass(AMFile);
-    $j2->on("AMFile::codeFile = AMLibraryFiles::filesCode");
+    $j2->on("AMFile::codeFile = AMLibraryFiles::codeFile");
     
     $j3 = new CMJoin(CMJoin::LEFT);
     $j3->setClass(AMProject);
-    $j3->on("AMProjectLibraryEntry::projectCode = AMProject::codeProject");
+    $j3->on("AMProjectLibraryEntry::codeProject = AMProject::codeProject");
     
     $j4 = new CMJoin(CMJoin::INNER);
     $j4->setClass('CMGroup');
@@ -270,9 +270,9 @@ class  AMLibrary extends CMObj{
     $q->addJoin($j4, "grupos");
     $q->addJoin($j5, "membros");
     
-    $q->setProjection("AMLibraryFiles::filesCode, AMProject::title, AMProject::codeProject, AMFile::codeFile, AMFile::mimetype, AMFile::metadata, AMFile::name");
+    $q->setProjection("AMLibraryFiles::codeFile, AMProject::title, AMProject::codeProject, AMFile::codeFile, AMFile::mimetype, AMFile::metadata, AMFile::name");
     
-    $q->setFilter('CMGroupMember::codeUser = '.$_SESSION['user']->codeUser.' AND CMGroupMember::status="'.CMGroupMember::ENUM_STATUS_ACTIVE.'" AND filesCode != "NULL" AND mimetype LIKE "image%"');
+    $q->setFilter('CMGroupMember::codeUser = '.$_SESSION['user']->codeUser.' AND CMGroupMember::status="'.CMGroupMember::ENUM_STATUS_ACTIVE.'" AND codeFile != "NULL" AND mimetype LIKE "image%"');
     
     return $q->execute();
 
@@ -280,5 +280,3 @@ class  AMLibrary extends CMObj{
 
 
 }
-
-?>

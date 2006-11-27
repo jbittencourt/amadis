@@ -1,4 +1,4 @@
-<?
+<?php
 
 class AMChatsCommunities extends CMObj{
   
@@ -7,10 +7,5 @@ class AMChatsCommunities extends CMObj{
 
      $this->addField("codeRoom",CMObj::TYPE_INTEGER,11,1,0,0);
      $this->addField("codeCommunity",CMObj::TYPE_INTEGER,11,1,0,0);
-
-
   }
-
 }
-
-?>

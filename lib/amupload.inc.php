@@ -1,4 +1,4 @@
-<?
+<?php
 class AMUpload {
 
   const ABSOLUTE_PATHS = 1;
@@ -350,6 +350,3 @@ class AMUpload {
   }
  
 }
-
-
-?>

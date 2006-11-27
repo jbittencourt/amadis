@@ -14,4 +14,3 @@ class AMBlogProfile extends CMObj
      $this->addPrimaryKey("codeUser");
   }
 }
-

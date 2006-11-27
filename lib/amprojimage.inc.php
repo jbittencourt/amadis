@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * An implementation of AMFoto to the Projects
  * 
@@ -40,7 +40,3 @@ class AMProjImage extends AMFoto {
 
 
 }
-
-
-
-?>

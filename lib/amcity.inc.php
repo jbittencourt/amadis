@@ -7,16 +7,12 @@ class AMCity extends CMObj
     {
         $this->setTable("Cities");
 
-        $this->addField("codCidade",CMObj::TYPE_INTEGER,11,1,0,1);
-        $this->addField("nomCidade",CMObj::TYPE_VARCHAR,100,1,0,0);
-        $this->addField("codEstado",CMObj::TYPE_INTEGER,11,1,0,0);
-        $this->addField("tempo",CMObj::TYPE_INTEGER,11,1,0,0);
+        $this->addField("codeCity",CMObj::TYPE_INTEGER,11,1,0,1);
+        $this->addField("name",CMObj::TYPE_VARCHAR,100,1,0,0);
+        $this->addField("state",CMObj::TYPE_INTEGER,11,1,0,0);
+        $this->addField("time",CMObj::TYPE_INTEGER,11,1,0,0);
 
-        $this->addPrimaryKey("codCidade");
+        $this->addPrimaryKey("codeCity");
     }
 
 }
-
-
-
-?>

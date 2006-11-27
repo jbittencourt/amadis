@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Model an invitation or request to be member of a project.
  *
@@ -304,4 +304,3 @@ class AMCommunities extends CMObj implements  CMACLAppInterface
 
 
 }
-

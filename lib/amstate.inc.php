@@ -31,5 +31,3 @@ class AMState extends CMObj
     }
 
 }
-
-?>

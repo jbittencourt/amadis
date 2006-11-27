@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Model an invitation or request to be member of a project.
  *
@@ -31,7 +31,3 @@ class AMCommunityNews extends CMObj {
 
   }
 }
-
-//put your functions here
-
-?>

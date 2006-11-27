@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * The users class.
  * This class manage all actions of a user in the environment.
@@ -823,4 +823,3 @@ class AMUser extends CMUser
     }
     
 }
-

@@ -1,4 +1,4 @@
-<?
+<?php
 
 class AMUploadThumb extends AMThumb {
 
@@ -9,5 +9,3 @@ class AMUploadThumb extends AMThumb {
   }
 
 }
-
-?>

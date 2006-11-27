@@ -1,4 +1,4 @@
-<?
+<?php
 
 class AMUserThumb extends AMThumb {
 
@@ -11,11 +11,9 @@ class AMUserThumb extends AMThumb {
   public function load() {
     $tmp = $this->codeFile;
     if(empty($tmp)) {
-      $this->codeFile = AMUserFoto::DEFAULT_IMAGE;
+      $this->codeFile = AMUserPicture::DEFAULT_IMAGE;
     }
     return parent::load();
   }
 
 }
-
-?>

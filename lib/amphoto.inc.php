@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * This class models a picture(foto) or image that is stored in the database.
  * 
@@ -16,7 +16,7 @@
  * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
  * @see AMArquivo, AMArquivo, AMUserFoto
  **/
-abstract class AMFoto extends AMImage {
+abstract class AMPhoto extends AMImage {
 
   protected $maxX = "200";
   protected $maxY = "200";
@@ -48,7 +48,3 @@ abstract class AMFoto extends AMImage {
   }
 
 }
-
-
-
-?>

@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * 
@@ -19,5 +19,3 @@ class AMAlbumThumb extends AMThumb {
   }
 
 }
-
-?>

@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Encapsulates the User Picture.
  *
@@ -31,7 +31,7 @@ class AMUserFoto extends AMFoto {
 
     switch($this->state) {
     case CMObj::STATE_PERSISTENT:
-      return new AMTUserImage($this->codeArquivo);
+      return new AMTUserImage($this->codeFile);
     case CMObj::STATE_DIRTY:
       return new AMTUserImage($this,AMImageTemplate::METHOD_SESSION);
     case CMObj::STATE_DIRTY_NEW:

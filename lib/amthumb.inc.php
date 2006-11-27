@@ -1,4 +1,4 @@
-<?
+<?php
 abstract class AMThumb extends AMImage {
   protected $maxY;
   protected $maxX;

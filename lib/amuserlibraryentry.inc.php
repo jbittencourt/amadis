@@ -1,4 +1,4 @@
-<?
+<?php
 
 /** 
  *  Manage user's libraries
@@ -17,12 +17,12 @@ class AMUserLibraryEntry extends CMObj {
   
   public function configure() {
     $this->setTable("UsersLibraries");
-    $this->addField("userCode",CMObj::TYPE_INTEGER,11,1,0,0);
-    $this->addField("libraryCode",CMObj::TYPE_INTEGER,11,1,0,0);
+    $this->addField("codeUser",CMObj::TYPE_INTEGER,11,1,0,0);
+    $this->addField("codeLibrary",CMObj::TYPE_INTEGER,11,1,0,0);
     $this->addField("time",CMObj::TYPE_INTEGER,20,1,0,0);
 
-    $this->addPrimaryKey("userCode");
-    $this->addPrimaryKey("libraryCode");
+    $this->addPrimaryKey("codeUser");
+    $this->addPrimaryKey("codeLibrary");
   }
   
   public function __construct($user){
@@ -33,7 +33,7 @@ class AMUserLibraryEntry extends CMObj {
   
   public function libraryExist(){  // confere se a biblioteca do usuario existe.. caso nao, ele cria uma
     //$l = new AMUserLibraryEntry;
-    $this->userCode = $this->user;
+    $this->codeUser = $this->user;
     try{
       $this->load();
     }catch(CMDBNoRecord $w){
@@ -52,8 +52,8 @@ class AMUserLibraryEntry extends CMObj {
     try{
       $library->save();
       //adiciona esta nova biblioteca ao usuario que esta sendo cadastrado
-      $this->userCode =  $this->user;
-      $this->libraryCode = $library->code;      
+      $this->codeUser =  $this->user;
+      $this->codeLibrary = $library->code;      
       $this->save();      
     }catch(AMException $e){ 
       $e->getMessage(); die();
@@ -61,14 +61,12 @@ class AMUserLibraryEntry extends CMObj {
   }
 
   public function getLibrary($user){
-    $this->userCode = $user;
+    $this->codeUser = $user;
     try{
       $this->load();
     }catch(CMDBNoRecord $w){
       $this->newLibrary();
     }
-    return $this->libraryCode;
+    return $this->codeLibrary;
   }
-
 }
-?>

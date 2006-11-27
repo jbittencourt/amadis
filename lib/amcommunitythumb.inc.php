@@ -1,4 +1,4 @@
-<?
+<?php
 
 class AMCommunityThumb extends AMThumb {
 
@@ -14,9 +14,4 @@ class AMCommunityThumb extends AMThumb {
     }
   }
 
-
-
-
 }
-
-?>

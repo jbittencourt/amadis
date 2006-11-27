@@ -1,4 +1,4 @@
-<?
+<?php
 include("jpspan.inc.php");
 
 class AMComunicator { 
@@ -48,4 +48,3 @@ class AMComunicator {
   }
 
 }
-?>

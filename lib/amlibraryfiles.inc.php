@@ -1,4 +1,4 @@
-<?
+<?php
 /**  
  *  Relates files -> libraries
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
@@ -13,15 +13,15 @@ class AMLibraryFiles extends CMObj {
 
   public function configure() {
     $this->setTable("FilesLibraries");
-    $this->addField("filesCode",CMObj::TYPE_INTEGER,11,1,0,0);
+    $this->addField("codeFile",CMObj::TYPE_INTEGER,11,1,0,0);
     $this->addField("time",CMObj::TYPE_INTEGER,20,1,0,0);
-    $this->addField("libraryCode",CMObj::TYPE_INTEGER,11,1,0,0);
+    $this->addField("codeLibrary",CMObj::TYPE_INTEGER,11,1,0,0);
     $this->addField("referred",CMObj::TYPE_CHAR,1,1,0,0);
     $this->addField("active",CMObj::TYPE_CHAR,1,1,0,0);
     $this->addField("shared",CMObj::TYPE_CHAR,1,1,0,0);
 
-    $this->addPrimaryKey("filesCode");
-    $this->addPrimaryKey("libraryCode");
+    $this->addPrimaryKey("codeFile");
+    $this->addPrimaryKey("codeLibrary");
   }
 
   public function setActive(){
@@ -37,5 +37,3 @@ class AMLibraryFiles extends CMObj {
     $this->shared = "n";
   }
 }
-
-?>

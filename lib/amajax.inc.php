@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Ajax interface to xoadGetMeta
  *
@@ -31,5 +31,3 @@
 interface AMAjax {
   public function xoadGetMeta();
 }
-
-?>

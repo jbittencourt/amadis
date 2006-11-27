@@ -1,11 +1,11 @@
-<?
+<?php
 
 /**
  * Classe que implementa as funcionalidades da ferramenta Finder
  *
  * Classe que implementa as funcionalidades da ferramenta Finder
  *
- * @author Robson Mendonça <robson@lec.ufrgs.br>
+ * @author Robson Mendona <robson@lec.ufrgs.br>
  * @access public
  * @version 0.5
  * @package AMADIS
@@ -249,5 +249,3 @@ class AMFinder implements AMAjax {
   }
 
 }
-
-?>

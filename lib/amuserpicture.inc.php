@@ -77,7 +77,4 @@ class AMUserPicture extends AMFixedSizeImage implements AMThumbinaiableImage
       return new AMTUserImage(self::DEFAULT_IMAGE);
     }
   }
-
-
-
 }

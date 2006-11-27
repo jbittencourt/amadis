@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Short descrition
  *
@@ -54,6 +54,3 @@ class AMLogUploadFiles extends CMObj {
     return array("users"=>$q->execute(), "projects"=>$q2->execute());
   }
 }
-
-
-?>

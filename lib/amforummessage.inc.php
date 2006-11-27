@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Class that representas a Forum Message.
  *
@@ -26,6 +26,3 @@ class AMForumMessage extends CMObj {
     $this->addPrimaryKey("code");
   }
 }
-
-
-?>

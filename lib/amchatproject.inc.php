@@ -1,3 +1,4 @@
+<?php
 class AMChatProject extends CMObj{
   
   public function configure() {

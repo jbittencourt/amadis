@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * An implementation of AMFixedSizeImage to the Projects
  * 
@@ -79,7 +79,3 @@ class AMProjectImage extends AMFixedSizeImage implements AMThumbinaiableImage {
 
 
 }
-
-
-
-?>

@@ -106,4 +106,3 @@ class AMAgregatorFacade implements AMAjax {
         XOAD_Client::publicMethods($this, $methods);
     }
 }
-?>

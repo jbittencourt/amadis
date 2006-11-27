@@ -1,4 +1,4 @@
-<?
+<?php
 
 class AMCommunityForum extends CMObj {
 
@@ -14,4 +14,3 @@ class AMCommunityForum extends CMObj {
 
   }
 }
-?>

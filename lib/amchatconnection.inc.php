@@ -81,6 +81,3 @@ class AMChatConnection extends CMObj {
   } 
 
 }
-
-
-?>

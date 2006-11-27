@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * This subPackage answer for the users albums.
@@ -119,4 +119,3 @@ class  AMAlbum extends CMObj {
     parent::delete();
   }
 }
-?> 

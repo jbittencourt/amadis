@@ -1,4 +1,4 @@
-<?
+<?php
 
 interface AMCChat {
 
@@ -12,4 +12,3 @@ interface AMCChat {
   static public function drawMessages($list);
 
 }
-?>

@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * The AMEnvironment class represents the basic environment in witch the application is running.
  *
@@ -635,6 +635,5 @@ class AMEnvironment extends CMEnvironment
 
         return $q->execute();
     }
-
 
 }

@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Log messages error, this is a better way to control error events of the system.
  *
@@ -64,5 +64,3 @@ class AMLog {
     return self::$errors;
   }
 }
-
-?>

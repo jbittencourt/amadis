@@ -150,6 +150,4 @@ class AMChat implements AMAjax {
     XOAD_Client::publicMethods($this, $methods);
   }
 
-}  
-
-?>
+}

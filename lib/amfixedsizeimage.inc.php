@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * This class models a image that is stored in the database and has width and height constraings.
  * 
@@ -52,7 +52,3 @@ abstract class AMFixedSizeImage extends AMImage {
   }
 
 }
-
-
-
-?>

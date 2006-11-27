@@ -186,9 +186,4 @@ class AMImage extends AMFile
             }
         }
     }
-
-
 }
-
-
-?>

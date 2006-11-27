@@ -51,4 +51,3 @@ class AMBlogPost extends CMObj
 
 
 }
-

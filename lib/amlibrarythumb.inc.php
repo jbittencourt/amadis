@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**  
  * Thumbs to Library
@@ -20,5 +20,3 @@ class AMLibraryThumb extends AMThumb {
   }
 
 }
-
-?>

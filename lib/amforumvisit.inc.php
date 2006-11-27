@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Class that implements the ForumVisits Table
  *
@@ -23,5 +23,3 @@ class AMForumVisit extends CMObj {
   }
 
 }
-
-?>

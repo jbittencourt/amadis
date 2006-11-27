@@ -1,4 +1,4 @@
-<?
+<?php
 
 class AMIconThumb extends AMThumb {
 
@@ -9,5 +9,3 @@ class AMIconThumb extends AMThumb {
   }
 
 }
-
-?>

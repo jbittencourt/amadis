@@ -1,4 +1,4 @@
-<?
+<?php
 
 class AMCommunicator { 
   
@@ -49,4 +49,3 @@ class AMCommunicator {
   }
 
 }
-?>

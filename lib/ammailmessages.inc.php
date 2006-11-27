@@ -1,4 +1,4 @@
-<?
+<?php
 
 class AMMailMessages extends CMObj {
 
@@ -41,6 +41,4 @@ class AMMailMessages extends CMObj {
     return $result;
   }
 
-}
-
-?>
+}  

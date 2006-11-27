@@ -1,4 +1,4 @@
-<?
+<?php
 /**  
  *  Manage projects libraries
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
@@ -13,17 +13,17 @@ class AMProjectLibraryEntry extends CMObj {
 
   public function configure() {
     $this->setTable("ProjectsLibraries");
-    $this->addField("projectCode",CMObj::TYPE_INTEGER,11,1,0,0);
-    $this->addField("libraryCode",CMObj::TYPE_INTEGER,11,1,0,0);
+    $this->addField("codeProject",CMObj::TYPE_INTEGER,11,1,0,0);
+    $this->addField("codeLibrary",CMObj::TYPE_INTEGER,11,1,0,0);
 
-    $this->addPrimaryKey("projectCode");
-    $this->addPrimaryKey("libraryCode");
+    $this->addPrimaryKey("codeProject");
+    $this->addPrimaryKey("codeLibrary");
   }
  
   public function __construct($project=""){
     parent::__construct();
     if(!empty($project))
-      $this->projectCode = $project;
+      $this->codeProject = $project;
   }
 
   public function libraryExist(){  // confere se a biblioteca do usuario existe.. caso nao, ele cria uma
@@ -45,7 +45,7 @@ class AMProjectLibraryEntry extends CMObj {
     try{
       $library->save();
       //adiciona esta nova biblioteca ao usuario que esta sendo cadastrado
-      $this->libraryCode = $library->code;
+      $this->codeLibrary = $library->code;
       $this->save();
     }catch(CMDBException $e){ 
       $e->getMessage();
@@ -54,15 +54,13 @@ class AMProjectLibraryEntry extends CMObj {
   }
   
   public function getLibrary($proj){
-    $this->projectCode = $proj;
+    $this->codeProject = $proj;
     try{
       $this->load();
     }catch(CMException $e){
       echo $e;
     }
-    return $this->libraryCode;
+    return $this->codeLibrary;
   }
 
 }
-
-?>

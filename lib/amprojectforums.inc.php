@@ -23,7 +23,3 @@ class AMProjectForums extends CMObj
 
     }
 }
-
-//put your functions here
-
-?>

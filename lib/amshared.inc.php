@@ -1,4 +1,15 @@
-<?
+<?php
+/**
+ *  
+ * This class is used for AJAX to (un)share files on amadis libraries
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @access  public
+ * @package AMADIS
+ * @subpackage 
+ * @version 1.0
+ * @author Cristiano S Basso <csbasso@lec.ufrgs.br>
+ **/
 class AMShared {
 
   public function share($id){
@@ -50,5 +61,3 @@ class AMShared {
   }
 
 }
-
-?>

@@ -21,5 +21,3 @@ class AMWarning extends CMObj
     return $q->execute();
   }
 }
-
-?>

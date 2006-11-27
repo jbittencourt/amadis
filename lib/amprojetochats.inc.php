@@ -13,5 +13,3 @@ class AMProjectChats extends CMObj{
   }
 
 }
-
-?>

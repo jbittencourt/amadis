@@ -3,13 +3,12 @@
 class AMProjectComment extends CMObj {
 
    public function configure() {
-     $this->setTable("ProjetoComentario");
+     $this->setTable("ProjectComments");
 
-     $this->addField("codProjeto",CMObj::TYPE_INTEGER,11,1,0,0);
-     $this->addField("codComentario",CMObj::TYPE_INTEGER,20,1,0,0);
+     $this->addField("codeProject",CMObj::TYPE_INTEGER,11,1,0,0);
+     $this->addField("codeComment",CMObj::TYPE_INTEGER,20,1,0,0);
 
-     $this->addPrimaryKey("codProjeto");
-     $this->addPrimaryKey("codComentario");
+     $this->addPrimaryKey("codeProject");
+     $this->addPrimaryKey("codeComment");
   }
 }
-

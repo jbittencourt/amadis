@@ -1,4 +1,4 @@
-<?
+<?php
 
 class AMChgStatusThumb extends AMThumb {
 
@@ -9,5 +9,3 @@ class AMChgStatusThumb extends AMThumb {
   }
 
 }
-
-?>
