@@ -32,7 +32,7 @@ CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 DROP TABLE IF EXISTS `amadis`.`Files`;
 CREATE TABLE `amadis`.`Files` (
-  `codeFile` BIGINT(20) NOT NULL,
+  `codeFile` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `data` LONGBLOB NOT NULL,
   `mimeType` VARCHAR(100) NOT NULL,
   `size` INT(11) NOT NULL DEFAULT '0',
