@@ -1,11 +1,11 @@
 <?
 /**
- * This page creates a new community.
+ * This page creates a new project.
  *
- * This page is used to create a new community in AMADIS. It
- * has 2 pages: one for the general community data (name, description, etc),
- * and a second for the project image selection. The
- * only user that is added in this stage to the community team is the logged user.
+ * This page is used to create a new project in AMADIS. It
+ * has 3 pages: one for the general project data (name, description, etc),
+ * other to select areas and a third for the project image selection. The
+ * only user that is added in this stage to the project is the logged user.
  * 
  *
  * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
@@ -35,6 +35,8 @@ $pag->setPathIndicator($ind);
 
 //form box to interface
 $cadBox = new AMTCommunityCadBox("", AMTCadBox::COMMUNITY_THEME);
+
+unset($_REQUEST['frm_codeCommunity']);
 
 switch($_REQUEST['action']) {
 
@@ -74,7 +76,9 @@ switch($_REQUEST['action']) {
      $community = new AMCommunities;
      $community->name = $_REQUEST['frm_name'];
      try {
-       $community->load();
+       $community->load();       
+       $_SESSION['cad_community'] = new AMCommunities;
+       $_SESSION['cad_community']->loadDataFromRequest();       
        header("Location:$_SERVER[PHP_SELF]?frm_amerror=community_exists");
      }catch (CMDBNoRecord $e) {
        unset($community);
@@ -85,36 +89,29 @@ switch($_REQUEST['action']) {
      //if this is the first submit, create an object in the session to store the user data
      $_SESSION['cad_community'] = new AMCommunities();
      $_SESSION['cad_community']->loadDataFromRequest();
+     $_SESSION['cad_community']->status = AMCommunities::ENUM_STATUS_AUTHORIZED;
      $_SESSION['cad_community']->time = time();
-
-     $_SESSION['cad_image'] = new AMCommunityImage;
    }
    else {
      //if the user hit back, fill the from with the data from the session object
      $_SESSION['cad_community']->loadDataFromRequest();
    }
-
-   //image stuff
-   
-   //unserialize the image
-   $foto = unserialize($_SESSION['cad_image']);
-   if($foto==false) $foto = $_SESSION['cad_image'];
-   $_SESSION['cad_image'] = $foto;
-
-   if(!empty($_FILES['frm_image'])) {
+   //image stufff
+   $_SESSION['cad_image'] = new AMCommunityImage;
+   if(!empty($_FILES['frm_image'])) {   
      try {
        $_SESSION['cad_image']->loadImageFromRequest("frm_image");
      }
      catch(AMEImage $e) {
        header("Location:$_SERVER[PHP_SELF]?action=pag_1&frm_amerror=invalid_image_type");
      }
-
    }
-
    $view = $_SESSION['cad_image']->getView();
    $cadBox->add("<p align=center>");
    $cadBox->add($view);
-
+   
+   $_SESSION['cad_image']=serialize($_SESSION['cad_image']);
+   
 
    //get the image types that are allowed in this installation of gd+php
    $types = AMImage::getValidImageExtensions();
@@ -127,21 +124,19 @@ switch($_REQUEST['action']) {
    $cadBox->add("<br><input type=submit onClick=\"this.form['action'].value='pag_2'\" value=\"$_language[next]\">");
    $cadBox->add("</form>");
 
-
-
    $cadBox->setTitle($_language['community_pic']);
-   $_SESSION['cad_image']=serialize($_SESSION['cad_image']);
 
    break;
 
  case "pag_2":
 
-
    $foto = unserialize($_SESSION['cad_image']);
+
    if($foto==false) $foto = $_SESSION['cad_image'];
+
      
-   if( $foto->state==CMObj::STATE_DIRTY_NEW ) {
-     $foto->time = time();
+   if(($foto->state==CMObj::STATE_DIRTY) || ($foto->state==CMObj::STATE_DIRTY_NEW)) {
+     $foto->tempo = time();
      try {
        $foto->save(); 
      }
@@ -149,13 +144,12 @@ switch($_REQUEST['action']) {
        header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_picture");
      }
      
-     $_SESSION['cad_community']->image = (integer) $foto->codeFile;
+     $_SESSION['cad_community']->image = (integer) $foto->codeArquivo;
    }
-
 
    //save the community
    try {
-     $_SESSION['cad_community']->save();
+     $_SESSION['cad_community']->save();    
    }
    catch(CMDBException $e) {
      if(!empty($foto)) {
@@ -169,17 +163,37 @@ switch($_REQUEST['action']) {
      }
      header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=creating_user_dir");
    }
-
+   
+  
+   $member = new CMGroupMember;
+   $member->codeGroup = (integer) $_SESSION['cad_community']->codeGroup;
+   $member->codeUser =  (integer) $_SESSION['user']->codeUser;
+   $member->time = time();
+   try{
+     $member->save();
+   }catch(CMObjEDuplicatedEntry $e){
+     header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=group_already_exist");
+   }
+   $adm = new AMCommunityMembers;
+   $adm->codeCommunity = $_SESSION['cad_community']->code;
+   $adm->codeUser = $_SESSION['user']->codeUser;
+   $adm->flagAdmin = AMCommunityMembers::ENUM_FLAGADMIN_ADMIN;
+   $adm->time = time();   
+   try{
+     $adm->save();
+   }catch(CMObjEDuplicatedEntry $e){
+     header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=group_already_exist");
+   }
       
    $cod = $_SESSION['cad_community']->code;
-
+   
    unset($_SESSION['cad_community']);
    unset($_SESSION['cad_image']);
    unset($_SESSION['amadis']['communities']);
 
-   //if everything was ok, go the page of the project.
+   //if everything was ok, go the page of the community.
 
-   header("Location: $_CMAPP[services_url]/communities/community.php?frm_codeCommunity=$cod&frm_ammsg=community_created");
+   CMHTMLPage::redirect($_CMAPP[services_url]."/communities/community.php?frm_codeCommunity=$cod&frm_ammsg=community_created");
    
    break;
 

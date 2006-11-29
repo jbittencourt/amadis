@@ -16,7 +16,7 @@
 include("../../config.inc.php");
 
 
-$_language = $_CMAPP[i18n]->getTranslationArray('communities','community_invite_user');
+$_language = $_CMAPP[i18n]->getTranslationArray("community_invite_user");
 
 
 //checks to see if the user is an group member
@@ -24,45 +24,28 @@ if(empty($_REQUEST[frm_codeCommunity])) {
   Header("Location: $_CMAPP[services_url]/communities/communities.php?frm_amerror=community_code_does_not_exists");
 }
 
-$community = new AMCommunities;
-$community->code = (integer) $_REQUEST[frm_codeCommunity];
+$co = new AMCommunities;
+$co->code = $_REQUEST[frm_codeCommunity];
 try {
-  $community->load();
-  $group = $community->getGroup();
-  $aco = $community->getACO();
-
+  $co->load();
 } catch(CMDBNoRecord $e) {
   Header("Location: $_CMAPP[services_url]/communities/community.php?frm_amerror=community_code_does_not_exists");
 }
 
+$group = $co->getGroup();
 $isMember = $group->isMember($_SESSION[user]->codeUser);
+
 if(!$isMember) {
-   CMHTMLPage::redirect("$_CMAPP[services_url]/communities/community.php?frm_codeCommunity=$community->code&frm_amerror=not_group_member");
+   CMHTMLPage::redirect("$_CMAPP[services_url]/communities/community.php?frm_codeCommunity=$co->code&frm_amerror=not_group_member");
 }
 
 
 $pag = new AMTCommunities;
-
-$admin = $aco->testUserPrivilege($_SESSION['user']->codeUser,
-				 AMCommunities::PRIV_ADMIN);
-$add_users = $aco->testUserPrivilege($_SESSION['user']->codeUser,
-				     AMCommunities::PRIV_ADD_USERS);
-if(!$admin && !$add_users) {
-  //the current user doesn't have privileges
-  $pag->addError($_language['error_no_privileges']);
-  $url = $_CMAPP['services_url'].'/communities/community.php?frm_codeCommunity='.$community->code;
-  $pag->add("<br><div align=center><a href='$url' class='cinza'>");
-  $pag->add($_language['back']."</a></div><br>");
-  echo $pag;
-
-  die();  
-}
-
 //adds an Javascript that checks for if thereis some checkbox checked before submit.
 $pag->requires("inviteusers.js");
 $pag->requires("search.js");
 
-$title_box = $_language[invite_users_to_community].' '.$community->name;
+$title_box = $_language[invite_users_to_community].' '.$co->name;
 $box = new AMTCadBox($title_box,
 		     AMTCadBox::CADBOX_SEARCH,
 		     AMTCadBox::COMMUNITY_THEME);
@@ -70,11 +53,6 @@ $box = new AMTCadBox($title_box,
 //adds the default message for the javascript display when you try to submit
 //a empty form.
 $pag->addScript("msg_check_some_user='$_language[error_user_not_select]';");
-
-//show the name of the current community and the back link.
-$pag->add("<br><span class=\"titcomunidade\">$_language[community]: ".$community->name."<br></span>");
-$pag->add("<a  href=\"".$_CMAPP[services_url]."/communities/community.php?frm_codeCommunity=".$community->code."\" class=\"green\">$_language[back_to_community]</a>");
-$pag->add("<br><br>");
 
 
 switch($_REQUEST[action]) {
@@ -93,8 +71,6 @@ switch($_REQUEST[action]) {
      $pag->addError($_language[error_invitation_failed]);
    }
 
-   $_avaiable = $_SESSION[user]->listFriends();
-
    if(empty($_REQUEST[frm_search_text])) 
      break;
      
@@ -107,22 +83,22 @@ switch($_REQUEST[action]) {
 
    //put the curren group of the project into an associative
    //array so we can check if some user is in the group.
-   if(empty($_SESSION[communities][$community->code][members])) {
+   if(empty($_SESSION[communities][$co->code][members])) {
      $list = $group->listActiveMembers();
      foreach($list as $item) {
        $temp[$item->codeUser] = $item;
      }
-     $_SESSION[communities][$community->code][members] = $temp;
+     $_SESSION[communities][$co->code][members] = $temp;
    };
    break;
 }
 
 
 
-//erase users from the container that are alredy community members
+//erase users from the container that are alredy project members
 $men = "";
 if($_avaiable->__hasItems()) {
-  $temp = $_SESSION[communities][$community->code][members];
+  $temp = $_SESSION[communities][$co->code][members];
   foreach($_avaiable->items as $key=>$item) {
     if(isset($temp[$item->codeUser])) {
       unset($_avaiable->items[$key]);
@@ -144,7 +120,7 @@ $box->add("<table border=0 cellpadding=0 cellspacing=0><tr>");
 $box->add("<tr><td>");
 $box->add("<form name=\"search\" action=\"$_SERVER[PHP_SELF]\" onSubmit=\"return Search_validateForm(this.elements['frm_search_text'].value))\">");
 $box->add("<input type=hidden name=action value=\"A_search\">");
-$box->add("<input type=hidden name=frm_codeCommunity value=\"$community->code\">");
+$box->add("<input type=hidden name=frm_codeCommunity value=\"$co->code\">");
 
 $box->add('<span class="texto">'.$_language[search_users].'</span> &nbsp;<input type=text name=frm_search_text value="'.$_REQUEST[frm_search_text].'"> &nbsp;');
 
@@ -159,7 +135,7 @@ $box->add("<td width=240 valign=top><br>");
 $box->add('<form name="group" action="'.$_SERVER[PHP_SELF].'" onSubmit="return checkUsers(this,\'frm_usersInvite[]\');">');
 $box->add('<input type=hidden name=frm_search_text value="'.$_REQUEST[frm_search_text].'"> ');
 $box->add("<input type=hidden name=action value=\"A_invite\">");
-$box->add("<input type=hidden name=frm_codeCommunity value=\"$community->code\">");
+$box->add("<input type=hidden name=frm_codeCommunity value=\"$co->code\">");
 
 //print the list of team
 $box->add("<table border=0 cellspacing=0  cellspacing=0><tr>");
@@ -191,7 +167,7 @@ $box->add("</td>");
 $box->add("</tr></table>");
 
 //cancel and submit buttons
-$cancel_url = $_CMAPP[services_url]."/communities/community.php?frm_codeCommunity=".$community->code;
+$cancel_url = $_CMAPP[services_url]."/communities/community.php?frm_codeCommunity=".$co->code;
 
 $box->add("<p align=center><input type=button onclick=\"window.location='$cancel_url'\" value=\"$_language[cancel]\">");
 $box->add("&nbsp; <input type=submit  value=\"$_language[frm_invite]\">");

@@ -16,59 +16,35 @@
 include("../../config.inc.php");
 
 
-$_language = $_CMAPP[i18n]->getTranslationArray('communities','community_tie_project');
-
+$_language = $_CMAPP[i18n]->getTranslationArray("community_tie_project");
 
 //checks to see if the user is an group member
 if(empty($_REQUEST[frm_codeCommunity])) {
   Header("Location: $_CMAPP[services_url]/communities/communities.php?frm_amerror=community_code_does_not_exists");
 }
 
-$community = new AMCommunities;
-$community->code = $_REQUEST[frm_codeCommunity];
+$co = new AMCommunities;
+$co->code = $_REQUEST[frm_codeCommunity];
 try {
-  $community->load();
-  $group = $community->getGroup();
-  $aco = $community->getACO();
+  $co->load();
 } catch(CMDBNoRecord $e) {
   Header("Location: $_CMAPP[services_url]/communities/communities.php?frm_amerror=community_code_does_not_exists");
 }
 
-
+$group = $co->getGroup();
 $isMember = $group->isMember($_SESSION[user]->codeUser);
 
 if(!$isMember) {
-   CMHTMLPage::redirect("$_CMAPP[services_url]/communities/community.php?frm_codeCommunity=$community->code&frm_amerror=not_group_member");
+   CMHTMLPage::redirect("$_CMAPP[services_url]/communities/community.php?frm_codeCommunity=$co->code&frm_amerror=not_group_member");
 }
 
-//creates the page template
 $pag = new AMTCommunities;
-
-
-//test if the users har rights to access this page
-$admin = $aco->testUserPrivilege($_SESSION['user']->codeUser,
-				 AMCommunities::PRIV_ADMIN);
-$add_projects = $aco->testUserPrivilege($_SESSION['user']->codeUser,
-				     AMCommunities::PRIV_ADD_PROJECTS);
-
-if(!$admin && !$add_projects) {
-  //the current user doesn't have privileges
-  $pag->addError($_language['error_no_privileges']);
-  $url = $_CMAPP['services_url'].'/communities/community.php?frm_codeCommunity='.$community->code;
-  $pag->add("<br><div align=center><a href='$url' class='cinza'>");
-  $pag->add($_language['back']."</a></div><br>");
-  echo $pag;
-
-  die();  
-}
-
-
 
 //adds an Javascript that checks for if thereis some checkbox checked before submit.
 $pag->requires("tieproject.js");
 $pag->requires("search.js");
 
-$title_box = $_language[tie_projects_to_community].' '.$community->name;
+$title_box = $_language[tie_projects_to_community].' '.$co->name;
 $box = new AMTCadBox($title_box,
 		     AMTCadBox::CADBOX_SEARCH,
 		     AMTCadBox::COMMUNITY_THEME);
@@ -77,32 +53,21 @@ $box = new AMTCadBox($title_box,
 //a empty form.
 $pag->addScript("msg_check_some_user='$_language[error_project_not_select]';");
 
-//show the name of the current community and the back link.
-$pag->add("<br><span class=\"titcomunidade\">$_language[community]: ".$community->name."<br></span>");
-$pag->add("<a  href=\"".$_CMAPP[services_url]."/communities/community.php?frm_codeCommunity=".$community->code."\" class=\"green\">$_language[back_to_community]</a>");
-$pag->add("<br><br>");
-
-
 switch($_REQUEST[action]) {
  case "A_tie":
    if(empty($_REQUEST[frm_projectTie])) {
      CMHTMLPage::redirect("Location: $_CMAPP[services_url]/communities/tieproject.php?frm_amerror=project_not_select");
    }
-
    try {
      foreach($_REQUEST[frm_projectTie] as $proj) {
        $rel = new AMCommunityProjects;
        $rel->codeProject = $proj;
-       $rel->codeCommunity = $community->code;
+       $rel->codeCommunity = $co->code;
        try{
 	 $rel->save();
 	 $pag->addMessage($_language[msg_tie_success]);
        }catch(CMObjEDuplicatedEntry $e) {
-	 //in this case, the project is already added;
-	 /**
-	  * @todo Add custom error message
-	  **/
-	 $pag->addError($_language[error_tie_failed]);
+	 $pag->addError($_language[error_project_already_tied]);
        }
      }
    } catch(CMDBException $e) {
@@ -117,16 +82,15 @@ switch($_REQUEST[action]) {
    $_avaiable = $temp[0];
    break;   
  default:
-   $_SESSION[communities][$community->code][projects] = $community->listProjects();
+   $_SESSION[communities][$co->code][projects] = $co->listProjects();
    $_avaiable = new CMContainer;
    break;
 }
 //erase projects from the container that are alredy members
 $men = "";
 if($_avaiable instanceof CMObj){
-  if($_avaiable->__hasItems()) {    
-    
-    $temp = $_SESSION[communities][$community->code][projects];
+  if($_avaiable->__hasItems()) {        
+    $temp = $_SESSION[communities][$co->code][projects];
     foreach($_avaiable->items as $key=>$item) {
       if(isset($temp[$item->codeProject])) {
 	unset($_avaiable->items[$key]);
@@ -135,19 +99,15 @@ if($_avaiable instanceof CMObj){
   }
 }
 	       
-
-
-
-//Start an form. I don't user AMWSmartform beacuse this form is
+//Start an form. I don't use AMWSmartform beacuse this form is
 //very unusual
 
 //start table - left
 $box->add("<table border=0 cellpadding=0 cellspacing=0><tr>");
-
 $box->add("<tr><td>");
 $box->add("<form name=\"search\" action=\"$_SERVER[PHP_SELF]\" onSubmit=\"return Search_validateForm(this.elements['frm_search_text'].value))\">");
 $box->add("<input type=hidden name=action value=\"A_search\">");
-$box->add("<input type=hidden name=frm_codeCommunity value=\"$community->code\">");
+$box->add("<input type=hidden name=frm_codeCommunity value=\"$co->code\">");
 
 $box->add('<span class="texto">'.$_language[search_projects].'</span> &nbsp;<input type=text name=frm_search_text value="'.$_REQUEST[frm_search_text].'"> &nbsp;');
 
@@ -155,18 +115,15 @@ $box->add(AMMain::getSearchButton());
 $box->add("</form>");
 
 $box->add("</td></tr>");
-
-
 $box->add("<td width=240 valign=top><br>");
-
 $box->add('<form name="group" action="'.$_SERVER[PHP_SELF].'" onSubmit="return checkUsers(this,\'frm_projectTie[]\');">');
 $box->add('<input type=hidden name=frm_search_text value="'.$_REQUEST[frm_search_text].'"> ');
 $box->add("<input type=hidden name=action value=\"A_tie\">");
-$box->add("<input type=hidden name=frm_codeCommunity value=\"$community->code\">");
+$box->add("<input type=hidden name=frm_codeCommunity value=\"$co->code\">");
 
 //print the list of team
 $box->add("<table border=0 cellspacing=0  cellspacing=0><tr>");
-//note($_avaiable);
+
 if($_avaiable->__hasItems()) {
   foreach($_avaiable as $item) {    
     $box->add('<tr>');
@@ -188,7 +145,7 @@ $box->add("</td>");
 $box->add("</tr></table>");
 
 //cancel and submit buttons
-$cancel_url = $_CMAPP[services_url]."/communities/community.php?frm_codeCommunity=".$community->code;
+$cancel_url = $_CMAPP[services_url]."/communities/community.php?frm_codeCommunity=".$co->code;
 
 $box->add("<p align=center><input type=button onclick=\"window.location='$cancel_url'\" value=\"$_language[cancel]\">");
 $box->add("&nbsp; <input type=submit  value=\"$_language[frm_tie]\">");

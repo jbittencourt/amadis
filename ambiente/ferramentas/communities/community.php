@@ -5,9 +5,9 @@ include("../../config.inc.php");
 
 
 $_language = $_CMAPP[i18n]->getTranslationArray("communities");
-
 $pag = new AMTCommunities;
 $box = new AMTwoColsLayout;
+
 
 if(!empty($_REQUEST[frm_codeCommunity])) {
   $community = new AMCommunities;
@@ -15,11 +15,14 @@ if(!empty($_REQUEST[frm_codeCommunity])) {
   try{
     $community->load();
     $group = $community->getGroup();
-    $aco = $community->getACO();
   }catch(CMDBNoRecord $e){
     $_REQUEST[frm_amerror] = "community_not_exists";    
     echo $pag;
     die();
+  }catch(CMObjEPropertieValueNotValid $er){    
+    $_REQUEST[frm_amerror] = "community_not_exists";    
+    echo $pag;
+    die(); 
   }
 } else { 
   $_REQUEST[frm_amerror] = "no_community_id";
@@ -30,22 +33,15 @@ if(!empty($_REQUEST[frm_codeCommunity])) {
   die();
 }
 
+
 //checks if the user is a member of the community
 if(!empty($_SESSION[user])) {
   $isMember = $group->isMember($_SESSION[user]->codeUser);
 }
 
+$_CMAPP[smartform][language] = $_language;
 
-if($_SESSION['user'] instanceof CMUser) {
-  $canAdmin = $aco->testUserPrivilege($_SESSION['user']->codeUser,
-				      AMCommunities::PRIV_ADMIN);
-  $canAddUsers = $aco->testUserPrivilege($_SESSION['user']->codeUser,
-					 AMCommunities::PRIV_ADD_USERS);
-} else {
-  $canAdmin = false;
-  $canAddUsers = false;
-}
-if($canAdmin || $canAddUser) {
+if($isMember) {
   $req = new AMBCommunityRequest($community);
   if($req->hasRequests()) { 
     $req->setWidth($box->getWidth());
@@ -63,8 +59,7 @@ if($canAdmin || $canAddUser) {
 $box->add("<font class=\"txttitcomunidade\">$_language[community]:<br> ".$community->name."<br>", AMTwoColsLayout::LEFT);
 $box->add("<img src=\"".$_CMAPP[images_url]."/dot.gif\" border=\"0\" height=10 width=1><br>", AMTwoColsLayout::LEFT);
 
-$image = AMCommunityImage::getImage($community);
-$box->add(new AMTCommunityImage($image), AMTwoColsLayout::LEFT);
+$box->add(new AMTCommunityImage($community->image), AMTwoColsLayout::LEFT);
 
 $box->add("<br>", AMTwoColsLayout::LEFT);
 $box->add("<img src=\"".$_CMAPP[images_url]."/dot.gif\" border=\"0\" height=10 width=1><br>", AMTwoColsLayout::LEFT);
@@ -99,10 +94,11 @@ if($_SESSION[user] instanceof CMUser) {
   /*
    *CAIXA DE EDICAO DO PROJETO
    */
-  if($isMember){
-    $communityEdit = new AMBCommunityEdit($community);
-    $box->add($communityEdit,AMTwoColsLayout::RIGHT);
-  } else {
+  if($isMember){    
+    $box->add(new AMBCommunityEdit,AMTwoColsLayout::RIGHT);    
+  }  
+  
+  if(!$group->isMember($_SESSION[user]->codeUser)) {
     $box->add(new AMBCommunityJoin($community),AMTwoColsLayout::RIGHT);
   }
   
