@@ -47,7 +47,7 @@ if(!empty($_REQUEST['frm_codeProjeto'])) {
   }
 
   $_SESSION['cad_foto'] = new AMProjImage;
-  $_SESSION['cad_foto']->codeArquivo = (integer) $_SESSION['cad_proj']->image;
+  $_SESSION['cad_foto']->codeFile = (integer) $_SESSION['cad_proj']->image;
   try {
     $_SESSION['cad_foto']->load();
   }  catch (CMDBNoRecord $e) {
@@ -219,7 +219,7 @@ switch($_REQUEST['action']) {
 
      
    if(($foto->state==CMObj::STATE_DIRTY) || ($foto->state==CMObj::STATE_DIRTY_NEW)) {
-     $foto->tempo = time();
+     $foto->time = time();
      try {
        $foto->save(); 
      }
@@ -227,7 +227,7 @@ switch($_REQUEST['action']) {
        header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_picture");
      }
      
-     $_SESSION['cad_proj']->image = (integer) $foto->codeArquivo;
+     $_SESSION['cad_proj']->image = (integer) $foto->codeFile;
    }
 notelastquery();
    //save the project
