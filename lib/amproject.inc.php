@@ -38,7 +38,7 @@ class AMProject extends CMObj {
             $group->time = time();
             try {
                 $group->save();
-            } catch(CMDBException $e) {
+            } catch(CMDBException $e) {            	
                 Throw new AMException("An error ocurred creating the project group.");
             }
             $this->codeGroup = $group->codeGroup;

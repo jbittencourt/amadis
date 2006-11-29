@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * This page creates a new project.
  *
@@ -136,15 +136,14 @@ switch($_REQUEST['action']) {
 
      
    if(($foto->state==CMObj::STATE_DIRTY) || ($foto->state==CMObj::STATE_DIRTY_NEW)) {
-     $foto->tempo = time();
+     $foto->time = time();
      try {
-       $foto->save(); 
+       $foto->save();        
      }
      catch(CMDBException $e) {
        header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_picture");
      }
-     
-     $_SESSION['cad_community']->image = (integer) $foto->codeArquivo;
+     $_SESSION['cad_community']->image = (integer) $foto->codeFile;
    }
 
    //save the community
@@ -161,6 +160,7 @@ switch($_REQUEST['action']) {
      if(!empty($foto)) {
        $foto->delete();
      }
+     echo $e->getMessage();
      header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=creating_user_dir");
    }
    

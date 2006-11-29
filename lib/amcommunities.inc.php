@@ -58,17 +58,16 @@ class AMCommunities extends CMObj implements  CMACLAppInterface
 	* @see CMObj
 	* @todo Create a wrapper to handle the change of status an sync with group.
 	**/
-    public function save()
-    {
+    public function save(){
 
     //if is the first time that the object is saved, and it has some data
     // inside it, create a new group.
-        if($this->state==self::STATE_DIRTY_NEW) {
+        if($this->state==self::STATE_DIRTY_NEW || $this->state==self::STATE_DIRTY ) {
       //create a new group for the project
             $group = new CMGroup;
             $group->description = "Community ".$this->name;
 
-            if($this->status==self::ENUM_FLAGAUTH_ALLOW) {
+            if($this->status == self::ENUM_FLAGAUTH_ALLOW) {
                 $group->managed = CMGroup::ENUM_MANAGED_NOT_MANAGED;
             } else {
                 $group->managed = CMGroup::ENUM_MANAGED_MANAGED;
@@ -79,8 +78,9 @@ class AMCommunities extends CMObj implements  CMACLAppInterface
             try {
                 $group->save();
             } catch(CMDBException $e) {
-                Throw new AMException("An error ocurred creating the project group.");
-            }
+            	notelastquery();
+                Throw new AMException("An error ocurred creating the community group.");
+            }       
             $this->codeGroup = $group->codeGroup;
 
             //is the default behavior of the object
@@ -95,7 +95,7 @@ class AMCommunities extends CMObj implements  CMACLAppInterface
             try {
                 $member->save();
             } catch(CMDBException $e) {
-                Throw new AMException("An error ocurred creating the project group.");
+                Throw new AMException("An error ocurred creating the community group.");
             }
 
 	        //Creates an ACL and gives the current user the admin
@@ -107,11 +107,10 @@ class AMCommunities extends CMObj implements  CMACLAppInterface
             try {
                 $aco->save();
             } catch(CMDBException $e) {
-                Throw new AMException("An error ocurred creating the project group.");
+                Throw new AMException("An error ocurred creating the community group.");
             }
             $this->codeACO = (integer) $aco->code;
-            $aco->addUserPrivilege((integer) $_SESSION['user']->codeUser,
-            self::PRIV_ADMIN);
+            $aco->addUserPrivilege((integer) $_SESSION['user']->codeUser, self::PRIV_ADMIN);
 
         }
          
