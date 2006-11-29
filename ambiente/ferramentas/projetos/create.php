@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * This page creates a new project.
  *
@@ -90,6 +90,7 @@ switch($_REQUEST['action']) {
    }else $_SESSION['cad_proj']='';
 
    $status = AMProject::listAvaiableStatus();
+
    $form->setSelect("status",$status,"code","name");
    $form->addComponent("action",new CMWHidden("action","pag_1"));
 
@@ -150,8 +151,8 @@ switch($_REQUEST['action']) {
      }
    }
    if(!isset($proj_areas)) $proj_areas=array();
-   $lista = new CMWListAdd("frm_codAreas",$areas,$proj_areas,"codArea","nomArea");
-   $form->addComponent("frm_codAreas",$lista);
+   $lista = new CMWListAdd("frm_codeArea",$areas,$proj_areas,"codeArea","name");
+   $form->addComponent("frm_codeArea",$lista);
 
    $form->setCancelUrl("$_CMAPP[services_url]/projetos/projects.php?clear_cadProj");
    $cadBox->add($form);
@@ -161,25 +162,25 @@ switch($_REQUEST['action']) {
 
    break;
  case "pag_2":
-   if(!isset($_REQUEST['frm_codAreas'])) $_REQUEST['frm_codAreas']=array();
+   if(!isset($_REQUEST['frm_codeArea'])) $_REQUEST['frm_codeArea']=array();
 
-   if((!is_array($_REQUEST['frm_codAreas']) && empty($_FILES['frm_foto']))) {
+   if((!is_array($_REQUEST['frm_codeArea']) && empty($_FILES['frm_foto']))) {
      Header("Location: $_CMAPP[services_url]/projetos/create.php?action=pag_1&frm_amerror=proj_must_select_areas");
    }
    else {
-     if(is_array($_REQUEST['frm_codAreas'])) {
+     if(is_array($_REQUEST['frm_codeArea'])) {  	  
        $temp = array();
-       foreach($_REQUEST['frm_codAreas'] as $area) {
-	 $temp[] = $area;
+       foreach($_REQUEST['frm_codeArea'] as $area) {
+	 		$temp[] = $area;
        }
        $_SESSION['cad_proj']->addVariable("areas",$temp);
      }
    }
  
-  
-   //image stufff
-   if((!$_SESSION['cad_foto'] instanceof AMProjImage))
-     $_SESSION['cad_foto'] = new AMProjImage;
+   //image stuff
+   if(!($_SESSION['cad_foto'] instanceof AMProjectImage)){
+     $_SESSION['cad_foto'] = new AMProjectImage;
+   }
 
    if(!empty($_FILES['frm_foto'])) {
      try {
@@ -195,7 +196,6 @@ switch($_REQUEST['action']) {
    $cadBox->add($view);
    
    $_SESSION['cad_foto']=serialize($_SESSION['cad_foto']);
-
 
    //get the image types that are allowed in this installation of gd+php
    $types = AMImage::getValidImageExtensions();
@@ -229,17 +229,17 @@ switch($_REQUEST['action']) {
      
      $_SESSION['cad_proj']->image = (integer) $foto->codeArquivo;
    }
-   
+notelastquery();
    //save the project
-   try {
+  // try {
      $_SESSION['cad_proj']->save();
-   }
+   /**}
    catch(CMDBException $e) {
      header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_user");
    }
    catch(AMException $e) {
      header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=creating_user_dir");
-   }
+   }**/
 
    //save the areas
    $con = new CMContainer;
@@ -248,24 +248,26 @@ switch($_REQUEST['action']) {
 
    $tmp_areas = $_SESSION[cad_proj]->areas;
    $max = 0;
+
    foreach($tmp_areas as $code) {
-     if($proj_areas->in($code)) {
+     
+   	if($proj_areas->in($code)) {
        $proj_areas->remove($code);
        continue;
-     }
+     }     
      $temp = new AMProjectArea;
-     $temp->codArea = $code;
-     $temp->codProjeto = $_SESSION[cad_proj]->codeProject;
+     $temp->codeArea = $code;
+     $temp->codeProject = $_SESSION[cad_proj]->codeProject;     
      $con->add($code,$temp);
-     $max = max($max,$code);
+     $max = max($max,$code);     
    }
 
    $remove = new CMContainer;
    if($proj_areas->__hasItems()) {
      foreach($proj_areas as $item) {
        $temp = $item->areas;
-       $temp->items[0]->codArea = $item->codArea; //override devel bug
-       $remove->add($item->codArea,$temp->items[0]);
+       $temp->items[0]->codeArea = $item->codeArea; //override devel bug
+       $remove->add($item->codeArea,$temp->items[0]);
      }
    };
 
@@ -304,5 +306,3 @@ switch($_REQUEST['action']) {
    
 $pag->add($cadBox);
 echo $pag;
-
-?>

@@ -36,7 +36,7 @@ switch($action) {
             $_SESSION['cad_foto']->codeFile = AMUserPicture::getImage($_SESSION['user']);
 
             //test if the returned image is the default image
-            if($_SESSION['cad_foto']->codeFile==AMUserPicture::DEFAULT_IMAGE ) {
+            if($_SESSION['cad_foto']->codeFile == AMUserPicture::DEFAULT_IMAGE ) {
                 $createNewImage = true;
             }
                         
@@ -117,6 +117,9 @@ switch($action) {
             try {
                 $foto->save();
                 $_SESSION['cad_user']->picture = $foto->codeFile;
+            }
+            catch(CMObjEDuplicatedEntry $de){
+            	header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_picture");
             }
             catch(CMDBException $e) {
                 header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_picture");

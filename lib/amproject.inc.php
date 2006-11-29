@@ -65,7 +65,7 @@ class AMProject extends CMObj {
                 Throw new AMException("You are trying to create a project directory that alredy exists.");
             }
             catch(CMvfsFileNotFound $e) {
-                $dir = new CMvfsLocal($path,0);  //create but not verify if the dir exists
+                $dir = new CMvfsLocal($path,0) ;  //create but not verify if the dir exists
                 $dir->register();
             }
         }
@@ -184,12 +184,12 @@ class AMProject extends CMObj {
 
     public function listAreas() {
         $q = new CMQuery('AMArea');
-        $j = new CMJoin(CMJoin::NATURAL);
+        $j = new CMJoin(CMJoin::INNER);
         $j->setClass('AMProjectArea');
         $q->addJoin($j,"areas");
 
         $q->setLimit(4,0);
-        $q->setFilter("AMProjectArea::codProjeto=".$this->codeProject);
+        $q->setFilter("AMProjectArea::codeProject=".$this->codeProject);
 
         return $q->execute();
     }

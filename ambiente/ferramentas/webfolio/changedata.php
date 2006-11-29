@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * This file changes the personal data of an user.
  *
@@ -109,14 +109,12 @@ switch(AMEnvironment::processActionRequest()) {
 	    } catch(CMDBException $e) {
     	    header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_user");
 	    }
-
 	    $_SESSION['user'] = $_SESSION['cad_user'];
 
     	unset($_SESSION['cad_user']);
-
 	    header("Location:$_CMAPP[services_url]/webfolio/webfolio.php?frm_ammsg=data_changed");
     	$cadBox->setTitle($_language['pag_2']);
-
+		
 	    break;
     
 	/**
@@ -129,5 +127,3 @@ switch(AMEnvironment::processActionRequest()) {
 
 $pag->add($cadBox);
 echo $pag;
-
-?>

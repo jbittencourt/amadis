@@ -175,7 +175,7 @@ error_cannot_register_logged = "Para poder realizar um novo cadastro no AMADIS, 
 
 
 [register]
-escolher_cidade ="Escolha uma cidade:"
+choose_city ="Escolha uma cidade:"
 frm_username="Digite um nome de usu&aacute;rio:"
 frm_password="Digite uma senha:"
 frm_re_password="Re-digite a senha:"

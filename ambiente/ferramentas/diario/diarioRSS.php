@@ -8,7 +8,7 @@
 <!-- ViewVC - http://viewvc.org/
 by Greg Stein - mailto:gstein@lyra.org -->
 <head>
-<title>SourceForge.net Repository - [amadis] Log of /amadis/ambiente/ferramentas/diario/search.php</title>
+<title>SourceForge.net Repository - [amadis] Log of /amadis/ambiente/ferramentas/diario/diarioRSS.php</title>
 <meta name="generator" content="ViewVC 1.0.3" />
 <link rel="stylesheet" href="/*docroot*/styles.css" type="text/css" />
 </head>
@@ -45,7 +45,7 @@ diario</a>
 
 
 
-search.php
+diarioRSS.php
 
 
 </strong>
@@ -56,7 +56,7 @@ search.php
 
 
 <div style="float: right; padding: 5px;"><a href="http://sourceforge.net"><img src="/*docroot*/images/sourceforge_whitebg.gif" alt="(logo)" border=0 width=136 height=79></a></div>
-<h1>Log of /amadis/ambiente/ferramentas/diario/search.php</h1>
+<h1>Log of /amadis/ambiente/ferramentas/diario/diarioRSS.php</h1>
 
 <p style="margin:0;">
 
@@ -75,10 +75,10 @@ search.php
 <tr>
 <td>Links to HEAD:</td>
 <td>
-(<a href="/amadis/amadis/ambiente/ferramentas/diario/search.php?view=markup">view</a>)
-(<a href="/*checkout*/amadis/amadis/ambiente/ferramentas/diario/search.php">download</a>)
+(<a href="/amadis/amadis/ambiente/ferramentas/diario/diarioRSS.php?view=markup">view</a>)
+(<a href="/*checkout*/amadis/amadis/ambiente/ferramentas/diario/diarioRSS.php">download</a>)
 
-(<a href="/amadis/amadis/ambiente/ferramentas/diario/search.php?view=annotate">annotate</a>)
+(<a href="/amadis/amadis/ambiente/ferramentas/diario/diarioRSS.php?view=annotate">annotate</a>)
 </td>
 </tr>
 
@@ -86,17 +86,17 @@ search.php
 <tr>
 <td>Links to version_1_2_1:</td>
 <td>
-(<a href="/amadis/amadis/ambiente/ferramentas/diario/search.php?view=markup&amp;pathrev=version_1_2_1">view</a>)
-(<a href="/*checkout*/amadis/amadis/ambiente/ferramentas/diario/search.php?pathrev=version_1_2_1">download</a>)
+(<a href="/amadis/amadis/ambiente/ferramentas/diario/diarioRSS.php?view=markup&amp;pathrev=version_1_2_1">view</a>)
+(<a href="/*checkout*/amadis/amadis/ambiente/ferramentas/diario/diarioRSS.php?pathrev=version_1_2_1">download</a>)
 
-(<a href="/amadis/amadis/ambiente/ferramentas/diario/search.php?view=annotate&amp;pathrev=version_1_2_1">annotate</a>)
+(<a href="/amadis/amadis/ambiente/ferramentas/diario/diarioRSS.php?view=annotate&amp;pathrev=version_1_2_1">annotate</a>)
 </td>
 </tr>
 
 
 <tr>
 <td>Sticky Tag:</td>
-<td><form method="get" action="/amadis/amadis/ambiente/ferramentas/diario/search.php" style="display: inline">
+<td><form method="get" action="/amadis/amadis/ambiente/ferramentas/diario/diarioRSS.php" style="display: inline">
 <input type="hidden" name="view" value="log" />
 
 
@@ -119,10 +119,6 @@ search.php
 <optgroup label="Non-branch tags">
 
 
-<option>start</option>
-
-
-
 <option>Root_version_1_2_1</option>
 
 
@@ -141,7 +137,7 @@ search.php
 <input type="submit" value="Set" />
 </form>
 
-<form method="get" action="/amadis/amadis/ambiente/ferramentas/diario/search.php" style="display: inline">
+<form method="get" action="/amadis/amadis/ambiente/ferramentas/diario/diarioRSS.php" style="display: inline">
 <input type="hidden" name="view" value="log" />
 
 <input type="submit" value="Clear">
@@ -163,69 +159,54 @@ search.php
 <div>
 <hr />
 
-<a name="rev1.1.1.1"></a>
-<a name="start"></a>
+<a name="rev1.2"></a>
 <a name="Root_version_1_2_1"></a>
 <a name="Root_version_1_2"></a>
 
 
-Revision <strong>1.1.1.1</strong> -
+Revision <strong>1.2</strong> -
 
-(<a href="/amadis/amadis/ambiente/ferramentas/diario/search.php?revision=1.1.1.1&amp;view=markup&amp;pathrev=version_1_2_1">view</a>)
+(<a href="/amadis/amadis/ambiente/ferramentas/diario/diarioRSS.php?revision=1.2&amp;view=markup&amp;pathrev=version_1_2_1">view</a>)
 
-(<a href="/*checkout*/amadis/amadis/ambiente/ferramentas/diario/search.php?revision=1.1.1.1&amp;pathrev=version_1_2_1">download</a>)
+(<a href="/*checkout*/amadis/amadis/ambiente/ferramentas/diario/diarioRSS.php?revision=1.2&amp;pathrev=version_1_2_1">download</a>)
 
-(<a href="/amadis/amadis/ambiente/ferramentas/diario/search.php?annotate=1.1.1.1&amp;pathrev=version_1_2_1">annotate</a>)
-
-
-
-- <a href="/amadis/amadis/ambiente/ferramentas/diario/search.php?view=log&amp;r1=1.1.1.1&amp;pathrev=version_1_2_1">[select for diffs]</a>
+(<a href="/amadis/amadis/ambiente/ferramentas/diario/diarioRSS.php?annotate=1.2&amp;pathrev=version_1_2_1">annotate</a>)
 
 
 
+- <a href="/amadis/amadis/ambiente/ferramentas/diario/diarioRSS.php?view=log&amp;r1=1.2&amp;pathrev=version_1_2_1">[select for diffs]</a>
 
-<em>(vendor branch)</em>
+
+
 
 <br />
 
-<em>Mon Sep 12 20:38:43 2005 UTC</em> (14 months, 2 weeks ago) by <em>j_bittencourt</em>
+<em>Tue May 16 23:36:28 2006 UTC</em> (6 months, 2 weeks ago) by <em>vai_will</em>
+
+
+<br />Branch:
+
+<a href="/amadis/amadis/ambiente/ferramentas/diario/diarioRSS.php?view=log&amp;pathrev=MAIN"><strong>MAIN</strong></a>
 
 
 
 <br />CVS Tags:
 
-<a href="/amadis/amadis/ambiente/ferramentas/diario/search.php?view=log&amp;pathrev=Root_version_1_2"><strong>Root_version_1_2</strong></a>,
+<a href="/amadis/amadis/ambiente/ferramentas/diario/diarioRSS.php?view=log&amp;pathrev=Root_version_1_2"><strong>Root_version_1_2</strong></a>,
 
-<a href="/amadis/amadis/ambiente/ferramentas/diario/search.php?view=log&amp;pathrev=Root_version_1_2_1"><strong>Root_version_1_2_1</strong></a>,
-
-<a href="/amadis/amadis/ambiente/ferramentas/diario/search.php?view=log&amp;pathrev=start"><strong>start</strong></a>
+<a href="/amadis/amadis/ambiente/ferramentas/diario/diarioRSS.php?view=log&amp;pathrev=Root_version_1_2_1"><strong>Root_version_1_2_1</strong></a>
 
 
 
 <br />Branch point for:
 
-<a href="/amadis/amadis/ambiente/ferramentas/diario/search.php?view=log&amp;pathrev=version_1_2_1"><strong>version_1_2_1</strong></a>
+<a href="/amadis/amadis/ambiente/ferramentas/diario/diarioRSS.php?view=log&amp;pathrev=version_1_2_1"><strong>version_1_2_1</strong></a>
 
 
 
 
 
-<br />Changes since <strong>1.1: +0 -0 lines</strong>
-
-
-
-
-
-
-
-<br />Diff to <a href="/amadis/amadis/ambiente/ferramentas/diario/search.php?r1=1.1&amp;r2=1.1.1.1&amp;pathrev=version_1_2_1">previous 1.1</a>
-
-
-
-
-
-
-, to <a href="/amadis/amadis/ambiente/ferramentas/diario/search.php?r1=1.2&amp;r2=1.1.1.1&amp;pathrev=version_1_2_1">next main 1.2</a>
+<br />Changes since <strong>1.1: +34 -41 lines</strong>
 
 
 
@@ -233,7 +214,18 @@ Revision <strong>1.1.1.1</strong> -
 
 
 
-<pre class="vc_log">Initial Import.
+<br />Diff to <a href="/amadis/amadis/ambiente/ferramentas/diario/diarioRSS.php?r1=1.1&amp;r2=1.2&amp;pathrev=version_1_2_1">previous 1.1</a>
+
+
+
+
+
+
+
+
+
+
+<pre class="vc_log">*** empty log message ***
 </pre>
 </div>
 
@@ -247,27 +239,27 @@ Revision <strong>1.1.1.1</strong> -
 
 Revision <strong>1.1</strong> -
 
-(<a href="/amadis/amadis/ambiente/ferramentas/diario/search.php?revision=1.1&amp;view=markup&amp;pathrev=version_1_2_1">view</a>)
+(<a href="/amadis/amadis/ambiente/ferramentas/diario/diarioRSS.php?revision=1.1&amp;view=markup&amp;pathrev=version_1_2_1">view</a>)
 
-(<a href="/*checkout*/amadis/amadis/ambiente/ferramentas/diario/search.php?revision=1.1&amp;pathrev=version_1_2_1">download</a>)
+(<a href="/*checkout*/amadis/amadis/ambiente/ferramentas/diario/diarioRSS.php?revision=1.1&amp;pathrev=version_1_2_1">download</a>)
 
-(<a href="/amadis/amadis/ambiente/ferramentas/diario/search.php?annotate=1.1&amp;pathrev=version_1_2_1">annotate</a>)
+(<a href="/amadis/amadis/ambiente/ferramentas/diario/diarioRSS.php?annotate=1.1&amp;pathrev=version_1_2_1">annotate</a>)
 
 
 
-- <a href="/amadis/amadis/ambiente/ferramentas/diario/search.php?view=log&amp;r1=1.1&amp;pathrev=version_1_2_1">[select for diffs]</a>
+- <a href="/amadis/amadis/ambiente/ferramentas/diario/diarioRSS.php?view=log&amp;r1=1.1&amp;pathrev=version_1_2_1">[select for diffs]</a>
 
 
 
 
 <br />
 
-<em>Mon Sep 12 20:38:43 2005 UTC</em> (14 months, 2 weeks ago) by <em>j_bittencourt</em>
+<em>Sun Apr 23 19:08:17 2006 UTC</em> (7 months, 1 week ago) by <em>j_bittencourt</em>
 
 
 <br />Branch:
 
-<a href="/amadis/amadis/ambiente/ferramentas/diario/search.php?view=log&amp;pathrev=MAIN"><strong>MAIN</strong></a>
+<a href="/amadis/amadis/ambiente/ferramentas/diario/diarioRSS.php?view=log&amp;pathrev=MAIN"><strong>MAIN</strong></a>
 
 
 
@@ -284,7 +276,7 @@ Revision <strong>1.1</strong> -
 
 
 
-<pre class="vc_log">Initial revision
+<pre class="vc_log">Changes in the forum create process to allow future use of the privileges system.
 </pre>
 </div>
 
@@ -301,7 +293,7 @@ select a symbolic revision name using the selection box, or choose
 'Use Text Field' and enter a numeric revision.
 
 </p>
-<form method="get" action="/amadis/amadis/ambiente/ferramentas/diario/search.php" name="diff_select">
+<form method="get" action="/amadis/amadis/ambiente/ferramentas/diario/diarioRSS.php" name="diff_select">
 <table cellpadding="2" cellspacing="0" class="auto">
 <tr>
 <td>&nbsp;</td>
@@ -312,21 +304,19 @@ Diffs between
 <select name="r1">
 <option value="text" selected="selected">Use Text Field</option>
 
-<option value="1.1.1.1:version_1_2_1">version_1_2_1</option>
+<option value="1.2:version_1_2_1">version_1_2_1</option>
 
-<option value="1.1.1.1:start">start</option>
+<option value="1.2:Root_version_1_2_1">Root_version_1_2_1</option>
 
-<option value="1.1.1.1:Root_version_1_2_1">Root_version_1_2_1</option>
+<option value="1.2:Root_version_1_2">Root_version_1_2</option>
 
-<option value="1.1.1.1:Root_version_1_2">Root_version_1_2</option>
+<option value="1.3:MAIN">MAIN</option>
 
-<option value="1.2:MAIN">MAIN</option>
-
-<option value="1.2:HEAD">HEAD</option>
+<option value="1.3:HEAD">HEAD</option>
 
 </select>
 <input type="text" size="12" name="tr1"
-value="1.1.1.1"
+value="1.2"
 onchange="document.diff_select.r1.selectedIndex=0" />
 
 and
@@ -334,17 +324,15 @@ and
 <select name="r2">
 <option value="text" selected="selected">Use Text Field</option>
 
-<option value="1.1.1.1:version_1_2_1">version_1_2_1</option>
+<option value="1.2:version_1_2_1">version_1_2_1</option>
 
-<option value="1.1.1.1:start">start</option>
+<option value="1.2:Root_version_1_2_1">Root_version_1_2_1</option>
 
-<option value="1.1.1.1:Root_version_1_2_1">Root_version_1_2_1</option>
+<option value="1.2:Root_version_1_2">Root_version_1_2</option>
 
-<option value="1.1.1.1:Root_version_1_2">Root_version_1_2</option>
+<option value="1.3:MAIN">MAIN</option>
 
-<option value="1.2:MAIN">MAIN</option>
-
-<option value="1.2:HEAD">HEAD</option>
+<option value="1.3:HEAD">HEAD</option>
 
 </select>
 <input type="text" size="12" name="tr2"
@@ -371,7 +359,7 @@ Type of Diff should be a
 </form>
 
 
-<form method="get" action="/amadis/amadis/ambiente/ferramentas/diario/search.php">
+<form method="get" action="/amadis/amadis/ambiente/ferramentas/diario/diarioRSS.php">
 <div>
 <hr />
 <a name="logsort"></a>

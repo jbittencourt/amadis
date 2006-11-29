@@ -1,4 +1,4 @@
-<?
+<?php
 
 include_once("../../config.inc.php");
 
@@ -31,7 +31,7 @@ if($letra != ""){
 
       $pag->add($conteudo);
       $thumb = new AMUserThumb;
-      $thumb->codeArquivo = (integer) $item->foto;
+      $thumb->codeFile = (integer) $item->picture;
       try {
 	$thumb->load();
 	$pag->add($thumb->getView());
@@ -57,10 +57,4 @@ $conteudo .= "</tr></table>";
 $pag->add($conteudo);
 
 
-//}
-
-//else die($lang[acesso_nao_permitido]);
-
-echo $pag; 
-
-?>
+echo $pag;

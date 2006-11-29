@@ -142,12 +142,12 @@ class AMEnvironment extends CMEnvironment
     function listCities()
     {   
         $q = new CMQuery('AMCity');
-        $j = new CMJoin(CMJoin::NATURAL);
+        $j = new CMJoin(CMJoin::INNER);
         $j->setClass('AMState');
 
         $q->addJoin($j, "state");
 
-        $q->setOrder("name asc");
+        $q->setOrder("States.name asc");
         $q->setDistinct();
 
         return $q->execute();

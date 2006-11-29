@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * This file register a new user to the environment.
  *
@@ -91,9 +91,9 @@ switch($_REQUEST['action']) {
    
    $complete = (int) $_conf->app->environment->use_complete_register_form;
    if($complete) 
-     $fields_rec = array("name", "email", "datNascimento", "codCidade", "endereco", "cep", "telefone", "aboutMe");
+     $fields_rec = array("name", "email", "birthDate", "codeCity", "address", "cep", "aboutMe");
    else
-     $fields_rec = array("name","email", "datNascimento", "codCidade","aboutMe");
+     $fields_rec = array("name","email", "birthDate", "codeCity","aboutMe");
    
    $form = new AMWSmartForm('AMUser', "cad_user", $_SERVER['PHP_SELF'], $fields_rec);
 
@@ -103,12 +103,12 @@ switch($_REQUEST['action']) {
    if(!($_SESSION['cad_user'] instanceof AMUser)) {
      //if this is the first submit, create an object in the session to store the user data
      $_SESSION['cad_user'] = new AMUser();
-     $_SESSION['cad_user']->loadDataFromRequest();
+     $_SESSION['cad_user']->loadDataFromRequest();     
      $_SESSION['cad_user']->time = time();
    }
    else {
      //if the user hit back, fill the from with the data from the session object
-     $_SESSION['cad_user']->loadDataFromRequest();
+     $_SESSION['cad_user']->loadDataFromRequest();     
      $form->loadDataFromObject($_SESSION['cad_user']);
    }
 
@@ -116,20 +116,20 @@ switch($_REQUEST['action']) {
 
       
    //campo cidade
-   $cidades = $_SESSION['environment']->listaCidades();
-   
-   $form->setSelect("codCidade",$cidades,"codCidade","nomCidade");
-   $form->components['codCidade']->addOption(0,$_language['escolher_cidade']);
+   $cidades = $_SESSION['environment']->listCities();
+
+   $form->setSelect("codeCity",$cidades,"codeCity","name");
+   $form->components['codeCity']->addOption(0,$_language['choose_city']);
 
    //die("V2:".$form->components[codCidade]->getValue());
-   if(!$form->components['codCidade']->getValue())
-     $form->components['codCidade']->setValue(0);
+   if(!$form->components['codeCity']->getValue())
+     $form->components['codeCity']->setValue(0);
 
    
 
       
    //campo idade
-   $form->setDate("datNascimento","d/m/Y",1);
+   $form->setDate("birthDate","d/m/Y",1);
       
    //campo acao
    $form->addComponent("action",new CMWHidden("action","pag_2"));
@@ -169,7 +169,7 @@ switch($_REQUEST['action']) {
        $_SESSION['cad_foto']->loadImageFromRequest("frm_foto");
      }
      catch(AMEImage $e) {
-       $pag->addError($_language['error_invalid_image_type']);
+       $pag->addError($_language['error_invalid_image_type'], $e->getMessage());
      }
    }
    
@@ -202,14 +202,14 @@ switch($_REQUEST['action']) {
    if($foto==false) $foto = $_SESSION['cad_foto'];
    
    if(($foto->state==CMObj::STATE_DIRTY) || ($foto->state==CMObj::STATE_DIRTY_NEW)) {
-     $foto->tempo = time();
+     $foto->time = time();
      try {
        $foto->save(); 
      }
      catch(CMDBException $e) {
          //header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_picture");
      }
-     $_SESSION['cad_user']->foto = (integer) $foto->codeArquivo;
+     $_SESSION['cad_user']->picture = (integer) $foto->codeFile;
    }
 
    //verifica se o ambiente esta configurado para aceitar o cadastro
@@ -227,6 +227,7 @@ switch($_REQUEST['action']) {
      $_SESSION['cad_user']->save();
    }
    catch(CMDBException $e) {
+   	 echo $e->getMessage();
      $foto->delete();
      header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_user");
    }
@@ -285,4 +286,3 @@ switch($_REQUEST['action']) {
    
 $pag->add($cadBox);
 echo $pag;
-
