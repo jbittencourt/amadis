@@ -18,7 +18,7 @@ $_CMAPP['config'] = simplexml_load_file($_CMAPP['config_file']);
 
 //load the path of the libs
 foreach($_CMAPP['config']->app[0]->libs[0]->lib as $item) {
-  $attributes = $item->attributes();
+	  $attributes = $item->attributes();
   switch((string) $attributes['name']) {
   case 'cmdevel':
     $_CMDEVEL['path'] = $attributes['path']; break;
@@ -40,9 +40,9 @@ set_exception_handler('exception_handler');
 
 
 //PATHs dos servicos da aplicacao
-$_CMAPP['services_path'] = $_CMAPP['path'] . "enviroments/tools";
+$_CMAPP['services_path'] = $_CMAPP['path']."/environment/tools";
 
-include($_CMDEVEL['path'] . "/cmdevel.inc.php");
+include($_CMDEVEL['path']."/cmdevel.inc.php");
 include("cmpersistence.inc.php");
 include("cmapp.inc.php");
 include("cminterface.inc.php");
@@ -72,10 +72,10 @@ $_CMAPP['finder'] = $_conf->app->finder;
 * Conecta com o banco de dados
 **/
 try {
-  $_CMAPP['db'] = new CMDBConnection($_CMAPP['config']);
+	$_CMAPP['db'] = new CMDBConnection($_CMAPP['config']);
 }
 catch (CMDBCannotConnect $e) {
-  die($e->getMessage());
+	die($e->getMessage());
 }
 
 
@@ -85,7 +85,7 @@ session_start();
 
 
 if(empty($_SESSION['environment'])) {
-  $_SESSION['environment'] = new AMEnvironment();
+	$_SESSION['environment'] = new AMEnvironment();
 
 }
 
@@ -96,8 +96,8 @@ if(empty($_SESSION['environment'])) {
  **/
 
 if($_conf->app->languages->active == 1) {
-  include("cminterface/cmi18n.inc.php");
-  $_CMAPP['i18n'] = new CMi18n;
+	include("cminterface/cmi18n.inc.php");
+	$_CMAPP['i18n'] = new CMi18n;
 }
 
 //set uma url para as imagens relativas a sua linguagem. \xc9 importante
@@ -106,42 +106,42 @@ $_CMAPP['imlang_url'] = $_CMAPP['images_url']."/".$_CMAPP['i18n']->getActualLang
 
 //colocar o login aqui, servir� para que mais tarde o logon possa ocorrer em qualquer p�gina.
 if(isset($_REQUEST['login_action'])) {
-  switch($_REQUEST['login_action']) {
-  case "A_login":
-    try {
-      $_SESSION['environment']->login($_REQUEST['frm_username'],$_REQUEST['frm_password']);
-    }
-    catch(CMLoginFailure $e) {
-      $file = basename($_SERVER['SCRIPT_FILENAME']);
-      if($file!="loginfailure.php") {
-	$_SESSION['login_failed_trying_to_access'] = $file;
-      }
-      Header("Location: ".$_CMAPP['url']."/loginfailure.php?frm_amerror=invalid_login");
-      die();
-    }
+	switch($_REQUEST['login_action']) {
+		case "A_login":
+			try {
+				$_SESSION['environment']->login($_REQUEST['frm_username'],$_REQUEST['frm_password']);
+			}
+			catch(CMLoginFailure $e) {
+				$file = basename($_SERVER['SCRIPT_FILENAME']);
+				if($file!="loginfailure.php") {
+					$_SESSION['login_failed_trying_to_access'] = $file;
+				}
+				Header("Location: ".$_CMAPP['url']."/loginfailure.php?frm_amerror=invalid_login");
+				die();
+			}
 
-    break;
-   
-  case "A_logout":
-    $_SESSION['environment']->logout();
-    Header("Location: ".$_CMAPP[url]."/index.php");
-    break;   
-  }
+			break;
+
+		case "A_logout":
+			$_SESSION['environment']->logout();
+			Header("Location: ".$_CMAPP[url]."/index.php");
+			break;
+	}
 }
 
 if($_SESSION['environment']->logged) {
-  $_SESSION['session']->update();
+	$_SESSION['session']->update();
 }
 else {
-  if($_CMAPP['notrestricted']==false) {
-    Header("Location: ".$_CMAPP['url']."/index.php?frm_amerror=session_timeout");
-  }
+	if($_CMAPP['notrestricted']==false) {
+		Header("Location: ".$_CMAPP['url']."/index.php?frm_amerror=session_timeout");
+	}
 }
 
 if(!ereg("(index|register|recoverpassword|loginfailure)",basename($_SERVER['SCRIPT_FILENAME']))) {
-  $_CMAPP['form_login_action'] = $_SERVER['PHP_SELF'];
-} else { 
-  $_CMAPP['form_login_action'] = $_CMAPP['services_url']."/webfolio/webfolio.php";
+	$_CMAPP['form_login_action'] = $_SERVER['PHP_SELF'];
+} else {
+	$_CMAPP['form_login_action'] = $_CMAPP['services_url']."/webfolio/webfolio.php";
 }
 
 //include XOAD AJAX Framework;
