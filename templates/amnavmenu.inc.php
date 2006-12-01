@@ -101,7 +101,7 @@ class  AMNavMenu extends CMHTMLObj
             if($projects->__hasItems()) {
                 foreach($projects as $proj) {
                     $str="";
-                    $tree->add("<a href=\"".$_CMAPP['services_url']."/projects/project.php?frm_codProjeto=$proj->codeProject\" class=\"mnlateral\">&raquo; $proj->title $str</a><br>");
+                    $tree->add("<a href=\"".$_CMAPP['services_url']."/projects/projeto.php?frm_codProjeto=$proj->codeProject\" class=\"mnlateral\">&raquo; $proj->title $str</a><br>");
                 }
             }
             else {
@@ -253,5 +253,3 @@ class  AMNavMenu extends CMHTMLObj
     }
 
 }
-
-
