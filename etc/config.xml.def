@@ -13,7 +13,7 @@
    </general>
    <libs>
       <lib name="cmdevel" path="/cmdevel" />
-      <lib name="xoad" path="/ambiente/media/libs/xoad" />
+      <lib name="xoad" path="/environment/media/libs/xoad" />
    </libs>
    <environment>
       <plataform>1</plataform>
@@ -35,12 +35,12 @@
       <js>COMPLETE_WITH_YOUR_URL/media/js</js>
       <css>COMPLETE_WITH_YOUR_URL/media/css</css>
       <thumbnails>COMPLETE_WITH_YOUR_URL/media/thumbnails</thumbnails>
-      <services>COMPLETE_WITH_YOUR_URL/ferramentas</services>
-      <pages>COMPLETE_WITH_YOUR_URL/paginas</pages>
+      <services>COMPLETE_WITH_YOUR_URL/tools</services>
+      <pages>COMPLETE_WITH_YOUR_URL/pages</pages>
    </urls>
    <paths>
-      <pages>COMPLETE_WITH_YOUR_PATH/ambiente/paginas</pages>
-      <thumbnails>COMPLETE_WITH_YOUR_PATH/ambiente/media/thumbnails</thumbnails>	
+      <pages>COMPLETE_WITH_YOUR_PATH/environment/pages</pages>
+      <thumbnails>COMPLETE_WITH_YOUR_PATH/environment/media/thumbnails</thumbnails>	
       <cache>COMPLETE_WITH_YOUT_PATH/cache</cache>
    </paths>
    <database>
