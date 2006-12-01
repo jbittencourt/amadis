@@ -1,9 +1,9 @@
-<?
+<?php
 $sem_login = 1;
 include_once("../../config.inc.php");
 
 $ui = new RDui ("smartform","");
-$lang = $_SESSION[ambiente]->getLangUI($ui);
+$lang = $_SESSION[environment]->getLangUI($ui);
 
 
 //a função abaixo serve para tirar o offset em minutos

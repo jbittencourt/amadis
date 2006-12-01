@@ -32,7 +32,7 @@ switch($_REQUEST['action']) {
    break;
    
  default:
-   $imagePath = $_CMAPP['path']."/ambiente/paginas/$_REQUEST[frm_image]";
+   $imagePath = $_CMAPP['path']."/environment/pages/$_REQUEST[frm_image]";
 
    // check if file exists
    if (!file_exists("$imagePath")) {
