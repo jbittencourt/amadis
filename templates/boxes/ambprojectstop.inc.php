@@ -1,4 +1,4 @@
-<?
+<?php
  /**
  * @package AMADIS
  * @subpackage AMBoxes
@@ -13,7 +13,7 @@ class AMBProjectsTop extends CMHTMLObj {
     parent::__construct();
     $res = $_SESSION['environment']->listTopProjects();
     foreach($res as $item) {
-      $link  = "<a class=\"cinza\" href=\"".$_CMAPP['services_url']."/projetos/projeto.php?frm_codProjeto=";
+      $link  = "<a class=\"cinza\" href=\"".$_CMAPP['services_url']."/projects/projeto.php?frm_codProjeto=";
       $link .= $item->codeProject."\">&raquo; ".$item->title."</a><br>";
       $this->links[] = $link;
     }
@@ -38,7 +38,7 @@ class AMBProjectsTop extends CMHTMLObj {
 	$buffer .= $item;
       }
     }
-    $buffer .= "<a href=\"".$_CMAPP['services_url']."/projetos/listprojects.php\" class=\"green\">&raquo; $_language[list_all_projects]</a><br>";
+    $buffer .= "<a href=\"".$_CMAPP['services_url']."/projects/listprojects.php\" class=\"green\">&raquo; $_language[list_all_projects]</a><br>";
     $buffer .= "</td>";
     $buffer .= "</tr>";
     $buffer .= "</table>";

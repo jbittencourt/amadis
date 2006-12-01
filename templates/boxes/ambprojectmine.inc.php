@@ -1,4 +1,4 @@
-<?
+<?php
  /**
  * @package AMADIS
  * @subpackage AMBoxes
@@ -25,7 +25,7 @@ class AMBProjectMine extends AMColorBox {
     if(!empty($this->itens->items)) {
       foreach($this->itens as $item) {
 	
-	$url = $_CMAPP['services_url']."/projetos/projeto.php?frm_codProjeto=".$item->codeProject;
+	$url = $_CMAPP['services_url']."/projects/projeto.php?frm_codProjeto=".$item->codeProject;
     
 	parent::add("<a href=\"$url\" class=\"green\">&raquo; ".$item->title."</a><br>");
       }
@@ -35,5 +35,3 @@ class AMBProjectMine extends AMColorBox {
       
   }
 }
-
-?>

@@ -480,7 +480,7 @@ class AMMain extends AMHTMLPage
     public static function getViewDiaryButton($codeUser)
     {
         global $_CMAPP,$_language;
-        $link = "$_CMAPP[services_url]/diario/blog.php?frm_codeUser=$codeUser";
+        $link = "$_CMAPP[services_url]/blog/blog.php?frm_codeUser=$codeUser";
         return '<button class="button-as-link" type="button" onClick="AM_openURL(\''.$link.'\')"><img src="'.$_CMAPP['images_url'].'/ico_diario.gif"> '.$_language['visit_diary'].'</button>';
     }
 
@@ -496,5 +496,3 @@ class AMMain extends AMHTMLPage
     
 
 }
-
-

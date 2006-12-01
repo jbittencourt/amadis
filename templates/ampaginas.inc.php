@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * 
@@ -26,6 +26,3 @@ class AMPaginas extends AMMain {
 
   }
 }
-
-
-?>

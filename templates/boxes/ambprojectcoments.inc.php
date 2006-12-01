@@ -1,4 +1,4 @@
-<?
+<?php
  /**
  * @package AMADIS
  * @subpackage AMBoxes
@@ -64,7 +64,7 @@ class AMBProjectComents extends AMSimpleBox implements CMActionListener {
       }
     }else parent::add("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$_language[no_comments]<br>");
 
-    parent::add("<a href=\"".$_CMAPP['services_url']."/projetos/listprojects.php?list_action=A_list_comments&frm_codProjeto=".$proj->codeProject);
+    parent::add("<a href=\"".$_CMAPP['services_url']."/projects/listprojects.php?list_action=A_list_comments&frm_codProjeto=".$proj->codeProject);
     parent::add("\" class=\"project_comment\">&raquo; $_language[more_comments]</a>");
     
     if(!empty($_SESSION['user'])) {
@@ -84,5 +84,3 @@ class AMBProjectComents extends AMSimpleBox implements CMActionListener {
       
   }
 }
-
-?>

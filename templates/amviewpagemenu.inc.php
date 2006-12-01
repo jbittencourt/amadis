@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * This a second mainMenu, that used in a viewpage.php
  *
@@ -26,7 +26,7 @@ class AMViewPageMenu
 		   array($_CMAPP['imlang_url']."/wf_mn_inicial_off.gif",
 			 $_CMAPP['imlang_url']."/wf_mn_inicial_on.gif",)
 		   );
-    $this->addItem($_CMAPP['services_url']."/projetos/projects.php",
+    $this->addItem($_CMAPP['services_url']."/projects/projects.php",
 		   array($_CMAPP['imlang_url']."/wf_mn_projetos_off.gif",
 			 $_CMAPP['imlang_url']."/wf_mn_projetos_on.gif",)
 		   );
@@ -50,7 +50,7 @@ class AMViewPageMenu
       }
       $diario = ($_REQUEST[frm_codeUser] != $_SESSION[user]->codeUser ? "?frm_codeUser=$_REQUEST[frm_codeUser]" : "");
 
-      $this->addSecundaryItem($_CMAPP['services_url']."/diario/diario.php$diario",
+      $this->addSecundaryItem($_CMAPP['services_url']."/blog/diario.php$diario",
 			      array($_CMAPP['imlang_url']."/wf_mn_diario_off.gif",
 				    $_CMAPP['imlang_url']."/wf_mn_diario_on.gif",)
 			      );
@@ -67,18 +67,13 @@ class AMViewPageMenu
 			    array($_CMAPP['imlang_url']."/wf_mn_editpage_off.gif",
 				  $_CMAPP['imlang_url']."/wf_mn_editpage_on.gif",)
 			    );
-//     $diario = ($_REQUEST[frm_codeUser] != $_SESSION[user]->codeUser ? "?frm_codeUser=$_REQUEST[frm_codeUser]" : "");
-    
-//     $this->addSecundaryItem($_CMAPP['services_url']."/diario/diario.php$diario",
-// 			    array($_CMAPP['imlang_url']."/wf_mn_diario_off.gif",
-// 				  $_CMAPP['imlang_url']."/wf_mn_diario_on.gif",)
-// 			    );
-    $url = $_CMAPP['services_url']."/projetos/projectforums.php?frm_codeProject=$_REQUEST[frm_codProjeto]";
+			    
+    $url = $_CMAPP['services_url']."/projects/projectforums.php?frm_codeProject=$_REQUEST[frm_codProjeto]";
     $this->addSecundaryItem($url,
 			    array($_CMAPP['imlang_url']."/wf_mn_forum_off.gif",
 				  $_CMAPP['imlang_url']."/wf_mn_forum_on.gif",)
 			    );
-    $url = $_CMAPP['services_url']."/projetos/chat.php?frm_codeProject=$_REQUEST[frm_codProjeto]";
+    $url = $_CMAPP['services_url']."/projects/chat.php?frm_codeProject=$_REQUEST[frm_codProjeto]";
     $this->addSecundaryItem($url,
 			    array($_CMAPP['imlang_url']."/wf_mn_chat_off.gif",
 				  $_CMAPP['imlang_url']."/wf_mn_chat_on.gif",)
@@ -164,7 +159,3 @@ class AMViewPageMenu
   }
   
 }
-
-
-
-?>

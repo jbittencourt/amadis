@@ -30,6 +30,7 @@ ENGINE = InnoDB
 ROW_FORMAT = Compact
 CHARACTER SET utf8 COLLATE utf8_general_ci;
 
+
 DROP TABLE IF EXISTS `amadis`.`Files`;
 CREATE TABLE `amadis`.`Files` (
   `codeFile` BIGINT(20) NOT NULL AUTO_INCREMENT,
@@ -100,6 +101,27 @@ CREATE TABLE `amadis`.`User` (
     REFERENCES `amadis`.`Cities` (`codeCity`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
+)
+ENGINE = InnoDB
+ROW_FORMAT = Compact
+CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+DROP TABLE IF EXISTS `amadis`.`Album`;
+CREATE TABLE `amadis`.`Album` (
+  `code` BIGINT(20) NOT NULL AUTO_INCREMENT,
+  `codeUser` BIGINT(20) NOT NULL,
+  `codePhoto` BIGINT(20) NOT NULL,
+  `comments` VARCHAR(100) NOT NULL,
+  `time` INT(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`code`),
+  FOREIGN KEY `FKFilesonAlbum` (`codePhoto`)
+    REFERENCES `amadis`.`Files` (`codeFile`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  FOREIGN KEY `FKUseronAlbum` (`codeUser`)
+    REFERENCES `amadis`.`User` (`codeUser`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION    
 )
 ENGINE = InnoDB
 ROW_FORMAT = Compact

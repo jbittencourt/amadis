@@ -42,14 +42,14 @@ $pag->add("</table>");
 $projs = $_SESSION['environment']->listTopProjects();
 $box1 = new AMColorBox("$_CMAPP[imlang_url]/box_projvisitados_tit.gif",AMColorBox::COLOR_BOX_PURPLE);
 $box1->add(new AMTProjectsSmallList($projs));
-$box1->add("<a href='$_CMAPP[services_url]/projetos/listprojects.php'>&raquo; $_language[list_all_projects]</a>");
+$box1->add("<a href='$_CMAPP[services_url]/projects/listprojects.php'>&raquo; $_language[list_all_projects]</a>");
 
 //new projects
 $projs = $_SESSION['environment']->listNewProjects();
 $box2 = new AMColorBox("$_CMAPP[imlang_url]/box_projnovos_tit.gif",AMColorBox::COLOR_BOX_DARKPURPLE);
 if($projs->__hasItems()){
   $box2->add(new AMTProjectsSmallList($projs));
-  $box2->add("<a href='$_CMAPP[services_url]/projetos/listprojects.php'>&raquo; $_language[list_all_projects]</a>");
+  $box2->add("<a href='$_CMAPP[services_url]/projects/listprojects.php'>&raquo; $_language[list_all_projects]</a>");
 }
 else{ 
   $box2->add($_language['no_project_found']); 
@@ -80,5 +80,3 @@ $pag->add($cols);
 
 
 echo $pag;
-
-?>

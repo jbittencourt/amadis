@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * A list of projects inside an AMTCadBox.
@@ -49,7 +49,7 @@ class AMProjectList extends AMListBox {
 	  
 
 	parent::add("<td width=40%>");
-	parent::add("<a class=\"blue\" href=\"$_CMAPP[services_url]/projetos/projeto.php?frm_codProjeto=$item->codeProject\">$item->title</a>");
+	parent::add("<a class=\"blue\" href=\"$_CMAPP[services_url]/projects/projeto.php?frm_codProjeto=$item->codeProject\">$item->title</a>");
 	parent::add("</td>");
 	parent::add("<td><span class=\"texto\">$item->description</span></td>");
 	parent::add("</tr>");
@@ -64,6 +64,3 @@ class AMProjectList extends AMListBox {
     return parent::__toString();
   }
 }
-
-
-?>

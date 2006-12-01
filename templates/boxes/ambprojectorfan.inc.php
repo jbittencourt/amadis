@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * This box lists the active requests from users to join a project
@@ -15,7 +15,7 @@ class AMBProjectOrfan extends AMColorBox implements CMActionListener {
 
   public function __construct(AMProject $proj) {
     global $_CMAPP;
-    //parent::__construct($_CMAPP[imlang_url]."/img_novidades_projetos.gif");
+
     $this->proj = $proj;
     parent::__construct("",self::COLOR_BOX_BLUE);
     
@@ -58,7 +58,7 @@ class AMBProjectOrfan extends AMColorBox implements CMActionListener {
 
     $proj = $this->proj;
 
-    $link = $_CMAPP['services_url']."/projetos/projeto.php?frm_codProjeto=$proj->codeProject";
+    $link = $_CMAPP['services_url']."/projects/projeto.php?frm_codProjeto=$proj->codeProject";
     if($this->adopted) {
       CMHTMLPage::redirect($link);
       return false;
@@ -85,5 +85,3 @@ class AMBProjectOrfan extends AMColorBox implements CMActionListener {
   }
 
 }
-
-?>

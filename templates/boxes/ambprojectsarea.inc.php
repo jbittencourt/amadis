@@ -23,7 +23,7 @@ class AMBProjectsArea extends CMHTMLObj {
         /*
         * URL de submit do form
         */
-        $url = $_CMAPP['services_url']."/projetos/listprojects.php";
+        $url = $_CMAPP['services_url']."/projects/listprojects.php";
 
         /*
         *Buffering html of the box to output screen

@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * Register project box template
@@ -23,7 +23,3 @@ class AMTCadProj extends AMMain {
 
   }
 }
-
-
-
-?>

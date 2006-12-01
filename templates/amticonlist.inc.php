@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * @package AMADIS
  * @subpackage AMTemplates
@@ -46,7 +46,7 @@ class AMTIconList extends CMHTMLObj {
 	case self::PROJECT_LIST:
 	  $f = AMProjectImage::getImage($item);;
 	  $name = $item->title;
-	  $url = $_CMAPP['services_url'].'/projetos/projeto.php?frm_codProjeto='.$item->codeProject;
+	  $url = $_CMAPP['services_url'].'/projects/projeto.php?frm_codProjeto='.$item->codeProject;
 	  break;
 	  /* COMMUNITIES */
 	case self::COMMUNITY_LIST:
@@ -88,6 +88,3 @@ class AMTIconList extends CMHTMLObj {
 
 
 }
-
-
-?>

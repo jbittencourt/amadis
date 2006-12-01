@@ -1,4 +1,4 @@
-<?
+<?php
 
 class AMBProjectsLastPagesModified extends AMColorBox {
 
@@ -23,7 +23,7 @@ class AMBProjectsLastPagesModified extends AMColorBox {
 	$urlpage  = $_CMAPP['services_url']."/pages/viewpage.php?frm_page=projetos/projeto_";
 	$urlpage .= $item->codeAnchor."&frm_codeProject=".$item->codeAnchor;
 
-	$urlproj = "$_CMAPP[services_url]/projetos/projeto.php?frm_codProjeto=$item->codeAnchor";
+	$urlproj = "$_CMAPP[services_url]/projects/projeto.php?frm_codProjeto=$item->codeAnchor";
 
 	parent::add("<a href='$urlproj' class='marinho'>".$item->project[0]->title."</a>&nbsp;");
 	parent::add("<a href='$urlpage' class='projBlue'>($_language[see_home_page])</a><br>");
@@ -38,5 +38,3 @@ class AMBProjectsLastPagesModified extends AMColorBox {
     return parent::__toString();
   }
 }
-
-?>

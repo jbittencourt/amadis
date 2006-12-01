@@ -1,4 +1,4 @@
-<?
+<?php
  /**
  * @package AMADIS
  * @subpackage AMColorBox
@@ -37,5 +37,3 @@ class AMBPeopleLastPagesModified extends AMColorBox {
     return parent::__toString();
   }
 }
-
-?>

@@ -1,4 +1,4 @@
-<?
+<?php
  /**
  * @package AMADIS
  * @subpackage AMBoxes
@@ -33,7 +33,7 @@ class AMBProjectEdit extends AMColorBox implements CMActionListener {
 	$err = new CMError($_language['error_cannot_leave_project'],__CLASS__);
 	return false;
       }
-      CMHTMLPage::redirect($_CMAPP['services_url'].'/projetos/projeto.php?frm_codProjeto='.$_REQUEST['frm_codProjeto'].'&frm_message=leave_project');
+      CMHTMLPage::redirect($_CMAPP['services_url'].'/projects/projeto.php?frm_codProjeto='.$_REQUEST['frm_codProjeto'].'&frm_message=leave_project');
       $this->abandoned = true;
 
       //clear group cache
@@ -50,7 +50,7 @@ class AMBProjectEdit extends AMColorBox implements CMActionListener {
   public function __toString() {  
     global $_CMAPP, $proj, $_language;
   
-    $link = $_CMAPP['services_url']."/projetos/projeto.php?frm_codProjeto=$proj->codeProject";
+    $link = $_CMAPP['services_url']."/projects/projeto.php?frm_codProjeto=$proj->codeProject";
     if($this->abandoned) {
       CMHTMLPage::redirect($link);
     }
@@ -64,16 +64,13 @@ class AMBProjectEdit extends AMColorBox implements CMActionListener {
     /*    
      *Buffering html of the box to output screen
      */
-    $urlinfo = $_CMAPP['services_url']."/projetos/create.php?frm_codeProjeto=".$proj->codeProject;
-
-    //$urledit = $_CMAPP[services_url]."/paginas/pagina.php?frm_type=project&frm_codeProjeto=".$proj->codeProject;
-
-    $urlequipe = $_CMAPP['services_url']."/projetos/inviteusers.php?frm_codeProjeto=".$proj->codeProject;
+    $urlinfo = $_CMAPP['services_url']."/projects/create.php?frm_codeProjeto=".$proj->codeProject;
+    $urlequipe = $_CMAPP['services_url']."/projects/inviteusers.php?frm_codeProjeto=".$proj->codeProject;
     $urlupload = $_CMAPP['services_url']."/upload/upload.php?frm_upload_type=project&frm_codeProjeto=".$proj->codeProject;
     $leave_confirm = "if(confirm(\"$_language[project_leave_confirm]\")) { window.location=\"$_SERVER[PHP_SELF]?pe_action=A_leave&frm_codProjeto=".$proj->codeProject."\";  } else { return false; }";
-    $urlleave = $_CMAPP['services_url']."/projetos/projeto.php?frm_codeProjeto=".$proj->codeProject;
+    $urlleave = $_CMAPP['services_url']."/projects/projeto.php?frm_codeProjeto=".$proj->codeProject;
     
-    //parent::add("<a href=\"$urlpage\" class=\"green\">&raquo; ".$_language[project_link_edit]."</a><br>");
+
     parent::add("<a href=\"$urlinfo\" class =\"green\">&raquo; ".$_language['project_link_info']."</a><br>");
     parent::add("<a href=\"$urlequipe\" class =\"green\">&raquo; ".$_language['project_link_group']."</a><br>");
     parent::add("<a href=\"$urlupload\" class =\"green\">&raquo; ".$_language['project_link_upload']."</a><br>");
@@ -83,5 +80,3 @@ class AMBProjectEdit extends AMColorBox implements CMActionListener {
       
   }
 }
-
-?>

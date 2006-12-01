@@ -43,7 +43,7 @@ class AMBMyWebfolio extends AMColorBox implements CMActionListener {
       $urlpage = $_CMAPP['services_url']."/pages/viewpage.php?frm_page=users/user_$_REQUEST[frm_codeUser]&frm_codeUser=$_REQUEST[frm_codeUser]";
       $urlfriend = $_SERVER[PHP_SELF]."?frm_codeUser=$_REQUEST[frm_codeUser]&action=A_make_friend";
       $urlemail = $_CMAPP['services_url']."/correio/message.php";
-      $urldiary = $_CMAPP['services_url']."/diario/diario.php?frm_codeUser=".$_REQUEST['frm_codeUser']."";
+      $urldiary = $_CMAPP['services_url']."/blog/diario.php?frm_codeUser=".$_REQUEST['frm_codeUser']."";
       $urllibrary = $_CMAPP['services_url']."/library/library.php?frm_codeUser=".$_REQUEST['frm_codeUser']."";
       $urlviewmsg = $_CMAPP['services_url']."/webfolio/scraps.php?frm_codeUser=".$_REQUEST['frm_codeUser']."";
       $urlviewalbum = $_CMAPP['services_url']."/album/viewalbum.php?frm_codeUser=".$_REQUEST['frm_codeUser']."";

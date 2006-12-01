@@ -1,4 +1,4 @@
-<?
+<?php
 /** 
  * Listagem generica com thumbnails de usuarios ou projetos
  *
@@ -46,4 +46,3 @@ abstract class AMListBox extends AMTCadBox {
   }
 
 }
-?>

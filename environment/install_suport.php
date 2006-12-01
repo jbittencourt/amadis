@@ -1,4 +1,4 @@
-<?
+<?php
 function getPerms($dir) {
   $perms = fileperms($dir);
   // Owner

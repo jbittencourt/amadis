@@ -265,7 +265,7 @@ class AMUpload {
     
     if ($handle = opendir($dir)) {
       $dir .= "/";
-      $pos = strpos($dir, "paginas");
+      $pos = strpos($dir, "pages");
       $sufix = substr($dir, ($pos+8), -1);
       $imgs = array();
       $i = 0;

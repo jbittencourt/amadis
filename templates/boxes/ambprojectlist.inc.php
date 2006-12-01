@@ -1,4 +1,4 @@
-<?
+<?php
  /**
  * @package AMADIS
  * @subpackage AMBoxes
@@ -100,7 +100,7 @@ class AMBProjectList extends AMPageBox implements CMActionListener {
 	$box = new AMBProjectCommentsList($this->itens, $title, AMTCadBox::CADBOX_LIST);
 	
 	parent::add("<br><span class=\"project_title\">$_language[project]: ".$proj->title."<br></span>");
-	parent::add("<a  href='$_CMAPP[services_url]/projetos/projeto.php?frm_codProjeto=$proj->codeProject' class='green'>");
+	parent::add("<a  href='$_CMAPP[services_url]/projects/projeto.php?frm_codProjeto=$proj->codeProject' class='green'>");
 	parent::add("$_language[back_to_project]</a>");
 
       } else {
@@ -131,7 +131,7 @@ class AMBProjectList extends AMPageBox implements CMActionListener {
 	$box = new AMBProjectNewsList($this->itens, $title, AMTCadBox::CADBOX_LIST);
 	
 	parent::add("<br><span class=\"project_title\">$_language[project]: ".$proj->title."<br></span>");
-	parent::add("<a  href='$_CMAPP[services_url]/projetos/projeto.php?frm_codProjeto=$proj->codeProject' class='green'>");
+	parent::add("<a  href='$_CMAPP[services_url]/projects/projeto.php?frm_codProjeto=$proj->codeProject' class='green'>");
 	parent::add("$_language[back_to_project]</a>");
 
       } else {
@@ -151,4 +151,3 @@ class AMBProjectList extends AMPageBox implements CMActionListener {
     return parent::__toString();
   }
 }
-?>

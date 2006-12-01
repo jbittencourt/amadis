@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Template para a interface de um chat.
  * @ignore
@@ -18,10 +18,10 @@ abstract class AMChatTemplate extends CMHTMLObj {
     $this->sleepTime = 2;  //seta epera para 2 segundos
   }
 
-  //essa funcao é um template e deve ser reimplementada para o chat de cada ambiente
+  //essa funcao ï¿½ um template e deve ser reimplementada para o chat de cada ambiente
   abstract public function drawMessage($message);
 
-  //essa funcao é um template e deve ser reimplementada para o chat de cada ambiente
+  //essa funcao ï¿½ um template e deve ser reimplementada para o chat de cada ambiente
   abstract public function getNewMessages($time);
   
   //esta eh uma funcao usada para quando um chat eh enserrado
@@ -48,7 +48,7 @@ abstract class AMChatTemplate extends CMHTMLObj {
   public function mainLoop($lastMessageTime="") {
     global $_CMAPP;
     
-    session_write_close();    //fecha a seção para escrita evitando sessões concorrentes, o que gera um bug no sistema
+    session_write_close();    //fecha a seï¿½ï¿½o para escrita evitando sessï¿½es concorrentes, o que gera um bug no sistema
     ignore_user_abort(TRUE);
     set_time_limit(0);
     
@@ -110,6 +110,3 @@ abstract class AMChatTemplate extends CMHTMLObj {
   }
 
 }
-
-
-?>

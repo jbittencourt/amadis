@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * Main navigation menu, localized in horizontal bar
@@ -22,7 +22,7 @@ class AMMainMenu extends CMHtmlObj {
 		   array($_CMAPP['imlang_url']."/ico_inicial_off.gif",
 			 $_CMAPP['imlang_url']."/ico_inicial_on.gif",)
 		   );
-    $this->addItem($_CMAPP['services_url']."/projetos/projects.php",
+    $this->addItem($_CMAPP['services_url']."/projects/projects.php",
 		   array($_CMAPP['imlang_url']."/ico_projetos_off.gif",
 			 $_CMAPP['imlang_url']."/ico_projetos_on.gif",)
 		   );
@@ -88,7 +88,3 @@ class AMMainMenu extends CMHtmlObj {
   }
 
 }
-
-
-
-?>

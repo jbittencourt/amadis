@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Small project list, to show in AMADIS initial page
  *
@@ -34,7 +34,7 @@ class AMTProjectsSmallList extends CMHTMLObj {
 	if($text!=$proj->description) {
 	  $text.="...";
 	}
-	parent::add("<a href='$_CMAPP[services_url]/projetos/projeto.php?frm_codProjeto=$proj->codeProject'>$proj->title</a> - $text");
+	parent::add("<a href='$_CMAPP[services_url]/projects/projeto.php?frm_codProjeto=$proj->codeProject'>$proj->title</a> - $text");
 	parent::add("<tr><td colspan=2><img src='$_CMAPP[images_url]/dot.gif' height='10'>");
       }
     }
@@ -50,5 +50,3 @@ class AMTProjectsSmallList extends CMHTMLObj {
   
 
 }
-
-?>

@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * Base template to projects
@@ -22,7 +22,3 @@ class AMTProjeto extends AMMain {
 
   }
 }
-
-
-
-?>

@@ -111,7 +111,7 @@ class AMBUserInvitations extends AMColorBox implements CMActionListener {
 	//invitation text
 	parent::add("</td><td class=\"texto\">");
 	parent::add($_language['project_invitation'].' ');
-	parent::add("<a class=\"blue\" href=\"$_CMAPP[services_url]/projetos/projeto.php?frm_codProjeto=$proj->codeProject\">$proj->title</a>.");
+	parent::add("<a class=\"blue\" href=\"$_CMAPP[services_url]/projects/projeto.php?frm_codProjeto=$proj->codeProject\">$proj->title</a>.");
 	parent::add("</td><td align=center>");
 
 	$inv = $proj->invitation[0];
@@ -128,5 +128,3 @@ class AMBUserInvitations extends AMColorBox implements CMActionListener {
     }
   }
 }
-
-?>

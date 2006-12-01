@@ -56,7 +56,7 @@ class AMProject extends CMObj {
             if(empty($path)) {
                 Throw new AMException("Cannot save project because the pages dir is not correctly configured. Please, verify your config.xml");
             }
-            $path.= "/projetos/projeto_".$this->codeProject;
+            $path.= "/projects/projeto_".$this->codeProject;
 
       //if the this doesn't exists, so we can create it, otherwise generate an exception.
             try {

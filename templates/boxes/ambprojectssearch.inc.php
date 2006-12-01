@@ -1,4 +1,4 @@
-<?
+<?php
  /**
  * @package AMADIS
  * @subpackage AMBoxes
@@ -49,5 +49,3 @@ class AMBProjectsSearch extends AMPageBox implements CMActionListener {
     else return CMHTMLObj::__toString();
   }
 }
-
-?>

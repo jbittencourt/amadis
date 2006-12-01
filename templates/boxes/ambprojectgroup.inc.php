@@ -1,4 +1,4 @@
-<?
+<?php
  /**
  * @package AMADIS
  * @subpackage AMBoxes
@@ -29,7 +29,7 @@ class AMBProjectGroup extends AMAbstractBox {
     parent::add('<div id="projectGroupList">');
     parent::add('</div>');
 
-    parent::add("<a href=\"".$_CMAPP['services_url']."/projetos/members.php?frm_codProjeto=".$this->proj->codeProject."\"");
+    parent::add("<a href=\"".$_CMAPP['services_url']."/projects/members.php?frm_codProjeto=".$this->proj->codeProject."\"");
     parent::add(" class=\"green\">$_language[more_members]</a><br><br>");
 
     $js = 'loadProjectGroup("'.$this->proj->codeGroup.'");';
@@ -39,5 +39,3 @@ class AMBProjectGroup extends AMAbstractBox {
     return parent::__toString();
   }
 }
-
-?>

@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * Main listing box
@@ -222,6 +222,4 @@ class AMBUpload extends CMHTMLObj {
 
     return parent::__toString();
   }
-}   
-
-?>
+}

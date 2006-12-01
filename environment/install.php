@@ -1,4 +1,4 @@
-<?
+<?php
 include('install_suport.php');
 
 function note($array) { echo "<pre>Men:\n"; print_r($array); echo "</pre>"; }
@@ -10,10 +10,10 @@ $out = array();
 //system diretories
 $basedir = substr(getcwd(), 0, -9);
 $config_xml = $basedir.'/etc/config.xml';
-$config_php = $basedir.'/ambiente/config.inc.php';
-$pages = $basedir.'/ambiente/paginas';
-$users_pages = $paginas.'/users';
-$project_pages = $paginas.'/projetos';
+$config_php = $basedir.'/environment/config.inc.php';
+$pages = $basedir.'/environment/pages';
+$users_pages = $pages.'/users';
+$project_pages = $pages.'/projects';
 
 //Check requires
 
@@ -35,15 +35,15 @@ if(!version_compare(PHP_VERSION, '5.0.1', ">=")) {
   $ok = true;
 }
 
-//Check permisions in ambiente and media
-$pBase = getPerms($basedir."/ambiente");
-$pMedia = getPerms($basedir."/ambiente/media");
+//Check permisions in environment and media
+$pBase = getPerms($basedir."/environment");
+$pMedia = getPerms($basedir."/environment/media");
 
 if($perm != "www" && $pMedia != "www") {
   $ok = false;
   $out[] = "<b style='color:red;'> You need set writable the following diretories:</b><br> ";
   $out[] = "<b>Execute the commands below in terminal:</b><br>";
-  $out[] = "<h4><i>chmod 777 $basedir/ambiente<br>chmod 777 $basedir/ambiente/media</i></h4>";
+  $out[] = "<h4><i>chmod 777 $basedir/environment<br>chmod 777 $basedir/environment/media</i></h4>";
 }
 
 if($ok) {
@@ -102,9 +102,3 @@ if($ok) {
 
 
 echo str_replace("{CONTENT}", implode("\n", $out), $pag);
-
-
-?>
-
-
-
