@@ -10,7 +10,7 @@
  * @version 1.0
  * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
  */
-class AMBoxDiaryComment extends CMHTMLObj
+class AMBoxBlogComment extends CMHTMLObj
 {
 
     private $contents;

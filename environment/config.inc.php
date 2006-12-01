@@ -24,6 +24,8 @@ foreach($_CMAPP['config']->app[0]->libs[0]->lib as $item) {
     $_CMDEVEL['path'] = $attributes['path']; break;
   case 'xoad':
     $_XOAD['path'] = $attributes['path']; break;
+  case 'lastRSS':
+    $_LAST_RSS['path'] = $attributes['path']; break;
   }
 }
 
@@ -38,9 +40,9 @@ set_exception_handler('exception_handler');
 
 
 //PATHs dos servicos da aplicacao
-$_CMAPP['services_path'] = $_CMAPP['path']."/ambiente/ferramentas";
+$_CMAPP['services_path'] = $_CMAPP['path'] . "enviroments/tools";
 
-include($_CMDEVEL['path']."/cmdevel.inc.php");
+include($_CMDEVEL['path'] . "/cmdevel.inc.php");
 include("cmpersistence.inc.php");
 include("cmapp.inc.php");
 include("cminterface.inc.php");

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * The AMBoxDiario is a box that list blog entries.
+ * The AMBoxBlog is a box that list blog entries.
  *
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  * @access public
@@ -10,7 +10,7 @@
  * @version 1.0
  * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
  */
-class AMBoxDiario extends CMHTMLObj 
+class AMBoxBlog extends CMHTMLObj 
 {
     
     private $imagem;
@@ -134,7 +134,7 @@ class AMBoxDiario extends CMHTMLObj
                 $impar = $i % 2;
                 $i++;
 
-                $calendar->pointDay(date('d',$post->tempo), "#anchor_post_$post->codePost");
+                $calendar->pointDay(date('d',$post->time), "#anchor_post_$post->codePost");
 
                 if($impar) {
                     parent::add("<tr bgcolor=\"#F9F9FF\">");
@@ -156,11 +156,11 @@ class AMBoxDiario extends CMHTMLObj
                 }
 
                 
-                parent::add("align=\"absmiddle\" ><font class=\"titpost\">$post->titulo</font><font class=\"datapost\"> - ".date("h:i ".$_language['date_format'],$post->tempo));
+                parent::add("align=\"absmiddle\" ><font class=\"titpost\">$post->title</font><font class=\"datapost\"> - ".date("h:i ".$_language['date_format'],$post->time));
                 parent::add("<a name=\"anchor_post_$post->codePost\" > </a> ");
                 parent::add("</font><br><img src=\"$url/dot.gif\" width=\"10\" height=\"7\" border=\"0\"><br>");
                 parent::add("<font class=\"txtdiario\">");
-                parent::add(new AMSmileRender($post->texto));
+                parent::add(new AMSmileRender($post->body));
                 parent::add("</font><br>");
                 parent::add("<a class='diary_comment' href='".self::getPermanentLink($post)."'>");
                 parent::add($_language['permanent_link'].'</a>');
@@ -172,7 +172,7 @@ class AMBoxDiario extends CMHTMLObj
                 if($post->numComments==0) {
                     if($_SESSION['user']) {
                         parent::add("<td class=\"diary_comment_link\"><a class=\"diary_comment\" href=\"javascript:$link_comentarios\">");
-                        parent::add("$_language[aguardando_comentario] <img id=\"post_comments_$post->codePost\" src=\"$_CMAPP[images_url]/ico_seta_off_cmnt.gif\">");
+                        parent::add("$_language[waiting_comments] <img id=\"post_comments_$post->codePost\" src=\"$_CMAPP[images_url]/ico_seta_off_cmnt.gif\">");
                         parent::add("</a></td>");
                     }
                 }
@@ -188,7 +188,7 @@ class AMBoxDiario extends CMHTMLObj
 // 	  }
                 }
 
-                $tempo_post = time() - $post->tempo;
+                $tempo_post = time() - $post->time;
                 if ($tempo_post < 86400){
                     if($post->codeUser == $_SESSION['user']->codeUser) {
                         $link_editar = "postar.php?frm_codePost=$post->codePost&frm_action=editar";
@@ -238,7 +238,7 @@ class AMBoxDiario extends CMHTMLObj
             parent::add("<tr bgcolor=\"#F2F2FE\">");
             parent::add("<td><img src=\"$url/dot.gif\" width=\"20\" height=\"10\" border=\"0\"></td>");
             parent::add("<td valign=\"top\"><br><img src=\"$url/diario_markescuro.gif\" ");
-            parent::add("<span class=\"datapost\">$_language[diary_empty]</span>");
+            parent::add("<span class=\"datapost\">$_language[blog_empty]</span>");
             parent::add("<td><img src=\"$url/dot.gif\" width=\"20\" height=\"10\" border=\"0\"></td>");
 
 

@@ -429,8 +429,8 @@ class AMUser extends CMUser
         $query->groupby("AMBlogPost::codePost");
         $query->addVariable("numComments","count( AMBlogComment::codeComment )");
 
-        $query->setFilter("AMBlogPost::codeUser=$this->codeUser AND time>=$date_start AND tempo < $date_end");
-        $query->setOrder("AMBlogPost::tempo desc");
+        $query->setFilter("AMBlogPost::codeUser=$this->codeUser AND AMBlogPost::time>=$date_start AND AMBlogPost::time < $date_end");
+        $query->setOrder("AMBlogPost::time desc");
         
 
         return $query->execute();
@@ -720,6 +720,13 @@ class AMUser extends CMUser
    */
     public function getLastProjectsComments() 
     {
+    	
+    	//if the session doesn't exists, this is the first user login
+    	//so there is no need for comments search
+    	if(!array_key_exists('last_session', $_SESSION)) {
+    		return new CMContainer;
+    	}
+    	
         $q = new CMQuery('AMProject');
 
         $j = new CMJoin(CMJoin::INNER);
@@ -743,7 +750,7 @@ class AMUser extends CMUser
         $q->addJoin($j3, "members");
         $q->addJoin($j4,"comments");
 
-        $q->setFilter("AMComment::tempo > ".$_SESSION['last_session']->timeEnd." AND CMGroupMember::codeUser=$this->codeUser");
+        $q->setFilter("AMComment::tempo > ". $_SESSION['last_session']->timeEnd. " AND CMGroupMember::codeUser=$this->codeUser");
 
         $q->groupby("AMProject::codeProject");
         $q->addVariable("numMessages","count( AMProjectComment::codComentario)");
@@ -753,6 +760,9 @@ class AMUser extends CMUser
 
     public function getLastBlogComments() 
     {
+    	if(!array_key_exists('last_session', $_SESSION)) {
+    		return new CMContainer;
+    	}
         $q = new CMQuery('AMBlogPost');
 
         $j = new CMJoin(CMJoin::INNER);

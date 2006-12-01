@@ -80,7 +80,7 @@ class  AMNavMenu extends CMHTMLObj
 
       // MY DIARY
             $img = "<img src=\"$_CMAPP[imlang_url]/mn_meu_meudiario.gif\" border=0>";
-            $this->add("<a href=\"$_CMAPP[services_url]/diario/blog.php\">$img</a>");
+            $this->add("<a href=\"$_CMAPP[services_url]/blog/blog.php\">$img</a>");
 
       // MY LIBRARY
             $img = "<img src=\"$_CMAPP[imlang_url]/mn_meus_arquivos.gif\" border=0>";
@@ -97,11 +97,11 @@ class  AMNavMenu extends CMHTMLObj
                 $tree->open();
             }
 
-            $tree->add("<a class='green' href='$_CMAPP[services_url]/projetos/create.php'>&raquo; $_language[create_project]</a><br>");
+            $tree->add("<a class='green' href='$_CMAPP[services_url]/projects/create.php'>&raquo; $_language[create_project]</a><br>");
             if($projects->__hasItems()) {
                 foreach($projects as $proj) {
                     $str="";
-                    $tree->add("<a href=\"".$_CMAPP['services_url']."/projetos/projeto.php?frm_codProjeto=$proj->codeProject\" class=\"mnlateral\">&raquo; $proj->title $str</a><br>");
+                    $tree->add("<a href=\"".$_CMAPP['services_url']."/projects/project.php?frm_codProjeto=$proj->codeProject\" class=\"mnlateral\">&raquo; $proj->title $str</a><br>");
                 }
             }
             else {

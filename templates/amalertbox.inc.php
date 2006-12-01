@@ -16,6 +16,8 @@ Class AMAlertBox extends AMAbstractBox {
   protected $theme;
   protected $icon = true;
   protected $contents = array();
+  protected $class;
+  
   const ALERT = "01";
   const DIALOG = "04";
   const MESSAGE = "02";
@@ -68,7 +70,7 @@ Class AMAlertBox extends AMAbstractBox {
     parent::add('</tr>');
     parent::add('<tr> ');
     parent::add('<td><img src="'.$url.'/dot.gif" width="1" height="1" border="0"></td>');
-    parent::add('<td><div id="msg_alert" class="'.$this->class.'">');
+    parent::add('<td><div id="msg_alert" class="' . $this->class . '">');
     if($this->icon) parent::add('<img src="'.$url.'/ico_alert.gif"> '); 
     
     parent::add($this->contents);

@@ -35,7 +35,9 @@ $el['pag_1'] = $_language['pag_1'];
 $el['pag_2'] = $_language['pag_2'];
 $el['pag_3'] = $_language['pag_3'];
 $ind =  new AMPathIndicator($el);
-$ind->setState($_REQUEST['action']);
+if(array_key_exists('action', $_REQUEST)) {
+	$ind->setState($_REQUEST['action']);	
+}
 $pag->setPathIndicator($ind);
 
 $cadBox = new AMTCadBox("",AMTCadBox::CADBOX_CREATE,AMTCadBox::WEBFOLIO_THEME);
@@ -49,9 +51,10 @@ switch($_REQUEST['action']) {
    $fields_rec = array("username");
       
    //formulary
-   $form = new AMWSmartForm('AMUser',"cad_user",$_SERVER[PHP_SELF],$fields_rec);
+   $form = new AMWSmartForm('AMUser',"cad_user",$_SERVER['PHP_SELF'],$fields_rec);
 
-   if($_SESSION['cad_user'] instanceof AMUser) {
+   if(array_key_exists('cad_user', $_SESSION) and 
+   	 $_SESSION['cad_user'] instanceof AMUser) {
      $form->loadDataFromObject($_SESSION['cad_user']);
    }
 
@@ -100,7 +103,7 @@ switch($_REQUEST['action']) {
 
    $form->setWidgetOrder($fields_rec);
 
-   if(!($_SESSION['cad_user'] instanceof AMUser)) {
+   if(!(array_key_exists('cad_user', $_SESSION) && $_SESSION['cad_user'] instanceof AMUser)) {
      //if this is the first submit, create an object in the session to store the user data
      $_SESSION['cad_user'] = new AMUser();
      $_SESSION['cad_user']->loadDataFromRequest();     

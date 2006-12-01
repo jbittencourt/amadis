@@ -12,7 +12,7 @@
 
 $_CMAPP['notrestricted'] = True;
 include("../../config.inc.php");
-include("lastRSS.php");
+include($_LAST_RSS['path'] . 'lastRSS.php');
 
 $_language = $_CMAPP['i18n']->getTranslationArray("projects");
 

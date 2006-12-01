@@ -229,12 +229,12 @@ register_subject_email = "Cadastro no AMADIS"
 
 [blog]
 frm_title = "T&iacute;tulo da minha mensagem:"
-frm_text = "Conte&uacute;do da minha mensagem:"
+frm_body = "Conte&uacute;do da minha mensagem:"
 frm_image = "Escolha a imagem do seu di&aacute;rio:"
 frm_titleBlog = "Escolha o t&iacute;tulo do seu di&aacute;rio:"
 frm_titleProfile = "Descreva seu perfil pessoal:"
 
-frm_body = "Coment&aacute;rio"
+frm_comment_body = "Coment&aacute;rio"
 
 waiting_comments = "Aguardando coment&aacute;rios."
 comments = "Coment&aacute;rios"

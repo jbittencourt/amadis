@@ -21,10 +21,10 @@ class AMBlogImage extends AMFixedSizeImage
 
     public function getView() {
         if($this->state==CMObj::STATE_PERSISTENT) {
-            return new AMTDiaryImage($this->codeFile);
+            return new AMTBlogImage($this->codeFile);
         }
         else {
-            return new AMTDiaryImage($this,AMImageTemplate::METHOD_SESSION);
+            return new AMTBlogImage($this,AMImageTemplate::METHOD_SESSION);
         }
     }
 
