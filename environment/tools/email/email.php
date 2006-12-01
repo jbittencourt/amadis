@@ -11,7 +11,7 @@ include_once("$rdpath/email/rdemail.inc.php");
 $f_email = new RDImapMail();
 
 $ui = new RDui("email", "");
-$lang = $_SESSION[ambiente]->getLangUI($ui);
+$lang = $_SESSION[environment]->getLangUI($ui);
 
 
 //limpa variaveis de secao
@@ -137,5 +137,3 @@ $pag->add("<br><br>");
 
 
 $pag->imprime();
-
-?>

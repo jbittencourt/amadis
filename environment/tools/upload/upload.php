@@ -59,7 +59,7 @@ switch($_REQUEST['frm_upload_type']) {
        /*
 	*Verificacao do realpath do diretorio
 	*/
-       $real = AMUpload::getRealPath("$pathBase/projetos/projeto_".$_REQUEST['frm_codeProjeto']);
+       $real = AMUpload::getRealPath("$pathBase/projects/projeto_".$_REQUEST['frm_codeProjeto']);
        
        $UPLOAD_DIR = new AMUpload($real);
        
@@ -325,7 +325,7 @@ switch($_REQUEST['action']) {
      $rootFolder = "users/user_".$_SESSION['user']->codeUser;
      break;
    case "project":
-     $rootFolder = "projetos/projeto_";
+     $rootFolder = "projects/projeto_";
      break;
    }
 

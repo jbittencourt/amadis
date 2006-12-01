@@ -1,4 +1,4 @@
-<?
+<?php
 $_CMAPP['notrestricted'] = True;
 include("../../config.inc.php");
 
@@ -93,7 +93,7 @@ $projs = $user->listProjects();
 $box2 = new AMColorBox($_CMAPP['imlang_url'].'/box_wfprojetos_tit.gif',AMColorBox::COLOR_BOX_BLUE);
 if($projs->__hasItems()) {
   $box2->add(new AMTIconList($projs,AMTIconList::PROJECT_LIST,7));
-  $box2->add("<br><a href='$_CMAPP[services_url]/projetos/listprojects.php'>&raquo; $_language[list_all_projects]</a>");
+  $box2->add("<br><a href='$_CMAPP[services_url]/projects/listprojects.php'>&raquo; $_language[list_all_projects]</a>");
 }
 else {
   $box2->add("<span class='texto'>$_language[user_no_projects]</span>");
@@ -137,5 +137,3 @@ $pag->add($box5);
 
 
 echo $pag;
-
-?>

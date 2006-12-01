@@ -7,7 +7,7 @@ include_once("$pathtemplates/ambox.inc.php");
 include_once("$rdpath/interface/rdjswindow.inc.php");
 
 $ui = new RDui("addressbook", "");
-$lang = $_SESSION[ambiente]->getLangUI($ui);
+$lang = $_SESSION[environment]->getLangUI($ui);
 
 
 class Form extends WSmartForm {
@@ -186,7 +186,3 @@ $pag->add("&nbsp;<a class=\"fontgray\" href=\"javascript:document.lista.acao.val
 $pag->add("</form>");
 
 $pag->imprime();
-
-
-
-?>

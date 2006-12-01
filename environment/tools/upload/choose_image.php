@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Chooser a image to insert in a page
  *
@@ -33,10 +33,10 @@ $pag->addScript($script);
 switch($_REQUEST['frm_upload_type']) {
 
   case "user":
-    $dir = "$_CMAPP[path]/ambiente/paginas/users/user_".$_SESSION['user']->codeUser;
+    $dir = "$_CMAPP[path]/environment/pages/users/user_".$_SESSION['user']->codeUser;
     break;
  case "project":
-   $dir = "$_CMAPP[path]/ambiente/paginas/projetos/projeto_".$_REQUEST['codeProjeto'];
+   $dir = "$_CMAPP[path]/environment/pages/projects/projeto_".$_REQUEST['codeProjeto'];
    break;
  case "course":
    $dir = "";

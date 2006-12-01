@@ -1,4 +1,4 @@
-<?
+<?php
 /** 
  * This file do a visualization of the webpages hosted in AMADIS.
  *
@@ -19,7 +19,7 @@ echo "<html><head><title>$_languge[amadis]</title></head>";
 echo "<frameset rows='45,*' border='0'>";
 echo "<frame id='ammenu' src='$_CMAPP[services_url]/pages/menu.php?$_SERVER[QUERY_STRING]'>";
 
-$dir = "$_CMAPP[path]/ambiente/paginas/$_REQUEST[frm_page]";
+$dir = "$_CMAPP[path]/environment/pages/$_REQUEST[frm_page]";
 if(file_exists("$dir/index.html") || file_exists("$dir/index.htm") || file_exists("$dir/index.php")) {
   echo "<frame id='amcontent' src='$_CMAPP[pages_url]/$_REQUEST[frm_page]'>";
 } else {
@@ -31,5 +31,3 @@ if(file_exists("$dir/index.html") || file_exists("$dir/index.htm") || file_exist
 }
 echo "</frameset>";
 echo "</html>";
-
-?>

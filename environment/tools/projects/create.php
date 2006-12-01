@@ -56,7 +56,7 @@ if(!empty($_REQUEST['frm_codeProjeto'])) {
     $_SESSION['cad_foto'] = new AMProjImage;
   }     
   if(!$group->isMember($_SESSION['user']->codeUser)) {
-    CMHTMLPage::redirect($_CMAPP['services_url']."/projetos/projeto.php?frm_codProjeto=$_REQUEST[frm_codeProjeto]&frm_amerror=edit_not_allowed");
+    CMHTMLPage::redirect($_CMAPP['services_url']."/projects/projeto.php?frm_codProjeto=$_REQUEST[frm_codeProjeto]&frm_amerror=edit_not_allowed");
   }
 }
 
@@ -83,7 +83,7 @@ switch($_REQUEST['action']) {
       
    //formulary
    $form = new AMWSmartForm('AMProject',"cad_user",$_SERVER['PHP_SELF'],$fields_rec);
-   $form->setCancelUrl("$_CMAPP[services_url]/projetos/projects.php?clear_cadProj");
+   $form->setCancelUrl("$_CMAPP[services_url]/projects/projects.php?clear_cadProj");
 
    if(isset($_SESSION['cad_proj']) && ($_SESSION['cad_proj'] instanceof CMObj)) {
      $form->loadDataFromObject($_SESSION['cad_proj']);
@@ -154,7 +154,7 @@ switch($_REQUEST['action']) {
    $lista = new CMWListAdd("frm_codeArea",$areas,$proj_areas,"codeArea","name");
    $form->addComponent("frm_codeArea",$lista);
 
-   $form->setCancelUrl("$_CMAPP[services_url]/projetos/projects.php?clear_cadProj");
+   $form->setCancelUrl("$_CMAPP[services_url]/projects/projects.php?clear_cadProj");
    $cadBox->add($form);
 
    $cadBox->setTitle("<img src='$_CMAPP[imlang_url]/img_areas_conhecimento.gif'>");
@@ -165,7 +165,7 @@ switch($_REQUEST['action']) {
    if(!isset($_REQUEST['frm_codeArea'])) $_REQUEST['frm_codeArea']=array();
 
    if((!is_array($_REQUEST['frm_codeArea']) && empty($_FILES['frm_foto']))) {
-     Header("Location: $_CMAPP[services_url]/projetos/create.php?action=pag_1&frm_amerror=proj_must_select_areas");
+     Header("Location: $_CMAPP[services_url]/projects/create.php?action=pag_1&frm_amerror=proj_must_select_areas");
    }
    else {
      if(is_array($_REQUEST['frm_codeArea'])) {  	  
@@ -284,7 +284,7 @@ notelastquery();
      $con->acidOperation(CMContainer::OPERATION_SAVE);
    }
    catch(CMObjEContainerOperationFailed $e) {
-     Header("Location: $_CMAPP[services_url]/projetos/create.php?action=fatal_error&frm_amerror=save_failed");
+     Header("Location: $_CMAPP[services_url]/projects/create.php?action=fatal_error&frm_amerror=save_failed");
    }
    
    $cod = $_SESSION[cad_proj]->codeProject;
@@ -292,7 +292,7 @@ notelastquery();
    unset($_SESSION[cad_foto]);
    
    //if everything was ok, go the page of the project.
-   CMHTMLPage::redirect($_CMAPP[services_url].'/projetos/projeto.php?frm_ammsg=project_created&frm_codProjeto='.$cod);
+   CMHTMLPage::redirect($_CMAPP[services_url].'/projects/projeto.php?frm_ammsg=project_created&frm_codProjeto='.$cod);
    
    break;
 

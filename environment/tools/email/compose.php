@@ -14,7 +14,7 @@ include_once("$rdpath/smartform/wsmartform.inc.php");
 $f_email = new RDImapMail();
 
 $ui = new RDui("email", "");
-$lang = $_SESSION[ambiente]->getLangUI($ui);
+$lang = $_SESSION[environment]->getLangUI($ui);
 
 $pag = new AMCorreio();
 
@@ -168,7 +168,3 @@ $box->add($form);
 $pag->add($box);
 
 $pag->imprime();
-
-
-
-?>

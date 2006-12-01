@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * This page is used to invite users to a project.
  *
@@ -21,7 +21,7 @@ $_language = $_CMAPP[i18n]->getTranslationArray("project_invite_user");
 
 //checks to see if the user is an group member
 if(empty($_REQUEST[frm_codeProjeto])) {
-  Header("Location: $_CMAPP[services_url]/projetos/projects.php?frm_amerror=project_code_does_not_exists");
+  Header("Location: $_CMAPP[services_url]/projects/projects.php?frm_amerror=project_code_does_not_exists");
 }
 
 $proj = new AMProject;
@@ -29,14 +29,14 @@ $proj->codeProject = $_REQUEST[frm_codeProjeto];
 try {
   $proj->load();
 } catch(CMDBNoRecord $e) {
-  Header("Location: $_CMAPP[services_url]/projetos/projects.php?frm_amerror=project_code_does_not_exists");
+  Header("Location: $_CMAPP[services_url]/projects/projects.php?frm_amerror=project_code_does_not_exists");
 }
 
 $group = $proj->getGroup();
 $isMember = $group->isMember($_SESSION[user]->codeUser);
 
 if(!$isMember) {
-   CMHTMLPage::redirect("$_CMAPP[services_url]/projetos/project.php?frm_codProjeto=$proj->code&frm_amerror=not_group_member");
+   CMHTMLPage::redirect("$_CMAPP[services_url]/projects/project.php?frm_codProjeto=$proj->code&frm_amerror=not_group_member");
 }
 
 
@@ -58,7 +58,7 @@ $pag->addScript("msg_check_some_user='$_language[error_user_not_select]';");
 switch($_REQUEST[action]) {
  case "A_invite":
    if(empty($_REQUEST[frm_usersInvite])) {
-     CMHTMLPage::redirect("Location: $_CMAPP[services_url]/projetos/inviteusers.php?frm_amerror=_user_not_select");
+     CMHTMLPage::redirect("Location: $_CMAPP[services_url]/projects/inviteusers.php?frm_amerror=_user_not_select");
    }
 
    try {
@@ -168,7 +168,7 @@ $box->add("</td>");
 $box->add("</tr></table>");
 
 //cancel and submit buttons
-$cancel_url = $_CMAPP[services_url]."/projetos/projeto.php?frm_codProjeto=".$proj->codeProject;
+$cancel_url = $_CMAPP[services_url]."/projects/projeto.php?frm_codProjeto=".$proj->codeProject;
 
 $box->add("<p align=center><input type=button onclick=\"window.location='$cancel_url'\" value=\"$_language[cancel]\">");
 $box->add("&nbsp; <input type=submit  value=\"$_language[frm_invite]\">");
@@ -180,6 +180,3 @@ $box->add("</form>");
 
 $pag->add($box);
 echo $pag;
-
-
-?>

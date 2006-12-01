@@ -1,4 +1,4 @@
-<?
+<?php
 include_once("../../config.inc.php");
 include_once("$pathtemplates/amtadmin.inc.php");
 include_once("$pathtemplates/ambox.inc.php");
@@ -6,7 +6,7 @@ include_once("$pathuserlib/amadmin.inc.php");
 include_once("$pathuserlib/amescola.inc.php");
 
 $ui = new RDui("admin");
-$lang = $_SESSION[ambiente]->getLangUi($ui);
+$lang = $_SESSION[environment]->getLangUi($ui);
 
 $pag = new AMTAdmin();
 
@@ -82,7 +82,7 @@ $admins = $escola->listaAdmins();
 
     //verifica se a escola jah existe caso esteja sendo cadsatrada uma nova escola
     if ($save->nomEscola == "") {
-      if ($_SESSION[ambiente]->existeEscola($_REQUEST[frm_nomEscola]) == "1") {
+      if ($_SESSION[environment]->existeEscola($_REQUEST[frm_nomEscola]) == "1") {
 	$notSave = "1";
 	$pag->add ("<br><font class=fontgray><font color=red size=+1><center>$lang[escola_jah_existe]</font></font></center><br><br>");
       }
@@ -115,7 +115,7 @@ $admins = $escola->listaAdmins();
     $campos_ausentes = array();
     $campos_hidden = array("codEscola");
     $form = new WSmartForm("AMEscola","form1","editar_escolas.php?acao=A_salvar".$option,$campos_ausentes,$campos_hidden);
-    $lista = $_SESSION[ambiente]->listaCidades();
+    $lista = $_SESSION[environment]->listaCidades();
     $form->setSelect("codCidade",$lista,"codCidade","nomCidade");
     $form->setCancelUrl($voltar);
     $form->setDesign(WFORMEL_DESIGN_OVER);
@@ -152,7 +152,7 @@ $admins = $escola->listaAdmins();
   //se nenhuma escola tiver sido selecionada, abre a lista de escolas.
   else {
     //lista as escolas com as opcoes
-    $escolas = $_SESSION[ambiente]->listaEscolas();
+    $escolas = $_SESSION[environment]->listaEscolas();
     
     if (!empty($escolas->records)) {
       
@@ -172,10 +172,3 @@ $admins = $escola->listaAdmins();
 
 
   $pag->imprime();
-  
-
-
-
-
-
-?>

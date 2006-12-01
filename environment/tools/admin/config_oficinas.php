@@ -8,7 +8,7 @@ include_once("$pathtemplates/ambox.inc.php");
 include_once("$rdpath/smartform/wsmartform.inc.php");
 
 $ui = new RDui("admin");
-$lang = $_SESSION[ambiente]->getLangUi($ui);
+$lang = $_SESSION[environment]->getLangUi($ui);
 
 $pag = new AMTAdmin();
 $box = new AMBox();
@@ -102,7 +102,7 @@ if ($_SESSION[usuario]->eMembroCategoria(ADMINISTRADOR_PLATAFORMA)) {
 
     $box->setTitle($lang[menu_tipo_cursos]);
   
-    $tiposCursos = $_SESSION[ambiente]->listaTipoCursos();
+    $tiposCursos = $_SESSION[environment]->listaTipoCursos();
     if(!empty($tiposCursos->records)){
       foreach($tiposCursos->records as $item){
 	$link  = "<a href=$_SERVER[PHP_SELF]?acao=A_editar_tipo_curso";

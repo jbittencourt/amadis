@@ -1,4 +1,4 @@
-<?
+<?php
 
 include("../../config.inc.php");
 include_once("$rdpath/smartform/wsmartform.inc.php");
@@ -6,7 +6,7 @@ include_once("$pathtemplates/amcolorbox.inc.php");
 include_once("$pathtemplates/amtcadastro.inc.php");
 
 $ui = new RDui("cadastro", "");
-$lang = $_SESSION[ambiente]->getLangUI($ui);
+$lang = $_SESSION[environment]->getLangUI($ui);
 
 $pag = new AMTCadastro();
 

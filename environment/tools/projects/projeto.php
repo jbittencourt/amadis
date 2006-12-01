@@ -1,4 +1,4 @@
-<?
+<?php
 $_CMAPP['notrestricted'] = 1;
 include("../../config.inc.php");
 
@@ -16,7 +16,7 @@ if(isset($_REQUEST['frm_codProjeto']) && !empty($_REQUEST['frm_codProjeto'])) {
        $proj->load();
        $group = $proj->getGroup();
      }catch(CMDBNoRecord $e){
-       $location  = $_CMAPP[services_url]."/projetos/projeto.php?frm_amerror=project_not_exists";
+       $location  = $_CMAPP[services_url]."/projects/projeto.php?frm_amerror=project_not_exists";
        $location .= "&frm_codProjeto=".$_REQUEST[frm_codProjeto];
        CMHTMLPage::redirect($location);
      }
@@ -172,4 +172,3 @@ $box->add("<br>",AMTwoColsLayout::RIGHT);
 
 $pag->add($box);
 echo $pag;
-?>

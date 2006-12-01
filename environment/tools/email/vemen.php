@@ -11,7 +11,7 @@ include_once("$pathtemplates/amcorreio.inc.php");
 $f_email = new RDImapMail();
 
 $ui = new RDui("email");
-$lang = $_SESSION[ambiente]->getLangUI($ui);
+$lang = $_SESSION[environment]->getLangUI($ui);
 
 
 $pag = new AMCorreio();

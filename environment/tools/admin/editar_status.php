@@ -10,7 +10,7 @@ include_once("$pathtemplates/ambox.inc.php");
 include_once("$rdpath/smartform/wsmartform.inc.php");
 
 $ui = new RDui("admin");
-$lang = $_SESSION[ambiente]->getLangUi($ui);
+$lang = $_SESSION[environment]->getLangUi($ui);
 
 $pag = new AMTAdmin();
 
@@ -52,7 +52,7 @@ if ($_SESSION[usuario]->eMembroCategoria(ADMINISTRADOR_PLATAFORMA)) {
 
     //verifica se a area jah existe caso esteja sendo cadsatrada uma nova area
     if ($save->nomArea == "") {
-      if ($_SESSION[ambiente]->existeStatus($_REQUEST[frm_desStatus]) == "1") {
+      if ($_SESSION[environment]->existeStatus($_REQUEST[frm_desStatus]) == "1") {
 	$notSave = "1";
 	$pag->add ("<br><font class=fontgray><font color=red size=+1><center>$lang[status_jah_existe]</font></font></center><br><br>");
       }
@@ -109,7 +109,7 @@ if ($_SESSION[usuario]->eMembroCategoria(ADMINISTRADOR_PLATAFORMA)) {
   //se nenhuma categ tiver sido selecionada, abre a lista
   else {
     //lista as categs com as opcoes
-    $categ = $_SESSION[ambiente]->listaStatus();
+    $categ = $_SESSION[environment]->listaStatus();
     
     if (!empty($categ->records)) {
       

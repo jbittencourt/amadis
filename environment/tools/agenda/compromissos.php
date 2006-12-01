@@ -8,7 +8,7 @@ include_once("$rdpath/base/rdagenda.inc.php");
 include_once("$pathuserlib/amcompromisso.inc.php");
 
 $ui = new RDui("compromissos",$_REQUEST[acao]);
-$lang = $_SESSION[ambiente]->getLangUI($ui);
+$lang = $_SESSION[environment]->getLangUI($ui);
 
 $pag = new AMTemplateComprimissos();
 
@@ -170,7 +170,7 @@ else {
 
 $mes_cal = Date_Calc::getCalendarMonth($mes,$ano);
 
-//como muitas vezes utiliza-se esse parâmetro pelo link montei uma string pré pronta
+//como muitas vezes utiliza-se esse parï¿½metro pelo link montei uma string prï¿½ pronta
 $link_data = "dia=$dia&mes=$mes&ano=$ano";
 
 $pag->add(menuAuxiliar(array(array("link" => "$_SERVER[PHP_SELF]?acao=A_criar_compromisso&$link_data","texto"=>"Criar novo compromisso"))));
@@ -244,6 +244,9 @@ $tab->add("<br><TABLE><TR>");
 
 $tab->add("<FORM name=\"form1\" action=\"$_SERVER[PHP_SELF]\" method=\"POST\">");
 $tab->add("<TD><SELECT name=\"mes\" onChange=\"document.form1.submit()\">");
+/**
+ * @TODO change mounth names to i18n..! 
+ */
 
 $tab->add("  <OPTION value=\"1\">Janeiro");
 $tab->add("  <OPTION value=\"2\">Fevereiro");
@@ -365,11 +368,11 @@ if (!empty($compromissos->records)) {
     $hora = date("h:i",$comp->timeDATA);
 
     $class = "class=\"$tab->cor\"";
-    //      //----comença a escrever compromissos
+    //      //----comenï¿½a a escrever compromissos
     //      $tab->add("<TR style=\" background-color: $cor\" $class><td  width=\"15%\">$hora</td><td><span style=\"font-weight: bold;\">".$comp->nomCompromisso."</span><br> &nbsp; &nbsp; Vinculado a:<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Projeto: ".$nomeProjeto[$x]."<br>"."&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Oficina: ".$nomeOficina[$x]." </TD><td align=right><font size=-2>$acoes</font></td></TR>");
     //      $tab->add("<tr  style=\" background-color: $cor\"><td>&nbsp;</td><td colspan=2>$comp->desCompromisso</td></tr>");
     //      //-----Fim de escrever compromissos  
-    //----comença a escrever compromissos
+    //----comenï¿½a a escrever compromissos
     $tab->add("<TR style=\" background-color: $cor\" $class><td  width=\"50\">$hora</td><td><span style=\"font-weight: bold; font-family: helvetica,arial,sans-serif;\">".$comp->nomCompromisso."</span><small><span style=\"font-family: helvetica,arial,sans-serif;\">$titulo</span></small></TD><td align=right><font size=-2>$acoes</font></td></TR>");
     $tab->add("<tr  style=\" background-color: $cor\"><td>&nbsp;</td><td cellpadding=\"5\" cellspacing=\"5\" colspan=2><small><span style=\"font-family: helvetica,arial,sans-serif;\"><blockquote>$comp->desCompromisso</blockquote></span></small><hr noshade></td></tr>");
     //-----Fim de escrever compromissos   

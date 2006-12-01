@@ -13,7 +13,7 @@ if(!empty($_REQUEST[frm_codeProject])) {
      try{
        $proj->load();
      }catch(CMDBNoRecord $e){
-       $location  = $_CMAPP[services_url]."/projetos/projeto.php?frm_amerror=project_not_exists";
+       $location  = $_CMAPP[services_url]."/projects/projeto.php?frm_amerror=project_not_exists";
        $location .= "&frm_codProjeto=".$_REQUEST[frm_codeProject];
        header("Location:$location");
      }
@@ -98,7 +98,7 @@ $box->add(new AMBForum($proj->title, $forums));
 
 $box->add("<br/>");
 
-$box->add("<FORM ACTION='$_CMAPP[services_url]/projetos/projectforums.php' METHOD=post>");
+$box->add("<FORM ACTION='$_CMAPP[services_url]/projects/projectforums.php' METHOD=post>");
 $box->add("<INPUT TYPE=HIDDEN NAME=\"frm_codeProject\" VALUE=\"$_REQUEST[frm_codeProject]\">");
 $box->add("<INPUT TYPE=HIDDEN NAME=\"frm_action\" VALUE=\"A_create\">");
 
@@ -112,6 +112,3 @@ $pag->add($box);
 
 
 echo $pag;
-
-
-?>

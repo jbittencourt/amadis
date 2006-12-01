@@ -1,4 +1,4 @@
-<?
+<?php
 
 $_CMAPP['notrestricted'] = 1;
 
@@ -31,7 +31,7 @@ switch($_REQUEST['frm_action']) {
 
 
    if($_SESSION['environment']->logged == 1){
-     $link = "<a href=\"$_CMAPP[services_url]/projetos/create.php\">";
+     $link = "<a href=\"$_CMAPP[services_url]/projects/create.php\">";
      $link.= "<img border=0 src=\"$_CMAPP[imlang_url]/img_criar_novo_projeto.gif\"><br>";
      $link.= "</a>";
      $box->add($link, AMTwoColsLayout::LEFT);
@@ -71,5 +71,3 @@ switch($_REQUEST['frm_action']) {
 }
 
 echo $pag;
-
-?>

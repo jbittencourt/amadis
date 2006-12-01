@@ -10,7 +10,7 @@ include_once("$pathtemplates/ammain.inc.php");
 include_once("$pathtemplates/ambox.inc.php");
 
 $ui = new RDui("admin", "");
-$lang = $_SESSION[ambiente]->getLangUI($ui);
+$lang = $_SESSION[environment]->getLangUI($ui);
 
 $pag = new AMMain();
 
@@ -76,7 +76,7 @@ switch ($_REQUEST[pagina]) {
      $t = AMUser::getTables();
      $chave[] = opval("nomUser","%$_REQUEST[frm_nomUser]%","","LIKE");
      $campos = array("nomUser","nomPessoa","codUser","strEMailAlt");
-     $lista = $_SESSION[ambiente]->listaUsuariosPlataforma($_SESSION[Plataforma]->codPlataforma,$chave,$campos);;
+     $lista = $_SESSION[environment]->listaUsuariosPlataforma($_SESSION[Plataforma]->codPlataforma,$chave,$campos);;
      
      if(!empty($lista->records)) {
 
@@ -104,7 +104,7 @@ switch ($_REQUEST[pagina]) {
      $t = AMUser::getTables();
      $chave[] = opval("nomPessoa","%$_REQUEST[frm_nomPessoa]%","","LIKE");
      $campos = array("nomUser","nomPessoa","codUser","strEMailAlt");
-     $lista = $_SESSION[ambiente]->listaUsuariosPlataforma($_SESSION[Plataforma]->codPlataforma,$chave,$campos);;
+     $lista = $_SESSION[environment]->listaUsuariosPlataforma($_SESSION[Plataforma]->codPlataforma,$chave,$campos);;
      
      if(!empty($lista->records)){
        
@@ -132,7 +132,7 @@ switch ($_REQUEST[pagina]) {
      $t = AMUser::getTables();
      $chave[] = opval("strEMailAlt","%$_REQUEST[frm_strEMailAlt]%","","LIKE");
      $campos = array("nomUser","nomPessoa","codUser","strEMailAlt");
-     $lista = $_SESSION[ambiente]->listaUsuariosPlataforma($_SESSION[Plataforma]->codPlataforma,$chave,$campos);;
+     $lista = $_SESSION[environment]->listaUsuariosPlataforma($_SESSION[Plataforma]->codPlataforma,$chave,$campos);;
      
      if(!empty($lista->records)){
        

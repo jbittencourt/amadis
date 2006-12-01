@@ -10,7 +10,7 @@ include_once("$pathtemplates/ambox.inc.php");
 include_once("$rdpath/smartform/wsmartform.inc.php");
 
 $ui = new RDui("config_forum");
-$lang = $_SESSION[ambiente]->getLangUi($ui);
+$lang = $_SESSION[environment]->getLangUi($ui);
 
 if ($_SESSION[usuario]->eMembroCategoria(ADMINISTRADOR_PLATAFORMA)) {
   $pag = new AMTAdmin();

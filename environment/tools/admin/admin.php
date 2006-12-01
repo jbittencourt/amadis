@@ -15,7 +15,7 @@ $box = new AMTwoColsLayout;
 
 
 $adBox = new AMBAdminTables;
-//permite a mudanca de dados das tabelas estaticas do ambiente
+//permite a mudanca de dados das tabelas estaticas do environment
 $box->add($adBox, AMTwoColsLayout::LEFT);
 $box->add ("<br>", AMTwoColsLayout::LEFT);
 
