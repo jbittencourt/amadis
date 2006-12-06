@@ -1,4 +1,4 @@
-<?
+<?php
 class AMTAlbum extends AMMain {
   
 
@@ -10,8 +10,6 @@ class AMTAlbum extends AMMain {
 
     $this->setImgId($_CMAPP['imlang_url']."/top_album_amadis.gif");
       
-    $this->openNavMenu();
+    
   }
 }
-
-?>

@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Message box, list scrap messages send to a user
  *
@@ -26,29 +26,29 @@ class AMBUserScraps extends AMPageBox implements CMActionListener {
   public function doAction() {
     global $_language, $pag;
 
-    if(isset($_REQUEST[frm_codeMessage]) && !empty($_REQUEST[frm_codeMessage])) {
+    if(isset($_REQUEST['frm_codeMessage']) && !empty($_REQUEST['frm_codeMessage'])) {
       try {
 	$men = new AMUserMessages;
-	$men->code = $_REQUEST[frm_codeMessage];
+	$men->code = $_REQUEST['frm_codeMessage'];
 	$men->load();
 	$men->delete();
       }catch(CMException $e) {
-	$pag->addError($_language[fail_delete_message], $e->getMessage());
+	$pag->addError($_language['fail_delete_message'], $e->getMessage());
 	$pag->add("<a href=$_SERVER[HTTP_REFERER]>$_language[voltar]</a>");
 	echo $pag;
 	die();
       }
     }
-    if(empty($_REQUEST[frm_codeUser])) {
-      $user = $_SESSION[user];
+    if(empty($_REQUEST['frm_codeUser'])) {
+      $user = $_SESSION['user'];
     } else {
       $user = new AMUser;
-      $user->codeUser = $_REQUEST[frm_codeUser];
+      $user->codeUser = $_REQUEST['frm_codeUser'];
 
       try{
 	$user->load();
       }catch(CMDBException $e) {
-	$pag->addError($_language[user_not_loaded], $e->getMessage());
+	$pag->addError($_language['user_not_loaded'], $e->getMessage());
 	$pag->add("<a href=$_SERVER[HTTP_REFERER]>$_language[voltar]</a>");
 	echo $pag;
 	die();
@@ -57,9 +57,9 @@ class AMBUserScraps extends AMPageBox implements CMActionListener {
     
     $result = $messages = $user->listMyMessages($this->init, $this->numHitsFP);
     $this->box_type = AMTCadBox::CADBOX_LIST;
-    $this->title = $_language[scraps_of].' '.$user->name;
+    $this->title = $_language['scraps_of'].' '.$user->name;
     $this->itens = $result[0];
-    $this->numItems = $result[count];
+    $this->numItems = $result['count'];
   }
   
   public function __toString() {
@@ -86,8 +86,8 @@ class AMBUserScraps extends AMPageBox implements CMActionListener {
 	$box->add(date("$_language[hour_format]",$men->time)."<br>");
 	$box->add(date("$_language[date_format]",$men->time));
 
-	if($_SESSION[environment]->logged) {
-	  if($men->codeTo==$_SESSION[user]->codeUser) {
+	if($_SESSION['environment']->logged) {
+	  if($men->codeTo==$_SESSION['user']->codeUser) {
 	    $box->add('<td valign=top>');
 	    $link = "$_SERVER[PHP_SELF]?frm_codeMessage=$men->code&action=A_delete";
 	    if(!empty($_REQUEST[frm_codeUser])) {
@@ -99,7 +99,7 @@ class AMBUserScraps extends AMPageBox implements CMActionListener {
       }
       $box->add('</table>');
     } else {
-      $box->add('<span class="texto">'.$_language[no_scraps].'</span>');
+      $box->add('<span class="texto">'.$_language['no_scraps'].'</span>');
     }
 
     $box->setTitle($this->title);
@@ -109,4 +109,3 @@ class AMBUserScraps extends AMPageBox implements CMActionListener {
     return parent::__toString();
   }
 }
-?>

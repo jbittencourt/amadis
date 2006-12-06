@@ -81,8 +81,7 @@ class AMEnvSession implements AMAjax {
 
     $q->setFilter($filter);
 
-    $result = $q->execute();
-    notelastquery();
+    $result = $q->execute();    
     $ret = array();
     
     if($result->__hasItems()) {

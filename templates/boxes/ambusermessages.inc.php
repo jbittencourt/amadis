@@ -18,7 +18,7 @@ class AMBUserMessages extends AMColorBox {
 
     try {
       $this->cProjects = $_SESSION['user']->getLastProjectsComments();
-      $this->cDiary = $_SESSION['user']->getLastDiaryComments();
+      $this->cDiary = $_SESSION['user']->listLastBlogPosts() ;
       //$this->cMessages = $_SESSION['user']->getLastMessages();
     } catch(CMDBQueryError $e) {
       $this->exception = $e;

@@ -305,7 +305,7 @@ class AMMain extends AMHTMLPage
             if(!is_array($_REQUEST["frm_ammsg"])) {
                 $_REQUEST["frm_ammsg"] = array($_REQUEST["frm_ammsg"]);
             }
-            ;
+            
             foreach($_REQUEST["frm_ammsg"] as $msg) {
                 $messages[] = array("message"=>$_language["msg_$msg"],
 			    "thrower"=>"request");
@@ -493,6 +493,4 @@ class AMMain extends AMHTMLPage
     }
 
     
-    
-
 }

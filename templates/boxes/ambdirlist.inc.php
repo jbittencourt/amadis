@@ -1,4 +1,4 @@
-<?
+<?php
  /**
  * @package AMADIS
  * @subpackage AMBoxes
@@ -58,7 +58,7 @@ class AMBDirList extends CMHTMLObj {
     parent::add("      <td valign='top' width='10' class='texto'>&nbsp;</td>");
     parent::add("      <td class='texto'>");
     if($dir_pai != "") {
-      if(isset($_REQUEST[frm_codeUser]) && ($_REQUEST[frm_codeUser] != $_SESSION[user]->codeUser)) {
+      if(isset($_REQUEST['frm_codeUser']) && ($_REQUEST['frm_codeUser'] != $_SESSION['user']->codeUser)) {
 	$link = "$_CMAPP[services_url]/pages/viewpage.php?frm_page=$dir_pai&frm_codeUser=$_REQUEST[frm_codeUser]";
       } else {
 	$link = "$_CMAPP[services_url]/pages/viewpage.php?frm_page=$dir_pai&frm_codeProject=$_REQUEST[frm_codeProject]";

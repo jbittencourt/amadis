@@ -432,7 +432,7 @@ error_empty_password = "Voc&ecirc; digitou um nova senha em branco. Por favor di
 
 
 [changeUserData]
-escolher_cidade ="Escolha uma cidade:"
+choose_city ="Escolha uma cidade:"
 frm_username="Digite um nome de usu&aacute;rio:"
 frm_password="Digite uma senha:"
 frm_re_password="Re-digite a senha:"
@@ -1027,6 +1027,7 @@ conversation_timeout = "A conversa tornou-se inativa!"
 
 
 [library]
+project = "Projeto"
 upload_file = "Enviar arquivo"
 view_file = "Visualizar arquivos"
 delete_file = "Apagar arquivo";

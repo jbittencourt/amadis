@@ -4,8 +4,7 @@
  * @subpackage AMTemplates
  */
 
-class AMTBlog extends AMMain {
-	
+class AMTBlog extends AMMain {	
 
 	function __construct() {
 		global $_CMAPP;

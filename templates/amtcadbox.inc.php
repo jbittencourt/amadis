@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * Register box template
@@ -135,7 +135,3 @@ class AMTCadBox extends CMHTMLObj {
 
 
 }
-
-
-
-?>

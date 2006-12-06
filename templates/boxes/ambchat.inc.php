@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * @package AMADIS
  * @subpackage AMBoxes
@@ -239,11 +239,8 @@ class AMBChat extends CMHTMLObj {
 
     parent::add("   </td>");
     parent::add("</table>");
-    //notelastquery();
     return parent::__toString();
     
   }
   
 }
-
-?>

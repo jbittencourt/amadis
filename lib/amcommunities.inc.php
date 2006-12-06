@@ -19,8 +19,6 @@ class AMCommunities extends CMObj implements  CMACLAppInterface
 
     const ENUM_FLAGAUTH_ALLOW = "ALLOW";
     const ENUM_FLAGAUTH_REQUEST = "REQUEST";
-    const ENUM_STATUS_NOT_AUTHORIZED = "NOT_AUTHORIZED";
-    const ENUM_STATUS_AUTHORIZED = "AUTHORIZED";
 
 	//privileges to access this community
     const PRIV_ADMIN = "admin";
@@ -39,7 +37,6 @@ class AMCommunities extends CMObj implements  CMACLAppInterface
         $this->addField("name",CMObj::TYPE_VARCHAR,"30",1,0,0);
         $this->addField("codeGroup",CMObj::TYPE_INTEGER,"20",1,0,0);
         $this->addField("codeACO",CMObj::TYPE_INTEGER,"20",1,0,0);
-        $this->addField("status",CMObj::TYPE_ENUM,"12",1,"NOT_AUTHORIZED",0);
         $this->addField("flagAuth",CMObj::TYPE_ENUM,"10",1,"ALLOW",0);
         $this->addField("image",CMObj::TYPE_INTEGER,"20",1,0,0);
         $this->addField("time",CMObj::TYPE_INTEGER,"20",1,0,0);
@@ -48,8 +45,6 @@ class AMCommunities extends CMObj implements  CMACLAppInterface
 
         $this->setEnumValidValues("flagAuth",array(self::ENUM_FLAGAUTH_ALLOW,
         self::ENUM_FLAGAUTH_REQUEST));
-        $this->setEnumValidValues("status",array(self::ENUM_STATUS_NOT_AUTHORIZED,
-        self::ENUM_STATUS_AUTHORIZED));
     }
 
    /** 
@@ -67,7 +62,7 @@ class AMCommunities extends CMObj implements  CMACLAppInterface
             $group = new CMGroup;
             $group->description = "Community ".$this->name;
 
-            if($this->status == self::ENUM_FLAGAUTH_ALLOW) {
+            if($this->flagAuth == self::ENUM_FLAGAUTH_ALLOW) {
                 $group->managed = CMGroup::ENUM_MANAGED_NOT_MANAGED;
             } else {
                 $group->managed = CMGroup::ENUM_MANAGED_MANAGED;
@@ -78,7 +73,6 @@ class AMCommunities extends CMObj implements  CMACLAppInterface
             try {
                 $group->save();
             } catch(CMDBException $e) {
-            	notelastquery();
                 Throw new AMException("An error ocurred creating the community group.");
             }       
             $this->codeGroup = $group->codeGroup;
@@ -112,8 +106,7 @@ class AMCommunities extends CMObj implements  CMACLAppInterface
             $this->codeACO = (integer) $aco->code;
             $aco->addUserPrivilege((integer) $_SESSION['user']->codeUser, self::PRIV_ADMIN);
 
-        }
-         
+        }         
         parent::save();
     }
 

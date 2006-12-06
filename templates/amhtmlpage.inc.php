@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * Base to load an AMADIS page5~
@@ -19,5 +19,3 @@ class AMHTMLPage extends CMHTMLPage {
   }
 
 }
-
-?>

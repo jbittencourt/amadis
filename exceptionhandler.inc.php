@@ -1,14 +1,10 @@
-<?
+<?php
 /**
  * This function renders any exception that had not ben catch.
  *
  * @param Exception $e The exception that caused the fatal error.
  **/
 function exception_handler(Exception $e) {
-//   echo '<html>';
-//   echo '<header>';
-//   echo '</header>';
-//   echo '<body>';
 
   $line[] = 'Uncaught exception: '.get_class($e);
   $line[] = 'Message:'. $e->getMessage();
@@ -19,9 +15,5 @@ function exception_handler(Exception $e) {
   note($line); die();
   echo $text;
 
-//   echo '</body>';
-//   echo '</html>';
   die();
 }
-
-?>

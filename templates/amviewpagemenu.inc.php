@@ -13,48 +13,47 @@
  */
 class AMViewPageMenu
 
- extends CMHtmlObj {
-  private $itens;
-  private $secundaryItems;
-  
-  public function __construct() {
-    global $_CMAPP;
-    parent::__construct();
+extends CMHtmlObj {
+	private $itens;
+	private $secundaryItems;
 
-    //adiciona o item "inicial" no menu principal (se o usuario estiver logado)
-    $this->addItem($_CMAPP['url']."/index.php",
-		   array($_CMAPP['imlang_url']."/wf_mn_inicial_off.gif",
-			 $_CMAPP['imlang_url']."/wf_mn_inicial_on.gif",)
-		   );
-    $this->addItem($_CMAPP['services_url']."/projects/projects.php",
-		   array($_CMAPP['imlang_url']."/wf_mn_projetos_off.gif",
-			 $_CMAPP['imlang_url']."/wf_mn_projetos_on.gif",)
-		   );
-    
-    $this->addItem($_CMAPP['services_url']."/people/people.php",
-		   array($_CMAPP['imlang_url']."/wf_mn_pessoas_off.gif",
-			 $_CMAPP['imlang_url']."/wf_mn_pessoas_on.gif",)
-		   );
-    $this->addItem($_CMAPP['services_url']."/communities/communities.php",
-		   array($_CMAPP['imlang_url']."/wf_mn_comunidades_off.gif",
-			 $_CMAPP['imlang_url']."/wf_mn_comunidades_on.gif",)
-		   );
+	public function __construct() {
+		global $_CMAPP;
+		parent::__construct();
 
-    if(isset($_REQUEST[frm_codeUser]) && !empty($_REQUEST[frm_codeUser])) {
-      $check = (($_REQUEST[frm_codeUser] == $_SESSION[user]->codeUser) ? true : false);
-      if($check) {
-	$this->addSecundaryItem($_CMAPP['services_url']."/upload/upload.php?frm_upload_type=user",
+		//adiciona o item "inicial" no menu principal (se o usuario estiver logado)
+		$this->addItem($_CMAPP['url']."/index.php",
+		array($_CMAPP['imlang_url']."/wf_mn_inicial_off.gif",
+		$_CMAPP['imlang_url']."/wf_mn_inicial_on.gif",)
+		);
+		$this->addItem($_CMAPP['services_url']."/projects/projects.php",
+		array($_CMAPP['imlang_url']."/wf_mn_projetos_off.gif",
+		$_CMAPP['imlang_url']."/wf_mn_projetos_on.gif",)
+		);
+
+		$this->addItem($_CMAPP['services_url']."/people/people.php",
+		array($_CMAPP['imlang_url']."/wf_mn_pessoas_off.gif",
+		$_CMAPP['imlang_url']."/wf_mn_pessoas_on.gif",)
+		);
+		$this->addItem($_CMAPP['services_url']."/communities/communities.php",
+		array($_CMAPP['imlang_url']."/wf_mn_comunidades_off.gif",
+		$_CMAPP['imlang_url']."/wf_mn_comunidades_on.gif",)
+		);
+
+		if(isset($_REQUEST['frm_codeUser']) && !empty($_REQUEST['frm_codeUser'])) {
+			$check = (($_REQUEST['frm_codeUser'] == $_SESSION['user']->codeUser) ? true : false);
+			if($check) {
+				$this->addSecundaryItem($_CMAPP['services_url']."/upload/upload.php?frm_upload_type=user",
 				array($_CMAPP['imlang_url']."/wf_mn_editpage_off.gif",
-				      $_CMAPP['imlang_url']."/wf_mn_editpage_on.gif",)
+				$_CMAPP['imlang_url']."/wf_mn_editpage_on.gif",)
 				);
-      }
-      $diario = ($_REQUEST[frm_codeUser] != $_SESSION[user]->codeUser ? "?frm_codeUser=$_REQUEST[frm_codeUser]" : "");
+			}
+			$diario = ($_REQUEST['frm_codeUser'] != $_SESSION['user']->codeUser ? "?frm_codeUser=$_REQUEST[frm_codeUser]" : "");
 
-      $this->addSecundaryItem($_CMAPP['services_url']."/blog/diario.php$diario",
-			      array($_CMAPP['imlang_url']."/wf_mn_diario_off.gif",
-				    $_CMAPP['imlang_url']."/wf_mn_diario_on.gif",)
-			      );
-      $url = ($_REQUEST[frm_codeUser] == $_SESSION[user]->codeUser ? $_CMAPP['services_url']."/webfolio/webfolio.php" :
+			$this->addSecundaryItem($_CMAPP['services_url']."/blog/diario.php$diario",
+			array($_CMAPP['imlang_url']."/wf_mn_diario_off.gif",
+			$_CMAPP['imlang_url']."/wf_mn_diario_on.gif");
+			$url = ($_REQUEST['frm_codeUser'] == $_SESSION['user']->codeUser ? $_CMAPP['services_url']."/webfolio/webfolio.php" :
 	      $_CMAPP['services_url']."/webfolio/userinfo_details.php?frm_codeUser=$_REQUEST[frm_codeUser]");
       $this->addSecundaryItem($url,
 			      array($_CMAPP['imlang_url']."/wf_mn_webfolio_off.gif",

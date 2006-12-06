@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * @package AMADIS
  * @subpackage AMBoxes
@@ -17,8 +17,6 @@ class AMBAdminUsersTree extends AMSimpleBox {
     $q = new CMQuery('AMUser');    
     $res = $q->execute();
 
-//    notelastquery();die();
-
     $box = new AMBAdminUsersList($res,"$_language[search_users]",AMBAdminUsersList::PEOPLE);    
 
     parent::add($box);  
@@ -27,5 +25,3 @@ class AMBAdminUsersTree extends AMSimpleBox {
   }
 
 }
-
-?>
