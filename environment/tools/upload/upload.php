@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Main file to management of the files hosteds in AMADIS
  *
@@ -84,7 +84,7 @@ switch($_REQUEST['frm_upload_type']) {
      
      $pag->setTitle($_SESSION['user']->name);
      $thumb = new AMUploadThumb;
-     $thumb->codeArquivo = $_SESSION['user']->foto;
+     $thumb->codeFile = $_SESSION['user']->picture;
      $thumb->load();
      $pag->setThumb($thumb->thumb->getThumbURL());
    }else {
@@ -363,5 +363,3 @@ switch($_REQUEST['action']) {
 }
 
 echo $pag;
-
-?>

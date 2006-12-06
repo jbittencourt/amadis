@@ -49,7 +49,7 @@ switch($action) {
             
             if($createNewImage) {
                 $_SESSION['cad_foto'] = new AMUserPicture();
-                $_SESSION['cad_user']->picture = 0;
+                $_SESSION['cad_user']->picture = 1;
             };
 
         }
@@ -107,20 +107,16 @@ switch($action) {
 
         $foto = unserialize($_SESSION['cad_foto']);
         if($foto===false) {
-            echo "bla";
             $foto = $_SESSION['cad_foto'];
         }
-        
+
         $oldState = $foto->state;
         
         if($foto->state==CMObj::STATE_DIRTY || $foto->state==CMObj::STATE_DIRTY_NEW) {
             try {
                 $foto->save();
                 $_SESSION['cad_user']->picture = $foto->codeFile;
-            }
-            catch(CMObjEDuplicatedEntry $de){
-            	header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_picture");
-            }
+            }            
             catch(CMDBException $e) {
                 header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_picture");
             }
@@ -128,14 +124,13 @@ switch($action) {
 
         //only saves de user profile if the image is new. If it was updated, the codeFile remains the same
         //so no modifications is needed.
-        if($oldState==CMObj::STATE_DIRTY_NEW) {
+        if($oldState == CMObj::STATE_DIRTY_NEW) {
             try {
                 $_SESSION['cad_user']->save();
             }
             catch(CMDBException $e) {
                 header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_user");
             }
-
             $_SESSION['user'] = $_SESSION['cad_user'];
         }
         unset($_SESSION['cad_user']);

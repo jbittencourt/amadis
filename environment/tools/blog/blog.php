@@ -21,8 +21,7 @@ $_CMAPP['smartform']['language'] = $_language;
 
 
 
-$pag = new AMTBlog();
-
+$pag = new AMTBlog;
 
 if(!empty($_REQUEST['frm_action'])) {
 	switch($_REQUEST['frm_action']) {
@@ -36,7 +35,7 @@ if(!empty($_REQUEST['frm_action'])) {
 				$comentario->save();
 				$pag->addMessage($_language['msg_comments_saved']); //aviso em java script
 			}
-			catch(CMDBQueryError $erro) {
+ 			catch(CMDBQueryError $erro) {
 				$_REQUEST['frm_amerror'] = "comment_not_saved";
 			}
 			
@@ -175,4 +174,3 @@ if(!empty($userBlog)) {
 }
 
 echo $pag;
-?>

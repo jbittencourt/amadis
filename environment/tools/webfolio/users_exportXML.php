@@ -1,4 +1,4 @@
-<?
+<?php
 
 $_CMAPP['notrestricted'] = True;
 include("../../config.inc.php");
@@ -15,14 +15,10 @@ $root = $dom->createElement('projects');
 $dom->appendChild($root);
 
 $users = $_SESSION[environment]->listSummaryUsersInteraction();
-note($users); die();
+
 
 if(!empty($_SESSION[user])) {
-//   $user = new AMUser;
-//   $user->username = "juliano";
-//   $user->load();
   $userProjs = $_SESSION[user]->listProjects();
-//$userProjs = $user->listProjects();
 }
 
 Foreach($projects as $proj) {
@@ -48,5 +44,3 @@ Foreach($projects as $proj) {
 }
 
 echo $dom->saveXML();
-
-?>

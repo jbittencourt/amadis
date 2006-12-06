@@ -1,4 +1,4 @@
-<?
+<?php
 include("../../config.inc.php");
 
 $_CMAPP['notrestricted'] = 1;
@@ -15,4 +15,3 @@ $page->add("<br>");
 $page->add($box);
 
 echo $page;
-?>

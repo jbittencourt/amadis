@@ -229,7 +229,7 @@ switch($_REQUEST['action']) {
      
      $_SESSION['cad_proj']->image = (integer) $foto->codeFile;
    }
-notelastquery();
+
    //save the project
   // try {
      $_SESSION['cad_proj']->save();
@@ -244,9 +244,9 @@ notelastquery();
    //save the areas
    $con = new CMContainer;
 
-   $proj_areas = $_SESSION[cad_proj]->listAreas();
+   $proj_areas = $_SESSION['cad_proj']->listAreas();
 
-   $tmp_areas = $_SESSION[cad_proj]->areas;
+   $tmp_areas = $_SESSION['cad_proj']->areas;
    $max = 0;
 
    foreach($tmp_areas as $code) {
@@ -257,7 +257,7 @@ notelastquery();
      }     
      $temp = new AMProjectArea;
      $temp->codeArea = $code;
-     $temp->codeProject = $_SESSION[cad_proj]->codeProject;     
+     $temp->codeProject = $_SESSION['cad_proj']->codeProject;     
      $con->add($code,$temp);
      $max = max($max,$code);     
    }
@@ -274,8 +274,8 @@ notelastquery();
 
    //forces the ins of the user in the group
    $member = new CMGroupMember;
-   $member->codeGroup = $_SESSION[cad_proj]->codeGroup;
-   $member->codeUser = $_SESSION[user]->codeUser;
+   $member->codeGroup = $_SESSION['cad_proj']->codeGroup;
+   $member->codeUser = $_SESSION['user']->codeUser;
    $member->time = time();
    $con->add($max+1,$member);
 
@@ -287,12 +287,12 @@ notelastquery();
      Header("Location: $_CMAPP[services_url]/projects/create.php?action=fatal_error&frm_amerror=save_failed");
    }
    
-   $cod = $_SESSION[cad_proj]->codeProject;
-   unset($_SESSION[cad_proj]);
-   unset($_SESSION[cad_foto]);
+   $cod = $_SESSION['cad_proj']->codeProject;
+   unset($_SESSION['cad_proj']);
+   unset($_SESSION['cad_foto']);
    
    //if everything was ok, go the page of the project.
-   CMHTMLPage::redirect($_CMAPP[services_url].'/projects/projeto.php?frm_ammsg=project_created&frm_codProjeto='.$cod);
+   CMHTMLPage::redirect($_CMAPP['services_url'].'/projects/projeto.php?frm_ammsg=project_created&frm_codProjeto='.$cod);
    
    break;
 

@@ -65,8 +65,8 @@ switch(AMEnvironment::processActionRequest()) {
 
    //campo cidade
         $cidades = $_SESSION['environment']->listCities();
-        $form->setSelect("codeCity",$cidades,"codeCity","codeCity");
-        $form->components['codeCity']->addOption(0,$_language['escolher_cidade']);
+        $form->setSelect("codeCity",$cidades,"codeCity","name");
+        $form->components['codeCity']->addOption(0,$_language['choose_city']);
 
         if(!$form->components['codeCity']->getValue())
         $form->components['codeCity']->setValue(0);
@@ -105,7 +105,7 @@ switch(AMEnvironment::processActionRequest()) {
     	
 
 	    try {
-    	    $_SESSION['cad_user']->save();
+    	    $_SESSION['cad_user']->save();    	    
 	    } catch(CMDBException $e) {
     	    header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_user");
 	    }

@@ -1,22 +1,17 @@
-<?
+<?php
 
 include_once("../../config.inc.php");
-
-//AMEnvSession::getFinderRequest();
 
 AMFinder::initFinder("34_17");
 
 $f = new AMFinder;
 
-note($f->getNewMessages("34_17"));
+
 
 $e = new AMEnvSession;
-note($e->getFinderRequest());
-die();
-
 
 $pag = new AMMain;
-//$pag = new CMHTMLPage;
+
 $_language = $_CMAPP['i18n']->getTranslationArray("finder");
 $_SESSION['communicator'][1] = 'AMFinder';
 
@@ -30,12 +25,7 @@ AMFinder::initFinder(34,39);
 $f = new AMFinder();
 $f->sendMessage(39,"teste forcado");
 $a = $f->getNewMessages(34,39);
-note($a);
-note($f);
-notelastquery();
-//echo $pag;
 
-die();
 if(empty($_SESSION['finder'])) {
   $_SESSION['finder'] = new AMFinder();
 };
@@ -45,7 +35,7 @@ switch($_REQUEST[action]) {
    if(isset($_REQUEST[frm_mode])) {
      $_SESSION[finder]->changeMode($_REQUEST[frm_mode]);
    }
-   die(note($_REQUEST));
+
    break;
  case "A_remove_request":
    if(isset($_REQUEST[frm_codeRequest])) {
@@ -59,7 +49,7 @@ switch($_REQUEST[action]) {
        die($e->getMessage());
      }
    }
-   die(note($_REQUEST));
+
    break;
  case "A_send_message":
    $message = new AMFinderMessages;
@@ -69,7 +59,7 @@ switch($_REQUEST[action]) {
    $message->status = AMFinderMessages::ENUM_STATUS_NOT_READ;
    $message->save();
    echo CMHTMLObj::getScript("parent.Finder_clearChatBox();");
-   die(note($_REQUEST));
+
    break;
  case "A_close_chat":
    $_language = $_CMAPP[i18n]->getTranslationArray("finder");
@@ -80,7 +70,7 @@ switch($_REQUEST[action]) {
    
    $_SESSION[finder]->stopChat($_REQUEST[frm_codeUser]);
    
-   die(note($_REQUEST));
+
    break;
 }
 
@@ -109,16 +99,15 @@ $users = $_SESSION[finder]->getOnLineUsers();
 $online = array();
 
 //faz um scan no array de objetos e passa-os para um segundo array.
-//Faz isso para poder identificar quando um único usuários está conectado em
-//duas máquina diferents e mostra-lo só uma vez
-//A máquina em que o usuário estiver conectado a menos tempo recebe precedência.
+//Faz isso para poder identificar quando um ï¿½nico usuï¿½rios estï¿½ conectado em
+//duas mï¿½quina diferents e mostra-lo sï¿½ uma vez
+//A mï¿½quina em que o usuï¿½rio estiver conectado a menos tempo recebe precedï¿½ncia.
 
 if($users->__hasItems()) {
   
   foreach($users as $item) {
 
     if($item->flagEnded == CMEnvSession::ENUM_FLAGENDED_ENDED) {
-      //unset($_SESSION[amadis][finder][contacts][$item->codeUser]);
       continue;
     }
 
@@ -126,7 +115,6 @@ if($users->__hasItems()) {
 
     case CMEnvSession::ENUM_VISIBILITY_VISIBLE://visivel
       $online[$item->codeUser] = 1;
-      //$_SESSION[amadis][finder][contacts][$item->codeUser][status] = AMFinder::FINDER_NORMAL_MODE;
 
       //setar no menu como online
       $pag->add("<script language=\"javascript1.2\">");
@@ -135,7 +123,7 @@ if($users->__hasItems()) {
       break; 
     case CMEnvSession::ENUM_VISIBILITY_BUSY: //ocupado
       $online[$item->codeUser] = 1;
-      //$_SESSION[amadis][finder][contacts][$item->codeUser][status] = AMFinder::FINDER_BUSY_MODE;
+
       //setar como ocupado
       $pag->add("<script language=\"javascript1.2\">");
       $pag->add("window.parent.parent.Finder_changeUserStatus('UserIco_$item->codeUser','$_CMAPP[url]','busy');</script>");
@@ -144,7 +132,7 @@ if($users->__hasItems()) {
       break;
     case CMEnvSession::ENUM_VISIBILITY_HIDDEN: //oculto
       $online[$item->codeUser] = 1;
-      //$_SESSION[amadis][finder][contacts][$item->codeUser][status] = AMFinder::FINDER_HIDDEN_MODE;
+
       $pag->add("<script language=\"javascript1.2\">");
       $pag->add("window.parent.parent.Finder_changeUserStatus('UserIco_$item->codeUser','$_CMAPP[url]','hidden');</script>");
       $pag->add($item->codeUser."oculto<br>");
@@ -163,8 +151,4 @@ foreach($_SESSION[amadis][friends] as $item) {
   }
 }
 
-//echo $_SESSION[finder];  
 echo $pag;
-
-
-?>

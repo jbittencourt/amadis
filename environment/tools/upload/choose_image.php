@@ -45,7 +45,6 @@ switch($_REQUEST['frm_upload_type']) {
 
 
 $images = AMUpload::getImagesFromFolder($dir);
-//note($images);die();
 
 $cont = 0;
 
