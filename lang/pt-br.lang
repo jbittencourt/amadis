@@ -889,6 +889,8 @@ see_all_pages = "Listar todas as p&aacute;ginas pessoais"
 users_pages = "P&aacute;ginas de usu&aacute;rios"
 projects_pages = "P&aacute;ginas de projetos"
 no_user_loggeds = "Nenhum usu&aacute;rio logado."
+no_diary_updated = "Nenhum di&aacute;rio atualizado"
+no_page_updated = "Nenhuma p&aacute;gina atualizada"
 
 people_welcome_text = "Nesta &aacute;rea, voc&ecirc; pode localizar as
 pessoas que integram o Amadis e ver quem est&aacute;

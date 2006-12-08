@@ -1,4 +1,4 @@
-<?
+<?php
 $_CMAPP['notrestricted'] = 1;
 include("../../config.inc.php");
 
@@ -10,19 +10,11 @@ switch($_REQUEST['frm_action']) {
  
  default:
    $box = new AMTwoColsLayout;
-
    //coluna da esquerda
-   //$box->add("Sample", AMTwoColsLayout::LEFT);
    $box->add(new AMBPeopleSearchUsers, AMTwoColsLayout::LEFT);
    $box->add("<br><br>",AMTwoColsLayout::LEFT);
    $box->add(new AMBPeopleLastUsersLogeds, AMTwoColsLayout::LEFT);
     
-   //$box->add(new AMBSearch, AMTwoColsLayout::LEFT);
-   
-   //coluna da direita
-   //$box->add("Sample", AMTwoColsLayout::RIGHT);
-   
-     
    $box->add(new AMBPeopleLastPagesModified, AMTwoColsLayout::RIGHT);
    $box->add(new AMBPeopleLastDiaryPosts, AMTwoColsLayout::RIGHT);
    
@@ -36,5 +28,3 @@ switch($_REQUEST['frm_action']) {
 }
 
 echo $pag;
-
-?>
