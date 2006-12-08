@@ -56,7 +56,7 @@ class AMProject extends CMObj {
             if(empty($path)) {
                 Throw new AMException("Cannot save project because the pages dir is not correctly configured. Please, verify your config.xml");
             }
-            $path.= "/projects/projeto_".$this->codeProject;
+            $path.= "/projects/project_".$this->codeProject;
 
       //if the this doesn't exists, so we can create it, otherwise generate an exception.
             try {
@@ -133,7 +133,7 @@ class AMProject extends CMObj {
 
         $j1 = new CMJoin(CMJoin::INNER);
         $j1->setClass('AMProjectComment');
-        $j1->on('AMProjectComment::codComentario = AMComment::codComentario');
+        $j1->on('AMProjectComment::codeComment = AMComment::codeComment');
 
         $j2 = new CMJoin(CMJoin::INNER);
         $j2->setClass('AMUser');
@@ -145,10 +145,10 @@ class AMProject extends CMObj {
         $q->setCount();
 
         if(!empty($time) && !empty($_SESSION['last_session'])) {
-            $q->setFilter("AMProjectComment::codProjeto=$this->codeProject AND tempo > ".$_SESSION['last_session']->timeEnd);
-            $q->setOrder("tempo desc");
+            $q->setFilter("AMProjectComment::codeProject=$this->codeProject AND time > ".$_SESSION['last_session']->timeEnd);
+            $q->setOrder("time desc");
         }else {
-            $q->setFilter("AMProjectComment::codProjeto=".$this->codeProject);
+            $q->setFilter("AMProjectComment::codeProject=".$this->codeProject);
             $q->setLimit($ini, $lenght);
         }
         
@@ -160,13 +160,13 @@ class AMProject extends CMObj {
         $q->addJoin($j2,"usuarios");
 
         if(!empty($time) && !empty($_SESSION['last_session'])) {
-            $q->setFilter("AMProjectComment::codProjeto=$this->codeProject AND tempo < ".$_SESSION['last_session']->timeEnd);
-            $q->setOrder("tempo desc");
+            $q->setFilter("AMProjectComment::codeProject=$this->codeProject AND time < ".$_SESSION['last_session']->timeEnd);
+            $q->setOrder("time desc");
         }else {
-            $q->setFilter("AMProjectComment::codProjeto=".$this->codeProject);
+            $q->setFilter("AMProjectComment::codeProject=".$this->codeProject);
             $q->setLimit($ini, $lenght);
         }
-
+		
         return array("count"=>$count, $q->execute());
 
     }
@@ -224,7 +224,7 @@ class AMProject extends CMObj {
         }catch(CMException $e){
             echo $e;
         }
-        return $projlib->libraryCode;
+        return $projlib->codeLibrary;
     }
     
     public function getOpenRooms() {

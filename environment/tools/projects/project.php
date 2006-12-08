@@ -58,8 +58,15 @@ $box->add("<font class=\"project_title\">$_language[project]: ".$proj->title."<b
 $box->add("<img src=\"".$_CMAPP['images_url']."/dot.gif\" border=\"0\" height=\"10\" width=\"1\"><br>",
 	  AMTwoColsLayout::LEFT);
 
-$image = AMProjectImage::getImage($proj);
-$box->add($image,
+$imageCode = AMProjectImage::getImage($proj);
+$image = new AMProjectImage();
+$image->codeFile = $imageCode;
+try {
+	$image->load();
+} catch(CMDBNoRecord $e) {
+	echo $e;
+} 
+$box->add($image->getView(),
 	  AMTwoColsLayout::LEFT);
 
 $box->add("      <br>",
@@ -74,11 +81,10 @@ $box->add("<img src=\"".$_CMAPP['images_url']."/dot.gif\" border=\"0\" height=\"
 
 /*
  *STATUS DO PROJETO
+ * I disabled the project status. It has no 
+ * significance to the users of amadis
  */
-$projStatus = $proj->getStatus();
 $box->add("    <img src=\"".$_CMAPP['imlang_url']."/img_dados_projeto.gif\"><br>",
-	  AMTwoColsLayout::LEFT);
-$box->add("    <font class=\"texto\"><b>$_language[project_in]: $projStatus</b><br>",
 	  AMTwoColsLayout::LEFT);
 $box->add("    <img src=\"".$_CMAPP['images_url']."/dot.gif\" border=\"0\" height=\"10\" width=\"1\"><br>",
 	  AMTwoColsLayout::LEFT);

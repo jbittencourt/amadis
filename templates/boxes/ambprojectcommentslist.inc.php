@@ -1,8 +1,8 @@
-<?
+<?php
  /**
  * @package AMADIS
  * @subpackage AMBoxes
- */
+ **/
 
 class AMBProjectCommentsList extends AMListBox {
 
@@ -64,4 +64,3 @@ class AMBProjectCommentsList extends AMListBox {
     return parent::__toString();
   }
 }
-?>

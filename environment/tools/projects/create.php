@@ -79,19 +79,21 @@ switch($_REQUEST['action']) {
 
  default:
 
-   $fields_rec = array("title","description","status");
+   $fields_rec = array("title","description");
       
    //formulary
    $form = new AMWSmartForm('AMProject',"cad_user",$_SERVER['PHP_SELF'],$fields_rec);
+   
    $form->setCancelUrl("$_CMAPP[services_url]/projects/projects.php?clear_cadProj");
 
-   if(isset($_SESSION['cad_proj']) && ($_SESSION['cad_proj'] instanceof CMObj)) {
+   if(isset($_SESSION['cad_proj']) && ($_SESSION['cad_proj'] instanceof CMObj)) {  	
      $form->loadDataFromObject($_SESSION['cad_proj']);
-   }else $_SESSION['cad_proj']='';
-
+   } else { 
+     $_SESSION['cad_proj']='';
+   }
+   
    $status = AMProject::listAvaiableStatus();
-
-   $form->setSelect("status",$status,"code","name");
+   
    $form->addComponent("action",new CMWHidden("action","pag_1"));
 
 
@@ -292,7 +294,7 @@ switch($_REQUEST['action']) {
    unset($_SESSION['cad_foto']);
    
    //if everything was ok, go the page of the project.
-   CMHTMLPage::redirect($_CMAPP['services_url'].'/projects/projeto.php?frm_ammsg=project_created&frm_codProjeto='.$cod);
+   CMHTMLPage::redirect($_CMAPP['services_url'].'/projects/project.php?frm_ammsg=project_created&frm_codProjeto='.$cod);
    
    break;
 
