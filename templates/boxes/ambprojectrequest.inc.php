@@ -63,7 +63,7 @@ class AMBProjectRequest extends AMColorBox
             parent::add("<table border=0 cellspacing=1 cellpadding=2 width=\"100%\">");
             parent::add("<tr><td>");
             $thumb = new AMUserThumb;
-            $thumb->codeArquivo = $user->foto;
+            $thumb->codeFile = $user->picture;
             $thumb->load();
             parent::add($thumb->getView());
 

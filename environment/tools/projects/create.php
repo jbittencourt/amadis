@@ -56,7 +56,7 @@ if(!empty($_REQUEST['frm_codeProjeto'])) {
     $_SESSION['cad_foto'] = new AMProjImage;
   }     
   if(!$group->isMember($_SESSION['user']->codeUser)) {
-    CMHTMLPage::redirect($_CMAPP['services_url']."/projects/projeto.php?frm_codProjeto=$_REQUEST[frm_codeProjeto]&frm_amerror=edit_not_allowed");
+    CMHTMLPage::redirect($_CMAPP['services_url']."/projects/project.php?frm_codProjeto=$_REQUEST[frm_codeProjeto]&frm_amerror=edit_not_allowed");
   }
 }
 

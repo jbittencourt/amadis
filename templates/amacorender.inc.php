@@ -55,7 +55,7 @@ class AMACORender extends CMHTMLObj {
       $p = $temp->items[0];
 
       $thumb = new AMACOThumb;
-      $thumb->codeArquivo = $p->image;
+      $thumb->codeFile = $p->image;
       try {
 	$thumb->load();
       }

@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * @package AMADIS
  * @subpackage AMTemplates
@@ -15,5 +15,3 @@ class AMTLibraryFoto extends AMImageTemplate {
     return parent::__toString();
   } 
 }
-
-?>

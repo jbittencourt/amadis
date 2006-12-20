@@ -105,7 +105,6 @@ class AMCommunities extends CMObj implements  CMACLAppInterface
             }
             $this->codeACO = (integer) $aco->code;
             $aco->addUserPrivilege((integer) $_SESSION['user']->codeUser, self::PRIV_ADMIN);
-
         }         
         parent::save();
     }
@@ -116,10 +115,10 @@ class AMCommunities extends CMObj implements  CMACLAppInterface
      * */
     public function listProjects($ini=0, $lenght=5)
     {
-        $q = new CMQuery(AMProject);
+        $q = new CMQuery('AMProject');
 
         $j = new CMJoin(CMJoin::INNER);
-        $j->setClass(AMCommunityProjects);
+        $j->setClass('AMCommunityProjects');
         $j->on("AMProject::codeProject = AMCommunityProjects::codeProject");
 
         $q->addJoin($j, "projects");
@@ -130,14 +129,14 @@ class AMCommunities extends CMObj implements  CMACLAppInterface
 
     public function listNews($ini=0, $lenght=5)
     {
-        $q = new CMQuery(AMCommunityNews);
+        $q = new CMQuery('AMCommunityNews');
 
         $j = new CMJoin(CMJoin::INNER);
-        $j->setClass(AMCommunities);
+        $j->setClass('AMCommunities');
         $j->on("CommunityNews.codeCommunity = Communities.code");
 
         $j1 = new CMJoin(CMJoin::INNER);
-        $j1->setClass(AMuser);
+        $j1->setClass('AMuser');
         $j1->on("CommunityNews.codeUser = User.codeUser");
 
         $q->addJoin($j, "community");
@@ -225,13 +224,13 @@ class AMCommunities extends CMObj implements  CMACLAppInterface
      **/
     public function getGroup()
     {
-        if(empty($_SESSION[AMADIS][Community][$this->code][group])) {
+        if(empty($_SESSION['AMADIS']['Community'][$this->code]['group'])) {
             $g = new CMGroup;
             $g->codeGroup = $this->codeGroup;
             $g->load();
-            $_SESSION[AMADIS][Community][$this->code][group] = $g;
+            $_SESSION['AMADIS']['Community'][$this->code]['group'] = $g;
         }  else {
-            $g = $_SESSION[AMADIS][Community][$this->code][group];
+            $g = $_SESSION['AMADIS']['Community'][$this->code]['group'];
         }
         return $g;
     }
@@ -293,6 +292,4 @@ class AMCommunities extends CMObj implements  CMACLAppInterface
         self::PRIV_ADD_PROJECTS=>$_lang['privs_add_projects'],
         self::PRIV_MANAGE_COMMUNICATION=>$_lang['privs_manage_communication']);
     }
-
-
 }

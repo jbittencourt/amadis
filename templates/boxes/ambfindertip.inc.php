@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * @package AMADIS
  * @subpackage AMBoxes
@@ -24,7 +24,7 @@ class AMBFinderTip extends CMHTMLObj {
     parent::add("<div id=\"tipmscorpo\">");
     //user image
     $userThumb = new AMFinderTipThumb();
-    $userThumb->codeArquivo = ($this->user->foto==0 ? AMUser::DEFAULT_FOTO : $this->user->foto);
+    $userThumb->codeFile = ($this->user->picture==0 ? AMUser::DEFAULT_PICTURE : $this->user->picture);
     try {
       $userThumb->load();
       $userThumbURL = $userThumb->thumb->getThumbURL();
@@ -58,4 +58,3 @@ class AMBFinderTip extends CMHTMLObj {
   
   }
 }
-?>

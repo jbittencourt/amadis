@@ -1,90 +1,90 @@
-<?
+<?php
 
 include("../../config.inc.php");
 
-$userBib = AMForum::loadImageLibrary($_REQUEST[frm_codeForum]);
+$userBib = AMForum::loadImageLibrary($_REQUEST['frm_codeForum']);
 $uOut = array();
 if($userBib->__hasItems()) {
-  foreach($userBib as $item) {
-    $image = new AMLibraryThumb;
-    $image->codeArquivo = $item->codeArquivo;
-    try {
-      $image->load();
-      
-      $meta = explode("|", $item->metaDados);
-      $url = $image->thumb->getThumbUrl();
-      
-      $click = "AddImage('../../media/thumb.php?frm_image=$item->codeArquivo&action=library', 'legend_$item->codeArquivo');";
-      
-      $uOut[] = "<div class='item' style=\"background-image: url('$url');\">";
-      $uOut[] = "<div>";
-      $uOut[] = "$item->nome<br>$meta[0]x$meta[1] px / {$meta[2]}KB";
-      $uOut[] = "<p><a onClick=\"toggle('legenda_$item->codeArquivo'); legend='legend_$item->codeArquivo';\">&raquo;Legenda</a></p>";
-      $uOut[] = "</div>";
-      $uOut[] = "<div class='buttonOK'>";
-      $uOut[] = "<button onClick=\"$click\"><img src='$_CMAPP[images_url]/buttonOK.gif'></button></div>";
-      $uOut[] = "<div id='legenda_$item->codeArquivo' style='display:none;'>";
-      $uOut[] = "<input type='text' size='35' name='legend_$item->codeArquivo' id='legend_$item->codeArquivo'>";
-      $uOut[] = "</div>";
-      $uOut[] = "</div>";
-      
-    }catch (CMException $e) {
-      //echo "<img src=''>";
-    }
-    
-  }
+	foreach($userBib as $item) {
+		$image = new AMLibraryThumb;
+		$image->codeFile = $item->codeFile;
+		try {
+			$image->load();
+
+			$meta = explode("|", $item->metaDados);
+			$url = $image->thumb->getThumbUrl();
+
+			$click = "AddImage('../../media/thumb.php?frm_image=$item->codeFile&action=library', 'legend_$item->codeFile');";
+
+			$uOut[] = "<div class='item' style=\"background-image: url('$url');\">";
+			$uOut[] = "<div>";
+			$uOut[] = "$item->nome<br>$meta[0]x$meta[1] px / {$meta[2]}KB";
+			$uOut[] = "<p><a onClick=\"toggle('legenda_$item->codeFile'); legend='legend_$item->codeFile';\">&raquo;Legenda</a></p>";
+			$uOut[] = "</div>";
+			$uOut[] = "<div class='buttonOK'>";
+			$uOut[] = "<button onClick=\"$click\"><img src='$_CMAPP[images_url]/buttonOK.gif'></button></div>";
+			$uOut[] = "<div id='legenda_$item->codeFile' style='display:none;'>";
+			$uOut[] = "<input type='text' size='35' name='legend_$item->codeFile' id='legend_$item->codeFile'>";
+			$uOut[] = "</div>";
+			$uOut[] = "</div>";
+
+		}catch (CMException $e) {
+
+		}
+
+	}
 } else {
-  //$pag->add("<p>Nao ha imagens na sua biblioteca</p>");
+	//$pag->add("<p>Nao ha imagens na sua biblioteca</p>");
 }
 
 $pBib = AMForum::loadProjectImageLibrary();
 if($pBib->__hasItems()) {
-  foreach($pBib as $item) {
-    $image = new AMLibraryThumb;
-    $image->codeArquivo = $item->filesCode;
+	foreach($pBib as $item) {
+		$image = new AMLibraryThumb;
+		$image->codeFile = $item->codeFile;
 
-    try {
-      $image->load();
+		try {
+			$image->load();
 
-      //$dimensions = $image->getSize();
-      //$size = round($image->tamanho/1024);
-      $url = $image->thumb->getThumbUrl();
+			//$dimensions = $image->getSize();
+			//$size = round($image->tamanho/1024);
+			$url = $image->thumb->getThumbUrl();
 
-      $pj = $item->proj[0]->codeProject;
-      $pjTitle = $item->proj[0]->title;
+			$pj = $item->proj[0]->codeProject;
+			$pjTitle = $item->proj[0]->title;
 
-      if(!isset($pOut[$pj])) $pOut[$pj] = array();
-      
-      $click = "AddImage('../../media/thumb.php?frm_image=$image->codeArquivo&action=library', 'legend_$image->codeArquivo');";
-      $meta = explode("|", $item->files[0]->metaDados);
-      $pOut[$pj][title] = $pjTitle;
-      $pOut[$pj][] = "<div class='item' style=\"background-image: url('$url');\">";
-      $pOut[$pj][] = "<div>";
-      $pOut[$pj][] = "{$item->files[0]->nome}<br>$meta[0]x$meta[1] px / {$meta[2]}KB";
-      $pOut[$pj][] = "<p><a onClick=\"toggle('legenda_$image->codeArquivo'); legend='legend_$image->codeArquivo';\">&raquo;Legenda</a></p>";
-      $pOut[$pj][] = "</div>";
-      $pOut[$pj][] = "<div class='buttonOK'>";
-      $pOut[$pj][] = "<button onClick=\"$click\"><img src='$_CMAPP[images_url]/buttonOK.gif'></button></div>";
-      $pOut[$pj][] = "<div id='legenda_$image->codeArquivo' style='display:none;'>";
-      $pOut[$pj][] = "<input type='text' size='35' name='legend_$image->codeArquivo' id='legend_$image->codeArquivo'>";
-      $pOut[$pj][] = "</div>";
-      $pOut[$pj][] = "</div>";
+			if(!isset($pOut[$pj])) $pOut[$pj] = array();
 
-    }catch (CMEXception $e) {
-      //
-    }
-  }
+			$click = "AddImage('../../media/thumb.php?frm_image=$image->codeFile&action=library', 'legend_$image->codeFile');";
+			$meta = explode("|", $item->files[0]->metaDados);
+			$pOut[$pj][title] = $pjTitle;
+			$pOut[$pj][] = "<div class='item' style=\"background-image: url('$url');\">";
+			$pOut[$pj][] = "<div>";
+			$pOut[$pj][] = "{$item->files[0]->nome}<br>$meta[0]x$meta[1] px / {$meta[2]}KB";
+			$pOut[$pj][] = "<p><a onClick=\"toggle('legenda_$image->codeFile'); legend='legend_$image->codeFile';\">&raquo;Legenda</a></p>";
+			$pOut[$pj][] = "</div>";
+			$pOut[$pj][] = "<div class='buttonOK'>";
+			$pOut[$pj][] = "<button onClick=\"$click\"><img src='$_CMAPP[images_url]/buttonOK.gif'></button></div>";
+			$pOut[$pj][] = "<div id='legenda_$image->codeFile' style='display:none;'>";
+			$pOut[$pj][] = "<input type='text' size='35' name='legend_$image->codeFile' id='legend_$image->codeFile'>";
+			$pOut[$pj][] = "</div>";
+			$pOut[$pj][] = "</div>";
+
+		}catch (CMEXception $e) {
+			//
+		}
+	}
 } else {
-  //
+	//
 }
 
 foreach($pOut as $k=>$item) {
-  $out[] = "<li class='Proj Normal' id='Project' onClick=\"toggle('Project|Proj$k');\">Imagens do Projeto $item[title]</li>";
-  $out[] = "<script type='text/javascript'>idArray.push('Proj$k');</script>";
-  $out[] = "<span id='Proj$k'>";
-  unset($pOut[$k][title]);
-  $out[] = implode("\n", $pOut[$k]);
-  $out[] = "</span>";
+	$out[] = "<li class='Proj Normal' id='Project' onClick=\"toggle('Project|Proj$k');\">Imagens do Projeto $item[title]</li>";
+	$out[] = "<script type='text/javascript'>idArray.push('Proj$k');</script>";
+	$out[] = "<span id='Proj$k'>";
+	unset($pOut[$k][title]);
+	$out[] = implode("\n", $pOut[$k]);
+	$out[] = "</span>";
 }
 
 ?>
@@ -156,36 +156,36 @@ function AddImage(imageURL, legenda) {
 </head>
 <body>
 
-<div id='mainbox'>
-  <img src='<?=$_CMAPP[imlang_url]."/boxTitulo.gif"?>'><br>
-  <div id='listBox'>
-    <ul>
-      <li class='MyBib Selected' id='MyBib' onClick="toggle('MyBib|MyBibList');">Imagens dos Meus Arquivos AMADIS</li>
-      <script type='text/javascript'>idArray.push('MyBibList');</script>
-      <span id='MyBibList' style='display: block;'>
-          <? echo implode("\n", $uOut); ?>
-      </span>
-
-      <? echo implode("\n", $out); ?>
-    </ul>
-  </div>
-  <div id='listBox' style='height: 225px;'>
-    <ul>
-      <li class='Upload Selected' id='UpFile'>Carregar Imagem do Meu Computador</li>
-      <span id='File' style='display: block;'>
-        <iframe src ="sendImage.php"></iframe>
-      </span>
-
-      <li class='Internet Normal' id='Net' onClick="changeStyle(this.id); toggle('netBox');">
-        Caminho para um Imagem na Internet
-      </li>
-      <span id='netBox'>
-        <input title='Digite um endere&ccedil;o de imagem' type='text' size='38' id='imageURL' value='http://'>
-	<button onClick="AddImage(document.getElementById('imageURL').value, '');"><img src='<?=$_CMAPP[images_url]."/buttonOK.gif"?>'></button>
-      </span>
-    </ul>
-  </div>
-  <img src='<?=$_CMAPP[images_url]."/boxFooter.gif"?>'>
+<div id='mainbox'><img src='<?=$_CMAPP['imlang_url']."/boxTitulo.gif"?>'><br>
+<div id='listBox'>
+<ul>
+	<li class='MyBib Selected' id='MyBib'
+		onClick="toggle('MyBib|MyBibList');">Imagens dos Meus Arquivos AMADIS
+	</li>
+	<script type='text/javascript'>idArray.push('MyBibList');</script>
+	<span id='MyBibList' style='display: block;'> <? echo implode("\n", $uOut); ?>
+	</span>
+	<? echo implode("\n", $out); ?>
+</ul>
 </div>
+<div id='listBox' style='height: 225px;'>
+<ul>
+	<li class='Upload Selected' id='UpFile'>Carregar Imagem do Meu
+	Computador</li>
+	<span id='File' style='display: block;'> <iframe src="sendImage.php"></iframe>
+	</span>
+
+	<li class='Internet Normal' id='Net'
+		onClick="changeStyle(this.id); toggle('netBox');">Caminho para um
+	Imagem na Internet</li>
+	<span id='netBox'> <input title='Digite um endere&ccedil;o de imagem'
+		type='text' size='38' id='imageURL' value='http://'>
+	<button
+		onClick="AddImage(document.getElementById('imageURL').value, '');"><img
+		src='<?=$_CMAPP[images_url]."/buttonOK.gif"?>'></button>
+	</span>
+</ul>
+</div>
+<img src='<?=$_CMAPP[images_url]."/boxFooter.gif"?>'></div>
 </body>
 </html>

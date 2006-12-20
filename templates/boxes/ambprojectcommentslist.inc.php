@@ -27,10 +27,10 @@ class AMBProjectCommentsList extends AMListBox {
 	$i++;
 	parent::add("<tr id=\"$id\" class=\"".$this->class_prefix."_list_line\">");	  
 	parent::add("<td width = '80'>");
-	$f = $item->usuarios[0]->foto;
+	$f = $item->usuarios[0]->picture;
 	if($f!=0) {
 	  $thumb = new AMUserThumb;
-	  $thumb->codeArquivo = $item->usuarios[0]->foto;
+	  $thumb->codeFile = $item->usuarios[0]->picture;
 	  try {
 	    $thumb->load();
 	    parent::add($thumb->getView());

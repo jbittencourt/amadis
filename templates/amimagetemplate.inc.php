@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * Abstract class that handles the vizualizion of an image.
@@ -21,15 +21,15 @@
  * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
  **/
 
-abstract class  AMImageTemplate extends CMHTMLObj 
+abstract class  AMImageTemplate extends CMHTMLObj
 {
 
-  const METHOD_DB=0;
-  const METHOD_SESSION=1;
-  
-  protected $codeFile;
-  private $imageObj;
-  private $method;
+	const METHOD_DB=0;
+	const METHOD_SESSION=1;
+
+	protected $codeFile;
+	private $imageObj;
+	private $method;
 
   /**
    * Constructor of the class.
@@ -43,20 +43,20 @@ abstract class  AMImageTemplate extends CMHTMLObj
    * @param mixed $value If method is METHOD_DB, the value is code of the file in the databe. Otherwise is an object of the type AMFile
    * @param integer $method The method that should be used to handle the vizualization of the image
    **/
-  public function __construct($value,$method=self::METHOD_DB) 
+  public function __construct($value,$method=self::METHOD_DB)
   {
-    parent::__construct();
-    $this->method = $method;
-    
-    if($method==self::METHOD_DB) {
-      $this->codeFile = $value;
-    }
-    elseif($method==self::METHOD_SESSION) {
-      $this->imageObj= $value;
-    }
-    else {
-      Throw new AMException("Image render method not recognized.");
-    }
+  	parent::__construct();
+  	$this->method = $method;
+
+  	if($method==self::METHOD_DB) {
+  		$this->codeFile = $value;
+  	}
+  	elseif($method==self::METHOD_SESSION) {
+  		$this->imageObj= $value;
+  	}
+  	else {
+  		Throw new AMException("Image render method not recognized.");
+  	}
   }
 
 
@@ -65,24 +65,22 @@ abstract class  AMImageTemplate extends CMHTMLObj
    * 
    * @return string The url to the image.
    **/
-  public function getImageURL() 
+  public function getImageURL()
   {
-    global $_CMAPP;
-    $url = "";
-    switch($this->method) {
+  	global $_CMAPP;
+  	$url = "";
+  	switch($this->method) {
     case self::METHOD_DB:
-      $url = "$_CMAPP[media_url]/imagewrapper.php?method=db&frm_codeArquivo=".$this->codeFile;
-      break;
+    	$url = "$_CMAPP[media_url]/imagewrapper.php?method=db&frm_codeFile=".$this->codeFile;
+    	break;
     case self::METHOD_SESSION:
-      $rand = rand(0,100000);
-      
-      $_SESSION['amadis']['imageview'][$rand] =serialize($this->imageObj) ;
-      $url = "$_CMAPP[media_url]/imagewrapper.php?method=session&frm_id=$rand";
-      break;
-    }
-    return $url;
+    	$rand = rand(0,100000);
+
+    	$_SESSION['amadis']['imageview'][$rand] =serialize($this->imageObj) ;
+    	$url = "$_CMAPP[media_url]/imagewrapper.php?method=session&frm_id=$rand";
+    	break;
+  	}
+  	return $url;
   }
 
 }
-
-

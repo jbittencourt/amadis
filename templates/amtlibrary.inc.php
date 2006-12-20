@@ -1,12 +1,10 @@
-<?
+<?php
 /**
  * @package AMADIS
  * @subpackage AMTemplates
  */
 
 class AMTLibrary extends AMMain {
-  
-
   function __construct($libraryType) {
     global $_CMAPP;
 
@@ -22,5 +20,3 @@ class AMTLibrary extends AMMain {
       $this->setImgId($_CMAPP['imlang_url']."/top_meusarquivos.gif");
   }
 }
-
-?>

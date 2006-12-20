@@ -38,7 +38,7 @@ if($items[data]->__hasItems()) {
     }
     
     if($f==0) {
-      $f = $item->foto;
+      $f = $item->picture;
       $thumb = new AMUserThumb;
     }
     else {
@@ -46,7 +46,7 @@ if($items[data]->__hasItems()) {
     }
 
     if($f!=0) {
-      $thumb->codeArquivo = $f;
+      $thumb->codeFile = $f;
       try {
 	$thumb->load();
 	$box->add($thumb->getView());

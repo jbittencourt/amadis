@@ -146,9 +146,9 @@ if(!empty($_avaiable) && $_avaiable->__hasItems()) {
     $box->add('<td>');
     //user picture
     $thumb = new AMUserThumb;
-    $f = $item->foto;
+    $f = $item->picture;
     If(empty($f)) $f = AMUserFoto::DEFAULT_IMAGE;
-    $thumb->codeArquivo = $f;
+    $thumb->codeFile = $f;
     try {
       $thumb->load();
     } catch(CMDBNoRecord $e) { }
@@ -168,7 +168,7 @@ $box->add("</td>");
 $box->add("</tr></table>");
 
 //cancel and submit buttons
-$cancel_url = $_CMAPP[services_url]."/projects/projeto.php?frm_codProjeto=".$proj->codeProject;
+$cancel_url = $_CMAPP['services_url']."/projects/project.php?frm_codProjeto=".$proj->codeProject;
 
 $box->add("<p align=center><input type=button onclick=\"window.location='$cancel_url'\" value=\"$_language[cancel]\">");
 $box->add("&nbsp; <input type=submit  value=\"$_language[frm_invite]\">");

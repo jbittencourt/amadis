@@ -1,4 +1,4 @@
-<?
+<?php
 include("../../config.inc.php");
 
 $_language = $_CMAPP['i18n']->getTranslationArray("album");
@@ -18,4 +18,3 @@ $box = new AMBAlbumZoom($album->getMyPhotos(),"Zoom", $album);
 $page->add($box);
 
 echo $page;
-?>

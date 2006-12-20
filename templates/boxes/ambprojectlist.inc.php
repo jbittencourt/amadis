@@ -99,7 +99,7 @@
  					$box = new AMBProjectCommentsList($this->itens, $title, AMTCadBox::CADBOX_LIST);
 
  					parent::add("<br><span class=\"project_title\">$_language[project]: ".$proj->title."<br></span>");
- 					parent::add("<a  href='$_CMAPP[services_url]/projects/projeto.php?frm_codProjeto=$proj->codeProject' class='green'>");
+ 					parent::add("<a  href='$_CMAPP[services_url]/projects/project.php?frm_codProjeto=$proj->codeProject' class='green'>");
  					parent::add("$_language[back_to_project]</a>");
 
  				} else {
@@ -130,7 +130,7 @@
  					$box = new AMBProjectNewsList($this->itens, $title, AMTCadBox::CADBOX_LIST);
 
  					parent::add("<br><span class=\"project_title\">$_language[project]: ".$proj->title."<br></span>");
- 					parent::add("<a  href='$_CMAPP[services_url]/projects/projeto.php?frm_codProjeto=$proj->codeProject' class='green'>");
+ 					parent::add("<a  href='$_CMAPP[services_url]/projects/project.php?frm_codProjeto=$proj->codeProject' class='green'>");
  					parent::add("$_language[back_to_project]</a>");
 
  				} else {

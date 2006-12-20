@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Invitations friends box
  *
@@ -12,20 +12,18 @@
  * @see AMColorBox, CMActionListener
  */
 class AMBUserFriendInvitations extends AMColorBox implements CMActionListener {
-	
+
 	protected $invitations, $__hasItems;
 
 	public function __construct() {
 		global $_CMAPP;
-		parent::__construct("",self::COLOR_BOX_BEGE);
-
+		parent::__construct("",self::COLOR_BOX_BEGE);		
 		try {
 			$this->invitations = $_SESSION['user']->listFriendsInvitations();
-			($this->invitations->__hasItems() ? $this->__hasItems = true : $this->__hasItems = false);
+			($this->invitations->__hasItems() ? $this->__hasItems = true : $this->__hasItems = false);			
 		}catch(AMWEFirstLogin $e) {
 			$this->__hasItems = false;
 		}
-			
 	}
 
   /**
@@ -69,7 +67,7 @@ class AMBUserFriendInvitations extends AMColorBox implements CMActionListener {
   				$err = new AMError($_language['error_joining_project'],get_class($this));
   				return false;
   			}
-  				
+
   			$msg = new AMMessage($_language['msg_joined_project']." $proj->title.",get_class($this));
   			break;
   		case "A_reject":
@@ -92,7 +90,7 @@ class AMBUserFriendInvitations extends AMColorBox implements CMActionListener {
   	global $_language,$_CMAPP;
 
   	if($this->__hasItems) {
-  		
+
   		$_first = true;
 
   		$this->requires("alertbox.css", CMHTMLObj::MEDIA_CSS);
@@ -107,9 +105,9 @@ class AMBUserFriendInvitations extends AMColorBox implements CMActionListener {
   			//user image thumbnail
   			parent::add("<tr><td>");
   			$thumb = new AMUserThumb;
-  			$f  = $friend->foto;
+  			$f  = $friend->picture;
   			if(empty($f)) $f = AMUserFoto::DEFAULT_IMAGE;
-  			$thumb->codeArquivo = $f;
+  			$thumb->codeFile = $f;
   			try {
   				$thumb->load();
   				parent::add($thumb->getView());
@@ -117,7 +115,7 @@ class AMBUserFriendInvitations extends AMColorBox implements CMActionListener {
   			catch(CMDBException $e) {
   				echo $e; die();
   			}
-  				
+
   			//an empty column
   			parent::add("</td><td><img src=\"$_CMAPP[images_url]/dot.gif\" width=10>");
 
@@ -131,9 +129,6 @@ class AMBUserFriendInvitations extends AMColorBox implements CMActionListener {
   			$time = $friend->time;
   			$link = $_CMAPP['services_url']."/webfolio/userinfo_details.php?frm_codeUser=".$friend->codeUser;
 
-  			//error_invitation_user_failed = "N&atilde;o foi poss&iacute;vel adicionar o amigo!"
-  			//msg_invitation_user_success = "Amigo adicionado com sucesso!"
-
   			$mkFriend = "AMEnvSession.makeFriend($friend->codeUser, $time, '', '$_language[msg_invitation_user_success]', '$_language[error_invitation_user_failed]', AMEnvSessionCallBack.onMakeFriend);";
   			$rjFriend = "AMEnvSession.rejectFriend($friend->codeUser, $time, '','', AMEnvSessionCallBack.onRejectFriend);";
 
@@ -145,7 +140,7 @@ class AMBUserFriendInvitations extends AMColorBox implements CMActionListener {
   				parent::add("<tr><td colspan=4><br>");
   				parent::add(new AMDotline("100%"));
   			}
-  				
+
   			parent::add("</tr>");
   			$_first = false;
   			parent::add("</table>");
@@ -155,7 +150,4 @@ class AMBUserFriendInvitations extends AMColorBox implements CMActionListener {
   		return parent::__toString();
   	}
   }
-
 }
-
-?>

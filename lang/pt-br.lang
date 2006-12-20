@@ -77,7 +77,7 @@ logged = "AMADIS Logado"
 select_one = "Selecione uma op&ccedil;&atilde;o"
 next = "Pr&oacute;ximo";
 conclude = "Concluir"
-valid_image_types = "Os tipos de extens;&atilde;o de arquivo v&aacute;lidas s&atilde;o"
+valid_image_types = "Os tipos de extens&atilde;o de arquivo v&aacute;lidas s&atilde;o"
 
 user_info = "Informa&ccedil;&otilde;es sobre o usu&aacute;rio"
 loading_user_info = "Carregando os dados do usu&aacute;rio. Por favor aguarde..."
@@ -290,7 +290,6 @@ frm_mensagem = "Texto da minha mensagem:"
 change_personal_data = "Alterar meus dados pessoais"
 change_picture = "Alterar a Foto"
 change_password = "Trocar senha"
-
 see_my_home_page = "Ver a minha p&aacute;gina"
 see_my_album = "Ver meu &aacute;lbum"		 
 publish_my_home_page = "Publicar a minha p&aacute;gina"
@@ -314,8 +313,10 @@ new_messages = "novas mensagens para voc&ecirc;"
 access_email = "acessar o e-mail"
 empty_inbox = "N&atilde;o h&aacute; novas mensagens"
 no_comments = "N&atilde;o h&aacute; coment&aacute;rios."
+user_no_friends = "Este usu&aacute;rio ainda n&atilde;o tem amigos."
 messages = "Mensagens"
 no_amadis_news = "N&atilde;o h&aacute; novidades"
+no_files_shared = "Nenhum arquivo compartilhado no momento"
 
 send = "Enviar"
 
@@ -363,8 +364,12 @@ msg_password_change_sucesfull = "Sua senha foi alterada com sucesso."
 [album]
 userImages = "Imagens de ";
 noPhotos = "Este usu&aacute;rio ainda n&atilde;o tem fotos!";
-file_successful_sent = "Foto armazenada com sucesso!"
+msg_file_successful_sent = "Foto armazenada com sucesso!"
+msg_file_successful_delete = "Foto removida com sucesso!"
+msg_comment_successfull_edited = "Coment&aacute;rio alterado"
 error_send_file = "Problemas ao enviar a foto, tente novamente!<br>Veja se a extens&atilde;o do arquivo (ex.:'.jpg') est&aacute; correta"
+error_del_file = "Problemas ao deletar o arquivo, caso ocorra novamente contate o administrador do sistema"
+error_edit_comment = "Erro ao salvar o novo coment&aacute;rio"
 
 comment = "Insira um coment&aacute;rio para a imagem"
 photo = "Especifique uma foto do seu computador:"
@@ -1043,7 +1048,7 @@ list_all_files = "Listar todos os arquivos"
 thumbs = "Miniaturas";
 isShared = "Compartilhado"
 wish_delete = "Voce tem certeza que deseja deletar este arquivo?"
-
+no_files_shared = "Nenhum arquivo compartilhado no momento"
 legends = "Legenda da biblioteca"
 file_download = "Download do arquivo"
 file_del = "Excluir o arquivo da biblioteca"

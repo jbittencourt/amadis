@@ -144,7 +144,7 @@ class AMImage extends AMFile
         ob_start();
         Imagepng($img_dst);
         $this->data = ob_get_contents();
-        $this->mimetype = "image/png";
+        $this->mimeType = "image/png";
     //clear the buffer
         ob_end_clean();
 

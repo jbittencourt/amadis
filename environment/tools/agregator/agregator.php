@@ -16,7 +16,7 @@ include($_LAST_RSS['path'] . 'lastRSS.php');
 
 $_language = $_CMAPP['i18n']->getTranslationArray("projects");
 
-$pag = new AMTAgregador();
+$pag = new AMTAgregator();
 $pag->loadDynapi();
 $pag->addNotification(AMMain::getChangePwButton(1));
 //checks if the user is a member of the project
@@ -27,7 +27,7 @@ if(isset($_REQUEST['frm_codProjeto']) && !empty($_REQUEST['frm_codProjeto'])) {
     $proj->load();
     $group = $proj->getGroup();
   }catch(CMDBNoRecord $e){
-    $location  = $_CMAPP[services_url]."/projetos/projeto.php?frm_amerror=project_not_exists";
+    $location  = $_CMAPP[services_url]."/projects/project.php?frm_amerror=project_not_exists";
     $location .= "&frm_codProjeto=".$_REQUEST['frm_codProjeto'];
     header("Location:$location");
   }
@@ -50,13 +50,14 @@ if(!empty($_SESSION['user'])) {
 // load some RSS file
 $rss = new lastRSS;
 
+
 $rss->cache_dir = CACHE_DIR;
 $rss->cache_time = 3600; // one hour
 
 $blogs = AMAgregatorFacade::getSources($_REQUEST['frm_codProjeto']);
 if($blogs->__hasItems()) {
   $link = "if(this.value!=0) ";
-  $link .= "location.href='$_CMAPP[services_url]/agregador/agregador.php?frm_codProjeto=$_REQUEST[frm_codProjeto]&frm_codeBlog='+this.value";
+  $link .= "location.href='$_CMAPP[services_url]/agregator/agregator.php?frm_codProjeto=$_REQUEST[frm_codProjeto]&frm_codeBlog='+this.value";
 
   //$pag->add("&nbsp;&nbsp;<select name='blogs' onChange=\"$link\">");
   //$pag->add("<option value=0>$_language[select_one]</option>");
@@ -88,5 +89,3 @@ if(!empty($blog)) {
 
 
 echo $pag; 
-
-?>

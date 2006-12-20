@@ -57,10 +57,10 @@ class AMBAdminUsersList extends AMTCadBox {
 	$i++;
 	parent::add("<tr id=\"$id\" class=\"".$this->class_prefix."_list_line\">");	  
 	parent::add("<td width = '80'>");
-	$f = $item->foto;
+	$f = $item->picture;
 	if($f!=0) {
 	  $thumb = new AMUserThumb;
-	  $thumb->codeArquivo = $item->foto;
+	  $thumb->codeFile = $item->picture;
 	  try {
 	    $thumb->load();
 	    parent::add($thumb->getView());

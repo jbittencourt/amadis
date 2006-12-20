@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * This page is used to invite users to a community.
  *
@@ -16,16 +16,16 @@
 include("../../config.inc.php");
 
 
-$_language = $_CMAPP[i18n]->getTranslationArray("community_invite_user");
+$_language = $_CMAPP['i18n']->getTranslationArray("community_invite_user");
 
 
 //checks to see if the user is an group member
-if(empty($_REQUEST[frm_codeCommunity])) {
+if(empty($_REQUEST['frm_codeCommunity'])) {
   Header("Location: $_CMAPP[services_url]/communities/communities.php?frm_amerror=community_code_does_not_exists");
 }
 
 $co = new AMCommunities;
-$co->code = $_REQUEST[frm_codeCommunity];
+$co->code = $_REQUEST['frm_codeCommunity'];
 try {
   $co->load();
 } catch(CMDBNoRecord $e) {
@@ -33,7 +33,7 @@ try {
 }
 
 $group = $co->getGroup();
-$isMember = $group->isMember($_SESSION[user]->codeUser);
+$isMember = $group->isMember($_SESSION['user']->codeUser);
 
 if(!$isMember) {
    CMHTMLPage::redirect("$_CMAPP[services_url]/communities/community.php?frm_codeCommunity=$co->code&frm_amerror=not_group_member");
@@ -45,7 +45,7 @@ $pag = new AMTCommunities;
 $pag->requires("inviteusers.js");
 $pag->requires("search.js");
 
-$title_box = $_language[invite_users_to_community].' '.$co->name;
+$title_box = $_language['invite_users_to_community'].' '.$co->name;
 $box = new AMTCadBox($title_box,
 		     AMTCadBox::CADBOX_SEARCH,
 		     AMTCadBox::COMMUNITY_THEME);
@@ -55,40 +55,40 @@ $box = new AMTCadBox($title_box,
 $pag->addScript("msg_check_some_user='$_language[error_user_not_select]';");
 
 
-switch($_REQUEST[action]) {
+switch($_REQUEST['action']) {
  case "A_invite":
-   if(empty($_REQUEST[frm_usersInvite])) {
+   if(empty($_REQUEST['frm_usersInvite'])) {
      CMHTMLPage::redirect("Location: $_CMAPP[services_url]/communities/inviteusers.php?frm_amerror=_user_not_select");
    }
 
    try {
-     foreach($_REQUEST[frm_usersInvite] as $user) {
+     foreach($_REQUEST['frm_usersInvite'] as $user) {
        $group->userInvitationJoin($user,"");
      }
-     $pag->addMessage($_language[msg_invitation_success]);
+     $pag->addMessage($_language['msg_invitation_success']);
      CMHTMLPage::redirect("Location: $_CMAPP[services_url]/communities/inviteusers.php?frm_ammsg=msg_invitation_success");
    } catch(CMDBException $e) {
-     $pag->addError($_language[error_invitation_failed]);
+     $pag->addError($_language['error_invitation_failed']);
    }
 
-   if(empty($_REQUEST[frm_search_text])) 
+   if(empty($_REQUEST['frm_search_text'])) 
      break;
      
  case "A_search":
-   $temp = $_SESSION[environment]->searchUsers($_REQUEST[frm_search_text]);
+   $temp = $_SESSION['environment']->searchUsers($_REQUEST['frm_search_text']);
    $_avaiable = $temp[0];
    break;   
  default:
-   $_avaiable = $_SESSION[user]->listFriends();
+   $_avaiable = $_SESSION['user']->listFriends();
 
    //put the curren group of the project into an associative
    //array so we can check if some user is in the group.
-   if(empty($_SESSION[communities][$co->code][members])) {
+   if(empty($_SESSION['communities'][$co->code]['members'])) {
      $list = $group->listActiveMembers();
      foreach($list as $item) {
        $temp[$item->codeUser] = $item;
      }
-     $_SESSION[communities][$co->code][members] = $temp;
+     $_SESSION['communities'][$co->code]['members'] = $temp;
    };
    break;
 }
@@ -98,14 +98,14 @@ switch($_REQUEST[action]) {
 //erase users from the container that are alredy project members
 $men = "";
 if($_avaiable->__hasItems()) {
-  $temp = $_SESSION[communities][$co->code][members];
+  $temp = $_SESSION['communities'][$co->code]['members'];
   foreach($_avaiable->items as $key=>$item) {
     if(isset($temp[$item->codeUser])) {
       unset($_avaiable->items[$key]);
       $men = $_language["msg_users_removed"];
     }
   }
-  if(!empty($men) && ($_REQUEST[action]=="A_search")) $pag->addMessage($men);
+  if(!empty($men) && ($_REQUEST['action']=="A_search")) $pag->addMessage($men);
 }
 	       
 
@@ -122,7 +122,7 @@ $box->add("<form name=\"search\" action=\"$_SERVER[PHP_SELF]\" onSubmit=\"return
 $box->add("<input type=hidden name=action value=\"A_search\">");
 $box->add("<input type=hidden name=frm_codeCommunity value=\"$co->code\">");
 
-$box->add('<span class="texto">'.$_language[search_users].'</span> &nbsp;<input type=text name=frm_search_text value="'.$_REQUEST[frm_search_text].'"> &nbsp;');
+$box->add('<span class="texto">'.$_language['search_users'].'</span> &nbsp;<input type=text name=frm_search_text value="'.$_REQUEST['frm_search_text'].'"> &nbsp;');
 
 $box->add(AMMain::getSearchButton());
 $box->add("</form>");
@@ -132,8 +132,8 @@ $box->add("</td></tr>");
 
 $box->add("<td width=240 valign=top><br>");
 
-$box->add('<form name="group" action="'.$_SERVER[PHP_SELF].'" onSubmit="return checkUsers(this,\'frm_usersInvite[]\');">');
-$box->add('<input type=hidden name=frm_search_text value="'.$_REQUEST[frm_search_text].'"> ');
+$box->add('<form name="group" action="'.$_SERVER['PHP_SELF'].'" onSubmit="return checkUsers(this,\'frm_usersInvite[]\');">');
+$box->add('<input type=hidden name=frm_search_text value="'.$_REQUEST['frm_search_text'].'"> ');
 $box->add("<input type=hidden name=action value=\"A_invite\">");
 $box->add("<input type=hidden name=frm_codeCommunity value=\"$co->code\">");
 
@@ -147,7 +147,7 @@ if($_avaiable->__hasItems()) {
     $box->add('<td>');
     //user picture
     $thumb = new AMUserThumb;
-    $thumb->codeArquivo = ($item->foto==0 ? 1 : $item->foto);
+    $thumb->codeFile = ($item->picture==0 ? 1 : $item->picture);
     try {
       $thumb->load();
     } catch(CMDBNoRecord $e) { }
@@ -167,7 +167,7 @@ $box->add("</td>");
 $box->add("</tr></table>");
 
 //cancel and submit buttons
-$cancel_url = $_CMAPP[services_url]."/communities/community.php?frm_codeCommunity=".$co->code;
+$cancel_url = $_CMAPP['services_url']."/communities/community.php?frm_codeCommunity=".$co->code;
 
 $box->add("<p align=center><input type=button onclick=\"window.location='$cancel_url'\" value=\"$_language[cancel]\">");
 $box->add("&nbsp; <input type=submit  value=\"$_language[frm_invite]\">");
@@ -179,6 +179,3 @@ $box->add("</form>");
 
 $pag->add($box);
 echo $pag;
-
-
-?>

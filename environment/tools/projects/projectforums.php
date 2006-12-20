@@ -13,14 +13,14 @@ if(!empty($_REQUEST[frm_codeProject])) {
      try{
        $proj->load();
      }catch(CMDBNoRecord $e){
-       $location  = $_CMAPP[services_url]."/projects/projeto.php?frm_amerror=project_not_exists";
-       $location .= "&frm_codProjeto=".$_REQUEST[frm_codeProject];
+       $location  = $_CMAPP[services_url]."/projects/project.php?frm_amerror=project_not_exists";
+       $location .= "&frm_codProjeto=".$_REQUEST['frm_codeProject'];
        header("Location:$location");
      }
 } else { 
   $_REQUEST[frm_amerror] = "any_project_id";
   $pag->add("<br><div align=center><a href=\"".$_SERVER[HTTP_REFERER]."\" ");
-  $pag->add("class=\"cinza\">".$_language[voltar]."</a></div><br>");
+  $pag->add("class=\"cinza\">".$_language['voltar']."</a></div><br>");
   echo $pag;
   die();
 }

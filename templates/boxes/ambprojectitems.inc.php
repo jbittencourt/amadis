@@ -53,10 +53,10 @@ class AMBProjectItems extends AMColorBox {
   public static function getDiaryButton($proj){
     global $_CMAPP,$_language;
     
-    $urldiary = $_CMAPP['services_url']."/agregador/agregador.php?frm_codProjeto=".$proj;
+    $urldiary = $_CMAPP['services_url']."/agregator/agregator.php?frm_codProjeto=".$proj;
     $button  = "<button id='diary' class='project_items button-as-link' type='button' onclick=\"AM_openURL('$urldiary')\">";
     $button .= "<img src='$_CMAPP[images_url]/dot.gif' height='25px;'><br>";
-    $button .= "<span class='project_items_text'> $_language[project_link_diarybutton]</span>";
+    $button .= "<span class='project_items_text'> $_language[project_link_blogbutton]</span>";
     $button .= "</button>";
     return $button;
   }

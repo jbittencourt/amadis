@@ -32,7 +32,7 @@
  		$list = $ple->listSharedFiles($this->limit);
 
  		if(!$list->__hasItems()){
- 			parent::add($_language['no_files']);
+ 			parent::add($_language['no_files_shared']);
  		}
  		else {
  			parent::add("<table>");

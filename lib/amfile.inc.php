@@ -17,7 +17,7 @@ class AMFile extends CMObj {
 
      $this->addField("codeFile",CMObj::TYPE_INTEGER,11,1,0,1);
      $this->addField("data",CMObj::TYPE_BLOB,16777215,1,0,0);
-     $this->addField("mimetype",CMObj::TYPE_VARCHAR,100,1,0,0);
+     $this->addField("mimeType",CMObj::TYPE_VARCHAR,100,1,0,0);
      $this->addField("size",CMObj::TYPE_INTEGER,11,1,0,0);
      $this->addField("name",CMObj::TYPE_VARCHAR,30,1,0,0);
      $this->addField("metadata",CMObj::TYPE_VARCHAR, 255,1,0,0);

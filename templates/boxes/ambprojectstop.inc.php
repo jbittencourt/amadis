@@ -13,7 +13,7 @@ class AMBProjectsTop extends CMHTMLObj {
     parent::__construct();
     $res = $_SESSION['environment']->listTopProjects();
     foreach($res as $item) {
-      $link  = "<a class=\"cinza\" href=\"".$_CMAPP['services_url']."/projects/projeto.php?frm_codProjeto=";
+      $link  = "<a class=\"cinza\" href=\"".$_CMAPP['services_url']."/projects/project.php?frm_codProjeto=";
       $link .= $item->codeProject."\">&raquo; ".$item->title."</a><br>";
       $this->links[] = $link;
     }

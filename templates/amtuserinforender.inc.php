@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * @package AMADIS
  * @subpackage AMTemplates
@@ -33,7 +33,7 @@ class AMTUserInfoRender implements AMAjax {
 
     //picture of the user
     $pag->add("<a href=\"$where_to_go\">");
-    $pag->add(new AMTUserImage($user->foto));
+    $pag->add(new AMTUserImage($user->picture));
     $pag->add("</a>");
 
 
@@ -108,6 +108,3 @@ class AMTUserInfoRender implements AMAjax {
   }
 
 }
-
-
-?>

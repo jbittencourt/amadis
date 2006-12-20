@@ -58,7 +58,7 @@ class AMBProjectOrfan extends AMColorBox implements CMActionListener {
 
     $proj = $this->proj;
 
-    $link = $_CMAPP['services_url']."/projects/projeto.php?frm_codProjeto=$proj->codeProject";
+    $link = $_CMAPP['services_url']."/projects/project.php?frm_codProjeto=$proj->codeProject";
     if($this->adopted) {
       CMHTMLPage::redirect($link);
       return false;

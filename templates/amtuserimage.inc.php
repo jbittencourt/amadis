@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * The default vizualization of the user picture.
  *

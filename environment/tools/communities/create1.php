@@ -35,7 +35,7 @@ if(!empty($_REQUEST['frm_codeCommunity'])) {
   }catch(CMObjException $e) {}
 
   $_SESSION['cad_imagem'] = new AMCommunityImage;
-  $_SESSION['cad_imagem']->codeArquivo = $_SESSION['cad_community']->image;
+  $_SESSION['cad_imagem']->codeFile = $_SESSION['cad_community']->image;
   try {
     $_SESSION['cad_imagem']->load();
   }catch (CMDBNoRecord $e) { }
@@ -153,7 +153,7 @@ switch($_REQUEST[action]) {
      $foto->tempo = time();
      try {
        $foto->save();
-       $_SESSION[cad_community]->image = $foto->codeArquivo;
+       $_SESSION[cad_community]->image = $foto->codeFile;
      }
      catch(CMDBException $e) {
        header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_picture");
@@ -213,5 +213,3 @@ switch($_REQUEST[action]) {
    
 $pag->add($cadBox);
 echo $pag;
-
-?>

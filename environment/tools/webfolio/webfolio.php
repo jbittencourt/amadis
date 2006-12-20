@@ -28,32 +28,26 @@ $pag->add("<img src=\"$_CMAPP[images_url]/dot.gif\" width=20 height=20>");
 
 //caixa para adicionar amigos
 $pag->add("<div id='friends_invitation'");
+
 $inv = new AMBUserFriendInvitations;
-if($inv->__hasInvitations()) { 
-  $pag->add($inv);
+if($inv->__hasInvitations()) {
+	$pag->add($inv);
 }
 $pag->add("</div>");
 
 //caixa de convites de projetos
 $inv = new AMBUserInvitations;
-if($inv->__hasInvitations()) { 
-  $pag->add($inv);
+if($inv->__hasInvitations()) {
+	$pag->add($inv);
 }
 
 //caixa de convites de comunidades
 $inv = new AMBCommunitiesInvitations;
-if($inv->__hasInvitations()) { 
-  $pag->add($inv);
+if($inv->__hasInvitations()) {
+	$pag->add($inv);
 }
 
-//box for user rejects and accepts
-// $resp = new AMBUserResponses;
-// if($resp->__hasInvitations()) { 
-//   $pag->add($resp);
-// }
-
 $box = new AMTwoColsLayout;
-//$box->add("Teste 2",AMTwoColsLayout::RIGHT);
 
 /*********************
  * LEFT COLUMN
@@ -62,7 +56,7 @@ $foto = AMUserPicture::getImage($_SESSION['user']);
 $box->add(new AMTUserImage($foto),AMTwoColsLayout::LEFT);
 
 $box->add("<p><span class=\"texto\"><b>". $_SESSION['user']->name."<br>" . date($_language['date_format'],(integer) $_SESSION['user']->birthDate) . "</b>"
-		  , AMTwoColsLayout::LEFT);
+, AMTwoColsLayout::LEFT);
 
 $box->add("<br>".$_SESSION['user']->email, AMTwoColsLayout::LEFT);
 
@@ -70,21 +64,21 @@ $box->add("</font>", AMTwoColsLayout::LEFT);
 
 
 $box->add("<p><a href=\"$_CMAPP[services_url]/webfolio/changedata.php\" class=\"blue\">$_language[change_personal_data]</a>",
-			 AMTwoColsLayout::LEFT);
-$box->add("<br><a href=\"$_CMAPP[services_url]/webfolio/changePicture.php\" class=\"blue\">$_language[change_picture]</a>", 
-			AMTwoColsLayout::LEFT);
-$box->add("<br><a href=\"$_CMAPP[services_url]/webfolio/changepassword.php\" class=\"blue\">$_language[change_password]</a><p>", 
-			AMTwoColsLayout::LEFT);
+AMTwoColsLayout::LEFT);
+$box->add("<br><a href=\"$_CMAPP[services_url]/webfolio/changePicture.php\" class=\"blue\">$_language[change_picture]</a>",
+AMTwoColsLayout::LEFT);
+$box->add("<br><a href=\"$_CMAPP[services_url]/webfolio/changepassword.php\" class=\"blue\">$_language[change_password]</a><p>",
+AMTwoColsLayout::LEFT);
 
 
 //foruns that the user participate
 $forums = $_SESSION['user']->listLastModifiedForums();
 
 $box->add(new AMBForunsParticipate($forums),
-	  AMTwoColsLayout::LEFT);
+AMTwoColsLayout::LEFT);
 
 
-//Chats in that are happening or in the agenda of
+//Chats in that are happening or in the blog of
 //the  projects or communities that the user participates
 $box->add("<br>", AMTwoColsLayout::LEFT);
 $box->add(new AMBChatsUser, AMTwoColsLayout::LEFT);

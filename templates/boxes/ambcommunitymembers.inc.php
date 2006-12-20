@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * List members of communities
@@ -41,15 +41,13 @@ class AMBCommunityMembers extends AMSimpleBox {
 	parent::add($temp);
 	parent::add("<br>");
       }
-      parent::add("<a href=\"".$_CMAPP[services_url]."/communities/members.php?frm_codeCommunity=".$this->community->code."\" class=\"cinza\">&nbsp;&nbsp;$_language[more_members]</a><br><br>");
+      parent::add("<a href=\"".$_CMAPP['services_url']."/communities/members.php?frm_codeCommunity=".$this->community->code."\" class=\"cinza\">&nbsp;&nbsp;$_language[more_members]</a><br><br>");
     }
     else { 
-      parent::add($_language[no_members]."<br><br>");
+      parent::add($_language['no_members']."<br><br>");
     }
 
     return parent::__toString();
 
   }
 }
-
-?>

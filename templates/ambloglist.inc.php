@@ -51,7 +51,7 @@ class AMBlogList extends AMPageBox {
                     $f = $profile->image;
                 }
                 if(empty($f)) {
-                    $f = $item->foto;
+                    $f = $item->picture;
                     $thumb = new AMUserThumb;
                 }
                 else {
@@ -59,7 +59,7 @@ class AMBlogList extends AMPageBox {
                 }
 
                 if($f!=0) {
-                    $thumb->codeArquivo = $f;
+                    $thumb->codeFile = $f;
                     try {
                         $thumb->load();
                         $box->add($thumb->getView());

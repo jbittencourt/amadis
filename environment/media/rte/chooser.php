@@ -1,4 +1,4 @@
-<?
+<?php
 include("../../config.inc.php");
 
 $pag = new CMHTMLPage;
@@ -20,7 +20,7 @@ if($list->__hasItems()) {
   foreach($list as $item) {
     $image = new AMLibraryThumb;
     $image->setSize(133,100);
-    $image->codeArquivo = $item->codeArquivo;
+    $image->codeFile = $item->codeFile;
     try {
       $image->load();
       
@@ -29,13 +29,12 @@ if($list->__hasItems()) {
       $class = ($c==0 ? $c++ : $c--);
       $pag->add("<tr class='InsertImage_line$class'><td>");
       
-      $pag->add("<img style='cursor: pointer;' src='$url' onClick=\"sendImageSrc('../../media/thumb.php?frm_image=$item->codeArquivo&action=library')\">");
+      $pag->add("<img style='cursor: pointer;' src='$url' onClick=\"sendImageSrc('../../media/thumb.php?frm_image=$item->codeFile&action=library')\">");
       
       $pag->add("</td><td>$item->nome<br>");
       $pag->add("</td>");
       
-    }catch (CMException $e) {
-      //echo "<img src=''>";
+    }catch (CMException $e) {    
     }
     
   }
@@ -45,5 +44,3 @@ if($list->__hasItems()) {
 $pag->add("</table>");
 
 echo $pag;
-
-?>

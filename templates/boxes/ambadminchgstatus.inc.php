@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * @package AMADIS
  * @subpackage AMBoxes
@@ -43,7 +43,7 @@ class AMBAdminChgStatus extends AMColorBox {
       $message = $_language['active'];
     }
     $image1 = new AMChgStatusThumb;
-    $image1->codeArquivo = $us->foto;
+    $image1->codeFile = $us->picture;
     $image1->load();	  	
 
     $conteudo = "<table><tr><td>";
@@ -60,5 +60,3 @@ class AMBAdminChgStatus extends AMColorBox {
     return parent::__toString();    
   }
 }
-
-?>

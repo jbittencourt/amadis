@@ -171,7 +171,7 @@ switch($_REQUEST[action]) {
        header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_picture");
      }
      
-     $_SESSION[atu_community]->image = $foto->codeArquivo;
+     $_SESSION[atu_community]->image = $foto->codeFile;
      unset($_SESSION[cad_image]);
      unset($_SESSION[img_mod]);
    } 
@@ -213,12 +213,3 @@ switch($_REQUEST[action]) {
    
 $pag->add($cadBox);
 echo $pag;
-
-
-
-
-
-
-
-
-?>

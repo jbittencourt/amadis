@@ -1,9 +1,9 @@
-<?
+<?php
 include("../../config.inc.php");
 
 $pag = new CMHTMLPage;
 
-$_language = $_CMAPP[i18n]->getTranslationArray("library");
+$_language = $_CMAPP['i18n']->getTranslationArray("library");
 
 $pag->requires("rte_ins_image.css", CMHtmlObj::MEDIA_CSS);
 
@@ -11,7 +11,7 @@ $pag->addStyle("Body { margin: 5px; background: none; }");
 
 if(isset($_REQUEST['action']) && $_REQUEST['action'] == "A_sendImage") {
 
-  $a = new AMUserLibraryEntry($_SESSION[user]->codeUser);
+  $a = new AMUserLibraryEntry($_SESSION['user']->codeUser);
   $a->libraryExist();
   $lib = $a->getLibrary($_SESSION['user']->codeUser);
   
@@ -21,8 +21,8 @@ if(isset($_REQUEST['action']) && $_REQUEST['action'] == "A_sendImage") {
   
   $filelib = new AMLibraryFiles;
   $file = new AMImage;
-  if(isset($_REQUEST[codeArquivo])) {
-    $file->codeFile = $_REQUEST[codeArquivo];
+  if(isset($_REQUEST['codeFile'])) {
+    $file->codeFile = $_REQUEST['codeFile'];
     $file->load();
     $file->state = CMObj::STATE_DIRTY;
   }
@@ -34,14 +34,12 @@ if(isset($_REQUEST['action']) && $_REQUEST['action'] == "A_sendImage") {
   if($_FILES['file']['tmp_name'] == "")
     return false;
   
-  //  $file->data  = implode("",file($_FILES['file']['tmp_name']));
-  
   try{
     $file->save();
     $codeArquivo = $file->codeFile;
-    if(!isset($_REQUEST[codeArquivo])) {
+    if(!isset($_REQUEST['codeFile'])) {
       $filelib->libraryCode = $lib;
-      $filelib->filesCode = $file->codeFile;
+      $filelib->codeFile = $file->codeFile;
       $filelib->time = time();
       $filelib->save();
     }
@@ -68,7 +66,7 @@ if(isset($_REQUEST['action']) && $_REQUEST['action'] == "A_sendImage") {
     $pag->add(implode("\n", $out));
 
   } catch (CMException $e) {
-    $pag->addError($_language[error_send_file]);
+    $pag->addError($_language['error_send_file']);
   }
 
 }

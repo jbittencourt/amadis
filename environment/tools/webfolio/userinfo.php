@@ -28,7 +28,7 @@ $pag->add("<td valign=\"top\" id=\"tooltip_internal_area\">");
 //picture of the user
 
 $pag->add("<a href=\"$where_to_go\">");
-$pag->add(new AMTUserImage($user->foto));
+$pag->add(new AMTUserImage($user->picture));
 $pag->add("</a>");
 
 $pag->add("<div id=\"perfil\"> ");

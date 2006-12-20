@@ -131,7 +131,7 @@ if(array_key_exists('frm_foto',$_FILES)) {
 else {
 	if($profile->image) {
 		$_SESSION['diary_profile_image'] = new AMVlogImage;
-		$_SESSION['diary_profile_image']->codeArquivo = $profile->image;
+		$_SESSION['diary_profile_image']->codeFile = $profile->image;
 		try {
 			$_SESSION['diary_profile_image']->load();
 			$view = $_SESSION['diary_profile_image']->getView();
@@ -168,4 +168,3 @@ $caixa->add("</form>");
 
 $pag->add($caixa);
 echo $pag;
-?>

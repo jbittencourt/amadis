@@ -33,13 +33,13 @@ class AMBCommunityProjects extends AMSimpleBox {
     if($this->itens->__hasItems()) {
       foreach($this->itens as $item) {
 	parent::add("&nbsp;&nbsp;&nbsp;&raquo;");
-	parent::add("<a href=\"$_CMAPP[services_url]/projects/projeto.php?frm_codProjeto=$item->codeProject\" class=\"cinza\">$item->title</a>");
+	parent::add("<a href=\"$_CMAPP[services_url]/projects/project.php?frm_codProjeto=$item->codeProject\" class=\"cinza\">$item->title</a>");
 	parent::add("<br>");
       }
-      parent::add("<a href='".$_CMAPP[services_url]."/communities/listcommunityprojects.php?frm_codeCommunity=".$community->code."' class='cinza'>&nbsp;&nbsp;$_language[more_projects]</a><br><br>");
+      parent::add("<a href='".$_CMAPP['services_url']."/communities/listcommunityprojects.php?frm_codeCommunity=".$community->code."' class='cinza'>&nbsp;&nbsp;$_language[more_projects]</a><br><br>");
     }
     else { 
-      parent::add("&nbsp;&nbsp;&nbsp;".$_language[no_projects]."<br><br>");
+      parent::add("&nbsp;&nbsp;&nbsp;".$_language['no_projects']."<br><br>");
     }
       return parent::__toString();
       

@@ -45,7 +45,7 @@ switch($_REQUEST['frm_upload_type']) {
 
      $pag->setTitle($proj->title);
      $thumb = new AMUploadThumb;
-     $thumb->codeArquivo = ($proj->image==0 ? 2: $proj->image);
+     $thumb->codeFile = ($proj->image==0 ? 2: $proj->image);
      $thumb->load();
      $pag->setThumb($thumb->thumb->getThumbURL());
 

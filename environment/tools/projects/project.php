@@ -16,8 +16,8 @@ if(isset($_REQUEST['frm_codProjeto']) && !empty($_REQUEST['frm_codProjeto'])) {
        $proj->load();
        $group = $proj->getGroup();
      }catch(CMDBNoRecord $e){
-       $location  = $_CMAPP[services_url]."/projects/projeto.php?frm_amerror=project_not_exists";
-       $location .= "&frm_codProjeto=".$_REQUEST[frm_codProjeto];
+       $location  = $_CMAPP['services_url']."/projects/project.php?frm_amerror=project_not_exists";
+       $location .= "&frm_codProjeto=".$_REQUEST['frm_codProjeto'];
        CMHTMLPage::redirect($location);
      }
 } else { 
@@ -135,7 +135,10 @@ $box->add("<img src=\"".$_CMAPP['images_url']."/dot.gif\" width=\"20\" height=\"
 /*
  *CAIXA DE EDICAO DO PROJETO
  */
-
+if(!isset($orfan)){
+	$orfan = "";
+}
+	  
 if(!$orfan) {
   if($_SESSION['user'] instanceof CMUser) {
     if($isMember) {

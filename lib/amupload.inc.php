@@ -271,8 +271,7 @@ class AMUpload {
       $i = 0;
       while (false !== ($file = readdir($handle))) {
 	if($file != "." && $file != "..") {
-	  if(is_dir($dir.$file) && $recursive) 
-	    //$imgs = array_merge($imgs, self::getImagesFromFolder("$dir$file"));
+	  if(is_dir($dir.$file) && $recursive)	    
 	    $imgs[$file] = self::getImagesFromFolder("$dir$file");
 	}
 	if(ereg($ER, strtolower($file))){ 

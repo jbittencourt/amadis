@@ -1,15 +1,17 @@
-<?
+<?php
 
 include "../../config.inc.php"; 
 
-include($_CMAPP[path]."/templates/amtfotolibrary.inc.php");
+include($_CMAPP['path']."/templates/amtfotolibrary.inc.php");
 
 $_language = $_CMAPP['i18n']->getTranslationArray("library");
 
 $page = new AMTLibrary("shared");
+if(!isset($_REQUEST['frm_type'])){
+	$_REQUEST['frm_type'] = "";
+}
 
-
-switch($_REQUEST[frm_type]) {
+switch($_REQUEST['frm_type']) {
  case "project":
    
    $libprojz = new AMProjectLibraryEntry($_REQUEST["frm_codeProjeto"]);
@@ -31,9 +33,6 @@ switch($_REQUEST[frm_type]) {
    break;
 }
 
-
-
 $page->add($box);
 
 echo $page;
-?>

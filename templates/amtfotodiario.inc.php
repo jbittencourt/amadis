@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * @package AMADIS
  * @subpackage AMTemplates
@@ -18,4 +18,3 @@ class AMTFotoDiario extends AMImageTemplate {
     return parent::__toString();
   } 
 }
-?>

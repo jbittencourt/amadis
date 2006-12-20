@@ -45,7 +45,7 @@ switch($_REQUEST['action']) {
 		$fields_rec = array("name","description","flagAuth");
 
 		//formulary
-		$form = new AMWSmartForm(AMCommunities,"cad_community",$_SERVER['PHP_SELF'],$fields_rec);
+		$form = new AMWSmartForm('AMCommunities',"cad_community",$_SERVER['PHP_SELF'],$fields_rec);
 
 		$form->setWidgetOrder($fields_rec);
 
@@ -171,7 +171,7 @@ switch($_REQUEST['action']) {
 
 		//if everything was ok, go the page of the community.
 
-		CMHTMLPage::redirect($_CMAPP[services_url]."/communities/community.php?frm_codeCommunity=$cod&frm_ammsg=community_created");
+		CMHTMLPage::redirect($_CMAPP['services_url']."/communities/community.php?frm_codeCommunity=$cod&frm_ammsg=community_created");
 
 		break;
 

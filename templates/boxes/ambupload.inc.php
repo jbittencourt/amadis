@@ -34,6 +34,12 @@ class AMBUpload extends CMHTMLObj {
 
 	public function __toString() {
 		global $_CMAPP, $urlBase, $dir_pai, $_language;
+		if(!isset($popUrlBase)){
+			$popUrlBase = "";
+		}
+		if(!isset($i)){
+			$i = "";
+		}
 
 		parent::add("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">");
 		parent::add("    <tr>");
@@ -83,16 +89,16 @@ class AMBUpload extends CMHTMLObj {
 		/*
 		 *Listagem do diretorio
 		 */
-		
+
 		if(!empty($this->dir)) {
 			$i=0;
 			foreach($this->dir as $item) {
-				
+
 				if($i%2) $color="#EFF4FF";
 				else $color = "#DEF0FF";
 				$i++;
 				//#FFCC99 #CCCCFF
-				
+
 				$jsHO = "onmouseover=\"setPointer(this, $i, 'over', '$color', '#FFCC99', '#FFF4CB');\" ";
 				$jsHO .= "onmouseout=\"setPointer(this, $i, 'out', '$color', '#FFCC99', '#FFF4CB');\" ";
 				$jsHO .= "onmousedown=\"setPointer(this, $i, 'click', '$color', '#FFCC99', '#FFF4CB')\"";
@@ -101,7 +107,7 @@ class AMBUpload extends CMHTMLObj {
 				$js .= "(document.getElementById('frm_chk_row_$i').checked ? false : true);";
 
 				switch($_REQUEST['frm_upload_type']) {
-					
+						
 					case "project":
 						$popUrlBase = self::getScript("popUrlBase = '$_CMAPP[pages_url]/projetos/projeto_".$_REQUEST['frm_codeProjeto'].$_REQUEST['frm_dir']."';");
 						break;
@@ -111,7 +117,7 @@ class AMBUpload extends CMHTMLObj {
 
 						break;
 				}
-				
+
 				//id do arquivo
 				$id = "Upload_$item[mime]|$item[name]|".$i."|$item[mime]";
 
@@ -137,14 +143,14 @@ class AMBUpload extends CMHTMLObj {
 						parent::add("    <a href=\"$urlBase&frm_dir=$_REQUEST[frm_dir]/$item[name]\" class=\"cinza\">$item[name]</a>");
 						break;
 				}
-				
+
 				parent::add("  </td>");
 				parent::add("  <td bgcolor=\"$color\" onMouseDown=\"$js\" class=\"texto\">$item[time]</td>");
 				parent::add("  <td bgcolor=\"$color\" onMouseDown=\"$js\" class=\"texto\">$item[mime_info]</td>");
 				parent::add("</tr>");
 
 			}
-			
+				
 		} else parent::add("<b><i><font class=\"error\">$_language[empty_diretory]</font></i></b>");
 
 		//variaveis do ambiente de upload

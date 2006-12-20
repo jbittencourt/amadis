@@ -13,32 +13,32 @@
  * @see CMUser, CMEnvinronment
  */
 
-class AMUser extends CMUser 
+class AMUser extends CMUser
 {
 
-    const RPASS_LOWERCASE=1;
-    const RPASS_LOWERCASE_NUMBERS=2;
-    const RPASS_LOWERCASE_UPPERCASE_NUMBERS=3;
-    const RPASS_LOWERCASE_NUMBERS_N=4;
-    const RPASS_NUMBERS=5;
+	const RPASS_LOWERCASE=1;
+	const RPASS_LOWERCASE_NUMBERS=2;
+	const RPASS_LOWERCASE_UPPERCASE_NUMBERS=3;
+	const RPASS_LOWERCASE_NUMBERS_N=4;
+	const RPASS_NUMBERS=5;
 
-    public function configure() 
-    {
-        parent::configure();
+	public function configure()
+	{
+		parent::configure();
 
-    //estes sao campos especificos do AMUser que nao estao presentes 
-    //no CMUser
-        $this->addField("email",CMObj::TYPE_VARCHAR,100,1,0,0);
-        $this->addField("address",CMObj::TYPE_VARCHAR,150,1,0,0);
-        $this->addField("codeCity",CMObj::TYPE_INTEGER,11,1,0,0);
-        $this->addField("cep",CMObj::TYPE_VARCHAR,9,1,0,0);
-        $this->addField("aboutMe",CMObj::TYPE_TEXT,65535,1,0,0);
-        $this->addField("url",CMObj::TYPE_VARCHAR,150,1,0,0);
-        $this->addField("birthDate",CMObj::TYPE_INTEGER,20,1,0,0);
+		//estes sao campos especificos do AMUser que nao estao presentes
+		//no CMUser
+		$this->addField("email",CMObj::TYPE_VARCHAR,100,1,0,0);
+		$this->addField("address",CMObj::TYPE_VARCHAR,150,1,0,0);
+		$this->addField("codeCity",CMObj::TYPE_INTEGER,11,1,0,0);
+		$this->addField("cep",CMObj::TYPE_VARCHAR,9,1,0,0);
+		$this->addField("aboutMe",CMObj::TYPE_TEXT,65535,1,0,0);
+		$this->addField("url",CMObj::TYPE_VARCHAR,150,1,0,0);
+		$this->addField("birthDate",CMObj::TYPE_INTEGER,20,1,0,0);
 
-    //in the database, exists an default photo, wich code is 1, so default foto is 1.
-        $this->addField("picture",CMObj::TYPE_INTEGER,20,1,1,0);
-    }
+		//in the database, exists an default photo, wich code is 1, so default foto is 1.
+		$this->addField("picture",CMObj::TYPE_INTEGER,20,1,1,0);
+	}
 
   /**
    * This function save a new user in AMADIS DB.
@@ -49,91 +49,91 @@ class AMUser extends CMUser
    * @param void
    * @return void
    */ 
-    public function save() 
-    {
-        global $_conf, $_CMDEVEL;
-        $state = $this->state;
-        parent::save();
+  public function save()
+  {
+  	global $_conf, $_CMDEVEL;
+  	$state = $this->state;
+  	parent::save();
 
-        if($state==self::STATE_NEW || $state==self::STATE_DIRTY_NEW) {
-            include($_CMDEVEL['path']."/cmvfs.inc.php");
+  	if($state==self::STATE_NEW || $state==self::STATE_DIRTY_NEW) {
+  		include($_CMDEVEL['path']."/cmvfs.inc.php");
 
-            $path = (String) $_conf->app->paths->pages;
-            if(empty($path)) {
-                Throw new AMException("Cannot save user because the pages dir is not correctly configured. Please, verify your config.xml");
-            }
-            $path .= "/users/user_".$this->codeUser;
+  		$path = (String) $_conf->app->paths->pages;
+  		if(empty($path)) {
+  			Throw new AMException("Cannot save user because the pages dir is not correctly configured. Please, verify your config.xml");
+  		}
+  		$path .= "/users/user_".$this->codeUser;
 
-      //if the this doesn't exists, so we can create it, otherwise generate an exception.
-            try {
-                $dir = new CMvfsLocal($path);
-                $this->delete();
-                Throw new AMException("You are trying to create a user directory that alredy exists.");
-            } catch(CMvfsFileNotFound $e) {
-                $dir = new CMvfsLocal($path,0);  //create but not verify if the dir exists
-                $dir->register();
-            }
-        }
+  		//if the this doesn't exists, so we can create it, otherwise generate an exception.
+  		try {
+  			$dir = new CMvfsLocal($path);
+  			$this->delete();
+  			Throw new AMException("You are trying to create a user directory that alredy exists.");
+  		} catch(CMvfsFileNotFound $e) {
+  			$dir = new CMvfsLocal($path,0);  //create but not verify if the dir exists
+  			$dir->register();
+  		}
+  	}
 
-    }
+  }
 
-       
-    function getUserProjectChats() 
-    {
+   
+  function getUserProjectChats()
+  {
 
-        $q = new CMQuery('AMProject');
+  	$q = new CMQuery('AMProject');
 
-        $j1 = new CMJoin(CMJoin::INNER);
-        $j1->setClass('AMChatsProject');
-        $j1->on("AMProject::codeProject = AMChatsProject::codeProject");
-        $j1->setFake();
+  	$j1 = new CMJoin(CMJoin::INNER);
+  	$j1->setClass('AMChatsProject');
+  	$j1->on("AMProject::codeProject = AMChatsProject::codeProject");
+  	$j1->setFake();
 
-        $j2 = new CMJoin(CMJoin::INNER);
-        $j2->setClass('AMChatRoom');
-        $j2->on("AMChatsProject::codeRoom = AMChatRoom::codeRoom");
+  	$j2 = new CMJoin(CMJoin::INNER);
+  	$j2->setClass('AMChatRoom');
+  	$j2->on("AMChatsProject::codeRoom = AMChatRoom::codeRoom");
 
-        $j3 = new CMJoin(CMJoin::INNER);
-        $j3->setClass('CMGroupMember');
-        $j3->on("CMGroupMember::codeGroup=AMProject::codeGroup");
-        $j3->setFake();
+  	$j3 = new CMJoin(CMJoin::INNER);
+  	$j3->setClass('CMGroupMember');
+  	$j3->on("CMGroupMember::codeGroup=AMProject::codeGroup");
+  	$j3->setFake();
 
-        $t = time();
-        $q->setFilter("CMGroupMember::codeUser = $this->codeUser AND (AMChatRoom::beginDate>$t OR AMChatRoom::endDate>$t)");
+  	$t = time();
+  	$q->setFilter("CMGroupMember::codeUser = $this->codeUser AND (AMChatRoom::beginDate>$t OR AMChatRoom::endDate>$t)");
 
-        $q->addJoin($j1,'j1');
-        $q->addJoin($j2,"rooms");
-        $q->addJoin($j3,'j3');
-        return $q->execute();
-    }
+  	$q->addJoin($j1,'j1');
+  	$q->addJoin($j2,"rooms");
+  	$q->addJoin($j3,'j3');
+  	return $q->execute();
+  }
 
-    function getUserCommunityChats()
-    {
+  function getUserCommunityChats()
+  {
 
-        $q = new CMQuery('AMCommunities');
+  	$q = new CMQuery('AMCommunities');
 
-        $j1 = new CMJoin(CMJoin::INNER);
-        $j1->setClass('AMChatsCommunities');
-        $j1->on("AMCommunities::code = AMChatsCommunities::codeCommunity");
-        $j1->setFake();
+  	$j1 = new CMJoin(CMJoin::INNER);
+  	$j1->setClass('AMChatsCommunities');
+  	$j1->on("AMCommunities::code = AMChatsCommunities::codeCommunity");
+  	$j1->setFake();
 
-        $j2 = new CMJoin(CMJoin::INNER);
-        $j2->setClass('AMChatRoom');
-        $j2->on("AMChatsCommunities::codeRoom = AMChatRoom::codeRoom");
+  	$j2 = new CMJoin(CMJoin::INNER);
+  	$j2->setClass('AMChatRoom');
+  	$j2->on("AMChatsCommunities::codeRoom = AMChatRoom::codeRoom");
 
-        $j3 = new CMJoin(CMJoin::INNER);
-        $j3->setClass('CMGroupMember');
-        $j3->on("CMGroupMember::codeGroup=AMCommunities::codeGroup");
-        $j3->setFake();
+  	$j3 = new CMJoin(CMJoin::INNER);
+  	$j3->setClass('CMGroupMember');
+  	$j3->on("CMGroupMember::codeGroup=AMCommunities::codeGroup");
+  	$j3->setFake();
 
-        $t = time();
-        $q->setFilter("CMGroupMember::codeUser = $this->codeUser AND (AMChatRoom::beginDate>$t OR AMChatRoom::endDate>$t)");
+  	$t = time();
+  	$q->setFilter("CMGroupMember::codeUser = $this->codeUser AND (AMChatRoom::beginDate>$t OR AMChatRoom::endDate>$t)");
 
-        $q->addJoin($j1,'j1');
-        $q->addJoin($j2,"rooms");
-        $q->addJoin($j3,'j3');
-        return $q->execute();
+  	$q->addJoin($j1,'j1');
+  	$q->addJoin($j2,"rooms");
+  	$q->addJoin($j3,'j3');
+  	return $q->execute();
 
-    }
+  }
 
   /**
    * Generates a random  password with lowercase letter and numbers.
@@ -145,74 +145,74 @@ class AMUser extends CMUser
    * @param $mode - Generation mode
    * @return void
    **/
-    public function randomPassword($len=4,$mode=self::RPASS_LOWERCASE_NUMBERS_N) 
-    {
-        $chars=array();
-        $chars2=array();
-        if ($mode > 1){
-      // add numbers to $chars
-            for($i=48;$i<=57;$i++) {
-                array_push($chars, chr($i));
-            }
-        }
-        if ($mode==3){
-      // add uppercase to $chars
-            for($i=65;$i<=90;$i++) {
-                array_push($chars, chr($i));
-            }
-        }
-        if ($mode > 3){
-      // add lowercase to $chars2
-            for($i=97;$i<=122;$i++) {
-                array_push($chars2, chr($i));
-            }
-        }else{
+  public function randomPassword($len=4,$mode=self::RPASS_LOWERCASE_NUMBERS_N)
+  {
+  	$chars=array();
+  	$chars2=array();
+  	if ($mode > 1){
+  		// add numbers to $chars
+  		for($i=48;$i<=57;$i++) {
+  			array_push($chars, chr($i));
+  		}
+  	}
+  	if ($mode==3){
+  		// add uppercase to $chars
+  		for($i=65;$i<=90;$i++) {
+  			array_push($chars, chr($i));
+  		}
+  	}
+  	if ($mode > 3){
+  		// add lowercase to $chars2
+  		for($i=97;$i<=122;$i++) {
+  			array_push($chars2, chr($i));
+  		}
+  	}else{
 
-      // add lowercase to $chars
-            for($i=97;$i<=122;$i++) {
-                array_push($chars, chr($i));
-            }
-        }
-        if ($mode==4){
-      //build first half of password from $chars2 (lowercase)
-            for($i=0;$i<$len;$i++) {
-                mt_srand((double)microtime()*1000000);
-                $passwd.=$chars2[mt_rand(0,(count($chars2)-1))];
-            }
-      //build second half of password from $chars (numbers)
-            for($i=0;$i<$len;$i++) {
-                mt_srand((double)microtime()*1037800);
-                $passwd.=$chars[mt_rand(0,(count($chars)-1))];
-            }
-        }else{
-      // build password from $chars
-            for($i=0;$i<$len;$i++) {
-                mt_srand((double)microtime()*1000000);
-                $passwd.=$chars[mt_rand(0,(count($chars)-1))];
-            }
-        }
-        $this->password = $passwd;
-    }
+  		// add lowercase to $chars
+  		for($i=97;$i<=122;$i++) {
+  			array_push($chars, chr($i));
+  		}
+  	}
+  	if ($mode==4){
+  		//build first half of password from $chars2 (lowercase)
+  		for($i=0;$i<$len;$i++) {
+  			mt_srand((double)microtime()*1000000);
+  			$passwd.=$chars2[mt_rand(0,(count($chars2)-1))];
+  		}
+  		//build second half of password from $chars (numbers)
+  		for($i=0;$i<$len;$i++) {
+  			mt_srand((double)microtime()*1037800);
+  			$passwd.=$chars[mt_rand(0,(count($chars)-1))];
+  		}
+  	}else{
+  		// build password from $chars
+  		for($i=0;$i<$len;$i++) {
+  			mt_srand((double)microtime()*1000000);
+  			$passwd.=$chars[mt_rand(0,(count($chars)-1))];
+  		}
+  	}
+  	$this->password = $passwd;
+  }
 
-    public function listForums() 
-    {
-      
-        $q = new CMQuery('AMForum');    
-        $q->setFilter("AMForumMessage::codeUser=$this->codeUser");      
-        $j = new CMJoin(CMJoin::LEFT);
-        $j->setClass('AMForumMessage');
-        $j->on("AMForum::code=AMForumMessage::codeForum");
-        $j->setFake();
-        $q->addJoin($j,"fake");
+  public function listForums()
+  {
 
-        $q->addVariable("numMessages","count(AMForumMessage::code)");
-        $q->groupBy("AMForum::code");
-        return $q->execute();
-    }
+  	$q = new CMQuery('AMForum');
+  	$q->setFilter("AMForumMessage::codeUser=$this->codeUser");
+  	$j = new CMJoin(CMJoin::LEFT);
+  	$j->setClass('AMForumMessage');
+  	$j->on("AMForum::code=AMForumMessage::codeForum");
+  	$j->setFake();
+  	$q->addJoin($j,"fake");
+
+  	$q->addVariable("numMessages","count(AMForumMessage::code)");
+  	$q->groupBy("AMForum::code");
+  	return $q->execute();
+  }
 
 
-    public function listLastModifiedForums() 
-    {
+  public function listLastModifiedForums()
+  {
 
     /**
      This function generates this SQL;
@@ -238,31 +238,31 @@ class AMUser extends CMUser
     // Second, it must select the forum that the user visited
     // and, last, it must ignore the messages that the user send, because he alredy nows that this message
     // is new.
-  
-        $sq1 = new CMQuery('AMForumVisit');
-        $sq1->setProjection("AMForumVisit::time");
-        $sq1->setFilter("AMForumVisit::codeUser=$this->codeUser AND AMForumVisit::codeForum=AMForum::code");
 
-        $sq2 = new CMQuery('AMForumMessage');
-        $sq2->setProjection("codeForum");
-        $sq2->setFilter("codeUser=$this->codeUser");
-        $q1 = new CMQuery('AMForum');
-        $q1->setProjection("AMForum::*");
+    $sq1 = new CMQuery('AMForumVisit');
+    $sq1->setProjection("AMForumVisit::time");
+    $sq1->setFilter("AMForumVisit::codeUser=$this->codeUser AND AMForumVisit::codeForum=AMForum::code");
 
-        $j = new CMJoin(CMJoin::LEFT);
-        $j->setClass('AMForumMessage');
-        $j->on("AMForum::code=AMForumMessage::codeForum");
-        $j->setFake();
-        $q1->addJoin($j,"fake");
-        $q1->groupby("AMForum::code");
+    $sq2 = new CMQuery('AMForumMessage');
+    $sq2->setProjection("codeForum");
+    $sq2->setFilter("codeUser=$this->codeUser");
+    $q1 = new CMQuery('AMForum');
+    $q1->setProjection("AMForum::*");
+
+    $j = new CMJoin(CMJoin::LEFT);
+    $j->setClass('AMForumMessage');
+    $j->on("AMForum::code=AMForumMessage::codeForum");
+    $j->setFake();
+    $q1->addJoin($j,"fake");
+    $q1->groupby("AMForum::code");
 
 
-        $q1->addVariable("newMessages","count(AMForumMessage::code)");
+    $q1->addVariable("newMessages","count(AMForumMessage::code)");
 
-        $q1->setFilter("AMForumMessage::codeUser<>$this->codeUser AND AMForumMessage::timePost > ALL ",$sq1," AND AMForum::code IN ",$sq2);
+    $q1->setFilter("AMForumMessage::codeUser<>$this->codeUser AND AMForumMessage::timePost > ALL ",$sq1," AND AMForum::code IN ",$sq2);
 
-        return $q1->execute();
-    }
+    return $q1->execute();
+  }
 
   /**
    * Add a new friend to this user. If this user is the logged user, clear its friends cache.
@@ -272,91 +272,79 @@ class AMUser extends CMUser
    * @param $commentary - A short message to new friend =)
    * @return void
    */
-    public function addFriend($codeUser, $commentary) 
-    {
+  public function addFriend($codeUser, $commentary = "")
+  {
+  	$friend = new AMFriend;
+  	$friend->codeFriend = $codeUser;
+  	$friend->codeUser = $this->codeUser;
+  	$friend->comentary = $commentary;
+  	$friend->status = AMFriend::ENUM_STATUS_ACCEPTED;
+  	$friend->time = time();
 
-        $friend = new AMFriend;
-        $friend->codeFriend = $codeUser;
-        $friend->codeUser = $this->codeUser;
-        $friend->comentary = $commentary;
-        $friend->status = AMFriend::ENUM_STATUS_ACCEPTED;
-        $friend->time = time();
+  	try {
+  		$friend->save();
 
-        try {
-            $friend->save();
-
-            $f = new AMFriend;
-            $f->codeFriend = $this->codeUser;
-            $f->codeUser = $codeUser;
-            $f->comentary = $comentary;
-            $f->status = AMFriend::ENUM_STATUS_NOT_ANSWERED;
-            $f->time = time();
-            try {
-                $f->save();
-            }catch(CMException $e) {
-	//tratar excessao
-            }
-        }catch(CMException $e) {
-      //tratar excessao
-        }
-        if($_SESSION['user']->codeUser == $this->codeUser) {
-            unset($_SESSION['amadis']['friends']);
-        }
-    }
-
-
-    public function listFriends() 
-    {
-        if($_SESSION['user']->codeUser != $this->codeUser) {
-            $q = new CMQuery('AMUser');
-
-            $j1 = new CMJoin(CMJoin::INNER);
-            $j1->setClass('AMFriend');
-            $j1->on("AMUser::codeUser = AMFriend::codeFriend");
-
-            $q->addJoin($j1,"usuarios");
-
-            $q->setFilter("Friends.codeUser= $this->codeUser AND Friends.status = '".AMFriend::ENUM_STATUS_ACCEPTED."'");
-
-            return $q->execute();
-
-        }
-        if(!isset($_SESSION['amadis']['friends'])) {
-            
-            $q = new CMQuery('AMUser');
-
-            $j1 = new CMJoin(CMJoin::INNER);
-            $j1->setClass('AMFriend');
-            $j1->on("AMUser::codeUser = AMFriend::codeFriend");
+  		$f = new AMFriend;
+  		$f->codeFriend = $this->codeUser;
+  		$f->codeUser = $codeUser;
+  		$f->comentary = $comentary;
+  		$f->status = AMFriend::ENUM_STATUS_NOT_ANSWERED;
+  		$f->time = time();
+  		try {
+  			$f->save();
+  		}catch(CMException $e) {
+  			//tratar excessao
+  		}
+  	}catch(CMException $e) {
+  		//tratar excessao
+  	}
+  	if($_SESSION['user']->codeUser == $this->codeUser) {
+  		unset($_SESSION['amadis']['friends']);
+  	}
+  }
 
 
-      //$j2 = new CMJoin(CMJoin::INNER);
-      //$j2->setClass('CMEnvSession');
-      //$j2->on("EnvSession.codeUser = Friends.codeFriend");
-            
-            $q->addJoin($j1,"usuarios");
-      //$q->addJoin($j2,"sessions");
+  public function listFriends()
+  {
+  	if($_SESSION['user']->codeUser != $this->codeUser) {
+  		$q = new CMQuery('AMUser');
 
-            
-      //$timeOut = CMEnvSession::getTimeOut(time());
-            $q->setFilter("Friends.codeUser= $this->codeUser AND Friends.status = '".AMFriend::ENUM_STATUS_ACCEPTED."'");
-      //$q->setOrder("EnvSession.timeEnd DESC");
-      //$q->groupBy("EnvSession.codeUser");
-            
-      //$q->setProjection("User.*, EnvSession.*");
-            
-            $ret = $q->execute();
+  		$j1 = new CMJoin(CMJoin::INNER);
+  		$j1->setClass('AMFriend');
+  		$j1->on("AMUser::codeUser = AMFriend::codeFriend");
 
-            $_SESSION['amadis']['friends'] = serialize($ret);
+  		$q->addJoin($j1,"usuarios");
 
-        }else {
-            $ret = unserialize($_SESSION['amadis']['friends']);
-        }
+  		$q->setFilter("Friends.codeUser= $this->codeUser AND Friends.status = '".AMFriend::ENUM_STATUS_ACCEPTED."'");
 
-        return $ret;
+  		return $q->execute();
 
-    }
-    
+  	}
+  	if(!isset($_SESSION['amadis']['friends'])) {
+
+  		$q = new CMQuery('AMUser');
+
+  		$j1 = new CMJoin(CMJoin::INNER);
+  		$j1->setClass('AMFriend');
+  		$j1->on("AMUser::codeUser = AMFriend::codeFriend");
+
+  		$q->addJoin($j1,"usuarios");
+
+  		$q->setFilter("Friends.codeUser= $this->codeUser AND Friends.status = '".AMFriend::ENUM_STATUS_ACCEPTED."'");
+
+
+  		$ret = $q->execute();
+
+  		$_SESSION['amadis']['friends'] = serialize($ret);
+
+  	}else {
+  		$ret = unserialize($_SESSION['amadis']['friends']);
+  	}
+
+  	return $ret;
+
+  }
+
   /**
    * Confirmation function to user friends
    * Golum algorithm implementation of the friends recognise
@@ -366,14 +354,14 @@ class AMUser extends CMUser
    * @param int $codeUser - AMADIS user_id
    * @return Boolean - Confirmation of the test =P 
    */
-    public function isMyFriend($codeUser) 
-    {
-        $friends = $this->listFriends();
-        if(!empty($friends->items[$codeUser])) $ret = true;
-        else $ret = false;
-        serialize($_SESSION['amadis']['friends']);
-        return $ret;
-    }
+  public function isMyFriend($codeUser)
+  {
+  	$friends = $this->listFriends();
+  	if(!empty($friends->items[$codeUser])) $ret = true;
+  	else $ret = false;
+  	serialize($_SESSION['amadis']['friends']);
+  	return $ret;
+  }
 
   /**
    * List of invitation maked for AMADIS user that become you frind =)
@@ -382,23 +370,24 @@ class AMUser extends CMUser
    * @param void
    * @return CMContainer - List of the invitations
    */
-    public function listFriendsInvitations() 
-    {
-        if(empty($_SESSION['last_session'])) {
-            $q = new CMQuery('AMUser');
+  public function listFriendsInvitations()
+  {
+  		
+  	if(!empty($_SESSION['last_session'])) {
+  		$q = new CMQuery('AMUser');
 
-            $j = new CMJoin(CMJoin::LEFT);
-            $j->setClass('AMFriend');
-            $j->on("User.codeUser = Friends.codeFriend");
+  		$j = new CMJoin(CMJoin::LEFT);
+  		$j->setClass('AMFriend');
+  		$j->on("User.codeUser = Friends.codeFriend");
 
-            $q->addJoin($j, "invitation");
-            $q->setFilter("Friends.codeUser = $this->codeUser AND Friends.status = '".AMFriend::ENUM_STATUS_NOT_ANSWERED."'");
+  		$q->addJoin($j, "invitation");
+  		$q->setFilter("Friends.codeUser = $this->codeUser AND Friends.status = '".AMFriend::ENUM_STATUS_NOT_ANSWERED."'");
 
-            return $q->execute();
+  		return $q->execute();
 
-        }else Throw new AMWEFirstLogin;
-    }
-    
+  	}else Throw new AMWEFirstLogin;
+  }
+
   /**
    * List post for a diary
    *
@@ -407,53 +396,53 @@ class AMUser extends CMUser
    * @param int $y - Year
    * @return CMContainer - List of post from a diary
    **/
-    public function listBlogPosts ($m,$y)
-    {
-        $query=new CMQuery('AMBlogPost');
+  public function listBlogPosts ($m,$y)
+  {
+  	$query=new CMQuery('AMBlogPost');
 
-        $date_start = mktime(0,0,0,$m,1,$y);
+  	$date_start = mktime(0,0,0,$m,1,$y);
 
-    //the first day of the next month
-        if($m==12) {
-            $m=0; $y++;
-        }
-        $date_end = mktime(0,0,0,++$m,1,$y);
+  	//the first day of the next month
+  	if($m==12) {
+  		$m=0; $y++;
+  	}
+  	$date_end = mktime(0,0,0,++$m,1,$y);
 
-        $j2 = new CMJoin(CMJoin::LEFT);
-        $j2->on("AMBlogPost::codePost=AMBlogComment::codePost");
-        $j2->setFake();
-        $j2->setClass('AMBlogComment');
+  	$j2 = new CMJoin(CMJoin::LEFT);
+  	$j2->on("AMBlogPost::codePost=AMBlogComment::codePost");
+  	$j2->setFake();
+  	$j2->setClass('AMBlogComment');
 
-        $query->addJoin($j2, "comentarios");
+  	$query->addJoin($j2, "comentarios");
 
-        $query->groupby("AMBlogPost::codePost");
-        $query->addVariable("numComments","count( AMBlogComment::codeComment )");
+  	$query->groupby("AMBlogPost::codePost");
+  	$query->addVariable("numComments","count( AMBlogComment::codeComment )");
 
-        $query->setFilter("AMBlogPost::codeUser=$this->codeUser AND AMBlogPost::time>=$date_start AND AMBlogPost::time < $date_end");
-        $query->setOrder("AMBlogPost::time desc");
-        
+  	$query->setFilter("AMBlogPost::codeUser=$this->codeUser AND AMBlogPost::time>=$date_start AND AMBlogPost::time < $date_end");
+  	$query->setOrder("AMBlogPost::time desc");
 
-        return $query->execute();
-    }
 
-    
-    public function listLastBlogPosts() 
-    {
-        $query=new CMQuery('AMBlogPost');
-        $j2 = new CMJoin(CMJoin::LEFT);
-        $j2->on("AMBlogPost::codePost=AMBlogComment::codePost");
-        $j2->setFake();
-        $j2->setClass('AMBlogComment');
-        $query->groupby("AMBlogPost::codePost");
-        $query->addVariable("numComments","count( AMBlogComment::codeComment )");
+  	return $query->execute();
+  }
 
-        
-        $query->setOrder("AMBlogPost::tempo desc");
-        $query->setLimit(0,20);
-        $query->setFilter("AMBlogPost::codeUser=$this->codeUser");
-        
-        return $query->execute();
-    }
+
+  public function listLastBlogPosts()
+  {
+  	$query=new CMQuery('AMBlogPost');
+  	$j2 = new CMJoin(CMJoin::LEFT);
+  	$j2->on("AMBlogPost::codePost=AMBlogComment::codePost");
+  	$j2->setFake();
+  	$j2->setClass('AMBlogComment');
+  	$query->groupby("AMBlogPost::codePost");
+  	$query->addVariable("numComments","count( AMBlogComment::codeComment )");
+
+
+  	$query->setOrder("AMBlogPost::tempo desc");
+  	$query->setLimit(0,20);
+  	$query->setFilter("AMBlogPost::codeUser=$this->codeUser");
+
+  	return $query->execute();
+  }
 
   /**
    * List project of the a user
@@ -462,337 +451,337 @@ class AMUser extends CMUser
    * @param void
    * @return CMContainer - List of the projects from a diary
    **/
-    public function listProjects() 
-    {
-        $q = new CMQuery('AMProject');
-        $j = new CMJoin(CMJoin::INNER);
-        $j->setClass('CMGroup');
-        $j->on('AMProject::codeGroup=CMGroup::codeGroup');
-        $j->setFake();
+  public function listProjects()
+  {
+  	$q = new CMQuery('AMProject');
+  	$j = new CMJoin(CMJoin::INNER);
+  	$j->setClass('CMGroup');
+  	$j->on('AMProject::codeGroup=CMGroup::codeGroup');
+  	$j->setFake();
 
-        $j2 = new CMJoin(CMJoin::LEFT);
-        $j2->setClass('CMGroupMember');
-        $j2->on('CMGroupMember::codeGroup=CMGroup::codeGroup');
-        $j2->setFake();
+  	$j2 = new CMJoin(CMJoin::LEFT);
+  	$j2->setClass('CMGroupMember');
+  	$j2->on('CMGroupMember::codeGroup=CMGroup::codeGroup');
+  	$j2->setFake();
 
-        $q->addJoin($j, "grupos");
-        $q->addJoin($j2, "membros");
+  	$q->addJoin($j, "grupos");
+  	$q->addJoin($j2, "membros");
 
-        $q->setFilter('CMGroupMember::codeUser = '.$this->codeUser.' AND CMGroupMember::status="'.CMGroupMember::ENUM_STATUS_ACTIVE.'"');
-
-
-        return $q->execute();
-    }
-
-    public function listMyProjects() 
-    {
-        if(empty($_SESSION['amadis']['projects'])) {
-            $ret = $this->listProjects();
-            $_SESSION['amadis']['projects'] = serialize($ret);
-        }else {
-            $ret = unserialize($_SESSION['amadis']['projects']);
-            serialize($_SESSION['amadis']['projects']);
-        }
-
-        return $ret;
-    }
-
-    public function listProjectsInvitations() 
-    {
-        $q = new CMQuery('AMProject');
-        $j = new CMJoin(CMJoin::INNER);
-        $j->setClass('CMGroup');
-        $j->on('AMProject::codeGroup=CMGroup::codeGroup');
-        $j->setFake();
-
-        
-        $j2 = new CMJoin(CMJoin::LEFT);
-        $j2->setClass('CMGroupMemberJoin');
-        $j2->on('CMGroupMemberJoin::codeGroup=CMGroup::codeGroup');
-
-        $q->addJoin($j, "group");
-        $q->addJoin($j2, 'invitation');
-
-        $f = 'CMGroupMemberJoin::codeUser = '.$this->codeUser;
-        $f.= ' AND CMGroupMemberJoin::status="'.CMGroupMemberJoin::ENUM_STATUS_NOT_ANSWERED.'"';
-        $f.= ' AND CMGroupMemberJoin::type="'.CMGroupMemberJoin::ENUM_TYPE_INVITATION.'"';
-
-        $q->setFilter($f);
+  	$q->setFilter('CMGroupMember::codeUser = '.$this->codeUser.' AND CMGroupMember::status="'.CMGroupMember::ENUM_STATUS_ACTIVE.'"');
 
 
-        return $q->execute();
-    }
+  	return $q->execute();
+  }
 
-    public function listProjectsResponses() 
-    {
-        $q = new CMQuery('AMProject');
-        $j = new CMJoin(CMJoin::INNER);
-        $j->setClass('CMGroup');
-        $j->on('AMProject::codeGroup=CMGroup::codeGroup');
-        $j->setFake();
+  public function listMyProjects()
+  {
+  	if(empty($_SESSION['amadis']['projects'])) {
+  		$ret = $this->listProjects();
+  		$_SESSION['amadis']['projects'] = serialize($ret);
+  	}else {
+  		$ret = unserialize($_SESSION['amadis']['projects']);
+  		serialize($_SESSION['amadis']['projects']);
+  	}
 
-        $j2 = new CMJoin(CMJoin::LEFT);
-        $j2->setClass('CMGroupMemberJoin');
-        $j2->on('CMGroupMemberJoin::codeGroup=CMGroup::codeGroup');
+  	return $ret;
+  }
 
-        $q->addJoin($j, "group");
-        $q->addJoin($j2, 'invitation');
+  public function listProjectsInvitations()
+  {
+  	$q = new CMQuery('AMProject');
+  	$j = new CMJoin(CMJoin::INNER);
+  	$j->setClass('CMGroup');
+  	$j->on('AMProject::codeGroup=CMGroup::codeGroup');
+  	$j->setFake();
 
-        $f = 'CMGroupMemberJoin::codeUser = '.$this->codeUser;
-        $f.= ' AND CMGroupMemberJoin::status<>"'.CMGroupMemberJoin::ENUM_STATUS_NOT_ANSWERED.'"';
-        $f.= ' AND CMGroupMemberJoin::ackResponse="'.CMGroupMemberJoin::ENUM_ACKRESPONSE_NOT_ACK.'"';
-        $f.= ' AND CMGroupMemberJoin::type="'.CMGroupMemberJoin::ENUM_TYPE_REQUEST.'"';
 
-        $q->setFilter($f);
+  	$j2 = new CMJoin(CMJoin::LEFT);
+  	$j2->setClass('CMGroupMemberJoin');
+  	$j2->on('CMGroupMemberJoin::codeGroup=CMGroup::codeGroup');
 
-        return $q->execute();
-    }
+  	$q->addJoin($j, "group");
+  	$q->addJoin($j2, 'invitation');
+
+  	$f = 'CMGroupMemberJoin::codeUser = '.$this->codeUser;
+  	$f.= ' AND CMGroupMemberJoin::status="'.CMGroupMemberJoin::ENUM_STATUS_NOT_ANSWERED.'"';
+  	$f.= ' AND CMGroupMemberJoin::type="'.CMGroupMemberJoin::ENUM_TYPE_INVITATION.'"';
+
+  	$q->setFilter($f);
+
+
+  	return $q->execute();
+  }
+
+  public function listProjectsResponses()
+  {
+  	$q = new CMQuery('AMProject');
+  	$j = new CMJoin(CMJoin::INNER);
+  	$j->setClass('CMGroup');
+  	$j->on('AMProject::codeGroup=CMGroup::codeGroup');
+  	$j->setFake();
+
+  	$j2 = new CMJoin(CMJoin::LEFT);
+  	$j2->setClass('CMGroupMemberJoin');
+  	$j2->on('CMGroupMemberJoin::codeGroup=CMGroup::codeGroup');
+
+  	$q->addJoin($j, "group");
+  	$q->addJoin($j2, 'invitation');
+
+  	$f = 'CMGroupMemberJoin::codeUser = '.$this->codeUser;
+  	$f.= ' AND CMGroupMemberJoin::status<>"'.CMGroupMemberJoin::ENUM_STATUS_NOT_ANSWERED.'"';
+  	$f.= ' AND CMGroupMemberJoin::ackResponse="'.CMGroupMemberJoin::ENUM_ACKRESPONSE_NOT_ACK.'"';
+  	$f.= ' AND CMGroupMemberJoin::type="'.CMGroupMemberJoin::ENUM_TYPE_REQUEST.'"';
+
+  	$q->setFilter($f);
+
+  	return $q->execute();
+  }
 
 
   /**
    * List the news(noticias) from the projects that the current user participate
    *
    **/
-    public function listNewsProjects() 
-    {
-        $q = new CMQuery('AMProject');
+  public function listNewsProjects()
+  {
+  	$q = new CMQuery('AMProject');
 
-        $j = new CMJoin(CMJoin::INNER);
-        $j->setClass('AMProjectNews');
-        $j->on("AMProjectNews::codeProject = AMProject::codeProject");
+  	$j = new CMJoin(CMJoin::INNER);
+  	$j->setClass('AMProjectNews');
+  	$j->on("AMProjectNews::codeProject = AMProject::codeProject");
 
-        $j1 = new CMJoin(CMjoin::INNER);
-        $j1->setClass('CMGroupMember');
-        $j1->on("AMProject::codeGroup = CMGroupMember::codeGroup");
+  	$j1 = new CMJoin(CMjoin::INNER);
+  	$j1->setClass('CMGroupMember');
+  	$j1->on("AMProject::codeGroup = CMGroupMember::codeGroup");
 
-        $q->addJoin($j, "news");
-        $q->addJoin($j1, "members");
+  	$q->addJoin($j, "news");
+  	$q->addJoin($j1, "members");
 
-        $q->setFilter("CMGroupMember::codeUser = $this->codeUser");
-        $q->setOrder("AMProjectNews::time desc");
+  	$q->setFilter("CMGroupMember::codeUser = $this->codeUser");
+  	$q->setOrder("AMProjectNews::time desc");
 
-        return $q->execute();
+  	return $q->execute();
 
-    }
+  }
 
   /**
    * List the news from the communities that the current user participate
    */
-    public function listNewsCommunities() 
-    {
+  public function listNewsCommunities()
+  {
 
-        $q = new CMQuery('AMCommunities');
+  	$q = new CMQuery('AMCommunities');
 
-        $j = new CMJoin(CMJoin::INNER);
-        $j->setClass('AMCommunityNews');
-        $j->on('AMCommunityNews::codeCommunity = AMCommunities::code');
+  	$j = new CMJoin(CMJoin::INNER);
+  	$j->setClass('AMCommunityNews');
+  	$j->on('AMCommunityNews::codeCommunity = AMCommunities::code');
 
-        $j1= new CMJoin(CMJoin::INNER);
-        $j1->setClass('CMGroup');
-        $j1->on('CMGroup::codeGroup=AMCommunities::codeGroup');
-        $j1->setFake();
+  	$j1= new CMJoin(CMJoin::INNER);
+  	$j1->setClass('CMGroup');
+  	$j1->on('CMGroup::codeGroup=AMCommunities::codeGroup');
+  	$j1->setFake();
 
-        $j2 = new CMJoin(CMJoin::INNER);
-        $j2->setClass('CMGroupMember');
-        $j2->on('CMGroup::codeGroup=CMGroupMember::codeGroup');
-        $j2->setFake();
-
-
-
-        $q->addJoin($j, "news");
-        $q->addJoin($j1);
-        $q->addJoin($j2);
-
-        $q->setFilter("CMGroupMember::codeUser = $this->codeUser");
-        $q->setOrder("AMCommunityNews::time desc");
-        $q->setLimit(0,3);
+  	$j2 = new CMJoin(CMJoin::INNER);
+  	$j2->setClass('CMGroupMember');
+  	$j2->on('CMGroup::codeGroup=CMGroupMember::codeGroup');
+  	$j2->setFake();
 
 
-        return $q->execute();
 
-    }
+  	$q->addJoin($j, "news");
+  	$q->addJoin($j1);
+  	$q->addJoin($j2);
 
-    public function listCommunities() 
-    {
-        $q = new CMQuery("AMCommunities");
-        $j = new CMJoin(CMJoin::INNER);
-        $j->setClass("CMGroup");
-        $j->on('AMCommunities::codeGroup=CMGroup::codeGroup');
-        $j->setFake();
+  	$q->setFilter("CMGroupMember::codeUser = $this->codeUser");
+  	$q->setOrder("AMCommunityNews::time desc");
+  	$q->setLimit(0,3);
 
-        $j2 = new CMJoin(CMJoin::LEFT);
-        $j2->setClass("CMGroupMember");
-        $j2->on('CMGroupMember::codeGroup=CMGroup::codeGroup');
-        $j2->setFake();
 
-        $q->addJoin($j, "grupos");
-        $q->addJoin($j2, "membros");
+  	return $q->execute();
 
-        $q->setFilter('CMGroupMember::codeUser = '.$this->codeUser.' AND CMGroupMember::status="'.CMGroupMember::ENUM_STATUS_ACTIVE.'"');
+  }
 
-        return $q->execute();
-    }
+  public function listCommunities()
+  {
+  	$q = new CMQuery("AMCommunities");
+  	$j = new CMJoin(CMJoin::INNER);
+  	$j->setClass("CMGroup");
+  	$j->on('AMCommunities::codeGroup=CMGroup::codeGroup');
+  	$j->setFake();
+
+  	$j2 = new CMJoin(CMJoin::LEFT);
+  	$j2->setClass("CMGroupMember");
+  	$j2->on('CMGroupMember::codeGroup=CMGroup::codeGroup');
+  	$j2->setFake();
+
+  	$q->addJoin($j, "grupos");
+  	$q->addJoin($j2, "membros");
+
+  	$q->setFilter('CMGroupMember::codeUser = '.$this->codeUser.' AND CMGroupMember::status="'.CMGroupMember::ENUM_STATUS_ACTIVE.'"');
+
+  	return $q->execute();
+  }
 
 
 
   /**
    *Lista as minhas comunidades utilizando um cache. Para o usuario atualmente loggado
    */
-    public function listMyCommunities() 
-    {
-        
-        if(!empty($_SESSION['amadis']['communities'])) {
-            $list = unserialize($_SESSION['amadis']['communities']);
-            serialize($_SESSION['amadis']['communities']);
-        } else {
-            $list = $this->listCommunities();
-            $_SESSION['amadis']['communities'] = serialize($list);
+  public function listMyCommunities()
+  {
 
-        }
-        
-        return $list;
-    }
+  	if(!empty($_SESSION['amadis']['communities'])) {
+  		$list = unserialize($_SESSION['amadis']['communities']);
+  		serialize($_SESSION['amadis']['communities']);
+  	} else {
+  		$list = $this->listCommunities();
+  		$_SESSION['amadis']['communities'] = serialize($list);
 
-    public function listCommunitiesInvitations() 
-    {
-        $q = new CMQuery('AMCommunities');
-        $j = new CMJoin(CMJoin::INNER);
-        $j->setClass('CMGroup');
-        $j->on('AMCommunities::codeGroup=CMGroup::codeGroup');
-        $j->setFake();
+  	}
 
-        $j2 = new CMJoin(CMJoin::LEFT);
-        $j2->setClass('CMGroupMemberJoin');
-        $j2->on('CMGroupMemberJoin::codeGroup=CMGroup::codeGroup');
+  	return $list;
+  }
 
-        $q->addJoin($j, "group");
-        $q->addJoin($j2, 'invitation');
+  public function listCommunitiesInvitations()
+  {
+  	$q = new CMQuery('AMCommunities');
+  	$j = new CMJoin(CMJoin::INNER);
+  	$j->setClass('CMGroup');
+  	$j->on('AMCommunities::codeGroup=CMGroup::codeGroup');
+  	$j->setFake();
 
-        $f = 'CMGroupMemberJoin::codeUser = '.$this->codeUser;
-        $f.= ' AND CMGroupMemberJoin::status="'.CMGroupMemberJoin::ENUM_STATUS_NOT_ANSWERED.'"';
-        $f.= ' AND CMGroupMemberJoin::type="'.CMGroupMemberJoin::ENUM_TYPE_INVITATION.'"';
+  	$j2 = new CMJoin(CMJoin::LEFT);
+  	$j2->setClass('CMGroupMemberJoin');
+  	$j2->on('CMGroupMemberJoin::codeGroup=CMGroup::codeGroup');
 
-        $q->setFilter($f);
-        return $q->execute();
-    }
+  	$q->addJoin($j, "group");
+  	$q->addJoin($j2, 'invitation');
 
-    public function listCommunitiesResponses() 
-    {
-        $q = new CMQuery('AMCommunities');
-        $j = new CMJoin(CMJoin::INNER);
-        $j->setClass('CMGroup');
-        $j->on('AMCommunities::codeGroup=CMGroup::codeGroup');
-        $j->setFake();
+  	$f = 'CMGroupMemberJoin::codeUser = '.$this->codeUser;
+  	$f.= ' AND CMGroupMemberJoin::status="'.CMGroupMemberJoin::ENUM_STATUS_NOT_ANSWERED.'"';
+  	$f.= ' AND CMGroupMemberJoin::type="'.CMGroupMemberJoin::ENUM_TYPE_INVITATION.'"';
 
-        $j2 = new CMJoin(CMJoin::LEFT);
-        $j2->setClass('CMGroupMemberJoin');
-        $j2->on('CMGroupMemberJoin::codeGroup=CMGroup::codeGroup');
+  	$q->setFilter($f);
+  	return $q->execute();
+  }
 
-        $q->addJoin($j, "group");
-        $q->addJoin($j2, 'invitation');
+  public function listCommunitiesResponses()
+  {
+  	$q = new CMQuery('AMCommunities');
+  	$j = new CMJoin(CMJoin::INNER);
+  	$j->setClass('CMGroup');
+  	$j->on('AMCommunities::codeGroup=CMGroup::codeGroup');
+  	$j->setFake();
 
-        $f = 'CMGroupMemberJoin::codeUser = '.$this->codeUser;
-        $f.= ' AND CMGroupMemberJoin::status<>"'.CMGroupMemberJoin::ENUM_STATUS_NOT_ANSWERED.'"';
-        $f.= ' AND CMGroupMemberJoin::ackResponse="'.CMGroupMemberJoin::ENUM_ACKRESPONSE_NOT_ACK.'"';
-        $f.= ' AND CMGroupMemberJoin::type="'.CMGroupMemberJoin::ENUM_TYPE_REQUEST.'"';
+  	$j2 = new CMJoin(CMJoin::LEFT);
+  	$j2->setClass('CMGroupMemberJoin');
+  	$j2->on('CMGroupMemberJoin::codeGroup=CMGroup::codeGroup');
 
-        $q->setFilter($f);
+  	$q->addJoin($j, "group");
+  	$q->addJoin($j2, 'invitation');
 
-        return $q->execute();
-    }
+  	$f = 'CMGroupMemberJoin::codeUser = '.$this->codeUser;
+  	$f.= ' AND CMGroupMemberJoin::status<>"'.CMGroupMemberJoin::ENUM_STATUS_NOT_ANSWERED.'"';
+  	$f.= ' AND CMGroupMemberJoin::ackResponse="'.CMGroupMemberJoin::ENUM_ACKRESPONSE_NOT_ACK.'"';
+  	$f.= ' AND CMGroupMemberJoin::type="'.CMGroupMemberJoin::ENUM_TYPE_REQUEST.'"';
+
+  	$q->setFilter($f);
+
+  	return $q->execute();
+  }
 
   /**
    *Contagem de mensagens no correio
    */
-    public function getNumberNotReadMessages() {
-        $q = new CMQuery('AMMailMessages');
+  public function getNumberNotReadMessages() {
+  	$q = new CMQuery('AMMailMessages');
 
-        $q->setFilter("addressee = $this->codeUser and status = '".AMMailMessages::ENUM_STATUS_NOT_READ."'");
-        $q->setCount();
+  	$q->setFilter("addressee = $this->codeUser and status = '".AMMailMessages::ENUM_STATUS_NOT_READ."'");
+  	$q->setCount();
 
-        return $q->execute();
+  	return $q->execute();
 
-    }
+  }
 
   /**
    *Faz contagem de novos comentarios dos meus projetos desde
    *ultimo login.
    */
-    public function getLastProjectsComments() 
-    {
-    	
-    	//if the session doesn't exists, this is the first user login
-    	//so there is no need for comments search
-    	if(!array_key_exists('last_session', $_SESSION)) {
-    		return new CMContainer;
-    	}
-    	
-        $q = new CMQuery('AMProject');
+  public function getLastProjectsComments()
+  {
 
-        $j = new CMJoin(CMJoin::INNER);
-        $j->on("AMProject::codeProject = AMProjectComment::codProjeto");
-        $j->setClass('AMProjectComment');
+  	//if the session doesn't exists, this is the first user login
+  	//so there is no need for comments search
+  	if(!array_key_exists('last_session', $_SESSION)) {
+  		return new CMContainer;
+  	}
 
-        $j2 = new CMJoin(CMJoin::INNER);
-        $j2->on("AMProject::codeGroup = CMGroup::codeGroup");
-        $j2->setClass('CMGroup');
+  	$q = new CMQuery('AMProject');
 
-        $j3 = new CMJoin(CMJoin::INNER);
-        $j3->on("CMGroupMember::codeGroup = CMGroup::codeGroup");
-        $j3->setClass('CMGroupMember');
+  	$j = new CMJoin(CMJoin::INNER);
+  	$j->on("AMProject::codeProject = AMProjectComment::codProjeto");
+  	$j->setClass('AMProjectComment');
 
-        $j4 = new CMJoin(CMJoin::INNER);
-        $j4->on("AMComment::codComentario = AMProjectComment::codComentario");
-        $j4->setClass('AMComment');
+  	$j2 = new CMJoin(CMJoin::INNER);
+  	$j2->on("AMProject::codeGroup = CMGroup::codeGroup");
+  	$j2->setClass('CMGroup');
 
-        $q->addJoin($j, "pcomments");
-        $q->addJoin($j2, "group");
-        $q->addJoin($j3, "members");
-        $q->addJoin($j4,"comments");
+  	$j3 = new CMJoin(CMJoin::INNER);
+  	$j3->on("CMGroupMember::codeGroup = CMGroup::codeGroup");
+  	$j3->setClass('CMGroupMember');
 
-        $q->setFilter("AMComment::tempo > ". $_SESSION['last_session']->timeEnd. " AND CMGroupMember::codeUser=$this->codeUser");
+  	$j4 = new CMJoin(CMJoin::INNER);
+  	$j4->on("AMComment::codComentario = AMProjectComment::codComentario");
+  	$j4->setClass('AMComment');
 
-        $q->groupby("AMProject::codeProject");
-        $q->addVariable("numMessages","count( AMProjectComment::codComentario)");
+  	$q->addJoin($j, "pcomments");
+  	$q->addJoin($j2, "group");
+  	$q->addJoin($j3, "members");
+  	$q->addJoin($j4,"comments");
 
-        return $q->execute();
-    }
+  	$q->setFilter("AMComment::tempo > ". $_SESSION['last_session']->timeEnd. " AND CMGroupMember::codeUser=$this->codeUser");
 
-    public function getLastBlogComments() 
-    {
-    	if(!array_key_exists('last_session', $_SESSION)) {
-    		return new CMContainer;
-    	}
-        $q = new CMQuery('AMBlogPost');
+  	$q->groupby("AMProject::codeProject");
+  	$q->addVariable("numMessages","count( AMProjectComment::codComentario)");
 
-        $j = new CMJoin(CMJoin::INNER);
-        $j->on("AMBlogPost::codePost = AMBlogComment::codePost");
-        $j->setClass('AMBlogComment');
+  	return $q->execute();
+  }
 
-        $q->addJoin($j, "comments");
+  public function getLastBlogComments()
+  {
+  	if(!array_key_exists('last_session', $_SESSION)) {
+  		return new CMContainer;
+  	}
+  	$q = new CMQuery('AMBlogPost');
 
-        $q->setFilter("AMBlogComment::time > ".$_SESSION['last_session']->timeEnd." AND AMBlogPost::codeUser=$this->codeUser");
+  	$j = new CMJoin(CMJoin::INNER);
+  	$j->on("AMBlogPost::codePost = AMBlogComment::codePost");
+  	$j->setClass('AMBlogComment');
 
-        $q->groupby("AMBlogPost::codeUser");
-        $q->addVariable("numMessages","count( AMBlogComment::codComment)");
+  	$q->addJoin($j, "comments");
 
-        return $q->execute();
-    }
+  	$q->setFilter("AMBlogComment::time > ".$_SESSION['last_session']->timeEnd." AND AMBlogPost::codeUser=$this->codeUser");
 
-    public function getLastMessages() 
-    {
-        if(!empty($_SESSION['last_session'])) {
-            $q = new CMQuery('AMUserMessages');
+  	$q->groupby("AMBlogPost::codeUser");
+  	$q->addVariable("numMessages","count( AMBlogComment::codComment)");
 
-            $q->setFilter("time > ".$_SESSION['last_session']->timeEnd." AND codeUser=$this->codeUser");
+  	return $q->execute();
+  }
 
-            $q->groupby("code");
-            $q->addVariable("numMessages","count( code)");
+  public function getLastMessages()
+  {
+  	if(!empty($_SESSION['last_session'])) {
+  		$q = new CMQuery('AMUserMessages');
 
-            return $q->execute();
+  		$q->setFilter("time > ".$_SESSION['last_session']->timeEnd." AND codeUser=$this->codeUser");
 
-        }else Throw new AMWEFirstLogin;
-    }
+  		$q->groupby("code");
+  		$q->addVariable("numMessages","count( code)");
+
+  		return $q->execute();
+
+  	}else Throw new AMWEFirstLogin;
+  }
 
 
   /**
@@ -803,33 +792,32 @@ class AMUser extends CMUser
    * @param int $lenght - Number of rows will return
    * @return Array CMContainer and number of AFFECTED_ROWS
    */
-    public function listMyMessages($ini=0, $lenght=10) 
-    {
-        $q = new CMQuery('AMUserMessages');
+  public function listMyMessages($ini=0, $lenght=10){
+  	$q = new CMQuery('AMUserMessages');
 
-        $filter = 'AMUserMessages::codeTo='.$this->codeUser;
-        $order = 'AMUserMessages::time DESC';
+  	$filter = 'AMUserMessages::codeTo='.$this->codeUser;
+  	$order = 'AMUserMessages::time DESC';
 
-        $q->setFilter($filter);
-        $q->setOrder($order);
+  	$q->setFilter($filter);
+  	$q->setOrder($order);
 
-        $j = new CMJoin(CMJoin::INNER);
-        $j->setClass('AMUser');
-        $j->using("codeUser");
+  	$j = new CMJoin(CMJoin::INNER);
+  	$j->setClass('AMUser');
+  	$j->using("codeUser");
 
-        $q->addJoin($j,'author');
+  	$q->addJoin($j,'author');
 
-        $q->setCount();
-        $count = $q->execute();
+  	$q->setCount();
+  	$count = $q->execute();
 
-        $q = new CMQuery('AMUserMessages');
-        $q->setFilter($filter);
-        $q->setOrder($order);
-        $q->addJoin($j, 'author');
+  	$q = new CMQuery('AMUserMessages');
+  	$q->setFilter($filter);
+  	$q->setOrder($order);
+  	$q->addJoin($j, 'author');
 
-        $q->setLimit($ini, $lenght);
+  	$q->setLimit($ini, $lenght);
 
-        return array('count'=>$count, $q->execute());
-    }
-    
+  	return array('count'=>$count, $q->execute());
+  }
+
 }

@@ -47,7 +47,7 @@ class AMBUserMessages extends AMColorBox {
 	  $men =  $_language[project_comment]; 
 	};
 
-	parent::add("<a class=\"new_comments\" href=\"$_CMAPP[services_url]/projects/projeto.php?frm_codProjeto=$item->codeProject\" class=\"cinza\">");
+	parent::add("<a class=\"new_comments\" href=\"$_CMAPP[services_url]/projects/project.php?frm_codProjeto=$item->codeProject\" class=\"cinza\">");
 	parent::add("$item->numMessages $men</a> <b>$item->title</b><br>");
       }
     } else $this->__hasItems = false;

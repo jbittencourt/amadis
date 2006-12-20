@@ -34,7 +34,7 @@ class AMTProjectsSmallList extends CMHTMLObj {
 	if($text!=$proj->description) {
 	  $text.="...";
 	}
-	parent::add("<a href='$_CMAPP[services_url]/projects/projeto.php?frm_codProjeto=$proj->codeProject'>$proj->title</a> - $text");
+	parent::add("<a href='$_CMAPP[services_url]/projects/project.php?frm_codProjeto=$proj->codeProject'>$proj->title</a> - $text");
 	parent::add("<tr><td colspan=2><img src='$_CMAPP[images_url]/dot.gif' height='10'>");
       }
     }
