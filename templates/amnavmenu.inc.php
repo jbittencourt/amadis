@@ -150,12 +150,12 @@ class  AMNavMenu extends CMHTMLObj
 	 
                     }
                     $icoOnline = "<img id=\"UserIco_$friend->codeUser\" align=\"middle\" src=\"$ico\" $onClick>";
-                    $tree->add("$icoOnline<a class=\"mnlateral\" href=\"".$_CMAPP['services_url']."/webfolio/userinfo_details.php?frm_codeUser=$friend->codeUser\"> $friend->name $str</a><br>");
+                    $tree->add("$icoOnline<a class='mnlateral' href='".$_CMAPP['services_url']."/webfolio/userinfo_details.php?frm_codeUser=$friend->codeUser'> $friend->name</a><br>");
                 }
             } else {
                 $tree->add("<font class=\"texto\">$_language[no_friends]</font>");
             }
-            
+
             $this->add($tree,false,false,$_CMAPP['images_url']."/mn_bgmeus.gif");
             $communities = $_SESSION['user']->listMyCommunities();
             $temp = "<img src=\"$_CMAPP[imlang_url]/mn_minhas_comunidades.gif\" border=0>";
@@ -246,7 +246,6 @@ class  AMNavMenu extends CMHTMLObj
         parent::add('<div id="footer-menu"><img src="'.$_CMAPP['images_url'].'/img_footer_menu.gif"></div>');
         parent::add('</div>');
         parent::add('</div>');
-
 
         return parent::__toString();
 

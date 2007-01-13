@@ -32,10 +32,16 @@ class AMBMyWebfolio extends AMColorBox implements CMActionListener {
   		$urlviewmsg = $_CMAPP['services_url']."/webfolio/scraps.php";
 
 
-  		parent::add("<a href=\"$urlpage\" class =\"cinza\">&raquo; ".$_language['see_my_home_page']."</a><br>");
-  		parent::add("<a href=\"$urlpublish\" class =\"cinza\">&raquo; ".$_language['publish_my_home_page']."</a><br>");
-  		parent::add("<a href=\"$urlmyalbum\" class =\"cinza\">&raquo; ".$_language['see_my_album']."</a><br>");
-  		parent::add("<a href=\"$urlviewmsg\" class =\"cinza\">&raquo; ".$_language['read_my_messages']."</a><br>");
+  		parent::add("<a href='$urlpage' class ='cinza'>&raquo; ".$_language['see_my_home_page']."</a><br>");
+  		parent::add("<a href='$urlpublish' class ='cinza'>&raquo; ".$_language['publish_my_home_page']."</a><br>");
+  		parent::add("<a href='$urlmyalbum' class ='cinza'>&raquo; ".$_language['see_my_album']."</a><br>");
+  		
+  		/*
+  		 * Check for new messages since last login.
+  		 */
+  		$new_messages = $_SESSION['user']->checkForNewMessages();
+  		$txt_link = ($new_messages > 0 ? "($new_messages) Novas mensagens." : '');
+  		parent::add("<a href='$urlviewmsg' class ='cinza'>&raquo; ".$_language['read_my_messages']."<br> $txt_link</a><br>");
 
 
   	}else {
@@ -43,7 +49,7 @@ class AMBMyWebfolio extends AMColorBox implements CMActionListener {
   		$urlpage = $_CMAPP['services_url']."/pages/viewpage.php?frm_page=users/user_$_REQUEST[frm_codeUser]&frm_codeUser=$_REQUEST[frm_codeUser]";
   		$urlfriend = $_SERVER['PHP_SELF']."?frm_codeUser=$_REQUEST[frm_codeUser]&action=A_make_friend";
   		$urlemail = $_CMAPP['services_url']."/correio/message.php";
-  		$urldiary = $_CMAPP['services_url']."/blog/diario.php?frm_codeUser=".$_REQUEST['frm_codeUser']."";
+  		$urldiary = $_CMAPP['services_url']."/blog/blog.php?frm_codeUser=".$_REQUEST['frm_codeUser']."";
   		$urllibrary = $_CMAPP['services_url']."/library/library.php?frm_codeUser=".$_REQUEST['frm_codeUser']."";
   		$urlviewmsg = $_CMAPP['services_url']."/webfolio/scraps.php?frm_codeUser=".$_REQUEST['frm_codeUser']."";
   		$urlviewalbum = $_CMAPP['services_url']."/album/viewalbum.php?frm_codeUser=".$_REQUEST['frm_codeUser']."";

@@ -39,8 +39,9 @@ class AMFile extends CMObj {
    * @param string $inputName The name of the <INPUT type=file> element in the form.
    **/
   public function loadFileFromRequest($formName) {
-    $this->name = $_FILES[$formName]['name'];
-    $this->mimetype = $_FILES[$formName]['type'];
+
+  	$this->name = $_FILES[$formName]['name'];
+    $this->mimeType = $_FILES[$formName]['type'];
     $this->size = $_FILES[$formName]['size'];
     $this->time = time();
 

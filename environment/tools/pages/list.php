@@ -17,6 +17,7 @@ include("../../config.inc.php");
 $_language = $_CMAPP['i18n']->getTranslationArray("upload");
 
 $pag = new CMHTMLPage;
+
 $dirBase = $_REQUEST['frm_page'];
 $dir = new AMUpload($_CMAPP['path']."/environment/pages/$_REQUEST[frm_page]");
 

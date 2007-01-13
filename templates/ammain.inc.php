@@ -391,11 +391,11 @@ class AMMain extends AMHTMLPage
         parent::add(new AMTUserinfo(new CMUser));
         parent::add("</div>");
 
-        parent::addScript("initDCOM('$_CMAPP[media_url]/rte/blank.htm');");
+        //parent::addScript("initDCOM('$_CMAPP[media_url]/rte/blank.htm');");
 
         self::addXOADHandler("AMEnvSession", "AMEnvSession");
 
-        parent::addPageBegin(XOAD_Utilities::header("$_CMAPP[media_url]/lib/xoad"));
+        parent::addPageBegin(XOAD_Utilities::header("$_CMAPP[media_url]/libs/xoad"));
 
         if($_SESSION['environment']->logged) {
             self::addXOADHandler("AMFinder", "AMFinder");
@@ -481,7 +481,7 @@ class AMMain extends AMHTMLPage
     {
         global $_CMAPP,$_language;
         $link = "$_CMAPP[services_url]/blog/blog.php?frm_codeUser=$codeUser";
-        return '<button class="button-as-link" type="button" onClick="AM_openURL(\''.$link.'\')"><img src="'.$_CMAPP['images_url'].'/ico_diario.gif"> '.$_language['visit_diary'].'</button>';
+        return '<button class="button-as-link" type="button" onClick="AM_openURL(\''.$link.'\')"><img src="'.$_CMAPP['images_url'].'/ico_diario.gif"> '.$_language['visit_blog'].'</button>';
     }
 
     public static function getTieButton($codeProject, $codeCommunity)

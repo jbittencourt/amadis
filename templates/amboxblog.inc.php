@@ -34,7 +34,7 @@ class AMBoxBlog extends CMHTMLObj
         $this->imagem = $imagem;
         $this->texto = $texto;
         $this->titulo = $titulo;
-        $this->rsslink =  "diarioRSS.php?frm_codeUser=".$user;
+        $this->rsslink =  "blogRSS.php?frm_codeUser=".$user;
         $this->requires("blog.js");
     }
 
@@ -56,9 +56,9 @@ class AMBoxBlog extends CMHTMLObj
         global $_CMAPP,$_language;
 
         $url = $_CMAPP['images_url'];
-
+	
         $js = "blog_handler_url = '$_CMAPP[services_url]/diario/comentarios.php';";
-        $js.= "blog_delete_link = 'diario.php?frm_action=A_delete&frm_codePost=';";
+        $js.= "blog_delete_link = 'blog.php?frm_action=A_delete&frm_codePost=';";
         $js.= "blog_delete_message = '$_language[post_delete]';";
         $js.= "Blog_preLoadImages('$_CMAPP[images_url]/ico_seta_on_cmnt.gif','$_CMAPP[images_url]/ico_seta_off_cmnt.gif');";
 
@@ -94,7 +94,8 @@ class AMBoxBlog extends CMHTMLObj
         parent::add("</div>");
   
         parent::add("<div id=\"diary_header\">");
-        if(empty($_REQUEST['frm_codeUser'])) {
+        
+        if(empty($_REQUEST['frm_codeUser']) || $_REQUEST['frm_codeUser'] == $_SESSION['user']->codeUser) {
             parent::add(implode("\n",$this->cabecalho));
         }
         parent::add("</div>"); //diary header;
@@ -137,49 +138,49 @@ class AMBoxBlog extends CMHTMLObj
                 $calendar->pointDay(date('d',$post->time), "#anchor_post_$post->codePost");
 
                 if($impar) {
-                    parent::add("<tr bgcolor=\"#F9F9FF\">");
-                    parent::add("<td><img src=\"$url/box_diario_03a.gif\" width=\"20\" height=\"10\" border=\"0\"></td>");
-                    parent::add("<td bgcolor=\"#FAFBFB\"><img src=\"$url/dot.gif\" width=\"20\" height=\"10\" border=\"0\"></td>");
-                    parent::add("<td><img src=\"$url/box_diario_04b.gif\" width=\"20\" height=\"10\" border=\"0\"></td>");
+                    parent::add("<tr bgcolor='#F9F9FF'>");
+                    parent::add("<td><img src='$url/box_diario_03a.gif' width='20' height='10' border='0'></td>");
+                    parent::add("<td bgcolor='#FAFBFB'><img src='$url/dot.gif' width='20' height='10' border='0'></td>");
+                    parent::add("<td><img src='$url/box_diario_04b.gif' width='20' height='10' border='0'></td>");
                     parent::add("</tr>");
 
-                    parent::add("<tr bgcolor=\"#F9F9FF\">");
-                    parent::add("<td background=\"$url/box_diario_bgleft.gif\"><img src=\"$url/dot.gif\" width=\"20\" height=\"10\" border=\"0\"></td>");
-                    parent::add("<td valign=\"top\"><img src=\"$url/diario_markclaro.gif\" ");
+                    parent::add("<tr bgcolor='#F9F9FF'>");
+                    parent::add("<td background='$url/box_diario_bgleft.gif'><img src='$url/dot.gif' width='20' height='10' border='0'></td>");
+                    parent::add("<td valign='top'><img src='$url/diario_markclaro.gif' ");
 	 
                 }
                 else {
-                    parent::add("<tr bgcolor=\"#F2F2FE\">");
-                    parent::add("<td><img src=\"$url/dot.gif\" width=\"20\" height=\"10\" border=\"0\"></td>");
-                    parent::add("<td valign=\"top\"><img src=\"$url/diario_markescuro.gif\" ");
+                    parent::add("<tr bgcolor='#F2F2FE'>");
+                    parent::add("<td><img src='$url/dot.gif' width='20' height='10' border='0'></td>");
+                    parent::add("<td valign='top'><img src='$url/diario_markescuro.gif' ");
 
                 }
 
                 
-                parent::add("align=\"absmiddle\" ><font class=\"titpost\">$post->title</font><font class=\"datapost\"> - ".date("h:i ".$_language['date_format'],$post->time));
-                parent::add("<a name=\"anchor_post_$post->codePost\" > </a> ");
-                parent::add("</font><br><img src=\"$url/dot.gif\" width=\"10\" height=\"7\" border=\"0\"><br>");
-                parent::add("<font class=\"txtdiario\">");
+                parent::add("align='absmiddle' ><font class='titpost'>$post->title</font><font class='datapost'> - ".date("h:i ".$_language['date_format'],$post->time));
+                parent::add("<a name='anchor_post_$post->codePost' > </a> ");
+                parent::add("</font><br><img src='$url/dot.gif' width='10' height='7' border='0'><br>");
+                parent::add("<font class='txtdiario'>");
                 parent::add(new AMSmileRender($post->body));
                 parent::add("</font><br>");
                 parent::add("<a class='diary_comment' href='".self::getPermanentLink($post)."'>");
                 parent::add($_language['permanent_link'].'</a>');
-                parent::add("<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"100%\">");
+                parent::add("<table cellpadding='0' cellspacing='0' border='0' width='100%'>");
                 parent::add("<tr>");
 
                 $link_comentarios = "Blog_toogleComments('$post->codePost')";
 
                 if($post->numComments==0) {
                     if($_SESSION['user']) {
-                        parent::add("<td class=\"diary_comment_link\"><a class=\"diary_comment\" href=\"javascript:$link_comentarios\">");
-                        parent::add("$_language[waiting_comments] <img id=\"post_comments_$post->codePost\" src=\"$_CMAPP[images_url]/ico_seta_off_cmnt.gif\">");
+                        parent::add("<td class='diary_comment_link'><a class='diary_comment' href='#' onclick=\"$link_comentarios\">");
+                        parent::add("$_language[waiting_comments] <img id='post_comments_$post->codePost' src='$_CMAPP[images_url]/ico_seta_off_cmnt.gif'>");
                         parent::add("</a></td>");
                     }
                 }
                 else {
-                    $l = "<a class=\"diary_comment\" href=\"javascript:$link_comentarios\">";
-                    parent::add("<td class=\"diary_comment_link\">");
-                    parent::add("$l $_language[comentarios]($post->numComments) <img id=\"post_comments_$post->codePost\" src=\"$_CMAPP[images_url]/ico_seta_off_cmnt.gif\"></a>");
+                    $l = "<a class='diary_comment' onclick=\"$link_comentarios\" href='#'>";
+                    parent::add("<td class='diary_comment_link'>");
+                    parent::add("$l $_language[comentarios]($post->numComments) <img id='post_comments_$post->codePost' src='$_CMAPP[images_url]/ico_seta_off_cmnt.gif'></a>");
                     parent::add("</td>");
 
 	  //this will open the box with the comment after an new comment. But dosent works. :)
@@ -191,10 +192,10 @@ class AMBoxBlog extends CMHTMLObj
                 $tempo_post = time() - $post->time;
                 if ($tempo_post < 86400){
                     if($post->codeUser == $_SESSION['user']->codeUser) {
-                        $link_editar = "postar.php?frm_codePost=$post->codePost&frm_action=editar";
+                        $link_editar = "post.php?frm_codePost=$post->codePost&frm_action=editar";
 
-                        parent::add("<td align=\"right\"><a class=\"diary_edit\" href= $link_editar> <img  src=\"$_CMAPP[imlang_url]/icon_editar.gif\" border=\"0\" align=\"baseline\"></a>");
-                        parent::add("&nbsp;&nbsp;&nbsp;<a href=\"#\" onClick=\"Blog_deletePost($post->codePost)\" class=\"diary_edit\"><img src=\"$_CMAPP[imlang_url]/icon_excluir.gif\" border=\"0\" align=\"baseline\"></a></td>");
+                        parent::add("<td align='right'><a class='diary_edit' href= $link_editar> <img  src='$_CMAPP[imlang_url]/icon_editar.gif' border='0' align='baseline'></a>");
+                        parent::add("&nbsp;&nbsp;&nbsp;<a href='#' onClick=\"Blog_deletePost($post->codePost)\" class='diary_edit'><img src='$_CMAPP[imlang_url]/icon_excluir.gif' border='0' align='baseline'></a></td>");
 	  
 
                     }
@@ -203,10 +204,10 @@ class AMBoxBlog extends CMHTMLObj
                 
                 parent::add("</tr>");
 
-                parent::add("<tr><td colspan=\"2\">");
-                parent::add("<div id=\"post_$post->codePost\" style=\"display: none;\"></div>");
+                parent::add("<tr><td colspan='2'>");
+                parent::add("<div id='post_$post->codePost' style='display: none;'></div>");
 
-                parent::add("<tr><td colspan=\"2\"><img src=\"$url/dot.gif\" width=\"20\" height=\"25\" border=\"0\"></td></tr>");
+                parent::add("<tr><td colspan='2'><img src='$url/dot.gif' width='20' height='25' border='0'></td></tr>");
 
                 parent::add("</table>");
 
@@ -215,42 +216,42 @@ class AMBoxBlog extends CMHTMLObj
 
 
                 if($impar) {
-                    parent::add("<td  background=\"$url/box_diario_bgrigth.gif\"><img src=\"$url/dot.gif\" width=\"20\" height=\"10\" border=\"0\"></td>");
+                    parent::add("<td  background='$url/box_diario_bgrigth.gif'><img src='$url/dot.gif' width='20' height='10' border='0'></td>");
                     parent::add("</tr>	");
-                    parent::add("<tr bgcolor=\"#F9F9FF\">");
-                    parent::add("<td><img src=\"$url/box_diario_03.gif\" width=\"20\" height=\"10\" border=\"0\"></td>");
-                    parent::add("<td bgcolor=\"#FAFBFB\"><img src=\"$url/dot.gif\" width=\"20\" height=\"10\" border=\"0\"></td>");
-                    parent::add("<td><img src=\"$url/box_diario_04.gif\" width=\"20\" height=\"10\" border=\"0\"></td>");
+                    parent::add("<tr bgcolor='#F9F9FF'>");
+                    parent::add("<td><img src='$url/box_diario_03.gif' width='20' height='10' border='0'></td>");
+                    parent::add("<td bgcolor='#FAFBFB'><img src='$url/dot.gif' width='20' height='10' border='0'></td>");
+                    parent::add("<td><img src='$url/box_diario_04.gif' width='20' height='10' border='0'></td>");
                 }
                 else {
-                    parent::add("<td><img src=\"$url/dot.gif\" width=\"20\" height=\"10\" border=\"0\"></td>");
+                    parent::add("<td><img src='$url/dot.gif' width='20' height='10' border='0'></td>");
 
                 }
                 parent::add("</tr>");
 	 
 
-                parent::add("<tr bgcolor=\"#F2F2FE\"><td colspan=\"3\"><img src=\"$url/dot.gif\" width=\"20\" height=\"30\" border=\"0\"></td></tr>");
+                parent::add("<tr bgcolor='#F2F2FE'><td colspan='3'><img src='$url/dot.gif' width='20' height='30' border='0'></td></tr>");
 
             }
             
         }
         else {
-            parent::add("<tr bgcolor=\"#F2F2FE\">");
-            parent::add("<td><img src=\"$url/dot.gif\" width=\"20\" height=\"10\" border=\"0\"></td>");
-            parent::add("<td valign=\"top\"><br><img src=\"$url/diario_markescuro.gif\" ");
-            parent::add("<span class=\"datapost\">$_language[blog_empty]</span>");
-            parent::add("<td><img src=\"$url/dot.gif\" width=\"20\" height=\"10\" border=\"0\"></td>");
+            parent::add("<tr bgcolor='#F2F2FE'>");
+            parent::add("<td><img src='$url/dot.gif' width='20' height='10' border='0'></td>");
+            parent::add("<td valign='top'><br><img src='$url/diario_markescuro.gif' ");
+            parent::add("<span class='datapost'>$_language[blog_empty]</span>");
+            parent::add("<td><img src='$url/dot.gif' width='20' height='10' border='0'></td>");
 
 
         }
 
         parent::add("<tr>");
-        parent::add("<td><img src=\"$url/box_diario_05.gif\" width=\"20\" height=\"20\" border=\"0\"></td>");
-        parent::add("<td bgcolor=\"#F2F2FE\"><img src=\"$url/dot.gif\" width=\"20\" height=\"20\" border=\"0\"></td>");
-        parent::add("<td><img src=\"$url/box_diario_06.gif\" width=\"20\" height=\"20\" border=\"0\"></td>");
+        parent::add("<td><img src='$url/box_diario_05.gif' width='20' height='20' border='0'></td>");
+        parent::add("<td bgcolor='#F2F2FE'><img src='$url/dot.gif' width='20' height='20' border='0'></td>");
+        parent::add("<td><img src='$url/box_diario_06.gif' width='20' height='20' border='0'></td>");
         parent::add("</tr>");
         parent::add("</table>");
-
+		
         return parent::__toString();
     }
 

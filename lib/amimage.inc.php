@@ -170,6 +170,7 @@ class AMImage extends AMFile
 
         $old_state = $this->state;
         parent::save();
+
     //we must delete all the existing thumbnails of this image if the save was sucessfull
     //see AMThumb for more information about thumbnail generation
         if($old_state==CMObj::STATE_DIRTY) {

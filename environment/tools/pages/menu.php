@@ -27,5 +27,3 @@ $pag->add("</tr>");
 $pag->add("</table>");
 
 echo $pag;
-
-?>

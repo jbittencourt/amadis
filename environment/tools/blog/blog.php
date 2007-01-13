@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Visualization of diary
  *
@@ -101,7 +102,8 @@ else {
 			$userBlog->load();
 			$default = false;
 		} Catch(CMDBNoRecord $e) {
-			$pag->addError($_language['error_post_does_not_exist']);
+			$pag->addError($_language['error_post_does_not_exist'], $e->getMessage());
+
 			echo $pag;
 			die();
 		}
@@ -158,14 +160,17 @@ if(!empty($userBlog)) {
 
 	 
 	$caixa = new AMBoxBlog($posts,$userBlog->codeUser,$title,$image,$text);
+
 	$caixa->setDate($_REQUEST['frm_calMonth'],$_REQUEST['frm_calYear']);
 	$date = getdate(time());
 	if(!empty($_SESSION['user']) && ($_REQUEST['frm_calMonth']==$date['mon']) && ($_REQUEST['frm_calYear']==$date['year'])) {
+
 		if($userBlog->codeUser==$_SESSION['user']->codeUser) {
 			$caixa->addCabecalho("<br> <a class=\"diary_header\" href=\"post.php\" > &raquo; $_language[post_blog] </a>");
 			$caixa->addCabecalho("<br> <a class=\"diary_header\" href=\"$linkEditar\" > &raquo; $_language[edit_blog] </a>");
 		}
 	}
+
 	$rsslink = $_CMAPP['services_url'] . "/blog/blogRSS.php?frm_codeUser=$userBlog->codeUser";
 	$pag->setRSSFeed($rsslink,$title);
 	$pag->add($caixa);

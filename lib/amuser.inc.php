@@ -819,5 +819,21 @@ class AMUser extends CMUser
 
   	return array('count'=>$count, $q->execute());
   }
-
-}
+	
+  /**
+   * List public messages(scraps) since last login
+   * 
+   * @access public
+   * @return int number of AFFECTED_ROWS
+   */
+  public function checkForNewMessages() {
+  	$q = new CMQuery('AMUserMessages');
+  	
+  	$filter = 'AMUserMessages::codeTo = ' . $this->codeUser . ' AND AMUserMessages::time > '. $_SESSION['last_session']->timeEnd;
+  	
+  	$q->setFilter($filter);
+  	$q->setCount();
+  	return $q->execute();
+  }
+  
+}	

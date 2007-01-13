@@ -67,7 +67,7 @@ if(array_key_exists('action', $_REQUEST)) {
 				$pag->addError($_language[profile_not_saved]);
 				break;
 			}
-			Header("Location: $_CMAPP[services_url]/Blog/Blog.php?frm_ammsg=profile_edit_success&frm_type=user");
+			Header("Location: $_CMAPP[services_url]/blog/blog.php?frm_ammsg=profile_edit_success&frm_type=user");
 			die();
 			break;
 
@@ -129,7 +129,11 @@ if(array_key_exists('frm_foto',$_FILES)) {
 	$_SESSION['cad_foto']=serialize($_SESSION['cad_foto']);
 }
 else {
-	if($profile->image) {
+	/*
+	 * TODO check the AMVlogImage dependencie after discomment lines below
+	 */
+	
+	/*if($profile->image) {
 		$_SESSION['diary_profile_image'] = new AMVlogImage;
 		$_SESSION['diary_profile_image']->codeFile = $profile->image;
 		try {
@@ -141,7 +145,7 @@ else {
 			echo $e;
       //hummm, some error on the image. Probably was deleted from the DB.
 		}
-	}
+	}*/
 }
 
 //get the image types that are allowed in this installation of gd+php
