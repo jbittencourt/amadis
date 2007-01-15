@@ -904,6 +904,22 @@ CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 SET FOREIGN_KEY_CHECKS = 1;
 
+-- ------------------------------------
+-- default inserts... -----------------
+-- ------------------------------------
+
+INSERT INTO `States` ( `codeState` , `name` , `country` , `code` )
+VALUES ( '1', 'Rio Grande do Sul', 'Brasil', 'RS');
+
+INSERT INTO `Cities` ( `codeCity` , `name` , `state` , `time` )
+VALUES ('1', 'Porto Alegre', '1', '0');
+
+INSERT INTO `Areas` (`codeArea`, `name`) VALUES (1, 'Ciências'),
+(2, 'Matemática'),(3, 'História'),(4, 'Física'),(5, 'Biologia'),
+(6, 'Literatura'),(7, 'Educação Física'),(8, 'Geografia'),
+(9, 'Química'),(10, 'Língua Estrangeira'),(12, 'Música'),
+(13, 'Filosofia'),(14, 'Educação Infantil'),(15, 'Artes');
+
 -- ----------------------------------------------------------------------
 -- EOF
 
