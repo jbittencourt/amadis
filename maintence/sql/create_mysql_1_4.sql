@@ -650,7 +650,7 @@ CREATE TABLE `amadis`.`GroupMember` (
   `codeUser` BIGINT(20) NOT NULL DEFAULT '0',
   `status` ENUM('ACTIVE','RETIRED') NOT NULL DEFAULT 'ACTIVE',
   `time` BIGINT(20) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`codeGroup`, `codeUser`),
+  PRIMARY KEY (`codeGroup`, `codeUser`, `status`),
   FOREIGN KEY `FKuseronGroupMember` (`codeUser`)
     REFERENCES `amadis`.`User` (`codeUser`)
     ON DELETE NO ACTION
@@ -728,23 +728,6 @@ ENGINE = InnoDB
 ROW_FORMAT = Compact
 CHARACTER SET utf8 COLLATE utf8_general_ci;
 
-DROP TABLE IF EXISTS `amadis`.`News`;
-CREATE TABLE `amadis`.`News` (
-  `codeNews` INT(4) NOT NULL AUTO_INCREMENT,
-  `codeProject` INT(4) NOT NULL DEFAULT '0',
-  `title` VARCHAR(100) NOT NULL,
-  `text` TEXT NOT NULL,
-  `time` INT(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`codeNews`),
-  FOREIGN KEY `FKprojectonNews` (`codeProject`)
-    REFERENCES `amadis`.`Projects` (`codeProject`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
-)
-ENGINE = InnoDB
-ROW_FORMAT = Compact
-CHARACTER SET utf8 COLLATE utf8_general_ci;
-
 DROP TABLE IF EXISTS `amadis`.`ProjectAreas`;
 CREATE TABLE `amadis`.`ProjectAreas` (
   `codeProject` INT(11) NOT NULL DEFAULT '0',
@@ -801,23 +784,19 @@ CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 DROP TABLE IF EXISTS `amadis`.`ProjectNews`;
 CREATE TABLE `amadis`.`ProjectNews` (
-  `codeNews` INT(11) NOT NULL AUTO_INCREMENT,
+  `code` INT(11) NOT NULL AUTO_INCREMENT,
   `codeProject` INT(11) NOT NULL DEFAULT '0',
   `codeUser` BIGINT(20) NOT NULL DEFAULT '0',
   `title` VARCHAR(100) NOT NULL,
   `text` TEXT NOT NULL,
   `time` INT(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`codeNews`),
+  PRIMARY KEY (`code`),
   FOREIGN KEY `FKuseronProjectNews` (`codeUser`)
     REFERENCES `amadis`.`User` (`codeUser`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   FOREIGN KEY `FKprojectsonProjectNews` (`codeProject`)
     REFERENCES `amadis`.`Projects` (`codeProject`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  FOREIGN KEY `FKnewsonProjectNews` (`codeNews`)
-    REFERENCES `amadis`.`News` (`codeNews`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 )
