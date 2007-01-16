@@ -54,6 +54,8 @@ acesso_nao_permitido = "Acesso n&atilde;o permitido"
 acesso_negado = "Acesso negado"
 contact_errors = "Caso persista o erro, entre em contato com o administrador do ambiente."
 
+no_privileges = "Voc&ecirc; n&atilde;o tem privil&eacute;gios"
+
 #Most common actions
 try_again = "Tente novamente"
 finish = "Concluir"
@@ -244,8 +246,9 @@ search_blog = "Procurar por outros di&aacute;rios."
 post_date = "Enviado em "
 by = " por "
 default_title = "Di&aacute;rio de"
-
+no_diary_found = "Nenhum di&aacute;rio encontrado"
 permanent_link = "Link Permanente"
+diary_amadis = "Di&aacute;rios do AMADIS"
 
 post_blog = "Publicar no meu di&aacute;rio"
 post_not_exists = "N&atilde;o existe a nota no di&aacute;rio."
@@ -323,6 +326,8 @@ send = "Enviar"
 change_password = "Troca senha"
 project_invitation = "Voc&ecirc; foi convidado para participar do projeto";
 
+msg_joined_project = "Voc&ecirc; agora faz parte da equipe do projeto "
+msg_rejected_project = "Voc&ecirc; rejeitou o pedido para fazer parte do projeto "
 
 friend_invitation = "Este usu&aacute;rio te adicionou como amigo!"
 no_chats = "Nao h&aacute; chats ocorrendo"
@@ -348,8 +353,8 @@ blog_comment = "novo coment&aacute;rio no post"
 forum_list_more = "Ver todos os F&oacute;runs"
 webfolio_visit = "Ir para o Webf&oacute;lio"
 
-user_no_communities = "O usu&aacute;rio n&atilde; participa de nenhuma comunidade no momento."
-user_no_projects = "O usu&aacute; n&atilde; participa de nenhum projeto no momento."
+user_no_communities = "O usu&aacute;rio n&atilde;o participa de nenhuma comunidade no momento."
+user_no_projects = "O usu&aacute;rio n&atilde;o participa de nenhum projeto no momento."
 no_forums_events = "Nenhuma novidade nos f&oacute;runs"
 no_files_shared = "Nenhum arquivo compartilhado no momento "
 list_all_files = "Ver todos os arquivos compartilhados"
@@ -727,7 +732,7 @@ community_forum_priv_partial = "Somente os membros da comunidade podem participa
 community_forum_priv_restricted = "Apenas os membros da comunidade pode ver e participar"
 community_forum_priv_open = "Todos os usu&aacute;rios podem ver e participar"
 
-
+list_community_news = "Ver not&iacute;cias da comunidade"
 
 error_joining_user = "Ocorreu um erro ao aceitar este pedido. Por
 favor tente novamente."
@@ -812,7 +817,7 @@ no_communities_found = "Nenhuma comunidade encontrada"
 project_group_actual = "Equipe atual da Comunidade"
 project_group_old = "Pessoas que j&aacute; participaram desta comunidade."
 
-
+community_join_request = "Por qu&ecirc; voc&ecirc; quer fazer parte desta comunidade?"
 request_join_waiting = "Sua requisi&ccedil;&atilde;o para participar dessa comunidade est&aacute; aguardando por aprova&ccedil;&atilde;o."
 community_join = "Juntar-me a esta Comunidade"
 community_visit = "Visitar esta Comunidade"	      
@@ -833,6 +838,7 @@ tie_projects_to_community = "Vincular projetos a comunidade"
 
 community_code_does_not_exists = "O c&oacute;digo passado &eacute;
 inv&aacute;lido ou n&atilde;o existe"
+
 error_project_not_selected = "Nenhum projeto foi selecionado"
 msg_tie_success = "Projeto vinculado com sucesso"
 error_tie_failed = "N&atilde;o foi poss&iacute;vel vincular o projeto
@@ -947,13 +953,14 @@ send = "Enviar"
 state_name = "Nome do estado"
 send_warn = "Enviar aviso"
 event = "Avisos"
+configuration = "Configura&ccedil;&otilde;es AMADIS:"
 config_environment = "Configurar Ambiente"
 config_forum = "Configurar F&oacute;rum"
 config_chat = "Configurar Chat"
 config_communities = "Configurar Comunidades"
 city_name = "Nome da cidade"
 list_not_authorized = "Communidades n&atilde;o autorizadas"
-error_authorization_success = "Autoriza&ccedil;&atilde;o da(s) comunidade(s) realizada com sucesso!"
+
 send_messages = "Enviar avisos para utilizadores"
 user_not_found = "Usu&aacute;rio n&atilde;o encontrado"
 set_new_pw = "Digite a nova senha para "
@@ -1094,3 +1101,9 @@ aco_no_projects = "Voc&ecirc;  n&atilde;o participa de nenhum projeto no momento
 aco_no_communities = "Voc&ecirc;  n&atilde;o participa de nenhuma comunidade no momento. Realia uma busca para selecionar comunidades."
 
 aco_privs_world = "Todos no AMADIS"
+
+[rte]
+
+image_from_my_AMADIS_lib = "Imagens dos Meus Arquivos AMADIS"
+image_from_my_pc = "Carregar Imagem do Meu Computador"
+image_from_internet = "Caminho para uma Imagem na Internet"
