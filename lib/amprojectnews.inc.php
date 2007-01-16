@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Short descrition
  *
@@ -15,17 +15,14 @@ class AMProjectNews extends CMObj {
    public function configure() {
      $this->setTable("ProjectNews");
 
-     $this->addField("codeNews",CMObj::TYPE_INTEGER,"20",1,0,1);
+     $this->addField("code",CMObj::TYPE_INTEGER,"20",1,0,1);
      $this->addField("codeProject",CMObj::TYPE_INTEGER,"20",1,0,0);
      $this->addField("codeUser",CMObj::TYPE_INTEGER,"20",1,0,0);
      $this->addField("title",CMObj::TYPE_VARCHAR,"100",1,"",0);
      $this->addField("text",CMObj::TYPE_TEXT,0,1,"",0);
      $this->addField("time",CMObj::TYPE_INTEGER,"11",1,0,0);
 
-     $this->addPrimaryKey("codeNews");
+     $this->addPrimaryKey("code");
   }
 
 }
-
-
-?>

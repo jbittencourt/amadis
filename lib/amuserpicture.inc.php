@@ -36,7 +36,7 @@ class AMUserPicture extends AMFixedSizeImage implements AMThumbinaiableImage
    *
    * @param AMUser $user The user wich you want to obtain the image code.
    **/
-  static public function getImage(AMUser $user) {
+  static public function getImage($user) {
     $foto = (integer) $user->picture;
     if(empty($foto)) {
       return self::DEFAULT_IMAGE;
@@ -51,7 +51,8 @@ class AMUserPicture extends AMFixedSizeImage implements AMThumbinaiableImage
    * @param boolean $smallthumb Sets if returned thumbnails is of the small size.
    **/
   static public function getThumb($obj,$smallthumb=false) {
-    $image = self::getImage($obj);
+
+  	$image = self::getImage($obj);
 
     $thumb = new AMUserThumb($smallthumb);
     $thumb->codeFile = $image;

@@ -34,7 +34,7 @@ class AMCommunityImage extends AMFixedSizeImage implements AMThumbinaiableImage 
    *
    * @param AMCommunities $comm The community wich you want to obtain the image code.
    **/
-  static public function getImage(AMCommunities $comm) {
+  static public function getImage($comm) {
     $image = (integer) $comm->image;
     if(empty($image)) {
       return self::DEFAULT_IMAGE;

@@ -19,7 +19,7 @@ class AMArea extends CMObj {
     }
 
     static public function listAreas(){
-        $q = new CMQuery(AMArea);
+        $q = new CMQuery('AMArea');
         return $q->execute();
     }
     

@@ -82,7 +82,7 @@ class AMEnvironment extends CMEnvironment
         $q->addJoin($j, "areas");
         $q->addJoin($j1, "area");
         $q->setOrder("time desc");
-        $q->setFilter("AMArea::codArea =". $codArea);
+        $q->setFilter("AMArea::codeArea =". $codArea);
         $q->setLimit($ini, $length);
         $result[] = $q->execute();
         return $result;
@@ -349,8 +349,7 @@ class AMEnvironment extends CMEnvironment
         $q->addJoin($j, "news");
 
         $q->setLimit(0,5);
-        $q->setOrder("CommunityNews.time desc");
-        $q->setFilter("Communities.status = '".AMCommunities::ENUM_STATUS_AUTHORIZED."'");
+        $q->setOrder("CommunityNews.time desc");        
 
         return $q->execute();
 
@@ -372,14 +371,12 @@ class AMEnvironment extends CMEnvironment
     public function listAllCommunities($ini=0, $length=5)
     {
         $q = new CMQuery('AMCommunities');
-        $result = array();
-        $q->setFilter("Communities.status = '".AMCommunities::ENUM_STATUS_AUTHORIZED."'");
+        $result = array();        
         $q->setCount();
         $result['count'] = $q->execute();
 
         $q = new CMQuery('AMCommunities');
-        $q->setOrder("name asc");
-        $q->setFilter("Communities.status = '".AMCommunities::ENUM_STATUS_AUTHORIZED."'");
+        $q->setOrder("name asc");        
         $q->setLimit($ini, $length);
         $result[] = $q->execute();
         return $result;
@@ -393,8 +390,7 @@ class AMEnvironment extends CMEnvironment
     {
         $s = new CMSearch('AMCommunities');
         $s->addSearchFields("AMCommunities::name","AMCommunities::description");
-        $s->setSeachString($searchString);
-        $s->setFilter("AMCommunities::status='".AMCommunities::ENUM_STATUS_AUTHORIZED."'");
+        $s->setSeachString($searchString);        
 
         $q = clone $s;
         $q->setCount();
@@ -451,8 +447,8 @@ class AMEnvironment extends CMEnvironment
         
         $q = new CMQuery('CMEnvSession');
 
-    //$filter = "EnvSession.flagEnded = '".CMEnvSession::ENUM_FLAGENDED_NOT_ENDED."'";
-        $filter  = "Friends.codeUser = ".$_SESSION['user']->codeUser;//." AND EnvSession.timeEnd < ".CMEnvSession::getTimeout(time());
+    
+        $filter  = "Friends.codeUser = ".$_SESSION['user']->codeUser;
         $filter .= " AND Friends.status = '".AMFriend::ENUM_STATUS_ACCEPTED."'";
         $filter .= " AND EnvSession.flagEnded = '".CMEnvSession::ENUM_FLAGENDED_NOT_ENDED."'";
 
@@ -465,7 +461,7 @@ class AMEnvironment extends CMEnvironment
         $q->addJoin($j1, "friends");
 
         $q->setFilter($filter);
-    //$q->setOrder("EnvSession.timeEnd DESC");
+
         $q->groupBy("EnvSession.codeUser");
 
         return $q->execute();

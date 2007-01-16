@@ -189,7 +189,7 @@ class AMProject extends CMObj {
         $q->addJoin($j,"areas");
 
         $q->setLimit(4,0);
-        $q->setFilter("AMProjectArea::codeProject=".$this->codeProject);
+        $q->setFilter("AMProjectArea::codeProject=".$this->codeProject." AND AMProjectArea::codeArea = AMArea::codeArea");
 
         return $q->execute();
     }
@@ -199,8 +199,8 @@ class AMProject extends CMObj {
         $q = new CMQuery('AMForum');
 
         $j = new CMJoin(CMJoin::INNER);
-        $j->setClass('AMProjectForum');
-        $j->on("AMForum::code = AMProjectForum::codeForum");
+        $j->setClass('AMProjectForums');
+        $j->on("AMForum::code = AMProjectForums::codeForum");
 
         $j2 = new CMJoin(CMJoin::LEFT);
         $j2->on("AMForum::code=AMForumMessage::codeForum");
