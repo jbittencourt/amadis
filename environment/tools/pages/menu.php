@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Visualization pages menu
  *
