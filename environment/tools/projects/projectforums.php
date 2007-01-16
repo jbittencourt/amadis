@@ -1,90 +1,91 @@
-<?
-$_CMAPP[notrestricted] = 1;
+<?php
+
+$_CMAPP['notrestricted'] = 1;
 include("../../config.inc.php");
 
-$_language = $_CMAPP[i18n]->getTranslationArray("projects");
+$_language = $_CMAPP['i18n']->getTranslationArray("projects");
 
 $pag = new AMTProjeto;
 $pag->requires("forum.css",CMHTMLObj::MEDIA_CSS);
 
-if(!empty($_REQUEST[frm_codeProject])) {
-     $proj = new AMProject;
-     $proj->codeProject = $_REQUEST[frm_codeProject];
-     try{
-       $proj->load();
-     }catch(CMDBNoRecord $e){
-       $location  = $_CMAPP[services_url]."/projects/project.php?frm_amerror=project_not_exists";
-       $location .= "&frm_codProjeto=".$_REQUEST['frm_codeProject'];
-       header("Location:$location");
-     }
-} else { 
-  $_REQUEST[frm_amerror] = "any_project_id";
-  $pag->add("<br><div align=center><a href=\"".$_SERVER[HTTP_REFERER]."\" ");
-  $pag->add("class=\"cinza\">".$_language['voltar']."</a></div><br>");
-  echo $pag;
-  die();
+if(!empty($_REQUEST['frm_codeProject'])) {
+	$proj = new AMProject;
+	$proj->codeProject = $_REQUEST['frm_codeProject'];
+	try{
+		$proj->load();
+	}catch(CMDBNoRecord $e){
+		$location  = $_CMAPP['services_url']."/projects/project.php?frm_amerror=project_not_exists";
+		$location .= "&frm_codProjeto=".$_REQUEST['frm_codeProject'];
+		header("Location:$location");
+	}
+} else {
+	$_REQUEST['frm_amerror'] = "any_project_id";
+	$pag->add("<br><div align=center><a href=\"".$_SERVER['HTTP_REFERER']."\" ");
+	$pag->add("class=\"cinza\">".$_language['voltar']."</a></div><br>");
+	echo $pag;
+	die();
 }
 
 
-if(!empty($_REQUEST[frm_action])) {
-  switch($_REQUEST[frm_action]) {
+if(!empty($_REQUEST['frm_action'])) {
+	switch($_REQUEST['frm_action']) {
   case "A_create":
-    $title = "<div class=\"forum_project_title\">$_language[project_forum_create] $proj->title</div>";
+  	$title = "<div class=\"forum_project_title\">$_language[project_forum_create] $proj->title</div>";
 
-    $_language = $_CMAPP[i18n]->getTranslationArray("forum");
+  	$_language = $_CMAPP['i18n']->getTranslationArray("forum");
 
-    $box = new AMColorBox($title,AMColorBox::COLOR_BOX_BEGE);
-    $box->setWidth("500px");
-    $box->add("<br/>");
+  	$box = new AMColorBox($title,AMColorBox::COLOR_BOX_BEGE);
+  	$box->setWidth("500px");
+  	$box->add("<br/>");
 
-    $box->add("<FORM ACTION='$_SERVER[PHP_SELF]'>");
-    $box->add("<INPUT TYPE=hidden NAME=frm_codeProject value='$_REQUEST[frm_codeProject]'>");
-    $box->add("<INPUT TYPE=hidden NAME=frm_action value='A_create2'>");
-    $box->add("$_language[frm_name] <INPUT TYPE=text NAME=frm_name VALUE='$_REQUEST[frm_name]'>");
+  	$box->add("<FORM ACTION='$_SERVER[PHP_SELF]'>");
+  	$box->add("<INPUT TYPE=hidden NAME=frm_codeProject value='$_REQUEST[frm_codeProject]'>");
+  	$box->add("<INPUT TYPE=hidden NAME=frm_action value='A_create2'>");
+  	$box->add("$_language[frm_name] <INPUT TYPE=text NAME=frm_name VALUE='$_REQUEST[frm_name]'>");
 
-    $box->add("<P style='text-align: right'><BUTTON TYPE=SUBMIT CLASS='image-button'><IMG SRC='$_CMAPP[imlang_url]/bt_criar_forum.gif'></BUTTON>");
-    $box->add("</FORM>");
+  	$box->add("<P style='text-align: right'><BUTTON TYPE=SUBMIT CLASS='image-button'><IMG SRC='$_CMAPP[imlang_url]/bt_criar_forum.gif'></BUTTON>");
+  	$box->add("</FORM>");
 
-    $pag->add($box);
-    echo $pag;
-    die();
-    break;
+  	$pag->add($box);
+  	echo $pag;
+  	die();
+  	break;
   case "A_create2":
 
-    //create a forum object
-    $forum = new AMForum;
-    $forum->name = $_REQUEST[frm_name];
-    $forum->creationTime = time();
-    $forum->save();
-    
-    //relates the forum with the project
-    $link = new AMProjectForum;
-    $link->codeForum = $forum->code;
-    $link->codeProject = $_REQUEST[frm_codeProject];
-    $link->save();
+  	//create a forum object
+  	$forum = new AMForum;
+  	$forum->name = $_REQUEST['frm_name'];
+  	$forum->creationTime = time();
+  	$forum->save();
 
-    $aco = $forum->getACO();
-    $aco->addGroupPrivilege($proj->codeGroup,AMForum::PRIV_ALL);
-    $aco->addWorldPrivilege(AMForum::PRIV_VIEW);
+  	//relates the forum with the project
+  	$link = new AMProjectForums;
+  	$link->codeForum = $forum->code;
+  	$link->codeProject = $_REQUEST['frm_codeProject'];
+  	$link->save();
 
-    //The above line are commented because the aco render process
-    //is not iet ready. They should be uncomented as soon as possible.
+  	$aco = $forum->getACO();
+  	$aco->addGroupPrivilege($proj->codeGroup,AMForum::PRIV_ALL);
+  	$aco->addWorldPrivilege(AMForum::PRIV_VIEW);
 
-//     $box = new AMACORender($aco);
-//     $pag->add($box);
-//     echo $pag;
-//     die();
+  	//The above line are commented because the aco render process
+  	//is not iet ready. They should be uncomented as soon as possible.
+
+  	//     $box = new AMACORender($aco);
+  	//     $pag->add($box);
+  	//     echo $pag;
+  	//     die();
 
 
-//   case "A_end":
+  	//   case "A_end":
 
-    $link = "$_CMAPP[services_url]/forum/forum.php?frm_codeForum=$forum->code";
-    CMHtmlPage::redirect($link);
-    die();
-    
-    break;
+  	$link = "$_CMAPP[services_url]/forum/forum.php?frm_codeForum=$forum->code";
+  	CMHtmlPage::redirect($link);
+  	die();
 
-  }
+  	break;
+
+	}
 }
 
 $pag->add("<br><br>");

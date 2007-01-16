@@ -1,4 +1,4 @@
-<?php
+ <?php
 /**
  * This page creates a new project.
  *
@@ -46,7 +46,7 @@ if(!empty($_REQUEST['frm_codeProjeto'])) {
     $_SESSION['cad_proj']->addVariable("areas",$tmp_areas);
   }
 
-  $_SESSION['cad_foto'] = new AMProjImage;
+  $_SESSION['cad_foto'] = new AMProjectImage;
   $_SESSION['cad_foto']->codeFile = (integer) $_SESSION['cad_proj']->image;
   try {
     $_SESSION['cad_foto']->load();
@@ -95,8 +95,6 @@ switch($_REQUEST['action']) {
    $status = AMProject::listAvaiableStatus();
    
    $form->addComponent("action",new CMWHidden("action","pag_1"));
-
-
 
    $cadBox->add($form);
    $cadBox->setTitle("<img src='$_CMAPP[imlang_url]/img_dados_gerais.gif'>");

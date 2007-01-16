@@ -1,4 +1,4 @@
-<?
+<?php
 $_CMAPP['notrestricted'] = 1;
 
 include("../../config.inc.php");
@@ -13,5 +13,3 @@ $pag = new AMTProjeto;
 $pag->add(new AMBProjectList);
 
 echo $pag;
-
-?>

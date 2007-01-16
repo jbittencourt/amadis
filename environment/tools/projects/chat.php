@@ -1,4 +1,4 @@
-<?
+<?php
 $_CMAPP['notrestricted']=false;
 
 include("../../config.inc.php");
@@ -10,11 +10,12 @@ $pag = new AMTChat;
 $pag->add("<br>");
 
 $proj = new AMProject;
+
 $proj->codeProject = $_REQUEST['frm_codeProject'];
 try {
-  $proj->load();
+	$proj->load();
 }catch (CMException $e) {
-  die($e->getMessage());
+	die($e->getMessage());
 }
 
 $box = new AMBChat;
@@ -27,15 +28,14 @@ $box->setToolType(AMChatRoom::ENUM_CHAT_TYPE_PROJECT, $proj->codeProject);
 $openRooms = $proj->getOpenRooms();
 
 if($openRooms->__hasItems()) {
-  $box->addOpenRooms($openRooms);
+	$box->addOpenRooms($openRooms);
 }
 
 $markedChats = $proj->getMarkedChats();
 if($markedChats->__hasItems()) {
-  $box->addMarkedChats($markedChats);
+	$box->addMarkedChats($markedChats);
 }
 
 $pag->add($box);
 
 echo $pag;
-?>
