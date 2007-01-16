@@ -86,7 +86,7 @@ $pag->add(CMHTMLObj::getScript(implode("\n", $script)));
 $pag->add("<form action='#' enctype='multipart/form-data' name='sendImageForm' method='post'>");
 $pag->add("  <input type='file' name='file' id='file' size='33' onChange='checkFile(this, document.sendImageForm);'>");
 $pag->add("  <input type='hidden' name='action' value='A_sendImage'>");
-if(isset($codeArquivo)) $pag->add("<input type='hidden' name='codeArquivo' value='$codeArquivo'>");
+if(isset($codeArquivo)) $pag->add("<input type='hidden' name='codeFile' value='$codeArquivo'>");
 $pag->add("</form>");
 
 echo $pag;
