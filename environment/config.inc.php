@@ -16,6 +16,11 @@ $_CMAPP['config'] = simplexml_load_file($_CMAPP['config_file']);
  * @todo test if the config file does not exist
  **/
 
+if(!isset($_CMAPP['notrestricted'])){
+	$_CMAPP['notrestricted'] = "";
+}	
+
+
 //load the path of the libs
 foreach($_CMAPP['config']->app[0]->libs[0]->lib as $item) {
 	  $attributes = $item->attributes();
