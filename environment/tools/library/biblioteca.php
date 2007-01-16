@@ -52,7 +52,7 @@ if(!isset($_REQUEST['opcao'])){
 
 switch( $_REQUEST['opcao'] ){
 	case "save":
-		if($_FILES['uploadFile']['name'] == ""){
+		if($_FILES['uploadFile']['name'] != ""){
 			try{
 				$ret =  $library->saveEntry();
 			}catch(AMException $e){
@@ -75,10 +75,14 @@ switch( $_REQUEST['opcao'] ){
 	case "download":
 		$file = new AMFile;
 		$file->codeFile = $_REQUEST['codeFile'];
-		$file->load();
-		$down = new AMTFileDownload($file);
-		echo $down;
-
+		try {
+			$file->load();
+		} catch(CMDBNoRecord $e) {
+			die("Image doesn't exists.");
+		}
+		$download = new AMTFileDownload($file);
+		echo $download;
+		die();		
 		break;
 	case "share":
 		break;
