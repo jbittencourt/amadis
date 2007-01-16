@@ -12,18 +12,18 @@
  * @see AMDiaryList, AMAmbiente
  */
 
-$_CMAPP[notrestricted] = True;
+$_CMAPP['notrestricted'] = True;
 include("../../config.inc.php");
 
-$_language = $_CMAPP[i18n]->getTranslationArray("diary");
-$_CMAPP[smartform] = array();
-$_CMAPP[smartform][language] = $_language;
+$_language = $_CMAPP['i18n']->getTranslationArray("blog");
+$_CMAPP['smartform'] = array();
+$_CMAPP['smartform']['language'] = $_language;
 
 
-$pag = new AMTDiario();
+$pag = new AMTBlog;
 
-$box = new AMDiaryList;
-$items = AMAmbiente::listDiaries($box->getInitial(),$box->getFinal());
-$box->init($items[data],$items[count]);
+$box = new AMBlogList;
+$items = AMEnvironment::listDiaries($box->getInitial(),$box->getFinal());
+$box->init($items['data'],$items['count']);
 $pag->add($box);
 echo $pag; 

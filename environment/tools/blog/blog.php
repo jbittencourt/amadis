@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Visualization of diary
  *
@@ -20,8 +19,6 @@ $_language = $_CMAPP['i18n']->getTranslationArray("blog");
 $_CMAPP['smartform'] = array();
 $_CMAPP['smartform']['language'] = $_language;
 
-
-
 $pag = new AMTBlog;
 
 if(!empty($_REQUEST['frm_action'])) {
@@ -36,13 +33,13 @@ if(!empty($_REQUEST['frm_action'])) {
 				$comentario->save();
 				$pag->addMessage($_language['msg_comments_saved']); //aviso em java script
 			}
- 			catch(CMDBQueryError $erro) {
+			catch(CMDBQueryError $erro) {
 				$_REQUEST['frm_amerror'] = "comment_not_saved";
 			}
-			
+				
 			break;
 
-    // ------------  teste para deletar posts
+			// ------------  teste para deletar posts
 		case "A_delete":
 			$deletar = new AMBlogPost;
 			$deletar->codePost = $_REQUEST['frm_codePost'];
@@ -59,17 +56,16 @@ if(!empty($_REQUEST['frm_action'])) {
 					}
 				}
 			}
-			
+				
 			catch(CMObjException $exception) {
 				$pag->addError($_language['post_not_delete']);
 
 			}
 			break;
-    // ------------  teste para deletar posts
+			// ------------  teste para deletar posts
 
 	}
 }
-
 
 $default = true;
 
@@ -89,9 +85,9 @@ if(!empty($_REQUEST['frm_codeUser'])) {
 	}
 }
 else {
-  //if no user code was submited, test for
-  //a message code, so we can load the
-  //data for the query
+	//if no user code was submited, test for
+	//a message code, so we can load the
+	//data for the query
 	if(!(empty($_REQUEST['frm_codePost']))) {
 		$post = new AMBlogPost;
 		$post->codePost = $_REQUEST['frm_codePost'];
@@ -102,12 +98,11 @@ else {
 			$userBlog->load();
 			$default = false;
 		} Catch(CMDBNoRecord $e) {
-			$pag->addError($_language['error_post_does_not_exist'], $e->getMessage());
-
+			$pag->addError($_language['error_post_does_not_exist']);
 			echo $pag;
 			die();
 		}
-		
+
 		$_REQUEST['frm_calMonth'] = date("m",$post->tempo);
 		$_REQUEST['frm_calYear'] = date("Y",$post->tempo);
 
@@ -116,16 +111,15 @@ else {
 }
 
 //If there is codePost or codeUser submited, or there
-//was some error in the load, the defautl behavior is
+//was some error in the load, the default behavior is
 //to load the diary of the user.
-if($default) {
+if($default) {	
 	$userBlog = $_SESSION['user'];
 }
 
-if(!empty($userBlog)) {
+if(!empty($userBlog)) {	
 	$profile= new AMBlogProfile;
 	$profile->codeUser = $userBlog->codeUser;
-
 
 	$title = "";
 	$text = "";
@@ -140,7 +134,7 @@ if(!empty($userBlog)) {
 		$title = $_language['default_title'].' '.$userBlog->name;
 		$linkEditar = "edit.php";
 	}
-	
+
 
 	if(empty($_REQUEST['frm_calYear']) || empty($_REQUEST['frm_calMonth'])) {
 		$_REQUEST['frm_calMonth'] = date('m',time());
@@ -148,8 +142,7 @@ if(!empty($userBlog)) {
 	}
 
 	$posts = $userBlog->listBlogPosts($_REQUEST['frm_calMonth'],$_REQUEST['frm_calYear']);
-
-
+	
 	if($profile->image==0) {
 		$image = new AMTBlogImage(AMUserPicture::getImage($userBlog));
 	}
@@ -157,25 +150,19 @@ if(!empty($userBlog)) {
 		$image = new AMTBlogImage($profile->image);
 	}
 
-
-	 
 	$caixa = new AMBoxBlog($posts,$userBlog->codeUser,$title,$image,$text);
-
 	$caixa->setDate($_REQUEST['frm_calMonth'],$_REQUEST['frm_calYear']);
 	$date = getdate(time());
 	if(!empty($_SESSION['user']) && ($_REQUEST['frm_calMonth']==$date['mon']) && ($_REQUEST['frm_calYear']==$date['year'])) {
-
 		if($userBlog->codeUser==$_SESSION['user']->codeUser) {
 			$caixa->addCabecalho("<br> <a class=\"diary_header\" href=\"post.php\" > &raquo; $_language[post_blog] </a>");
 			$caixa->addCabecalho("<br> <a class=\"diary_header\" href=\"$linkEditar\" > &raquo; $_language[edit_blog] </a>");
 		}
 	}
-
 	$rsslink = $_CMAPP['services_url'] . "/blog/blogRSS.php?frm_codeUser=$userBlog->codeUser";
 	$pag->setRSSFeed($rsslink,$title);
 	$pag->add($caixa);
 } else {
 	$pag->addError($_language['error_user_not_logged']);
 }
-
 echo $pag;
