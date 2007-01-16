@@ -27,7 +27,7 @@ if(!empty($_REQUEST['frm_codeCommunity'])) {
 } else { 
   $_REQUEST['frm_amerror'] = "no_community_id";
   
-  $pag->add("<br><div align=center><a href=\"".$_SERVER[HTTP_REFERER]."\" ");
+  $pag->add("<br><div align=center><a href=\"".$_SERVER['HTTP_REFERER']."\" ");
   $pag->add("class=\"cinza\">".$_language['voltar']."</a></div><br>");
   echo $pag;
   die();

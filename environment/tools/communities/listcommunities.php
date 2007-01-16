@@ -1,4 +1,4 @@
-<?
+<?php
 
 $_CMAPP['notrestricted'] = 1;
 
@@ -17,5 +17,3 @@ if($_REQUEST['list_action'] == "A_list_news" || $_REQUEST['list_action'] == "A_l
 }
      
 echo $pag;
-
-?>

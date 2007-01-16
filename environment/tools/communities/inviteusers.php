@@ -41,7 +41,7 @@ if(!$isMember) {
 
 
 $pag = new AMTCommunities;
-//adds an Javascript that checks for if thereis some checkbox checked before submit.
+//adds an Javascript that checks for if there is some checkbox checked before submit.
 $pag->requires("inviteusers.js");
 $pag->requires("search.js");
 
@@ -89,7 +89,7 @@ switch($_REQUEST['action']) {
        $temp[$item->codeUser] = $item;
      }
      $_SESSION['communities'][$co->code]['members'] = $temp;
-   };
+   }
    break;
 }
 

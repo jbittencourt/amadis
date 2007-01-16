@@ -1,6 +1,6 @@
 <?php
 /**
- * This page is used to invite users to a community.
+ * This page is used to join projects to a community.
  *
  * The objective of this page is the allow community admin to
  * invite new users to his community. The invitation is stored
@@ -51,8 +51,11 @@ AMTCadBox::COMMUNITY_THEME);
 
 //adds the default message for the javascript display when you try to submit
 //a empty form.
-$pag->addScript("msg_check_some_user='$_language[error_project_not_select]';");
+$pag->addScript("msg_check_some_user='$_language[error_project_not_selected]';");
 
+if(!isset($_REQUEST['action'])){
+	$_REQUEST['action'] = "";
+}
 switch($_REQUEST['action']) {
  case "A_tie":
  	if(empty($_REQUEST['frm_projectTie'])) {

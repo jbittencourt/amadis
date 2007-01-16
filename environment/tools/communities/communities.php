@@ -1,8 +1,8 @@
-<?
-$_CMAPP[notrestricted]=1;
+<?php
+$_CMAPP['notrestricted']=1;
 include("../../config.inc.php");
 
-$_language = $_CMAPP[i18n]->getTranslationArray("communities");
+$_language = $_CMAPP['i18n']->getTranslationArray("communities");
 
 $pag = new AMTCommunities;
 
@@ -28,7 +28,7 @@ switch($_REQUEST['frm_action']) {
     **/
 
    $box->add(new AMBCommunitiesSearch, AMTwoColsLayout::RIGHT);
-   if(!empty($_SESSION[user])) {
+   if(!empty($_SESSION['user'])) {
      $box->add(new AMBMyCommunities, AMTwoColsLayout::RIGHT);
      $box->add("<br><br>",AMTwoColsLayout::RIGHT);
    }
@@ -45,5 +45,3 @@ switch($_REQUEST['frm_action']) {
 }
  
 echo $pag;
-
-?>

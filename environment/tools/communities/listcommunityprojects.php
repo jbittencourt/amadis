@@ -1,4 +1,4 @@
-<?
+<?php
 
 $_CMAPP['notrestricted'] = 1;
 
@@ -7,7 +7,7 @@ include("../../config.inc.php");
 $_language = $_CMAPP['i18n']->getTranslationArray('communities');
 
 $community = new AMCommunities;
-$community->code = $_REQUEST[frm_codeCommunity];
+$community->code = $_REQUEST['frm_codeCommunity'];
 try {
   $community->load();
   $group = $community->getGroup();
@@ -19,7 +19,7 @@ try {
 
 $pag = new AMTCommunities;
 
-$pag->add("<a  href=\"".$_CMAPP[services_url]."/communities/community.php?frm_codeCommunity=".$community->code."\" class=\"green\">$_language[back_to_community]</a>");
+$pag->add("<a  href=\"".$_CMAPP['services_url']."/communities/community.php?frm_codeCommunity=".$community->code."\" class=\"green\">$_language[back_to_community]</a>");
 $pag->add("<br><br>");
 
 
@@ -29,5 +29,3 @@ $title = "$_language[list_projects_community] ".$community->name;
 $box = new AMProjectList($projects,$title, AMTCadBox::CADBOX_LIST);
 $pag->add($box);
 echo $pag;
-
-?>

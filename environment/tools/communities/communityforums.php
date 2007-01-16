@@ -1,37 +1,38 @@
-<?
-$_CMAPP[notrestricted] = 1;
+<?php
+
+$_CMAPP['notrestricted'] = 1;
 include("../../config.inc.php");
 
-$_language = $_CMAPP[i18n]->getTranslationArray("communities");
+$_language = $_CMAPP['i18n']->getTranslationArray("communities");
 
 $pag = new AMTCommunities;
 $pag->requires("forum.css",CMHTMLObj::MEDIA_CSS);
 
-if(!empty($_REQUEST[frm_codeCommunity])) {
+if(!empty($_REQUEST['frm_codeCommunity'])) {
      $co = new AMCommunities;
-     $co->code = $_REQUEST[frm_codeCommunity];
+     $co->code = $_REQUEST['frm_codeCommunity'];
      try{
        $co->load();
      }catch(CMDBNoRecord $e){
-       $location  = $_CMAPP[services_url]."/communities/community.php?frm_amerror=community_not_exists";
-       $location .= "&frm_codeCommunity=".$_REQUEST[frm_codeCommunity];
+       $location  = $_CMAPP['services_url']."/communities/community.php?frm_amerror=community_not_exists";
+       $location .= "&frm_codeCommunity=".$_REQUEST['frm_codeCommunity'];
        header("Location:$location");
      }
 } else { 
-  $_REQUEST[frm_amerror] = "error_no_community_id";
-  $pag->add("<br><div align=center><a href=\"".$_SERVER[HTTP_REFERER]."\" ");
-  $pag->add("class=\"cinza\">".$_language[back]."</a></div><br>");
+  $_REQUEST['frm_amerror'] = "error_no_community_id";
+  $pag->add("<br><div align=center><a href=\"".$_SERVER['HTTP_REFERER']."\" ");
+  $pag->add("class=\"cinza\">".$_language['back']."</a></div><br>");
   echo $pag;
   die();
 }
 
 
-if(!empty($_REQUEST[frm_action])) {
-  switch($_REQUEST[frm_action]) {
+if(!empty($_REQUEST['frm_action'])) {
+  switch($_REQUEST['frm_action']) {
   case "A_create":
     $title = "<div class=\"forum_project_title\">$_language[community_forum_create] $co->name</div>";
 
-    $_language = $_CMAPP[i18n]->getTranslationArray("forum");
+    $_language = $_CMAPP['i18n']->getTranslationArray("forum");
 
     $box = new AMColorBox($title,AMColorBox::COLOR_BOX_BEGE);
     $box->add("<br/>");
@@ -52,13 +53,13 @@ if(!empty($_REQUEST[frm_action])) {
   case "A_make":
 
     $forum = new AMForum;
-    $forum->name = $_REQUEST[frm_name];
+    $forum->name = $_REQUEST['frm_name'];
     $forum->creationTime = time();
     $forum->save();
     
     $link = new AMCommunityForum;
     $link->codeForum = $forum->code;
-    $link->codeCommunity = $_REQUEST[frm_codeCommunity];
+    $link->codeCommunity = $_REQUEST['frm_codeCommunity'];
     $link->save();
 
     $aco = $forum->getACO();
@@ -100,6 +101,3 @@ $pag->add($box);
 
 
 echo $pag;
-
-
-?>

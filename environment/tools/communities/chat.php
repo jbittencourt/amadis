@@ -1,4 +1,5 @@
-<?
+<?php
+
 $_CMAPP['notrestricted']=false;
 
 include("../../config.inc.php");
@@ -44,4 +45,3 @@ if($markedChats->__hasItems()) {
 $pag->add($box);
 
 echo $pag;
-?>
