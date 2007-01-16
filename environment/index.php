@@ -1,4 +1,5 @@
 <?php
+
 $_CMAPP['notrestricted']=true;
 include("config.inc.php");
 include($_CMAPP['path']."/templates/aminicial.inc.php");
