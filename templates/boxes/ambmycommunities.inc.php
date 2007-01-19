@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * @package AMADIS
  * @subpackage AMBoxes
@@ -13,7 +13,7 @@ class AMBMyCommunities extends AMColorBox {
     
     parent::__construct("$_CMAPP[imlang_url]/img_minhas_comunidades.gif",self::COLOR_BOX_BEGE);
     
-    $this->itens = $_SESSION[user]->listMyCommunities();
+    $this->itens = $_SESSION['user']->listMyCommunities();
 
   }
 
@@ -32,5 +32,3 @@ class AMBMyCommunities extends AMColorBox {
   }
 
 }
-
-?>

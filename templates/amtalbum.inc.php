@@ -1,7 +1,5 @@
 <?php
 class AMTAlbum extends AMMain {
-  
-
   function __construct() {
     global $_CMAPP;
 

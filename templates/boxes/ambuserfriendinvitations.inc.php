@@ -22,7 +22,7 @@ class AMBUserFriendInvitations extends AMColorBox implements CMActionListener {
 			$this->invitations = $_SESSION['user']->listFriendsInvitations();
 			($this->invitations->__hasItems() ? $this->__hasItems = true : $this->__hasItems = false);			
 		}catch(AMWEFirstLogin $e) {
-			$this->__hasItems = false;
+			$this->__hasItems = false;			
 		}
 	}
 

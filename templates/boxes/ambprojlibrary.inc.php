@@ -1,4 +1,4 @@
-<?
+<?php
  /**
  * @package AMADIS
  * @subpackage AMBoxes
@@ -36,7 +36,7 @@ class AMBProjLibrary extends AMColorBox {
       parent::add("<font class='blt_subtitulo'>$_language[last_five]</font>");
       parent::add("<table>");
       foreach($list as $item) {
-	$mimeType = explode("/",$item->mimetype);
+	$mimeType = explode("/",$item->mimeType);
 	switch($mimeType[1]){
 	case "pdf":
 	  $icon = "/images/icon_pdf.gif";
@@ -87,8 +87,8 @@ class AMBProjLibrary extends AMColorBox {
 	  break;
 	}
 
-	parent::add("<tr><td class='blt_box_p'><a href='$_CMAPP[services_url]/library/biblioteca.php?frm_type=projeto&frm_codeProjeto=$_REQUEST[frm_codProjeto]&opcao=download&codeArquivo=$item->codeFile'><img src='$_CMAPP[media_url]$icon'></a></td>");
-	parent::add("<td class='blt_box_p'>&raquo;<a href='$_CMAPP[services_url]/library/biblioteca.php?frm_type=projeto&frm_codeProjeto=$_REQUEST[frm_codProjeto]&opcao=download&codeArquivo=$item->codeFile'> $item->name</a> </td>");
+	parent::add("<tr><td class='blt_box_p'><a href='$_CMAPP[services_url]/library/biblioteca.php?frm_type=projeto&frm_codeProjeto=$_REQUEST[frm_codProjeto]&opcao=download&codeFile=$item->codeFile'><img src='$_CMAPP[media_url]$icon'></a></td>");
+	parent::add("<td class='blt_box_p'>&raquo;<a href='$_CMAPP[services_url]/library/biblioteca.php?frm_type=projeto&frm_codeProjeto=$_REQUEST[frm_codProjeto]&opcao=download&codeFile=$item->codeFile'> $item->name</a> </td>");
 	$shared = $ple->isShared($item->codeFile);
 	if($shared == "true"){
 	  $sh = "<td>(".$_language['isShared'].")</td>";
@@ -103,4 +103,3 @@ class AMBProjLibrary extends AMColorBox {
     return parent::__toString();
   }
 }
-?>

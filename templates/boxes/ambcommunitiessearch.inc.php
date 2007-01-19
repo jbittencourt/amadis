@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * Search box to communities
@@ -34,7 +34,7 @@ class AMBCommunitiesSearch extends AMPageBox implements CMActionListener {
 
     default :
       parent::add("<br>");
-      $box = new AMBSearch($_SERVER['PHP_SELF'],$_CMAPP[imlang_url]."/img_localizar_comunidades.gif", AMColorBox::COLOR_BOX_LGREEN);
+      $box = new AMBSearch($_SERVER['PHP_SELF'],$_CMAPP['imlang_url']."/img_localizar_comunidades.gif", AMColorBox::COLOR_BOX_LGREEN);
       parent::add($box);
       break;
     case "listing" :
@@ -58,5 +58,3 @@ class AMBCommunitiesSearch extends AMPageBox implements CMActionListener {
     else return CMHTMLObj::__toString();
   }
 }
-
-?>

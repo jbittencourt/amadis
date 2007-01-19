@@ -38,6 +38,10 @@ class AMBCommunitiesNews extends AMSimpleBox implements CMActionListener {
 	public function doAction () {
 		global $_CMAPP, $_language;
 
+		if(!isset($_REQUEST['community_news_action'])){
+			$_REQUEST['community_news_action'] = "";
+		}
+
 		switch($_REQUEST['community_news_action']) {
 
 			default:
@@ -74,7 +78,7 @@ class AMBCommunitiesNews extends AMSimpleBox implements CMActionListener {
 				catch(CMDBException $e) {
 					header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=save_failure");
 				}
-				
+
 				$cod = $news->codeCommunity;
 				unset($news);
 

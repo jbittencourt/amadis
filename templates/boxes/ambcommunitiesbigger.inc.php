@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * List box of the biggets communities
@@ -19,8 +19,8 @@ class  AMBCommunitiesBigger extends AMColorBox {
     global $_CMAPP;
     
     parent::__construct("$_CMAPP[imlang_url]/img_maiores_comunidades.gif", self::COLOR_BOX_BEGE);
-    $this->items = $_SESSION[environment]->listBiggerCommunities();
-;
+    $this->items = $_SESSION['environment']->listBiggerCommunities();
+
   }
 
   public function __toString() {
@@ -34,11 +34,9 @@ class  AMBCommunitiesBigger extends AMColorBox {
 	parent::add("$item->name - ($mString)");
 	parent::add("</a><br>");
       }
-    }else   parent::add($_language[dont_have_communities]);
+    }else   parent::add($_language['dont_have_communities']);
     
     return parent::__toString();
 
   }
 }
-
-?>

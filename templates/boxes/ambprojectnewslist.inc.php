@@ -27,7 +27,7 @@ class AMBProjectNewsList extends AMListBox {
 	if(($i%2)==1) $id = $this->class_prefix."_list_2";
 	$i++;
 	parent::add("<tr id=\"$id\" class=\"".$this->class_prefix."_list_line\">");	  
-	parent::add("<td width = '80'><a name='project_news_$item->codeNews'>");
+	parent::add("<td width = '80'><a name='project_news_$item->code'>");
 	$f = $item->autor[0]->picture;
 	if($f!=0) {
 	  $thumb = new AMUserThumb;

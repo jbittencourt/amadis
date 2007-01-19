@@ -71,11 +71,11 @@ class AMBlogList extends AMPageBox {
 
 	//print the rest of the table
                 $box->add("<td width=40%>");
-                $link = "<a href=\"$_CMAPP[services_url]/diario/diario.php?frm_codeUser=$item->codeUser\" class=\"blue\">";
+                $link = "<a href=\"$_CMAPP[services_url]/blog/blog.php?frm_codeUser=$item->codeUser\" class=\"blue\">";
                 if(!empty($profile)) {
-                    $box->add("$link $profile->tituloDiario</a>");
+                    $box->add("$link $profile->titleBlog</a>");
                 } else {
-                    $box->add("$link $_language[titulo_padrao] $item->name</a>");
+                    $box->add("$link $_language[default_title] $item->name</a>");
                 }
                 $box->add("</td>");
                 $box->add("<td>");
@@ -94,6 +94,4 @@ class AMBlogList extends AMPageBox {
         parent::add($box);
         return parent::__toString();
     }
-
-
 }

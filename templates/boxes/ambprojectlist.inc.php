@@ -47,13 +47,13 @@
 
  				try {
  					$area = new AMArea;
- 					$area->codArea = $_REQUEST['frm_codArea'];
+ 					$area->codeArea = $_REQUEST['frm_codArea'];
  					$area->load();
  				}catch (CMDBNoRecord $e) {
  					unset($area);
  				}
 
- 				$title = "$_language[list_projects_areas] ".$area->nomArea;
+ 				$title = "$_language[list_projects_areas] ".$area->name;
  				$box = new AMProjectList($this->itens, $title, AMTCadBox::CADBOX_LIST);
 
 

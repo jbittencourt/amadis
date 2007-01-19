@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * Template to agregator
@@ -10,7 +10,7 @@
  * @version 1.0
  * @author Daniel M. Basso <daniel@basso.inf.br>
  */
-class AMTAgregador extends AMMain {
+class AMTAgregator extends AMMain {
   
 
   function __construct() {
@@ -24,7 +24,3 @@ class AMTAgregador extends AMMain {
     
   }
 }
-
-
-
-?>

@@ -1,5 +1,4 @@
-<?
-
+<?php
 /**
  *Este eh box de aviso de convite e aviso de requisicao de entrada
  *para um projeto.

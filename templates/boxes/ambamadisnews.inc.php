@@ -29,7 +29,7 @@ class AMBAmadisNews extends AMColorBox {
 				parent::add("<b>&raquo; $_language[projects]</b><br>");
 				foreach($this->nProjects as $item) {
 					parent::add("<a class=\"cinza\" ");
-					parent::add("href=\"$_CMAPP[services_url]/projetos/listprojects.php?list_action=A_list_news&frm_codProjeto=$item->codeProject#project_news_".$item->news[0]->codeNews."\">");
+					parent::add("href=\"$_CMAPP[services_url]/projetos/listprojects.php?list_action=A_list_news&frm_codProjeto=$item->codeProject#project_news_".$item->news[0]->code."\">");
 					parent::add("&raquo; ".$item->news[0]->title." - <b>($item->title)</b>");
 					parent::add("</a><br>");
 				}

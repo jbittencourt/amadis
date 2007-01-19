@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Provides a method to download a file from the database.
  *
@@ -42,13 +42,8 @@ class AMTFileDownload {
     header("Content-Type: application/octet-stream");
     header("Content-Disposition:attachment; filename=".$this->file->name);
     header("Content-Length: ".$this->size);
-    header("Content-Transfer-Encoding: binary");
+    header("Content-Transfer-Encoding: binary");    
     echo $file->data;
   }
 
-
-
 }
-
-
-?>

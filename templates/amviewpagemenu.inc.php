@@ -50,7 +50,7 @@ extends CMHtmlObj {
 			}
 			$diario = ($_REQUEST['frm_codeUser'] != $_SESSION['user']->codeUser ? "?frm_codeUser=$_REQUEST[frm_codeUser]" : "");
 
-			$this->addSecundaryItem($_CMAPP['services_url']."/blog/diario.php$diario",
+			$this->addSecundaryItem($_CMAPP['services_url']."/blog/blog.php$diario",
 			array($_CMAPP['imlang_url']."/wf_mn_diario_off.gif",
 			$_CMAPP['imlang_url']."/wf_mn_diario_on.gif");
 			$url = ($_REQUEST['frm_codeUser'] == $_SESSION['user']->codeUser ? $_CMAPP['services_url']."/webfolio/webfolio.php" :

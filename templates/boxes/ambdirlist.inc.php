@@ -106,6 +106,10 @@ class AMBDirList extends CMHTMLObj {
 	  break;
 	}
 	
+	if(!isset($js)){
+		$js="";
+	}
+	
 	parent::add("  </td>");
 	parent::add("  <td bgcolor='$color' onMouseDown=\"$js\" class='texto'>$item[time]</td>");
 	parent::add("  <td bgcolor='$color' onMouseDown=\"$js\" class='texto'>$item[mime_info]</td>");

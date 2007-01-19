@@ -29,7 +29,7 @@
   			try{
   				$news->save();
   				header("Location:$_SERVER[PHP_SELF]?frm_codProjeto=".$this->project->codeProject."&frm_ammsg=save_news_success");
-  			}catch(CMDBException $e) {
+  			}catch(CMDBException $e) {  				
   				header("Location:$_SERVER[PHP_SELF]?frm_codProjeto=".$this->project->codeProject."&frm_amerror=not_save_news");
   			}
   		}
@@ -79,8 +79,9 @@
 		$form->setSpacing(1);
 		$form->setLabelClass("texto");
 	
-		$form->components['title']->setSize(30);
-		$form->components['text']->setSize(25,4);
+		$form->components['title']->setSize(22);
+		$form->components['text']->setCols(25);
+		$form->components['text']->setRows(4);
 	
 		$form->addComponent("action", new CMWHidden("action", "A_save_news"));
 		$form->addComponent("codProjeto ", new CMWHidden("frm_codProjeto",$this->project->codeProject));

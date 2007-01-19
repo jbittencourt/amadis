@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * @package AMADIS
  * @subpackage AMBoxes
@@ -9,7 +9,7 @@ class AMBAdminTables extends AMSimpleBox {
   public function __construct() {
     global $_language;
     
-    parent::__construct($_langage[edit_tables]);
+    parent::__construct($_language['edit_tables']);
   }
 
   public function __toString() {
@@ -17,13 +17,10 @@ class AMBAdminTables extends AMSimpleBox {
     
     parent::add($_language['edit_tables']."<Br>");
     
-    parent::add("<a href=\"$_CMAPP[services_url]/admin/editar_estados.php\">$_language[edit_states]</a><br>");    
-    parent::add("<a href=\"$_CMAPP[services_url]/admin/editar_areas.php\">$_language[edit_knowledge_areas]</a><br>");
-    //parent::add("<a href=\"$_CMAPP[services_url]/admin/editprojectstatus.php\">$_language[edit_project_status]</a><br>");
+    parent::add("<a href=\"$_CMAPP[services_url]/admin/editStates.php\">$_language[edit_states]</a><br>");    
+    parent::add("<a href=\"$_CMAPP[services_url]/admin/editAreas.php\">$_language[edit_knowledge_areas]</a><br>");    
     
     return parent::__toString();
   }
 
 }
-
-?>

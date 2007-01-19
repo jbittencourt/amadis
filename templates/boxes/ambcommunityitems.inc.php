@@ -12,14 +12,14 @@
  */
 
 class AMBCommunityItems extends AMColorBox {
-	
+
 	private $link = array();
 
 	public function __construct() {
 		global $_CMAPP;
 		parent::__construct($_CMAPP['imlang_url']."/img_itens_comunidade.gif",self::COLOR_BOX_LGREEN);
 	}
-	
+
 	public function addLink($link, $url) {
 		$this->links[] = array("url"=>$url,"link"=>$link);
 	}
@@ -70,40 +70,40 @@ class AMBCommunityItems extends AMColorBox {
 				$abandoned = true;
 
 				//clear group cache
-				if(!empty($_SESSION['amadis']['communities']))  unset($_SESSION['amadis']['communities']);
+				if(!empty($_SESSION['amadis']['communities'])){
+					unset($_SESSION['amadis']['communities']);
+				}
+
 				break;
 		}
 	}
+
 	public function __toString() {
-		
+
 		global $_CMAPP,$community,$group, $_language;
-		/*
-     *Buffering html of the box to output screen
-     */
-    if(!empty($_REQUEST['co_action'])){
-      $group = $community->getGroup();
-      echo $group;
-      try {
-	echo "leave";
-	$group->retireMember($_SESSION['user']->codeUser);
-      }
-      catch(CMDBException $e) {
-	$err = new CMError($_language['error_cannot_leave_community'],__CLASS__);
-	return false;
-      }
-      CMHTMLPage::redirect($_CMAPP['services_url'].'/communities/community.php?frm_codeCommunity='.$_REQUEST['frm_codeCommunity'].'&frm_message=leave_community');
-      $abandoned = true;
 
-      //clear group cache
-      if(!empty($_SESSION['amadis']['communities']))  unset($_SESSION['amadis']['communities']);      
-    }
-    parent::add($this->getChatButton($community));
-    parent::add($this->getForumButton($community));
-    if(isset($_SESSION['user']))
-       if($group->isMember($_SESSION['user']->codeUser))
-       parent::add($this->getLeaveButton($community));
+		if(!empty($_REQUEST['co_action'])){
+			$group = $community->getGroup();
+			try {
+				$group->retireMember($_SESSION['user']->codeUser);
+			}
+			catch(CMDBException $e) {
+				$err = new CMError($_language['error_cannot_leave_community'],__CLASS__);
+				return false;
+			}
+			CMHTMLPage::redirect($_CMAPP['services_url'].'/communities/community.php?frm_codeCommunity='.$_REQUEST['frm_codeCommunity'].'&frm_message=leave_community');
+			$abandoned = true;
 
-    return parent::__toString();
-      
-  }
+			//clear group cache
+			if(!empty($_SESSION['amadis']['communities']))  unset($_SESSION['amadis']['communities']);
+		}
+		parent::add($this->getChatButton($community));
+		parent::add($this->getForumButton($community));
+		if(isset($_SESSION['user']))
+		if($group->isMember($_SESSION['user']->codeUser))
+		parent::add($this->getLeaveButton($community));
+
+		return parent::__toString();
+
+	}
 }
