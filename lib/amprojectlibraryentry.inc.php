@@ -27,13 +27,14 @@ class AMProjectLibraryEntry extends CMObj {
   }
 
   public function libraryExist(){  // confere se a biblioteca do usuario existe.. caso nao, ele cria uma
-    try{
+	try{
       $this->load();
-    }catch(CMDBNoRecord $e){
+    }catch(CMException $e){
+    	new AMErrorReport($e, 'AMProjectLibraryEntry');
       try{
-	$this->newLibrary();
+		$this->newLibrary();
       }catch(CMDBNoRecord $f){ 
-	$f->getMessage(); die();
+		new AMErrorReport($f, 'AMProjectLibraryEntry'); 
       }
     }
   }
@@ -48,8 +49,7 @@ class AMProjectLibraryEntry extends CMObj {
       $this->codeLibrary = $library->code;
       $this->save();
     }catch(CMDBException $e){ 
-      $e->getMessage();
-      die();
+      return $e->getMessage();
     }
   }
   
@@ -58,7 +58,7 @@ class AMProjectLibraryEntry extends CMObj {
     try{
       $this->load();
     }catch(CMException $e){
-      echo $e;
+      return $e;
     }
     return $this->codeLibrary;
   }

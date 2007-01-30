@@ -109,11 +109,11 @@ class AMBUpload extends CMHTMLObj {
 				switch($_REQUEST['frm_upload_type']) {
 						
 					case "project":
-						$popUrlBase = self::getScript("popUrlBase = '$_CMAPP[pages_url]/projetos/projeto_".$_REQUEST['frm_codeProjeto'].$_REQUEST['frm_dir']."';");
+						$popUrlBase = self::getScript("var popUrlBase = '$_CMAPP[pages_url]/projects/project_".$_REQUEST['frm_codeProjeto'].$_REQUEST['frm_dir']."';");
 						break;
 
 					case "user":
-						$popUrlBase = self::getScript("popUrlBase = '$_CMAPP[pages_url]/users/user_".$_SESSION['user']->codeUser.$_REQUEST['frm_dir']."';");
+						$popUrlBase = self::getScript("var popUrlBase = '$_CMAPP[pages_url]/users/user_".$_SESSION['user']->codeUser.$_REQUEST['frm_dir']."';");
 
 						break;
 				}

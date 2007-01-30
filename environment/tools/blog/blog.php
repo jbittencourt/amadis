@@ -88,7 +88,7 @@ else {
 	//if no user code was submited, test for
 	//a message code, so we can load the
 	//data for the query
-	if(!(empty($_REQUEST['frm_codePost']))) {
+	if(!empty($_REQUEST['frm_codePost'])) {
 		$post = new AMBlogPost;
 		$post->codePost = $_REQUEST['frm_codePost'];
 		try {
@@ -153,6 +153,7 @@ if(!empty($userBlog)) {
 	$caixa = new AMBoxBlog($posts,$userBlog->codeUser,$title,$image,$text);
 	$caixa->setDate($_REQUEST['frm_calMonth'],$_REQUEST['frm_calYear']);
 	$date = getdate(time());
+	
 	if(!empty($_SESSION['user']) && ($_REQUEST['frm_calMonth']==$date['mon']) && ($_REQUEST['frm_calYear']==$date['year'])) {
 		if($userBlog->codeUser==$_SESSION['user']->codeUser) {
 			$caixa->addCabecalho("<br> <a class=\"diary_header\" href=\"post.php\" > &raquo; $_language[post_blog] </a>");
@@ -162,6 +163,7 @@ if(!empty($userBlog)) {
 	$rsslink = $_CMAPP['services_url'] . "/blog/blogRSS.php?frm_codeUser=$userBlog->codeUser";
 	$pag->setRSSFeed($rsslink,$title);
 	$pag->add($caixa);
+	
 } else {
 	$pag->addError($_language['error_user_not_logged']);
 }

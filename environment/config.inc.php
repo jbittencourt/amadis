@@ -5,7 +5,7 @@
 $parts = explode('/',dirname(__FILE__));
 array_pop($parts);
 $_CMAPP['path'] = implode('/',$parts);
-
+ini_set(’display_errors’, 1);
 /**
  * PARSING THE config.xml FILE AND LOAD OF DEFAULT VARS.
  **/

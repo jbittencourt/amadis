@@ -38,7 +38,7 @@ if(isset($_REQUEST['action']) && $_REQUEST['action'] == "A_sendImage") {
     $file->save();
     $codeArquivo = $file->codeFile;
     if(!isset($_REQUEST['codeFile'])) {
-      $filelib->libraryCode = $lib;
+      $filelib->codeLibrary = $lib;
       $filelib->codeFile = $file->codeFile;
       $filelib->time = time();
       $filelib->save();

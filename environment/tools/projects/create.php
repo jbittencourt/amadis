@@ -1,4 +1,4 @@
- <?php
+<?php
 /**
  * This page creates a new project.
  *
@@ -51,9 +51,9 @@ if(!empty($_REQUEST['frm_codeProjeto'])) {
   try {
     $_SESSION['cad_foto']->load();
   }  catch (CMDBNoRecord $e) {
-    $_SESSION['cad_foto'] = new AMProjImage;
+    $_SESSION['cad_foto'] = new AMProjectImage;
   }  catch (CMDBQueryError $e) {
-    $_SESSION['cad_foto'] = new AMProjImage;
+    $_SESSION['cad_foto'] = new AMProjectImage;
   }     
   if(!$group->isMember($_SESSION['user']->codeUser)) {
     CMHTMLPage::redirect($_CMAPP['services_url']."/projects/project.php?frm_codProjeto=$_REQUEST[frm_codeProjeto]&frm_amerror=edit_not_allowed");
@@ -231,15 +231,15 @@ switch($_REQUEST['action']) {
    }
 
    //save the project
-  // try {
+  try {
      $_SESSION['cad_proj']->save();
-   /**}
+   }
    catch(CMDBException $e) {
-     header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_user");
+     header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_project");
    }
    catch(AMException $e) {
-     header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=creating_user_dir");
-   }**/
+     header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=creating_project_dir");
+   }
 
    //save the areas
    $con = new CMContainer;

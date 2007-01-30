@@ -27,7 +27,8 @@ class AMBProjLibrary extends AMColorBox {
 
     $ple = new AMLibrary();
     $ple->setLibrary($this->library);
-    $list = $ple->getLastFiles($this->limit);    
+    $list = $ple->getLastFiles($this->limit);
+    
 
     if(!$list->__hasItems()){
       parent::add($_language['no_files']);

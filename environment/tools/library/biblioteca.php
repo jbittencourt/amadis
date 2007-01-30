@@ -25,7 +25,7 @@ switch($_REQUEST['frm_type']) {
 		$proj->load();
 		$titulo = "$_language[project] $proj->title";
 		$imagem = $proj->image;
-		if(empty($imagem)) $imagem = AMProjImage::DEFAULT_IMAGE;
+		if(empty($imagem)) $imagem = AMProjectImage::DEFAULT_IMAGE;
 		//pega o id da lib do proj
 		$lib = $proj->getLibrary();
 		break;

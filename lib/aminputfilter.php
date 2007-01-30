@@ -53,6 +53,4 @@ class AMInputFilter
         return $this->__applyFilter($key, FILTER_VALIDATE_INT, FILTER_FLAG_ALLOW_OCTAL);
     }
     
-    public function get
-    
 }

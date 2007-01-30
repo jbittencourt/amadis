@@ -222,7 +222,7 @@ class AMProject extends CMObj {
         try{
             $projlib->load();
         }catch(CMException $e){
-            echo $e;
+            new AMErrorReport($e, 'AMProjectLibraryEntry');
         }
         return $projlib->codeLibrary;
     }

@@ -59,7 +59,7 @@ switch($_REQUEST['frm_upload_type']) {
        /*
 	*Verificacao do realpath do diretorio
 	*/
-       $real = AMUpload::getRealPath("$pathBase/projects/projeto_".$_REQUEST['frm_codeProjeto']);
+       $real = AMUpload::getRealPath("$pathBase/projects/project_".$_REQUEST['frm_codeProjeto']);
        
        $UPLOAD_DIR = new AMUpload($real);
        

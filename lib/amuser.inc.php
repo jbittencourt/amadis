@@ -829,7 +829,8 @@ class AMUser extends CMUser
   public function checkForNewMessages() {
   	$q = new CMQuery('AMUserMessages');
   	
-  	$filter = 'AMUserMessages::codeTo = ' . $this->codeUser . ' AND AMUserMessages::time > '. $_SESSION['last_session']->timeEnd;
+  	$filter = 'AMUserMessages::codeTo = ' . $this->codeUser . ' AND AMUserMessages::time ';
+  	if(!empty($_SESSION['last_session'])) $filter .= '> '. $_SESSION['last_session']->timeEnd;
   	
   	$q->setFilter($filter);
   	$q->setCount();

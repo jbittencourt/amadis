@@ -21,7 +21,11 @@ class  AMLibrary extends CMObj{
 	}
 
 	public function setLibrary($lib){
-		$this->code = $lib;
+		try {
+			$this->code = $lib;
+		} catch(CMObjEPropertieValueNotValid $e) {
+			new AMErrorReport($e, 'AMLibrary');
+		}
 	}
 
 
@@ -185,15 +189,18 @@ class  AMLibrary extends CMObj{
    * You give a number of results you want, $limit, and its return the last $limit files posted.
    **/
   public function getLastFiles($limit){
-  	try{
-  		$q = new CMQuery('AMFile','AMLibraryFiles');
-  		$q->setFilter("AMFile::codeFile = AMLibraryFiles::codeFile AND AMLibraryFiles::codeLibrary = '$this->code' AND AMLibraryFiles::active='y'");
-  		$q->setLimit(0,$limit);
-  		$q->setOrder('AMFile::time desc');
+	$q = new CMQuery('AMFile','AMLibraryFiles');
+  	$q->setFilter("AMFile::codeFile = AMLibraryFiles::codeFile AND AMLibraryFiles::codeLibrary = '$this->code' AND AMLibraryFiles::active='y'");
+  	$q->setLimit(0,$limit);
+  	$q->setOrder('AMFile::time desc');
+  	try {
   		$res = $q->execute();
   		return $res;
-  	}catch(CMDBNoRecord $r){
+  	}catch(CMException $r){
+  		new AMErrorReport($r, 'AMLibrary');
+  		return new CMContainer;
   	}
+  	
   }
 
   /**
