@@ -99,13 +99,13 @@ class AMTCalendar extends CMHTMLObj {
         $Month->build(); // Build the days in the month
 
 
-        parent::add("<div id=\"amcalendar\">");
-        parent::add("<div class=\"caption\">");
-        parent::add("<a href=\"$this->link_prev\" id=\"previous month\" class=\"nav\">&laquo;</a> ".$this->label[(integer) $this->month]." ".$this->year);
-        parent::add("<a href=\"$this->link_next\" id=\"next month\" class=\"nav\">&raquo;</a>");
+        parent::add("<div id='amcalendar'>");
+        parent::add("<div class='caption'>");
+        parent::add("<a href='$this->link_prev' id='previous month' class='nav'>&laquo;</a> ".$this->label[(integer) $this->month]." ".$this->year);
+        parent::add("<a href='$this->link_next' id='next month' class='nav'>&raquo;</a>");
         parent::add("</div>");
 
-        parent::add("<div id=\"cal\">");
+        parent::add("<div id='cal'>");
 
         $today_day = (integer) date("d",time());
         $today_month = (integer) date("m",time());
@@ -119,7 +119,7 @@ class AMTCalendar extends CMHTMLObj {
             else {
                 $id = "bloco_week";
             }
-            parent::add("<span id=\"$id\">".$w[0]."</span>");
+            parent::add("<span id='$id'>".$w[0]."</span>");
         }
 
         while ($Day = $Month->fetch()) {
@@ -128,7 +128,7 @@ class AMTCalendar extends CMHTMLObj {
             $int_day = (integer)$Day->thisDay();
             if(array_key_exists($int_day,$this->marked_days)) {
                 $temp = $this->marked_days[(integer)$Day->thisDay()];
-                $text_day = "<a href=\"$temp\">$text_day</a>";
+                $text_day = "<a href='$temp'>$text_day</a>";
                 $class = "marked_day";
             }
 
@@ -137,11 +137,11 @@ class AMTCalendar extends CMHTMLObj {
             }
             
             if ($Day->isFirst()) {
-                parent::add("<span class=\"firstday $class\">");
+                parent::add("<span class='firstday $class'>");
             }
             else {
-                if(!empty($class)) $class = "class=\"$class\"";
-                parent::add("<span id=\"bloco\" $class>");
+                if(!empty($class)) $class = "class='$class'";
+                parent::add("<span id='bloco' $class>");
             }
 
             if ($Day->isEmpty()) {

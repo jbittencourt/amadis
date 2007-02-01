@@ -30,11 +30,11 @@ class AMProjectLibraryEntry extends CMObj {
 	try{
       $this->load();
     }catch(CMException $e){
-    	new AMErrorReport($e, 'AMProjectLibraryEntry');
+    	new AMErrorReport($e, 'AMProjectLibraryEntry::libraryExist', AMLog::LOG_LIBRARY);
       try{
 		$this->newLibrary();
       }catch(CMDBNoRecord $f){ 
-		new AMErrorReport($f, 'AMProjectLibraryEntry'); 
+		new AMErrorReport($e, 'AMProjectLibraryEntry::libraryExist', AMLog::LOG_LIBRARY); 
       }
     }
   }
@@ -49,7 +49,7 @@ class AMProjectLibraryEntry extends CMObj {
       $this->codeLibrary = $library->code;
       $this->save();
     }catch(CMDBException $e){ 
-      return $e->getMessage();
+	  new AMErrorReport($e, 'AMProjectLibraryEntry::newLibrary', AMLog::LOG_LIBRARY);    	
     }
   }
   
@@ -58,7 +58,7 @@ class AMProjectLibraryEntry extends CMObj {
     try{
       $this->load();
     }catch(CMException $e){
-      return $e;
+      new AMErrorReport($e, 'AMProjectLibraryEntry::getLibrary', AMLog::LOG_LIBRARY);
     }
     return $this->codeLibrary;
   }

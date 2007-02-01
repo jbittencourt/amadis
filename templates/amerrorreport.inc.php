@@ -18,11 +18,13 @@ class AMErrorReport extends CMHTMLObj {
 
   /**
    * @param object $e The exception that caused the error
+   * @param string $class The class and method what executed in the moment.
+   * @param string $module The module where the action is executed.
    **/
-  public function __construct(CMException $e, $class, $type=self::QUERY_ERROR) {
+  public function __construct(CMException $e, $class, $module) {
     parent::__construct();
     $this->exception = $e;
-    new AMLog($class, $this->exception->getMessage());
+    new AMLog($class, $this->exception->getMessage(), $module);
     
   }
 

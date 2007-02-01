@@ -16,14 +16,14 @@ $_CMAPP[notrestricted] = True;
 include("../../config.inc.php");
 
 
-$_language = $_CMAPP[i18n]->getTranslationArray("diary");
+$_language = $_CMAPP[i18n]->getTranslationArray("blog");
 $_CMAPP[smartform] = array();
 $_CMAPP[smartform][language] = $_language;
 
 
 
 //load the data from the post into a variable and test for errors
-$post = new AMDiarioPost;
+$post = new AMBlogPost;
 $post->codePost = $_REQUEST[frm_codePost];
 
 try {
@@ -36,7 +36,7 @@ try {
 $comments = $post->listComments();
 
 $campos = array("body");
-$form = new AMWSmartForm(AMDiarioComentario, "cad_comentario", "$_CMAPP[services_url]/diario/diario.php",$campos);
+$form = new AMWSmartForm(AMBlogComment, "cad_comentario", "$_CMAPP[services_url]/diario/diario.php",$campos);
 $form->submit_label = $_language[post_comment];
 $form->setCancelUrl("");
 $form->cancel_button->setOnClick("window.Blog_toogleComments('$post->codePost')");
@@ -48,7 +48,7 @@ $form->addComponent("action", new CMWHidden("frm_action","A_comentario"));
 
 
 
-$box = new AMBoxDiaryComment;
+$box = new AMBoxBlogComment;
 
 $ico = "<img id=\"diary_comment_ico\" src=\"$_CMAPP[images_url]/ico_comentario.gif\">";
  

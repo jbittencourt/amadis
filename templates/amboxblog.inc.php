@@ -49,7 +49,7 @@ class AMBoxBlog extends CMHTMLObj
 
     public static function getPermanentLink($post) {
         global $_CMAPP;
-        return "$_CMAPP[services_url]/diario/diario.php?frm_codePost=$post->codePost#anchor_post_$post->codePost";
+        return "$_CMAPP[services_url]/blog/blog.php?frm_codePost=$post->codePost#anchor_post_$post->codePost";
     }
     
     public function __toString() {
@@ -57,7 +57,7 @@ class AMBoxBlog extends CMHTMLObj
 
         $url = $_CMAPP['images_url'];
 	
-        $js = "blog_handler_url = '$_CMAPP[services_url]/diario/comentarios.php';";
+        //$js = "blog_handler_url = '$_CMAPP[services_url]/diario/comentarios.php';";
         $js.= "blog_delete_link = 'blog.php?frm_action=A_delete&frm_codePost=';";
         $js.= "blog_delete_message = '$_language[post_delete]';";
         $js.= "Blog_preLoadImages('$_CMAPP[images_url]/ico_seta_on_cmnt.gif','$_CMAPP[images_url]/ico_seta_off_cmnt.gif');";
@@ -65,35 +65,35 @@ class AMBoxBlog extends CMHTMLObj
         parent::addScript($js);
 
 
-        parent::add("<img src=\"$_CMAPP[images_url]/dot.gif\" width=20 height=20>");
-        parent::add("<table cellpadding=\"0\" cellspacing=\"0\"  width=100%>");
+        parent::add("<img src='$_CMAPP[images_url]/dot.gif' width=20 height=20>");
+        parent::add("<table cellpadding='0' cellspacing='0'  width=100%>");
         parent::add("<tr>");
-        parent::add("<td width=\"20\"><img src=\"$url/box_diario_01.gif\" width=\"20\" height=\"18\" border=\"0\"></td>");
-        parent::add("<td background=\"$url/box_diario_bgtop.gif\"><img src=\"$url/dot.gif\" width=\"20\" height=\"18\" border=\"0\"></td>");
-        parent::add("<td width=\"20\"><img src=\"$url/box_diario_02.gif\" width=\"20\" height=\"18\" border=\"0\"></td>");
+        parent::add("<td width='20'><img src='$url/box_diario_01.gif' width='20' height='18' border='0'></td>");
+        parent::add("<td background='$url/box_diario_bgtop.gif'><img src='$url/dot.gif' width='20' height='18' border='0'></td>");
+        parent::add("<td width='20'><img src='$url/box_diario_02.gif' width='20' height='18' border='0'></td>");
         parent::add("</tr>");
         parent::add("<tr>");
-        parent::add("<td background=\"$url/box_diario_bgleft.gif\"><img src=\"$url/dot.gif\" width=\"20\" height=\"18\" border=\"0\"></td>");
-        parent::add("<td bgcolor=\"#FAFBFB\" valign=\"top\">");
-        parent::add("<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"100%\">");
+        parent::add("<td background='$url/box_diario_bgleft.gif'><img src='$url/dot.gif' width='20' height='18' border='0'></td>");
+        parent::add("<td bgcolor='#FAFBFB' valign='top'>");
+        parent::add("<table cellpadding='0' cellspacing='0' border='0' width='100%'>");
         parent::add("<tr>");
-        parent::add("<td width=\"87\" valign=top>");
+        parent::add("<td width='87' valign=top>");
 
-        parent::add("<div id=\"diary_header_picture\">");
+        parent::add("<div id='diary_header_picture'>");
         parent::add($this->imagem);
         parent::add("</div>");
 
         parent::add("</td>");
-        parent::add("<td width=\"20\"><img src=\"$url/dot.gif\" width=\"20\" height=\"10\" border=\"0\"></td>");
-        parent::add("<td valign=\"top\"><font class=\"diary_title\">$this->titulo</font>");
-        parent::add("<acronym title=\"Really Simple Syndication\" style=\"border: 0px;\">");
-        parent::add("<a href=\"$this->rsslink\"><img src=\"$_CMAPP[images_url]/rss_feed.gif\" style=\"padding-left: 15px;\"></a></acronym><br />");
+        parent::add("<td width='20'><img src='$url/dot.gif' width='20' height='10' border='0'></td>");
+        parent::add("<td valign='top'><font class='diary_title'>$this->titulo</font>");
+        parent::add("<acronym title='Really Simple Syndication' style='border: 0px;'>");
+        parent::add("<a href='$this->rsslink'><img src='$_CMAPP[images_url]/rss_feed.gif' style='padding-left: 15px;'></a></acronym><br />");
 
-        parent::add("<div id=\"diary_header_text\">");
+        parent::add("<div id='diary_header_text'>");
         parent::add($this->texto);
         parent::add("</div>");
   
-        parent::add("<div id=\"diary_header\">");
+        parent::add("<div id='diary_header'>");
         
         if(empty($_REQUEST['frm_codeUser']) || $_REQUEST['frm_codeUser'] == $_SESSION['user']->codeUser) {
             parent::add(implode("\n",$this->cabecalho));
@@ -102,13 +102,13 @@ class AMBoxBlog extends CMHTMLObj
 
         $calendar = new AMTCalendar($this->month,$this->year);
         if(!empty($_REQUEST['frm_codeUser']))
-        $calendar->setMoveLink("$_CMAPP[services_url]/diario/diario.php?frm_codeUser=$this->user&");
+        $calendar->setMoveLink("$_CMAPP[services_url]/blog/blog.php?frm_codeUser=$this->user&");
         else
-        $calendar->setMoveLink("$_CMAPP[services_url]/diario/diario.php?");
+        $calendar->setMoveLink("$_CMAPP[services_url]/blog/blog.php?");
 
         parent::add("</td>");
-        parent::add("<td width=\"20\"><img src=\"$url/dot.gif\" width=\"20\" height=\"10\" border=\"0\"></td>");
-        parent::add("<td width=\"106\">");
+        parent::add("<td width='20'><img src='$url/dot.gif' width='20' height='10' border='0'></td>");
+        parent::add("<td width='106'>");
         parent::add($calendar);
 
         parent::add("</td>");
@@ -117,18 +117,18 @@ class AMBoxBlog extends CMHTMLObj
 
 
         parent::add("</td>");
-        parent::add("<td background=\"$url/box_diario_bgrigth.gif\"><img src=\"$url/dot.gif\" width=\"20\" height=\"18\" border=\"0\"></td>");
+        parent::add("<td background='$url/box_diario_bgrigth.gif'><img src='$url/dot.gif' width='20' height='18' border='0'></td>");
         parent::add("</tr>");
         parent::add("<tr>");
-        parent::add("<td><img src=\"$url/box_diario_03.gif\" width=\"20\" height=\"10\" border=\"0\"></td>");
-        parent::add("<td bgcolor=\"#FAFBFB\"><img src=\"$url/dot.gif\" width=\"20\" height=\"10\" border=\"0\"></td>");
-        parent::add("<td><img src=\"$url/box_diario_04.gif\" width=\"20\" height=\"10\" border=\"0\"></td>");
+        parent::add("<td><img src='$url/box_diario_03.gif' width='20' height='10' border='0'></td>");
+        parent::add("<td bgcolor='#FAFBFB'><img src='$url/dot.gif' width='20' height='10' border='0'></td>");
+        parent::add("<td><img src='$url/box_diario_04.gif' width='20' height='10' border='0'></td>");
         parent::add("</tr>");
 
         /*
         *posts do diario
         */
-
+		
         if($this->posts->__hasItems()) {
             $i=0;
             foreach($this->posts as $post) {
@@ -180,7 +180,7 @@ class AMBoxBlog extends CMHTMLObj
                 else {
                     $l = "<a class='diary_comment' onclick=\"$link_comentarios\" href='#'>";
                     parent::add("<td class='diary_comment_link'>");
-                    parent::add("$l $_language[comentarios]($post->numComments) <img id='post_comments_$post->codePost' src='$_CMAPP[images_url]/ico_seta_off_cmnt.gif'></a>");
+                    parent::add("$l $_language[comments]($post->numComments) <img id='post_comments_$post->codePost' src='$_CMAPP[images_url]/ico_seta_off_cmnt.gif'></a>");
                     parent::add("</td>");
 
 	  //this will open the box with the comment after an new comment. But dosent works. :)

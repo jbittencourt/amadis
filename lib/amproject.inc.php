@@ -38,7 +38,8 @@ class AMProject extends CMObj {
             $group->time = time();
             try {
                 $group->save();
-            } catch(CMDBException $e) {            	
+            } catch(CMDBException $e) {
+            	new AMErrorReport($e, 'AMProject::save', AMLog::LOG_PROJECTS);            	
                 Throw new AMException("An error ocurred creating the project group.");
             }
             $this->codeGroup = $group->codeGroup;
@@ -222,7 +223,7 @@ class AMProject extends CMObj {
         try{
             $projlib->load();
         }catch(CMException $e){
-            new AMErrorReport($e, 'AMProjectLibraryEntry');
+            new AMErrorReport($e, 'AMProject::getLibrary', AMLog::LOG_PROJECTS);
         }
         return $projlib->codeLibrary;
     }

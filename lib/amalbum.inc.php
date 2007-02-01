@@ -30,7 +30,10 @@ class  AMAlbum extends CMObj {
 			$q = new CMQuery('AMAlbum');
 			$q->setFilter("Album.codeUser = '$this->codeUser'");
 			return $q->execute();
-		}catch(CMDBNoRecord $w){}
+		}catch(CMDBNoRecord $w){
+			new AMErrorReport($w, 'AMAlbum::getMyPhotos', AMLog::LOG_ALBUM);
+			return new CMContainer;
+		}
 	}
 
 	public function saveEntry(){
@@ -74,7 +77,7 @@ class  AMAlbum extends CMObj {
 		try {
 			$file->save();	//salva o arquivo
 		}catch(CMException $e){
-			new AMLog('AMAlbum', $e->getMessage());
+			new AMErrorReport($e, 'AMBAlbum::saveEntry - saving_image', AMLog::LOG_ALBUM);
 		}
 
 		
@@ -86,7 +89,7 @@ class  AMAlbum extends CMObj {
 		try{
 			$this->save();
 		}catch(CMException $e){
-			new AMLog('AMAlbum', $e->getMessage());
+			new AMErrorReport($e, 'AMBAlbum::saveEntry - saving', AMLog::LOG_ALBUM);
 		}
 	}
 
@@ -95,13 +98,17 @@ class  AMAlbum extends CMObj {
 		$this->codePhoto = $codePhoto;
 		try{
 			$this->load();
-		}catch(CMException $e){}
+		}catch(CMException $e){
+			new AMErrorReport($e, 'AMBAlbum::editComment - loading', AMLog::LOG_ALBUM);
+		}
 
 		$this->comments = $comment;
 
 		try{
 			$this->save();
-		}catch(CMException $e){}
+		}catch(CMException $e){
+			new AMErrorReport($e, 'AMBAlbum::editComment - saving', AMLog::LOG_ALBUM);
+		}
 	}
 
 
@@ -110,17 +117,17 @@ class  AMAlbum extends CMObj {
 		$this->codePhoto = $id;
 		try{
 			$this->load();
-		}catch(CMException $e){}
+		}catch(CMException $e){
+			new AMErrorReport($e, 'AMBAlbum::deleta - loading', AMLog::LOG_ALBUM);
+		}
 		$file = new AMFile;
 		$file->codeFile = $id;
 		try{
 			$this->delete();
 			$file->load();
 			$file->delete();
-		}catch(CMException $e){}
-	}
-
-	public function delete(){
-		parent::delete();
+		}catch(CMException $e){
+			new AMErrorReport($e, 'AMBAlbum::deleta - delete', AMLog::LOG_ALBUM);
+		}
 	}
 }

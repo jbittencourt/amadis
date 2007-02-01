@@ -24,7 +24,7 @@ class  AMLibrary extends CMObj{
 		try {
 			$this->code = $lib;
 		} catch(CMObjEPropertieValueNotValid $e) {
-			new AMErrorReport($e, 'AMLibrary');
+			new AMErrorReport($e, 'AMLibrary::setLibrary', AMLog::LOG_LIBRARY);
 		}
 	}
 
@@ -151,7 +151,7 @@ class  AMLibrary extends CMObj{
   		$filelib->time = time();
   		$filelib->save();
   	}catch(CMException $e){
-  		die($e->getMessage());
+		new AMErrorReport($e, 'AMLibrary::saveEntry', AMLog::LOG_LIBRARY);
   	}
 
   	return $ret;
@@ -197,7 +197,7 @@ class  AMLibrary extends CMObj{
   		$res = $q->execute();
   		return $res;
   	}catch(CMException $r){
-  		new AMErrorReport($r, 'AMLibrary');
+  		new AMErrorReport($r, 'AMLibrary::getLastFiles', AMLog::LOG_LIBRARY);
   		return new CMContainer;
   	}
   	
@@ -207,17 +207,19 @@ class  AMLibrary extends CMObj{
    * Return if the file is shared or not.   
    **/
   public function isShared($fileCode){
-  	$filelib = new AMLibraryFiles;
+	$filelib = new AMLibraryFiles;
   	$filelib->codeFile = $fileCode;
   	try{
-    $filelib->load();
-  	}catch(AMException $e){ return "false"; }
-
-  	if($filelib->shared == "y")
-  	return "true";
-  	else
-  	return "false";
-  }
+    	$filelib->load();
+  	}catch(AMException $e){
+  		new AMErrorReport($e, 'AMLibrary::isShared', AMLog::LOG_LIBRARY); 
+  		return "false"; 
+  	}
+	  	if($filelib->shared == "y")
+  			return "true";
+  		else
+  			return "false";
+  	}
 
   /**
     * List the last $limit  shared files, if $limit = 0, list all..!  >:D~ 
@@ -229,9 +231,10 @@ class  AMLibrary extends CMObj{
   		if($limit > 0)
   		$q->setLimit(0,$limit);
   		$q->setOrder('AMFile::time desc');
-  		$res = $q->execute();
-  		return $res;
-  	}catch(CMDBNoRecord $r){}
+  		return $q->execute();
+  	}catch(CMDBNoRecord $r){
+		new AMErrorReport($e, 'AMLibrary::listSharedFiles', AMLog::LOG_LIBRARY);
+  	}
   }
 
 

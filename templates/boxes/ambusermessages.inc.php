@@ -29,7 +29,7 @@ class AMBUserMessages extends AMColorBox {
     global $_language, $_CMAPP;
 
     if(!empty($this->exception)) {
-      parent::add(new AMErrorReport($this->exception,"AMBUserMessages"));
+      parent::add(new AMErrorReport($this->exception,"AMBUserMessages::__toString", AMLog::LOG_WEBFOLIO));
       return parent::__toString();
     }
 

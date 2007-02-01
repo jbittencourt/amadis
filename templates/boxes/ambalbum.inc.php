@@ -15,6 +15,7 @@ class AMBAlbum extends AMListBox implements CMActionListener {
 						$album->saveEntry();
 						header("Location:$_SERVER[PHP_SELF]?frm_ammsg=file_successful_sent");
 					}catch(CMException $e){
+						new AMErrorReport($e, 'AMBAlbum::doAction', AMLog::LOG_ALBUM);
 						header("Location:$_SERVER[PHP_SELF]?frm_amerror=send_file");
 					}						
 					break;
@@ -24,6 +25,7 @@ class AMBAlbum extends AMListBox implements CMActionListener {
 						$album->deleta($_REQUEST["id"]);
 						header("Location:$_SERVER[PHP_SELF]?frm_ammsg=file_successful_delete");
 					}catch(CMException $e){
+						new AMErrorReport($e, 'AMBAlbum::doAction', AMLog::LOG_ALBUM);
 						header("Location:$_SERVER[PHP_SELF]?frm_amerror=del_file");
 					}
 					break;
@@ -33,6 +35,7 @@ class AMBAlbum extends AMListBox implements CMActionListener {
 						$album->editComment($_REQUEST['photo'], $_REQUEST['comment_edited']);
 						header("Location:$_SERVER[PHP_SELF]?frm_ammsg=comment_successfull_edited");
 					}catch(CMException $e){
+						new AMErrorReport($e, 'AMBAlbum::doAction', AMLog::LOG_ALBUM);
 						header("Location:$_SERVER[PHP_SELF]?frm_amerror=edit_comment");
 					}
 					break;

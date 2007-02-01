@@ -25,17 +25,17 @@ if(array_key_exists('action', $_REQUEST)) {
 			$profile = new AMBlogProfile;
 			$profile->codeUser = $_SESSION['user']->codeUser;
 
-    //try to load the profile from the DB;
+		    //try to load the profile from the DB;
 			try{
 				$profile->load();
 			} catch (CMDBException $exception) {
-      //if the loads fail, do nothing. The CMObj will handle the 
-      //insertion
+      		//if the loads fail, do nothing. The CMObj will handle the 
+      		//insertion
 			}
 
-			$image = $_SESSION['diary_profile_image'];
-			if(($image->state==CMObj::STATE_NEW) ||
-			($image->state==CMObj::STATE_DIRTY_NEW)) {
+			//$image = $_SESSION['diary_profile_image'];
+			
+			/*if(!empty($image) && (($image->state==CMObj::STATE_NEW) ||	($image->state==CMObj::STATE_DIRTY_NEW))) {
 				try {
 					$image->save();
 				} catch(CMDBException $e) {
@@ -50,16 +50,16 @@ if(array_key_exists('action', $_REQUEST)) {
 					$old_image->load();
 					$old_image->delete();
 				} catch (CMDBException $exception) {
-	//hummm, some problem ocured. I will ignore the problem.
-	//so lost image will remain in the dabatase. I will be
-	//cool  to log this information for the admin
+					//hummm, some problem ocured. I will ignore the problem.
+					//so lost image will remain in the dabatase. I will be
+					//cool  to log this information for the admin
 				}
 				
-			}
+			}*/
 
 			$profile->titleBlog= $_REQUEST['frm_titleBlog'];
 			$profile->text = $_REQUEST['frm_text'];
-			$profile->image = $image->codeFile;
+			//$profile->image = $image->codeFile;
 
 			try{
 				$profile->save();
@@ -72,8 +72,8 @@ if(array_key_exists('action', $_REQUEST)) {
 			break;
 
 		case "fatal_error":
-   //No caso de um erro fatal.
-   //A mensagem de erro e exibida pelo proprio template AMMain.
+   			//No caso de um erro fatal.
+   			//A mensagem de erro e exibida pelo proprio template AMMain.
 			$pad->add("<div align=center><a href=\"$_SERVER[PHP_SELF]\">$_language[try_again]</a></div>");
 			break;
 
@@ -99,19 +99,19 @@ if(array_key_exists('frm_tituloBlog',$_REQUEST)) {
 	$profile->tituloBlog = $_REQUEST['frm_tituloBlog'];
 }
 
-$caixa = new AMBoxBlogProfile("","aaa");
+$caixa = new AMBoxBlogProfile("","");
 
 //I decided to use an ordinary form insted the AMWSmartform to manipulate easily the
 //image submit
 
-$caixa->add("<form name=cad_user method=post action=\"$_SERVER[PHP_SELF]\" enctype=\"multipart/form-data\">");
-$caixa->add("<input type=hidden name=action value=\"\">");
+$caixa->add("<form name=cad_user method=post action='$_SERVER[PHP_SELF]' enctype='multipart/form-data'>");
+$caixa->add("<input type=hidden name=action value=''>");
 
 //title
-$caixa->add("<span class=\"fontgray\">$_language[frm_titleBlog]</span><br>");
-$caixa->add("<input name=\"frm_titleBlog\" id=\"frm_titleBlog\" value=\"$profile->titleBlog\" size=\"60\" maxlength=\"60\" type=\"text\">");
-$caixa->add("<span class=\"fontgray\">$_language[frm_text]</span><br>");
-$caixa->add("<textarea name=\"frm_text\" id=\"frm_text\" size=256 rows=8 cols=40>$profile->text</textarea>");
+$caixa->add("<span class='fontgray'>$_language[frm_titleBlog]</span><br>");
+$caixa->add("<input name='frm_titleBlog' id='frm_titleBlog' value='$profile->titleBlog' size='60' maxlength='60' type='text'>");
+$caixa->add("<span class='fontgray'>$_language[frm_text]</span><br>");
+$caixa->add("<textarea name='frm_text' id='frm_text' size=256 rows=8 cols=40>$profile->text</textarea>");
 
 if(array_key_exists('frm_foto',$_FILES)) {
 	$_SESSION['diary_profile_image'] = new AMBlogImage;
@@ -152,12 +152,12 @@ else {
 $types = AMImage::getValidImageExtensions();
 
 //image
-$caixa->add("<p align=center><span class=\"fontGray\">".$_language['frm_image']);
+$caixa->add("<p align=center><span class='fontGray'>".$_language['frm_image']);
 $caixa->add("&nbsp;".$_language['valid_image_types']." ".implode(", ",$types).".</span>");
-$caixa->add("<br><input type=file name=frm_foto onChange=\"this.form.submit()\">");
+$caixa->add("<br><input type=file name=frm_foto onChange='this.form.submit()'>");
 
-$caixa->add("<p align=right><br><input type=submit onClick=\"this.form['action'].value='A_edit'\" value=\"$_language[send]\">");
-$caixa->add("&nbsp;<input name=\"cancelar\" id=\"cancelar\" value=\"$_language[cancel]\" onclick=\"window.location.href = 'blog.php?frm_type='\" type=\"button\">");
+$caixa->add("<p align=right><br><input type=submit onClick=\"this.form['action'].value='A_edit'\" value='$_language[send]'>");
+$caixa->add("&nbsp;<input name='cancelar' id='cancelar' value='$_language[cancel]' onclick=\"window.location.href = 'blog.php?frm_type='\" type='button'>");
 
 $caixa->add("</form>");
 
