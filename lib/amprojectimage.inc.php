@@ -15,7 +15,7 @@
  **/
 class AMProjectImage extends AMFixedSizeImage implements AMThumbinaiableImage {
 
-  const DEFAULT_IMAGE = 2;     //the default user image is coded with number 2 in the databse
+  const DEFAULT_IMAGE = 'imagem_default_projetos.gif';     //the default user image is coded with number 2 in the databse
   public function __construct() {
     parent::__construct();
 
@@ -73,7 +73,7 @@ class AMProjectImage extends AMFixedSizeImage implements AMThumbinaiableImage {
     case CMObj::STATE_PERSISTENT:
 	return new AMTProjectImage($this->codeFile);
     case CMObj::STATE_NEW:
-      return new AMTProjectImage(self::DEFAULT_IMAGE);
+      return new AMTProjectImage(self::DEFAULT_IMAGE, AMImageTemplate::METHOD_DEFAULT);
     }
   }
 

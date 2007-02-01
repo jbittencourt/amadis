@@ -12,7 +12,8 @@
  **/
 class AMImage extends AMFile
 {
-
+	 
+	
   /**
    * Return an array with the images type that are supported by GD.
    **/
@@ -104,17 +105,17 @@ class AMImage extends AMFile
    **/
     public function resize($x1,$y1)
     {
-    //calculate proportions
+    	//calculate proportions
         $size = $this->getSize();
         $x0 = $size['x'];
         $y0 = $size['y'];
 
-    //compute the new dimmensions of the image considering
-    //the requested new dimensions and mantaining the
-    //porportion betwen the sides;
-    // x0,y0 = sizes of the original image
-    // x1,y1 = requested new size of the image
-    // xc,yc = computed new size of the image
+    	//compute the new dimmensions of the image considering
+    	//the requested new dimensions and mantaining the
+    	//porportion betwen the sides;
+    	// x0,y0 = sizes of the original image
+    	// x1,y1 = requested new size of the image
+    	// xc,yc = computed new size of the image
 
 
         $dx = $x1/$x0;
@@ -129,7 +130,7 @@ class AMImage extends AMFile
             $yc = $y1;
         }
         
-    //resizing image
+    	//resizing image
 
         $img_src = imagecreatefromstring($this->data);
         $img_dst = ImageCreateTrueColor($xc,$yc);
@@ -140,12 +141,12 @@ class AMImage extends AMFile
         imagecopyresampled($img_dst,$img_src,0,0,0,0,$xc,$yc,$src_width, $src_height);
 
 
-    //captures the image
+    	//captures the image
         ob_start();
         Imagepng($img_dst);
         $this->data = ob_get_contents();
         $this->mimeType = "image/png";
-    //clear the buffer
+    	//clear the buffer
         ob_end_clean();
 
     }
@@ -167,12 +168,27 @@ class AMImage extends AMFile
         $dm = $this->getSize();
         $s = round($this->size/1024);
         $this->metadata = "$dm[x]|$dm[y]|$s";
-
+		
         $old_state = $this->state;
-        parent::save();
+        
+     	$_conf = $_CMAPP['config'];
+     	$data = $this->data;
+    	unset($this->fieldsValues['data']);
 
-    //we must delete all the existing thumbnails of this image if the save was sucessfull
-    //see AMThumb for more information about thumbnail generation
+        try{
+        	parent::save();
+        }catch(CMException $e) {
+        	new AMErrorReport($e, 'AMImage::save', AMLog::LOG_CORE);
+        	throw $e;
+        }
+        
+        $path =  (string) $_conf->app[0]->paths[0]->files;
+    	$image = fopen($path.'/'.$this->codeFile.'_'.$this->name, "a");
+    	$w = fwrite($image, $data);
+    	fclose($image);
+
+	    //we must delete all the existing thumbnails of this image if the save was sucessfull
+    	//see AMThumb for more information about thumbnail generation
         if($old_state==CMObj::STATE_DIRTY) {
             $p = AMThumb::getImagesPattern($this->codeFile);
 
@@ -186,5 +202,20 @@ class AMImage extends AMFile
                 }
             }
         }
+    }
+    public function delete()
+    {
+    	global $_CMAPP;
+    	
+    	$path = (string) $_conf->app[0]->paths[0]->files;
+    	$image_path = $path.'/'.$this->codeFile.'_'.$this->name;
+    	
+    	try {
+    		parent::delete();
+    		unlink($image_path);	
+    	}catch(CMException $e) {
+    		new AMErrorReport($e, 'AMImage::delete', AMLog::LOG_CORE);
+    		throw $e;
+    	}
     }
 }

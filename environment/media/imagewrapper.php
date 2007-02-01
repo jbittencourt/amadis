@@ -51,13 +51,21 @@ switch($_REQUEST['method']) {
  	break;
  case "session":
  	$imagem = unserialize($_SESSION['amadis']['imageview'][$_REQUEST['frm_id']]);
+ 	header("Content-Type: ".$imagem->mimeType);
+	die($imagem->data);
  	break;
 }
 
-$d = $imagem->data;
-if (!empty($d)) {
+$path =  (string) $_conf->app[0]->paths[0]->files;
+$filename = $path.'/'.$imagem->codeFile.'_'.$imagem->name;
+if (file_exists($filename)) {
 	header("Content-Type: ".$imagem->mimeType);
-	echo $imagem->data;
+
+	$handle = fopen ($filename, "r");
+	$img = fread ($handle, filesize ($filename));
+	fclose ($handle);
+	
+	echo $img;
 }
 else {
 	error();

@@ -20,7 +20,7 @@ class AMTAgregator extends AMMain {
     $this->requires("project.css",self::MEDIA_CSS);
     $this->requires("agregator.css",self::MEDIA_CSS);
 
-    $this->setImgId($_CMAPP['imlang_url']."/top_agregador.gif");
+    $this->setImgId($_CMAPP['imlang_url']."/top_projetos.gif");
     
   }
 }

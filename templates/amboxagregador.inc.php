@@ -55,7 +55,7 @@ class AMBoxAgregador extends CMHTMLObj {
         }
     }
     
-    public function setHeader(AMProjeto $proj) {
+    public function setHeader(AMProject $proj) {
         $this->image = $proj->image;
         $this->title = $proj->title;
     }

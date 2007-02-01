@@ -26,6 +26,7 @@ abstract class  AMImageTemplate extends CMHTMLObj
 
 	const METHOD_DB=0;
 	const METHOD_SESSION=1;
+	const METHOD_DEFAULT=2;
 
 	protected $codeFile;
 	private $imageObj;
@@ -54,6 +55,9 @@ abstract class  AMImageTemplate extends CMHTMLObj
   	elseif($method==self::METHOD_SESSION) {
   		$this->imageObj= $value;
   	}
+  	elseif($method==self::METHOD_DEFAULT) {
+  		$this->imageObj = $value;
+  	}
   	else {
   		Throw new AMException("Image render method not recognized.");
   	}
@@ -68,6 +72,7 @@ abstract class  AMImageTemplate extends CMHTMLObj
   public function getImageURL()
   {
   	global $_CMAPP;
+  	
   	$url = "";
   	switch($this->method) {
     case self::METHOD_DB:
@@ -75,9 +80,11 @@ abstract class  AMImageTemplate extends CMHTMLObj
     	break;
     case self::METHOD_SESSION:
     	$rand = rand(0,100000);
-
     	$_SESSION['amadis']['imageview'][$rand] =serialize($this->imageObj) ;
     	$url = "$_CMAPP[media_url]/imagewrapper.php?method=session&frm_id=$rand";
+    	break;
+    case self::METHOD_DEFAULT:
+    	$url = "$_CMAPP[images_url]/$this->imageObj";
     	break;
   	}
   	return $url;

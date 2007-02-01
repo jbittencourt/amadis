@@ -207,10 +207,13 @@ switch($_REQUEST['action']) {
    if(($foto->state==CMObj::STATE_DIRTY) || ($foto->state==CMObj::STATE_DIRTY_NEW)) {
      $foto->time = time();
      try {
-       $foto->save(); 
+		$fName = 'USER_IMAGE_'.$_SESSION['cad_user']->username.'_'.$foto->name;
+     	$foto->name = $fName;
+        $foto->save(); 
      }
      catch(CMDBException $e) {
-         //header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_picture");
+     	new AMErrorReport($e, 'Register_User - saving image', AMLog::LOG_CORE);
+        header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_picture");
      }
      $_SESSION['cad_user']->picture = (integer) $foto->codeFile;
    }

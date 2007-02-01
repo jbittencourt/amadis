@@ -221,7 +221,9 @@ switch($_REQUEST['action']) {
    if(($foto->state==CMObj::STATE_DIRTY) || ($foto->state==CMObj::STATE_DIRTY_NEW)) {
      $foto->time = time();
      try {
-       $foto->save(); 
+     	$fName = 'PROJECT_IMAGE_'.$foto->name;
+     	$foto->name = $fName;
+        $foto->save(); 
      }
      catch(CMDBException $e) {
        header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_picture");
