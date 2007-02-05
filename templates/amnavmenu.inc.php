@@ -70,8 +70,7 @@ class  AMNavMenu extends CMHTMLObj
             $box = new AMMenuBox;
             $box->add($str);
             $this->add($box,true,true);
-
-
+			
 
       // WEBFOLIO
             $str = "<a href=\"$_CMAPP[services_url]/webfolio/webfolio.php\">";
