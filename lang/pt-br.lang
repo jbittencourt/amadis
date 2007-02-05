@@ -1006,6 +1006,11 @@ desactive = "Desativar"
 update = "Atualizar"
 yes_please = "Sim, por favor"
 no_thanks = "N&atilde;o, obrigado"
+log = "Log"
+view_logs = "Visualizar Logs"
+view_log = "Visualizar Log"
+select = "Selecione"
+
 
 [forum]
 frm_title = "T&iacute;tulo do F&oacute;rum"
