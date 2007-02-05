@@ -52,6 +52,7 @@ class AMProjectImage extends AMFixedSizeImage implements AMThumbinaiableImage {
     $image = self::getImage($obj);
 
     $thumb = new AMProjectThumb($smallthumb);
+
     $thumb->codeFile = $image;
     try {
       $thumb->load();

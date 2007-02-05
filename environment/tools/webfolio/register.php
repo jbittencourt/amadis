@@ -207,8 +207,6 @@ switch($_REQUEST['action']) {
    if(($foto->state==CMObj::STATE_DIRTY) || ($foto->state==CMObj::STATE_DIRTY_NEW)) {
      $foto->time = time();
      try {
-		$fName = 'USER_IMAGE_'.$_SESSION['cad_user']->username.'_'.$foto->name;
-     	$foto->name = $fName;
         $foto->save(); 
      }
      catch(CMDBException $e) {

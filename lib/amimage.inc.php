@@ -171,10 +171,6 @@ class AMImage extends AMFile
 		
         $old_state = $this->state;
         
-     	$_conf = $_CMAPP['config'];
-     	$data = $this->data;
-    	unset($this->fieldsValues['data']);
-
         try{
         	parent::save();
         }catch(CMException $e) {
@@ -182,11 +178,6 @@ class AMImage extends AMFile
         	throw $e;
         }
         
-        $path =  (string) $_conf->app[0]->paths[0]->files;
-    	$image = fopen($path.'/'.$this->codeFile.'_'.$this->name, "a");
-    	$w = fwrite($image, $data);
-    	fclose($image);
-
 	    //we must delete all the existing thumbnails of this image if the save was sucessfull
     	//see AMThumb for more information about thumbnail generation
         if($old_state==CMObj::STATE_DIRTY) {
@@ -207,12 +198,8 @@ class AMImage extends AMFile
     {
     	global $_CMAPP;
     	
-    	$path = (string) $_conf->app[0]->paths[0]->files;
-    	$image_path = $path.'/'.$this->codeFile.'_'.$this->name;
-    	
     	try {
     		parent::delete();
-    		unlink($image_path);	
     	}catch(CMException $e) {
     		new AMErrorReport($e, 'AMImage::delete', AMLog::LOG_CORE);
     		throw $e;

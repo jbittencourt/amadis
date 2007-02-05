@@ -37,16 +37,10 @@ switch($_REQUEST['method']) {
  	$imagem->codeFile = (integer) $_REQUEST['frm_codeFile'];
  	Try {
  		$imagem->load();
- 	}
- 	catch(Exception $e) {
+ 	}catch(Exception $e) {
  		//tests if a debug var is set in the request, if not, send an error image, otherwise print the exception.
- 		if($_REQUEST['debug']==1) {
- 			echo $e;
- 			die();
- 		}
- 		else {
- 			error();
- 		}
+		new AMErrorReport($e, 'IMAGEWRAPPER::'.$_REQUEST['method'], AMLog::LOG_CORE );
+		error();
  	}
  	break;
  case "session":

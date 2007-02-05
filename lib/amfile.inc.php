@@ -26,6 +26,38 @@ class AMFile extends CMObj {
      $this->addPrimaryKey("codeFile");
   }
 
+  public function save() 
+  {
+  	global $_CMAPP;
+  	
+  	$_conf = $_CMAPP['config'];
+
+  	$data = $this->data;
+  	unset($this->fieldsValues['data']);
+  	parent::save();
+  	
+  	$path = (string) $_conf->app[0]->paths[0]->files;
+  	$file = $path.'/'.$this->codeFile.'_'.$this->name;
+  	$f = fopen($file, "a");
+  	fwrite($f, $data);
+  	fclose($f);
+
+  }
+  
+  function delete() 
+  {
+  	global $_CMAPP;
+
+  	$_conf = $_CMAPP['config'];
+  	$path = (string) $_conf->app[0]->paths[0]->files;
+  	$file = $path.'/'.$this->codeFile.'/'.$this->name;
+  	if(file_exists($file)) {
+  		parent::delete();
+  		unlink($file);
+  	}
+  }
+  
+  
   /**
    * Load an image from the request to the object.
    *

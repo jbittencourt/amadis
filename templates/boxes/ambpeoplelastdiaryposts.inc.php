@@ -28,9 +28,9 @@
  		if(!empty($this->itens)) {
  			foreach($this->itens as $item) {
  				parent::add("<a class=\"people_blog_entry\" href=\"$_CMAPP[services_url]/blog/diario.php?frm_codePost=$item->codePost#anchor_post_".$item->codePost."\">");
- 				parent::add("&raquo; ".$item->titulo."</a>:  (");
- 				parent::add(new AMTUserInfo($item->autor[0],AMTUserInfo::LIST_USERNAME));
- 				parent::add(", ".date($_language['date_format'],$item->tempo).")");
+ 				parent::add("&raquo; ".$item->title."</a>:  (");
+ 				parent::add(new AMTUserInfo($item->author[0],AMTUserInfo::LIST_USERNAME));
+ 				parent::add(", ".date($_language['date_format'],$item->time).")");
  				parent::add("<br>");
  			}
  		}

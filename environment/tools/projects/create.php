@@ -31,8 +31,9 @@ if(!empty($_REQUEST['frm_codeProjeto'])) {
   $_SESSION['cad_proj']->codeProject = $_REQUEST['frm_codeProjeto'];
   try {
     $_SESSION['cad_proj']->load();
+  } catch(CMObjException $e) {
+  	new AMErrorReport($e, 'AMProject::load', AMLog::LOG_PROJECTS );
   }
-  catch(CMObjException $e) { }
 
   $group = $_SESSION['cad_proj']->getGroup();
 
@@ -92,7 +93,7 @@ switch($_REQUEST['action']) {
      $_SESSION['cad_proj']='';
    }
    
-   $status = AMProject::listAvaiableStatus();
+   //$status = AMProject::listAvaiableStatus();
    
    $form->addComponent("action",new CMWHidden("action","pag_1"));
 
@@ -103,14 +104,12 @@ switch($_REQUEST['action']) {
       
  case "pag_1":
 
-
-
    if((!($_SESSION['cad_proj'] instanceof AMProject))||($_SESSION['cad_proj']->state==CMObj::STATE_NEW) || ($_REQUEST['frm_title']!=$_SESSION['cad_proj']->title)) {
      $proj = new AMProject;
      $proj->title = $_REQUEST['frm_title'];
      try {
        $proj->load();
-       
+
        $_SESSION['cad_proj'] = new AMProject;
        $_SESSION['cad_proj']->loadDataFromRequest();
        
@@ -166,8 +165,7 @@ switch($_REQUEST['action']) {
 
    if((!is_array($_REQUEST['frm_codeArea']) && empty($_FILES['frm_foto']))) {
      Header("Location: $_CMAPP[services_url]/projects/create.php?action=pag_1&frm_amerror=proj_must_select_areas");
-   }
-   else {
+   } else {
      if(is_array($_REQUEST['frm_codeArea'])) {  	  
        $temp = array();
        foreach($_REQUEST['frm_codeArea'] as $area) {
@@ -214,89 +212,82 @@ switch($_REQUEST['action']) {
    break;
  case "pag_3":
    
-   $foto = unserialize($_SESSION['cad_foto']);
-   if($foto==false) $foto = $_SESSION['cad_foto'];
+	$foto = unserialize($_SESSION['cad_foto']);
+   	if($foto==false) $foto = $_SESSION['cad_foto'];
 
+   	if(($foto->state==CMObj::STATE_DIRTY) || ($foto->state==CMObj::STATE_DIRTY_NEW)) {
+     	$foto->time = time();
+     	try {
+     		die(note($foto));
+			$foto->save(); 
+     	} catch(CMDBException $e) {
+       		header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_picture");
+     	}
      
-   if(($foto->state==CMObj::STATE_DIRTY) || ($foto->state==CMObj::STATE_DIRTY_NEW)) {
-     $foto->time = time();
-     try {
-     	$fName = 'PROJECT_IMAGE_'.$foto->name;
-     	$foto->name = $fName;
-        $foto->save(); 
-     }
-     catch(CMDBException $e) {
-       header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_picture");
-     }
-     
-     $_SESSION['cad_proj']->image = (integer) $foto->codeFile;
-   }
+     	$_SESSION['cad_proj']->image = (integer) $foto->codeFile;
+   	}
 
-   //save the project
-  try {
-     $_SESSION['cad_proj']->save();
-   }
-   catch(CMDBException $e) {
-     header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_project");
-   }
-   catch(AMException $e) {
-     header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=creating_project_dir");
-   }
+   	//save the project
+	try {
+    	$_SESSION['cad_proj']->save();
+   	} catch(CMDBException $e) {
+		new AMErrorReport($e, 'AMProject::save',AMLog::LOG_PROJECTS );	
+		header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_project");
+   	} catch(AMException $e) {
+		new AMErrorReport($e, 'AMProject::save',AMLog::LOG_PROJECTS );
+		header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=creating_project_dir");
+   	}
 
-   //save the areas
-   $con = new CMContainer;
+   	//save the areas
+   	$con = new CMContainer;
 
-   $proj_areas = $_SESSION['cad_proj']->listAreas();
+   	$proj_areas = $_SESSION['cad_proj']->listAreas();
 
-   $tmp_areas = $_SESSION['cad_proj']->areas;
-   $max = 0;
+   	$tmp_areas = $_SESSION['cad_proj']->areas;
+   	$max = 0;
 
-   foreach($tmp_areas as $code) {
-     
-   	if($proj_areas->in($code)) {
-       $proj_areas->remove($code);
-       continue;
-     }     
-     $temp = new AMProjectArea;
-     $temp->codeArea = $code;
-     $temp->codeProject = $_SESSION['cad_proj']->codeProject;     
-     $con->add($code,$temp);
-     $max = max($max,$code);     
-   }
-
-   $remove = new CMContainer;
-   if($proj_areas->__hasItems()) {
-     foreach($proj_areas as $item) {
-       $temp = $item->areas;
-       $temp->items[0]->codeArea = $item->codeArea; //override devel bug
-       $remove->add($item->codeArea,$temp->items[0]);
-     }
-   };
+   	foreach($tmp_areas as $code) {
+   		if($proj_areas->in($code)) {
+       		$proj_areas->remove($code);
+  			continue;
+    	}     
+    	$temp = new AMProjectArea;
+    	$temp->codeArea = $code;
+    	$temp->codeProject = $_SESSION['cad_proj']->codeProject;     
+    	$con->add($code,$temp);
+    	$max = max($max,$code);     
+   	}
+   	$remove = new CMContainer;
+   	if($proj_areas->__hasItems()) {
+    	foreach($proj_areas as $item) {
+       		$temp = $item->areas;
+       		$temp->items[0]->codeArea = $item->codeArea; //override devel bug
+       		$remove->add($item->codeArea,$temp->items[0]);
+     	}
+   	};
 
 
-   //forces the ins of the user in the group
-   $member = new CMGroupMember;
-   $member->codeGroup = $_SESSION['cad_proj']->codeGroup;
-   $member->codeUser = $_SESSION['user']->codeUser;
-   $member->time = time();
-   $con->add($max+1,$member);
+   	//forces the ins of the user in the group
+   	$member = new CMGroupMember;
+   	$member->codeGroup = $_SESSION['cad_proj']->codeGroup;
+   	$member->codeUser = $_SESSION['user']->codeUser;
+   	$member->time = time();
+   	$con->add($max+1,$member);
 
-   try {
-     $remove->acidOperation(CMContainer::OPERATION_DELETE);
-     $con->acidOperation(CMContainer::OPERATION_SAVE);
-   }
-   catch(CMObjEContainerOperationFailed $e) {
-     Header("Location: $_CMAPP[services_url]/projects/create.php?action=fatal_error&frm_amerror=save_failed");
-   }
+   	try {
+     	$remove->acidOperation(CMContainer::OPERATION_DELETE);
+     	$con->acidOperation(CMContainer::OPERATION_SAVE);
+   	} catch(CMObjEContainerOperationFailed $e) {
+     	Header("Location: $_CMAPP[services_url]/projects/create.php?action=fatal_error&frm_amerror=save_failed");
+   	}
+   	$cod = $_SESSION['cad_proj']->codeProject;
+   	unset($_SESSION['cad_proj']);
+   	unset($_SESSION['cad_foto']);
    
-   $cod = $_SESSION['cad_proj']->codeProject;
-   unset($_SESSION['cad_proj']);
-   unset($_SESSION['cad_foto']);
+   	//if everything was ok, go the page of the project.
+   	CMHTMLPage::redirect($_CMAPP['services_url'].'/projects/project.php?frm_ammsg=project_created&frm_codProjeto='.$cod);
    
-   //if everything was ok, go the page of the project.
-   CMHTMLPage::redirect($_CMAPP['services_url'].'/projects/project.php?frm_ammsg=project_created&frm_codProjeto='.$cod);
-   
-   break;
+  	break;
 
 
  case "fatal_error":

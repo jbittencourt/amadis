@@ -9,13 +9,29 @@ abstract class AMThumb extends AMImage {
 
     $this->name_file = "image_".$this->maxX."_".$this->maxY."_".$this->codeFile.".png";
     if(!$this->checkThumbExists()) {
-      parent::load();
-      $this->save();
+	      parent::load();
+	      $this->loadFile();
+    	  $this->save();
     }
     
     $this->thumb = new AMTThumb($this->name_file);
   }
 
+  public function loadFile() 
+  {
+  	global $_CMAPP;
+
+  	$_conf = $_CMAPP['config'];
+  	$path =  (string) $_conf->app[0]->paths[0]->files;
+  	$file = $path."/".$this->codeFile.'_'.$this->name;
+  	if(file_exists($file)) {
+  		$f = fopen($file, 'r');
+  		$this->data = fread($f, filesize($file));
+		fclose($f);	
+  	}
+
+  	
+  }
   public function getView() {
     return $this->thumb;
   }

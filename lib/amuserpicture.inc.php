@@ -18,7 +18,7 @@
 class AMUserPicture extends AMFixedSizeImage implements AMThumbinaiableImage 
 {
 
-  const DEFAULT_IMAGE = 1;     //the default user image is coded with number 1 in the databse
+  const DEFAULT_IMAGE = 'imagem_default_user.gif';     //the default user image is coded with number 1 in the databse
   public function __construct() {
     parent::__construct();
 
@@ -75,7 +75,7 @@ class AMUserPicture extends AMFixedSizeImage implements AMThumbinaiableImage
     case CMObj::STATE_DIRTY_NEW:
       return new AMTUserImage($this,AMImageTemplate::METHOD_SESSION);
     case CMObj::STATE_NEW:
-      return new AMTUserImage(self::DEFAULT_IMAGE);
+      return new AMTUserImage(self::DEFAULT_IMAGE, AMImageTemplate::METHOD_DEFAULT);
     }
   }
 }
