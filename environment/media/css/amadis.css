@@ -1,519 +1,689 @@
-BODY {
-  margin: 0px;
-  width: 100%;
-  font-family: Arial, Helvetica, sans-serif;
+/* CSS Document */ /*** The Essential Code ***/
+* {
+	padding: 0;
+	margin: 0;
+}
+
+h1,h2,h3,h4,h5,h6,p,pre,blockquote,label,ul,ol,dl,fieldset,address {
+	margin: 0.2em 3%;
+}
+
+fieldset {
+	padding: 0.3em;
+}
+
+body {
+	min-width: 630px; /* 2 x (LC fullwidth + CC padding) + RC fullwidth */
+	border-left: solid 9px #00A3BA;
+	font-family: Arial, Helvetica, sans-serif;
   font-size: 11px;
-  line-height: 16px;
-  color: #666666;
-       
-  background-image: url("../images/bg_linhas_lateral2.gif");
-  background-repeat: repeat-y;
-  background-position: right;
-  background-color: #FFFFFF;
-  }
-
-
-BODY IMG { 
-  border: 0px;
-  }
-
-.admin_items  { 
-  /* background-color: #E2F6FF; QUANDO TIVER COM O MOUSE EM CIMA*/
-  background-color: #FFFCFC;                        
-  border: 2px #71A4AF solid;
-  height: 48px;
-  width: 48px; 
-  text-align: center;
-  }
-/* MAIN MENU */
-
-#amadis-logo { 
-  position: absolute;
-  left: 2px;
-  z-index: 20;
-/*   visibility: hidden; */
-  }
-
-#amadis-header { 
-  position: relative;
-  top: 0px;
-  margin-left: 206px;
-  background-image: url("../images/bg_header_2.jpg");
-  height: 108px;
-  padding: 0px 0px 0px 30px;
-  z-index: 19;
-  }
-
-#amadis-header-menu { 
-  position: relative;
-  bottom: 14px;
-  }
-  
-#amadis-header-menu .menuitems {
-  position: relative;
-  top: 16px;
-  left: -10px;
-  }
-  
-#amadis-header-line { 
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  float: right;
-  }
-
-#nav-menu { 
-  position: relative;
-  /* top: 131px; */
-  top: 238px;
-  left: 19px;
-  width: 197px;
-  /* border:solid thin red; */
-  z-index:1;
-  }
-  
-#column-one {  
-  position: relative;
-  float: left;
-  background-image: url("../images/pecas_amadis_2.png");
-  padding-top: 25px;
-  padding-bottom: 10px;
-  background-color: #f3f3f6;
-  width: 187px;
-  background-repeat: no-repeat;
-  }
-  
-/* #content-column { */
-/*   position: relative; */
-/*   margin-top: 10px; */
-/*   margin-right: 7px; */
-/*   border: solid thin red; */
-/*   } */
-  
-
-#content { 
-  position: relative;
-  top: 110px;
-  height: 100%;
-  padding-left: 230px;
-  margin-right: 10px;
-  min-height: 400px;
-  background: url("../images/img_dot_blue.gif") repeat-y;
-}
-  
-#footer-menu { 
-  position: absolute;
-  bottom: -20px;
-  }
-  
-#orange-line { 
-  position: relative;
-  display:inherit;
-  }
-  
-#dashed-line { 
-  background-image: url("../images/bg_linha_dots.gif");
-  background-repeat: repeat-x;
-  height: 7px;
-  width: 100%;
-  }
-
-#amadis-global-wrapper { 
-  position: relative;
-  top: -108px;
-  background: url("../images/img_dot_blue.gif") repeat-y;
 }
 
-#amadis-footer { 
-  display:none;
-  position: absolute;
-  height: 40px;
-  bottom:0px; !important
-  background: url("../images/img_dot_blue.gif") repeat-y;
-  clear: both;
-  }
 
 
-.portlet-line { 
-  /* z-index: 30; */
-  }
+.peca-logo {
+	background: url(../images/pecas.png);
+	width: 215px;
+	height: 172px;
+}
 
-.portlet { 
-  position: relative;
-  top: -25px;
-  padding: 0px;
-  margin-left: 6px;
-  margin-right: 2px;
-  } 
+#logout_button {
+	border: 0;
+	background-color: transparent;
+}
+
+#container {
+	padding-left: 185px; /* LC fullwidth */
+	padding-right: 50px; /*  CC padding */
+}
+
+#container .column {
+	position: relative;
+	float: left;
+}
+
+#center {
+	padding: 10px 20px; /* CC padding */
+	width: 100%;
+}
+
+#left {
+	width: 183px; /* LC width */
+	padding: 0px; /* LC padding */
+	right: 233px; /* LC fullwidth + CC padding */
+	margin-left: -100%;
+}
+
+#footer {
+	clear: both;
+}
+
+/*** IE Fix ***/
+* html #left {
+	left: 190px; /* RC fullwidth */
+}
+
+/*** Equal-height Columns ***/
+#container {
+	overflow: hidden;
+}
+
+#container .column {
+	padding-bottom: 1001em; /* X + padding-bottom */
+	margin-bottom: -1000em; /* X */
+}
+
+/*** Footer Fix ***/
+* html body {
+	overflow: hidden;
+}
+
+* html #footer-wrapper {
+	float: left;
+	position: relative;
+	width: 100%;
+	
+	padding-bottom: 10010px;
+	margin-bottom: -10000px;
+	background: #FFF; /*** Same as body background ***/
+}
+#footer {
+	font-size: 8px;
+	text-align: center;
+	padding: 0.27em 0;
+	background: #D5E5E5;
+	color: #636563;
+}
 
 
+/*** Just for Looks ***/
+body {
+	margin: 0;
+	padding: 0;
+	background: #FFF;
+}
+
+#header {
+	font-size: large;
+	border-bottom: solid 9px #ECF3F3;
+	background: #E8E4E1 url(../images/back_header.png) 185px 0 no-repeat;
+}
+
+#header .menu {
+	text-align: left;
+	margin-left: 185px;
+	padding-top: 5px;
+	background: #92C7D4 url(../images/back_menu.png) repeat-x bottom;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #fff;
+	color: #fff;
+}
+
+#header .amadis-logo {
+	margin-left: 215px;
+	padding: 0;
+	height: 68px;
+}
+
+#header .peca-logo {
+	position: absolute;
+	left: 0px;
+	top: 0px
+}
+
+
+
+#left {
+	margin-top: 67px;
+	background: #F9F9F7 url(../images/back_topleft.png) no-repeat;
+}
+
+#center {
+	background: #FFF;
+	border-right: solid 10px #ECF3F3;
+}
+
+#container .column {
+	padding-top: 1em;
+	text-align: justify;
+}
+
+/*** code ***/
+.menufont {
+	font: 12px lucida sans, sans-serif; /* Tamanho e fam�lia de fontes */
+	font-weight: bold;
+	color: #FFF; /* Cor da fonte */
+	margin-left: 35px;
+}
+
+
+
+.menufont li {
+	display: inline;
+	list-style-type: none;
+	border-left: 1px white solid;
+	padding: 7px 7px;
+
+}
+
+#menufontExtra a:link, a:active, a:visited{
+	color: #FFF; /* Cor da fonte */
+	text-decoration: none;	
+}
+
+.menufont li:hover {
+	background: url(../images/back_li_ms.gif) repeat-x;
+}
+
+
+
+/* AMADIS MENU BEGIN */ 
+/* Menu Container */
+#menubox {
+	width: 172px;
+	margin-left: 5px;
+}
+
+/* Menu Head */
+#menuTop {
+	background: #b4e3eb;
+	height: 100%;
+}
+
+/* Puzzle piece in the top of menu head */
+#my {
+	background: url(../images/puzzle.gif) no-repeat;
+	margin-left: 10px;
+	line-height: 25px;
+	padding-left: 28px; /* Espaçamento do texto a esquerda */
+	font-family: Tahoma, Helvetica, sans-serif;
+	color: #008CAF;
+}
+
+/* Top roundcorner of menu head */
+#imageTop {
+	height: 12px;
+	background: url(../images/topborder.gif) no-repeat;
+}
+
+/* Menu list items */
+#menu {
+	background: #e5f3f6 url(../images/back_degrademl.png) repeat-x;
+	border: solid 1px #b4e3eb;
+}
+
+/* Menu list : general properties - NO bullets! */
+#menu ul {
+	list-style: none;
+	font-family: Tahoma, Helvetica, sans-serif;
+	color: #008CAF;
+	font-size: 12px;
+	width: 170px;
+	position: relative;
+	right: 5px;
+}
+
+#menu ul a {
+	text-decoration: none;
+	color: #008CAF;
+}
+
+#menu ul .webfolio_txt  a:hover {
+	color: #426def;
+}
+
+#menu ul .blog_txt  a:hover {
+	color: #8b4adb;
+}
+#menu ul .lib_txt  a:hover {
+	color: #ae7fde;   
+}
+#menu ul .project_txt a:hover {
+	color: #009ac6;
+}
+#menu ul .friends_txt a:hover {
+	color: #ce0000;
+}
+#menu ul .commnunities_txt a:hover {
+	color: #9c9a63;
+}
+
+/* Menu itens : general properties */
+#menu ul li {
+	background: url(../images/lineml.png);
+	background-repeat: repeat-x;
+	background-position: bottom left;
+	padding-top: 18px;
+	overflow: hidden;
+	padding-bottom: 5px;
+	padding-left: 10px;
+	padding-right: 5px;
+}
+
+#menu ul li:hover {
+	background: url(../images/back_li_ml.gif) transparent repeat;	
+}
+
+/* Submenu list : properties inherited from Menu and added specific ones */
+#menu ul li ul {
+	margin: 0 0 0px 0px;
+	border-bottom: 0px;
+}
+
+/* Submenu itens : specific properties */
+#menu ul li ul li {
+	background: none;
+	margin: 2px 5px 0 10px;
+}
+
+/* Botton roundcorner of menu*/
+#menuBottom {
+	width: 172px;
+	height: 22px;
+	background: url(../images/bottomborder.gif);
+}
+
+/* AMADIS MENU END */ 
+
+/* AMADIS LOGIN BEGIN */ 
+/* Login Container */
+#frame {
+	width: 172px;
+	font-family: Tahoma, Helvetica, sans-serif;
+	font-size: 12px;
+}
+
+#loginTopBorder {
+	background: url(../images/boxsuperior.gif) repeat-x;
+	height: 12px;
+}
+
+#loginBottomBorder {
+	background: url(../images/boxinferior.gif) repeat-x;
+	height: 12px;
+}
+
+#loginContent {
+	background: #fff0f2;
+	border: 0 1px 0 1px solid #f7e4e6;
+	overflow: hidden;
+}
+
+#loginContent ul {
+	list-style-type: none;
+}
+
+#loginContent ul li {
+	margin-left: 13px;
+	margin-bottom: 3px;
+}
+
+#loginContentImage {
+	background: url(../images/ico_peca.png) no-repeat;
+	height: 25px;
+	text-indent: 20px;
+	color: #007d9c;
+}
+
+#loginStatus {
+	text-align: right;
+	margin-right: 15px;
+	height: 25px;
+}
+
+#loginStatusSelect {
+	width: 140px;
+	font-size: 10px;
+}
+
+#loginExit {
+	color: #fff0f2;
+	text-align: right;
+	margin-right: 15px;
+	font-weight: bold;
+}
+
+#loginOut {
+	background: #948ab5;
+	display: inline;
+	color: #fff0f2;
+	font-size: 12px;
+}
+
+#loginOutLeftImage {
+	background: url(../images/leftOut.gif) no-repeat bottom right;
+	height: 17px;
+	width: 7px;
+	display: inline;
+}
+
+#loginOutRightImage {
+	background: url(../images/rightOut.gif) no-repeat bottom left;
+	height: 17px;
+	width: 7px;
+	display: inline;
+}
+
+/* AMADIS LOGIN END */ 
+
+
+
+/* AMADIS INIT LOGIN BEGIN */
+	/* Init Login Container */
+#loginInit {
+	width: 172px;
+	font-family: Tahoma, Helvetica, sans-serif;
+	font-size: 12px;
+}
+
+#loginInitTopBorder {
+	background: url(../images/boxsuperior.gif) repeat-x;
+	height: 12px;
+}
+
+#loginInitBottomBorder {
+	background: url(../images/boxinferior.gif) repeat-x;
+	height: 12px;
+}
+
+#loginInitContent {
+	background: #fff0f2;
+	border: 0 1px 0 1px solid #f7e4e6;
+	overflow: hidden;
+}
+
+#loginInitContent ul {
+	list-style-type: none;
+}
+
+#loginInitContent ul li {
+	margin-left: 13px;
+	margin-bottom: 3px;
+	color: #636563;
+}
+
+#loginInitContentImage {
+	background: url(../images/ico_peca.png) no-repeat;
+	height: 25px;
+	text-indent: 20px;
+	color: #007d9c;
+	font-weight: bold;
+}
+
+#loginInitLog {
+	background: #b569ad;
+	display: inline;
+	color: #fff0f2;
+	font-size: 12px;
+}
+
+#loginInitLeftImage {
+	background: url(../images/leftLog.gif) no-repeat bottom right;
+	height: 17px;
+	width: 7px;
+	display: inline;
+}
+
+#loginInitRightImage {
+	background: url(../images/rightLog.gif) no-repeat bottom left;
+	height: 17px;
+	width: 7px;
+	display: inline;
+}
+
+/* AMADIS INIT LOGIN END */ 
+
+
+
+/* GENERAL */
 .error {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 16px;
-  line-height: 20px;
-  text-align: center;
-  vertical-align: middle;
-  }
-
-.message {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 16px;
-  line-height: 20px;
-  text-align: center;
-  vertical-align: middle;
-  }
-
-.mnlateral {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 11px;
-  line-height: 20px;
-  color: #007FA0;
-  left: 3px;
-  position: relative;
-  }
-  
-.progress_realcado {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
-  font-size: 10px;
-  line-height: 20px;
-  color: #19669E;
-  font-weight: bold;
-  }
-
-.txttitproj { 
-              font-family: Arial, Helvica, sans-serif;
-              font-size: 20px;
-              line-height: 20px;
-              color: #80BAC9;
-              }
-
-.progress_normal {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
-  font-size: 10px;
-  line-height: 20px;
-  color: #6BB9F2;
-  font-weight: bold;
-  }
-
-#logout_button { 
-  border: none;
-  background-color: transparent;
-  float: right;
-  }
-
-
-.small_list IMG#thumb  { 
-  border: 2px solid #d9ccff;
-  margin-right: 4px;
-  }
-  
-
-/* used for the user photo */
-.user-image TABLE {
-  margin-left: 10px; 
-  margin-right: auto;
-  }
-  
-
-/* button that should apear like links */
-.button-as-link { 
-  width: 75px;
-  height: 50px;
-  margin: 3px;
-  padding: 1px;
-  font-size: 11px;
-  cursor: pointer;
-  cursor: hand;
-  }
-
-.image-button { 
-  background: none;
-  border: none;
-  }
-  
-.image-as-link { 
-  cursor: pointer;
-  cursor: hand;
-  }
-  
-
-/* UNIFICAR NO FUTURO */
-/* Texts- AND LINKS */
-a.bluebox {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 11px;
-  line-height: 16px;
-  color: #3466D1;
-  text-decoration: underline;
-  left: 5px;
-  position: relative;
-  }
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	line-height: 20px;
+	text-align: center;
+	vertical-align: middle;
+}
 
 .textobox {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 11px;
-  line-height: 20px;
-  color: #666666;
-  left: 5px;
-  position: relative;
-  }
-
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 20px;
+	color: #666666;
+	left: 5px;
+	position: relative;
+}
 
 .texto {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 11px;
-  line-height: 16px;
-  color: #666666;
-  }
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 16px;
+	color: #666666;
+}
 
-.box {
-  border: 2px solid #6699FF;
-  }
-  
-  
 a.blue {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 11px;
-  line-height: 16px;
-  color: #3466D1;
-  text-decoration: underline;
-  }
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 16px;
+	color: #3466D1;
+	text-decoration: underline;
+}
 
 a.green {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 11px;
-  line-height: 20px;
-  color: #009999;
-  text-decoration: underline;
-  }
-  
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 20px;
+	color: #009999;
+	text-decoration: underline;
+}
+
 /* link box - marrom */
 a.marrom:link {
-  text-decoration: none;
-  color: #CC9966;
-  font-family: Arial; 
-  font-size: 11px;
-  line-height : 20px;
-  position: relative;
-  }
+	text-decoration: none;
+	color: #CC9966;
+	font-family: Arial;
+	font-size: 11px;
+	line-height: 20px;
+	position: relative;
+}
 
 a.marrom:visited {
-  text-decoration: none;
-  color: #CC9966; 
-  font-family: Arial;
-  font-size: 11px;
-  line-height : 20px;
-  position: relative;
-  }
-
-a.marrom:active {
-  text-decoration: none;
-  color: #CC9966;
-  font-family: Arial;
-  font-size: 11px;
-  line-height : 20px;
-  position: relative;
-  }
-
-a.marrom:hover {
-  text-decoration: underline;
-  color: #CC9966;
-  font-family: Arial;
-  font-size: 11px;
-  line-height : 20px;
-  position: relative;
-  }
-
-a.cinza:link {
-  font-size: 11px;
-  line-height : 20px;
-  position: relative;
-  text-decoration: none;
-  color: #666666;
-  font-family: Arial;
-  }
-
-a.cinza:visited {
-  font-size: 11px;
-  line-height : 20px;
-  position: relative;
-  text-decoration: none;
-  color: #666666;
-  font-family: Arial;
-  }
-
-a.cinza:active {
-  font-size: 11px;
-  line-height : 20px;
-  position: relative;
-  text-decoration: none;
-  color: #666666;
-  font-family: Arial;
-  }
-
-a.cinza:hover {
-  font-size: 11px;
-  line-height : 20px;
-  position: relative;
-  text-decoration: underline;
-  color: #3666666;
-  font-family: Arial;
-  }
-
-.persona_03 {
-  border-top-width: 1px;
-  border-bottom-width: 1px;
-  border-left-width: 0px;
-  border-right-width: 1px;
-  border-style: solid;
-  border-color: #E1F7F9;
-  background-color: #FFCB27;
-  padding: 7px;
-  font-family: verdana, Helvetica, sans-serif;
-  font-size: 11px;
-  color: #666666;
-  }
-
-.persona_04 {
-  border-top-width: 1px;
-  border-bottom-width: 1px;
-  border-left-width: 0px;
-  border-right-width: 1px;
-  border-style: solid;
-  border-color: #E1F7F9;
-  background-color: #FFEE5E;
-  padding: 7px;
-  font-family: verdana, Helvetica, sans-serif;
-  font-size: 11px;
-  color: #666666;
-  }
-               
-.persona_05{
-  border-top-width: 1px;
-  border-bottom-width: 1px;
-  border-left-width: 0px;
-  border-right-width: 1px;
-  border-style: solid;
-  border-color: #E1F7F9;
-  background-color: #FFEE5E;
-  padding: 7px;
-  font-family: verdana, Helvetica, sans-serif;
-  font-size: 11px;
-  color: #666666;
-  }               
-
-.persona_06 {
-  border-top-width: 1px;
-  border-bottom-width: 1px;
-  border-left-width: 0px;
-  border-right-width: 1px;
-  border-style: solid;
-  border-color: #E1F7F9;
-  background-color: #FAF8FA;
-  padding: 7px;
-  font-family: verdana, Helvetica, sans-serif;
-  font-size: 11px;
-  color: #666666;
-  }
-
-
-.menuitems{
-  padding-left:10px;
-  padding-right:10px;
-  }
-
-.textoint {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 11px;
-  line-height: 20px;
-  color: #666666;
-  }
-  
-.webfolio_forum A { 
-  text-decoration: none; 
-  color: #666666; 
-  font-family: Arial;	
-  font-size: 11px; 
-  line-height : 20px; 
-  position: relative;
-  }
-  
-
-.webfolio_forum A:hover { 
-  text-decoration: underline;
-  }
-  
-  
-.webfolio_forum_new A { 
-  text-decoration: none; 
-  color: green; 
-  font-family: Arial;	
-  font-size: 11px; 
-  line-height : 20px; 
-  position: relative;
-  }
-
-
-.webfolio_forum_new A:hover { 
-  text-decoration: underline;
-  }
-
-.logon select{ 
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 11px;
-  color: #333366;
-  border: thin solid #DDD7EE;
-  background-color: #E8E7EF;
-  width:130px;
-  margin-right: 0;
-  }
-
-.btsair { 
-  margin-right: 20;
-  margin-top: 5;
-  }
-
-#logout_button { 
-  border: none;
-  background-color: transparent;
-  float: right;
-  }
-
-.user_ico {
-  cursor: pointer;
-  }
+	text-decoration: none;
+	color: #CC9966;
+	font-family: Arial;
+	font-size: 11px;
+	line-height: 20px;
+	position: relative;
+}
 
 /* CSSs referentes ao Upload */
-.titupload { 
-  font-family: Arial, Helvetica, sans-serif;
-  font-size:18px;
-  line-height: 22px;
-  color: #2171B6;
-  }
+.titupload {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	line-height: 22px;
+	color: #2171B6;
+}
 
-.imgtitupload { 
-  width:70px;
-  border: thin solid #2171B6;
-  margin-left: 12px;
-  }
-                
-.subtitupload { 
-  font-family: Arial, Helvetica, sans-serif;
-  font-size:16px;
-  font-weight: bold; 
-  line-height: 20px;
-  color: #fff;
-  }
+.imgtitupload {
+	width: 70px;
+	border: thin solid #2171B6;
+	margin-left: 12px;
+}
 
-.cursor { 
-  cursor: pointer;
-  }
+.subtitupload {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 20px;
+	color: #fff;
+}
+
+.cursor {
+	cursor: pointer;
+}
 
 #notification_area {
-	position:absolute;
+	position: absolute;
 	top: 0px;
 	right: 0px;
 	width: 250px;
 	height: 50px;
+}
 
+a.marrom:active {
+	text-decoration: none;
+	color: #CC9966;
+	font-family: Arial;
+	font-size: 11px;
+	line-height: 20px;
+	position: relative;
+}
+
+a.marrom:hover {
+	text-decoration: underline;
+	color: #CC9966;
+	font-family: Arial;
+	font-size: 11px;
+	line-height: 20px;
+	position: relative;
+}
+
+a.cinza:link {
+	font-size: 11px;
+	line-height: 20px;
+	position: relative;
+	text-decoration: none;
+	color: #666666;
+	font-family: Arial;
+}
+
+a.cinza:visited {
+	font-size: 11px;
+	line-height: 20px;
+	position: relative;
+	text-decoration: none;
+	color: #666666;
+	font-family: Arial;
+}
+
+a.cinza:active {
+	font-size: 11px;
+	line-height: 20px;
+	position: relative;
+	text-decoration: none;
+	color: #666666;
+	font-family: Arial;
+}
+
+a.cinza:hover {
+	font-size: 11px;
+	line-height: 20px;
+	position: relative;
+	text-decoration: underline;
+	color: #3666666;
+	font-family: Arial;
+}
+
+.persona_03 {
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 0px;
+	border-right-width: 1px;
+	border-style: solid;
+	border-color: #E1F7F9;
+	background-color: #FFCB27;
+	padding: 7px;
+	font-family: verdana, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #666666;
+}
+
+.persona_04 {
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 0px;
+	border-right-width: 1px;
+	border-style: solid;
+	border-color: #E1F7F9;
+	background-color: #FFEE5E;
+	padding: 7px;
+	font-family: verdana, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #666666;
+}
+
+.persona_05 {
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 0px;
+	border-right-width: 1px;
+	border-style: solid;
+	border-color: #E1F7F9;
+	background-color: #FFEE5E;
+	padding: 7px;
+	font-family: verdana, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #666666;
+}
+
+.persona_06 {
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 0px;
+	border-right-width: 1px;
+	border-style: solid;
+	border-color: #E1F7F9;
+	background-color: #FAF8FA;
+	padding: 7px;
+	font-family: verdana, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #666666;
+}
+
+.message {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	line-height: 20px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.mnlateral {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 20px;
+	color: #007FA0;
+	left: 3px;
+	position: relative;
+}
+
+.progress_realcado {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: 20px;
+	color: #19669E;
+	font-weight: bold;
+}
+
+.txttitproj {
+	font-family: Arial, Helvica, sans-serif;
+	font-size: 20px;
+	line-height: 20px;
+	color: #80BAC9;
+}
+
+.progress_normal {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: 20px;
+	color: #6BB9F2;
+	font-weight: bold;
+}
+
+.admin_items {
+	/* background-color: #E2F6FF; QUANDO TIVER COM O MOUSE EM CIMA*/
+	background-color: #FFFCFC;
+	border: 2px #71A4AF solid;
+	height: 48px;
+	width: 48px;
+	text-align: center;
 }

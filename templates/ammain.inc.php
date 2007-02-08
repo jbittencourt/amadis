@@ -242,30 +242,29 @@ class AMMain extends AMHTMLPage
         
         $this->force_newline=0;
 
-    //logo
-        parent::add('<div id="amadis-logo"><img src="'.$_CMAPP['images_url'].'/pecas_amadis.png"></div>');
+        parent::add('<div id="header">');
+    	//logo
+		parent::add("	<div class=\"peca-logo\"></div>");
+        
+		
+		/*THIS image asks for atention
+		*	TODO
+		* 	this image was supposed to be inside CSS, but due to its localized settings, it needs another solution.
+		*/
+        parent::add("	<div class=\"amadis-logo\"><img src=\"".$_CMAPP['imlang_url']."/logo_amadis.png\" width=\"240\" height=\"68\"/></div>");
 
-
-    //header
-        parent::add('<div id="amadis-header">');
-        parent::add("<img  src=\"".$_CMAPP['images_url']."/img_cabecalho.gif\" border=\"0\" width=\"488\">");
-        parent::add('<div id="amadis-header-menu" >');
-        parent::add($this->main_menu);
+		parent::add("	<div class=\"menu\">");
+		parent::add($this->main_menu);
+		parent::add("	</div>");
         parent::add('</div>');
 
-        parent::add('<div id="amadis-header-line">');
-        parent::add('<img src="'.$_CMAPP['images_url'].'/bg_linhas_lateral.gif">');
-        parent::add('</div>');
-        parent::add('</div>');
-
-        parent::add('<div id="amadis-global-wrapper">');
-
-    //menu
-        parent::add($this->navmenu);
-
-        parent::add('<div id="content">');
-
-        if(!empty($this->imgid)) {
+        
+        
+        //container -  main area
+        parent::add("<div id=\"container\">");
+		parent::add("	<div id=\"center\" class=\"column\">");
+		
+		 if(!empty($this->imgid)) {
             parent::add("<img src=\"".$this->imgid."\" border=0><br>");
             parent::add('<img src="'.$_CMAPP['images_url'].'/dot.gif" height=5>');
         }
@@ -360,30 +359,28 @@ class AMMain extends AMHTMLPage
 
 
         parent::add($this->contents);
-
-
-    //PAGE FOOTER
-
-        parent::add('</div>');//content
-
-    //parent::add('</div>');//content-column
-
-        parent::add('</div>'); //global wrapper
-
-        parent::add("<div id='amadis-footer'>");
-        parent::add("<table border='0' cellspacing='0' cellpadding='0' align='left' width='95%'>");
-        parent::add("<td valign='top' background='".$_CMAPP['images_url']."/bg_fundo_cinza.gif'>&nbsp;</td>");
-        parent::add("<td background='".$_CMAPP['images_url']."/bg_fundo_cinza.gif'>&nbsp;</td>");
-        parent::add("<td background='".$_CMAPP['images_url']."/bg_fundo_cinza.gif' height='35'>&nbsp;</td>");
-        parent::add("<td background='".$_CMAPP['images_url']."/bg_linhas_lateral2.gif' width='10'>");
-        parent::add("<img src='".$_CMAPP['images_url']."/dot.gif' width='7' height='1'>");
-        parent::add("</td>");
-        parent::add("<tr><td valign='top' colspan='5' background='".$_CMAPP['images_url']."/bg_fundo_cinza2.gif'>");
-        parent::add("<img src='".$_CMAPP['images_url']."/dot.gif' width='1' height='5'>");
-        parent::add("</td></tr>");
-        parent::add("</table>");
-        parent::add('</div>');
-
+		
+		
+		
+		
+		parent::add("	</div>"); // end container -  main area
+		
+		
+		//left menu
+		parent::add("	<div id=\"left\" class=\"column\">");
+		parent::add($this->navmenu);
+		parent::add("	</div>");
+		parent::add("</div>");
+        
+        
+		
+		//footer
+		parent::add("<div id=\"footer-wrapper\">");
+		parent::add("	<div id=\"footer\">$_language[amadis]</div>");
+		parent::add("</div>");
+        
+        
+   
     //this div forces the inclusion of an AMTUserinfo in the page
     //this force the inclusion of the file, so on the fly pages(like comments in diary)
     //will work .
@@ -411,10 +408,14 @@ class AMMain extends AMHTMLPage
             }
         }
 
+        
         $html = parent::__toString();
+        $html = "  "; //fix error bellow footer 
         AMLog::commit();
+        
+        
         return $html;
-
+        
 
 
     }

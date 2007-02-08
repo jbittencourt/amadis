@@ -23,6 +23,7 @@ class  AMNavMenu extends CMHTMLObj
     {
         global $_CMAPP,$_language;
         parent::__construct();
+      
     //precisa pq usa o wtreenode
         $this->width=281;
     //$this->requires("menu.js",self::MEDIA_JS);
@@ -31,7 +32,8 @@ class  AMNavMenu extends CMHTMLObj
         if(!$_SESSION['environment']->logged) {
             $login = new AMBLogin();
             $this->add($login,true,true);
-
+			
+                    	
             $box = new AMMenuBox;
             $box->add("<a href=\"$_CMAPP[services_url]/webfolio/recoverpassword.php\" ><img src=\"$_CMAPP[imlang_url]/img_esqueci.gif\" border=0></a>");
             $this->add($box,true,false);
@@ -46,48 +48,56 @@ class  AMNavMenu extends CMHTMLObj
                 );
             }
 
-            $str ="	 <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"100%\">";
-            $str.="	 <tr>";
-            $str.="	 <td valign=\"top\" width=\"25\"><img src=\"$_CMAPP[images_url]/img_mn_login_on.gif\" width=\"25\" height=\"19\" border=\"0\"></td>";
-            $str.="<td class=\"mnlateral\">".$_SESSION['user']->username." $_language[on_AMADIS]:<br>";
-            $str.="<form class=\"logon\" name=\"form5\" method=\"post\" action=\"\">";
-      //select com os modos 
-            
-            $str.="<select name=\"select\" onChange=\"AMEnvSession.changeMode(this.value);\">";
 
+            
+            // STATUS MENU
+            $str = "";
+            $str .= "<div id=\"frame\">
+						<div id=\"loginTopBorder\"></div>
+						<div id=\"loginContent\">
+							<ul>
+								<li id=\"loginContentImage\">".$_SESSION['user']->username." $_language[on_AMADIS]:</li>
+								<li id=\"loginStatus\">";
+            $str.="					<form class=\"logon\" name=\"form5\" method=\"post\" action=\"\">";
+            $str.="					<select id=\"loginStatusSelect\" name=\"select\" onChange=\"AMEnvSession.changeMode(this.value);\">";
             $modes = AMEnvSession::getModes();
             foreach($modes as $k=>$item) {
                 if($_SESSION['session']->visibility == $k) $str.="<option value=\"$k\" SELECTED>$item</option>";
                 else $str.="<option value=\"$k\">$item</option>";
             }
-            $str.="</select>";
-            $str.="</form>";
-            $str.="<button id=\"logout_button\" type=\"button\" onclick=\"window.location='$_CMAPP[url]/index.php?login_action=A_logout'\">";
-            $str.="<img class=\"btsair\" src=\"$_CMAPP[imlang_url]/bt_sair.gif\" align=\"right\"></td>";
-            $str.="</button>";
-            $str.="	 </tr>";
-            $str.="	 </table>";
-            $box = new AMMenuBox;
-            $box->add($str);
-            $this->add($box,true,true);
+            $str.="					</select>";
+            $str.= "			</li>
+								<li id=\"loginExit\">
+									<button id=\"logout_button\" type=\"button\" onclick=\"window.location='$_CMAPP[url]/index.php?login_action=A_logout'\"><div id=\"loginOutLeftImage\">&nbsp;&nbsp;</div><div id=\"loginOut\">$_language[exit]</div><div id=\"loginOutRightImage\">&nbsp;&nbsp;</div></button>	
+								</li>
+						</ul>	
+					</div>
+					<div id=\"loginBottomBorder\"></div>
+				</div><br>";
+       
+			$this->add($str);
+
+            
+            
+             
+             //meu MENU
+            $str2 = "<div id=\"menubox\">
+						<div id=\"menuTop\">
+							<div id=\"imageTop\"></div>
+							<div id=\"my\">".$_language['my_amadis']."</div>
+						</div>";
+         
+            
+            $str2 .= "	<div id=\"menu\">";
+			$str2 .= "	<ul>";
+			$str2 .= "		<li class=\"webfolio_txt\"><a href=\"$_CMAPP[services_url]/webfolio/webfolio.php\">".$_language['webfolio']."</a></li>";
+			$str2 .= "		<li class=\"blog_txt\"><a href=\"$_CMAPP[services_url]/blog/blog.php\">".$_language['blog']."</a></li>";
+			$str2 .= "		<li class=\"lib_txt\"><a href=\"$_CMAPP[services_url]/library/biblioteca.php\">".$_language['library']."</a></li>";
 			
-
-      // WEBFOLIO
-            $str = "<a href=\"$_CMAPP[services_url]/webfolio/webfolio.php\">";
-            $str.= "<img border=\"0\" src=\"".$_CMAPP['imlang_url']."/mn_meu_webfolio.gif\"></a>";
-            $this->add($str,true);
-
-      // MY DIARY
-            $img = "<img src=\"$_CMAPP[imlang_url]/mn_meu_meudiario.gif\" border=0>";
-            $this->add("<a href=\"$_CMAPP[services_url]/blog/blog.php\">$img</a>");
-
-      // MY LIBRARY
-            $img = "<img src=\"$_CMAPP[imlang_url]/mn_meus_arquivos.gif\" border=0>";
-            $this->add("<a href=\"$_CMAPP[services_url]/library/biblioteca.php\">$img</a>");
-
+   
       // MY PROJECTS
             $projects  = $_SESSION['user']->listMyProjects();
-            $temp = "<img border=\"0\" src=\"".$_CMAPP['imlang_url']."/mn_meu_meusprojetos.gif\">";
+            $temp = "<li class=\"project_txt\">".$_language['projects'];
 
             $tree = new AMTree($temp);
             $tree->setJSCall("changeMenuStatus('projects','$tree->name')");
@@ -106,11 +116,15 @@ class  AMNavMenu extends CMHTMLObj
             else {
                 $tree->add('<span class="texto">'.$_language['not_member_any_project'].'</span>');
             }
-            $this->add($tree,false,false,$_CMAPP['images_url']."/mn_bgmeus.gif");
-
+            //$this->add($tree,false,false,$_CMAPP['images_url']."/mn_bgmeus.gif");
+			
+            $str2 .= $tree->__toString(); 
+            $str2 .= "</li>";
+            
+            
       // MY FRIENDS
             $friends = $_SESSION['user']->listFriends();
-            $temp = "<img src=\"$_CMAPP[imlang_url]/mn_meu_meusamigos.gif\" border=0>";
+            $temp = "<li class=\"friends_txt\">".$_language['friends'];
             $tree = new AMTree($temp);
 
             $tree->setJSCall("changeMenuStatus('friends','$tree->name')");
@@ -155,9 +169,16 @@ class  AMNavMenu extends CMHTMLObj
                 $tree->add("<font class=\"texto\">$_language[no_friends]</font>");
             }
 
-            $this->add($tree,false,false,$_CMAPP['images_url']."/mn_bgmeus.gif");
+            //$this->add($tree,false,false,$_CMAPP['images_url']."/mn_bgmeus.gif");
+            
+            $str2 .= $tree->__toString();
+          	$str2 .= "</li>";
+            
+            
+            // COMMUNITIES
+            
             $communities = $_SESSION['user']->listMyCommunities();
-            $temp = "<img src=\"$_CMAPP[imlang_url]/mn_minhas_comunidades.gif\" border=0>";
+            $temp = "<li class=\"commnunities_txt\">".$_language['communities'];
             $tree = new AMTree($temp);
 
             $tree->setJSCall("changeMenuStatus('communities','$tree->name')");
@@ -177,8 +198,22 @@ class  AMNavMenu extends CMHTMLObj
             else {
                 $tree->add("<font class=\"texto\">$_language[no_communities]</font>");
             }
-            $this->add($tree,false,false,$_CMAPP['images_url']."/mn_bgmeus.gif");
-            $this->add("<img src=\"$_CMAPP[imlang_url]/mn_box_footer.gif\" border=0>");
+            //$this->add($tree,false,false,$_CMAPP['images_url']."/mn_bgmeus.gif");
+
+            $str2 .= $tree->__toString();
+            $str2 .= "</li>";
+            
+             //menu footer
+            $str2 .= "</ul>	
+					</div>
+				<div id=\"menuBottom\">
+				</div>
+			</div>";
+
+          
+            
+            $this->add($str2);
+          
 
         }
     }
@@ -216,33 +251,33 @@ class  AMNavMenu extends CMHTMLObj
     //adds the items inside the menu
         parent::add('<div id="nav-menu">');
         parent::add('<div id="column-one">');
-
+		
         if(!empty($this->lines)) {
             foreach($this->lines as $line) {
-                parent::add("<tr>");
-                if($line['connector']) {
-                    $img = "mn_traco_laranja.gif";
-                }
-                else {
+               //parent::add("<tr>");
+                //if($line['connector']) {
+                   //$img = "mn_traco_laranja.gif";
+                //}
+                //else {
                     $img = "dot.gif";
-                }
+                //}
                 $bg="";
-                parent::add('<div class="portlet-line">');
-                parent::add('<div id="orange-line"><img src="'.$_CMAPP['images_url'].'/'.$img.'"></div>');
-                parent::add('<div class="portlet" style=\'background-image: url("'.$_CMAPP['images_url'].'/'.$line['bg'].'")\'>');
+               // parent::add('<div class="portlet-line">');
+                //parent::add('<div id="orange-line"><img src="'.$_CMAPP['images_url'].'/'.$img.'"></div>');
+                //parent::add('<div class="portlet" style=\'background-image: url("'.$_CMAPP['images_url'].'/'.$line['bg'].'")\'>');
                 parent::add($line['line']);
-                parent::add('</div>');
-                parent::add('</div>');
+               // parent::add('</div>');
+               // parent::add('</div>');
 
                 if($line['line_after']) {
                     parent::add("<br>");
                 }
             }
         }
-
+		
         
     //end of items
-        parent::add('<div id="footer-menu"><img src="'.$_CMAPP['images_url'].'/img_footer_menu.gif"></div>');
+        parent::add('<div id="footer-menu"></div>');
         parent::add('</div>');
         parent::add('</div>');
 

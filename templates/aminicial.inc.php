@@ -20,8 +20,11 @@ class AMInicial extends AMMain {
     parent::__construct("green");
 
     $this->setImgId($_CMAPP['imlang_url']."/top_apresentacao.gif");
-
+	
+    
   }
+  
+ 
 }
 
 

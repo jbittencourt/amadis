@@ -16,7 +16,7 @@ class AMMainMenu extends CMHtmlObj {
   public function __construct() {
     global $_CMAPP;
     parent::__construct();
-
+/*
     //adiciona o item "inicial" no menu principal (se o usuario estiver logado)
     $this->addItem($_CMAPP['url']."/index.php",
 		   array($_CMAPP['imlang_url']."/ico_inicial_off.gif",
@@ -35,7 +35,7 @@ class AMMainMenu extends CMHtmlObj {
 		   array($_CMAPP['imlang_url']."/ico_comunidades_off.gif",
 			 $_CMAPP['imlang_url']."/ico_comunidades_on.gif",)
 		   );
-    
+    */
 //     if(!empty($_SESSION['user'])) {
 //       $this->addItem($_CMAPP['services_url']."/admin/admin.php",
 // 		     array($_CMAPP['imlang_url']."/ico_administracao_off.gif",
@@ -45,43 +45,14 @@ class AMMainMenu extends CMHtmlObj {
 
   }
 
-  function addItem($link,$im) {
 
-    if(is_array($im)) {
-      $temp = new CMWSwapImage($link,$im[0],$im[1]);
-      $temp->setTarget('_top');
-    }
-    else {
-      $temp ="<a href=\"$item[link]\"><img src=\"$item[imagem]\"></a>";
-    }
-
-    
-    $this->itens[] = $temp;
-  }
 
   public function __toString() {
-    global $_CMAPP;
+    global $_CMAPP, $_language;
     
-    if(!empty($this->itens)) {
-      parent::add("<div class='menuitems'>");
-	  parent::add("<table valign=bottom cellspacing=0 cellpadding=0><tr>");
-      $menu = array();
-      foreach($this->itens as $k=>$item) {
-		$temp ="<td>";
-		if($item instanceof CMHTMLObj) {
-	  		$temp.= $item->__toString();
-		} else {
-		  $temp.= $item;
-		}
-		$menu[]= $temp."</td>";
-      }
 
-      parent::add(implode("<td valign=bottom><img src=\"".$_CMAPP['images_url']."/menu_separador.gif\"></td>",$menu));
-      
-      parent::add("</tr></table>");
-	  parent::add("</div>");
-
-    }
+    parent::add("<ul id ='menufontExtra' class='menufont'><li><a href=\"".$_CMAPP['services_url']."/communities/communities.php\">".strtoupper($_language[communities])."</a></li><li><a href=\"".$_CMAPP['services_url']."/people/people.php\">".strtoupper($_language[people])."</a></li><li>OFICINAS</li><li>WEBFÓLIO</li><li>FERRAMENTAS</li></ul>");
+	
 
     return parent::__toString();
 

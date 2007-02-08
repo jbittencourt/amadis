@@ -169,4 +169,5 @@ if(!empty($userBlog)) {
 } else {
 	$pag->addError($_language['error_user_not_logged']);
 }
+
 echo $pag;
