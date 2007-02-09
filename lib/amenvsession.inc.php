@@ -64,7 +64,7 @@ class AMEnvSession implements AMAjax {
     $q = new CMQuery('AMFinderMessages');
 
     $projection  = "AMFinderMessages::code, AMFinderMessages::codeSender, AMFinderMessages::message, ";
-    $projection .= "AMUser::codeUser, AMUser::foto, AMUser::username";
+    $projection .= "AMUser::codeUser, AMUser::picture, AMUser::username";
 
     $q->setProjection($projection);
 

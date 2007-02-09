@@ -1,11 +1,11 @@
-<?php
+<?
 
 /**
  * Classe que implementa as funcionalidades da ferramenta Finder
  *
  * Classe que implementa as funcionalidades da ferramenta Finder
  *
- * @author Robson Mendona <robson@lec.ufrgs.br>
+ * @author Robson Mendon�a <robson@lec.ufrgs.br>
  * @access public
  * @version 0.5
  * @package AMADIS
@@ -50,7 +50,7 @@ class AMFinder implements AMAjax {
       $time = $_SESSION['amadis']['FINDER_ROOM'][$sessionId]['time'];
       $timeout = time()-((int) $_CMAPP['finder']->timeout);
       if($time >= $timeout) {
-	$_SESSION['amadis']['FINDER_ROOM'][$sessionId]['time'] = time();
+		$_SESSION['amadis']['FINDER_ROOM'][$sessionId]['time'] = time();
       }else $_SESSION['amadis']['FINDER_ROOM'][$sessionId]['open'] = 0; 
     }
     
@@ -159,50 +159,50 @@ class AMFinder implements AMAjax {
   }
 
 
-  public function getNewMessages($sessionId) {
-    $users = explode("_", $sessionId);
-    $sender = $users[0];
-    $recipient = $users[1];
-    
-    if($this->checkTimeOut($sessionId)) {
-      $time = $_SESSION['amadis']['FINDER_ROOM'][$sessionId]['time'];
+  	public function getNewMessages($sessionId) {
+    	$users = explode("_", $sessionId);
+    	$sender = $users[0];
+    	$recipient = $users[1];
+    	
+    	if(!$this->checkTimeOut($sessionId)) {
+      		$time = $_SESSION['amadis']['FINDER_ROOM'][$sessionId]['time'];
 
-      $q = new CMQuery('AMFinderMessages');
+			$q = new CMQuery('AMFinderMessages');
       
-      $j = new CMJoin(CMJoin::INNER);
-      $j->setClass('AMUser');
-      $j->on("FinderMessages.codeSender = User.codeUser");
+      		$j = new CMJoin(CMJoin::INNER);
+      		$j->setClass('AMUser');
+      		$j->on("FinderMessages.codeSender = User.codeUser");
       
-      $q->addJoin($j, "user");
+      		$q->addJoin($j, "user");
       
-      $filter  = "((codeSender = $sender AND codeRecipient = $recipient) OR ";
-      $filter .= " (codeSender = $recipient AND codeRecipient = $sender)) AND FinderMessages.time > $time";
+      		$filter  = "((codeSender = $sender AND codeRecipient = $recipient) OR ";
+      		$filter .= " (codeSender = $recipient AND codeRecipient = $sender)) AND FinderMessages.time > $time";
       
-      $q->setOrder("FinderMessages.time ASC");
-      $q->setProjection("FinderMessages.*, User.username");
-      $q->setFilter($filter);
+      		$q->setOrder("FinderMessages.time ASC");
+      		$q->setProjection("FinderMessages.*, User.username");
+      		$q->setFilter($filter);
       
-      $list = $q->execute();
+      		$list = $q->execute();
       
-      //parse na lista de mensagens em espera
+      		//parse na lista de mensagens em espera
       
-      if(!empty($_SESSION['amadis']['FINDER_ROOM'][$sessionId]['wait'])) {
-	foreach($_SESSION['amadis']['FINDER_ROOM'][$sessionId]['wait'] as $k=>$item) {
-	  $list->add($k,unserialize($item));
-	  unset($_SESSION['amadis']['FINDER_ROOM'][$sessionId]['wait'][$k]);
-	}
-      }
-
-      if($list->__hasItems()) {
-	$this->updateTimeOut($sessionId, time());
-	return $this->drawMessages($list, $sessionId);
-      } else return 0;
+      		if(!empty($_SESSION['amadis']['FINDER_ROOM'][$sessionId]['wait'])) {
+				foreach($_SESSION['amadis']['FINDER_ROOM'][$sessionId]['wait'] as $k=>$item) {
+	  				$list->add($k,unserialize($item));
+	  				unset($_SESSION['amadis']['FINDER_ROOM'][$sessionId]['wait'][$k]);
+				}
+      		}
+      		if($list->__hasItems()) {
+				$this->updateTimeOut($sessionId, time());
+					return $this->drawMessages($list, $sessionId);
+      		} else return 0;
       
-    } else {
-      $this->closeFinderChat($sessionId);
-      return $this->drawMessages("conversation_timeout", $sessionId);
-    }
-  }
+    	} else {
+      		$this->closeFinderChat($sessionId);
+      		//return noteLastquery(false);
+      		return $this->drawMessages("conversation_timeout", $sessionId);
+    	}
+  	}
 
 
   public function drawMessages($messages, $sessionId) {
@@ -249,3 +249,5 @@ class AMFinder implements AMAjax {
   }
 
 }
+
+?>

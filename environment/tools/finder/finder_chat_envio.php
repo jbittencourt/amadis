@@ -3,7 +3,7 @@ $r_bibliotecas[] = "\$rdpath/finder/rdfinder.inc.php";
 include_once("../../config.inc.php");
 
 $ui = new RDUi("finder_envio",$_REQUEST[acao]);
-$lang = $_SESSION[environment]->getLangUI($ui);
+$lang = $_SESSION[ambiente]->getLangUI($ui);
 
 
 if(empty($_REQUEST[frm_user])) {

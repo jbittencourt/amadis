@@ -7,7 +7,7 @@ $_language = $_CMAPP['i18n']->getTranslationArray("finder");
 include("cminterface/cmhtmlpage.inc.php");
 $pag = new CMHtmlPage;
 
-$pag->addPageBegin(XOAD_Utilities::header("$_CMAPP[media_url]/lib/xoad"));
+$pag->addPageBegin(XOAD_Utilities::header("$_CMAPP[media_url]/libs/xoad"));
 $pag->addPageBegin(CMHTMLObj::getScript("var AMFinder = ".XOAD_Client::register(new AMFinder)));
 $pag->addPageBegin(CMHTMLObj::getScript("AMFinder_lang['conversation_timeout'] = '$_language[conversation_timeout]';"));
 
@@ -37,7 +37,7 @@ $pag->add("</div>");
 
 $pag->addPageEnd(CMHTMLObj::getScript("var ChatTabs = document.getElementById('ChatTabs');"));
 $pag->addPageEnd(CMHTMLObj::getScript("var ChatContainer = document.getElementById('ChatContainer');"));
-$pag->addPageEnd(CMHTMLObj::getScript("AMFinder.addChat('{$_SESSION[user]->codeUser}_$_REQUEST[frm_codeUser]',AMFinderCallBack.onAddChat);"));
+$pag->addPageEnd(CMHTMLObj::getScript("AMFinder.addChat('".$_SESSION['user']->codeUser.'_'.$_REQUEST['frm_codeUser']."',AMFinderCallBack.onAddChat);"));
 $pag->addPageEnd(CMHTMLObj::getScript("window.setInterval('window.opener.Finder_window = window',3);"));
 echo $pag;
 

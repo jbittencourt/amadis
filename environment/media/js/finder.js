@@ -16,7 +16,7 @@ function Finder_initChat() {
 
 var AMFinderCallBack = {
   onAddChat: function (result) {
-    if(result['success'] == 1) {
+    if(result.success == 1) {
       var tab = document.createElement("SPAN");
       tab.setAttribute('class', 'active_finder');
       tab.setAttribute('id', 'Tab_'+result.sessionId);
@@ -44,7 +44,7 @@ var AMFinderCallBack = {
     }
   },
   onGetNewMessages: function(result) {
-    
+
     var msg = window.document.createElement("DIV");
     msg.setAttribute("id","messagesBox");
     var chatDoc = AM_getElement("chat_"+result.sessionId);
@@ -88,6 +88,7 @@ var AMFinderCallBack = {
 }
 
 function Finder_openChatWindow(sessionId) {
+
   if(Finder_window != null) {
     Finder_window.Finder_loadTab(sessionId);
     Finder_window.focus();

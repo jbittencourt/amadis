@@ -1,4 +1,4 @@
-<?php
+<?
 
 class AMFinderTipThumb extends AMThumb {
 
@@ -9,3 +9,5 @@ class AMFinderTipThumb extends AMThumb {
   }
 
 }
+
+?>
