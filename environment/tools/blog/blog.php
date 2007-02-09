@@ -107,7 +107,6 @@ else {
 
 		$_REQUEST['frm_calMonth'] = date("m",$post->time);
 		$_REQUEST['frm_calYear'] = date("Y",$post->time);
-
 	}
 
 }

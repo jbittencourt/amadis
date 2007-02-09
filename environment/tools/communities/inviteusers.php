@@ -75,7 +75,7 @@ switch($_REQUEST['action']) {
      break;
      
  case "A_search":
-   $temp = $_SESSION['environment']->searchUsers($_REQUEST['frm_search_text']);
+   $temp = $_SESSION['environment']->searchUsersToInvitation($_REQUEST['frm_search_text']);
    $_avaiable = $temp[0];
    break;   
  default:

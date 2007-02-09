@@ -2,11 +2,15 @@
 
 class AMAdminLogs implements AMAjax {
 
-	public function drawLog($logfilename){
+	public function drawLog($logfilename, $numLines=100){
 		global $_CMAPP;
 		$log = "";
-
-		$arq = array_reverse(file($_CMAPP[path]."/log/".$logfilename));
+		
+		$log = array_reverse(file($_CMAPP[path]."/log/".$logfilename));
+		
+		if(count($log)>100) $numLines = count($log);
+		
+		$arq = array_splice($log, 0, $numLines);
 		
 		return $arq;
 	

@@ -105,15 +105,20 @@ class AMBUserFriendInvitations extends AMColorBox implements CMActionListener {
   			//user image thumbnail
   			parent::add("<tr><td>");
   			$thumb = new AMUserThumb;
-  			$f  = $friend->picture;
-  			if(empty($f)) $f = AMUserFoto::DEFAULT_IMAGE;
-  			$thumb->codeFile = $f;
+  			if(empty($friend->picture)) $f = AMUserPicture::DEFAULT_IMAGE;
+  			else $f = $friend->picture;
   			try {
+  				$thumb->codeFile = $f;
+  				try {
+  					$thumb->load();
+  					parent::add($thumb->getView());
+  				} catch(CMDBException $e) {
+  					note($e);
+  				}
+  			}catch(CMObjEPropertieValueNotValid $e) {
+  				$thumb = new AMUserThumb(AMUserPicture::DEFAULT_IMAGE);
   				$thumb->load();
   				parent::add($thumb->getView());
-  			}
-  			catch(CMDBException $e) {
-  				echo $e; die();
   			}
 
   			//an empty column

@@ -19,7 +19,7 @@ class AMBChatRoom extends CMHTMLPage {
   public function __toString() {
     global $_CMAPP;
     
-    parent::addPageBegin(XOAD_Utilities::header("$_CMAPP[media_url]/lib/xoad"));
+    parent::addPageBegin(XOAD_Utilities::header("$_CMAPP[media_url]/libs/xoad"));
     parent::addPageBegin(self::getScript("var AMChat = ".XOAD_Client::register(new AMChat)));
     
     parent::add("<!-- header flutuante -->");

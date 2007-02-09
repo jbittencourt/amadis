@@ -95,12 +95,16 @@ class AMBUserInvitations extends AMColorBox implements CMActionListener {
 				parent::add("<tr><td>");
 				$thumb = new AMProjectThumb;
 				$f = $proj->image;
-				if(empty($f)) $f = AMProjImage::DEFAULT_IMAGE;
-				$thumb->codeFile = $f;
+				if(empty($f)) $f = AMProjectImage::DEFAULT_IMAGE;
 				try {
+					$thumb->codeFile = $f;
+					try {
+						$thumb->load();
+					} catch(CMDBNoRecord $e) {}
+				}catch(CMObjEPropertieValueNotValid $e) {
+					$thumb = new AMProjectThumb('', AMProjectImage::DEFAULT_IMAGE);
 					$thumb->load();
-				} catch(CMDBNoRecord $e) {}
-
+				}
 				parent::add($thumb->getView());
 
 				//an empty column

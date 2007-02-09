@@ -59,6 +59,8 @@ switch($action) {
 			if($ustemp!=false) $_SESSION['cad_foto']=$ustemp;
 
 			try {
+				
+				echo $_SESSION['amadis']['old_photo_name'] = $_SESSION['cad_foto']->name;
 				$_SESSION['cad_foto']->loadImageFromRequest("frm_foto");
 			}
 			catch(AMEImage $e) {

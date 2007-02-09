@@ -23,8 +23,8 @@ if(isset($_REQUEST['frm_codProjeto']) && !empty($_REQUEST['frm_codProjeto'])) {
 } else {
 	$_REQUEST['frm_amerror'] = "any_project_id";
 
-	$pag->add("<br><div align=center><a href=\"".$_SERVER['HTTP_REFERER']."\" ");
-	$pag->add("class=\"cinza\">".$_language['back']."</a></div><br>");
+	$pag->add("<br><div align=center><a href='".$_SERVER['HTTP_REFERER']."' ");
+	$pag->add("class='cinza'>".$_language['back']."</a></div><br>");
 	echo $pag;
 	die();
 }
@@ -53,30 +53,33 @@ $proj_description = nl2br($proj->description);
  */
 
 //coluna da esquerda
-$box->add("<font class=\"project_title\">$_language[project]: ".$proj->title."<br>",
+$box->add("<font class='project_title'>$_language[project]: ".$proj->title."<br>",
 AMTwoColsLayout::LEFT);
-$box->add("<img src=\"".$_CMAPP['images_url']."/dot.gif\" border=\"0\" height=\"10\" width=\"1\"><br>",
+$box->add("<img src='".$_CMAPP['images_url']."/dot.gif' border='0' height='10' width='1'><br>",
 AMTwoColsLayout::LEFT);
 
 $imageCode = AMProjectImage::getImage($proj);
 $image = new AMProjectImage();
-$image->codeFile = $imageCode;
 try {
-	$image->load();
-} catch(CMDBNoRecord $e) {
-	echo $e;
+	$image->codeFile = $imageCode;
+	try {
+		$image->load();
+		$box->add($image->getView(), AMTwoColsLayout::LEFT);
+	} catch(CMDBNoRecord $e) {
+		echo $e;
+	}	
+}catch (CMObjEPropertieValueNotValid $e) {
+	$box->add(new AMTProjectImage(AMProjectImage::DEFAULT_IMAGE, AMImageTemplate::METHOD_DEFAULT), 
+	AMTwoColsLayout::LEFT);
 }
-$box->add($image->getView(),
+
+$box->add("      <br>", AMTwoColsLayout::LEFT);
+$box->add("<img src='".$_CMAPP['images_url']."/dot.gif' border='0' height='10' width='1'><br>",
 AMTwoColsLayout::LEFT);
 
-$box->add("      <br>",
+$box->add("<font class='texto'>$_language[project]: $proj->title <br>$proj_description<br>",
 AMTwoColsLayout::LEFT);
-$box->add("<img src=\"".$_CMAPP['images_url']."/dot.gif\" border=\"0\" height=\"10\" width=\"1\"><br>",
-AMTwoColsLayout::LEFT);
-
-$box->add("<font class=\"texto\">$_language[project]: $proj->title <br>$proj_description<br>",
-AMTwoColsLayout::LEFT);
-$box->add("<img src=\"".$_CMAPP['images_url']."/dot.gif\" border=\"0\" height=\"10\" width=\"1\"><br>",
+$box->add("<img src='".$_CMAPP['images_url']."/dot.gif' border='0' height='10' width='1'><br>",
 AMTwoColsLayout::LEFT);
 
 /*
@@ -84,9 +87,9 @@ AMTwoColsLayout::LEFT);
  * I disabled the project status. It has no
  * significance to the users of amadis
  */
-$box->add("    <img src=\"".$_CMAPP['imlang_url']."/img_dados_projeto.gif\"><br>",
+$box->add("    <img src='".$_CMAPP['imlang_url']."/img_dados_projeto.gif'><br>",
 AMTwoColsLayout::LEFT);
-$box->add("    <img src=\"".$_CMAPP['images_url']."/dot.gif\" border=\"0\" height=\"10\" width=\"1\"><br>",
+$box->add("    <img src='".$_CMAPP['images_url']."/dot.gif' border='0' height='10' width='1'><br>",
 AMTwoColsLayout::LEFT);
 
 /*
@@ -131,7 +134,7 @@ $box->add($projNews,AMTwoColsLayout::LEFT);
 $projItens = new AMBProjectItems;
 $box->add($projItens,AMTwoColsLayout::RIGHT);
 
-$box->add("<img src=\"".$_CMAPP['images_url']."/dot.gif\" width=\"20\" height=\"1\" border=\"0\">",
+$box->add("<img src='".$_CMAPP['images_url']."/dot.gif' width='20' height='1' border='0'>",
 AMTwoColsLayout::RIGHT);
 
 /*

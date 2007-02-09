@@ -31,6 +31,7 @@ abstract class  AMImageTemplate extends CMHTMLObj
 	protected $codeFile;
 	private $imageObj;
 	private $method;
+	private $thumb;
 
   /**
    * Constructor of the class.
@@ -44,7 +45,7 @@ abstract class  AMImageTemplate extends CMHTMLObj
    * @param mixed $value If method is METHOD_DB, the value is code of the file in the databe. Otherwise is an object of the type AMFile
    * @param integer $method The method that should be used to handle the vizualization of the image
    **/
-  public function __construct($value,$method=self::METHOD_DB)
+  public function __construct($value,$method=self::METHOD_DB, $thumb=false)
   {
   	parent::__construct();
   	$this->method = $method;
@@ -61,6 +62,8 @@ abstract class  AMImageTemplate extends CMHTMLObj
   	else {
   		Throw new AMException("Image render method not recognized.");
   	}
+  	
+  	$this->thumb = $thumb;
   }
 
 
@@ -84,7 +87,8 @@ abstract class  AMImageTemplate extends CMHTMLObj
     	$url = "$_CMAPP[media_url]/imagewrapper.php?method=session&frm_id=$rand";
     	break;
     case self::METHOD_DEFAULT:
-    	$url = "$_CMAPP[images_url]/$this->imageObj";
+    	if($this->thumb) $url = $_CMAPP['images_url'].'/thumb_'.$this->imageObj;
+    	else $url = "$_CMAPP[images_url]/$this->imageObj";
     	break;
   	}
   	return $url;

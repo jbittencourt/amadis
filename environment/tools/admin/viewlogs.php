@@ -8,15 +8,15 @@ $pag = new AMTAdmin();
 AMMain::addXOADHandler('AMAdminLogs', 'AMAdminLogs'); //register class handler
 $pag->requires("amadminlogs.js", CMHTMLObj::MEDIA_JS); //require javascript for interation
 
-$box = new AMTwoColsLayout;
+//$box = new AMTwoColsLayout;
 
 
-$box1 = new AMBAdminLogs;	
+$box = new AMBAdminLogs;	
 
 //$box2 = NULL;
 
-$box->add($box1,AMTwoColsLayout::LEFT);
-$box->add($box2,AMTwoColsLayout::RIGHT);
+//$box->add($box1,AMTwoColsLayout::LEFT);
+//$box->add($box2,AMTwoColsLayout::RIGHT);
 
 $pag->add($box);
 

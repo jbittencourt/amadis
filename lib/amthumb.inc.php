@@ -3,15 +3,19 @@ abstract class AMThumb extends AMImage {
   protected $maxY;
   protected $maxX;
   public $thumb;
+  public $type;
   protected $name_file;
   
   public function load() {
 
-    $this->name_file = "image_".$this->maxX."_".$this->maxY."_".$this->codeFile.".png";
+  	if(!empty($this->codeFile)) {
+  		$this->name_file = "image_".$this->maxX."_".$this->maxY."_".$this->codeFile.".png";
+  	} else $this->name_file = "image_".$this->maxX."_".$this->maxY."_".substr($this->type,0, -4).".png";
+
     if(!$this->checkThumbExists()) {
-	      parent::load();
-	      $this->loadFile();
-    	  $this->save();
+    	if(!empty($this->codeFile)) parent::load();
+    	$this->loadFile();
+    	$this->save();
     }
     
     $this->thumb = new AMTThumb($this->name_file);
@@ -22,8 +26,12 @@ abstract class AMThumb extends AMImage {
   	global $_CMAPP;
 
   	$_conf = $_CMAPP['config'];
-  	$path =  (string) $_conf->app[0]->paths[0]->files;
-  	$file = $path."/".$this->codeFile.'_'.$this->name;
+  	if(empty($this->type)) {
+  		$path =  (string) $_conf->app[0]->paths[0]->files;
+  		$file = $path."/".$this->codeFile.'_'.$this->name;
+  	} else {
+  		$file = $_CMAPP['path'].'/environment/media/images/'.$this->type;
+  	}
   	if(file_exists($file)) {
   		$f = fopen($file, 'r');
   		$this->data = fread($f, filesize($file));
@@ -48,10 +56,10 @@ abstract class AMThumb extends AMImage {
     try {
       $this->resize($this->maxX, $this->maxY);
     } catch(AMException $e) {
-      /**
-       * @todo Add an error image when the thumbnail cannot be genereated.
-       **/
-      return false;
+      	/**
+       	 * @todo Add an error image when the thumbnail cannot be genereated.
+       	 **/
+		return false;
     }
 
     $_conf = $_CMAPP['config'];
@@ -68,6 +76,7 @@ abstract class AMThumb extends AMImage {
 
   protected function checkThumbExists() {
     global $_CMAPP;
+    
     $_conf = $_CMAPP['config'];
     $path =  (string) $_conf->app[0]->paths[0]->thumbnails;
     if(file_exists($path.'/'.$this->name_file)) return true;

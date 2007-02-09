@@ -2,7 +2,7 @@
 
 class AMProjectThumb extends AMThumb {
 
-  public function __construct($mini=false) {
+  public function __construct($mini=false, $type='') {
     parent::__construct();
     if(!$mini) {
       $this->maxX = 80;
@@ -12,6 +12,7 @@ class AMProjectThumb extends AMThumb {
       $this->maxX = 60;
       $this->maxY = 60;
     }
+    $this->type = $type;
   }
 
 }

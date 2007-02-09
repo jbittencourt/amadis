@@ -14,7 +14,6 @@
  * @see AMImageTemplate, AMProjImage
  **/
 class AMTProjectImage extends AMImageTemplate {
- 
 
   public function __toString() {
     global $_CMAPP;

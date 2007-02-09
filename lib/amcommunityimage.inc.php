@@ -16,7 +16,7 @@
  **/
 class AMCommunityImage extends AMFixedSizeImage implements AMThumbinaiableImage {
 
-  const DEFAULT_IMAGE = 3;     //the default user image is coded with number 3 in the databse
+  const DEFAULT_IMAGE = 'imagem_default_communities.jpg';     //the default user image is coded with number 3 in the databse
 
   public function __construct() {
     parent::__construct();
@@ -73,7 +73,7 @@ class AMCommunityImage extends AMFixedSizeImage implements AMThumbinaiableImage 
     case CMObj::STATE_DIRTY_NEW:
       return new AMTCommunityImage($this,AMImageTemplate::METHOD_SESSION);
     case CMObj::STATE_NEW:
-      return new AMTCommunityImage(self::DEFAULT_IMAGE);
+      return new AMTCommunityImage(self::DEFAULT_IMAGE, AMImageTemplate::METHOD_DEFAULT);
     }
   }
 

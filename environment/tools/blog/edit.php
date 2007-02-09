@@ -33,9 +33,9 @@ if(array_key_exists('action', $_REQUEST)) {
       		//insertion
 			}
 
-			//$image = $_SESSION['diary_profile_image'];
+			$image = $_SESSION['diary_profile_image'];
 			
-			/*if(!empty($image) && (($image->state==CMObj::STATE_NEW) ||	($image->state==CMObj::STATE_DIRTY_NEW))) {
+			if(!empty($image) && (($image->state==CMObj::STATE_NEW) ||	($image->state==CMObj::STATE_DIRTY_NEW))) {
 				try {
 					$image->save();
 				} catch(CMDBException $e) {
@@ -55,11 +55,12 @@ if(array_key_exists('action', $_REQUEST)) {
 					//cool  to log this information for the admin
 				}
 				
-			}*/
+			}
 
 			$profile->titleBlog= $_REQUEST['frm_titleBlog'];
 			$profile->text = $_REQUEST['frm_text'];
-			//$profile->image = $image->codeFile;
+			
+			if($image->codeFile) $profile->image = $image->codeFile;
 
 			try{
 				$profile->save();
@@ -122,10 +123,12 @@ if(array_key_exists('frm_foto',$_FILES)) {
 		header("Location:$_SERVER[PHP_SELF]?frm_amerror=invalid_image_type");
 	}
 
+	
 	$view = $_SESSION['diary_profile_image']->getView();
+	
 	$caixa->add("<p align=center>");
 	$caixa->add($view);
-
+	
 	$_SESSION['cad_foto']=serialize($_SESSION['cad_foto']);
 }
 else {

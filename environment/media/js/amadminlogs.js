@@ -1,7 +1,7 @@
 
-function drawLog(param) {
+function drawLog(param, numLines) {
 
-  AMAdminLogs.drawLog(param, AMAdminLogsCallBack.ondrawLog);
+  AMAdminLogs.drawLog(param, numLines, AMAdminLogsCallBack.ondrawLog);
 }
 
 AMAdminLogsCallBack = {

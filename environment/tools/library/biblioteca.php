@@ -68,8 +68,12 @@ switch( $_REQUEST['opcao'] ){
 		break;
 
 	case "delete":
-		$library->deleta($_REQUEST['id']);
-		$page->addMessage($_language['file_successful_delete']);
+		try {
+			$library->deleta($_REQUEST['id']);
+			$page->addMessage($_language['file_successful_delete']);
+		}catch(CMException $e) {
+			$page->addError($_language['file_dont_deleted'], $e);						
+		} 
 		break;
 
 	case "download":

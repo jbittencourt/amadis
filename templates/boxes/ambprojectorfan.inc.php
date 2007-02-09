@@ -28,7 +28,7 @@ class AMBProjectOrfan extends AMColorBox implements CMActionListener {
   public function doAction() {
     global $_CMAPP,$_language;
 
-    if(!isset($_REQUEST['po_action']) || (isset($_REQUEST['po_action']) && empty($_REQUEST['po_action']))) {
+    if(!isset($_REQUEST['po_action']) && empty($_REQUEST['po_action'])) {
       return false;
     }
 
@@ -38,24 +38,22 @@ class AMBProjectOrfan extends AMColorBox implements CMActionListener {
       $group = $this->proj->getGroup();
       $group->force_add = true;
       try {
-	$group->addMember($_SESSION['user']->codeUser);
-      }
-      catch(CMDBException $e) {
-	$err = new AMError($_language['error_joining_user'],get_class($this));
-	return false;
+		$group->addMember($_SESSION['user']->codeUser);
+      } catch(CMDBException $e) {
+		$err = new AMError($_language['error_joining_user'],get_class($this));
+		return false;
       }
 
-      
       $msg = new AMMessage($user->name." ".$_language['msg_project_adopted'],get_class($this));
       $this->adopted = true;
       break;
     }
-
   }
 
   public function __toString() {
-    global $_language,$_CMAPP;
-
+    global $_language, $_CMAPP;
+	
+    if(!empty(AMBProjectGroupAction::$_lang)) $_language = AMBProjectGroupAction::$_lang;
     $proj = $this->proj;
 
     $link = $_CMAPP['services_url']."/projects/project.php?frm_codProjeto=$proj->codeProject";
@@ -63,20 +61,20 @@ class AMBProjectOrfan extends AMColorBox implements CMActionListener {
       CMHTMLPage::redirect($link);
       return false;
     }
-    parent::add("<table border=0 cellspacing=1 cellpadding=2 width=\"100%\"><tr>");
+    parent::add("<table border=0 cellspacing=1 cellpadding=2 width='100%'><tr>");
 
     //an empty column
-    parent::add("<td><img src=\"$_CMAPP[images_url]/dot.gif\" width=10>");
+    parent::add("<td><img src='$_CMAPP[images_url]/dot.gif' width=10>");
 
     //an empty column
-    parent::add("<td><img src=\"$_CMAPP[images_url]/dot.gif\" width=10>");
+    parent::add("<td><img src='$_CMAPP[images_url]/dot.gif' width=10>");
     //invitation text
-    parent::add("</td><td class=\"texto\">");
-    parent::add("$_language[project_orfan] ");
+    parent::add("</td><td class='texto'>");
+    parent::add("$_language[project_orfan]");
     parent::add("</td><td align=center>");
 
-    $js = "if(confirm('$_language[project_adopt_confirm]')) { window.location= '$link&po_action=A_adopt'; } else { return false; }";
-    parent::add("<a href=\"#\" onClick=\"$js\"class=\"green\">$_language[project_adopt]</a><br>");
+    $js = "if(confirm('$_language[project_adopt_confirm]')) { adoptProject('$proj->codeProject'); } else { return false; }";
+    parent::add("<a href='#' onClick=\"$js\" class='green'>$_language[project_adopt]</a><br>");
     parent::add("</tr>");
 
     parent::add("</table>");

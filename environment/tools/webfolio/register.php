@@ -210,6 +210,7 @@ switch($_REQUEST['action']) {
         $foto->save(); 
      }
      catch(CMDBException $e) {
+
      	new AMErrorReport($e, 'Register_User - saving image', AMLog::LOG_CORE);
         header("Location:$_SERVER[PHP_SELF]?action=fatal_error&frm_amerror=saving_picture");
      }

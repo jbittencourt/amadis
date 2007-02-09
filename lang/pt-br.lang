@@ -47,7 +47,7 @@ exit = "sair"
 user = "usu&aacute;rio"
 password  = "senha"
 log = "logar"
-
+ 
 #section of the environment
 people = "Pessoas"
 projects = "Projetos"
@@ -57,7 +57,7 @@ community = "Comunidade"
 courses = "Cursos"
 users = "Usu&aacute;rios"
 blog = "Di&aacute;rio"
-
+begin = "Inicial"
 
 user = "usu&aacute;rio"
 acesso_nao_permitido = "Acesso n&atilde;o permitido"
@@ -601,7 +601,7 @@ comment = "Coment&aacute;rio"
 project_news = "Novidade"
 project_orfan = "Este projeto encontra-se atualmente como &oacute;rf&atilde;o. Voc&ecirc; pode adot&aacute;-lo como seu, se quiser."
 project_adopt = "Adotar este Projeto"
-project_adopt_confirm = "Voc&ecirc; tem certeza que deseja adotar esse projeto?"
+project_adopt_confirm = "Voce tem certeza que deseja adotar esse projeto?"
 
 project_forum_title = "F&oacute;rum no Projeto"
 project_forum_create = "Cria F&oacute;rum no Projeto"
@@ -672,7 +672,7 @@ invite_users_to_project = "Convidar Usu&aacute;rio para o Projeto"
 search_result = "Resultado da Pesquisa"
 frm_invite = "Convidar"
 
-msg_users_removed = "Essa pesquisa retornou algumas pessoas que j&aacute; fazem parte do projeto. Para evitar problemas, eles foram retirados da listagem."
+msg_users_removed = "Essa pesquisa retornou algumas pessoas que j&aacute; fazem parte do projeto ou que j&aacute; foram convidadas e ainda n&atilde;o confirmaram o convite. Para evitar problemas, eles foram retirados da listagem."
 msg_invitation_success = "Os convites para participar do seu projeto foram enviados. Assim que as pessoas convidadas aceitarem, elas far&atilde;o parte da equipe do seu projeto. Voc&ecirc; pode convidar mais pessoas, ou clicar em cancelar e voltar para o seu projeto."
 
 search_users = "Procura por usu&aacute;rios"

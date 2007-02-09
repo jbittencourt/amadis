@@ -428,16 +428,16 @@ class AMUser extends CMUser
 
   public function listLastBlogPosts()
   {
-  	$query=new CMQuery('AMBlogPost');
+  	$query=new CMQuery('AMBlogPost','AMBlogComment');
   	$j2 = new CMJoin(CMJoin::LEFT);
-  	$j2->on("AMBlogPost::codePost=AMBlogComment::codePost");
-  	$j2->setFake();
+  	$j2->on("AMBlogPost::codePost = AMBlogComment::codePost");
+  	//$j2->setFake();
   	$j2->setClass('AMBlogComment');
   	$query->groupby("AMBlogPost::codePost");
-  	$query->addVariable("numComments","count( AMBlogComment::codeComment )");
+  	$query->addVariable("numComments","count( BlogComments.codeComment )");
 
 
-  	$query->setOrder("AMBlogPost::tempo desc");
+  	$query->setOrder("AMBlogPost::time desc");
   	$query->setLimit(0,20);
   	$query->setFilter("AMBlogPost::codeUser=$this->codeUser");
 
@@ -719,7 +719,7 @@ class AMUser extends CMUser
   	$q = new CMQuery('AMProject');
 
   	$j = new CMJoin(CMJoin::INNER);
-  	$j->on("AMProject::codeProject = AMProjectComment::codProjeto");
+  	$j->on("AMProject::codeProject = AMProjectComment::codeProject");
   	$j->setClass('AMProjectComment');
 
   	$j2 = new CMJoin(CMJoin::INNER);
@@ -731,7 +731,7 @@ class AMUser extends CMUser
   	$j3->setClass('CMGroupMember');
 
   	$j4 = new CMJoin(CMJoin::INNER);
-  	$j4->on("AMComment::codComentario = AMProjectComment::codComentario");
+  	$j4->on("AMComment::codeComment = AMProjectComment::codeComment");
   	$j4->setClass('AMComment');
 
   	$q->addJoin($j, "pcomments");
@@ -739,10 +739,10 @@ class AMUser extends CMUser
   	$q->addJoin($j3, "members");
   	$q->addJoin($j4,"comments");
 
-  	$q->setFilter("AMComment::tempo > ". $_SESSION['last_session']->timeEnd. " AND CMGroupMember::codeUser=$this->codeUser");
+  	$q->setFilter("AMComment::time > ". $_SESSION['last_session']->timeEnd. " AND CMGroupMember::codeUser=$this->codeUser");
 
   	$q->groupby("AMProject::codeProject");
-  	$q->addVariable("numMessages","count( AMProjectComment::codComentario)");
+  	$q->addVariable("numMessages","count( AMProjectComment::codeComment)");
 
   	return $q->execute();
   }

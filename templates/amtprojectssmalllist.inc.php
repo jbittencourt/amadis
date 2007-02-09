@@ -27,8 +27,13 @@ class AMTProjectsSmallList extends CMHTMLObj {
       foreach($this->items as $proj) {
 	parent::add("<tr>");
 	parent::add("<td>");
-	$img = AMProjectImage::getThumb($proj,true);
-	parent::add($img->getView());
+	try {
+		$img = AMProjectImage::getThumb($proj,true);
+		parent::add($img->getView());
+	}catch(CMObjEPropertieValueNotValid $e) {
+		parent::add(new AMTProjectImage(AMProjectImage::DEFAULT_IMAGE, AMImageTemplate::METHOD_DEFAULT, true));
+	}
+	
 	parent::add("<td>");
 	$text = substr($proj->description,0,50);
 	if($text!=$proj->description) {

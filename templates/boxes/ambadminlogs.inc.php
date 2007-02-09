@@ -35,7 +35,10 @@ class AMBAdminLogs extends AMSimpleBox {
 			}
 		
 		$conteudo .= "</select>";
-		$conteudo .= "<input type=button onClick=\"drawLog(AM_getElement('sel_log').value);\" value=".$_language['view_log'].">";
+		$conteudo .= "<input type=button onClick=\"drawLog(AM_getElement('sel_log').value,100);\" value=".$_language['view_log'].">&nbsp;&nbsp;";
+		$conteudo .= "<a href=\"javascript:drawLog(AM_getElement('sel_log').value, 5);\">5</a>&nbsp;";
+		$conteudo .= "<a href=\"javascript:drawLog(AM_getElement('sel_log').value, 10);\">10</a>&nbsp;";
+		$conteudo .= "<a href=\"javascript:drawLog(AM_getElement('sel_log').value, 50);\">50</a>&nbsp;";
 		$conteudo .= "</form></td></tr><table><br>";
 		$conteudo .= "<div id=\"logger\" style=\"display:none\"></div>";
 		parent::add($conteudo);

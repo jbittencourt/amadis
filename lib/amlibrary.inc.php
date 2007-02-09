@@ -165,25 +165,18 @@ class  AMLibrary extends CMObj{
    * 
    **/
 
-  public function deleta($id){
-  	$filelib = new AMLibraryFiles;
-  	$filelib->codeFile = $id;
-  	$filelib->load();
+  	public function deleta($id){
+  		$filelib = new AMLibraryFiles;
+  		$filelib->codeFile = $id;
+  		$filelib->load();
 
-  	if($filelib->referred == "y"){
-  		$filelib->unsetActive();
-  		$filelib->save();
+	  	if($filelib->referred == "0"){
+  			$filelib->unsetActive();
+  			$filelib->save();
+  		} else { 
+			$filelib->delete();
+  		}
   	}
-  	else{
-  		$filelib->delete();
-  		
-  		$file = new AMFile;
-  		$file->codeFile = $id;
-  		$file->load();
-  		$file->delete();
-  		
-  	}
-  }
 
   /**
    * You give a number of results you want, $limit, and its return the last $limit files posted.

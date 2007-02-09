@@ -19,6 +19,10 @@ abstract class AMAbstractBox extends CMHTMLObj {
     $this->width = $w;
   }
 
+  public function getWidth()
+  {
+  	return ($this->width != '100%' ? $this->width : '100%');
+  }
 
 
 }

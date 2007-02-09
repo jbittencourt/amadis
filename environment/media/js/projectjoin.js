@@ -3,18 +3,34 @@
 var AMBProjectGroupActionCallBack = {
   onListGroup: function(result) {
     AM_parseRequires(result.requires);
-
+    
     div = AM_getElement('projectGroupList');
-    div.innerHTML= result.list;
+    div.innerHTML = result.list;
+  },
+  
+  onAdoptProject: function (result) {
+    AM_parseRequires(result.requires);
+    
+    div = AM_getElement('projectGroupList');
+    div.innerHTML = result.list;
   }
 
 }
 
 function loadProjectGroup(group) {
   AM_setLoading("projectGroupList");
+
   AMBProjectGroup.onListGroupError = AM_callBack.onError;
   AMBProjectGroup.listGroup(group, AMBProjectGroupActionCallBack.onListGroup);
 } 
+
+function adoptProject(codeProject)
+{
+    AM_setLoading('projectGroupList');
+    
+    AMBProjectGroup.onadoptProjectError = AM_callBack.onError;
+    AMBProjectGroup.adoptProject(codeProject, AMBProjectGroupActionCallBack.onAdoptProject);
+}
 
 /*
  *  FUNCTIONS AND CLASSES FOR THE PROJECT JOIN

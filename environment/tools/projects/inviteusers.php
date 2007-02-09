@@ -18,7 +18,6 @@ include("../../config.inc.php");
 
 $_language = $_CMAPP['i18n']->getTranslationArray("project_invite_user");
 
-
 //checks to see if the user is an group member
 if(empty($_REQUEST['frm_codeProjeto'])) {
   Header("Location: $_CMAPP[services_url]/projects/projects.php?frm_amerror=project_code_does_not_exists");
@@ -65,19 +64,20 @@ if(!isset($_REQUEST['frm_search_text'])){
 switch($_REQUEST['action']) {
  case "A_invite":
    if(empty($_REQUEST['frm_usersInvite'])) {
-     CMHTMLPage::redirect("Location: $_CMAPP[services_url]/projects/inviteusers.php?frm_amerror=_user_not_select");
+     CMHTMLPage::redirect("Location: $_CMAPP[services_url]/projects/inviteusers.php?frm_amerror=user_not_select");
    }
 
    try {
-     foreach($_REQUEST['frm_usersInvite'] as $user) {
-       $group->userInvitationJoin($user,"");
-     }
-     $pag->addMessage($_language['msg_invitation_success']);
-   } catch(CMDBException $e) {
-     $pag->addError($_language['error_invitation_failed']);
-   }
-
-   if(empty($_REQUEST['frm_search_text'])) break;
+	foreach($_REQUEST['frm_usersInvite'] as $user) {
+		$group->userInvitationJoin($user,"");
+	}
+	$msg = 'frm_ammsg=invitation_success';
+	} catch(CMDBException $e) {
+		$msg = 'frm_error=invitation_failed';
+	}
+	
+	header('Location: '.$_CMAPP['services_url'].'/projects/inviteusers.php?frm_codeProjeto='.$proj->codeProject.'&'.$msg);
+   	if(empty($_REQUEST['frm_search_text'])) break;
 
  default:
    $_avaiable = $_SESSION['user']->listFriends();
@@ -154,12 +154,16 @@ if(!empty($_avaiable) && $_avaiable->__hasItems()) {
     //user picture
     $thumb = new AMUserThumb;
     $f = $item->picture;
-    If(empty($f)) $f = AMUserFoto::DEFAULT_IMAGE;
-    $thumb->codeFile = $f;
+    if(empty($f)) $f = AMUserPicture::DEFAULT_IMAGE;
     try {
-      $thumb->load();
-    } catch(CMDBNoRecord $e) { }
-    
+    	$thumb->codeFile = $f;
+    	try {
+      	$thumb->load();
+    	} catch(CMDBNoRecord $e) { }
+    }catch(CMObjEPropertieValueNotValid $e) {
+    	$thumb = new AMUserThumb(AMUserPicture::DEFAULT_IMAGE);
+    	$thumb->load();
+    }
     $box->add($thumb->getView());
 
     $box->add('<td>');

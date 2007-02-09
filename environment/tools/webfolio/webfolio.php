@@ -53,7 +53,9 @@ $box = new AMTwoColsLayout;
  * LEFT COLUMN
  ********************/
 $foto = AMUserPicture::getImage($_SESSION['user']);
-$box->add(new AMTUserImage($foto),AMTwoColsLayout::LEFT);
+if($foto == AMUserPicture::DEFAULT_IMAGE) {
+	$box->add(new AMTUserImage(AMUserPicture::DEFAULT_IMAGE, AMImageTemplate::METHOD_DEFAULT), AMTwoColsLayout::LEFT);
+} else $box->add(new AMTUserImage($foto),AMTwoColsLayout::LEFT);
 
 $box->add("<p><span class=\"texto\"><b>". $_SESSION['user']->name."<br>" . date($_language['date_format'],(integer) $_SESSION['user']->birthDate) . "</b>"
 , AMTwoColsLayout::LEFT);
@@ -63,11 +65,11 @@ $box->add("<br>".$_SESSION['user']->email, AMTwoColsLayout::LEFT);
 $box->add("</font>", AMTwoColsLayout::LEFT);
 
 
-$box->add("<p><a href=\"$_CMAPP[services_url]/webfolio/changedata.php\" class=\"blue\">$_language[change_personal_data]</a>",
+$box->add("<p><a href='$_CMAPP[services_url]/webfolio/changedata.php' class='blue'>$_language[change_personal_data]</a>",
 AMTwoColsLayout::LEFT);
-$box->add("<br><a href=\"$_CMAPP[services_url]/webfolio/changePicture.php\" class=\"blue\">$_language[change_picture]</a>",
+$box->add("<br><a href='$_CMAPP[services_url]/webfolio/changePicture.php' class='blue'>$_language[change_picture]</a>",
 AMTwoColsLayout::LEFT);
-$box->add("<br><a href=\"$_CMAPP[services_url]/webfolio/changepassword.php\" class=\"blue\">$_language[change_password]</a><p>",
+$box->add("<br><a href='$_CMAPP[services_url]/webfolio/changepassword.php' class='blue'>$_language[change_password]</a><p>",
 AMTwoColsLayout::LEFT);
 
 

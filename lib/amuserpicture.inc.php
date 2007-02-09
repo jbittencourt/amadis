@@ -18,7 +18,7 @@
 class AMUserPicture extends AMFixedSizeImage implements AMThumbinaiableImage 
 {
 
-  const DEFAULT_IMAGE = 'imagem_default_user.gif';     //the default user image is coded with number 1 in the databse
+  const DEFAULT_IMAGE = 'imagem_default_user.jpg';     //the default user image is coded with number 1 in the databse
   public function __construct() {
     parent::__construct();
 
@@ -54,13 +54,16 @@ class AMUserPicture extends AMFixedSizeImage implements AMThumbinaiableImage
 
   	$image = self::getImage($obj);
 
-    $thumb = new AMUserThumb($smallthumb);
-    $thumb->codeFile = $image;
+    $thumb = new AMUserThumb(self::DEFAULT_IMAGE);
     try {
-      $thumb->load();
-    }
-    catch(CMDBException $e) {
-      Throw $e;
+    	$thumb->codeFile = $image;
+        try {
+    	  $thumb->load();
+    	} catch(CMDBException $e) {
+    	  Throw $e;
+    	}
+    }catch(CMObjEPropertieValueNotValid $e) {
+    	$thumb->load();
     }
 
     return $thumb;

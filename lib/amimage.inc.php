@@ -70,7 +70,7 @@ class AMImage extends AMFile
         $name = $_FILES[$inputName]['name'];
         $parts = explode(".",$name);
         $extension = strtolower($parts[count($parts)-1]);
-
+		
         $valid = self::getValidImageExtensions();
         if(!in_array($extension,$valid)) {
             Throw new AMEImage;
@@ -170,7 +170,7 @@ class AMImage extends AMFile
         $this->metadata = "$dm[x]|$dm[y]|$s";
 		
         $old_state = $this->state;
-        
+    	    
         try{
         	parent::save();
         }catch(CMException $e) {
@@ -194,6 +194,7 @@ class AMImage extends AMFile
             }
         }
     }
+    
     public function delete()
     {
     	global $_CMAPP;
