@@ -231,20 +231,42 @@ body {
 #menu ul .webfolio_txt  a:hover {
 	color: #426def;
 }
+#menu ul .webfolio_txt_active  a {
+	color: #426def;
+}
 
 #menu ul .blog_txt  a:hover {
 	color: #8b4adb;
 }
+#menu ul .blog_txt_active  a {
+	color: #8b4adb;
+}
+
 #menu ul .lib_txt  a:hover {
 	color: #ae7fde;   
 }
+#menu ul .lib_txt_active  a {
+	color: #ae7fde;   
+}
+
 #menu ul .project_txt a:hover {
 	color: #009ac6;
 }
+#menu ul .project_txt_active a {
+	color: #009ac6;
+}
+
 #menu ul .friends_txt a:hover {
 	color: #ce0000;
 }
+#menu ul .friends_txt_active a {
+	color: #ce0000;
+}
+
 #menu ul .commnunities_txt a:hover {
+	color: #9c9a63;
+}
+#menu ul .commnunities_txt_active a {
 	color: #9c9a63;
 }
 

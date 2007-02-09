@@ -17,8 +17,10 @@ class AMMainMenu extends CMHtmlObj {
     	global $_CMAPP;
     	parent::__construct();
 
-	    //adiciona o item "inicial" no menu principal (se o usuario estiver logado)
-    	$this->addItem($_CMAPP['url']."/index.php", 'begin');
+    	if(isset($_SESSION['user'])){
+	    	//adiciona o item "inicial" no menu principal (se o usuario estiver logado)
+    		$this->addItem($_CMAPP['url']."/index.php", 'begin');
+    	}
     	$this->addItem($_CMAPP['services_url']."/projects/projects.php", 'projects');
 	    $this->addItem($_CMAPP['services_url']."/people/people.php", 'people');
 	    $this->addItem($_CMAPP['services_url']."/communities/communities.php", 'communities');

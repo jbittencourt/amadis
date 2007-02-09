@@ -87,17 +87,32 @@ class  AMNavMenu extends CMHTMLObj
 							<div id=\"my\">".$_language['my_amadis']."</div>
 						</div>";
          
-            
+         
+            if($_CMAPP['amadis_where_am_i']=='webfolio'){
+            	$webfolio_active = "_active";
+            }
+       		if($_CMAPP['amadis_where_am_i']=='blog'){
+            	$blog_active = "_active";
+            }
+        	if($_CMAPP['amadis_where_am_i']=='library'){
+            	$library_active = "_active";
+            }	
+            if($_CMAPP['amadis_where_am_i']=='projects'){
+            	$project_active = "_active";
+            }          
+            if($_CMAPP['amadis_where_am_i']=='friends'){
+            	$friends_active = "_active";
+            }            
             $str2 .= "	<div id=\"menu\">";
 			$str2 .= "	<ul>";
-			$str2 .= "		<li class=\"webfolio_txt\"><a href=\"$_CMAPP[services_url]/webfolio/webfolio.php\">".$_language['webfolio']."</a></li>";
-			$str2 .= "		<li class=\"blog_txt\"><a href=\"$_CMAPP[services_url]/blog/blog.php\">".$_language['blog']."</a></li>";
-			$str2 .= "		<li class=\"lib_txt\"><a href=\"$_CMAPP[services_url]/library/biblioteca.php\">".$_language['library']."</a></li>";
+			$str2 .= "		<li class=\"webfolio_txt$webfolio_active\"><a href=\"$_CMAPP[services_url]/webfolio/webfolio.php\">".$_language['webfolio']."</a></li>";
+			$str2 .= "		<li class=\"blog_txt$blog_active\"><a href=\"$_CMAPP[services_url]/blog/blog.php\">".$_language['blog']."</a></li>";
+			$str2 .= "		<li class=\"lib_txt$library_active\"><a href=\"$_CMAPP[services_url]/library/biblioteca.php\">".$_language['library']."</a></li>";
 			
    
       // MY PROJECTS
             $projects  = $_SESSION['user']->listMyProjects();
-            $temp = "<li class=\"project_txt\">".$_language['projects'];
+            $temp = "<li id=\"projects_menu\" class=\"project_txt\" onClick=\"toggleActive(this, 'project', '1');\" >".$_language['projects'];
 
             $tree = new AMTree($temp);
             $tree->setJSCall("changeMenuStatus('projects','$tree->name')");
@@ -123,8 +138,11 @@ class  AMNavMenu extends CMHTMLObj
             
             
       // MY FRIENDS
+			
             $friends = $_SESSION['user']->listFriends();
-            $temp = "<li class=\"friends_txt\">".$_language['friends'];
+       	
+			$temp = "<li id='friends_menu' class=\"friends_txt\" onClick=\"toggleActive(this, 'friends', '2'); \" >".$_language['friends'];
+			            
             $tree = new AMTree($temp);
 
             $tree->setJSCall("changeMenuStatus('friends','$tree->name')");
@@ -178,7 +196,7 @@ class  AMNavMenu extends CMHTMLObj
             // COMMUNITIES
             
             $communities = $_SESSION['user']->listMyCommunities();
-            $temp = "<li class=\"commnunities_txt\">".$_language['communities'];
+            $temp = "<li class=\"commnunities_txt\" onClick=\"toggleActive(this, 'commnunities', '3'); \">".$_language['communities'];
             $tree = new AMTree($temp);
 
             $tree->setJSCall("changeMenuStatus('communities','$tree->name')");

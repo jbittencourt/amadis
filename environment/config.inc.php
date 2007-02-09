@@ -152,3 +152,12 @@ if(!ereg("(index|register|recoverpassword|loginfailure)",basename($_SERVER['SCRI
 //include XOAD AJAX Framework;
 define('XOAD_AUTOHANDLE', true);
 include( $_XOAD['path'] . "/xoad.php");
+
+
+
+//creates whereami
+$arr = explode("/",$_SERVER['REQUEST_URI']);
+$_CMAPP['amadis_where_am_i'] = $arr[3];
+
+
+
