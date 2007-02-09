@@ -105,8 +105,8 @@ else {
 			die();
 		}
 
-		$_REQUEST['frm_calMonth'] = date("m",$post->tempo);
-		$_REQUEST['frm_calYear'] = date("Y",$post->tempo);
+		$_REQUEST['frm_calMonth'] = date("m",$post->time);
+		$_REQUEST['frm_calYear'] = date("Y",$post->time);
 
 	}
 
@@ -169,5 +169,4 @@ if(!empty($userBlog)) {
 } else {
 	$pag->addError($_language['error_user_not_logged']);
 }
-
 echo $pag;
