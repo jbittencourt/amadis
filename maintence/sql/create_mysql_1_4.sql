@@ -4,6 +4,7 @@
 -- ----------------------------------------------------------------------
 
 SET FOREIGN_KEY_CHECKS = 0;
+SET NAMES 'utf8';
 
 CREATE DATABASE IF NOT EXISTS `amadis`
   CHARACTER SET utf8;
@@ -908,6 +909,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 -- default inserts... -----------------
 -- ------------------------------------
 
+SET NAMES 'utf8';
 INSERT INTO `States` ( `codeState` , `name` , `country` , `code` )
 VALUES ( '1', 'Rio Grande do Sul', 'Brasil', 'RS');
 
