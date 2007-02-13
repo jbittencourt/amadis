@@ -75,7 +75,13 @@ class AMBUserScraps extends AMPageBox implements CMActionListener {
 				$box->add('<td>');
 
 				$thumb = new AMUserThumb;
-				$thumb->codeFile = $men->author[0]->picture;
+				try {
+					$thumb->codeFile = $men->author[0]->picture;
+				}catch(CMObjEPropertieValueNotValid $e) {
+					$thumb = new AMUserThumb(AMUserPicture::DEFAULT_IMAGE);
+					
+				}
+				
 				$thumb->load();
 
 				$box->add($thumb->getView());

@@ -533,6 +533,11 @@ back_to_project = "Voltar para o projeto"
 
 
 [projects]
+no_filters = "N&atilde;o h&aacute; filtros para este agregador"
+source_name = "Nome da fonte"
+rss_link = "Link RSS"
+edit_source_list = "Editar lista de fontes RSS"
+aggregator_configuration_area = "&Aacute;rea de configura&ccedil;&atilde;o do agregador."
 config_aggregator = "&raquo; Configurar Agregador"
 select_sources = "&raquo; Selecionar fontes RSS"
 project_intro = "Na &aacute;rea de PROJETOS do Amadis voc&ecirc;

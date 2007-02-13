@@ -14,13 +14,13 @@
 class AMAgregator extends CMObj {
 
     public function configure() {
-    $this->setTable("Agregator");
+    $this->setTable("Aggregator");
 
-    $this->addField("codeSource",CMObj::TYPE_INTEGER,4,1,0,0);
+    $this->addField("codeAggregator",CMObj::TYPE_INTEGER,4,1,0,0);
     $this->addField("keywords",CMObj::TYPE_TEXT,65535,1,0,0);
     $this->addField("time", CMObj::TYPE_INTEGER, 4,1,0,0);
     
-    $this->addPrimaryKey("codeSource");
+    $this->addPrimaryKey("codeAggregator");
     
   }
 }

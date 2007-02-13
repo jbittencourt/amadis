@@ -153,3 +153,65 @@ BUTTON#chat[class~=project_items]:hover { background-image: url("../images/icon_
                         font-weight: bold;
                         }
 
+
+/* CSSs Agregador Projetos */
+/* CSSs Diario Projetos */
+
+.boxdiarioproj {
+	border: 2px solid #0076A2;
+}
+
+.titdiarioproj{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	line-height: 20px;
+	color: #0076A2;
+	font-weight: bold;	
+}
+.txtdiarioproj{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 18px;
+	color: #066FA6;
+}
+
+
+a.filtro{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 18px;
+}
+
+a.filtro#on{
+	color: #066FA6;
+	text-decoration: underline;	
+}
+a.filtro#off{
+	color: #8E9EA6;
+	text-decoration: none;	
+}
+
+.font_rss{font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	line-height: 22px;
+	color: #066FA6;
+	}
+
+.palavras_filtro{font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	line-height: 22px;
+	color: #FF6600;
+	text-decoration: underline; 
+   }
+   
+.box_add_rss{
+    border: 1px solid #ADBEFC;
+    background-color:#F8FBF8;
+    width: 300;
+    height: 50;
+    padding:5;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 22px;
+    color: #008B0D;
+ }

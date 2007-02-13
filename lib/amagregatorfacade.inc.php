@@ -37,22 +37,29 @@ class AMAgregatorFacade implements AMAjax {
      * @see AMProjectBlogs
      * @return array
      */
-    public function addSource($projId, $address, $title, $type=AMProjectBlogs::ENUM_INTERNAL_SOURCE) {
+    public function addSource($projId, $title, $link) 
+    {
+    	global $_CMAPP;
+    	
         $source = new AMProjectBlogs;
         $source->codeProject = $projId;
-        $source->address = $address;
+        $source->address = $link;
         $source->title = $title;
-        $source->type = ($type == AMProjectBlogs::ENUM_INTERNAL_SOURCE ? AMProjectBlogs::ENUM_INTERNAL_SOURCE : AMProjectBlogs::ENUM_EXTERNAL_SOURCE);
+        $source->type = AMProjectBlogs::ENUM_TYPE_EXTERNAL;
         
         $ret = array();
 		try{
 		    $source->save();
-			$ret['error'] = 'saved';
+		    
+			$t = "<img src='$_CMAPP[images_url]/icon_rss_on.gif' id='status_$source->codeSource' onclick=\"Aggregator_toggleStatus(this.id);\" class='cursor' align='absmiddle'> "
+			   . "<img src='$_CMAPP[images_url]/icon_excluir_agregador.gif' id='delete_$source->codeSource' onclick=\"Aggregator_deleteSource(this.id);\" align='absmiddle'>"
+			   . "<span class='font_rss'>$source->title</span><br>";
+			$ret['src'] = $t;
+			$ret['id'] = $source->codeSource;
 		}catch(CMException $e) {
-			$ret['error'] = "not_saved";
-		    $box = new AMAlertBox(AMAlertBox::ERROR, "AMAgregatorFacade::addSource".$e->getMessage());
+			$ret = 0;
+			new AMErrorReport($e, 'AMAgregatorFacade::addSource saving', AMLog::LOG_AGGREGATOR);
 		}
-		$ret['msg'] = $box->__toString();
 		return $ret;
     }
     
@@ -62,46 +69,123 @@ class AMAgregatorFacade implements AMAjax {
      * @param int $id - blog Identifier
      * @return array
      */
-	public function removeSource($id) {
-	    $source = new AMBProjectBlogs;
-	    $source->codeBlog = $id;
+	public function deleteSource($id) {
+	    $source = new AMProjectBlogs;
+	    $source->codeSource = $id;
 
 	    $ret = array();
 	    try {
 	        $source->load();
 	        try {
 	            $source->delete();
-	            $ret['error'] = 'deleted';
+	            $ret['id'] = $id;
 	        }catch(CMException $e) {
-	            $ret['erro'] = 'not_deleted';
-	            $box = new AMAlertBox(AMAlertBox::ERROR, "AMAgregatorFacade::removeSource".$e->getMessage());
+	            $ret = 0;
+	            new AMErrorReport($e, 'AMAgregatorFacade::deleteSource deleting', AMLog::LOG_AGGREGATOR);
 	        }
 	    }catch(CMException $e) {
-	        $ret['error'] = 'not_loaded';
-	        $box = new AMAlertBox(AMAlertBox::ERROR, "AMAgregatorFacade::removeSource".$e->getMessage());
+	        $ret = 0;
+	        new AMErrorReport($e, 'AMAgregatorFacade::deleteSource deleting', AMLog::LOG_AGGREGATOR);
 	    }
-	    $ret['msg'] = $box->__toString();
 	    return $ret;
 	}
 
+	public function toggleStatus($id)
+	{
+		global $_CMAPP;
+		
+		$src = new AMProjectBlogs;
+		$src->codeSource = $id;
+		$ret = array('id'=>'status_'.$id);
+		try {
+			$src->load();
+		}catch(CMException $e) {
+			new AMErrorReport($e, 'AMAgregatorFacade::toggleStatus loading', AMLog::LOG_AGGREGATOR);
+			$ret = 0;
+		}
+		
+		if($src->status == AMProjectBlogs::ENUM_STATUS_ENABLE) {
+			$src->status = AMProjectBlogs::ENUM_STATUS_DISABLE;
+			$ret['src'] = $_CMAPP['images_url'].'/icon_rss_off.gif';
+		} else {
+			$src->status = AMProjectBlogs::ENUM_STATUS_ENABLE;
+			$ret['src'] = $_CMAPP['images_url'].'/icon_rss_on.gif';
+		}
+		
+		try {
+			$src->save();
+		}catch (CMException $e){
+			new AMErrorReport($e, 'AMAgregatorFacade::toggleStatus saving', AMLog::LOG_AGGREGATOR);
+			$ret = 0;
+		}
+		
+		return $ret;
+		
+	}
+	
 	public static function getSources($id) {
 		$q = new CMQuery('AMProjectBlogs');
-		
-		$j = new CMJoin(CMJoin::INNER);
-		$j->setClass("AMAgregator");
-		$j->on("AMAgregator::codeSource = AMProjectBlogs::codeProject");
-
-		$q->addJoin($j, "agregator");
 
 		$q->setFilter("AMProjectBlogs::codeProject=".$id);
 		return $q->execute();
 	}
+
+	public function addFilter($id, $keyword, $count) 
+	{
+		global $_CMAPP;
+		
+		$filter = new AMAgregator;
+		$filter->codeAggregator = $id;
+		
+		$ret = array();
+		
+		try {
+			$filter->load();
+			$filter->keywords .= ','.$keyword;
+		}catch(CMException $e) {
+			$filter->keywords = $keyword;
+		}
+		
+		try {
+			$filter->save();
+			$ret['src'] = $keyword." <img src='$_CMAPP[images_url]/icon_excluir_agregador.gif' onclick=\"Aggregator_deleteFilter($id, '".$keyword."', $count);\" align='absmiddle'><br>";
+			$ret['count'] = $count;
+		}catch(CMException $e) {
+			$ret = 0;
+			new AMErrorReport($e, 'AMAgregatorFacade::addFilter saving', AMLog::LOG_AGGREGATOR);
+		}
+		
+		return $ret;
+	}
 	
+	public function deleteFilter($id, $keyword, $count)
+	{
+		$filter = new AMAgregator;
+		$filter->codeAggregator = $id;
+		try {
+			$filter->load();
+			$tmp = explode(',', $filter->keywords);
+			$k = array_search($keyword, $tmp);
+			unset($tmp[$k]);
+			$filter->keywords = implode(',', $tmp);
+			try {
+				$filter->save();
+				$ret['id'] = $count;
+			}catch(CMException $e){
+				$ret = 0;
+				new AMErrorReport($e, 'AMAgregatorFacade::deleteFilter saving', AMLog::LOG_AGGREGATOR);
+			}
+		}catch(CMException $e) {
+			$ret = 0;
+			new AMErrorReport($e, 'AMAgregatorFacade::deleteFilter loading', AMLog::LOG_AGGREGATOR);
+		}
+		return $ret;
+	}
 	/**
 	 * Register Xoad handlers
 	 */
 	public function xoadGetMeta() {
-        $methods = array('getFormatedSources', 'getSources', 'addSource', 'removeSource');
+        $methods = array('getFormatedSources', 'getSources', 'addSource', 'deleteSource', 'toggleStatus', 'addFilter', 'deleteFilter');
         XOAD_Client::mapMethods($this, $methods);
         XOAD_Client::publicMethods($this, $methods);
     }
