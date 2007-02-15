@@ -572,6 +572,8 @@ project_link_chat = "Chats do projeto"
 project_link_library = "Biblioteca do projeto"
 project_link_blog = "Di&aacute;rio do projeto"
 project_link_edit = "Editar a p&aacute;gina do projeto"
+project_link_image = "Alterar imagem do projeto"
+project_link_areas = "Alterar &aacute;reas do projeto"
 project_link_info = "Atualizar as informa&ccedil;&otilde;es do projeto"
 project_link_group = "Convidar pessoas para o projeto"
 project_link_upload = "Publicar arquivos"
@@ -633,6 +635,9 @@ error_cannot_leave_project = "Ocorreu algum erro ao deixar esse projeto. Por fav
 error_edit_not_allowed = "Voc&ecirc; s&oacute; pode editar os projetos nos quais participa."
 
 msg_project_created = "O projeto foi criado com sucesso!"
+msg_project_edited = "O projeto foi editado com sucesso!"
+msg_image_changed = "A imagem foi alterada com sucesso!"
+msg_areas_changed = "&Aacute;reas foram alteradas com sucesso!"
 msg_join_request_send = "Sua solicita&ccedil;&atilde;o para juntar-se a esse projeto foi registrada, por favor, aguarde por uma resposta"
 msg_user_added = " foi aceito como membro deste projeto."
 msg_user_rejected = " foi rejeitado como membro deste projeto."
@@ -648,6 +653,7 @@ msg_rejected_project = "Voc&ecirc; rejeitou o pedido para fazer parte do projeto
 
 
 [project_create]
+error_any_project_id = "Nenhum identificador de projeto foi especificado!"
 frm_title = "Nome do Projeto"
 frm_description = "Fa&ccedil;a uma breve descri&ccedil;&atilde;o sobre
 o projeto incluindo perguntas"

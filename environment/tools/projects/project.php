@@ -98,14 +98,12 @@ AMTwoColsLayout::LEFT);
 $projAreas = $proj->listAreas();
 
 $box->add("<b>$_language[project_areas]</b>",AMTwoColsLayout::LEFT);
-if(!empty($projAreas->items)) {	
-	if($projAreas->count() == 1){
-		$box->add(" ".$projAreas->items[15]->name.".",AMTwoColsLayout::LEFT);
-	}else{
-		foreach($projAreas as $item) {
-			$box->add(" ".$item->name.",",AMTwoColsLayout::LEFT);
-		}
+if($projAreas->__hasItems()) {
+	$areas = array();
+	foreach ($projAreas as $item) {
+		$areas[] = $item->name;
 	}
+	$box->add(" ".implode(", ",$areas).'.',AMTwoColsLayout::LEFT);
 	$box->add("<br><br>",AMTwoColsLayout::LEFT);
 }
 else {

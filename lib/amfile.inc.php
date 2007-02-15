@@ -26,6 +26,18 @@ class AMFile extends CMObj {
      $this->addPrimaryKey("codeFile");
   }
 
+  public function load()
+  {
+  	try {
+  		parent::load();
+  		$_SESSION['amadis']['old_photo_name'] = $this->name;	
+  	}catch(CMException $e){
+  		throw $e;
+  	}
+  	
+  }
+  
+  
   public function save() 
   {
   	global $_CMAPP;

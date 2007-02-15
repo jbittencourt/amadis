@@ -38,8 +38,8 @@ class AMBPeopleSearchUsers extends AMPageBox implements CMActionListener {
       $this->itens = $result[0];
 
       $box = new AMUserList($this->itens,"$_language[search_users]",AMUserList::PEOPLE);
-      if(!isset($_REQUEST['action'])) $_REQUEST['action']='';
-      $this->addRequestVars("action=$_REQUEST[action]&search_action=$_REQUEST[search_action]&frm_search=$_REQUEST[frm_search]");
+      if(!isset($_REQUEST['frm_action'])) $_REQUEST['frm_action']='';
+      $this->addRequestVars("frm_action=$_REQUEST[frm_action]&search_action=$_REQUEST[search_action]&frm_search=$_REQUEST[frm_search]");
             
       parent::add($box);    
       $this->parent = true;

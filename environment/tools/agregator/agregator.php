@@ -97,6 +97,10 @@ if(!empty($blog)) {
   } else {
     $pag->add('Error: RSS file "'.$b->address.'" not found...');
   }
+}else {
+	$box = new AMBoxAgregador($rs,'',$isMember);
+	$box->setHeader($proj);
+	$pag->add($box);
 }
 
 echo $pag; 

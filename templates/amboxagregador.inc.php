@@ -79,15 +79,18 @@ class AMBoxAgregador extends CMHTMLObj {
 		parent::add("<table cellpadding='0' cellspacing='0' border='0' width='100%'>");
 		parent::add("<tr>");
 		parent::add("<!-- obss: a coluna abaixo precisa ter o mesmo widht da imagem de rosto q for enviada dinamicamente pelo usuario (aqui no caso é 87) -->");
-		$thumb = new AMTProjectImage($this->image);
+		if(empty($this->image)) {
+			$thumb = new AMTProjectImage(AMProjectImage::DEFAULT_IMAGE, AMImageTemplate::METHOD_DEFAULT);
+		}else $thumb = new AMTProjectImage($this->image);
 		
 		parent::add("<td width='87'><img src='".$thumb->getImageURL()."' width='87' height='94' border='0' class='boxdiarioproj'>");
 		
 		parent::add("</td>");
 		parent::add("<td width='20'><img src='$_CMAPP[images_url]/dot.gif' width='20' height='10' border='0'></td>");
 		parent::add("<td valign='top'><font class='titdiarioproj'>$this->title</font><br>");
-		parent::add("<a href='$_CMAPP[services_url]/agregator/config_aggregator.php?frm_codeProject=$_REQUEST[frm_codeProject]' class='headerdiario'>&raquo; $_language[edit_source_list].</a><br>");
-
+		if($this->isMember) {
+			parent::add("<a href='$_CMAPP[services_url]/agregator/config_aggregator.php?frm_codeProject=$_REQUEST[frm_codeProject]' class='headerdiario'>&raquo; $_language[edit_source_list].</a><br>");
+		}
 		parent::add("</td>");
 		parent::add("<td width='20'><img src='$_CMAPP[images_url]/dot.gif' width='20' height='10' border='0'></td>");
 		parent::add("</tr>");
@@ -110,58 +113,60 @@ class AMBoxAgregador extends CMHTMLObj {
 		
 		$par=true;
 
-        foreach($this->posts[items] as $post) {
-            if(!ereg($this->getFilter(), $post['description'])) {
-                continue;
-            }
+		if(!empty($this->posts['items'])) {
+        	foreach($this->posts['items'] as $post) {
+            	if(!ereg($this->getFilter(), $post['description'])) {
+                	continue;
+            	}
 
-            if($par) {
+            	if($par) {
                 
-                parent::add("<!-- post sobre área clara (#F1FAFD) -->");
-				parent::add("<tr bgcolor='#F1FAFD'><td colspan='3'><img src='$_CMAPP[images_url]/dot.gif' width='20' height='30' border='0'></td></tr>");
+                	parent::add("<!-- post sobre área clara (#F1FAFD) -->");
+					parent::add("<tr bgcolor='#F1FAFD'><td colspan='3'><img src='$_CMAPP[images_url]/dot.gif' width='20' height='30' border='0'></td></tr>");
 
-				parent::add("<tr bgcolor='#F1FAFD'>");
-				parent::add("<td><img src='$_CMAPP[images_url]/dot.gif' width='20' height='10' border='0'></td>");
-				parent::add("<td valign='top'><img src='$_CMAPP[images_url]/img_diarioproj_mark.gif' align='absmiddle'>");
-				parent::add("<a href='$post[link]'><span class='titpost'>".$post['title']."</span></a>");
-				parent::add("<span class='datapost'>".$post['pubDate']."</span><br><img src='$_CMAPP[images_url]/dot.gif' width='10' height='7' border='0'><br>");
-				parent::add("<font class='txtdiarioproj'>".html_entity_decode($post['description']).".</span><br>");
-				parent::add("<table cellpadding='0' cellspacing='0' border='0' width='100%'>");
+					parent::add("<tr bgcolor='#F1FAFD'>");
+					parent::add("<td><img src='$_CMAPP[images_url]/dot.gif' width='20' height='10' border='0'></td>");
+					parent::add("<td valign='top'><img src='$_CMAPP[images_url]/img_diarioproj_mark.gif' align='absmiddle'>");
+					parent::add("<a href='$post[link]'><span class='titpost'>".$post['title']."</span></a>");
+					parent::add("<span class='datapost'>".$post['pubDate']."</span><br><img src='$_CMAPP[images_url]/dot.gif' width='10' height='7' border='0'><br>");
+					parent::add("<font class='txtdiarioproj'>".html_entity_decode($post['description']).".</span><br>");
+					parent::add("<table cellpadding='0' cellspacing='0' border='0' width='100%'>");
 				
-				parent::add("<tr><td colspan='2'><img src='$_CMAPP[images_url]/dot.gif' width='20' height='25' border='0'></td></tr>");
-				parent::add("</table>");
-				parent::add("</td>");
-				parent::add("<td><img src='$_CMAPP[images_url]/dot.gif' width='20' height='10' border='0'></td>");
-				parent::add("</tr>	");
-				parent::add("<!-- fim post sobre área clara (#F1FAFD) -->");	
-            } else {
-                parent::add("<!-- post sobre área escura (#DCF0F6) -->");
-				parent::add("<tr bgcolor='#DCF0F6'>");
-				parent::add("<td><img src='$_CMAPP[images_url]/box_diarioproj_int_01.gif' width='20' height='10' border='0'></td>");
-				parent::add("<td bgcolor='#DCF0F6'><img src='$_CMAPP[images_url]/dot.gif' width='20' height='10' border='0'></td>");
-				parent::add("<td><img src='$_CMAPP[images_url]/box_diarioproj_int_02.gif' width='20' height='10' border='0'></td>");
-				parent::add("</tr>");
-				parent::add("<tr bgcolor='#DCF0F6'>");
-				parent::add("<td background='$_CMAPP[images_url]/box_diarioproj_int_bgleft.gif'><img src='$_CMAPP[images_url]/dot.gif' width='20' height='10' border='0'></td>");
-				parent::add("<td valign='top'><img src='$_CMAPP[images_url]/img_diarioproj_mark.gif' align='absmiddle'>");
-				parent::add("<a href='".$post['link']."'><span class='titpost'>".$post['title']."</span></a>");
-				parent::add("<span class='datapost'>$post[pubDate]</span><br><img src='$_CMAPP[images_url]/dot.gif' width='10' height='7' border='0'><br>");
-
-				parent::add("<font class='txtdiarioproj'>".html_entity_decode($post['description'])."</span><br>");
-				parent::add("</td>");
-				parent::add("<td  background='$_CMAPP[images_url]/box_diarioproj_int_bgrigth.gif'><img src='$_CMAPP[images_url]/dot.gif' width='20' height='10' border='0'></td>");
-				parent::add("</tr>	");
-				parent::add("<tr bgcolor='#DCF0F6'>");
-				parent::add("<td><img src='$_CMAPP[images_url]/box_diarioproj_int_03.gif' width='20' height='10' border='0'></td>");
-				parent::add("<td bgcolor='#DCF0F6'><img src='$_CMAPP[images_url]/dot.gif' width='20' height='10' border='0'></td>");
-				parent::add("<td><img src='$_CMAPP[images_url]/box_diarioproj_int_04.gif' width='20' height='10' border='0'></td>");
-
-				parent::add("</tr>");
-				parent::add("<!-- post sobre área escura (#DCF0F6) -->");	
-
-            }
-            $par=!$par;
-        }
+					parent::add("<tr><td colspan='2'><img src='$_CMAPP[images_url]/dot.gif' width='20' height='25' border='0'></td></tr>");
+					parent::add("</table>");
+					parent::add("</td>");
+					parent::add("<td><img src='$_CMAPP[images_url]/dot.gif' width='20' height='10' border='0'></td>");
+					parent::add("</tr>	");
+					parent::add("<!-- fim post sobre área clara (#F1FAFD) -->");	
+    	        } else {
+        	        parent::add("<!-- post sobre área escura (#DCF0F6) -->");
+					parent::add("<tr bgcolor='#DCF0F6'>");
+					parent::add("<td><img src='$_CMAPP[images_url]/box_diarioproj_int_01.gif' width='20' height='10' border='0'></td>");
+					parent::add("<td bgcolor='#DCF0F6'><img src='$_CMAPP[images_url]/dot.gif' width='20' height='10' border='0'></td>");
+					parent::add("<td><img src='$_CMAPP[images_url]/box_diarioproj_int_02.gif' width='20' height='10' border='0'></td>");
+					parent::add("</tr>");
+					parent::add("<tr bgcolor='#DCF0F6'>");
+					parent::add("<td background='$_CMAPP[images_url]/box_diarioproj_int_bgleft.gif'><img src='$_CMAPP[images_url]/dot.gif' width='20' height='10' border='0'></td>");
+					parent::add("<td valign='top'><img src='$_CMAPP[images_url]/img_diarioproj_mark.gif' align='absmiddle'>");
+					parent::add("<a href='".$post['link']."'><span class='titpost'>".$post['title']."</span></a>");
+					parent::add("<span class='datapost'>$post[pubDate]</span><br><img src='$_CMAPP[images_url]/dot.gif' width='10' height='7' border='0'><br>");
+	
+					parent::add("<font class='txtdiarioproj'>".html_entity_decode($post['description'])."</span><br>");
+					parent::add("</td>");
+					parent::add("<td  background='$_CMAPP[images_url]/box_diarioproj_int_bgrigth.gif'><img src='$_CMAPP[images_url]/dot.gif' width='20' height='10' border='0'></td>");
+					parent::add("</tr>	");
+					parent::add("<tr bgcolor='#DCF0F6'>");
+					parent::add("<td><img src='$_CMAPP[images_url]/box_diarioproj_int_03.gif' width='20' height='10' border='0'></td>");
+					parent::add("<td bgcolor='#DCF0F6'><img src='$_CMAPP[images_url]/dot.gif' width='20' height='10' border='0'></td>");
+					parent::add("<td><img src='$_CMAPP[images_url]/box_diarioproj_int_04.gif' width='20' height='10' border='0'></td>");
+	
+					parent::add("</tr>");
+					parent::add("<!-- post sobre área escura (#DCF0F6) -->");	
+	
+    	        }
+        	    $par=!$par;
+	        }
+		}
  		
 		parent::add("<!-- final area dos posts -->");
 		parent::add("<tr>");
