@@ -46,7 +46,7 @@ class AMTUserInfo extends CMHTMLObj {
       $this->tip->setLink($_CMAPP['services_url']."/webfolio/userinfo_details.php?frm_codeUser=$user->codeUser");
     }
     else{
-      $this->tip->setLink("#");
+      $this->tip->setLink("javascript:void(0);");
     }
 
 

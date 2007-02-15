@@ -43,12 +43,13 @@ class AMFile extends CMObj {
   	global $_CMAPP;
   	
   	$_conf = $_CMAPP['config'];
-
-  	$data = $this->data;
+	$data = $this->data;
+	
   	unset($this->fieldsValues['data']);
   	parent::save();
   	
   	$path = (string) $_conf->app[0]->paths[0]->files;
+
   	$file = $path.'/'.$this->codeFile.'_'.$this->name;
   	$f = fopen($file, "a");
   	fwrite($f, $data);

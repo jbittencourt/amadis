@@ -53,6 +53,8 @@ class AMCommunityImage extends AMFixedSizeImage implements AMThumbinaiableImage 
     $image = self::getImage($obj);
 
     $thumb = new AMCommunityThumb($smallthumb);
+    $thumb->type = self::DEFAULT_IMAGE;
+    
     $thumb->codeFile = $image;
     try {
       $thumb->load();

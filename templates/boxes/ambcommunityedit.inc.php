@@ -44,6 +44,7 @@ class AMBCommunityEdit extends AMColorBox {
 
 
 		$urledit = $_CMAPP['services_url']."/communities/update.php?frm_codeCommunity=".$this->community->code;
+		$urleditimage = $_CMAPP['services_url']."/communities/change_image.php?frm_codeCommunity=".$this->community->code;
 		//$urlmembers = $_CMAPP['services_url']."/communities/managemembers.php?frm_codeCommunity=".$this->community->code;
 
 		$urlinvite = $_CMAPP['services_url']."/communities/inviteusers.php?frm_codeCommunity=".$this->community->code;
@@ -51,6 +52,7 @@ class AMBCommunityEdit extends AMColorBox {
 
 		if($admin){
 			parent::add("<a href=\"$urledit\" class =\"cinza\">&raquo; ".$_language['community_link_edit']."</a><br>");
+			parent::add("<a href=\"$urleditimage\" class =\"cinza\">&raquo; ".$_language['community_link_edit_image']."</a><br>");
 			//parent::add("<a href=\"$urlmembers\" class =\"cinza\">&raquo; ".$_language['community_link_members']."</a><br>");
 		}
 		if($admin || $add_user)

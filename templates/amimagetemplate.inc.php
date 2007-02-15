@@ -48,8 +48,9 @@ abstract class  AMImageTemplate extends CMHTMLObj
   public function __construct($value,$method=self::METHOD_DB, $thumb=false)
   {
   	parent::__construct();
+  	
   	$this->method = $method;
-
+  	
   	if($method==self::METHOD_DB) {
   		$this->codeFile = $value;
   	}

@@ -56,14 +56,15 @@ if($isMember) {
  */
 
 //coluna da esquerda
-$box->add("<font class=\"txttitcomunidade\">$_language[community]:<br> ".$community->name."<br>", AMTwoColsLayout::LEFT);
+$box->add("<span class=\"txttitcomunidade\">$_language[community]: ".$community->name."<br></span>", AMTwoColsLayout::LEFT);
 $box->add("<img src=\"".$_CMAPP['images_url']."/dot.gif\" border=\"0\" height=10 width=1><br>", AMTwoColsLayout::LEFT);
 
-$box->add(new AMTCommunityImage($community->image), AMTwoColsLayout::LEFT);
+if($community->image == 0) $box->add(new AMTCommunityImage(AMCommunityImage::DEFAULT_IMAGE , AMTCommunityImage::METHOD_DEFAULT), AMTwoColsLayout::LEFT);
+else $box->add(new AMTCommunityImage($community->image), AMTwoColsLayout::LEFT);
 
 $box->add("<br>", AMTwoColsLayout::LEFT);
 $box->add("<img src=\"".$_CMAPP['images_url']."/dot.gif\" border=\"0\" height=10 width=1><br>", AMTwoColsLayout::LEFT);
-$box->add("<font class=\"texto\">$community->description<br>",
+$box->add("<span class=\"texto\">$community->description<br></span>",
 	  AMTwoColsLayout::LEFT);
 $box->add("<img src=\"".$_CMAPP['images_url']."/dot.gif\" border=\"0\" height=10 width=1><br>", AMTwoColsLayout::LEFT);
 
