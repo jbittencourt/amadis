@@ -9,12 +9,12 @@
 <app>
    <general>
        <admin_email>admin@yourdomain.org</admin_email>
-       <version>1.2.1</version>
+       <version>1.3.1</version>
    </general>
    <libs>
-      <lib name="cmdevel" path="/cmdevel" />
-      <lib name="xoad" path="/environment/media/libs/xoad" />
-      <lib name="lastRSS" path="/environment/media/libs/lastRSS" />
+      <lib name="cmdevel" path="COMPLETE_WITH_YOUR_PATH/cmdevel" />
+      <lib name="xoad" path="COMPLETE_WITH_YOUR_PATH/environment/media/libs/xoad" />
+      <lib name="lastRSS" path="COMPLETE_WITH_YOUR_PATH/environment/media/libs/lastRSS" />
    </libs>
    <environment>
       <plataform>1</plataform>
@@ -41,8 +41,10 @@
    </urls>
    <paths>
       <pages>COMPLETE_WITH_YOUR_PATH/environment/paginas</pages>
-      <thumbnails>COMPLETE_WITH_YOUR_PATH/environment/media/thumbnails</thumbnails>	
-      <cache>COMPLETE_WITH_YOUR_PATH/cache</cache>
+      <thumbnails>COMPLETE_WITH_YOUR_PATH/environment/media/thumbnails</thumbnails>
+      <cache>COMPLETE_YOUR_PATH/cache</cache>
+	  <log>COMPLETE_YOUR_PATH/log</log>
+	  <files>COMPLETE_YOUR_PATH/environment/files</files>
    </paths>
    <database>
       <driver>mysql</driver>

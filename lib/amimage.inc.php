@@ -177,7 +177,7 @@ class AMImage extends AMFile
         	new AMErrorReport($e, 'AMImage::save', AMLog::LOG_CORE);
         	throw $e;
         }
-        
+
 	    //we must delete all the existing thumbnails of this image if the save was sucessfull
     	//see AMThumb for more information about thumbnail generation
         if($old_state==CMObj::STATE_DIRTY) {

@@ -50,16 +50,16 @@ class AMFile extends CMObj {
   	
   	$path = (string) $_conf->app[0]->paths[0]->files;
 
-  	$file = $path.'/'.$this->codeFile.'_'.$this->name;
-  	$f = fopen($file, "a");
-  	fwrite($f, $data);
-  	fclose($f);
-	
   	if(isset($_SESSION['amadis']['old_photo_name'])) {
 		$file = $path.'/'.$this->codeFile.'_'.$_SESSION['amadis']['old_photo_name'];
 		if(file_exists($file)) unlink($file);
 		unset($_SESSION['amadis']['old_photo_name']);
 	}
+  	
+  	$file = $path.'/'.$this->codeFile.'_'.$this->name;
+  	$f = fopen($file, "a");
+  	fwrite($f, $data);
+  	fclose($f);
 	
   }
   

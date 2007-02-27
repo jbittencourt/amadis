@@ -78,6 +78,4 @@ class AMCommunityImage extends AMFixedSizeImage implements AMThumbinaiableImage 
       return new AMTCommunityImage(self::DEFAULT_IMAGE, AMImageTemplate::METHOD_DEFAULT);
     }
   }
-
-
 }

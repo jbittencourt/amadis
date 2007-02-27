@@ -1,5 +1,4 @@
 <?php
-
 $_CMAPP['notrestricted']=false;
 
 include("../../config.inc.php");
@@ -7,14 +6,6 @@ include("../../config.inc.php");
 $_language = $_CMAPP['i18n']->getTranslationArray("chat");
 
 $pag = new AMTChat;
-
-$pag->setOnClose("ajaxSync.send();");
-
-AMMain::addCommunicatorHandler('AMChat');
-
-$pag->addPageBegin(CMHTMLObj::getScript("var AMChat = new amchat(AMChatCallBack);"));
-
-$pag->add("<br>");
 
 $community = new AMCommunities;
 $community->code = $_REQUEST['frm_codeCommunity'];

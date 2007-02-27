@@ -91,7 +91,7 @@ switch($_REQUEST['action']) {
  		$foto->time = time();
  		try {
  			$foto->save();
-
+			
  			if($community->image == 0 || empty($community->image)) {
  				$community->image = (integer) $foto->codeFile;
  				$community->state = CMObj::STATE_DIRTY;
@@ -124,7 +124,7 @@ switch($_REQUEST['action']) {
  	}
 
  	unset($_SESSION['cad_community']);
- 	//if everything was ok, go the page of the project.
+ 	unset($_SESSION['cad_image']);
 
  	header("Location: $_CMAPP[services_url]/communities/community.php?frm_codeCommunity=".$community->code."&frm_ammsg=community_updated");
   

@@ -11,7 +11,7 @@ h1,h2,h3,h4,h5,h6,p,pre,blockquote,label,ul,ol,dl,fieldset,address {
 fieldset {
 	padding: 0.3em;
 }
-
+img {border: none;}
 body {
 	min-width: 630px; /* 2 x (LC fullwidth + CC padding) + RC fullwidth */
 	border-left: solid 9px #00A3BA;

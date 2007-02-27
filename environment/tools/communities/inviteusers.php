@@ -97,7 +97,7 @@ switch($_REQUEST['action']) {
 
 //erase users from the container that are alredy project members
 $men = "";
-if($_avaiable->__hasItems()) {
+if(!empty($_avaible) && $_avaiable->__hasItems()) {
   $temp = $_SESSION['communities'][$co->code]['members'];
   foreach($_avaiable->items as $key=>$item) {
     if(isset($temp[$item->codeUser])) {
@@ -139,7 +139,7 @@ $box->add("<input type=hidden name=frm_codeCommunity value=\"$co->code\">");
 
 //print the list of team
 $box->add("<table border=0 cellspacing=0  cellspacing=0><tr>");
-if($_avaiable->__hasItems()) {
+if(!empty($_avaiable) && $_avaiable->__hasItems()) {
   foreach($_avaiable as $item) {
     $box->add('<tr>');
     $box->add('<td><input type=checkbox name="frm_usersInvite[]" value="'.$item->codeUser.'">');
