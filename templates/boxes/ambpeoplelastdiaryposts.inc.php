@@ -27,7 +27,9 @@
  		
  		if(!empty($this->itens)) {
  			foreach($this->itens as $item) {
- 				parent::add("<a class=\"people_blog_entry\" href=\"$_CMAPP[services_url]/blog/blog.php?frm_codePost=$item->codePost#anchor_post_".$item->codePost."\">");
+ 				//TODO Solve the problem with the page scroll in the blog
+ 				//parent::add("<a class=\"people_blog_entry\" href=\"$_CMAPP[services_url]/blog/blog.php?frm_codePost=$item->codePost#anchor_post_".$item->codePost."\">");
+ 				parent::add("<a class=\"people_blog_entry\" href=\"$_CMAPP[services_url]/blog/blog.php?frm_codePost=$item->codePost\">");
  				parent::add("&raquo; ".$item->title."</a>:  (");
  				parent::add(new AMTUserInfo($item->author[0],AMTUserInfo::LIST_USERNAME));
  				parent::add(", ".date($_language['date_format'],$item->time).")");
