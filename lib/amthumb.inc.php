@@ -8,12 +8,13 @@ abstract class AMThumb extends AMImage {
   
   public function load() {
 
-  	if(!empty($this->codeFile)) {
-  		$this->name_file = "image_".$this->maxX."_".$this->maxY."_".$this->codeFile.".png";
+  	$codeFile = $this->codeFile;
+  	if(!empty($codeFile)) {
+  		$this->name_file = "image_".$this->maxX."_".$this->maxY."_".$codeFile.".png";
   	} else $this->name_file = "image_".$this->maxX."_".$this->maxY."_".substr($this->type,0, -4).".png";
 
     if(!$this->checkThumbExists()) {
-    	if(!empty($this->codeFile)) parent::load();
+    	if(!empty($codeFile)) parent::load();
     	$this->loadFile();
     	$this->save();
     }

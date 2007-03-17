@@ -34,7 +34,7 @@ class AMProjectImage extends AMFixedSizeImage implements AMThumbinaiableImage {
    * @param AMProject $project The project wich you want to obtain the image code.
    **/
   static public function getImage(AMProject $project) {
-    $image = (integer) $project->image;
+  	$image = $project->image;
     if(empty($image)) {
       return self::DEFAULT_IMAGE;
     }
@@ -52,16 +52,17 @@ class AMProjectImage extends AMFixedSizeImage implements AMThumbinaiableImage {
     $image = self::getImage($obj);
 
     $thumb = new AMProjectThumb($smallthumb);
-	$thumb->type = self::DEFAULT_IMAGE;
-
-	$thumb->codeFile = $image;
-    try {
-      $thumb->load();
-    }
-    catch(CMDBException $e) {
-      Throw $e;
-    }
-
+	try {
+		$thumb->codeFile = $image;
+	    try {
+    		$thumb->load();
+    	}catch(CMDBException $e) {
+      		new AMErrorReport($e, 'AMProjectImage::getThumb', AMLog::LOG_PROJECTS);
+    	}
+	}catch (CMObjEPropertieValueNotValid $e) { 
+		$thumb->type = self::DEFAULT_IMAGE;
+	}
+	
     return $thumb;
   }
 

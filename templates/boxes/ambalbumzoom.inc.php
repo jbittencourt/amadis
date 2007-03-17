@@ -14,7 +14,7 @@ class AMBAlbumZoom extends AMListBox {
       parent::add("<tr>");
       parent::add("<td valign='top' align='center'><br><table border='1' class='".$this->class_prefix."_table'><tr>");
       parent::add("<td class='".$this->class_prefix."_bg1'>");
-      parent::add("<img style=`border:1px;width:700px;` src='$_CMAPP[media_url]/imagewrapper.php?method=db&frm_codeFile=".$this->album->codePhoto."'>");
+      parent::add("<img style=`border:1px;max-width:700px;` src='$_CMAPP[media_url]/imagewrapper.php?method=db&frm_codeFile=".$this->album->codePhoto."'>");
       parent::add("</td></tr><tr><td align='right'>");
       parent::add("<br>".nl2br($this->album->comments)."&nbsp;&nbsp;&nbsp;&nbsp;<br><a class='".$this->class_prefix."_link' cursor:hand href='");
       if($state == "personal"){ 

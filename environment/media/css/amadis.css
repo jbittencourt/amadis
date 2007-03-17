@@ -167,7 +167,7 @@ body {
 }
 
 #menufontExtra a:link, a:active, a:visited{
-	color: #FFF; /* Cor da fonte */
+	color: #666; /* Cor da fonte */
 	text-decoration: none;	
 }
 

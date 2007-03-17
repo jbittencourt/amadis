@@ -33,23 +33,23 @@ switch($action) {
 
 			$_SESSION['cad_user'] = clone $_SESSION['user'];
 			$_SESSION['cad_foto'] = new AMUserPicture();
-			$_SESSION['cad_foto']->codeFile = AMUserPicture::getImage($_SESSION['user']);
-
+			//$_SESSION['cad_foto']->codeFile = AMUserPicture::getImage($_SESSION['user']);
+			$codeFile = AMUserPicture::getImage($_SESSION['user']);
 			//test if the returned image is the default image
-			if($_SESSION['cad_foto']->codeFile == AMUserPicture::DEFAULT_IMAGE ) {
+			if($codeFile == AMUserPicture::DEFAULT_IMAGE ) {
 				$createNewImage = true;
-			}
-				
-			try {
-				$_SESSION['cad_foto']->load();
-			}
-			catch(CMDBNoRecord $e) {
-				$createNewImage = true;
+			}else {
+				$_SESSION['cad_foto']->codeFile = $codeFile;
+				try {
+					$_SESSION['cad_foto']->load();
+				} catch(CMDBNoRecord $e) {
+					$createNewImage = true;
+				}
 			}
 				
 			if($createNewImage) {
 				$_SESSION['cad_foto'] = new AMUserPicture();
-				$_SESSION['cad_user']->picture = 1;
+				$_SESSION['cad_user']->picture = 0;
 			};
 
 		}

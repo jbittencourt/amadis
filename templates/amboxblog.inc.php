@@ -49,7 +49,8 @@ class AMBoxBlog extends CMHTMLObj
 
     public static function getPermanentLink($post) {
         global $_CMAPP;
-        return "$_CMAPP[services_url]/blog/blog.php?frm_codePost=$post->codePost#anchor_post_$post->codePost";
+        //return "$_CMAPP[services_url]/blog/blog.php?frm_codePost=$post->codePost#anchor_post_$post->codePost";
+        return "$_CMAPP[services_url]/blog/blog.php?frm_codePost=$post->codePost";
     }
     
     public function __toString() {

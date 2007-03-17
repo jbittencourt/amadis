@@ -39,7 +39,7 @@ class AMBAdminLogs extends AMSimpleBox {
 		$conteudo .= "<a href=\"javascript:drawLog(AM_getElement('sel_log').value, 5);\">5</a>&nbsp;";
 		$conteudo .= "<a href=\"javascript:drawLog(AM_getElement('sel_log').value, 10);\">10</a>&nbsp;";
 		$conteudo .= "<a href=\"javascript:drawLog(AM_getElement('sel_log').value, 50);\">50</a>&nbsp;";
-		$conteudo .= "</form></td></tr><table><br>";
+		$conteudo .= "</form></td></tr></table><br>";
 		$conteudo .= "<div id=\"logger\" style=\"display:none\"></div>";
 		parent::add($conteudo);
 

@@ -15,12 +15,12 @@
 
 .chat {
   position:absolute;
-  width: 95%;
+  width: 95%;	
   height:93%;
   top:15px;
   left:10px;
   /* scroll: vertical; */
-  border: solid red 1px;
+  border: none;
   padding-left: 15px;
   padding-right: 0px;
   }
@@ -87,7 +87,7 @@
                   }
 
 
-/* área central da parte de envio */
+/* ï¿½rea central da parte de envio */
 #main_enviarmsg {
                   position: absolute;
                   left:0;
@@ -96,7 +96,7 @@
                   }
 
 
-/* área de informações entre usuários */
+/* ï¿½rea de informaï¿½ï¿½es entre usuï¿½rios */
 
 #areainfocorpo {
                  margin-left:5px;
@@ -120,7 +120,7 @@
 #infoelement{
               text-align: center;
               font: normal 10px/20px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
-              color: fff;
+              color: #fff;
               position:absolute;
               top:130;	
               margin-left:12px;;	
@@ -134,7 +134,7 @@
         }
 
 
-/* usamos a propriedade margin para abrir espaços para as colunas laterais */
+/* usamos a propriedade margin para abrir espacos para as colunas laterais */
 #areatextochat {
                  margin-left:1.2em;
                  margin-right:1.2em;

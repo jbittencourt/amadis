@@ -33,7 +33,8 @@ class AMTUserInfoRender implements AMAjax {
 
     //picture of the user
     $pag->add("<a href=\"$where_to_go\">");
-    if(!empty($user->picture)) $pag->add(new AMTUserImage($user->picture));
+    $userpic = $user->picture;
+    if(!empty($userpic)) $pag->add(new AMTUserImage($userpic));
     else $pag->add(new AMTUserImage(AMUserPicture::DEFAULT_IMAGE, AMTUserImage::METHOD_DEFAULT));
     $pag->add("</a>");
 

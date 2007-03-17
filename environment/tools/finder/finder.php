@@ -2,6 +2,9 @@
 
 include_once("../../config.inc.php");
 
+echo AMShared::share('unshared_26');
+
+die();
 //AMEnvSession::getFinderRequest();
 
 AMFinder::initFinder("34_17");
@@ -109,9 +112,9 @@ $users = $_SESSION[finder]->getOnLineUsers();
 $online = array();
 
 //faz um scan no array de objetos e passa-os para um segundo array.
-//Faz isso para poder identificar quando um único usuários está conectado em
-//duas máquina diferents e mostra-lo só uma vez
-//A máquina em que o usuário estiver conectado a menos tempo recebe precedência.
+//Faz isso para poder identificar quando um ï¿½nico usuï¿½rios estï¿½ conectado em
+//duas mï¿½quina diferents e mostra-lo sï¿½ uma vez
+//A mï¿½quina em que o usuï¿½rio estiver conectado a menos tempo recebe precedï¿½ncia.
 
 if($users->__hasItems()) {
   

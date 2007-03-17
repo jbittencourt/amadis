@@ -12,7 +12,7 @@
  **/
 class AMShared {
 
-  public function share($id){
+  static public function share($id){
     global $_CMAPP;
 
     $fileLib = new AMLibraryFiles;
@@ -21,13 +21,15 @@ class AMShared {
     $oldId = $id;
     $ids = split("_", $id);
     //for a easier way to undestand the code i will extract the 2 info from array and put it in diff vars
-    $state = $ids[0]; $fileCode = $ids[1];
+    $state = $ids[0]; 
+    $fileCode = $ids[1];
+	
+    $fileLib->codeFile = $fileCode;
 
-    $fileLib->filesCode = $fileCode;
     try{
       $fileLib->load();
     }catch(AMException $e){ echo $e->getMessage(); }
-
+	
     //change all states  and set new variables..
     if($state == "shared"){  
       $newState = "unshared";      

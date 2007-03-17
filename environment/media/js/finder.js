@@ -1,12 +1,12 @@
 var AMFinder_Timeout;
 var AMFinder_lang = new Array();
 
-function Finder_initChat() {
+function Finder_initChat(id) {
   var cssMessages = window.document.createElement("LINK");
   cssMessages.setAttribute("rel", "stylesheet");
   cssMessages.setAttribute("href", "css/mensagens.css");
 
-  var chatFrame = AM_getElement("chat_34_17");
+  var chatFrame = AM_getElement("chat_"+id);
   var chatDoc = AM_getIFrameDocument(chatFrame, "body");
     
   var head = chatDoc.getElementsByTagName("head");
@@ -47,43 +47,45 @@ var AMFinderCallBack = {
 
     var msg = window.document.createElement("DIV");
     msg.setAttribute("id","messagesBox");
-    var chatDoc = AM_getElement("chat_"+result.sessionId);
-    
+    var chatDoc = AM_getElement("iChat_"+result.sessionId);
+	
     for(var i in result) {
       switch(result[i].responseType) {
       case "finder_alert":
-	msg.innerHTML = "<br><div style='font-color: #FF0000'>"+result[i].message+"</div>";
-	//chatDoc.body.appendChild(msg);
-	chatDoc.appendChild(msg);
-	//chatDoc.scrollTop += chatDoc.scrollHeight;
-	break;
+	  	var iChat = AM_getIFrameDocument(chatDoc);
+		msg.innerHTML = "<br><div style='font-color: #FF0000'>"+result[i].message+"</div>";
+		iChatDoc.body.appendChild(msg);
+		//chatDoc.appendChild(msg);
+		chatDoc.scrollTop += chatDoc.scrollHeight;
+		break;
 
       case "finder_timeout":
-	//msg.innerHTML = "<br><span class='finder_timeout'>"+AMFinder_lang[result[i].message]+"</span>";
-	msg.innerHTML = "<br><div class='finder_timeout'>"+AMFinder_lang[result[i].message]+"</div>";
-	window.clearInterval(eval("AMFinder_Timeout_"+result.sessionId));
-	chatDoc.appendChild(msg);
-	chatDoc.scrollTop += chatDoc.scrollHeight;
-	//chatFrame.contentWindow.scrollBy(0,1000);
-	Finder_tabAlert(result.sessionId, 'offline_finder', true);
-	break;
+	  	var iChat = AM_getIFrameDocument(chatDoc);
+		//msg.innerHTML = "<br><span class='finder_timeout'>"+AMFinder_lang[result[i].message]+"</span>";
+		msg.innerHTML = "<br><div class='finder_timeout'>"+AMFinder_lang[result[i].message]+"</div>";
+		window.clearInterval(eval("AMFinder_Timeout_"+result.sessionId));
+		iChat.body.appendChild(msg);
+		chatDoc.scrollTop += chatDoc.scrollHeight;
+		Finder_tabAlert(result.sessionId, 'offline_finder', true);
+		break;
 
       case "parse_messages":
-	Finder_tabAlert(result.sessionId, 'alert_finder', false);
-	var out = "";
-	out += "<br><div class='"+result[i].style+"'>";
-	out += result[i].username+"("+result[i].date+"): ";
-	out += result[i].message;
-	out += "</div>";
+		var iChat = AM_getIFrameDocument(chatDoc);
+		 
+		Finder_tabAlert(result.sessionId, 'alert_finder', false);
+		var out = "";
+		out += "<br><div class='"+result[i].style+"'>";
+		out += result[i].username+"("+result[i].date+"): ";
+		out += result[i].message;
+		out += "</div>";
 	
-	msg.innerHTML += out;
-	chatDoc.appendChild(msg);
-	chatDoc.scrollTop += chatDoc.scrollHeight;
-	//chatFrame.contentWindow.scrollBy(0,1000);
-	break;
+		msg.innerHTML += out;
+		
+		iChat.body.appendChild(msg);
+		chatDoc.contentWindow.scrollBy(0,1000);
+		break;
       }
     }
-    
   }
 }
 
@@ -96,7 +98,8 @@ function Finder_openChatWindow(sessionId) {
   } else {
     var userIds = sessionId.split("_");
     var param = "resizable=no,width=676,height=442,status=no,location=no,scrollig=yes,toolbar=no,scrollbars=yes";
-    Finder_window = window.open(Finder_chatSRC+"?frm_codeUser="+userIds[1], "Finder_ChatRoom", param);
+    var param = '';
+	Finder_window = window.open(Finder_chatSRC+"?frm_codeUser="+userIds[1], "Finder_ChatRoom", param);
   }
 }
 

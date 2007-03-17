@@ -38,12 +38,21 @@ class AMTFileDownload {
   }
 
   public function __toString() {
+  	global $_CMAPP;
+  	
     $this->file->name = addslashes($this->file->name);
     header("Content-Type: application/octet-stream");
     header("Content-Disposition:attachment; filename=".$this->file->name);
     header("Content-Length: ".$this->size);
-    header("Content-Transfer-Encoding: binary");    
-    echo $file->data;
+    header("Content-Transfer-Encoding: binary");
+    
+    $imagem = $_CMAPP['path'].'/environment/files/'.$this->file->codeFile."_".$this->file->name;    
+    $handle = fopen ($imagem, "r");
+	$img = fread ($handle, filesize ($imagem));
+	fclose ($handle);
+    
+    echo $img;
+    return '';
   }
 
 }

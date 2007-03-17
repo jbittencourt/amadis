@@ -21,8 +21,8 @@ class AMBFinderConversation extends CMHTMLObj {
     parent::add("    <div id='areatextochat'>");
 
     //box list messages
-    //parent::add("<iframe class='chat' id='chat_{$this->sessionId}' name='chat' src='$_CMAPP[media_url]/dcom.htm'></iframe>");
-    parent::add("<div class='chat' id='chat_".$this->sessionId."' name='chat'></div>");
+    parent::add("<iframe class='chat' id='iChat_{$this->sessionId}' name='chat' src='$_CMAPP[media_url]/dcom.htm'></iframe>");
+    //parent::add("<div class='chat' id='chat_".$this->sessionId."' name='chat'></div>");
     
     parent::add("    </div>");
     parent::add("    <div id='seta1' class='posicaoseta'><img src='$_CMAPP[images_url]/box_msg_areachat_01.png' width='14' height='10' border='0'></div>");
