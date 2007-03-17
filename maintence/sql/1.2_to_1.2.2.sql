@@ -121,7 +121,9 @@ ALTER TABLE `ProjetoComentario` RENAME TO `ProjectComments`,
  CHANGE COLUMN `datNascimento` `birthDate` BIGINT(20) NOT NULL DEFAULT 0,
  CHANGE COLUMN `foto` `picture` BIGINT(20) DEFAULT 0;
  
-
+ALTER TABLE `UsersLibraries` CHANGE `userCode` `codeUser` BIGINT( 20 ) NOT NULL ;
+ALTER TABLE `FilesLibraries` CHANGE `filesCode` `codeFile` INT( 11 ) NOT NULL ,
+CHANGE COLUMN `libraryCode` `codeLibrary` INT( 11 ) NOT NULL ;
 
 /*TODO Change all tables to InnoDB*/
 ALTER TABLE `User`  ENGINE = innodb DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;

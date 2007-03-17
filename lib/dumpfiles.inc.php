@@ -12,28 +12,33 @@ class DumpFiles
 		echo ': OK;<br><br>';
 		
 		$q = new CMQuery('AMFile');
-		
+		$count = 0;	
 		echo 'Listing files: ';
-		$files = $q->execute();
-		echo 'OK;<br><br>';
+		$mod = ceil(3212/100);
+		for($i=1; $i < $mod; $i++) {
+			$q->setLimit(($i*100),100);
+			$files = $q->execute();
+			echo 'OK;<br><br>';
 		
-		echo 'Iterating:...';
-		$count = 0;
-		if($files->__hasItems()) {
-			foreach($files as $file) {
-				echo '#DUMPING: '.$file->name.' as '.$path.'/'.$file->codeFile.'_'.$file->name.': ';
-				$f = fopen($path.'/'.$file->codeFile.'_'.$file->name, "a");
-				fwrite($f,$file->data);
-				fclose($f);
-				echo 'OK;<br>';
-				echo 'Saving in new format: ';
-			   	//unset($file->fieldsValues['data']);
-			   	$file->data = '';
-			   	$file->state = CMObj::STATE_DIRTY;
-				$file->save();
-				echo 'OK;<br>';
+			echo 'Iterating:...';
+			
+			if($files->__hasItems()) {
+				foreach($files as $file) {
+					echo '#DUMPING: '.$file->name.' as '.$path.'/'.$file->codeFile.'_'.$file->name.': ';
+					$f = fopen($path.'/'.$file->codeFile.'_'.$file->name, "a");
+					fwrite($f,$file->data);
+					fclose($f);
+					echo 'OK;<br>';
+					echo 'File Size: '.(round($file->size/1024, 2)).'KB<br>';
+					echo 'Saving in new format: ';
+				   	//unset($file->fieldsValues['data']);
+				   	$file->data = '';
+				   	$file->state = CMObj::STATE_DIRTY;
+					//$file->save();
+					echo 'OK;<br><br>';
 				
-				$count++;
+					$count++;
+				}
 			}
 		}
 		echo 'FININSHED!<br>';
