@@ -78,12 +78,17 @@ switch( $_REQUEST['opcao'] ){
 
 	case "download":
 		$file = new AMFile;
-		$file->codeFile = $_REQUEST['codeFile'];
 		try {
-			$file->load();
-		} catch(CMDBNoRecord $e) {
-			die("Image doesn't exists.");
+			$file->codeFile = $_REQUEST['codeArquivo'];
+			try {
+				$file->load();
+			} catch(CMDBNoRecord $e) {
+				die("Image doesn't exists.");
+			}
+		}catch(CMObjEPropertieValueNotValid $e) {
+			new AMErrorReport($e, 'biblioteca.php(84)', AMLog::LOG_LIBRARY);
 		}
+		
 		$download = new AMTFileDownload($file);
 		echo $download;
 		die();		

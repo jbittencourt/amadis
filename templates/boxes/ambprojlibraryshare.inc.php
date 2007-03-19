@@ -11,19 +11,23 @@ class AMBProjLibraryShare extends AMColorBox {
   private $limit; //this var is to set how many results must appears in the box
   private $show_link; //if this var is set 1, show the link to 'show all shared files'
   
-  public function __construct($proj, $limit, $show) {
+  public function __construct($proj, $limit, $show) 
+  {
     global $_CMAPP;
+    
+    parent::__construct($_CMAPP['imlang_url']."/box_wfarquivos_tit.gif",self::COLOR_BOX_PURPLE);
+    
     $this->requires("library.css",CMHTMLObj::MEDIA_CSS);
+    
     $this->proj = $proj;
     $this->library = $proj->getLibrary();
     $this->limit = $limit;
     $this->show_link = $show;
-    parent::__construct($_CMAPP['imlang_url']."/box_wfarquivos_tit.gif",self::COLOR_BOX_PURPLE);
   }
 
   public function __toString() {
     global $_language, $_CMAPP;
-    $base_link = "../library/library.php?frm_type=project&frm_codeProjeto=".$this->proj->codeProject;
+    $base_link = "$_CMAPP[services_url]/library/library.php?frm_type=project&frm_codeProjeto=".$this->proj->codeProject;
 
     $ple = new AMLibrary();
     $ple->setLibrary($this->library);
