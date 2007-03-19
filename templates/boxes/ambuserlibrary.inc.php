@@ -37,7 +37,7 @@
  		else {
  			parent::add("<table>");
  			foreach($list as $item) {
- 				$mimeType = explode("/",$item->mimetype);
+ 				$mimeType = explode("/",$item->mimeType);
  				switch($mimeType[1]){
  					case "pdf":
  						$icon = "/images/icon_pdf.gif";
