@@ -38,6 +38,17 @@ hour_complete_format = "h:i:s"
 [global]
 amadis = "AMADIS - Ambiente Virtual de Aprendizaje"
 
+my_amadis = "Mi Amadis"
+webfolio = "Webf&oacute;lio"
+library = "Biblioteca"
+projects = "Proyectos"
+friends = "Amigos"
+exit = "salir"
+user = "usuario"
+password  = "contraseña"
+log = "logar"
+
+#section of the environment
 people = "Personas"
 projects = "Proyectos"
 project = "Proyecto"
@@ -45,17 +56,19 @@ communities = "Comunidades"
 community = "Comunidad"
 courses = "Cursos"
 users = "Usuarios"
-diary = "Diario"
+blog = "Diario"
+begin = "Portada"
 
 user = "usuario"
 acesso_nao_permitido = "Acceso no permitido"
 acesso_negado = "Acceso denegado"
 contact_errors = "En caso de que el error persista, cont&aacute;ctese con el administrador."
 
-fatal_error = "Ocurri&oacute; un problema serio al ejecutar AMADIS. Por favor, entre en contacto con el administrador del sitio para corregir el problema."
+no_privileges = "Voc&ecirc; n&atilde;o tem privil&eacute;gios"
 
-sair = "Salir"
-entrar = "Entrar"
+#Most common actions
+try_again = "Tente novamente"
+finish = "Concluir"
 ok = "OK"
 cancel = "Cancelar"
 send = "Enviar"
@@ -77,9 +90,6 @@ select_one = "Seleccione una opci&oacute;n"
 next = "Pro&acute;ximo";
 conclude = "Finalizar"
 valid_image_types = "Los tipos de extensi&oacute;n v&aacute;lidos del archivo son"
-
-error_invalid_login = "Su login fall&oacute;. Por favor confirme su usuario y su contrase&ntilde;a."
-error_invalid_image_type = "El tipo de imagen enviada no fue aceptada. Por favor seleccione una imagen en otro formato."
 
 user_info = "Informaciones sobre el usuario"
 loading_user_info = "Cargando los datos del usuario. Por favor espere..."
@@ -113,7 +123,6 @@ finder_mode_HIDDEN = "Invisible"
 
 empty_search = "Usted debe ingresar un par&aacute;metro para la b&uacute;squeda"
 
-
 no_project_found = "Ning&uacute;n proyecto fue encontrado en esta b&uacute;squeda."
 no_community_found = "Ninguna comunidad fue encontrada"
 error_cannot_find_user = "Ese usuario no existe."
@@ -126,6 +135,34 @@ visit_page = "Ver p&aacute;gina"
 visit_diary = "Ver diario"
 
 no_communities = "Usted no posee comunidades"
+create_project = "Crear un nuevo proyecto"
+create_community = "Crear nueva Comunidad"
+
+[errors]
+fatal_error = "Ocurri&oacute; un problema serio al ejecutar AMADIS. Por favor, entre en contacto con el administrador del sitio para corregir 
+
+el problema."
+error_project_not_exists = "O projeto requisitado n&atilde;o existe!"
+error_community_not_exists = "A comunidade requisitada n&atilde;o existe!"
+error_not_a_project_member = "Voc&ecirc; n&atilde;o &eacute; um membro deste projeto."
+error_not_a_course_member = "Voc&ecirc; n&atilde;o &eacute; um participante deste curso."
+
+error_no_privileges = "Voc&ecirc; n&atilde;o possui privil&eacute;gios para acessar essa &aacute;rea"
+
+error_loading_image = "Erro ao carregar a imagem..."
+
+notices_not_found = "N&atilde;o existe nenhum aviso atualmente."
+
+error_joining_project = "Ocorreu algum problema ao tentar aceitar o convite. Por favor tente novamente."
+error_invitation_user_failed = "N&atilde;o foi poss&iacute;vel adicionar o amigo!"
+msg_invitation_user_success = "Amigo adicionado com sucesso!"
+msg_invitation_reject_success = "";
+
+error_under_construction = "Esta ferramente encontra-se em
+constru&ccedil;&atilde;o"
+
+error_invalid_login = "Su login fall&oacute;. Por favor confirme su usuario y su contrase&ntilde;a."
+error_invalid_image_type = "El tipo de imagen enviada no fue aceptada. Por favor seleccione una imagen en otro formato."
 
 [logs]
 new_user = " Nuevo(s) usuario(s) fue(ron) registrado(s) en AMADIS."
@@ -167,25 +204,41 @@ frm_foto = "Seleccione un archivo con una foto suya."
 try_again = "Intente nuevamente"
 
 your_username = "Su nombre de usuario es: ";
-register_ok = "Su registro fue realizado con &eacute;xito. Para accesar a AMADIS, puede entrar ahora con su nombre de usuario y contrase&ntilde;a en el men&uacute; de al lado."
-register_wait = "Su pedido de registro fue efectuado con &eacute;xito y aguarda aprobaci&oacute;n del administrador. En cuanto sea aceptado, un mensaje ser&aacute; enviado al e-mail que usted registr&oacute;."
+register_ok = "Su registro fue realizado con &eacute;xito. Para accesar a AMADIS, puede entrar ahora con su nombre de usuario y 
+
+contrase&ntilde;a en el men&uacute; de al lado."
+register_wait = "Su pedido de registro fue efectuado con &eacute;xito y aguarda aprobaci&oacute;n del administrador. En cuanto sea aceptado, 
+
+un mensaje ser&aacute; enviado al e-mail que usted registr&oacute;."
 
 error_user_exists = "Ya existe un usuario con este nombre."
-error_fatal = "No fue posible completar su proceso de registro debido a un error desconocido. Por favor intente nuevamente. Si el problema persiste, entre en contacto con el administrador del sistema."
+error_fatal = "No fue posible completar su proceso de registro debido a un error desconocido. Por favor intente nuevamente. Si el problema 
+
+persiste, entre en contacto con el administrador del sistema."
 
 error_password_dot_not_macth = "Las contrase&ntilde;as digitadas no son iguales."
 error_picture_not_defined = "El nombre de la foto no fue correctamente seleccionado, por favor intente nuevamente"
 
-error_saving_picture = "Ocurri&oacute; un error salvando su foto en el banco de datos. Por favor entre en contacto con el administrador del sistema."
+error_saving_picture = "Ocurri&oacute; un error salvando su foto en el banco de datos. Por favor entre en contacto con el administrador del 
 
-error_creating_user_dir = "Ocurri&oacute; un error grave creando la carpeta para su usuario. Por favor, contacte al adminsitrador del sistema."
+sistema."
 
-error_saving_user = "Ocurri&oacute; un error grave grabando sus datos. La operaci&oacute;n no fue finalizada con &eacute;xito. Por favor entre en contacto con el administrador del sistema."
+error_creating_user_dir = "Ocurri&oacute; un error grave creando la carpeta para su usuario. Por favor, contacte al adminsitrador del 
 
-error_sending_email = "Su registro fue realizado con &eacute;xito, pero una raz&oacute;n desconocida o su e-mail de confirmaci&oacute;n no fue correctamente enviado. Sin embargo eso no impide que utilice normalmente el ambiente."
+sistema."
+
+error_saving_user = "Ocurri&oacute; un error grave grabando sus datos. La operaci&oacute;n no fue finalizada con &eacute;xito. Por favor 
+
+entre en contacto con el administrador del sistema."
+
+error_sending_email = "Su registro fue realizado con &eacute;xito, pero una raz&oacute;n desconocida o su e-mail de confirmaci&oacute;n no 
+
+fue correctamente enviado. Sin embargo eso no impide que utilice normalmente el ambiente."
 
 error_invalid_email = "La direcci&oacute;n de e-mail digitado no es v&aacute;lida."
-error_cannot_contact_email_server = "No consegu&iacute; contacto con el servidor de email que usted digit&oacute;. Eso puede ser un problema temporario de comunicaci&oacute;n, o un problema en el llenado del formulario. ¿Est&aacute; seguro que su email es {EMAIL}?"
+error_cannot_contact_email_server = "No consegu&iacute; contacto con el servidor de email que usted digit&oacute;. Eso puede ser un problema 
+
+temporario de comunicaci&oacute;n, o un problema en el llenado del formulario. ¿Est&aacute; seguro que su email es {EMAIL}?"
 
 pag_0 = "Nombre de Usuario y Contrase&ntilde;a"
 pag_1 = "Datos Personales"
@@ -193,33 +246,41 @@ pag_2 = "Foto Personal"
 pag_3 = "Finalizar Registro"
 
 #email to be send when the user register
-register_accepted_email = "<html> <body> <p>Querido(a) {FIRSTNAME}, <p>Su registro fue aceptado en AMADIS con los siguientes datos: <p>Usuario: {USERNAME} <br>Nombre Completo: {NAME} <p>Para accesar al ambiente, basta visitar el sitio {URL}, digitar su usuario y contrase&ntilde;a en el Login (ver abajo), y clicar en OK.  <p align=center><img src='{IMG_URL}/howto_login.gif'> </body> </html>"
+register_accepted_email = "<html> <body> <p>Querido(a) {FIRSTNAME}, <p>Su registro fue aceptado en AMADIS con los siguientes datos: 
+
+<p>Usuario: {USERNAME} <br>Nombre Completo: {NAME} <p>Para accesar al ambiente, basta visitar el sitio {URL}, digitar su usuario y 
+
+contrase&ntilde;a en el Login (ver abajo), y clicar en OK.  <p align=center><img src='{IMG_URL}/howto_login.gif'> </body> </html>"
 
 register_waiting_email = "Su registro fue aceptado en AMADIS"
 register_subject_email = "Registro en AMADIS"
 
 
-[diary]
-frm_titulo = "T&iacute;tulo de mi mensaje:"
-frm_texto = "Contenido de mi mensaje:"
+[blog]
+frm_title = "T&iacute;tulo de mi mensaje:"
+frm_body = "Contenido de mi mensaje:"
 frm_imagem = "Elija la imagen de su diario:"
-frm_tituloDiario = "Elija el t&iacute;tulo de su diario:"
-frm_textoProfile = "Describa su perfil personal:"
+frm_titleBlog = "Elija el t&iacute;tulo de su diario:"
+frm_titleProfile = "Describa su perfil personal:"
 
-frm_body = "Comentario"
+frm_comment_body = "Comentario"
 
-aguardando_comentario = "Esperando comentario."
-comentarios = "Comentarios"
-escrever_nota = "Escribir una nueva nota en el diario."
-editar_diario = "Editar mi diario."
-procurar_diarios = "Buscar por otros diarios."
-data_envio = "Enviado en "
-por = " por "
-titulo_padrao = "Diario de"
+waiting_comments = "Esperando comentario."
+comments = "Comentarios"
+post_blog = "Escribir una nueva nota en el diario."
+edit_blog = "Editar mi diario."
+search_blog = "Buscar por otros diarios."
+post_date = "Enviado en "
+by = " por "
+default_title = "Diario de"
+no_diary_found = "Nenhum di&aacute;rio encontrado"
+permanent_link = "Link Permanente"
+diary_amadis = "Di&aacute;rios do AMADIS"
+
 
 permanent_link = "Link Permanente"
 
-post_diary = "Publicar en mi diario"
+post_blog = "Publicar en mi diario"
 post_not_exists = "No existe la nota en el diario."
 post_not_deleted = "No fue posible grabar su nota!"
 post_com_comments = "Esta nota del diario no puede ser removida, pues ya posee comentarios!"
@@ -251,7 +312,7 @@ error_user_not_logged = "Usted necesita estar logueado en el sistema para accede
 error_fail_delete_message = "Ocurri&oacute; un problema al borrar el mensaje.<br> Por favor, intente nuevamente."
 
 
-[Correo]
+[Correio]
 frm_destinatario = "Destinatario de mi mensaje:"
 frm_assunto = "Asunto de mi mensaje:"
 frm_mensagem = "Texto de mi mensaje:"
@@ -317,6 +378,20 @@ no_files_shared = "Ning&uacute;n archivo compartido en el momento "
 list_all_files = "Ver todos los archivos compartidos"
 init_chat = "Iniciar conversaci&oacute;n"
 off_line_user = "Usuario desconectado"
+
+[album]
+userImages = "Imagens de ";
+noPhotos = "Este usu&aacute;rio ainda n&atilde;o tem fotos!";
+msg_file_successful_sent = "Foto armazenada com sucesso!"
+msg_file_successful_delete = "Foto removida com sucesso!"
+msg_comment_successfull_edited = "Coment&aacute;rio alterado"
+error_send_file = "Problemas ao enviar a foto, tente novamente!<br>Veja se a extens&atilde;o do arquivo (ex.:'.jpg') est&aacute; correta"
+error_del_file = "Problemas ao deletar o arquivo, caso ocorra novamente contate o administrador do sistema"
+error_edit_comment = "Erro ao salvar o novo coment&aacute;rio"
+
+comment = "Insira um coment&aacute;rio para a imagem"
+photo = "Especifique uma foto do seu computador:"
+update= "Atualizar"
 
 [chat]
 save_chat = "¿Salvar el chat de la sala?"
@@ -427,9 +502,13 @@ frm_re_password="Re-digite su nueva contrase&ntilde;a:"
 change_password = "Cambiar la contrase&ntilde;a"
 
 error_old_password_problem = "Su contrase&ntilde;a actual no es la correcta. Por favor intente nuevamente."
-error_saving_password = "Ocurri&oacute; un error salvando su nueva contrase&ntilde;a. La contrase&ntilde;a actual <b>no</b> fue alterada. Por favor, intente nuevamente."
+error_saving_password = "Ocurri&oacute; un error salvando su nueva contrase&ntilde;a. La contrase&ntilde;a actual <b>no</b> fue alterada. Por 
 
-error_empty_password = "Usted digit&oacute; una nueva contrase&ntilde;a en blanco. Por favor digite una contrase&ntilde;a v&aacute;lida e intente nuevamente"
+favor, intente nuevamente."
+
+error_empty_password = "Usted digit&oacute; una nueva contrase&ntilde;a en blanco. Por favor digite una contrase&ntilde;a v&aacute;lida e 
+
+intente nuevamente"
 
 
 [changeUserData]
@@ -464,19 +543,29 @@ pag_2 = "Terminar"
 
 
 error_user_exists = "Ya existe un usuario utilizando este nombre."
-error_fatal = "No fue posible completar su proceso de registro debido a un error desconocido. Por favor intente nuevamente. Si el problema persiste, entre en contacto con el administrador del sistema."
+error_fatal = "No fue posible completar su proceso de registro debido a un error desconocido. Por favor intente nuevamente. Si el problema 
+
+persiste, entre en contacto con el administrador del sistema."
 
 error_picture_not_defined = "El nombre de una foto no fue correctamente seleccionado, por favor intente nuevamente"
 
-error_saving_picture = "Ocurri&oacute; un error grabando su foto en el banco de datos. Por favor entre en contacto con el administrador del sistema."
+error_saving_picture = "Ocurri&oacute; un error grabando su foto en el banco de datos. Por favor entre en contacto con el administrador del 
 
-error_saving_user = "Ocurri&oacute; un error grave grabando sus datos. La operaci&oacute;n no fue finalizada con &eacute;xito. Por favor entre en contacto con el administrador del sistema."
+sistema."
 
-error_cannot_contact_email_server = "No establec&iacute; contacto con el servidor de email que digit&oacute;. Puede ser un problema temporario de comunicaci&oacute;n o un problema en el registro del formulario. ¿Tiene seguridad que su email es {EMAIL}?"
+error_saving_user = "Ocurri&oacute; un error grave grabando sus datos. La operaci&oacute;n no fue finalizada con &eacute;xito. Por favor 
+
+entre en contacto con el administrador del sistema."
+
+error_cannot_contact_email_server = "No establec&iacute; contacto con el servidor de email que digit&oacute;. Puede ser un problema 
+
+temporario de comunicaci&oacute;n o un problema en el registro del formulario. ¿Tiene seguridad que su email es {EMAIL}?"
 
 
 [recoverPassword]
-explanation = "Para generar una nueva contrase&ntilde;a para su cuenta, por favor entre con las informaciones de abajo. Ambas informaciones deben coincidir con su registro, en caso contrario no ser&aacute; posible recuperar su contrase&ntilde;a."
+explanation = "Para generar una nueva contrase&ntilde;a para su cuenta, por favor entre con las informaciones de abajo. Ambas informaciones 
+
+deben coincidir con su registro, en caso contrario no ser&aacute; posible recuperar su contrase&ntilde;a."
 
 frm_username="Digite un nombre de usuario:"
 frm_email="Digite el e-mail que utiliz&oacute; en su registro."
@@ -484,12 +573,18 @@ frm_email="Digite el e-mail que utiliz&oacute; en su registro."
 recover_password_email_sub = "Su nueva contrase&ntilde;a de AMADIS"
 recover_password_email = "{FIRSTNAME}, su nueva contrase&ntilde;a es {PASSWORD}."
 
-error_email_possible_problem = "A pesar de que el e-mail digitado coincide con su registro, no fue posible contactar su servidor de email. Puede ser que el e-mail enviado por AMADIS no se entreg&oacute; correctamente. Si tiene seguridad que esta cuenta de email est&aacute; funcionando correctamente, basta realizar nuevamente su pedido."
+error_email_possible_problem = "A pesar de que el e-mail digitado coincide con su registro, no fue posible contactar su servidor de email. 
+
+Puede ser que el e-mail enviado por AMADIS no se entreg&oacute; correctamente. Si tiene seguridad que esta cuenta de email est&aacute; 
+
+funcionando correctamente, basta realizar nuevamente su pedido."
 
 error_user_not_found = "No consegu&iacute; encontrar un usuario con esa combinaci&oacute;n de nombre y e-mail."
 
 error_sending_email = "Hubo un error enviando el e-mail con su nueva contrase&ntilde;a."
-error_saving_user = "A pesar del e-mail haber sido enviado con una nueva contrase&ntilde;a, ocurri&oacute; un error al salvarla en el banco de datos. Por lo tanto, usted debe ignorar el e-mail enviado, pues la contrase&ntilde;a que all&iacute; consta no es v&aacute;lida."
+error_saving_user = "A pesar del e-mail haber sido enviado con una nueva contrase&ntilde;a, ocurri&oacute; un error al salvarla en el banco 
+
+de datos. Por lo tanto, usted debe ignorar el e-mail enviado, pues la contrase&ntilde;a que all&iacute; consta no es v&aacute;lida."
 
 try_again = "Intente nuevamente"
 recover_password_success = "Un e-mail con su nueva contrase&ntilde;a fue enviado. Por favor verifique su caja postal."
@@ -505,6 +600,11 @@ change_password = "Cambie contrase&ntilde;a"
 warning_amadis = "Avisos de AMADIS"
 
 
+[pages]
+
+all_pages = "Listagem das P&aacute;ginas"
+users_pages = "P&aacute;ginas dos usu&aacute;rios"
+
 
 [project_members]
 project_group_actual = "Equipo actual del Proyecto"
@@ -514,7 +614,13 @@ back_to_project = "Volver al proyecto"
 
 [projects]
 edit_blogs_list = "&raquo; Editar lista de blogs"
-project_intro = "En el &aacute;rea de PROYECTOS de Amadis tiene libertad para crear sus desaf&iacute;os de investigaci&oacute;n. A partir de la creaci&oacute;n de un proyecto, es posible construir p&aacute;ginas en Internet, publicar y compartir archivos, participar de foros e chats, agregar informaciones de otros diarios de Internet al proyecto. Por medio de esas herramientas, se facilita el intercambio de ideas entre los miembros de las comunidades, estimulando el desarrollo de los saberes de cada uno."
+project_intro = "En el &aacute;rea de PROYECTOS de Amadis tiene libertad para crear sus desaf&iacute;os de investigaci&oacute;n. A partir de 
+
+la creaci&oacute;n de un proyecto, es posible construir p&aacute;ginas en Internet, publicar y compartir archivos, participar de foros e 
+
+chats, agregar informaciones de otros diarios de Internet al proyecto. Por medio de esas herramientas, se facilita el intercambio de ideas 
+
+entre los miembros de las comunidades, estimulando el desarrollo de los saberes de cada uno."
 
 areas = "Seleccione una de las &aacute;reas para listar<br> los proyectos referentes al t&oacute;pico:"
 any_area = "Ning&uacute;n &aacute;rea registrada"
@@ -586,7 +692,9 @@ error_not_save_comment = "Su comentario no fue aceptado.<br> Si el problema pers
 error_not_save_news = "¡La noticia no fue grabada!"
 msg_save_news_success = "Su noticia fue grabada con &eacute;xito!"
 error_any_project_id = "Ning&uacute;n identificador del proyecto fue especificado!"
-error_project_code_does_not_exists = "El proyecto que fue requerido no existe en el banco de datos. Por favor contacte al administrador del sistema si el problema persiste."
+error_project_code_does_not_exists = "El proyecto que fue requerido no existe en el banco de datos. Por favor contacte al administrador del 
+
+sistema si el problema persiste."
 error_not_group_member = "Acceso negado! Para realizar esa operaci&oacute;n usted necesita ser miembro de este grupo."
 error_join_request = "Hubo un error al registrar su pedido para integrarse al proyecto. Por favor intente nuevamente"
 error_joining_user = "Ocurri&oacute; un error al aceptar este pedido. Por favor intente nuevamente."
@@ -619,10 +727,14 @@ error_proj_exists = "Ya existe un proyecto con ese nombre."
 error_proj_must_select_areas = "Debe seleccionar al menos un &aacute;rea del conocimiento para su proyecto"
 
 error_picture_not_defined = "El nombre de una foto no fue correctamente seleccionado, por favor intente nuevamente"
-error_saving_picture = "Ocurri&oacute; un error salvando su foto en el banco de datos. Por favor entre en contacto con el administrador del ambiente."
+error_saving_picture = "Ocurri&oacute; un error salvando su foto en el banco de datos. Por favor entre en contacto con el administrador del 
+
+ambiente."
 error_invalid_image_type = "El tipo de imagem enviada no es soportada. Por favor seleccione una imagen en otro formato."
 
-error_save_failed = "Ocurri&oacute; un error al salvar su proyecto en el Banco de Datos. Infelizmente no fue posible completar la operaci&oacute;n. En el caso que el problema persista, por favor contacte al administrador del sistema."
+error_save_failed = "Ocurri&oacute; un error al salvar su proyecto en el Banco de Datos. Infelizmente no fue posible completar la 
+
+operaci&oacute;n. En el caso que el problema persista, por favor contacte al administrador del sistema."
 
 pag_0 = "Datos Generales"
 pag_1 = "&Aacute;reas del Conocimento"
@@ -635,14 +747,20 @@ invite_users_to_project = "Invitar Usuario para el Proyecto"
 search_result = "Resultado de la Investigaci&oacute;n"
 frm_invite = "Invitar"
 
-msg_users_removed = "Esa investigaci&oacute;n devolvi&oacute; algunas personas que ya son parte del proyecto. Para evitar problemas, ellos fueron retirados del listado."
-msg_invitation_success = "Las invitaciones para participar de su proyecto fueron enviadas. En cuanto las personas invitadas acepten, ellas ser&aacute;n parte del equipo de su proyecto. Puede invitar m&aacute;s personas, o clicar en cancelar y volver para su proyecto."
+msg_users_removed = "Esa investigaci&oacute;n devolvi&oacute; algunas personas que ya son parte del proyecto. Para evitar problemas, ellos 
+
+fueron retirados del listado."
+msg_invitation_success = "Las invitaciones para participar de su proyecto fueron enviadas. En cuanto las personas invitadas acepten, ellas 
+
+ser&aacute;n parte del equipo de su proyecto. Puede invitar m&aacute;s personas, o clicar en cancelar y volver para su proyecto."
 
 search_users = "B&uacute;squeda por usuarios"
 search = "B&uacute;squeda"
 
 error_user_not_select = "Usted debe seleccionar al menos una persona para invitar."
-error_invitation_failed = "Hubo un error al realizar las invitaciones para su proyecto. Por favor intente nuevamente. En caso que el problema persista, contacte al administrador del sistema."
+error_invitation_failed = "Hubo un error al realizar las invitaciones para su proyecto. Por favor intente nuevamente. En caso que el problema 
+
+persista, contacte al administrador del sistema."
 
 [upload]
 error_upload_err_ini_size = "Tama&ntilde;o del archivo: {FILE} excede lo permitido por el servidor."
@@ -684,7 +802,13 @@ file_exists = "Este archivo ya existe."
 
 
 [communities]
-community_intro = "En el &aacute;rea de COMUNIDADES de Amadis, usted puede crear grupos que tengan intereses de investigaci&oacute;n en com&uacute;n. El objetivo de este espacio es posibilitar la construcci&oacute;n de un puente entre los que quieren compartir sus conocimientos y aquellos que desean aprender. Igualmente, es posible crear foros y chats, as&iacute; como listar los proyectos de inter&eacute;s de la comunidad."
+community_intro = "En el &aacute;rea de COMUNIDADES de Amadis, usted puede crear grupos que tengan intereses de investigaci&oacute;n en 
+
+com&uacute;n. El objetivo de este espacio es posibilitar la construcci&oacute;n de un puente entre los que quieren compartir sus 
+
+conocimientos y aquellos que desean aprender. Igualmente, es posible crear foros y chats, as&iacute; como listar los proyectos de 
+
+inter&eacute;s de la comunidad."
 
 community_forumbutton = "Foro"
 community_chatbutton = "Chat"
@@ -823,8 +947,12 @@ general_data = "Datos Generales"
 community_pic = "Foto de la Comunidad"
 try_again = "Intente nuevamente"
 
-error_save_failed = "Ocurri&oacute; un error al grabar su comunidad en el Banco de Datos. Infelizmente no fue posible completar la operaci&oacute;n. Si el problema persiste, por favor contacte al administrador del sistema."
-error_saving_picture = "Ocurri&oacute; un error grabando su foto en el banco de datos. Por favor entre en contacto con el administrador del sistema."
+error_save_failed = "Ocurri&oacute; un error al grabar su comunidad en el Banco de Datos. Infelizmente no fue posible completar la 
+
+operaci&oacute;n. Si el problema persiste, por favor contacte al administrador del sistema."
+error_saving_picture = "Ocurri&oacute; un error grabando su foto en el banco de datos. Por favor entre en contacto con el administrador del 
+
+sistema."
 
 [people]
 search_users = "B&uacute;squeda de Personas"
@@ -1019,3 +1147,9 @@ aco_no_projects = "Usted  no participa de ning&uacute;n proyecto en el momento. 
 aco_no_communities = "Usted no participa de ninguna comunidad en el momento. Realice una b&uacute;squeda para seleccionar comunidades."
 
 aco_privs_world = "Todos en AMADIS"
+
+[rte]
+
+image_from_my_AMADIS_lib = "Imagens dos Meus Arquivos AMADIS"
+image_from_my_pc = "Carregar Imagem do Meu Computador"
+image_from_internet = "Caminho para uma Imagem na Internet"
