@@ -11,6 +11,4 @@
 #sendbox_window { 
                   margin: 0px;
                   }
-IFRAME { 
-         border: thin black 0px;
-         }
+IFRAME { border: none; }

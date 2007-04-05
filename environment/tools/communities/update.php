@@ -95,7 +95,6 @@ switch($_REQUEST['action']) {
 
  	case "pag_1":
 	 	$_SESSION['updating_community']->loadDataFromRequest();
-
 	 	//save the community
  		if($_SESSION['updating_community']->state==CMObj::STATE_DIRTY) {
  			try {

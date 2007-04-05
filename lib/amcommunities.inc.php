@@ -55,10 +55,10 @@ class AMCommunities extends CMObj implements  CMACLAppInterface
 	**/
     public function save(){
 
-    //if is the first time that the object is saved, and it has some data
-    // inside it, create a new group.
-        if($this->state==self::STATE_DIRTY_NEW || $this->state==self::STATE_DIRTY ) {
-      //create a new group for the project
+    	//if is the first time that the object is saved, and it has some data
+    	// inside it, create a new group.
+        if($this->state==self::STATE_DIRTY_NEW || $this->state==self::STATE_NEW ) {
+      	//create a new group for the project
             $group = new CMGroup;
             $group->description = "Community ".$this->name;
 
@@ -74,7 +74,8 @@ class AMCommunities extends CMObj implements  CMACLAppInterface
                 $group->save();
             } catch(CMDBException $e) {
                 Throw new AMException("An error ocurred creating the community group.");
-            }       
+            }
+
             $this->codeGroup = $group->codeGroup;
 
             //is the default behavior of the object
@@ -87,24 +88,25 @@ class AMCommunities extends CMObj implements  CMACLAppInterface
             $member->codeUser =  (integer) $_SESSION['user']->codeUser;
             $member->time = time();
             try {
-                $member->save();
-            } catch(CMDBException $e) {
-                Throw new AMException("An error ocurred creating the community group.");
+	        	$member->save();
+    	    } catch(CMDBException $e) {
+				Throw new AMException("An error ocurred creating the community group.");
             }
 
 	        //Creates an ACL and gives the current user the admin
 	        //privilege
 
             $aco = new CMACO($this);
-            $aco->description = "Forum ".$this->name;
+            $aco->description = "COMMUNITY ".$this->name;
             $aco->time = time();
             try {
-                $aco->save();
+               	$aco->save();
             } catch(CMDBException $e) {
-                Throw new AMException("An error ocurred creating the community group.");
+               	Throw new AMException("An error ocurred creating the community group.");
             }
             $this->codeACO = (integer) $aco->code;
             $aco->addUserPrivilege((integer) $_SESSION['user']->codeUser, self::PRIV_ADMIN);
+
         }         
         parent::save();
     }

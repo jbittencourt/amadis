@@ -16,7 +16,7 @@ body {
 	min-width: 630px; /* 2 x (LC fullwidth + CC padding) + RC fullwidth */
 	border-left: solid 9px #00A3BA;
 	font-family: Arial, Helvetica, sans-serif;
-  font-size: 11px;
+  	font-size: 11px;
 }
 
 
@@ -327,7 +327,10 @@ body {
 
 #loginContent {
 	background: #fff0f2;
-	border: 0 1px 0 1px solid #f7e4e6;
+	border-right: 1px;
+	border-left: 1px;
+	border-style: solid;
+	border-color: #f7e4e6;
 	overflow: hidden;
 }
 
@@ -410,7 +413,9 @@ body {
 
 #loginInitContent {
 	background: #fff0f2;
-	border: 0 1px 0 1px solid #f7e4e6;
+	border-right: 1px;
+	border-left: 1px;
+	border: solid #f7e4e6;
 	overflow: hidden;
 }
 
@@ -601,7 +606,7 @@ a.cinza:hover {
 	line-height: 20px;
 	position: relative;
 	text-decoration: underline;
-	color: #3666666;
+	color: #366666;
 	font-family: Arial;
 }
 

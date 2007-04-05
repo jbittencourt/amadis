@@ -39,6 +39,10 @@ hour_complete_format = "h:i:s"
 amadis = "AMADIS - Ambiente Virtual de Aprendizagem"
 
 my_amadis = "Meu Amadis"
+my_projects = "Meus Projetos"
+my_communities = "Minhas Comunidades"
+my_friends = "Meus Amigos"
+album = "Album"
 webfolio = "Webf&oacute;lio"
 library = "Biblioteca"
 projects = "Projetos"
@@ -47,7 +51,7 @@ exit = "sair"
 user = "usu&aacute;rio"
 password  = "senha"
 log = "logar"
- 
+ 	
 #section of the environment
 people = "Pessoas"
 projects = "Projetos"
