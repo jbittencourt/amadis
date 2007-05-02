@@ -14,12 +14,14 @@
 
 class AMBCommunitiesList extends AMPageBox implements CMActionListener {
 
-	private $itens = array();
+	private $items = array();
 	protected $title;
 	protected $box_type;
 
-	public function __construct() {
+	public function __construct($items, $title) {
 		parent::__construct(10);
+		$this->items = $items;
+		$this->title = $title;
 	}
 
 	public function doAction() {
@@ -48,26 +50,30 @@ class AMBCommunitiesList extends AMPageBox implements CMActionListener {
 	public function __toString() {
 		global $_language, $_CMAPP;
 
-		$t = "<table id='community_list'>";
-		$ft = "</table>";
-
 		$box = new AMTCadBox("", $this->box_type, AMTCadBox::COMMUNITY_THEME);
 
 
-		$box->add($t);
+		$box->add('<table id="community_list">');
 
-		if($this->itens->__hasItems()) {
+		if($this->items->__hasItems()) {
 			$i = 0;
-			foreach($this->itens as $item) {
+			foreach($this->items as $item) {
 				$id = "community_list_1";
 				if(($i%2)==1) $id = "community_list_2";
 				$i++;
 
 				$box->add("<tr id='$id' class=\"community_list_line\"><td>");
 
-				$thumb = AMCommunityImage::getThumb($item);
+				try { 
+					$thumb = AMCommunityImage::getThumb($item);
+				} catch(CMException $e) {
+					/**
+					 * @todo correct exception
+					 */
+					note($e); 
+				}
+				//note($thumb->getView()); die();
 				$box->add($thumb->getView());
-
 
 				$box->add("<td width=20%>");
 				$box->add("<a href=\"".$_CMAPP['services_url']."/communities/community.php?frm_codeCommunity=".$item->code);
@@ -80,7 +86,7 @@ class AMBCommunitiesList extends AMPageBox implements CMActionListener {
 		else {
 			$box->add("<span class='texto'>$_language[no_communities_found]</a>");
 		}
-		$box->add($ft);
+		$box->add('</table>');
 		$box->setTitle($this->title);
 		parent::add($box);
 
