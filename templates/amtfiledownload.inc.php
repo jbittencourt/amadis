@@ -30,29 +30,46 @@
  **/
 class AMTFileDownload {
 
-  protected $file;
+    protected $file;
 
 
-  public function __construct(AMFile $file) {
-    $this->file = $file;
-  }
+    public function __construct(AMFile $file) {
+        $this->file = $file;
+    }
 
-  public function __toString() {
-  	global $_CMAPP;
-  	
-    $this->file->name = addslashes($this->file->name);
-    header("Content-Type: application/octet-stream");
-    header("Content-Disposition:attachment; filename=".$this->file->name);
-    header("Content-Length: ".$this->size);
-    header("Content-Transfer-Encoding: binary");
-    
-    $imagem = $_CMAPP['path'].'/environment/files/'.$this->file->codeFile."_".$this->file->name;    
-    $handle = fopen ($imagem, "r");
-	$img = fread ($handle, filesize ($imagem));
-	fclose ($handle);
-    
-    echo $img;
-    return '';
-  }
+    public function __toString() {
+        global $_conf;
+        
+        $msie5 = 0;
+    	if (eregi("IE 5",$_SERVER['HTTP_USER_AGENT'])) { $msie5 = 1; } 
+
+        //$this->file->name = addslashes($this->file->name);
+        header("Content-length: " . $this->file->size);
+        header("Content-Transfer-Encoding: 8bit");
+        
+        if($msie5) {
+            header("Content-type: application/force-download");
+            header('Content-disposition: inline; filename="' . $this->file->name . '"');
+        } else {
+        	header("Content-Type: application/octet-stream");
+        	header('Content-disposition: attachment; filename="' . $this->file->name . '"');
+        }
+        
+        header("Content-Length: ".$this->size);
+        
+
+        $path = (string) $_conf->app->paths->files;
+        $imagem = $path . DIRECTORY_SEPARATOR . $this->file->codeFile."_".$this->file->name;
+        $handle = fopen ($imagem, "r");
+
+        if ($handle) {
+            while (!feof($handle)) {
+                $buffer = fgets($handle, 4096);
+                echo $buffer;
+            }
+            fclose($handle);
+        }
+        return '';
+    }
 
 }
