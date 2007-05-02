@@ -20,6 +20,7 @@ $_CMAPP['smartform'] = array();
 $_CMAPP['smartform']['language'] = $_language;
 
 $pag = new AMTBlog;
+
 $pag->addXOADHandler('AMBlog', 'AMBlog');
 
 if(!empty($_REQUEST['frm_action'])) {
@@ -118,7 +119,7 @@ if($default) {
 	$userBlog = $_SESSION['user'];
 }
 
-if(!empty($userBlog)) {	
+if(is_a($userBlog,'AMUser')) {	
 	$profile= new AMBlogProfile;
 	$profile->codeUser = $userBlog->codeUser;
 
@@ -136,13 +137,23 @@ if(!empty($userBlog)) {
 		$linkEditar = "edit.php";
 	}
 
-
 	if(empty($_REQUEST['frm_calYear']) || empty($_REQUEST['frm_calMonth'])) {
-		$_REQUEST['frm_calMonth'] = date('m',time());
-		$_REQUEST['frm_calYear'] = date('Y',time());
-	}
+		$posts = $userBlog->listLastBlogPosts();
 
-	$posts = $userBlog->listBlogPosts($_REQUEST['frm_calMonth'],$_REQUEST['frm_calYear']);
+		//determine the date to exibit in the calendar
+		if($posts->__isEmpty()) {
+			//if $posts is empty, use today date 
+			$_REQUEST['frm_calMonth'] = date('m');
+			$_REQUEST['frm_calYear'] = date('Y');
+		} else {
+			//else, use the date of last post in the blog
+			$newestPost = $posts->get(0);
+			$_REQUEST['frm_calMonth'] = date('m',$newestPost->time);
+			$_REQUEST['frm_calYear'] = date('Y',$newestPost->time);
+		}
+	} else {
+		$posts = $userBlog->listBlogPostsByDate($_REQUEST['frm_calMonth'],$_REQUEST['frm_calYear']);
+	}
 	
 	if($profile->image==0) {
 		$image = new AMTBlogImage(AMUserPicture::getImage($userBlog));
@@ -168,4 +179,5 @@ if(!empty($userBlog)) {
 } else {
 	$pag->addError($_language['error_user_not_logged']);
 }
+
 echo $pag;

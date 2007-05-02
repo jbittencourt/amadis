@@ -23,7 +23,8 @@ $_CMAPP['smartform']['language'] = $_language;
 $pag = new AMTBlog;
 
 $box = new AMBlogList;
-$items = AMEnvironment::listDiaries($box->getInitial(),$box->getFinal());
+$items = AMEnvironment::listBlogs($box->getInitial(),$box->getFinal());
 $box->init($items['data'],$items['count']);
 $pag->add($box);
+
 echo $pag; 

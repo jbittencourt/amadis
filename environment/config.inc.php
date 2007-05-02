@@ -5,7 +5,7 @@
 $parts = explode('/',dirname(__FILE__));
 array_pop($parts);
 $_CMAPP['path'] = implode('/',$parts);
-ini_set(’display_errors’, 1);
+
 /**
  * PARSING THE config.xml FILE AND LOAD OF DEFAULT VARS.
  **/
@@ -157,7 +157,11 @@ include( $_XOAD['path'] . "/xoad.php");
 
 //creates whereami
 $arr = explode("/",$_SERVER['REQUEST_URI']);
-$_CMAPP['amadis_where_am_i'] = $arr[3];
+if(isset($arr[3])) {
+	$_CMAPP['amadis_where_am_i'] = $arr[3];
+} else {
+	$_CMAPP['amadis_where_am_i'] = '';
+}
 
 
 

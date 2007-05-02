@@ -61,6 +61,7 @@
       <active>1</active>
       <default>pt-br</default>
       <language name="Portugues Brasil" file="pt-br.lang" prefix="pt-br" />
+      <language name="Espanhol" file="es-uy.lang" prefix="es-uy" />
       <language name="English" file="en.lang" prefix="en" />
    </languages>
    <tools>

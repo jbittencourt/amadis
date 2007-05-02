@@ -61,17 +61,21 @@ if(!empty($userBlog)) {
   
   
   $xml = '   <title>'.html_entity_decode($title)."</title>\n";
-  $xml .= '   <link>'.$_CMAPP[services_url].'/diario/diario.php?frm_codeUser='.$userBlog->codeUser."</link>\n";
+  $xml .= '   <link>'.$_CMAPP[services_url].'/blog/blog.php?frm_codeUser='.$userBlog->codeUser."</link>\n";
   $xml .= '   <description>'.html_entity_decode($text)."</description>\n";
   
-  foreach($posts as $post) {
-    $xml .= "   <item>\n";
-    $xml .= '      <title>'.html_entity_decode($post->title).'</title>'."\n";
-    $text = str_replace("../../media", "$_CMAPP[media_url]", $post->body);
-    $xml .= '      <description>'.html_entity_decode($text).'</description>'."\n";
-    $xml .= '      <link>'.$_CMAPP[services_url].'/diario/diario.php?frm_codePost='.$post->codePost.'#anchor_post_'.$post->codePost."</link>\n";
-    $xml .= '      <pubDate>'.date("h:i ".$_language['date_format'],$post->tempo).'</pubDate>'."\n";
-    $xml .= "   </item>\n";
+  if($posts->__isEmpty()) {
+  	$xml .= '<item></item>';
+  } else {
+  	foreach($posts as $post) {
+	    $xml .= "   <item>\n";
+    	$xml .= '      <title>'.html_entity_decode($post->title).'</title>'."\n";
+    	$text = str_replace("../../media", "$_CMAPP[media_url]", $post->body);
+    	$xml .= '      <description>'.html_entity_decode($text).'</description>'."\n";
+    	$xml .= '      <link>'.$_CMAPP[services_url].'/blog/blog.php?frm_codePost='.$post->codePost.'#anchor_post_'.$post->codePost."</link>\n";
+    	$xml .= '      <pubDate>'.date("h:i ".$_language['date_format'],$post->time).'</pubDate>'."\n";
+    	$xml .= "   </item>\n";
+  	}
   }
   
   $xml .= "</channel>\n</rss>";

@@ -94,7 +94,7 @@ class AMXOTheme extends AMHTMLPage
 
         $this->force_newline=0;
 
-        parent::add('<div class="logo"><img src="'.$_CMAPP[images_url].'/xo/logo_amadis.png" alt="" /></div>');
+        parent::add('<div class="logo"><img src="'.$_CMAPP['images_url'].'/xo/logo_amadis.png" alt="" /></div>');
         parent::add('<div class="banner">');
 		
         parent::add('  <div class="menu">');
@@ -208,7 +208,7 @@ class AMXOTheme extends AMHTMLPage
 		
 		parent::add('<div class="footer"></div>');
 		parent::add('<div id="overlay" style="display:none;">');
-		parent::add('<div id="close-button"><img src="'.$_CMAPP[images_url].'/xo/dashboard/icon_closemyactions.png" alt="" border="0" /></div>');
+		parent::add('<div id="close-button"><img src="'.$_CMAPP['images_url'].'/xo/dashboard/icon_closemyactions.png" alt="" border="0" /></div>');
 		parent::add('</div>');
 
 		
@@ -258,8 +258,10 @@ class AMXOTheme extends AMHTMLPage
             }
         }
         
+        
         $html = parent::__toString();
         $html = "  "; //fix error bellow footer 
+        
         AMLog::commit();
         
         return $html;

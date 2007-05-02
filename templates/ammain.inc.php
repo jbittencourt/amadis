@@ -26,13 +26,16 @@ class AMMain extends AMHTMLPage
 	
     function __construct($theme="") 
     {
-        global $_CMAPP;
+        global $_CMAPP, $_conf;
         parent::__construct();
-
-        //if(ereg('Gecko\/2007', $_SERVER['HTTP_USER_AGENT'])) {
-        	$this->page = new AMXOTheme;
-        //} else $this->page = new AMDefaultTheme;
         
+        switch( (string) $_conf->app->interface->theme ) {
+        	case 'xo':
+        		$this->page = new AMXOTheme; break;
+        	default:
+        		$this->page = new AMDefaultTheme; break;
+        }
+		        
         $this->requires("tooltip.css",self::MEDIA_CSS);
         $this->requires("lib.js",self::MEDIA_JS);
         $this->requires("finder.js", self::MEDIA_JS);
@@ -194,12 +197,16 @@ class AMMain extends AMHTMLPage
     }
     
     
+    public function setRSSFeed($link, $title="") 
+    {
+    	$this->page->setRSSFeed($link, $title="");
+    }
+    
     public function __toString() 
     {
         global $_CMAPP,$_language;
 		
         return $this->page->__toString();
-        
     }
 
 

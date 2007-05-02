@@ -20,7 +20,7 @@ class AMBProjectItems extends AMColorBox {
   public static function getPageButton($proj){
     global $_CMAPP,$_language;
 
-    $urlpage = $_CMAPP['services_url']."/pages/viewpage.php?frm_page=projects/projeto_".$proj."&frm_codProjeto=".$proj;
+    $urlpage = $_CMAPP['services_url']."/pages/viewpage.php?frm_page=projects/project_".$proj."&frm_codProjeto=".$proj;
     $button  = "<button id='page' class='project_items button-as-link' type='button' onclick=\"AM_openURL('$urlpage')\">";
     $button .= "<img src='$_CMAPP[images_url]/dot.gif' height='25px;' width='10px'><br>";
     $button .= "<span class='project_items_text'> $_language[project_link_pagebutton]</span>";

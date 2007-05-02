@@ -88,6 +88,12 @@ class  AMNavMenu extends CMHTMLObj
 						</div>";
          
          
+            $webfolio_active = '';
+            $blog_active = '';
+            $library_active = '';
+            $project_active = '';
+            $friends_active = '';
+            
             if($_CMAPP['amadis_where_am_i']=='webfolio'){
             	$webfolio_active = "_active";
             }
@@ -105,6 +111,7 @@ class  AMNavMenu extends CMHTMLObj
             }            
             $str2 .= "	<div id=\"menu\">";
 			$str2 .= "	<ul>";
+
 			$str2 .= "		<li class=\"webfolio_txt$webfolio_active\"><a href=\"$_CMAPP[services_url]/webfolio/webfolio.php\">".$_language['webfolio']."</a></li>";
 			$str2 .= "		<li class=\"blog_txt$blog_active\"><a href=\"$_CMAPP[services_url]/blog/blog.php\">".$_language['blog']."</a></li>";
 			$str2 .= "		<li class=\"lib_txt$library_active\"><a href=\"$_CMAPP[services_url]/library/biblioteca.php\">".$_language['library']."</a></li>";

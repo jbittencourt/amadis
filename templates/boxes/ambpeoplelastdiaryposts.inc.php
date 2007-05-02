@@ -41,6 +41,9 @@
  		}
  		parent::add("<img src='$_CMAPP[media_url]/images/dot.gif' width='1' height='7' border='0'>");
  		parent::add(new AMDotLine);
+ 		parent::add("<a class=\"grape\" href=\"$_CMAPP[services_url]/blog/listPosts.php\">");
+ 		parent::add("&raquo; $_language[list_recent_posts]</a>");
+ 		parent::add(new AMDotLine);
  		parent::add("<a class=\"grape\" href=\"$_CMAPP[services_url]/blog/list.php\">");
  		parent::add("&raquo; $_language[list_all_diaries]</a>");
  		return parent::__toString();

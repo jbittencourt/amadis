@@ -17,8 +17,8 @@ class AMEImage extends AMException {
 
 class AMExceptionFile extends AMException {
 
-  public function __construct($file) {
-    parent::__construct("Could not load the file $file.");
+  public function __construct($file, $errorMsg) {
+    parent::__construct("Could not load the file $file. Error: " . $errorMsg);
   }
 }
 

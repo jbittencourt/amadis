@@ -53,10 +53,12 @@ class AMBAlbum extends AMListBox implements CMActionListener {
 			foreach($this->itens as $item){
 				parent::add("<td valign='top' align='center'><br><table border='1' class='".$this->class_prefix."_table'><tr>");
 				parent::add("<td align='center'>");
-				$image = new AMAlbumThumb;
-				$image->codeFile = $item->codePhoto;
-				$image->load();
-				parent::add($image->getView());
+				
+				$pict = $item->getPhoto();
+				
+				$thumb = AMAlbumPicture::getThumb($pict);
+
+				parent::add($thumb->getView());				
 				parent::add("</tr><tr><td align='right'>");
 				parent::add("<br>".nl2br($item->comments)."&nbsp;&nbsp;&nbsp;&nbsp;");
 				//Icons controller
@@ -79,7 +81,7 @@ class AMBAlbum extends AMListBox implements CMActionListener {
 		parent::add("<tr><td><img src='$_CMAPP[media_url]/images/dot.gif' width='1' height='7' border='0'><table cellpadding='1' cellspacing='8' border='0'>");
 		parent::add("<tr><td>");
 		parent::add("<form enctype='multipart/form-data' action='$_SERVER[PHP_SELF]' method='post' name='upload'>");
-		parent::add("".$_language['photo']."<br><input name='uploadFile' type='file'><input type='hidden' name='fieldName' value='uploadFile'><input type='hidden' name='MAX_FILE_SIZE' value='2048'><input type='hidden' name ='action' value ='save'></td></tr>");
+		parent::add("".$_language['photo']."<br><input name='frm_picture' type='file'><input type='hidden' name='fieldName' value='frm_picture'><input type='hidden' name='MAX_FILE_SIZE' value='2048'><input type='hidden' name ='action' value ='save'></td></tr>");
 		parent::add("<tr><td><br>".$_language['comment']."<br><input type='text' size='20' name='comment'>");
 		parent::add(" &nbsp;&nbsp;<input type='submit' value='$_language[send]'></form></td></tr></table></td><td></td></tr>");
 		parent::add("</table>");

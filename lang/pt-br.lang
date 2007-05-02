@@ -63,6 +63,9 @@ users = "Usu&aacute;rios"
 blog = "Di&aacute;rio"
 begin = "Inicial"
 
+person = "Pessoa"
+subject = "Assunto"
+
 user = "usu&aacute;rio"
 acesso_nao_permitido = "Acesso n&atilde;o permitido"
 acesso_negado = "Acesso negado"
@@ -262,7 +265,10 @@ by = " por "
 default_title = "Di&aacute;rio de"
 no_diary_found = "Nenhum di&aacute;rio encontrado"
 permanent_link = "Link Permanente"
-diary_amadis = "Di&aacute;rios do AMADIS"
+blogs_amadis = "Di&aacute;rios do AMADIS"
+blogs_last_posts = "Últimas notas nos Di&aacute;rios do AMADIS"
+
+blog_today_feeds = "Notas de hoje nos Di&aacute;rios do AMADIS"
 
 post_blog = "Publicar no meu di&aacute;rio"
 post_not_exists = "N&atilde;o existe a nota no di&aacute;rio."
@@ -295,7 +301,11 @@ error_post_does_not_exist = "Esse post n&atilde;o existe ou foi apagado"
 error_user_not_logged = "Voc&ecirc; precisa estar logado no sistema para acessar seu di&aacute;rio pessoal";
 error_fail_delete_message = "Ocorreu um problema ao deletar a mensagem.<br> Por favor, tente novamente."
 
-
+blog_filter_date = "Intervalo de Tempo";
+blog_filter_day = "Hoje";
+blog_filter_week = "&Uacute;ltima semana";
+blog_filter_month = "&Uacute;ltimo m&ecirc;s";
+blog_posts_select = "Filtrar notas no di&aacute;rio"
 
 [Correio]
 frm_destinatario = "Destinat&aacute;rio de minha mensagem:"
@@ -920,6 +930,7 @@ blog = "Di&aacute;rio"
 last_users = "Usu&aacute;rios logados"
 last_blog_posts = "&Uacute;ltimas postagens em di&aacute;rios"
 list_all_diaries = "Listar todos os di&aacute;rios pessoais"
+list_recent_posts = "Listar notas recentes nos di&aacute;rios"
 more_options = "Mais Op&ccedil;&otilde;es"
 see_home_page = "Ver p&aacute;gina"
 see_all_pages = "Listar todas as p&aacute;ginas pessoais"
