@@ -18,7 +18,7 @@ class AMBUserMessages extends AMColorBox {
 
     	try {
       		$this->cProjects = $_SESSION['user']->getLastProjectsComments();
-      		$this->cDiary = $_SESSION['user']->listLastBlogPosts() ;
+      		$this->cDiary = $_SESSION['user']->listLastBlogPostsComments() ;
       		//$this->cMessages = $_SESSION['user']->getLastMessages();
     	} catch(CMDBQueryError $e) {
       		$this->exception = $e;
@@ -58,7 +58,8 @@ class AMBUserMessages extends AMColorBox {
 
       		foreach($this->cDiary as $item) {
 				$men = $_language[blog_comments] ;
-				if($item->numComments == 1) { 
+				$comments = (integer) $item->numComments;
+				if( $comments == 1) { 
 	  				$men =  $_language[blog_comment]; 
 				};
 				parent::add('<a class="new_comments" href="'.AMBoxBlog::getPermanentLink($item).'" class="cinza">');

@@ -39,40 +39,11 @@ class  AMAlbum extends CMObj {
 	public function saveEntry(){
 		
 		$formName = $_REQUEST['fieldName']; // recebe o nome do campo de tipo 'file'
-		$file = new AMImage;
+		$file = new AMAlbumPicture;
 		//preenche os capos do arquivo
 
-		$ext = AMImage::getValidImageExtensions();
-		$achou=false;
-		foreach($ext as $item){
-			$g = explode(".",$_FILES[$formName]['name']);
-			if($g[1] == $item){
-				$achou = true;
-			}
-		}
-		if(!$achou)
-		return false;
-
-
-		$file->name = $_FILES[$formName]['name'];
-		$file->name = str_replace(" ", "_",$file->name);
-		$file->mimeType = $_FILES[$formName]['type'];
-		$file->size = $_FILES[$formName]['size'];
+		$file->loadFileFromRequest($formName);
 		$file->time = time();
-
-
-		if($_FILES[$formName]['tmp_name'] == "")
-		return false;
-
-		$file->data  = implode("",file($_FILES[$formName]['tmp_name']));
-		$d = $file->data;
-
-		if(empty($d))
-		return false;
-
-		$tam = $file->getSize();
-		if($tam['x'] > 700)
-		$file->resize(700,800);
 
 		try {
 			$file->save();	//salva o arquivo
@@ -111,8 +82,21 @@ class  AMAlbum extends CMObj {
 		}
 	}
 
+	public function getPhoto() 
+	{
+		$pict = new AMAlbumPicture;
+		$pict->codeFile = $this->codePhoto;
+		try {
+			$pict->load();	
+		} catch(CMDBException $e) {
+			Throw $e;
+		}
+		
+		return $pict;
+	}
 
-	public function deleta($id){
+	public function deleta($id)
+	{
 
 		$this->codePhoto = $id;
 		try{

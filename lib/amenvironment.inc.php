@@ -235,9 +235,9 @@ class AMEnvironment extends CMEnvironment
     }
 
   /**
-   * List the diary profiles of the users that have alredy blogged, ordered by the last post message
+   * List the blogs profiles of the users that have alredy blogged, ordered by the last post message
    **/
-    public function listDiaries($lower_limit=0,$upper_limit=0)
+    public function listBlogs($lower_limit=0,$upper_limit=0)
     {
         
         $q = new CMQuery('AMUser');
@@ -270,6 +270,62 @@ class AMEnvironment extends CMEnvironment
         }
 
         return array("count"=>$count,"data"=>$q->execute());
+    }
+    
+    
+    
+   
+    /**
+     * List the last posted post in the AMADIS blogs.
+     *
+     * @param integer $lower_limit
+     * @param integer $upper_limit
+     * @return array Array contaning two keys. count for the number of registers returned and data for the CMContainer.
+     */
+    public function listBlogsPosts($lowerDate, $upperDate, $extra_filters, $lower_limit=0,$upper_limit=0) 
+    {
+    	$q = new CMQuery('AMBlogPost');
+        $q->setOrder("AMBlogPost::time desc");
+               
+        
+        		
+        
+        
+        $j1 = new CMJoin(CMJoin::LEFT);
+        $j1->setClass('AMBlogProfile');
+        $j1->on("AMBlogProfile::codeUser=AMBlogPost::codeUser");
+
+        $j2 = new CMJoin(CMJoin::INNER);
+        $j2->setClass('AMUser');
+        $j2->on("AMBlogPost::codeUser=AMUser::codeUser");
+
+    	        
+        $q->addJoin($j1,"profile");
+        $q->addJoin($j2,"user");
+
+		$filter = "(AMBlogPost::time >= $lowerDate AND AMBlogPost::time <=$upperDate)";
+    	if(!empty($extra_filters['user'])) {
+        	$filter .= "AND (AMUser::name LIKE '%$extra_filters[user]%')";
+        }
+        if(!empty($extra_filters['subject'])) {
+        	$s = new CMSearch('AMBLogPost');
+        	$s->addSearchFields("AMBlogPost::title","AMBlogPost::body");
+        	$s->setSeachString($extra_filters['subject']);
+        	$filter .= 'AND (' . $s->getWhereClause() . ')';
+        }
+        $q->setFilter($filter);
+        
+    //count the total number of rows for paggination
+        $c = clone $q;
+        $c->setCount();
+        $count = $c->execute();
+
+        if(!empty($upper_limit)) {
+            $q->setLimit($lower_limit,$upper_limit);
+        }
+
+        return array( "count" => $count,
+        			  "data"  => $q->execute() );
     }
 
   /**
@@ -609,5 +665,18 @@ class AMEnvironment extends CMEnvironment
 
 
         return $q->execute();
+    }
+    
+    /**
+     * Do a safe unserialization of a variable;
+     *
+     * @param mixed $var the variable to be unserialized
+     * @return unserialized var
+     */
+    public static function safeUnserialize($var) 
+    {
+    	$ustemp= @unserialize($var);
+		if($ustemp==false) return $var;
+		return $ustemp;
     }
 }

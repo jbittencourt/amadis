@@ -55,8 +55,7 @@ switch($action) {
 		}
 
 		if(isset($_FILES['frm_foto']) && !empty($_FILES['frm_foto'])) {
-			$ustemp= @unserialize($_SESSION['cad_foto']);
-			if($ustemp!=false) $_SESSION['cad_foto']=$ustemp;
+			$_SESSION['cad_foto'] = AMEnvironment::safeUnserialize($_SESSION['cad_foto']);
 
 			try {
 				
@@ -71,8 +70,8 @@ switch($action) {
 
 		}
 		else {
-			$foto = @unserialize($_SESSION['cad_foto']);
-			if($foto===false) $foto = $_SESSION['cad_foto'];
+			$foto = AMEnvironment::safeUnserialize($_SESSION['cad_foto']);
+			
 			$view = $foto->getView();
 		}
 
@@ -105,11 +104,7 @@ switch($action) {
 		}
 
 
-		$foto = unserialize($_SESSION['cad_foto']);
-		if($foto===false) {
-			$foto = $_SESSION['cad_foto'];
-		}
-
+		$foto = AMEnvironment::safeUnserialize($_SESSION['cad_foto']);
 		$oldState = $foto->state;
 
 		if($foto->state==CMObj::STATE_DIRTY || $foto->state==CMObj::STATE_DIRTY_NEW) {

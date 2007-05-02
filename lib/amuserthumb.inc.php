@@ -9,12 +9,5 @@ class AMUserThumb extends AMThumb {
     $this->type = $type;
   }
 
-  /*public function load() {
-    $tmp = $this->codeFile;
-    if(empty($tmp)) {
-      $this->codeFile = AMUserPicture::DEFAULT_IMAGE;
-    }
-    return parent::load();
-  }*/
 
 }

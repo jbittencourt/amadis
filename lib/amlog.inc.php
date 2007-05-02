@@ -59,8 +59,10 @@ class AMLog {
 		global $_conf;
     	$path = (string) $_conf->app[0]->paths[0]->log;
 		
-    	$actor_id = $_SESSION['user']->codeUser;
-		$actor_name = $_SESSION['user']->username;
+		if(isset($_SESSION['user'])) {
+    		$actor_id = $_SESSION['user']->codeUser;
+			$actor_name = $_SESSION['user']->username;
+		}
     	$errors = self::getErrors();
 		$HASH_ERRORS = array();
 		

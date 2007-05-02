@@ -23,7 +23,6 @@
 
 abstract class  AMImageTemplate extends CMHTMLObj
 {
-
 	const METHOD_DB=0;
 	const METHOD_SESSION=1;
 	const METHOD_DEFAULT=2;
@@ -84,15 +83,16 @@ abstract class  AMImageTemplate extends CMHTMLObj
     	break;
     case self::METHOD_SESSION:
     	$rand = rand(0,100000);
-    	$_SESSION['amadis']['imageview'][$rand] =serialize($this->imageObj) ;
+    	$_SESSION['amadis']['imageview'][$rand] = serialize($this->imageObj) ;
     	$url = "$_CMAPP[media_url]/imagewrapper.php?method=session&frm_id=$rand";
     	break;
     case self::METHOD_DEFAULT:
-    	if($this->thumb) $url = $_CMAPP['images_url'].'/thumb_'.$this->imageObj;
-    	else $url = "$_CMAPP[images_url]/$this->imageObj";
+    	if($this->thumb) $url = $_CMAPP['thumbs_url']. '/' . $this->imageObj;
+    	else $url = $_CMAPP['url'] . '/files/' . $this->imageObj;
     	break;
   	}
   	return $url;
   }
+
 
 }

@@ -396,7 +396,7 @@ class AMUser extends CMUser
    * @param int $y - Year
    * @return CMContainer - List of post from a diary
    **/
-  public function listBlogPosts ($m,$y)
+  public function listBlogPostsByDate ($m,$y)
   {
   	$query=new CMQuery('AMBlogPost');
 
@@ -426,13 +426,34 @@ class AMUser extends CMUser
   }
 
 
+  public function listLastBlogPostsComments()
+  {
+	$query=new CMQuery('AMBlogPost');
+  	$j2 = new CMJoin(CMJoin::INNER);
+  	$j2->on("AMBlogPost::codePost = AMBlogComment::codePost");
+  	$j2->setFake();
+  	$j2->setClass('AMBlogComment');
+  	$query->addJoin($j2, 'comments');
+  	$query->groupby("AMBlogPost::codePost");
+  	$query->addVariable("numComments","count( BlogComments.codeComment )");
+
+
+  	$query->setOrder("AMBlogPost::time desc");
+  	$query->setLimit(0,20);
+  	$query->setFilter("AMBlogPost::codeUser=$this->codeUser");
+
+  	return $query->execute();
+  }
+  
   public function listLastBlogPosts()
   {
-  	$query=new CMQuery('AMBlogPost','AMBlogComment');
+  	$query=new CMQuery('AMBlogPost');
+  	
   	$j2 = new CMJoin(CMJoin::LEFT);
-  	$j2->on("AMBlogPost::codePost = AMBlogComment::codePost");
-  	//$j2->setFake();
   	$j2->setClass('AMBlogComment');
+  	$j2->on("AMBlogPost::codePost = AMBlogComment::codePost");
+  	$query->addJoin($j2, "comentarios");
+  	  	
   	$query->groupby("AMBlogPost::codePost");
   	$query->addVariable("numComments","count( BlogComments.codeComment )");
 
@@ -829,8 +850,13 @@ class AMUser extends CMUser
   public function checkForNewMessages() {
   	$q = new CMQuery('AMUserMessages');
   	
-  	$filter = 'AMUserMessages::codeTo = ' . $this->codeUser . ' AND AMUserMessages::time ';
-  	if(!empty($_SESSION['last_session'])) $filter .= '> '. $_SESSION['last_session']->timeEnd;
+  	$filter = 'AMUserMessages::codeTo = ' . $this->codeUser;
+  	
+  	if(is_a($_SESSION['last_session'],'CMEnvSession')) {
+  		$filter .= ' AND ( AMUserMessages::time > '. $_SESSION['last_session']->timeEnd . ')';
+  	} else {
+  		return 0;
+  	}
   	
   	$q->setFilter($filter);
   	$q->setCount();

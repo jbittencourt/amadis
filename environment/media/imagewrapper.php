@@ -31,8 +31,8 @@ if(empty($_REQUEST['method'])) {
 	}
 }
 
-
-$f = (integer) $_REQUEST['frm_codeFile'];
+$f = false;
+if(isset($_REQUEST['frm_codeFile'])) $f = (integer) $_REQUEST['frm_codeFile'];
 if(!$f && !isset($_REQUEST['frm_id'])) $_REQUEST['method'] = 'default';
 
 switch($_REQUEST['method']) {
@@ -52,13 +52,6 @@ switch($_REQUEST['method']) {
  	header("Content-Type: ".$imagem->mimeType);
 	die($imagem->data);
  	break;
- case 'default':
- 	$imagem = $_CMAPP['path'].'/environment/media/images/'.$_REQUEST['frm_codeFile'];
- 	$handle = fopen ($imagem, "r");
-	$img = fread ($handle, filesize ($imagem));
-	fclose ($handle);
- 	header("Content-Type: image/jpeg");
- 	die($img);
 }
 
 $path =  (string) $_conf->app[0]->paths[0]->files;

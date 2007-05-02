@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * Smaall list of the communities showed in the initial page AMADIS
@@ -12,43 +12,46 @@
  */
 class AMTCommunitySmallList extends CMHTMLObj {
 
-  protected $items;
+	protected $items;
 
-  public function __construct(CMContainer $items) {
-    parent::__construct();
-    $this->items = $items;
-  }
-
-
-  public function __toString() {
-    global $_CMAPP;
-
-    parent::add("<table class='small_list'>");
-    if($this->items->__hasItems()) {
-      foreach($this->items as $comm) {
-	parent::add("<tr>");
-	parent::add("<td>");
-	try {
-	  $img = AMCommunityImage::getThumb($comm,true);
-	  parent::add($img->getView());
-	}catch(CMException $e) {
-
+	public function __construct(CMContainer $items) {
+		parent::__construct();
+		$this->items = $items;
 	}
-	parent::add("<td>");
-	$text = substr($comm->description,0,50);
-	if($text!=$comm->description) {
-	  $text.="...";
+
+
+	public function __toString() {
+		global $_CMAPP;
+
+		parent::add("<table class='small_list'>");
+		if($this->items->__hasItems()) {
+			foreach($this->items as $comm) {
+				parent::add("<tr>");
+				parent::add("<td>");
+				
+				
+				try {
+					$img = AMCommunityImage::getThumb($comm,true);
+					parent::add($img->getView());
+				} catch(CMException $e) {
+					echo $e; die('bla');
+				}
+				
+				parent::add("<td>");
+				$text = substr($comm->description,0,50);
+				if($text!=$comm->description) {
+					$text.="...";
+				}
+				parent::add("<a href='$_CMAPP[services_url]/communities/community.php?frm_codeCommunity=$comm->code'>$comm->name</a> - $text");
+				parent::add("<tr><td colspan=2><img src='$_CMAPP[images_url]/dot.gif' height='10'>");
+			}
+		}
+		parent::add("</table>");
+
+		return parent::__toString();
 	}
-	parent::add("<a href='$_CMAPP[services_url]/communities/community.php?frm_codeCommunity=$comm->code'>$comm->name</a> - $text");
-	parent::add("<tr><td colspan=2><img src='$_CMAPP[images_url]/dot.gif' height='10'>");
-      }
-    }
-    parent::add("</table>");
 
-    return parent::__toString();
-  }
-
-  
+	
 
 }
 

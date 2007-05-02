@@ -35,6 +35,7 @@ class AMCommunityImage extends AMFixedSizeImage implements AMThumbinaiableImage 
    * @param AMCommunities $comm The community wich you want to obtain the image code.
    **/
   static public function getImage($comm) {
+  	
     $image = (integer) $comm->image;
     if(empty($image)) {
       return self::DEFAULT_IMAGE;
@@ -49,20 +50,24 @@ class AMCommunityImage extends AMFixedSizeImage implements AMThumbinaiableImage 
    * @param object $obj The community to return the thumbnail.
    * @param boolean $smallthumb Sets if returned thumbnails is of the small size.
    **/
-  static public function getThumb($obj,$smallthumb=false) {
+  static public function getThumb($obj, $smallthumb=false) {
     $image = self::getImage($obj);
-
+	
     $thumb = new AMCommunityThumb($smallthumb);
-    $thumb->type = self::DEFAULT_IMAGE;
+	        
+    if( $image != self::DEFAULT_IMAGE ) {
+    	$thumb->codeFile =  $image;
+    } else {
+    	$thumb->type = self::DEFAULT_IMAGE;
+    }
     
-    $thumb->codeFile = $image;
     try {
-      $thumb->load();
+      	$thumb->load();
     }
     catch(CMDBException $e) {
-      Throw $e;
-    }
-
+      	Throw $e;
+    }	
+	
     return $thumb;
   }
 
