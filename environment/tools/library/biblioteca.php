@@ -79,7 +79,7 @@ switch( $_REQUEST['opcao'] ){
 	case "download":
 		$file = new AMFile;
 		try {
-			$file->codeFile = $_REQUEST['codeArquivo'];
+			$file->codeFile = $_REQUEST['codeFile'];
 			try {
 				$file->load();
 			} catch(CMDBNoRecord $e) {
@@ -89,6 +89,7 @@ switch( $_REQUEST['opcao'] ){
 			new AMErrorReport($e, 'biblioteca.php(84)', AMLog::LOG_LIBRARY);
 		}
 		
+
 		$download = new AMTFileDownload($file);
 		echo $download;
 		die();		
