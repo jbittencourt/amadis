@@ -15,7 +15,7 @@ include("../../config.inc.php");
 $_language = $_CMAPP['i18n']->getTranslationArray("upload");
 
 echo "<html><head><title>$_language[amadis]</title></head>";
-echo "<frameset rows='45,*' border='0'>";
+echo "<frameset rows='22,*' border='0'>";
 echo "<frame id='ammenu' src='$_CMAPP[services_url]/pages/menu.php?$_SERVER[QUERY_STRING]'>";
 
 $dir = "$_CMAPP[path]/environment/pages/$_REQUEST[frm_page]";

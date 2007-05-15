@@ -36,7 +36,7 @@ switch($_REQUEST['frm_upload_type']) {
     $dir = "$_CMAPP[path]/environment/pages/users/user_".$_SESSION['user']->codeUser;
     break;
  case "project":
-   $dir = "$_CMAPP[path]/environment/pages/projects/projeto_".$_REQUEST['codeProjeto'];
+   $dir = "$_CMAPP[path]/environment/pages/projects/project_".$_REQUEST['codeProjeto'];
    break;
  case "course":
    $dir = "";
@@ -57,7 +57,7 @@ function parseImages($list,$pos=5,$name="") {
   foreach($list as $k=>$item) {
     
     if(is_int($k)) {
-      
+
       $urlImage = "$_CMAPP[media_url]/thumb.php?frm_image=$item[src]";
       
       if($cont % 2 == 0) $bgcolor = "#EFEFEF";

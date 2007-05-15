@@ -22,7 +22,7 @@ switch($_REQUEST['action']) {
      if($image instanceof AMThumb) {
        $dados = $image->getView();
      }
-     else $dados = $image->data;
+     else $dados = $image->getData();
      header("Content-type: $image->mimetype");
      echo $dados;
    }catch (CMException $e) {

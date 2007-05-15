@@ -206,4 +206,20 @@ class AMImage extends AMFile
     		throw $e;
     	}
     }
+    
+    public function getData()
+    {
+    	global $_conf;
+    	
+    	$path =  (string) $_conf->app[0]->paths[0]->files;
+		$filename = $path.'/'.$imagem->codeFile.'_'.$imagem->name;
+		if (file_exists($filename)) {
+			$handle = fopen ($filename, "r");
+			$img = fread ($handle, filesize ($filename));
+			fclose ($handle);
+			return $img;
+		} else {
+			return 0;
+		}
+    }
 }
