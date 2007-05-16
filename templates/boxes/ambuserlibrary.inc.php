@@ -87,8 +87,8 @@
  						}
  						break;
  				}
-				parent::add("<tr><td class='blt_box_p'><a href='$_CMAPP[services_url]/library/biblioteca.php?frm_type=projeto&frm_codeProjeto=$_REQUEST[frm_codProjeto]&opcao=download&codeArquivo=$item->codeFile'><img src='$_CMAPP[media_url]$icon'></a></td>");
-				parent::add("<td class='blt_box_p'>&raquo;<a href='$_CMAPP[services_url]/library/biblioteca.php?frm_type=projeto&frm_codeProjeto=$_REQUEST[frm_codProjeto]&opcao=download&codeArquivo=$item->codeFile'>$item->name</a></td>");
+				parent::add("<tr><td class='blt_box_p'><a href='$_CMAPP[services_url]/library/biblioteca.php?frm_type=projeto&frm_codeProjeto=$_REQUEST[frm_codProjeto]&opcao=download&codeFile=$item->codeFile'><img src='$_CMAPP[media_url]$icon'></a></td>");
+				parent::add("<td class='blt_box_p'>&raquo;<a href='$_CMAPP[services_url]/library/biblioteca.php?frm_type=projeto&frm_codeProjeto=$_REQUEST[frm_codProjeto]&opcao=download&codeFile=$item->codeFile'>$item->name</a></td>");
  				parent::add("<td class='blt_box_p'>( ".date("d/m/Y",$item->time)." )</td></tr>");
  			}
  			parent::add("</table>");
