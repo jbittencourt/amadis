@@ -23,7 +23,7 @@ switch($_REQUEST['action']) {
        $dados = $image->getView();
      }
      else $dados = $image->getData();
-     header("Content-type: $image->mimetype");
+     header("Content-type: $image->mimeType");
      echo $dados;
    }catch (CMException $e) {
 

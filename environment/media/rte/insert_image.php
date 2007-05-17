@@ -10,6 +10,7 @@ if(!isset($_REQUEST['frm_codeForum'])){
 
 $userBib = AMForum::loadImageLibrary($_REQUEST['frm_codeForum']);
 $uOut = array();
+
 if($userBib->__hasItems()) {
 	foreach($userBib as $item) {
 		$image = new AMLibraryThumb;
@@ -24,7 +25,7 @@ if($userBib->__hasItems()) {
 
 			$uOut[] = "<div class='item' style=\"background-image: url('$url');\">";
 			$uOut[] = "<div>";
-			$uOut[] = "$item->nome<br>$meta[0]x$meta[1] px / {$meta[2]}KB";
+			$uOut[] = "$item->name<br>$meta[0]x$meta[1] px / {$meta[2]}KB";
 			$uOut[] = "<p><a onClick=\"toggle('legenda_$item->codeFile'); legend='legend_$item->codeFile';\">&raquo;Legenda</a></p>";
 			$uOut[] = "</div>";
 			$uOut[] = "<div class='buttonOK'>";

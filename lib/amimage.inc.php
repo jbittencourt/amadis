@@ -212,7 +212,7 @@ class AMImage extends AMFile
     	global $_conf;
     	
     	$path =  (string) $_conf->app[0]->paths[0]->files;
-		$filename = $path.'/'.$imagem->codeFile.'_'.$imagem->name;
+		$filename = $path.'/'.$this->codeFile.'_'.$this->name;
 		if (file_exists($filename)) {
 			$handle = fopen ($filename, "r");
 			$img = fread ($handle, filesize ($filename));
