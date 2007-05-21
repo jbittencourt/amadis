@@ -903,6 +903,56 @@ ROW_FORMAT = Compact
 CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 
+CREATE TABLE `WikiPage` (
+  `codePage` bigint(20) NOT NULL auto_increment,
+  `namespace` varchar(100) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `lastest` int(11) NOT NULL,
+  `new` tinyint(1) NOT NULL,
+  PRIMARY KEY  (`codePage`),
+  UNIQUE KEY `name` (`namespace`,`title`)
+) 
+ENGINE=InnoDB
+CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+-- 
+-- Table structure for table `WikiRevision`
+-- 
+
+CREATE TABLE `WikiRevision` (
+  `codeRevision` bigint(20) NOT NULL,
+  `page` bigint(20) NOT NULL,
+  `text` bigint(20) NOT NULL,
+  `user` int(11) NOT NULL,
+  `time` bigint(20) NOT NULL,
+  PRIMARY KEY  (`codeRevision`,`page`),
+  KEY `page` (`page`),
+  KEY `text` (`text`),
+  KEY `user` (`user`)
+) 
+ENGINE=InnoDB
+CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+ALTER TABLE `WikiRevision`
+  ADD CONSTRAINT `WikiRevision_ibfk_5` FOREIGN KEY (`page`) REFERENCES `WikiPage` (`codePage`),
+  ADD CONSTRAINT `WikiRevision_ibfk_6` FOREIGN KEY (`text`) REFERENCES `WikiText` (`codeText`),
+  ADD CONSTRAINT `WikiRevision_ibfk_7` FOREIGN KEY (`user`) REFERENCES `User` (`codeUser`);
+
+
+-- 
+-- Table structure for table `WikiText`
+-- 
+
+CREATE TABLE `WikiText` (
+  `codeText` bigint(20) NOT NULL auto_increment,
+  `text` mediumblob NOT NULL,
+  PRIMARY KEY  (`codeText`)
+)
+ENGINE=InnoDB
+CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+
+
 SET FOREIGN_KEY_CHECKS = 1;
 
 -- ------------------------------------
