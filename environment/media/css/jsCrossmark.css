@@ -1,0 +1,32 @@
+.quote, .author, .summary, .metadata, .note {
+	margin: 20px;
+   padding: 10px;
+   color: #111;
+	background: #eee;
+}
+
+.author { background: #dfd; }
+.summary { background: #ffd; font-style: italic; }
+.metadata { background: #fdd; }
+.note { background: #ddf; }
+.table { background: #fdf; }
+
+.section {
+	margin: 3px;
+   padding: 2px;
+   border: #ddd 1pt dashed;
+}
+
+td{
+   background: #eee;
+   text-align: center;
+   color: #000;
+   padding: 3px;
+}
+
+th{
+   background: #000;
+   text-align: center;
+   color: #fff;
+   padding: 3px;
+}
