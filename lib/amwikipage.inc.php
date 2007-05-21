@@ -55,6 +55,9 @@ class AMWikiPage extends CMObj
         //save before because the page is new, and is needed to
         //generate a codePage for it.
         if($this->state == CMObj::STATE_DIRTY_NEW) {
+            if(!($this->isVariableDefined('title') && $this->isVariableDefined('namespace'))) {
+                Throw new AMException('You must define at least a title and a namespace');
+            }
             $this->new = 1;
             parent::save();
         }
@@ -86,7 +89,29 @@ class AMWikiPage extends CMObj
             parent::save();
         }
     }
+    
+    public function __set($name, $value) 
+    {
+        if(($name=='title') || ($name=='namespace')) {
+            if(($this->state == CMObj::STATE_DIRTY) ||
+               ($this->state == CMObj::STATE_PERSISTENT )) {
+                   Throw new AMException('You cannot change the title or the namespace of the page. Please use the move method.');
+            };
+        } 
+        
+        parent::__set($name, $value);
+    }
 
+    /**
+     * Move the current page to a new Title.
+     *
+     * @param String $new_title The new title of the page.
+     * @todo implement this function
+     */
+    public function move($new_title) {
+        
+    }
+    
 }
 
 ?>
