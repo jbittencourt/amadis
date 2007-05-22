@@ -933,12 +933,6 @@ CREATE TABLE `WikiRevision` (
 ENGINE=InnoDB
 CHARACTER SET utf8 COLLATE utf8_general_ci;
 
-ALTER TABLE `WikiRevision`
-  ADD CONSTRAINT `WikiRevision_ibfk_5` FOREIGN KEY (`page`) REFERENCES `WikiPage` (`codePage`),
-  ADD CONSTRAINT `WikiRevision_ibfk_6` FOREIGN KEY (`text`) REFERENCES `WikiText` (`codeText`),
-  ADD CONSTRAINT `WikiRevision_ibfk_7` FOREIGN KEY (`user`) REFERENCES `User` (`codeUser`);
-
-
 -- 
 -- Table structure for table `WikiText`
 -- 
@@ -954,6 +948,11 @@ CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+ALTER TABLE `WikiRevision`
+  ADD CONSTRAINT `WikiRevision_ibfk_5` FOREIGN KEY (`page`) REFERENCES `WikiPage` (`codePage`),
+  ADD CONSTRAINT `WikiRevision_ibfk_6` FOREIGN KEY (`text`) REFERENCES `WikiText` (`codeText`),
+  ADD CONSTRAINT `WikiRevision_ibfk_7` FOREIGN KEY (`user`) REFERENCES `User` (`codeUser`);
 
 -- ------------------------------------
 -- default inserts... -----------------
