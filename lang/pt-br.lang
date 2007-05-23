@@ -1149,3 +1149,6 @@ aco_privs_world = "Todos no AMADIS"
 image_from_my_AMADIS_lib = "Imagens dos Meus Arquivos AMADIS"
 image_from_my_pc = "Carregar Imagem do Meu Computador"
 image_from_internet = "Caminho para uma Imagem na Internet"
+
+[wiki]
+wiki = "Amadis wiki page"
