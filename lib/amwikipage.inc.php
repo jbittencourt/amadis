@@ -55,7 +55,10 @@ class AMWikiPage extends CMObj
         //save before because the page is new, and is needed to
         //generate a codePage for it.
         if($this->state == CMObj::STATE_DIRTY_NEW) {
-            if(!($this->isVariableDefined('title') && $this->isVariableDefined('namespace'))) {
+        	$title = $this->title;
+        	$namespace = $this->namespace;
+        	if(empty($title) && empty($namespace)) {
+            //if(!($this->isVariableDefined('title') && $this->isVariableDefined('namespace'))) {
                 Throw new AMException('You must define at least a title and a namespace');
             }
             $this->new = 1;
@@ -69,7 +72,7 @@ class AMWikiPage extends CMObj
             
             $text = new AMWikiText;
             $text->text = $this->text;
-            $text->save();
+           	$text->save();
             
             $rev = new AMWikiRevision;
             $rev->text = $text->codeText;
