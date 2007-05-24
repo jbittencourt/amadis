@@ -159,7 +159,7 @@ function AM_addCSSMessage() {
 
 
 function AM_addError(html_box) {
-  var error_div  = AM_getElement('errors_area');
+  var error_div  = AM_getElement('erros_area');
 
   error_div.innerHTML =   AM_addCSSMessage() + html_box;
 }
@@ -238,7 +238,7 @@ function AM_unsetLoading(div_name, message) {
 
 AM_callBack = {
   onError : function (result) {
-    var e = document.CreateElement('DIV');
+  	var e = document.createElement('DIV');
     e.innerHTML = result.message;
     AM_getElement('erros_area').appendChild(e);
   }
