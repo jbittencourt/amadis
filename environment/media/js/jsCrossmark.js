@@ -5,7 +5,7 @@ jsCrossmark - JavaScript Crossmark Markup Interpreter
 
 :Author
    [[ Daniel Monteiro Basso | mailto:daniel@basso.inf.br ]]
-   [[ LaboratÃ³rio de Estudos Cognitivos | http://www.lec.ufrgs.br ]]
+   [[ Laboratório de Estudos Cognitivos | http://www.lec.ufrgs.br ]]
    [[ Universidade Federal do Rio Grande do Sul | http://www.ufrgs.br ]]
 
 
@@ -730,7 +730,7 @@ function SemanticAnaliser(sintaxBlocks, semanticActions, position, state)
 
 function htmlSemanticActions()
 {
-   this.wikiManagerAddress="wikiManager.php?id="
+   this.wikiManagerAddress="index.php?frm_namespace=" + CURRENT_NAMESPACE + "&frm_title=";
 
    // HEADING LEVEL
    this.enterSubLevel=function()
@@ -776,7 +776,10 @@ function htmlSemanticActions()
    }
    this.linkMangled=function(text,addr)
    {
-      addr=this.wikiManagerAddress+addr.replace(/[^\#\.a-zA-Z0-9]*/g,'')
+      //addr=this.wikiManagerAddress+addr.replace(/[^\#\.a-zA-Z0-9]*/g,'')
+	  addr = addr.replace(/^\s+|\s+$/g, '')
+	  addr = addr.split(' ')
+	  addr = this.wikiManagerAddress+addr.join('_')
       return "<a href='"+addr+"'>"+text+"</a>";
    }
 
