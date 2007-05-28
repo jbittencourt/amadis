@@ -1,7 +1,7 @@
 .quote, .author, .summary, .metadata, .note {
 	margin: 20px;
-   padding: 10px;
-   color: #111;
+   	padding: 10px;
+   	color: #111;
 	background: #eee;
 }
 
@@ -11,22 +11,28 @@
 .note { background: #ddf; }
 .table { background: #fdf; }
 
-.section {
+.section, #jsCrossMark_editArea {
 	margin: 3px;
-   padding: 2px;
-   border: #ddd 1pt dashed;
+	padding: 2px;
+   	border: #ddd 1pt solid;
 }
 
-td{
-   background: #eee;
-   text-align: center;
-   color: #000;
-   padding: 3px;
+ul#jsCrossmark_actionBar {
+	margin-left: 5px;
+	margin-bottom: -3px;
+	text-align: right;
 }
 
-th{
-   background: #000;
-   text-align: center;
-   color: #fff;
-   padding: 3px;
+ul#jsCrossmark_actionBar li {
+	display: inline;
+	border: dashed gray 0px;
+	border-bottom: 1px;
+	background: #DDD;
+	padding: 5px 5px 0px 5px;
+	text-align: center;
+	-moz-border-radius: 0.5em 0.5em 0 0;
+}
+
+#txtarea {
+	border: solid gray 1px;
 }
