@@ -28,6 +28,17 @@ class AMBProjectItems extends AMColorBox {
     return $button;
   }
 
+  public static function getWikiButton($proj){
+    global $_CMAPP,$_language;
+    
+    $urlwiki = $_CMAPP['services_url']."/wiki/index.php?frm_namespace=project_".$proj;
+    $button  = "<button id='wiki' class='project_items button-as-link' type='button' onclick=\"AM_openURL('$urlwiki')\">";
+    $button .= "<img src='$_CMAPP[images_url]/dot.gif' height='25px;'><br>";
+    $button .= "<span class='project_items_text'> $_language[project_link_wikibutton]</span>";
+    $button .= "</button>";
+    return $button;
+  }
+  
   public static function getForumButton($proj){
     global $_CMAPP,$_language;
     
@@ -74,6 +85,7 @@ class AMBProjectItems extends AMColorBox {
     parent::add($this->getDiaryButton($proj->codeProject));
     parent::add($this->getForumButton($proj->codeProject));
     parent::add($this->getChatButton($proj->codeProject));
+    parent::add($this->getWikiButton($proj->codeProject));
       
     return parent::__toString();
       
