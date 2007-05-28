@@ -1,39 +1,56 @@
-function Wiki_preview()
+
+function linkMangled(text, addr)
 {
-   crossmark=new Crossmark();
-   var markup;
-
-   markup = AM_getElement('txtarea').value;
-
-   var res=AM_getElement('preview_result');
-
-   res.innerHTML = "Esta e somente uma visualizacao, voce precisa clicar em salvar para guardas as modificacoes do texto";
-   try {
-      res.innerHTML += crossmark.parse(markup);
-   } catch(e) {
-      res.innerHTML = "Couldn't generate the page because the<br/>"
-      +"crossmark source triggered the following error:<br/>"
-      +"Name: <b>"+e.name+"</b><br/>"
-      +"Message: <b>"+e.message+"</b><br/>";
-   }
-   res.style.display='block';
-	
+	addr = addr.replace(/^\s+|\s+$/g, '')
+   	addr = addr.split(' ')
+   	addr = this.wikiManagerAddress+addr.join('_')
+   	return "<a href='"+addr+"'>"+text+"</a>";
 }
 
-function toggleEdit()
+function Wiki_preview()
 {
-   var b=AM_getElement('edit');
-   if (b.value=='Edit') {
-      b.value='Salvar';
+	crossmark=new Crossmark();
+	crossmark.semanticActions.wikiManagerAddress="index.php?frm_namespace=" + CURRENT_NAMESPACE + "&frm_title=";
+	crossmark.semanticActions.linkMangled=linkMangled;
 
-	  AM_getElement('preview').style.display = 'inline';
+   	var markup;
 
-      var txtarea = AM_getElement('txtarea');
-      txtarea.style.display='block';
-      AM_getElement('result').style.display='none';
-   } else {
-   	  Wiki_savePage(CURRENT_NAMESPACE, CURRENT_PAGE, AM_getElement('txtarea').value);
-   }
+   	markup = AM_getElement('txtarea').value;
+
+   	var res=AM_getElement('preview_result');
+
+   	res.innerHTML = "Esta e somente uma visualizacao, voce precisa clicar em salvar para guardas as modificacoes do texto";
+   	try {
+    	res.innerHTML += crossmark.parse(markup);
+   	} catch(e) {
+    	res.innerHTML = "Couldn't generate the page because the<br/>"
+      	+"crossmark source triggered the following error:<br/>"
+      	+"Name: <b>"+e.name+"</b><br/>"
+      	+"Message: <b>"+e.message+"</b><br/>";
+   	}
+   	res.style.display='block';
+
+}
+
+function toggleEdit(cancel)
+{
+   	if(cancel == 'cancel') {
+		AM_getElement('jsCrossMark_editArea').style.display = 'none';
+		AM_getElement('preview_result').style.display = 'none';
+		AM_getElement('result').style.display = 'block';
+		AM_getElement('txtarea').value = AM_getElement(CURRENT_PAGE).innerHTML;
+		return;
+   	} else {
+   		var txtarea = AM_getElement('txtarea');
+   		AM_getElement('result').style.display='none';
+		AM_getElement('jsCrossMark_editArea').style.display = 'block';
+	}
+}
+
+function Wiki_saveText()
+{
+	Wiki_savePage(CURRENT_NAMESPACE, CURRENT_PAGE, AM_getElement('txtarea').value);
+	AM_getElement('jsCrossMark_editArea').style.display = 'none';	
 }
 
 var AMWikiCallBack = {
@@ -52,31 +69,31 @@ function Wiki_savePage(namespace, title, text)
 
 function wikiLoad(src)
 {
-   crossmark=new Crossmark();
-   var markup;
-   
-   var txtarea=AM_getElement('txtarea');
-   if (src) {
-      markup=AM_getElement(src).value;
-      txtarea.value=markup
-   } else
-      markup=txtarea.value
-      
-   txtarea.style.display='none'
-   AM_getElement('preview_result').style.display = 'none';
-   AM_getElement('preview').style.display = 'none';
+   	crossmark=new Crossmark();
+  	crossmark.semanticActions.wikiManagerAddress="index.php?frm_namespace=" + CURRENT_NAMESPACE + "&frm_title=";
+	crossmark.semanticActions.linkMangled=linkMangled;
 
-   AM_getElement('edit').value='Edit'
-   var res=AM_getElement('result')   
-   try {
-      res.innerHTML=crossmark.parse(markup)
-   } catch(e) {
-      res.innerHTML="Couldn't generate the page because the<br/>"
-      +"crossmark source triggered the following error:<br/>"
-      +"Name: <b>"+e.name+"</b><br/>"
-      +"Message: <b>"+e.message+"</b><br/>"
-   }
-   res.style.display='block'
+   	var markup;
+   
+   	var txtarea=AM_getElement('txtarea');
+   	if (src) {
+    	markup=AM_getElement(src).value;
+      	txtarea.value=markup
+   	} else
+      	markup=txtarea.value
+      
+   	AM_getElement('preview_result').style.display = 'none';
+
+   	var res=AM_getElement('result')   
+   	try {
+      	res.innerHTML=crossmark.parse(markup)
+   	} catch(e) {
+      	res.innerHTML="Couldn't generate the page because the<br/>"
+      	+"crossmark source triggered the following error:<br/>"
+      	+"Name: <b>"+e.name+"</b><br/>"
+      	+"Message: <b>"+e.message+"</b><br/>"
+   	}
+   	res.style.display='block'
 }
 
 
@@ -188,7 +205,8 @@ function Wiki_loadToolBar()
 	Wiki_addButton('/skins/common/images/button_link.png','Ligacao interna','[[',']]','Titulo da ligacao');
 	Wiki_addButton('/skins/common/images/button_extlink.png','Ligacao externa (lembre-se dos prefixos http://, ftp://, ...)','[[',']]','ligacao externa | http://www.wikimedia.org');
 	Wiki_addButton('/skins/common/images/button_headline.png','Seccao de nivel 2','\n== ',' ==\n','Texto de cabecalho');
-	Wiki_addButton('/skins/common/images/button_image.png','Imagem anexa','[[Imagem:',']]','Exemplo.jpg');
+	//<image dunciad.png, Pope's Dunciad>
+	Wiki_addButton('/skins/common/images/button_image.png','Imagem anexa','<imagem ','>','Exemplo.jpg');
 	Wiki_addButton('/skins/common/images/button_media.png','Ligacao a ficheiro interno de multimedia','[[Media:',']]','Exemplo.ogg');
 	Wiki_addButton('/skins/common/images/button_math.png','Formula matematica (LaTeX)','\<math\>','\</math\>','Inserir formula aqui');
 	Wiki_addButton('/skins/common/images/button_nowiki.png','Ignorar formato wiki','\<nowiki\>','\</nowiki\>','Inserir texto nao-formatado aqui');

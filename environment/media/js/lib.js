@@ -271,9 +271,9 @@ function openWindow() {
 function toggleActive(element, elName,node) {
 	var a = element.getElementsByTagName('a');
 	
-	var class = element.getAttribute('class');
+	var Class = element.getAttribute('class');
 	var aux = "treenode_"+node;
-	if(class.indexOf('active') != '-1' ){
+	if(Class.indexOf('active') != '-1' ){
 		element.setAttribute('class',elName+'_txt'); 
 	} else {
 		element.setAttribute('class', elName+'_txt_active');

@@ -75,6 +75,11 @@ cmMacros.registerMacro('summary', function(params,block,sact,sanl)
       sanl.commonParse(block),'summary')
 })
 
+cmMacros.registerMacro('quote', function(params,block,sact,sanl)
+{
+   return sact.blockquote(sanl.commonParse(block))
+})
+
 cmMacros.registerMacro('note', function(params,block,sact,sanl)
 {
    if (!block)
@@ -135,6 +140,13 @@ cmMacros.registerMacro('math', function(params,block,sact,sanl)
       )+'}]'
 })
 
+cmMacros.registerMacro('raw', function(params,block,sact,sanl)
+{
+   return sact.escapeSpecials(block)
+          .replace(/\n/g,'<br/>')
+          .replace(/ /g,'&nbsp;')
+})
+
 function styleParser(trigger)
 {
    // can't use \w because it has '_'
@@ -159,11 +171,12 @@ function styleParser(trigger)
 function splitSintaxBlocks(text)
 {
    // sintaxBlocks=splitSintaxBlocks(text):
+   // - trim right spaces
    // - split in chunks of same indentation
    // - strip the indentation
    // - count the blank lines before the chunk
 
-   var lines=text.split('\n')
+   var lines=text.replace(/ *\n/g,'\n').split('\n')
    var i=0
    var sintaxBlocks=new Array()
    
@@ -319,6 +332,9 @@ function SemanticAnaliser(sintaxBlocks, semanticActions, position, state)
       if (this.nxtsb && !this.nxtsb.indentLevel && this.nxtsb.blanksBefore<1)
          return false
 
+      if (this.gbFirst)
+         this.gbIndent=this.cursb.indentLevel
+
       var tind=''
       for (var i=this.gbIndent; i<this.cursb.indentLevel; i++)
          tind+=' '
@@ -390,8 +406,9 @@ function SemanticAnaliser(sintaxBlocks, semanticActions, position, state)
       while (i<chunks.length)
       {
          var macro=chunks[i].split(/(\w+)(\s.*)/g)
-         if (macro[1].toLowerCase()=='raw') // 'raw' macro is hardcoded
-            retv+=macro[2]
+         if (macro[1].toLowerCase()=='raw' 
+         || cmMacros.localization[macro[1].toLowerCase()]=='raw' )
+            retv+=this.semanticActions.escapeSpecials(macro[2])
          else
             retv+=//" MACRO CALL "+macro[1]+
             this.style(
@@ -529,9 +546,11 @@ function SemanticAnaliser(sintaxBlocks, semanticActions, position, state)
       } else { // same indent
          for (var i=0; i<this.cursb.block.length; i++)
             this.result+=this.semanticActions.listItem(
-               this.cursb.block[i].replace(
-                  this.clRegExp,
-                  this.clSubType==1?'$3':'$1'
+               this.commonParse(
+                  this.cursb.block[i].replace(
+                     this.clRegExp,
+                     this.clSubType==1?'$3':'$1'
+                  )
                )
             )
       }
@@ -547,7 +566,7 @@ function SemanticAnaliser(sintaxBlocks, semanticActions, position, state)
    this.checkHeading=function()
    {
       if (  this.cursb.indentLevel>0
-         || this.cursb.blanksBefore<1 
+         || (this.pos>1 && this.cursb.blanksBefore<1)
          || !this.nxtsb
          || this.nxtsb.blanksBefore<1  )
       {
@@ -730,7 +749,7 @@ function SemanticAnaliser(sintaxBlocks, semanticActions, position, state)
 
 function htmlSemanticActions()
 {
-   this.wikiManagerAddress="index.php?frm_namespace=" + CURRENT_NAMESPACE + "&frm_title=";
+   this.wikiManagerAddress="wikiManager.php?id="
 
    // HEADING LEVEL
    this.enterSubLevel=function()
@@ -776,10 +795,7 @@ function htmlSemanticActions()
    }
    this.linkMangled=function(text,addr)
    {
-      //addr=this.wikiManagerAddress+addr.replace(/[^\#\.a-zA-Z0-9]*/g,'')
-	  addr = addr.replace(/^\s+|\s+$/g, '')
-	  addr = addr.split(' ')
-	  addr = this.wikiManagerAddress+addr.join('_')
+      addr=this.wikiManagerAddress+addr.replace(/[^\#\.a-zA-Z0-9]*/g,'')
       return "<a href='"+addr+"'>"+text+"</a>";
    }
 
@@ -854,4 +870,3 @@ function Crossmark()
       return txt
    }
 }
-
