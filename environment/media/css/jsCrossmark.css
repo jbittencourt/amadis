@@ -17,6 +17,10 @@
    	border: #ddd 1pt solid;
 }
 
+#result table th, #preview_result table th {
+	background: #DDD;
+}
+
 ul#jsCrossmark_actionBar {
 	margin-left: 5px;
 	margin-bottom: -3px;
@@ -35,4 +39,35 @@ ul#jsCrossmark_actionBar li {
 
 #txtarea {
 	border: solid gray 1px;
+	width: 90%;
+}
+
+table#wiki-history{
+	width: 99%;
+}
+
+.row1 {
+	background: #DDD;
+}
+
+.row2 {
+	background: transparent;
+}
+
+#Wiki_insertImageWindow {
+	display: none;
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	width: 400px;
+	height: 300px;
+	background: #FFF;
+	border: solid #EEE 1px;
+	-moz-border-radius: 0.7em;
+}
+
+#Wiki_insertImageWindow .close-button {
+	float: right;
+	margin-right: 5px;
+	margin-top: 5px;
 }
