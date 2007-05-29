@@ -12,6 +12,9 @@ if(isset($_REQUEST['frm_namespace']) && !empty($_REQUEST['frm_namespace'])) {
 	}catch(CMException $e) {
 		$wikiPage->save();
 	}
+	if(isset($_REQUEST['frm_revision']) && !empty($_REQUEST['frm_revision'])) {
+		$wikiPage->getOldRevision($_REQUEST['frm_revision']);
+	}
 }
 
 if(empty($wikiPage->text) && empty($_REQUEST['frm_title']) && $_REQUEST['frm_title'] != 'Main_Page') {
@@ -33,12 +36,12 @@ $page->addPageBegin(CMHTMLObj::getScript("var CURRENT_PAGE = '$wikiPage->title'"
  * Action bar
  */
 $page->add('<ul id="jsCrossmark_actionBar">
-	<li><a href="index.php?frm_namespace='.$wikiPage->namespace.'&frm_title='.$wikiPage->title.'">Artigo</a></li>
-	<li>Discusão</li>
-	<li><a href="javascript:void(0);" onclick="javascript:toggleEdit();">Editar</a></li>
-	<li><a href="history.php?frm_namespace='.$wikiPage->namespace.'&frm_title='.$wikiPage->title.'">História</a></li>
-	<li>Mover</li>
-	<li>Vigiar</li>
+	<li><a href="index.php?frm_namespace='.$wikiPage->namespace.'&frm_title='.$wikiPage->title.'">'.$_language['article'].'</a></li>
+	<li>'.$_language['discusion'].'</li>
+	<li><a href="javascript:void(0);" onclick="javascript:toggleEdit();">'.$_language['edit'].'</a></li>
+	<li><a href="history.php?frm_namespace='.$wikiPage->namespace.'&frm_title='.$wikiPage->title.'">'.$_language['history'].'</a></li>
+	<li>'.$_language['move'].'</li>
+	<li>'.$_language['watch'].'</li>
 </ul>');
 
 $page->add('<div id="preview_result"></div>');
@@ -52,7 +55,7 @@ $page->add('<div id="jsCrossMark_editArea" style="display:none;">');
 /**
  * Wiki editition toolbar
  */
-$page->add('<div id="edit_toolbar">EDIT_TOOLBAR</div>');
+$page->add('<div id="edit_toolbar">'.CMHTMLObj::getScript('Wiki_loadToolBar();').'</div>');
 
 $page->add('<textarea style="display: none;" id="'.$wikiPage->title.'">'."\n".$wikiPage->text.'</textarea>');
 $page->add('<textarea id="txtarea" cols=85 rows=30></textarea><br><br>');
@@ -66,7 +69,13 @@ $page->add(CMHTMLObj::getScript('wikiLoad("'.$wikiPage->title.'");'));
 if($wikiPage->new == 1) {
 	$page->add(CMHTMLObj::getScript('toggleEdit();'));
 }
+$page->add('<div id="Wiki_insertImageWindow" style="left:0px; top:0px;">');
+$page->add('<a href="javascript:Wiki_close(\'Wiki_insertImageWindow\');">');
+$page->add('<img src="'.$_CMAPP['images_url'].'/up_janela_fechar.gif" class="close-button"></a>');
+$page->add('<iframe width="100%" height="99%" scrolling="no" src="insert_image.php?frm_namespace='.$wikiPage->namespace.'"></iframe>');
+$page->add('</div>');
 
+$page->add(CMHTMLObj::getScript('AM_getElement(\'jsCrossMark_editArea\').onmousemove = getMouseXY;'));
 echo $page;
 
 ?>
