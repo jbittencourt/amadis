@@ -595,6 +595,7 @@ project_link_leave = "Abandonar este projeto"
 
 project_link_pagebutton = "P&aacute;gina"
 project_link_forumbutton = "F&oacute;runs"
+project_link_wikibutton = "Wiki"
 project_link_chatbutton = "Chats"
 project_link_blogbutton = "Agregador"
 
@@ -1152,3 +1153,9 @@ image_from_internet = "Caminho para uma Imagem na Internet"
 
 [wiki]
 wiki = "Amadis wiki page"
+move = "Mover"
+watch = "Vigiar"
+discusion = "Discus&atilde;o"
+history = "Hist&oacute;ria"
+article = "Artigo"
+Main_Pain = "P&aacute;gina Principal"
