@@ -30,6 +30,7 @@ class AMLog {
 	const LOG_LIBRARY = 'library-error.log';
 	const LOG_FORUM = 'forum-error.log';
 	const LOG_FRIENDS = 'friends-error.log';
+	const LOG_WIKI = 'wiki-error.log';
 	
   	/**
    	 * Add a new error in error.log array, after execute AMError::commit() to save in log file.

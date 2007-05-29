@@ -115,6 +115,47 @@ class AMWikiPage extends CMObj
         
     }
     
+    public function getOldRevision($codeRevision)
+    {
+        //loads the current review
+        $this->currentRevision = new AMWikiRevision;
+        $this->currentRevision->page = (integer) $this->codePage;
+        $this->currentRevision->codeRevision = (integer) $codeRevision;
+        $text = new AMWikiText;
+        try {
+            $this->currentRevision->load();
+            $text->codeText = $this->currentRevision->text;
+            $text->load();
+        } catch(CMDBNoRecord $e) {
+            Throw new AMException('This wiki page has no revisions.');
+        }
+        $this->text = $text->text;
+    	
+    }
+    
+    public function getHistoy()
+    {
+    	$q = new CMQuery('AMWikiRevision');
+    	
+    	//$j1 = new CMJoin(CMJoin::LEFT);
+    	//$j1->setClass('AMWikiText');
+        //$j1->on("AMWikiRevision::text = AMWikiText::codeText");
+    	
+        $j2 = new CMJoin(CMJoin::LEFT);
+    	$j2->setClass('AMUser');
+        $j2->on("AMWikiRevision::user = AMUser::codeUser");
+        
+    	//$q->addJoin($j1, 'texts');
+    	$q->addJoin($j2, 'users');
+    	
+    	$q->setProjection('AMWikiRevision::*, AMUser::*');
+    	$q->setFilter('AMWikiRevision::page = '. $this->codePage);
+    	$q->setOrder('AMWikiRevision::time DESC');
+    	
+    	return $q->execute();
+
+    }
+    
 }
 
 ?>
