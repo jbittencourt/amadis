@@ -157,7 +157,7 @@ function Wiki_insertTags(tagOpen, tagClose, sampleText) {
 
 // this function generates the actual toolbar buttons with localized text
 // we use it to avoid creating the toolbar where javascript is not enabled
-function Wiki_addButton(imageFile, speedTip, tagOpen, tagClose, sampleText) {
+function Wiki_addButton(imageFile, speedTip, tagOpen, tagClose, sampleText, callFunction) {
 	// Don't generate buttons for browsers which don't fully
 	// support it.
 	if (!document.selection && is_ie) {
@@ -170,11 +170,17 @@ function Wiki_addButton(imageFile, speedTip, tagOpen, tagClose, sampleText) {
 	sampleText = Wiki_escapeQuotes(sampleText);
 	var mouseOver = "";
 
-	document.write("<a href=\"javascript:Wiki_insertTags");
-	document.write("('"+tagOpen+"','"+tagClose+"','"+sampleText+"');\">");
-	document.write("<img width=\"23\" height=\"22\" src=\""+imageFile+"\" border=\"0\" alt=\""+speedTip+"\" title=\""+speedTip+"\""+mouseOver+">");
-	document.write("</a><br>");
-	return;
+	if(callFunction == undefined) {
+		document.write("<a href=\"javascript:Wiki_insertTags");
+		document.write("('"+tagOpen+"','"+tagClose+"','"+sampleText+"');\">");
+		document.write("<img width=\"23\" height=\"22\" src=\""+imageFile+"\" border=\"0\" alt=\""+speedTip+"\" title=\""+speedTip+"\""+mouseOver+">");
+		document.write("</a><br>");
+		return;
+	} else {
+		document.write("<a href=\"javascript:" + callFunction + "\">");
+		document.write("<img width=\"23\" height=\"22\" src=\""+imageFile+"\" border=\"0\" alt=\""+speedTip+"\" title=\""+speedTip+"\""+mouseOver+">");
+		document.write("</a><br>");
+	}
 }
 
 function Wiki_escapeQuotes(text) {
@@ -205,11 +211,45 @@ function Wiki_loadToolBar()
 	Wiki_addButton('/skins/common/images/button_link.png','Ligacao interna','[[',']]','Titulo da ligacao');
 	Wiki_addButton('/skins/common/images/button_extlink.png','Ligacao externa (lembre-se dos prefixos http://, ftp://, ...)','[[',']]','ligacao externa | http://www.wikimedia.org');
 	Wiki_addButton('/skins/common/images/button_headline.png','Seccao de nivel 2','\n== ',' ==\n','Texto de cabecalho');
-	//<image dunciad.png, Pope's Dunciad>
-	Wiki_addButton('/skins/common/images/button_image.png','Imagem anexa','<imagem ','>','Exemplo.jpg');
-	Wiki_addButton('/skins/common/images/button_media.png','Ligacao a ficheiro interno de multimedia','[[Media:',']]','Exemplo.ogg');
-	Wiki_addButton('/skins/common/images/button_math.png','Formula matematica (LaTeX)','\<math\>','\</math\>','Inserir formula aqui');
-	Wiki_addButton('/skins/common/images/button_nowiki.png','Ignorar formato wiki','\<nowiki\>','\</nowiki\>','Inserir texto nao-formatado aqui');
-	Wiki_addButton('/skins/common/images/button_sig.png','Sua assinatura com hora e data','--~~~~','','');
-	Wiki_addButton('/skins/common/images/button_hr.png','Linha horizontal (utilize moderadamente)','\n----\n','','');
+	Wiki_addButton('/skins/common/images/button_image.png','Imagem anexa','<image ','>','Exemplo.jpg', 'Wiki_insertImage();');
+	//Wiki_addButton('/skins/common/images/button_media.png','Ligacao a ficheiro interno de multimedia','[[Media:',']]','Exemplo.ogg');
+	//Wiki_addButton('/skins/common/images/button_math.png','Formula matematica (LaTeX)','\<math\>','\</math\>','Inserir formula aqui');
+	//Wiki_addButton('/skins/common/images/button_nowiki.png','Ignorar formato wiki','\<nowiki\>','\</nowiki\>','Inserir texto nao-formatado aqui');
+	//Wiki_addButton('/skins/common/images/button_sig.png','Sua assinatura com hora e data','--~~~~','','');
+	//Wiki_addButton('/skins/common/images/button_hr.png','Linha horizontal (utilize moderadamente)','\n----\n','','');
+}
+
+function Wiki_insertImage()
+{
+	var win = AM_getElement('Wiki_insertImageWindow');
+	win.style.display = 'block';
+	win.style.left = (MouseX-200) + 'px;';
+	win.style.top = (MouseY-150) + 'px;';
+
+}
+
+var MouseX;
+var MouseY;
+
+function getMouseXY(e) {
+  if (is_ie) { // grab the x-y pos.s if browser is IE
+    tempX = event.clientX + document.body.scrollLeft;
+    tempY = event.clientY + document.body.scrollTop;
+  } else {  // grab the x-y pos.s if browser is NS
+    tempX = e.pageX;
+    tempY = e.pageY;
+  }  
+  // catch possible negative values in NS4
+  if (tempX < 0){ tempX = 0; }
+  if (tempY < 0){ tempY = 0; }  
+  // show the position values in the form named Show
+  // in the text fields named MouseX and MouseY
+  MouseX = tempX; 
+  MouseY = tempY;
+  return true;
+}
+
+function Wiki_close(id)
+{
+	AM_getElement(id).style.display = 'none';
 }
