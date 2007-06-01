@@ -7,12 +7,19 @@ function linkMangled(text, addr)
    	return "<a href='"+addr+"'>"+text+"</a>";
 }
 
+function Wiki_image(text, align)
+{
+	text = text.replace(/^\s+|\s+$/g, '')
+	return '<a href="index.php?frm_namespace='+CURRENT_NAMESPACE+'&frm_title='+text.replace(/[0-9]+_/, '').replace('../../files/', 'image_')+'">'
+			+ '<img src="'+text+'" '+(align?'align="'+align+'"':'')+'/></a>';	
+}
+
 function Wiki_preview()
 {
 	crossmark=new Crossmark();
 	crossmark.semanticActions.wikiManagerAddress="index.php?frm_namespace=" + CURRENT_NAMESPACE + "&frm_title=";
 	crossmark.semanticActions.linkMangled=linkMangled;
-
+	crossmark.semanticActions.image = Wiki_image;
    	var markup;
 
    	markup = AM_getElement('txtarea').value;
@@ -72,7 +79,7 @@ function wikiLoad(src)
    	crossmark=new Crossmark();
   	crossmark.semanticActions.wikiManagerAddress="index.php?frm_namespace=" + CURRENT_NAMESPACE + "&frm_title=";
 	crossmark.semanticActions.linkMangled=linkMangled;
-
+	crossmark.semanticActions.image = Wiki_image;
    	var markup;
    
    	var txtarea=AM_getElement('txtarea');
@@ -218,6 +225,13 @@ function Wiki_loadToolBar()
 	//Wiki_addButton('/skins/common/images/button_sig.png','Sua assinatura com hora e data','--~~~~','','');
 	//Wiki_addButton('/skins/common/images/button_hr.png','Linha horizontal (utilize moderadamente)','\n----\n','','');
 }
+
+function Wiki_insertImageTag(url)
+{
+	window.parent.parent.Wiki_insertTags('<image ', '>', url);
+	window.parent.parent.Wiki_close('Wiki_insertImageWindow');	
+}
+
 
 function Wiki_insertImage()
 {
