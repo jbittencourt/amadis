@@ -62,7 +62,7 @@ class AMUserPicture extends AMFixedSizeImage implements AMThumbinaiableImage
         try {
     	  $thumb->load();
     	} catch(CMDBException $e) {
-    	  Throw $e;
+    	  new AMLog('AMUserPicture', $e, AMLog::LOG_CORE);
     	}
     }catch(CMObjEPropertieValueNotValid $e) {
     	$thumb->type = self::DEFAULT_IMAGE;
