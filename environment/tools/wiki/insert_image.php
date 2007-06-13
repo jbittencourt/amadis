@@ -17,16 +17,18 @@ if(isset($_REQUEST['action']) && $_REQUEST['action']=='save_image') {
 
 	
 $files = $wikiFile->getFiles();
-//note($_CMAPP[]);die();
-if($files->__hasItems()) {
+
+if(count($files) > 0) {
 	foreach($files as $file) {
+		
 		$thumb = new AMLibraryThumb;
-		$thumb->codeFile = (integer) $file->files->items[0]->file;
+		$thumb->codeFile = (integer) $file['codeFile'];
 		try {
 			$thumb->load();
 		} catch (CMException $e) { }
-		$image = str_replace('image_', $thumb->codeFile.'_', $file->title);
-		$page->add('<img src="'.$thumb->thumb->getThumbUrl().'" onclick="Wiki_insertImageTag(\'../../files/'.$image.'\');"> '.$file->title.'<br>');
+
+		$image = str_replace('image_', $thumb->codeFile.'_', $file['name']);
+		$page->add('<img src="'.$thumb->thumb->getThumbUrl().'" onclick="Wiki_insertImageTag(\'../../files/'.$image.'\');"> '.$file['name'].'<br>');
 		$page->add('<br clear="all">');
 			
 	}

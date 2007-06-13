@@ -19,9 +19,15 @@ if(isset($_REQUEST['frm_namespace']) && !empty($_REQUEST['frm_namespace'])) {
 
 if(empty($wikiPage->text) && empty($_REQUEST['frm_title']) && $_REQUEST['frm_title'] != 'Main_Page') {
 	$wikiPage->text = "\nMain Page\n============\n\nEsta é uma pagina para voce porder organizar todo o seu conteudo de pesquisa de seu projeto\n";
-} else if(empty($wikiPage->text)) {
+}else if(ereg('^image_', $wikiPage->title)) {
+	$wikiPage->text = str_replace('image_', '', $wikiPage->title)."\n".str_repeat('=', strlen($wikiPage->title))."\n\n";
+	$image = new AMWikiFile;
+	$image->revision = $wikiPage->lastest;
+	$image->load();
+	$wikiPage->text .= '<image ../../files/'.str_replace('image_', $image->file.'_', $wikiPage->title).'">';
+}else if(empty($wikiPage->text)) {
 	$wikiPage->text = "\n\n".str_replace('_', ' ', $wikiPage->title)."\n".str_repeat("=", strlen($wikiPage->title))."\n\n";
-}
+} 
 
 AMMain::addXOADHandler('AMWiki', 'AMWiki');
 
@@ -72,7 +78,7 @@ if($wikiPage->new == 1) {
 $page->add('<div id="Wiki_insertImageWindow" style="left:0px; top:0px;">');
 $page->add('<a href="javascript:Wiki_close(\'Wiki_insertImageWindow\');">');
 $page->add('<img src="'.$_CMAPP['images_url'].'/up_janela_fechar.gif" class="close-button"></a>');
-$page->add('<iframe width="100%" height="99%" scrolling="no" src="insert_image.php?frm_namespace='.$wikiPage->namespace.'"></iframe>');
+$page->add('<iframe width="100%" height="99%" scrolling="auto" src="insert_image.php?frm_namespace='.$wikiPage->namespace.'"></iframe>');
 $page->add('</div>');
 
 $page->add(CMHTMLObj::getScript('AM_getElement(\'jsCrossMark_editArea\').onmousemove = getMouseXY;'));
