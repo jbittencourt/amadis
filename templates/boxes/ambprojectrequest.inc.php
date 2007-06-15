@@ -63,10 +63,18 @@ class AMBProjectRequest extends AMColorBox
             parent::add("<table border=0 cellspacing=1 cellpadding=2 width=\"100%\">");
             parent::add("<tr><td>");
             $thumb = new AMUserThumb;
-            $thumb->codeFile = $user->picture;
-            $thumb->load();
-            parent::add($thumb->getView());
-
+            try {
+            	$thumb->codeFile = $user->picture;
+            	try {
+            		$thumb->load();
+            		parent::add($thumb->getView());
+            	}catch(CMException $e) {
+            		new AMLog('AMBProjectRequest load thumbnail', $e, AMLog::LOG_PROJECTS);
+            	}
+            }catch(CMException $e) {
+            	new AMLog('AMBProjectRequest setting codeFile', $e, AMLog::LOG_PROJECTS);
+            }
+			
       //an empty column
             parent::add("</td><td><img src=\"$_CMAPP[images_url]/dot.gif\" width=10>");
 
