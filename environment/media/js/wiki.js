@@ -181,12 +181,12 @@ function Wiki_addButton(imageFile, speedTip, tagOpen, tagClose, sampleText, call
 		document.write("<a href=\"javascript:Wiki_insertTags");
 		document.write("('"+tagOpen+"','"+tagClose+"','"+sampleText+"');\">");
 		document.write("<img width=\"23\" height=\"22\" src=\""+imageFile+"\" border=\"0\" alt=\""+speedTip+"\" title=\""+speedTip+"\""+mouseOver+">");
-		document.write("</a><br>");
+		document.write("</a>");
 		return;
 	} else {
 		document.write("<a href=\"javascript:" + callFunction + "\">");
 		document.write("<img width=\"23\" height=\"22\" src=\""+imageFile+"\" border=\"0\" alt=\""+speedTip+"\" title=\""+speedTip+"\""+mouseOver+">");
-		document.write("</a><br>");
+		document.write("</a>");
 	}
 }
 
@@ -212,18 +212,18 @@ function Wiki_escapeQuotesHTML(text) {
 
 function Wiki_loadToolBar()
 {
-	Wiki_addButton('/skins/common/images/button_bold.png','Texto em negrito','*','*','Texto em negrito');
-	Wiki_addButton('/skins/common/images/button_italic.png','Texto em italico','\/','\/','Texto em italico');
-	Wiki_addButton('/skins/common/images/button_underline.png','Texto sublinhado','_','_','Texto sublinhado');
-	Wiki_addButton('/skins/common/images/button_link.png','Ligacao interna','[[',']]','Titulo da ligacao');
-	Wiki_addButton('/skins/common/images/button_extlink.png','Ligacao externa (lembre-se dos prefixos http://, ftp://, ...)','[[',']]','ligacao externa | http://www.wikimedia.org');
-	Wiki_addButton('/skins/common/images/button_headline.png','Seccao de nivel 2','\n== ',' ==\n','Texto de cabecalho');
-	Wiki_addButton('/skins/common/images/button_image.png','Imagem anexa','<image ','>','Exemplo.jpg', 'Wiki_insertImage();');
-	//Wiki_addButton('/skins/common/images/button_media.png','Ligacao a ficheiro interno de multimedia','[[Media:',']]','Exemplo.ogg');
-	//Wiki_addButton('/skins/common/images/button_math.png','Formula matematica (LaTeX)','\<math\>','\</math\>','Inserir formula aqui');
-	//Wiki_addButton('/skins/common/images/button_nowiki.png','Ignorar formato wiki','\<nowiki\>','\</nowiki\>','Inserir texto nao-formatado aqui');
-	//Wiki_addButton('/skins/common/images/button_sig.png','Sua assinatura com hora e data','--~~~~','','');
-	//Wiki_addButton('/skins/common/images/button_hr.png','Linha horizontal (utilize moderadamente)','\n----\n','','');
+	Wiki_addButton('../../media/images/button_bold.png','Texto em negrito','*','*','Texto em negrito');
+	Wiki_addButton('../../media/images/button_italic.png','Texto em italico','\/','\/','Texto em italico');
+	Wiki_addButton('../../media/images/button_underline.png','Texto sublinhado','_','_','Texto sublinhado');
+	Wiki_addButton('../../media/images/button_link.png','Ligacao interna','[[',']]','Titulo da ligacao');
+	Wiki_addButton('../../media/images/button_extlink.png','Ligacao externa (lembre-se dos prefixos http://, ftp://, ...)','[[',']]','ligacao externa | http://www.wikimedia.org');
+	Wiki_addButton('../../media/images/button_headline.png','Seccao de nivel 2','\n== ',' ==\n','Texto de cabecalho');
+	Wiki_addButton('../../media/images/button_image.png','Imagem anexa','<image ','>','Exemplo.jpg', 'Wiki_insertImage();');
+	//Wiki_addButton('media/images/button_media.png','Ligacao a ficheiro interno de multimedia','[[Media:',']]','Exemplo.ogg');
+	//Wiki_addButton('media/images/button_math.png','Formula matematica (LaTeX)','\<math\>','\</math\>','Inserir formula aqui');
+	//Wiki_addButton('media/images/button_nowiki.png','Ignorar formato wiki','\<nowiki\>','\</nowiki\>','Inserir texto nao-formatado aqui');
+	//Wiki_addButton('media/images/button_sig.png','Sua assinatura com hora e data','--~~~~','','');
+	//Wiki_addButton('media/images/button_hr.png','Linha horizontal (utilize moderadamente)','\n----\n','','');
 }
 
 function Wiki_insertImageTag(url)
