@@ -18,7 +18,7 @@ class AMBCommunitiesList extends AMPageBox implements CMActionListener {
 	protected $title;
 	protected $box_type;
 
-	public function __construct($items, $title) {
+	public function __construct($items='', $title='') {
 		parent::__construct(10);
 		$this->items = $items;
 		$this->title = $title;

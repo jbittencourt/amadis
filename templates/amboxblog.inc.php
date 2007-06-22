@@ -173,13 +173,13 @@ class AMBoxBlog extends CMHTMLObj
 
                 if($post->numComments==0) {
                     if($_SESSION['user']) {
-                        parent::add("<td class='diary_comment_link'><a class='diary_comment' href='#' onclick=\"$link_comentarios\">");
+                        parent::add("<td class='diary_comment_link'><a class='diary_comment' href='javascript:void(0);' onclick=\"$link_comentarios\">");
                         parent::add("$_language[waiting_comments] <img id='post_comments_$post->codePost' src='$_CMAPP[images_url]/ico_seta_off_cmnt.gif'>");
                         parent::add("</a></td>");
                     }
                 }
                 else {
-                    $l = "<a class='diary_comment' onclick=\"$link_comentarios\" href='#'>";
+                    $l = "<a class='diary_comment' onclick=\"$link_comentarios\" href='javascript:void(0)'>";
                     parent::add("<td class='diary_comment_link'>");
                     parent::add("$l $_language[comments]($post->numComments) <img id='post_comments_$post->codePost' src='$_CMAPP[images_url]/ico_seta_off_cmnt.gif'></a>");
                     parent::add("</td>");

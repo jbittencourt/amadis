@@ -33,7 +33,7 @@ class AMBCommunityList extends AMPageBox implements CMActionListener {
 				$this->numItems = $result['count'];
 				$this->itens = $result[0];
 
-				$box = new AMCommunityList($this->itens, $_language['list_communities'], AMTCadBox::CADBOX_LIST);
+				$box = new AMBCommunitiesList($this->itens, $_language['list_communities'], AMTCadBox::CADBOX_LIST);
 
 
 				break;

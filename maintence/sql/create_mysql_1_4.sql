@@ -853,7 +853,7 @@ CHARACTER SET utf8 COLLATE utf8_general_ci;
 DROP TABLE IF EXISTS `amadis`.`UserMessages`;
 CREATE TABLE `amadis`.`UserMessages` (
   `code` INT(11) NOT NULL AUTO_INCREMENT,
-  `message` TINYTEXT NOT NULL,
+  `message` TEXT NOT NULL,
   `codeUser` BIGINT(20) NOT NULL DEFAULT '0',
   `codeTo` BIGINT(20) NOT NULL,
   `time` INT(11) NOT NULL DEFAULT '0',
@@ -953,6 +953,18 @@ ALTER TABLE `WikiRevision`
   ADD CONSTRAINT `WikiRevision_ibfk_5` FOREIGN KEY (`page`) REFERENCES `WikiPage` (`codePage`),
   ADD CONSTRAINT `WikiRevision_ibfk_6` FOREIGN KEY (`text`) REFERENCES `WikiText` (`codeText`),
   ADD CONSTRAINT `WikiRevision_ibfk_7` FOREIGN KEY (`user`) REFERENCES `User` (`codeUser`);
+
+-- 
+-- Table structure for table `WikiText`
+-- 
+
+CREATE TABLE `WikiFile` (
+  `revision` bigint(20) NOT NULL,
+  `file` bigint(20) NOT NULL,
+  PRIMARY KEY  (`revision`, `file`)
+)
+ENGINE=InnoDB
+CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 -- ------------------------------------
 -- default inserts... -----------------

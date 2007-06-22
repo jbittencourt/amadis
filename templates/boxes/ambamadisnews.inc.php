@@ -29,7 +29,11 @@ class AMBAmadisNews extends AMColorBox {
 				parent::add("<b>&raquo; $_language[projects]</b><br>");
 				foreach($this->nProjects as $item) {
 					parent::add("<a class=\"cinza\" ");
-					parent::add("href=\"$_CMAPP[services_url]/projetos/listprojects.php?list_action=A_list_news&frm_codProjeto=$item->codeProject#project_news_".$item->news[0]->code."\">");
+					/*
+					 * TODO Solve the css bug that hidden a top of the box.
+					 */
+					//parent::add("href=\"$_CMAPP[services_url]/projects/listprojects.php?list_action=A_list_news&frm_codProjeto=$item->codeProject#project_news_".$item->news[0]->code."\">");
+					parent::add("href=\"$_CMAPP[services_url]/projects/listprojects.php?list_action=A_list_news&frm_codProjeto=$item->codeProject\">");
 					parent::add("&raquo; ".$item->news[0]->title." - <b>($item->title)</b>");
 					parent::add("</a><br>");
 				}
