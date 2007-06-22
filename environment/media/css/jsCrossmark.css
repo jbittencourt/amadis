@@ -17,6 +17,13 @@
    	border: #ddd 1pt solid;
 }
 
+#result img, #preview_result img {
+	max-width: 400px;
+	border: #CCC solid 2px;
+	padding: 5px;
+	-moz-border-radius: 0.8em;
+}
+
 #result table th, #preview_result table th {
 	background: #DDD;
 }
