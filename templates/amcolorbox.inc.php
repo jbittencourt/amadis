@@ -49,43 +49,43 @@ class AMColorBox extends AMAbstractBox {
       $this->class = "box_turquesa";
       break;
     case self::COLOR_BOX_BEGE:
-      $this->class = "box_bege";
+      $this->class = "box-bege";
       break;
     case self::COLOR_BOX_BLUE:
-      $this->class = "box_blue";
+      $this->class = "box-blue";
       break;
     case self::COLOR_BOX_BLUEB:
-      $this->class = "box_blueb";
+      $this->class = "box-blueb";
       break;
     case self::COLOR_BOX_GREEN:
-      $this->class = "box_green";
+      $this->class = "box-green";
       break;
     case self::COLOR_BOX_BLUA:
-      $this->class = "box_blua";
+      $this->class = "box-blua";
       break;
     case self::COLOR_BOX_ROSA:
-      $this->class = "box_rosa";
+      $this->class = "box-rosa";
       break;
     case self::COLOR_BOX_LGREEN:
-      $this->class = "box_lgreen";
+      $this->class = "box-lgreen";
       break;
     case self::COLOR_BOX_GREEN2:
-      $this->class = "box_green2";
+      $this->class = "box-green2";
       break;
     case self::COLOR_BOX_PURPLE:
-      $this->class = "box_purple";
+      $this->class = "box-purple";
       break;
     case self::COLOR_BOX_DARKPURPLE:
-      $this->class = "box_darkpurple";
+      $this->class = "box-darkpurple";
       break;
     case self::COLOR_BOX_YELLOW:
-      $this->class = "box_yellow";
+      $this->class = "box-yellow";
       break;
     case self::COLOR_BOX_YELLOWB:
-      $this->class = "box_yellowb";
+      $this->class = "box-yellowb";
       break;
     case self::COLOR_BOX_PINK:
-      $this->class = "box_pink";
+      $this->class = "box-pink";
       break;
     }
   }
@@ -105,63 +105,27 @@ class AMColorBox extends AMAbstractBox {
   public function __toString() {
     global $_CMAPP;
     
-    parent::add("<!-- Begin AMColorBox -->");
-    $w="";
-    if($this->width!=0) { 
-        $w = "style='width: $this->width'";
-    }
-    parent::add("<div id=\"$this->name\" $w>");
-    parent::add("<table id=\"color-table\" class='color_box $this->class'>");
-    parent::add("<tbody>");
+    $injection = array(
+    	'box_id'    => $this->name,
+    	'box_width' => $this->width != 0 ? 'style="width:'.$this->width.'px;"' : '',
+    	'box_class' => $this->class,
+    	'box_theme' => $this->theme
+   	);
 
-    //first line empty
-    parent::add("<tr>");
-    parent::add("<td id='ctl'><img  src=\"".$_CMAPP['images_url']."/".$this->theme."_es.gif\"></td>");
-    parent::add("<td id='bt' ><img   src=\"".$_CMAPP['images_url']."/dot.gif\"></td>");
-    parent::add("<td id='ctr'><img  src=\"".$_CMAPP['images_url']."/".$this->theme."_ds.gif\"></td>");
-    parent::add("</tr>");
-    //end first line empty
+   	if(!empty($this->title)) {
+      if(ereg("(jpg|gif|jpeg|png)", $this->title)) {
+		$injection['box_title'] = '<img src="'.$this->title.'"><br />';
+      } else $injection['box_title'] = '<td valign="top"><span class="color-box box-titles>'.$this->title.'</span><br />'; 
+    } 
 
-    parent::add("<tr>");
-    parent::add("<td id='bl'></td>");
-
-    //title image or text
-    if(!empty($this->title)) {
-      $ext = substr($this->title, -3);
-      if( $ext == "jpg" || $ext == "gif" || $ext == "jpeg" || $ext == "png")
-	parent::add("<td valign=\"top\"><img src=\"".$this->title."\"border=\"0\">");
-      else
-	parent::add("<td valign=\"top\"><font class='color_box box_titles'>".$this->title."</font>"); 
-    }
-    else {
-      parent::add("<td valign=\"top\"><img src=\"$_CMAPP[images_url]/dot.gif\" >");
-    }
-    parent::add("<br>");
-    //end title image
-
-    parent::add("<font class=\"textobox\">");
-
-    //parse itens
+  	//parse itens
     if(!empty($this->contents)) {
-	parent::add($this->contents);
+		$injection['box_content'] = implode("\n", $this->contents);
     }
-    parent::add("</font><td id='br'></td>");
-    parent::add("</tr>");
     
-    //last line empty
-    parent::add("<tr>");
-    parent::add("<td id='cbl'><img src=\"".$_CMAPP['images_url']."/".$this->theme."_ei.gif\"></td>");
-    parent::add("<td id='bb' ><img src=\"".$_CMAPP['images_url']."/dot.gif\" border=\"0\"></td>");
-    parent::add("<td id='cbr'><img  src=\"".$_CMAPP['images_url']."/".$this->theme."_di.gif\"></td>");
-    parent::add("</tr>");
-    //end last line empty
-
-    parent::add("</tbody></table>");
-    parent::add('</div>');
-    parent::add("<!-- end AMColorBox -->");
-
+    parent::add(AMHTMLPage::loadView($injection, 'color_box'));
+    
     return parent::__toString();
-
   }
 
 }

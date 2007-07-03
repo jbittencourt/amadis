@@ -34,17 +34,18 @@ class  AMNavMenu extends CMHTMLObj
             $this->add($login,true,true);
 			
                     	
-            $box = new AMMenuBox;
-            $box->add("<a href=\"$_CMAPP[services_url]/webfolio/recoverpassword.php\" ><img src=\"$_CMAPP[imlang_url]/img_esqueci.gif\" border=0></a>");
-            $this->add($box,true,false);
+            //$box = new AMMenuBox;
+            //$box->add("<a href=\"$_CMAPP[services_url]/webfolio/recoverpassword.php\" ><img src=\"$_CMAPP[imlang_url]/img_esqueci.gif\" border=0></a>");
+            //$this->add($box,true,false);
   
         }
         else {
 
             if(!isset($_SESSION['amadis']['menus'])) {
-                $_SESSION['amadis']['menus'] = array("projects"=>0,
-					     "friends"=>0,
-					     "communities"=>0
+                $_SESSION['amadis']['menus'] = array(
+                		"projects"=>0,
+					    "friends"=>0,
+					    "communities"=>0
                 );
             }
 
@@ -73,7 +74,7 @@ class  AMNavMenu extends CMHTMLObj
 						</ul>	
 					</div>
 					<div id=\"loginBottomBorder\"></div>
-				</div><br>";
+				</div><br />";
        
 			$this->add($str);
 
@@ -128,11 +129,11 @@ class  AMNavMenu extends CMHTMLObj
                 $tree->open();
             }
 
-            $tree->add("<a class='green' href='$_CMAPP[services_url]/projects/create.php'>&raquo; $_language[create_project]</a><br>");
+            $tree->add("<a class='green' href='$_CMAPP[services_url]/projects/create.php'>&raquo; $_language[create_project]</a><br />");
             if($projects->__hasItems()) {
                 foreach($projects as $proj) {
                     $str="";
-                    $tree->add("<a href=\"".$_CMAPP['services_url']."/projects/project.php?frm_codProjeto=$proj->codeProject\" class=\"mnlateral\">&raquo; $proj->title $str</a><br>");
+                    $tree->add("<a href=\"".$_CMAPP['services_url']."/projects/project.php?frm_codProjeto=$proj->codeProject\" class=\"mnlateral\">&raquo; $proj->title $str</a><br />");
                 }
             }
             else {
@@ -188,7 +189,7 @@ class  AMNavMenu extends CMHTMLObj
 	 
                     }
                     $icoOnline = "<img id=\"UserIco_$friend->codeUser\" align=\"middle\" src=\"$ico\" $onClick>";
-                    $tree->add("$icoOnline<a class='mnlateral' href='".$_CMAPP['services_url']."/webfolio/userinfo_details.php?frm_codeUser=$friend->codeUser'> $friend->name</a><br>");
+                    $tree->add("$icoOnline<a class='mnlateral' href='".$_CMAPP['services_url']."/webfolio/userinfo_details.php?frm_codeUser=$friend->codeUser'> $friend->name</a><br />");
                 }
             } else {
                 $tree->add("<font class=\"texto\">$_language[no_friends]</font>");
@@ -212,12 +213,12 @@ class  AMNavMenu extends CMHTMLObj
                 $tree->open();
             }
 
-            $tree->add("<a class='green' href='$_CMAPP[services_url]/communities/create.php'>&raquo; $_language[create_community]</a><br>");
+            $tree->add("<a class='green' href='$_CMAPP[services_url]/communities/create.php'>&raquo; $_language[create_community]</a><br />");
             if($communities->__hasItems()) {
                 foreach($communities as $communitie) {
                     $str="";
 
-                    $tree->add("<a class=\"mnlateral\" href=\"".$_CMAPP['services_url']."/communities/community.php?frm_codeCommunity=$communitie->code\" class=\"mnlateral\">&raquo; $communitie->name $str</a><br>");
+                    $tree->add("<a class=\"mnlateral\" href=\"".$_CMAPP['services_url']."/communities/community.php?frm_codeCommunity=$communitie->code\" class=\"mnlateral\">&raquo; $communitie->name $str</a><br />");
                 }
             }
             else {
@@ -295,7 +296,7 @@ class  AMNavMenu extends CMHTMLObj
                // parent::add('</div>');
 
                 if($line['line_after']) {
-                    parent::add("<br>");
+                    parent::add("<br />");
                 }
             }
         }

@@ -21,7 +21,7 @@ class AMMain extends AMHTMLPage
     protected $auto_error_report = true;
     protected $pathindicator;
     protected static $XOADHandlers = array();
-    protected $alerts, $dynapi, $notifications = array();
+    protected $alerts, $notifications = array();
 	protected $page;
 	
     function __construct($theme="") 
@@ -35,19 +35,18 @@ class AMMain extends AMHTMLPage
         	default:
         		$this->page = new AMDefaultTheme; break;
         }
-		        
+
+        $this->page->mainMenu = new AMMainMenu();
+
+        $this->page->navMenu = new AMNavMenu();
+        
         $this->requires("tooltip.css",self::MEDIA_CSS);
         $this->requires("lib.js",self::MEDIA_JS);
         $this->requires("finder.js", self::MEDIA_JS);
         $this->requires("finder.css", self::MEDIA_CSS);
         $this->requires("envsession.js", self::MEDIA_JS);
         $this->requires("tipms.css", self::MEDIA_CSS);
-
-        //$this->main_menu = new AMMainMenu();
-
-        //$this->navmenu = new AMNavMenu();
-
-        $this->leftMargin = 260;
+        
 
     /** Set Finder hash table
      *
@@ -205,7 +204,122 @@ class AMMain extends AMHTMLPage
     public function __toString() 
     {
         global $_CMAPP,$_language;
-		
+
+   /**
+     * Adds the error messages to the page, if there is any. It
+     * searchs for the AMErrors intantiated and error messages 
+     * passed by the URL with the frm_amerror.
+     **/
+        $errors = AMError::getErrors();
+        if($this->auto_error_report) {
+      //search if there is some error passed by the url
+            if(!empty($_REQUEST["frm_amerror"])) {
+                if(!is_array($_REQUEST["frm_amerror"])) {
+                    $_REQUEST["frm_amerror"] = array($_REQUEST["frm_amerror"]);
+                }
+                
+                foreach($_REQUEST["frm_amerror"] as $error) {
+                    $errors[] = array("message"=>$_language["error_$error"],
+			    "thrower"=>"request");
+                }
+            }
+        }
+
+    /**
+     * Adds the messages to the page, if there is any. It
+     * searchs for the AMMessage intantiated and messages 
+     * passed by the URL with the frm_ammessage.
+     **/
+        $messages = AMMessage::getMessages();
+        if(!empty($_REQUEST["frm_ammsg"])) {
+            if(!is_array($_REQUEST["frm_ammsg"])) {
+                $_REQUEST["frm_ammsg"] = array($_REQUEST["frm_ammsg"]);
+            }
+            
+            foreach($_REQUEST["frm_ammsg"] as $msg) {
+                $messages[] = array("message"=>$_language["msg_$msg"],
+			    "thrower"=>"request");
+            }
+        }
+
+        
+        //notification area
+        $notices[] = '<div id="notification_area">';
+        $notifications = $this->page->getNotifications();
+        if(!empty($notifications)) {
+            $notices[] = implode('&nbsp;', $notifications);
+        }
+        $notices[] = '</div>';
+
+        $notices[] = '<div id="erros_area">';
+        if(!empty($errors)) {
+            $notices[] = '<br>';
+            $debug_mode = (int) $_CMAPP['environment']->debug_mode;
+            foreach($errors as $num=>$message) {
+            	$alBox = new AMAlertBox(AMAlertBox::ERROR,$message['message']);
+                $notices[]= $alBox->__toString();
+                if($debug_mode) {
+                	$alBox2 = new AMAlertBox(AMAlertBox::ERROR, $message['exception']);
+                	$notices[] = $alBox2->__toString();
+                }
+            }
+            $notices[] = '<br />';
+        }
+        $notices[] = '</div>';
+
+        $notices[] = '<div id="alerts_area">';
+        if(!empty($this->alerts)) {
+            foreach($this->alerts as $num=>$message) {
+            	$alBox = new AMAlertBox(AMAlertBox::ALERT,$message);
+                $notices[] = $alBox->__toString();
+            }
+            $notices[] = '<br />';
+        }
+        $notices[] = '</div>';
+
+        $notices[] = '<div id="messages_area">';
+        if(!empty($messages)) {
+            foreach($messages as $num=>$message) {
+            	$alBox = new AMAlertBox(AMAlertBox::MESSAGE,$message['message']);
+                $notices[] = $alBox->__toString();
+            }
+            $notices[] = '<br />';
+        }
+        $notices[] = '</div>';
+
+        /*if(!empty($this->pathindicator)) {
+            $main_content[] = $this->pathindicator;
+        }
+		*/
+        $this->page->addNotices($notices);
+        
+        //this div forces the inclusion of an AMTUserinfo in the page
+    	//this force the inclusion of the file, so on the fly pages(like comments in diary)
+    	//will work .
+        $this->page->addPageEnd('<div id="hiddenDIV" style="display:none">');
+        $this->page->addPageEnd(new AMTUserinfo(new CMUser));
+        $this->page->addPageEnd('</div>');
+
+        //parent::addScript("initDCOM('$_CMAPP[media_url]/rte/blank.htm');");
+
+        AMMain::addXOADHandler('AMEnvSession', 'AMEnvSession');
+
+        $this->page->addPageBegin(XOAD_Utilities::header("$_CMAPP[media_url]/libs/xoad"));
+
+        if($_SESSION['environment']->logged) {
+            AMMain::addXOADHandler("AMFinder", "AMFinder");
+            $this->page->addPageBegin(self::getScript("var Finder_chatSRC = '$_CMAPP[services_url]/finder/finder_chat.php';"));
+            $this->page->addPageEnd(CMHTMLObj::getScript("initEnvironment();"));
+            //$this->setOnload("initEnvironment();");
+        }
+        
+        $handlers = AMMain::getXOADHandlers();
+        if(!empty($handlers)) {
+            foreach($handlers as $class=>$handler) {
+                $this->page->addPageBegin(self::getScript("var $handler = ".XOAD_Client::register(new $class)));
+            }
+        }
+        
         return $this->page->__toString();
     }
 

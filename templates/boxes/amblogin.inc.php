@@ -38,42 +38,24 @@ class AMBLogin extends CMHtmlObj {
   function __toString() {
     global $_CMAPP, $_language;
 
-    $formAction = $_CMAPP['form_login_action'];
-    parent::add("<div id=\"loginInit\">");
-	parent::add("				<div id=\"loginInitTopBorder\"></div>");
-	parent::add("				<div id=\"loginInitContent\">"); 
-	parent::add("				<ul>");
-	parent::add("					<li id=\"loginInitContentImage\">Login:</li>");
-	parent::add("					<form action=\"".$formAction."\" method=\"post\" name=\"loginbox\">");
-	parent::add("					<input type=\"hidden\" name=\"login_action\" value=\"A_login\">");
-    parent::add("					<li >".$_language['user'].":</li>");
-	parent::add("					<li > <input type=\"text\" name=\"frm_username\" size=\"13\"></li>");
-	parent::add("					<li >".$_language['password'].":</li>");
-	parent::add("					<li ><input type=\"password\" name=\"frm_password\" size=\"13\"</li>");
-	parent::add("					<li id=\"loginExit\">");
-	parent::add("						<button id=\"logout_button\" type=\"submit\"><div id=\"loginInitLeftImage\">&nbsp;&nbsp;</div><div id=\"loginInitLog\">$_language[log]</div><div id=\"loginInitRightImage\">&nbsp;&nbsp;</div>	</button>");
-	parent::add("					</li>");
-	parent::add("				</ul>");	
-	parent::add("			</div>");
-	parent::add("			<div id=\"loginInitBottomBorder\"></div>");
-	
-	 if(!empty($this->requestVars)) {
+    $injection = array(
+    	'formAction'=>$_CMAPP['form_login_action'],
+    	'label_user'=>$_language['user'],
+    	'label_password'=>$_language['password'],
+    	'closures'=>array()
+    );
+    
+    if(!empty($this->requestVars)) {
       foreach($this->requestVars as $k=>$item) {
-		parent::add("<input type=\"hidden\" name=\"$k\" value=\"$item\">");
+		$injection['closures'][] = '<input type="hidden" name="'.$k.'" value="'.$item.'" />';
       }
     }
     
-    parent::add("</form>");
-	parent::add("</div>");
     
-   
- 
-
- 
+    parent::add(AMHTMLPage::loadView($injection, 'login_box', 'core_templates'));
+    
     return parent::__toString();
   }
 
 }
-
-
 ?>

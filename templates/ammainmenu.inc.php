@@ -41,18 +41,30 @@ class AMMainMenu extends CMHtmlObj {
 		$this->items[] = "<li><a href='".$url."'>".strtoupper($_language[$label])."</a></li>";
 	}
 	
+	/**
+	 *<ul id="menufontExtra" class="menufont">
+	 *	<li><a href="#test">COMUNIDADES</a></li>
+	 *	<li><a href="#">PESSOAS</a></li>
+	 *	<li><a href="#">OFICINAS</a></li>
+	 *	<li><a href="#">WEBFÓLIO</a></li>
+	 *	<li><a href="#">FERRAMENTAS</a></li>
+	 *</ul>
+	 * 
+	 *
+	 * @return unknown
+	 */
   	public function __toString() {
     	global $_CMAPP, $_language;
     
 
-    	parent::add("<ul id ='menufontExtra' class='menufont'>");
+    	parent::add('<ul id ="menufontExtra" class="menufont">');
     	
     	if(!empty($this->items)) {
     		foreach($this->items as $item) {
     			parent::add($item);
     		}
     	}
-		parent::add("</ul>");
+		parent::add('</ul>');
 
     	return parent::__toString();
 
