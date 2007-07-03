@@ -1,0 +1,44 @@
+@CHARSET "UTF-8";
+/** INTERNET EXPLORER FIXES **/
+/** HEADER fixes **/
+#header .peca-logo { 
+	background: transparent url(../images/pecas.gif) no-repeat;
+}
+
+/* Init Login Container */
+#loginInitTopBorder {
+	background: url(../images/boxsuperior.gif) repeat-x;
+	margin-bottom: -7px;
+}
+
+#loginInitBottomBorder {
+	background: url(../images/boxinferior.gif) repeat-x;
+	height: 12px;
+	margin-top: -3px;
+}
+
+/** SIDE-BAR MENU **/
+/* Menu itens : general properties */
+#menubox {
+	overflow: hidden;
+}
+
+#menu ul li {
+	width: 154px;
+	margin-left: 5px;
+}
+
+/* Submenu list : properties inherited from Menu and added specific ones */
+
+/* Submenu itens : specific properties */
+/* Botton roundcorner of menu*/
+#menuBottom {
+	width: 172px;
+	height: 22px;
+	background: url(../images/bottomborder.gif);
+	margin-top: -3px;
+}
+
+#center {
+	margin-top: 15px;
+}
