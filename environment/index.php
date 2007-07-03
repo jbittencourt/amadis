@@ -8,8 +8,6 @@ $_language = $_CMAPP['i18n']->getTranslationArray("inicial");
 
 $pag = new AMInicial();
 
-
-
 /**
  * BEM-VINDO AO AMADIS
  **/

@@ -159,11 +159,11 @@ input[type=text]:focus, select:focus { background-color:#fff; color:#000; }
 
 .chats_list_parent {
 	padding-left: 15px;
-	style-list-image: url("../images/img_arrow.gif");
+	list-style-image: url("../images/img_arrow.gif");
 }
 
 .chats_list {
-	magin-left: 5px;
+	margin-left: 5px;
 	padding-left: 0px;
 }
 
