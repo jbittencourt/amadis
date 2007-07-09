@@ -1,5 +1,4 @@
 <?php
-
 $_CMAPP['notrestricted']=true;
 include("config.inc.php");
 include($_CMAPP['path']."/templates/aminicial.inc.php");
@@ -11,32 +10,24 @@ $pag = new AMInicial();
 /**
  * BEM-VINDO AO AMADIS
  **/
-$pag->add("<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\">");
-$pag->add("<tr><td colspan=\"3\"><img src=\"".$_CMAPP['images_url']."/dot.gif\" width=\"20\" height=\"20\"></td></tr>");
-$pag->add("<tr><TD colspan=\"3\" class=\"textoint\"><img src=\"".$_CMAPP['images_url']."/logo_lec.gif\" hspace=\"60\" vspace=\"20\" border=\"0\" align=\"right\">$_language[lec_text_1] <br><b>");
-
-$pag->add("</tr>");
+$pag->add('<div class="presentation">');
+$pag->add('<img src="'.$_CMAPP['images_url'].'/logo_lec.gif" style="float:right; margin: 15px;" alt=""/>');
+$pag->add($_language['lec_text_1'].'</div>');
 
 if($_conf->app->interface->applets=='true') {
-	$pag->add("<APPLET  code=\"br.ufrgs.lec.amadis.applets.ProjectPulse.ProjectsPulse\" archive=\"$_CMAPP[url]/media/applets/ProjectsPulse.jar\" width=540 height=90>");
-	$pag->add("<PARAM name=amadisurl VALUE=\"$_CMAPP[url]\">");
-	$pag->add("</APPLET>");
+	$pag->add('<div><APPLET  code="br.ufrgs.lec.amadis.applets.ProjectPulse.ProjectsPulse" archive="'.$_CMAPP['url'].'/media/applets/ProjectsPulse.jar" width="540" height="90">');
+	$pag->add('<PARAM name="amadisurl" VALUE="'.$_CMAPP['url'].'">');
+	$pag->add('</APPLET></div>');
 }
 
 if(empty($_SESSION['user'])) {
   /**
    * QUERO ME CADASTRAR
    **/
-  $pag->add("<tr><td colspan=\"3\">");
-  $pag->add("<a href=\"$_CMAPP[services_url]/webfolio/register.php\">");
-  $pag->add("<img src=\"".$_CMAPP['imlang_url']."/img_cadastrar_amadis.gif\" border=0></tr></a>");
-}
-//linha
-$pag->add("<tr><td colspan=\"3\"><img src=\"".$_CMAPP['images_url']."/dot.gif\" width=\"20\" height=\"20\"></td></tr>");
-$pag->add("<tr><td colspan=\"3\">");
-$pag->add("</td></tr>");
-
-$pag->add("</table>");
+  $pag->add('<div style="clear:right;">');
+  $pag->add('<a href="'.$_CMAPP['services_url'].'/webfolio/register.php">');
+  $pag->add('<img src="'.$_CMAPP['imlang_url'].'/img_cadastrar_amadis.gif" alt="" /></a></div>');
+} else $pag->add('<br style="clear:right;" />');
 
 //best visited projects
 $projs = $_SESSION['environment']->listTopProjects();
