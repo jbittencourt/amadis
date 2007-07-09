@@ -114,45 +114,12 @@ class AMDefaultTheme extends AMHTMLPage
         	'main_content'=>implode("\n", $main_content)
         );
         
-        parent::add(self::loadView($injection, 'default_theme', 'core_templates'));
+        parent::add(self::loadView($injection, 'default_theme'));
         
         $html = parent::__toString();
         $html = "  "; //fix error bellow footer 
         AMLog::commit();
         
         return $html;
-        
-        die();
-        
-        
-		
-		/*THIS image asks for atention
-		*	TODO
-		* 	this image was supposed to be inside CSS, but due to its localized settings, it needs another solution.
-		*/
-        //parent::add("	<div class=\"amadis-logo\"><img src=\"".$_CMAPP['imlang_url']."/logo_amadis.png\" width=\"240\" height=\"68\"/></div>");
-
-
-        parent::add($this->contents);
-		//parent::add(self::loadView(array('variavel'=>'valor da variavel'), 'color_box', 'core_templates'));		
-		parent::add("	</div>"); // end container -  main area
-		
-		//left menu
-		parent::add("	<div id=\"left\" class=\"column\">");
-		parent::add($this->navmenu);
-		parent::add("	</div>");
-		parent::add("</div>");
-		
-		//footer
-		parent::add("<div id=\"footer-wrapper\">");
-		parent::add("	<div id=\"footer\">$_language[amadis]</div>");
-		parent::add("</div>");
-   
-        $html = parent::__toString();
-        $html = "  "; //fix error bellow footer 
-        AMLog::commit();
-        
-        return $html;
-
-    }
+     }
 }

@@ -1,26 +1,33 @@
-			<div id="loginInit">
-				<div id="loginInitTopBorder"></div>
-				<div id="loginInitContent">
-					<div id="loginInitContentImage">Login:</div>
-					<div style="padding-left: 10px;">
-						<form action="<?php print $formAaction; ?>" method="post">
-							<div>
-								<input type="hidden" name="login_action" value="A_login" />
-								<label><?php print $label_user; ?>:</label>
-								<br />
-								<input type="text" name="frm_username" size="13" />
-								<label><?php print $label_password; ?>:</label>
-								<input type="password" name="frm_password" size="13" />
-								<br />
-								<div id="loginExit">
-									<button id="logout_button" type="submit">
-										<div id="loginInitLog">logar</div>
-									</button>
-								</div>
-								<?php print implode("\n", $closures); ?>
-							</div>
-						</form>
-					</div>
-				</div>
-				<div id="loginInitBottomBorder"></div>
-			</div>
+<?php if(!$_SESSION['environment']->logged) : ?>
+<form action="<?php print $formAaction; ?>" method="post">
+	<div>
+		<input type="hidden" name="login_action" value="A_login" />
+		<label><?php print $_language['user']; ?>:</label>
+		<br />
+		<input type="text" name="frm_username" size="13" />
+		<label><?php print $_language['password']; ?>:</label>
+		<input type="password" name="frm_password" size="13" />
+		<br />
+		<div id="loginExit">
+			<button id="logout_button" type="submit">
+				<div id="loginInitLog"><?php print $_language['login']; ?></div>
+			</button>
+		</div>
+		<?php print implode("\n", $closures); ?>
+	</div>
+</form>
+<?php else : ?>
+<form action="?login_action=A_logout" method="post">
+	<div>
+		<select id="loginStatusSelect" name="select" onChange="AMEnvSession.changeMode(this.value);">
+			<?php print implode("\n", $options); ?>
+		</select>
+		<br />
+		<div id="loginExit">
+			<button id="logout_button" type="submit" onclick="location.href='<?php print $_CMAPP['url']; ?>/index.php?login_action=A_logout">
+				<div id="loginInitLog"><?php print $_language['exit']; ?></div>
+			</button>
+		</div>
+	</div>
+</form>
+<?php endif; ?>

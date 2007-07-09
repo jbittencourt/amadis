@@ -38,22 +38,27 @@ class AMBLogin extends CMHtmlObj {
   function __toString() {
     global $_CMAPP, $_language;
 
-    $injection = array(
-    	'formAction'=>$_CMAPP['form_login_action'],
-    	'label_user'=>$_language['user'],
-    	'label_password'=>$_language['password'],
-    	'closures'=>array()
-    );
+    if(!$_SESSION['environment']->logged) {
+    	$injection = array(
+    		'formAction'=>$_CMAPP['form_login_action'],
+    		'closures'=>array()
+    	);
     
-    if(!empty($this->requestVars)) {
-      foreach($this->requestVars as $k=>$item) {
-		$injection['closures'][] = '<input type="hidden" name="'.$k.'" value="'.$item.'" />';
-      }
+    	if(!empty($this->requestVars)) {
+	      	foreach($this->requestVars as $k=>$item) {
+				$injection['closures'][] = '<input type="hidden" name="'.$k.'" value="'.$item.'" />';
+      		}
+    	}
+	    parent::add(AMHTMLPage::loadView($injection, 'login_box'));
+    } else {
+    	$modes = AMEnvSession::getModes();
+    	$options = array();
+        foreach($modes as $k=>$item) {
+        	if($_SESSION['session']->visibility == $k) $options[] = "<option value=\"$k\" SELECTED>$item</option>";
+            else $options[] = "<option value=\"$k\">$item</option>";
+        }
+        parent::add(AMHTMLPage::loadView(array('options'=>$options), 'login_box'));
     }
-    
-    
-    parent::add(AMHTMLPage::loadView($injection, 'login_box', 'core_templates'));
-    
     return parent::__toString();
   }
 
