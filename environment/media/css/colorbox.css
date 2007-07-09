@@ -220,3 +220,18 @@
 	line-height: 20px;
 	color: #557B83;          
 }
+
+/* LISTS */
+.small-list .item {
+	display:block;
+}
+
+.small-list .thumb {
+	float: left;
+	margin: 5px 10px 5px 0;
+	width: 70px;
+}
+
+.small-list .description {
+	display:table-cell;
+}

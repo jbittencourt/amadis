@@ -9,7 +9,7 @@
 
 body {
 	border-left: solid 9px #00A3BA;
-	font-size: 13px;
+	font-size: 12px;
 	font-family: Arial, Helvetica, sans;
 	background-position: 9px;
 }
@@ -89,7 +89,8 @@ img { border: none; }
 }
 
 #dashed-line { 
-  border-top: dotted 1px #CCC; 
+  border-top: dotted 1px #CCC;
+  margin-bottom: 10px; 
 }
 
 /** FOOTER **/		
@@ -323,7 +324,7 @@ h1 {
 
 /* Puzzle piece in the top of menu head */
 #my {
-	background: url(images/puzzle.gif) no-repeat;
+	background: url(../images/puzzle.gif) no-repeat;
 	margin-left: 10px;
 	line-height: 25px;
 	padding-left: 28px; /* Espaçamento do texto a esquerda */
@@ -334,12 +335,12 @@ h1 {
 /* Top roundcorner of menu head */
 #imageTop {
 	height: 12px;
-	background: url(images/topborder.gif) no-repeat;
+	background: url(../images/topborder.gif) no-repeat;
 }
 
 /* Menu list items */
 #menu {
-	background: #e5f3f6 url(images/back_degrademl.png) repeat-x;
+	background: #e5f3f6 url(../images/back_degrademl.png) repeat-x;
 	border: solid 1px #b4e3eb;
 }
 
@@ -401,7 +402,7 @@ h1 {
 
 /* Menu itens : general properties */
 #menu ul li {
-	background: url(images/lineml.png);
+	background: url(../images/lineml.png);
 	background-repeat: repeat-x;
 	background-position: bottom left;
 	padding-top: 18px;
@@ -412,7 +413,7 @@ h1 {
 }
 
 #menu ul li:hover {
-	background: url(images/back_li_ml.gif) transparent repeat;	
+	background: url(../images/back_li_ml.gif) transparent repeat;	
 }
 
 /* Submenu list : properties inherited from Menu and added specific ones */
@@ -432,11 +433,10 @@ h1 {
 #menuBottom {
 	width: 172px;
 	height: 22px;
-	background: url(images/bottomborder.gif);
+	background: url(../images/bottomborder.gif);
 }
 
 /* AMADIS MENU END */ 
-
 
 
 /* GENERAL */
@@ -691,3 +691,11 @@ a.cinza:hover {
 	width: 48px;
 	text-align: center;
 }
+
+.clear { clear:both; }
+
+/* MENU BOX */
+.menu-box { background: url(../images/mn_box_bg.gif) repeat-y; }
+.menu-box .border-top { background: url(../images/mn_box_01.gif) no-repeat; }
+.menu-box .border-bottom { background: url(../images/mn_box_02.gif) no-repeat; }
+.menu-box .content { text-align: center; width: 150px;}

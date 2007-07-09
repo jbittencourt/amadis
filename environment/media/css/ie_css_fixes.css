@@ -42,3 +42,20 @@
 #center {
 	margin-top: 15px;
 }
+
+/* LIST BOX */
+.small-list .item {
+	display:block;
+}
+.small-list .thumb img {
+	float: left;
+	vertical-align: top;
+ 	/*display: table-row;*/
+	background: transparent;
+}
+
+.small-list .description {
+	margin-left: 75px;
+	display:table-row;
+	background: transparent;
+}
