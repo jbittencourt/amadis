@@ -45,7 +45,7 @@ projects = "Proyectos"
 friends = "Amigos"
 exit = "salir"
 user = "usuario"
-password  = "contraseña"
+password  = "contraseï¿½a"
 log = "logar"
 
 #section of the environment
@@ -177,7 +177,7 @@ proyectos, compartirlos con otros colegas, divulgar
 y discutir sus dudas, buscar informaciones,
 encontrar compa&ntilde;eros de trabajo y adem&aacute;s participar de cursos virtuales."
 
-areas = "Seleccione una de las &aacute;reas para listar<br> los proyectos referentes al t&oacute;pico:"
+areas = "Seleccione una de las &aacute;reas para listar<br /> los proyectos referentes al t&oacute;pico:"
 error_session_timeout = "Su sesi&oacute;n finaliz&oacute;. Por favor, ingrese el login nuevamente."
 error_cannot_register_logged = "Para poder realizar un nuevo registro en AMADIS, debe primero salir del ambiente."
 
@@ -238,7 +238,7 @@ fue correctamente enviado. Sin embargo eso no impide que utilice normalmente el 
 error_invalid_email = "La direcci&oacute;n de e-mail digitado no es v&aacute;lida."
 error_cannot_contact_email_server = "No consegu&iacute; contacto con el servidor de email que usted digit&oacute;. Eso puede ser un problema 
 
-temporario de comunicaci&oacute;n, o un problema en el llenado del formulario. ¿Est&aacute; seguro que su email es {EMAIL}?"
+temporario de comunicaci&oacute;n, o un problema en el llenado del formulario. ï¿½Est&aacute; seguro que su email es {EMAIL}?"
 
 pag_0 = "Nombre de Usuario y Contrase&ntilde;a"
 pag_1 = "Datos Personales"
@@ -248,7 +248,7 @@ pag_3 = "Finalizar Registro"
 #email to be send when the user register
 register_accepted_email = "<html> <body> <p>Querido(a) {FIRSTNAME}, <p>Su registro fue aceptado en AMADIS con los siguientes datos: 
 
-<p>Usuario: {USERNAME} <br>Nombre Completo: {NAME} <p>Para accesar al ambiente, basta visitar el sitio {URL}, digitar su usuario y 
+<p>Usuario: {USERNAME} <br />Nombre Completo: {NAME} <p>Para accesar al ambiente, basta visitar el sitio {URL}, digitar su usuario y 
 
 contrase&ntilde;a en el Login (ver abajo), y clicar en OK.  <p align=center><img src='{IMG_URL}/howto_login.gif'> </body> </html>"
 
@@ -286,7 +286,7 @@ post_not_deleted = "No fue posible grabar su nota!"
 post_com_comments = "Esta nota del diario no puede ser removida, pues ya posee comentarios!"
 post_no_edit = "Esta nota del diario no puede ser editada, pues ya posee comentarios!"
 post_new_comment = "Escribir nuevo Comentario"
-post_delete = "¿Est&aacute; seguro que desea borrar esta nota en el diario?"
+post_delete = "ï¿½Est&aacute; seguro que desea borrar esta nota en el diario?"
 
 comments_dont_exists = "Esta nota todav&iacute;a no posee comentarios"
 
@@ -309,7 +309,7 @@ error_post_cannot_be_deleted = "Este Post no puede ser borrado pues ya posee com
 error_post_not_delete = "No fue posible borrar esta nota!"
 error_post_does_not_exist = "Ese post no existe o fue borrado"
 error_user_not_logged = "Usted necesita estar logueado en el sistema para acceder a su diario personal";
-error_fail_delete_message = "Ocurri&oacute; un problema al borrar el mensaje.<br> Por favor, intente nuevamente."
+error_fail_delete_message = "Ocurri&oacute; un problema al borrar el mensaje.<br /> Por favor, intente nuevamente."
 
 
 [Correio]
@@ -335,7 +335,7 @@ message = "Mensaje:"
 read_my_messages = "Ver mis mensajes"
 read_messages = "Ver mensajes"
 error_message_not_send = "No fue posible enviar su mensaje."
-error_message_send_success = "¡Su mensaje fue enviado con &eacute;xito!"
+error_message_send_success = "ï¿½Su mensaje fue enviado con &eacute;xito!"
 user_profile = "Ver webfolio"
 communities = "Comunidades"
 new_message = "nuevo mensaje para usted"
@@ -385,7 +385,7 @@ noPhotos = "Este usu&aacute;rio ainda n&atilde;o tem fotos!";
 msg_file_successful_sent = "Foto armazenada com sucesso!"
 msg_file_successful_delete = "Foto removida com sucesso!"
 msg_comment_successfull_edited = "Coment&aacute;rio alterado"
-error_send_file = "Problemas ao enviar a foto, tente novamente!<br>Veja se a extens&atilde;o do arquivo (ex.:'.jpg') est&aacute; correta"
+error_send_file = "Problemas ao enviar a foto, tente novamente!<br />Veja se a extens&atilde;o do arquivo (ex.:'.jpg') est&aacute; correta"
 error_del_file = "Problemas ao deletar o arquivo, caso ocorra novamente contate o administrador do sistema"
 error_edit_comment = "Erro ao salvar o novo coment&aacute;rio"
 
@@ -394,7 +394,7 @@ photo = "Especifique uma foto do seu computador:"
 update= "Atualizar"
 
 [chat]
-save_chat = "¿Salvar el chat de la sala?"
+save_chat = "ï¿½Salvar el chat de la sala?"
 init_date_chat = "Coloque la fecha de inicio de su chat"
 end_date_chat = "Coloque la fecha de final de su chat"
 infinity_chat = "Mantener este chat siempre abierto"
@@ -418,7 +418,7 @@ user_already_in_room = "Usuario ya est&aacute; en otra sala de chat"
 no_chats_open = "No hay chats en este momento."
 no_marked_chats = "No hay chats marcados."
 save_chat_error = "Error al salvar el chat"
-save_chat_success = "¡Chat salvado con &Eacute;xito!"
+save_chat_success = "ï¿½Chat salvado con &Eacute;xito!"
 scheduled_chat = "chat agendado"
 in_progress_chat = "chat en desarrollo"
 no_chats = "No hay ning&uacute;n chat marcado o realiz&aacute;ndose en el momento."
@@ -472,9 +472,9 @@ frm_datInscricaoFim = "Finalizaci&oacute;n de las Inscripciones"
 
 
 [errors]
-error_course_not_exists = "¡El curso solicitado no existe!"
-error_project_not_exists = "¡El proyecto solicitado no existe!"
-error_community_not_exists = "¡La comunidad solicitada no existe!"
+error_course_not_exists = "ï¿½El curso solicitado no existe!"
+error_project_not_exists = "ï¿½El proyecto solicitado no existe!"
+error_community_not_exists = "ï¿½La comunidad solicitada no existe!"
 error_not_a_project_member = "Usted no es un miembro de este proyecto."
 error_not_a_course_member = "Usted no es un participante de este curso."
 
@@ -488,8 +488,8 @@ msg_joined_project = "Ahora usted es parte del equipo del proyecto "
 msg_rejected_project = "Usted rechaz&oacute; el pedido para ser parte del proyecto "
 
 error_joining_project = "Ocurri&oacute; alg&uacute;n problema al intentar aceptar la invitaci&oacute;n. Por favor intente nuevamente."
-error_invitation_user_failed = "¡No fue posible agregar el amigo!"
-msg_invitation_user_success = "¡Amigo agregado con &eacute;xito!"
+error_invitation_user_failed = "ï¿½No fue posible agregar el amigo!"
+msg_invitation_user_success = "ï¿½Amigo agregado con &eacute;xito!"
 msg_invitation_reject_success = "";
 
 error_under_construction = "Esta herramienta se encuentra en construcci&oacute;n"
@@ -516,7 +516,7 @@ escolher_cidade ="Elija una ciudad:"
 frm_username="Digite un nombre de usuario:"
 #frm_username_desc="El nombre de usuario sirve para efectuar la salida del ambiente."
 frm_password="Digite una contrase&ntilde;a:"
-#frm_password_desc="¡Su contrase&ntilde;a es secreta no la pierda!"
+#frm_password_desc="ï¿½Su contrase&ntilde;a es secreta no la pierda!"
 frm_re_password="Re-digite la contrase&ntilde;a:"
 
 frm_name="Digite su nombre completo:"
@@ -559,7 +559,7 @@ entre en contacto con el administrador del sistema."
 
 error_cannot_contact_email_server = "No establec&iacute; contacto con el servidor de email que digit&oacute;. Puede ser un problema 
 
-temporario de comunicaci&oacute;n o un problema en el registro del formulario. ¿Tiene seguridad que su email es {EMAIL}?"
+temporario de comunicaci&oacute;n o un problema en el registro del formulario. ï¿½Tiene seguridad que su email es {EMAIL}?"
 
 
 [recoverPassword]
@@ -622,7 +622,7 @@ chats, agregar informaciones de otros diarios de Internet al proyecto. Por medio
 
 entre los miembros de las comunidades, estimulando el desarrollo de los saberes de cada uno."
 
-areas = "Seleccione una de las &aacute;reas para listar<br> los proyectos referentes al t&oacute;pico:"
+areas = "Seleccione una de las &aacute;reas para listar<br /> los proyectos referentes al t&oacute;pico:"
 any_area = "Ning&uacute;n &aacute;rea registrada"
 no_members = "Ning&uacute;n miembro registrado"
 more_members = "Ver todos los miembros que participaron del proyecto:"
@@ -656,11 +656,11 @@ no_files = "Sin archivos en el momento"
 isShared = "Compartido"
 list_all_files = "Listar todos los archhivos compartidos"
 
-project_leave_confirm = "¿Tiene seguridad que desea abandonar este proyecto?"
+project_leave_confirm = "ï¿½Tiene seguridad que desea abandonar este proyecto?"
 project_not_projects = "Usted no posee ning&uacute;n proyecto"
 projects_community = "Seleccione una comunidad para listar los proyectos"
 project_join = "Unirme a este Proyecto"
-project_join_request = "¿Por qu&eacute; desea formar parte de ese proyecto?"
+project_join_request = "ï¿½Por qu&eacute; desea formar parte de ese proyecto?"
 user_join_request = " desea volverse miembro de este proyecto."
 list_projects = "Listado de los proyectos"
 list_projects_areas = "Proyectos de"
@@ -687,9 +687,9 @@ request_join_waiting = "Su solicitud para participar de ese proyecto est&aacute;
 search_projects = "Buscar en los Proyectos"
 
 error_no_explain_join_project = "Debe escribir sus motivos para entrar en este proyecto"
-msg_save_comment_success  = "¡Su comentario fue enviado con &eacute;xito!"
-error_not_save_comment = "Su comentario no fue aceptado.<br> Si el problema persiste contacte al administrador del ambiente."
-error_not_save_news = "¡La noticia no fue grabada!"
+msg_save_comment_success  = "ï¿½Su comentario fue enviado con &eacute;xito!"
+error_not_save_comment = "Su comentario no fue aceptado.<br /> Si el problema persiste contacte al administrador del ambiente."
+error_not_save_news = "ï¿½La noticia no fue grabada!"
 msg_save_news_success = "Su noticia fue grabada con &eacute;xito!"
 error_any_project_id = "Ning&uacute;n identificador del proyecto fue especificado!"
 error_project_code_does_not_exists = "El proyecto que fue requerido no existe en el banco de datos. Por favor contacte al administrador del 
@@ -702,7 +702,7 @@ error_joining_user = "Ocurri&oacute; un error al aceptar este pedido. Por favor 
 error_cannot_leave_project = "Ocurri&oacute; alg&uacute;n error al abandonar ese proyecto. Por favor intente nuevamente."
 error_edit_not_allowed = "Solamente puede editar los proyectos en los cuales participa."
 
-msg_project_created = "¡El proyecto fue creado con &eacute;xito!"
+msg_project_created = "ï¿½El proyecto fue creado con &eacute;xito!"
 msg_join_request_send = "Su solicitud para integrarse a ese proyecto fue registrada, por favor, espere una respuesta"
 msg_user_added = " fue aceptado como miembro de este proyecto."
 msg_user_rejected = " fue rechazado como miembro de este proyecto."
@@ -769,7 +769,7 @@ error_upload_err_partial = "No fue realizado el env&iacute;o completo del archiv
 error_upload_err_no_file = "El archivo: {FILE} no fue enviado."
 error_cannot_delete_diretory = "No fue posible borrar el directorio: {DIR}"
 msg_diretory_removed_success = "El directorio: {DIR} fue removido con &eacute;xito"
-msg_files_removed_success = "¡Archivo(s) removido(s) con &eacute;xito!"
+msg_files_removed_success = "ï¿½Archivo(s) removido(s) con &eacute;xito!"
 msg_diretory_created_success = "El directorio: {DIR} fue creado con &eacute;xito."
 msg_upload_success = "Archivo(s) enviado(s) con &eacute;xito."
 msg_upload_unzip_success = "archivo descompactado con &eacute;xito."
@@ -791,7 +791,7 @@ send_files = "Enviar archivos:"
 
 fields_to_delete = "Los siguientes archivos ser&aacute;n removidos!"
 not_delete_empty_diretory = "Este directorio est&aacute; vacio. No es posible borrarlo,\n estando dentro de &eacute;l!"
-not_selected_files = "¡No fue seleccionado ning&uacute;n archivo!"
+not_selected_files = "ï¿½No fue seleccionado ning&uacute;n archivo!"
 new_folder_name = "Digite el nombre de la nueva carpeta:\n"
 number_files_to_send = "Quiero enviar m&aacute;s archivos:"
 overwrite_files = "Los siguientes archivos ser&aacute;n  sobrescritos:"
@@ -836,10 +836,10 @@ add_news = "Agregar una novedad"
 community_join = "Integrarme a esta comunidad"
 communities = "Comunidades"
 more_options = "M&aacute;s Opciones"
-msg_community_created = "¡Comunidad creada con &eacute;xito!"
+msg_community_created = "ï¿½Comunidad creada con &eacute;xito!"
 msg_community_updated ="Comunidad Actualizada con &Eacute;xito"
 without_communities_news = "No hay entrada de noticias en las comunidades"
-msg_community_news_created = "¡Noticia salvada con &eacute;xito!"
+msg_community_news_created = "ï¿½Noticia salvada con &eacute;xito!"
 community = "Comunidad"
 error_community_not_exists = "La comunidad solicitada no existe"
 error_no_community_id = "No fue especificado un identificador para la comunidad"
@@ -854,7 +854,7 @@ community_link_change_image = "Alterar imagen"
 community_link_forum = "Foros de la Comunidad"
 community_link_chat = "Chats de la Comunidad"
 community_link_leave = "Abandonar esa Comunidad"
-membersjoin_not_exists = "¡No existen solicitudes de nuevos miembros para esta Comunidad!"
+membersjoin_not_exists = "ï¿½No existen solicitudes de nuevos miembros para esta Comunidad!"
 
 list_projects_community = "Lista de proyectos vinculados a la Comunidad "
 
@@ -862,7 +862,7 @@ no_projects = "No hay proyectos para esta comunidad"
 more_projects = "M&aacute;s proyectos"
 tie_project = "Vincular un proyecto a esta comunidad"
 error_cannot_leave_community = "Ocurri&oacute; alg&uacute;n error al dejar esa comunidad. Por favor intente nuevamente."
-community_leave_confirm = "¿Est&aacute; seguro que desea abandonar esta comunidad?"
+community_leave_confirm = "ï¿½Est&aacute; seguro que desea abandonar esta comunidad?"
 msg_leave_community = " Usted no es m&aacute;s miembro de la comunidad"
 user_added ="Usuario agregado a la comunidad"
 user_rejected ="Usuario rechazado"
@@ -883,7 +883,7 @@ see_not_judged_subscriptions = "Ver Inscripciones no juzgadas"
 frm_title = "T&iacute;tulo de la noticia"
 frm_text = "Texto de la noticia"
 community_news = "Noticia de la comunidad"
-save_failure = "No fue posible salvar la noticia.<br> Intente nuevamente, si el problema persiste contacte al administrador del sistema."
+save_failure = "No fue posible salvar la noticia.<br /> Intente nuevamente, si el problema persiste contacte al administrador del sistema."
 pag_0 = "Noticia de la comunidad"
 pag_1 = "Terminar"
 send_news = "Enviar"
@@ -923,7 +923,7 @@ not_group_member = "Usted no es miembro de esta comunidad"
 invite_users_to_community = "Invitar usuarios para la comunidad"
 error_user_not_select = "Ning&uacute;n usuario fue seleccionado"
 
-msg_invitation_success = "¡Invitaci&oacute;n realizada con &eacute;xito!"
+msg_invitation_success = "ï¿½Invitaci&oacute;n realizada con &eacute;xito!"
 error_invitation_failed = "No fue posible realizar esta invitaci&oacute;n"
 msg_user_removed = "Usuario removido"
 
@@ -1018,7 +1018,7 @@ config_chat = "Configurar Chat"
 config_communities = "Configurar Comunidades"
 city_name = "Nombre de la ciudad"
 list_not_authorized = "Comunidades no autorizadas"
-error_authorization_success = "¡Autorizaci&oacute;n de la(s) comunidad(es) realizada con &eacute;xito!"
+error_authorization_success = "ï¿½Autorizaci&oacute;n de la(s) comunidad(es) realizada con &eacute;xito!"
 send_messages = "Enviar avisos para usuarios"
 user_not_found = "Usuario no encontrado"
 set_new_pw = "Digite la nueva contrase&ntilde;a para "
@@ -1026,7 +1026,7 @@ send_notification = "Enviar notificaci&oacute;n para"
 select_state = "Seleccione un Estado"
 retype_new_pw = "Re-digite la nueva contrase&ntilde;a"
 pw_notmatch = "La contrase&ntilde;a no coincide. Intente nuevamente"
-pw_successful_change = "¡Contrase&ntilde;a cambiada con &eacute;xito!"
+pw_successful_change = "ï¿½Contrase&ntilde;a cambiada con &eacute;xito!"
 msg_c_delete_successful = "Comunidad exclu&iacute;da con &eacute;xito"
 error_c_delete_failed = "No fue posible excluir a la comunidad"
 msg_c_auth_successful = "Comunidad autorizada con &eacute;xito"
@@ -1093,7 +1093,7 @@ error_cannot_edit_forum = "No fue posible editar el foro debido a un error desco
 finder = "Finder"
 reply_to = "Responder para "
 user_close_window = "La ventana de conversaci&oacute;n fue cerrada."
-conversation_timeout = "¡La conversaci&oacute;n se volvi&oacute; inactiva!"
+conversation_timeout = "ï¿½La conversaci&oacute;n se volvi&oacute; inactiva!"
 
 
 [library]
@@ -1109,7 +1109,7 @@ other_file = "Otros"
 list_all_files = "Listar todos los archivos"
 thumbs = "Miniaturas";
 isShared = "Compartido"
-wish_delete = "¿Est&aacute; seguro que desea borrar este archivo?"
+wish_delete = "ï¿½Est&aacute; seguro que desea borrar este archivo?"
 
 no_img = "No tenemos im&aacute;genes en el momento"
 no_docs = "No tenemos textos en el momento"
@@ -1119,7 +1119,7 @@ no_other = "No tenemos otros archivos en el momento"
 no_all = "No tenemos documentos en esta biblioteca, para insertar nuevos use el campo abajo!"
 no_files = "Sin archivos en el momento"
 
-file_successful_sent = "¡Archivo enviado con &eacute;xito!"
+file_successful_sent = "ï¿½Archivo enviado con &eacute;xito!"
 file_successful_delete = "Archivo eliminado con &eacute;xito!"
 error_send_file = "Error al enviar el archivo."
 
