@@ -1,5 +1,5 @@
 <!-- BEGIN COLORBOX <?php print $box_id . '-' . $box_class; ?>-->
-<div id="<?php print $box_id; ?>" class="color-box <?php print $box_class; ?>" <?php print $box_width; ?>>
+<div <?php if(!empty($box_id)) { print 'id="'.$box_id.'"'; } ?> class="color-box <?php print $box_class; ?>" <?php print $box_width; ?>>
 	<div class="border-top"> <div class="border-top-right"></div> </div>
 	<div class="content">
 		<?php print $box_title ?>

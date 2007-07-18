@@ -1,5 +1,5 @@
 <?php if(!$_SESSION['environment']->logged) : ?>
-<form action="<?php print $formAaction; ?>" method="post">
+<form action="<?php print $formAction; ?>" method="post">
 	<div>
 		<input type="hidden" name="login_action" value="A_login" />
 		<label><?php print $_language['user']; ?>:</label>
@@ -19,7 +19,7 @@
 <?php else : ?>
 <form action="?login_action=A_logout" method="post">
 	<div>
-		<select id="loginStatusSelect" name="select" onChange="AMEnvSession.changeMode(this.value);">
+		<select id="loginStatusSelect" name="select" onchange="AMEnvSession.changeMode(this.value);">
 			<?php print implode("\n", $options); ?>
 		</select>
 		<br />
