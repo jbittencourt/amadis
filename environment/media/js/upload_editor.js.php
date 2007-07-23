@@ -17,7 +17,7 @@ function initDocument() {
 
 
 //Example on how to add a custom button when you construct the HTMLArea:
-//echo "for (var i in editor) { document.write(i+"<br>") }";
+//echo "for (var i in editor) { document.write(i+"<br />") }";
   var editor = new HTMLArea("<?=$_SESSION[smartform][cmwhtmlarea][name]?>");
   var cfg = editor.config; // this is the default configuration;
 

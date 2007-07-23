@@ -37,3 +37,51 @@ function Blog_deletePost(codePost){
 
   return false;
 }
+
+
+var Blog = {
+	newPost : function() {
+		$('new-post').toggle();
+		$('frm_codePost').value = '';
+		$('frm_title').value = '';
+
+		/**
+		 * TODO - Find a way to clean the editor when create a new post. 
+		 */
+		//enableDesignMode('frm_body', 'write', false);
+	},
+
+	cancelEdit : function() {
+		$('new-post').hide();
+	},	
+
+	editPost : function(id) {
+		$('new-post').show();
+		window.location = "#editor";
+		$('frm_codePost').value = id;
+		$('frm_title').value = $('post-title-'+id).innerHTML;
+		enableDesignMode('frm_body', $('post-content-'+id).innerHTML, false);
+	},
+
+	replyComment : function(codePost, codeComment) {
+		if($('post_'+codePost).style == 'block') {
+			$('post_'+codePost).hide();
+			return;	
+		}
+		new Ajax.Updater('reply-'+codeComment, 'ajax/comments.php?frm_action=reply_comment', {
+			parameters : '&frm_codePost='+codePost+'&frm_codeComment='+codeComment
+		});
+		$('reply-'+codeComment).toggle();
+	},
+	
+	loadComments : function(codePost) {
+		if($('post_'+codePost).style == 'block') {
+			$('post_'+codePost).hide();
+			return;	
+		}
+		new Ajax.Updater('post_'+codePost, 'ajax/comments.php?frm_codePost='+codePost, {
+			parameters : { evalScripts : true }
+		});
+		$('post_'+codePost).toggle();
+	}
+}

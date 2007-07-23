@@ -100,7 +100,7 @@ function AM_debugBrowserObject(obj) {
   for (var i in obj) {
     var property = obj[i];
     out += i+"###";
-    out += property+"<br>";
+    out += property+"<br />";
    
   }
   //out += "</table>";

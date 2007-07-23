@@ -53,7 +53,7 @@ var AMFinderCallBack = {
       switch(result[i].responseType) {
       case "finder_alert":
 	  	var iChat = AM_getIFrameDocument(chatDoc);
-		msg.innerHTML = "<br><div style='font-color: #FF0000'>"+result[i].message+"</div>";
+		msg.innerHTML = "<br /><div style='font-color: #FF0000'>"+result[i].message+"</div>";
 		iChatDoc.body.appendChild(msg);
 		//chatDoc.appendChild(msg);
 		chatDoc.scrollTop += chatDoc.scrollHeight;
@@ -61,8 +61,8 @@ var AMFinderCallBack = {
 
       case "finder_timeout":
 	  	var iChat = AM_getIFrameDocument(chatDoc);
-		//msg.innerHTML = "<br><span class='finder_timeout'>"+AMFinder_lang[result[i].message]+"</span>";
-		msg.innerHTML = "<br><div class='finder_timeout'>"+AMFinder_lang[result[i].message]+"</div>";
+		//msg.innerHTML = "<br /><span class='finder_timeout'>"+AMFinder_lang[result[i].message]+"</span>";
+		msg.innerHTML = "<br /><div class='finder_timeout'>"+AMFinder_lang[result[i].message]+"</div>";
 		window.clearInterval(eval("AMFinder_Timeout_"+result.sessionId));
 		iChat.body.appendChild(msg);
 		chatDoc.scrollTop += chatDoc.scrollHeight;
@@ -74,7 +74,7 @@ var AMFinderCallBack = {
 		 
 		Finder_tabAlert(result.sessionId, 'alert_finder', false);
 		var out = "";
-		out += "<br><div class='"+result[i].style+"'>";
+		out += "<br /><div class='"+result[i].style+"'>";
 		out += result[i].username+"("+result[i].date+"): ";
 		out += result[i].message;
 		out += "</div>";

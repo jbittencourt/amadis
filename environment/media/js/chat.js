@@ -17,7 +17,7 @@ var AMChatCallBack = {
     case "repeated_name":
       var name = AM_getElement('frm_room_name');
       var msg = window.document.createElement("SPAN");
-      msg.innerHTML = "*Este nome j&aacute; est&aacute; sendo utilizado!<br>";
+      msg.innerHTML = "*Este nome j&aacute; est&aacute; sendo utilizado!<br />";
       msg.style.setProperty("color", Chat_originalColor,"");
       msg.setAttribute("id", "alertRoomName");
       
@@ -45,7 +45,7 @@ var AMChatCallBack = {
 
 	chat.setAttribute("class","textoverde");
 
-	var out = "<b>"+result.obj.name+"</b><br>";
+	var out = "<b>"+result.obj.name+"</b><br />";
 	out += language_scheduled_to+"&nbsp;<span class='datachat'>"+date.hours+":"+date.minutes+"&nbsp;"+language_of_day+"&nbsp;"+date.mday+"/"+date.mon+"/"+date.year+"</span>";
 	
 	chat.innerHTML = out;
@@ -86,7 +86,7 @@ function Chat_saveChat(form) {
   if(!chkName){
     chkName = true;
     var msg = window.document.createElement("SPAN");
-    msg.innerHTML = "*Preencha com o nome para sala!<br>";
+    msg.innerHTML = "*Preencha com o nome para sala!<br />";
     msg.style.setProperty("color", Chat_originalColor,"");
     name.focus();
     //original color e1f7f9 
@@ -98,7 +98,7 @@ function Chat_saveChat(form) {
     chkSubject = true;
 
     var msg = window.document.createElement("SPAN");
-    msg.innerHTML = "*Preencha com o assunto da sala!<br>";
+    msg.innerHTML = "*Preencha com o assunto da sala!<br />";
     msg.style.setProperty("color", Chat_originalColor,"");
     subject.focus();
     

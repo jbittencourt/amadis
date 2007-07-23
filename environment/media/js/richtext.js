@@ -642,13 +642,13 @@ function ieKeyPress(evt, rte) {
   //the following breaks list and indentation functionality in IE (don't use)
   //	switch (key) {
   //		case 13:
-  //			//insert <br> tag instead of <p>
+  //			//insert <br /> tag instead of <p>
   //			//change the key pressed to null
   //			evt.keyCode = 0;
   //			
-  //			//insert <br> tag
+  //			//insert <br /> tag
   //			currentRTE = rte;
-  //			insertHTML('<br>');
+  //			insertHTML('<br />');
   //			break;
   //	};
 }

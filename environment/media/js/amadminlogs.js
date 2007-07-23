@@ -11,7 +11,7 @@ AMAdminLogsCallBack = {
 	    
 	if(result != null){
 	    for(i=0;i<result.length;i++){
-    	 	txt += result[i]+"<br>";
+    	 	txt += result[i]+"<br />";
 	     }
      	obj.innerHTML = txt;
 	    obj.style.display = "block";
