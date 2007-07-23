@@ -27,7 +27,7 @@ class AMChatMessages extends CMObj {
     $message->userStyle = $_SESSION['amadis']['chat']['color'];
     $message->time = time();
     
-    $message->message = strip_tags($text,"<br><b><i><u>");
+    $message->message = strip_tags($text,"<br /><b><i><u>");
     
     $message->save();
 

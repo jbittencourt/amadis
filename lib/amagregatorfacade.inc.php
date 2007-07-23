@@ -20,7 +20,7 @@ class AMAgregatorFacade implements AMAjax {
         $ret['items'] = array();
         if($sources->__hasItems()) {
             foreach($sources as $item) {
-				$ret['items'][] = "<input type=checkbox id=external_".$item->codeBlog." name=external_".$item->codeBlog.">".$item->title."<br>\n";
+				$ret['items'][] = "<input type=checkbox id=external_".$item->codeBlog." name=external_".$item->codeBlog.">".$item->title."<br />\n";
             }
         }
         return $ret;
@@ -53,7 +53,7 @@ class AMAgregatorFacade implements AMAjax {
 		    
 			$t = "<img src='$_CMAPP[images_url]/icon_rss_on.gif' id='status_$source->codeSource' onclick=\"Aggregator_toggleStatus(this.id);\" class='cursor' align='absmiddle'> "
 			   . "<img src='$_CMAPP[images_url]/icon_excluir_agregador.gif' id='delete_$source->codeSource' onclick=\"Aggregator_deleteSource(this.id);\" align='absmiddle'>"
-			   . "<span class='font_rss'>$source->title</span><br>";
+			   . "<span class='font_rss'>$source->title</span><br />";
 			$ret['src'] = $t;
 			$ret['id'] = $source->codeSource;
 		}catch(CMException $e) {
@@ -148,7 +148,7 @@ class AMAgregatorFacade implements AMAjax {
 		
 		try {
 			$filter->save();
-			$ret['src'] = $keyword." <img src='$_CMAPP[images_url]/icon_excluir_agregador.gif' onclick=\"Aggregator_deleteFilter($id, '".$keyword."', $count);\" align='absmiddle'><br>";
+			$ret['src'] = $keyword." <img src='$_CMAPP[images_url]/icon_excluir_agregador.gif' onclick=\"Aggregator_deleteFilter($id, '".$keyword."', $count);\" align='absmiddle'><br />";
 			$ret['count'] = $count;
 		}catch(CMException $e) {
 			$ret = 0;

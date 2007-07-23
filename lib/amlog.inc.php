@@ -77,7 +77,7 @@ class AMLog {
 				$hm = $h * 60;
 				$ms = $hm * 60;
 				$gmdate = gmdate("M d Y H:i:s ", time()-($ms)); // the "-" can be switched to a plus if that's what your time zone is.
-				$HASH_ERRORS[$er['module']][] = "$gmdate - $actor_name($actor_id)<br>CLASS:$er[thrower]:Exception:$er[exception]\n";
+				$HASH_ERRORS[$er['module']][] = "$gmdate - $actor_name($actor_id)<br />CLASS:$er[thrower]:Exception:$er[exception]\n";
     			
     		}
 

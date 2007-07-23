@@ -12,8 +12,8 @@ class AMArea extends CMObj {
     
     function listProjects() {
          
-        $q = new CMQuery(AMProject);
-        $q->setNaturalJoin(AMProjectArea,"temp");
+        $q = new CMQuery('AMProject');
+        $q->setNaturalJoin('AMProjectArea',"temp");
         $q->setFilter("codeArea = '$this->codeArea'");
         return $q->execute();
     }

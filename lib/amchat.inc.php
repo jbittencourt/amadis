@@ -72,7 +72,7 @@ class AMChat implements AMAjax {
 	}catch(CMException $e) {
 	  $chatRoom->delete();
 	  $ret['error'] = "not_saved";
-	  $box = new AMAlertBox(AMAlertBox::ERROR, $err."<br>ChatProject::".$e->getMessage());
+	  $box = new AMAlertBox(AMAlertBox::ERROR, $err."<br />ChatProject::".$e->getMessage());
 	}
 	break;
 
@@ -85,13 +85,13 @@ class AMChat implements AMAjax {
 	}catch(CMException $e) {
 	  $chatRoom->delete();
 	  $ret['error'] = "not_saved";
-	  $box = new AMAlertBox(AMAlertBox::ERROR, $err."<br>ChatCommunity::".$e->getMessage());
+	  $box = new AMAlertBox(AMAlertBox::ERROR, $err."<br />ChatCommunity::".$e->getMessage());
 	}
 	break;
       }
     }catch(CMException $e) {
       $ret['error'] = "not_saved";
-      $box = new AMAlertBox(AMAlertBox::ERROR, $err."<br>ChatRoom::".$e->getMessage());
+      $box = new AMAlertBox(AMAlertBox::ERROR, $err."<br />ChatRoom::".$e->getMessage());
     }
       
     $ret['msg'] = $box->__toString();
@@ -136,7 +136,7 @@ class AMChat implements AMAjax {
 	$msg .= "</div>\n";
 	$linesNumber = (strlen($message)*2)+100;
 	//$msg .= CMHTMLObj::getScript("window.scrollTela($linesNumber);");
-	//$msg .= CMHTMLObj::getScript("for(var i in window) document.write(window[i]+'<br>');");
+	//$msg .= CMHTMLObj::getScript("for(var i in window) document.write(window[i]+'<br />');");
 	$return[] = $msg;
       }
     } else return 0;

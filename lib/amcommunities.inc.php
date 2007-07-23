@@ -43,8 +43,7 @@ class AMCommunities extends CMObj implements  CMACLAppInterface
 
         $this->addPrimaryKey("code");
 
-        $this->setEnumValidValues("flagAuth",array(self::ENUM_FLAGAUTH_ALLOW,
-        self::ENUM_FLAGAUTH_REQUEST));
+        $this->setEnumValidValues("flagAuth",array(self::ENUM_FLAGAUTH_ALLOW, self::ENUM_FLAGAUTH_REQUEST));
     }
 
    /** 
