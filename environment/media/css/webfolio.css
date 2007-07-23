@@ -1,59 +1,122 @@
-.webfolio_forum A { 
-                    text-decoration: none; 
-                    color: #666666; 
-                    FONT-FAMILY: Arial;	
-                    FONT-SIZE: 11px; 
-                    line-height : 20px; 
-                    position: relative;
-                  }
+.webfolio_forum A {
+	text-decoration: none; 
+    color: #666666; 
+    line-height : 20px;
+	position: relative;
+}
 
+.webfolio_forum A:hover {
+	text-decoration: underline;
+}
 
-.webfolio_forum A:hover { 
-                          text-decoration: underline;
-                          }
+.webfolio_forum_new A {
+	text-decoration: none;
+	color: green; 
+	line-height : 20px; 
+	position: relative;
+}
 
+.webfolio_forum_new A:hover {
+	text-decoration: underline;
+}
 
-.webfolio_forum_new A { 
-                    text-decoration: none; 
-                    color: green; 
-                    FONT-FAMILY: Arial;	
-                    FONT-SIZE: 11px; 
-                    line-height : 20px; 
-                    position: relative;
-                  }
+TABLE#scraps  {
+	width: 100%;
+}
 
-
-.webfolio_forum_new A:hover { 
-                          text-decoration: underline;
-                          }
-
-
-TABLE#scraps  { 
-                width: 100%;
-                }
-
-TABLE#scraps  TD { 
-                font-family: Arial, Helvetica, sans-serif;
-                font-size: 11px;
-                line-height: 16px;
-                color: #666666;
-                }
+TABLE#scraps  TD {
+	line-height: 16px;
+    color: #666666;
+}
 
 TABLE#scraps IMG#thumb { 
-         border: 2px solid #80BAC9;
-         }
+	border: 2px solid #80BAC9;
+}
 
-
-.webfolio-title { 
-                  font-family: Arial, Helvetica, sans-serif;
-                  font-size:18px;
-                  line-height: 20px;
-                  text-decoration: none;
-                  color: #7ABFF5;
-                  }
-
+.webfolio-title {
+	font-size:140%;
+	line-height: 20px;
+    text-decoration: none;
+    color: #7ABFF5;
+	display:block;
+	padding-top: 7px;
+	margin-left: 55px;
+}
 
 .new_comments  {
 	color: #4781b2;
 }
 
+/* FLASH ACTIONS BUTTONS */
+.webfolio-items {
+	background-color : #FFF;
+	border : 2px solid #E8EEFD;
+    height : 52px;
+    /*width : 68px;*/                 
+    text-align : center;
+    position : relative;
+    background-repeat: no-repeat;
+    background-position: 50% 25%;
+}
+
+.webfolio-items:hover  { 
+	background-color: #FFF; 
+    border: 2px solid #E8EEFD;
+    height : 52px;
+    /*width : 75px;*/
+    text-align: center;
+    position:relative;
+    background-repeat: no-repeat;
+    background-position: 50% 25%;
+}
+
+.webfolio-items-text { 
+	color: #306BBA;
+	line-height: 14px;
+    display: block;
+	text-align: center;
+	width: 100%;
+    position: relative;
+}
+
+/* PAGE BUTTON */
+/*IE*/
+BUTTON#page { background-image: url("../images/icon_page_on.gif"); background-color: #FFF; }
+
+BUTTON#page[class~=webfolio-items] { background-image: url("../images/icon_page_off.gif"); background-color: #FFF; }
+BUTTON#page[class~=webfolio-items]:hover { background-image: url("../images/icon_page_on.gif"); background-color: #EFF3FD; }
+
+/* BLOG BUTTON */
+/*IE*/
+BUTTON#blog { background-image: url("../images/icon_diario_on.gif"); background-color: #FFF; }
+
+BUTTON#blog[class~=webfolio-items] { background-image: url("../images/icon_diario_off.gif"); background-color: #FFF; }
+BUTTON#blog[class~=webfolio-items]:hover { background-image: url("../images/icon_diario_on.gif"); background-color: #EFF3FD; }
+
+/* FRIEND BUTTON */
+/*IE*/
+BUTTON#friend { background-image: url("../images/icon_addfriend_on.gif"); background-color: #FFF; }
+
+BUTTON#friend[class~=webfolio-items] { background-image: url("../images/icon_addfriend_off.gif"); background-color: #FFF; }
+BUTTON#friend[class~=webfolio-items]:hover { background-image: url("../images/icon_addfriend_on.gif"); background-color: #EFF3FD; }
+
+/* LIBRARY BUTTON */
+/*IE*/
+BUTTON#files { background-image: url("../images/icon_files_on.gif"); background-color: #FFF; }
+
+BUTTON#files[class~=webfolio-items] { background-image: url("../images/icon_files_off.gif"); background-color: #FFF; }
+BUTTON#files[class~=webfolio-items]:hover { background-image: url("../images/icon_files_on.gif"); background-color: #EFF3FD; }
+
+/* ALBUM BUTTON */
+/*IE*/
+BUTTON#album { background-image: url("../images/icon_album_on.gif"); background-color: #FFF; }
+
+BUTTON#album[class~=webfolio-items] { background-image: url("../images/icon_album_off.gif"); background-color: #FFF; }
+BUTTON#album[class~=webfolio-items]:hover { background-image: url("../images/icon_album_on.gif"); background-color: #EFF3FD; }
+
+/* MESSAGE BUTTON */
+/*IE*/
+BUTTON#message { background-image: url("../images/icon_message_on.gif"); background-color: #FFF; }
+
+BUTTON#message[class~=webfolio-items] { background-image: url("../images/icon_message_off.gif"); background-color: #FFF; }
+BUTTON#message[class~=webfolio-items]:hover { background-image: url("../images/icon_message_on.gif"); background-color: #EFF3FD; }

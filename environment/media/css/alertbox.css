@@ -1,64 +1,61 @@
-.alert_box_table { 
-                   margin-bottom: 20px;
-                   border: none;
-                   border-collapse: separate;
-                   border-spacing: 0px;
-                   border-padding: 0px;
-                   width: 100%;
-             }
-
-.alert-box { 
-             min-width: 520px;
-             max-width: 650px; 
-             }
-
-.alert_box TD { 
-                vertical-align: center;
-                  }
-
-#msg_alert {
-             position:relative;
-             }
-
-#msg_alert font{
-                 float: right;
-                 FONT-FAMILY: Arial;	
-                 FONT-SIZE: 11px;
-                 }
-
-#msg_alert img{ 
-                float: left;
-                margin-left: 0;
+.alert-box, #box-error, #box-message, #box-alert {
+	width: 70%;
 }
 
-#alert{ 
-        width: 50; 
-        margin-left: 0;
-        border: 1px solid #6699FF;
-        }
+.alert-ico {
+	float: left;
+	margin: 7px 0px 7px 30px;
+}
 
-#msg_alert a{	color: #666666; 
-              FONT-FAMILY: Arial;	
-              FONT-SIZE: 11px;
-              text-decoration: underline;
-              }
-																							
+#msg_alert {
+	position:relative;
+}
+
+#msg_alert font{
+	float: right;
+}
+
+#msg_alert img{
+	float: left;
+	margin-left: 0px;
+}
+
+#alert{
+	width: 50%; 
+	margin-left: 0;
+	border: 1px solid #6699FF;
+}
+
+#msg_alert a{
+	color: #666666; 
+	text-decoration: underline;
+}
+
+#box-message {	background-color: #E3FFDE; }
+#box-message.message .border-top { }
+#box-message.message .border-bottom { }
+#box-message.message .border-top-left { height: 5px; background: url(../images/box_alert_02/box_alert_es.gif) no-repeat top left; }
+#box-message.message .border-top-right {height: 5px;  background: transparent url(../images/box_alert_02/box_alert_ds.gif) no-repeat top right; }
+#box-message.message .border-bottom-left { height: 5px; background: transparent url(../images/box_alert_02/box_alert_ei.gif) no-repeat bottom left; }
+#box-message.message .border-bottom-right { height: 5px; background: transparent url(../images/../images/box_alert_02/box_alert_di.gif) no-repeat bottom right; }
+#box-message.message .content { height: 50px; }
 
 
-#box_message { 
-             background-color: #E3FFDE;
-               }
+#box-dialog { background-color: #F3F7FF; }
 
-#box_dialog { 
-              background-color: #F3F7FF;
-              }
+#box-alert.alert { background-color: #FFFCE1; }
+#box-alert.alert .border-top, #box-alert.alert .border-bottom { background: transparent; }
+#box-alert.alert .border-top-left { background: url(../images/box_alert_01/box_alert_es.gif) no-repeat top left; height: 5px; }
+#box-alert.alert .border-top-right { background: transparent url(../images/box_alert_01/box_alert_ds.gif) no-repeat top right; height: 5px; }
+#box-alert.alert .border-bottom-left { background: transparent url(../images/box_alert_01/box_alert_ei.gif) no-repeat bottom left; height: 5px; }
+#box-alert.alert .border-bottom-right { background: transparent url(../images/../images/box_alert_01/box_alert_di.gif) no-repeat bottom right; height: 5px; }
+#box-alert.alert .content { height: 50px; background: #FFFCE1; border: none; }
 
-#box_alert { 
-             background-color: #FFFCE1;
-             }
-
-#box_error { 
-             background-color: #FFF2F2;
-             }
-
-
+#box-error { background-color: #FFF2F2; }
+#box-error.error .border-top { }
+#box-error.error .border-bottom { }
+#box-error.error .border-top-left { height: 5px; background: url(../images/box_alert_03/box_alert_es.gif) no-repeat top left; }
+#box-error.error .border-top-right {height: 5px;  background: transparent url(../images/box_alert_03/box_alert_ds.gif) no-repeat top right; }
+#box-error.error .border-bottom-left { height: 5px; background: transparent url(../images/box_alert_03/box_alert_ei.gif) no-repeat bottom left; }
+#box-error.error .border-bottom-right { height: 5px; background: transparent url(../images/../images/box_alert_03/box_alert_di.gif) no-repeat bottom right; }
+#box-error.error .content { height: 50px; }

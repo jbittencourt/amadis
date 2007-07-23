@@ -15,6 +15,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6, p, pre, blockquote, label, ul, ol, dl, fieldset, address { margin:0.2em 3%; }
+
 a:link, a:visited, a:hover { text-decoration: none; }
 fieldset { padding: 0.3em; }
 img { border: none; }
@@ -699,3 +700,60 @@ a.cinza:hover {
 .menu-box .border-top { background: url(../images/mn_box_01.gif) no-repeat; }
 .menu-box .border-bottom { background: url(../images/mn_box_02.gif) no-repeat; }
 .menu-box .content { text-align: center; width: 150px;}
+
+/* SEARCH BOX */
+#frm_search {
+	border: solid 1px #DDD;
+	height: 19px;
+	width: 250px;
+	margin-bottom: 2px;
+}
+
+#searchButton {
+	border: none;
+	background-color: #DDD;
+	height: 20px;
+}
+
+.user-image {
+	background: url(/~robson/amadisphp/media/images/perfil.gif) no-repeat;
+	padding: 20px 15px 30px 26px;	
+}
+
+/* SECTION TITLES */
+.section-title {
+	margin: 0px;	
+}
+
+.section-title img {
+	margin: 0 10px -3px 0;
+}
+
+.section-title .section-webfolio {
+	color: #607ee1;
+}
+
+.section-title .section-project {
+	color: #008CAF;
+}
+
+.section-title .section-people {
+	color: #EC3139;
+}
+
+.section-title .section-communities {
+	color: #B4BA6B;
+}
+
+.section-title .section-blog {
+	color: #9144CD;
+}
+
+.section-title .section-initial {
+	color: #9CCE70;
+}
+
+/* SPECIAL AREAS */
+#erros_area, #messages_area {
+	text-align: center;
+}

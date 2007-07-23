@@ -215,13 +215,26 @@
 .box-pink #thumb { border: solid  #FFBBC3 2px; }
 .box-pink #icon-el  { background: #FCF4F4; }
 
+/* INNER BLOG BOX */
+.box-innerblog { width: 100%; background: #FAFBFB; }
+.box-innerblog * { background: transparent; }
+.box-innerblog .border-top { background: url(../images/box_innerblog/box_innerblog_es.gif) no-repeat top left; }
+.box-innerblog .border-top-right { background: transparent url(../images/box_innerblog/box_innerblog_ds.gif) no-repeat top right; }
+.box-innerblog .border-bottom { background: url(../images/box_innerblog/box_innerblog_ei.gif) no-repeat bottom left; }
+.box-innerblog .border-bottom-right { background: url(../images/box_innerblog/box_innerblog_di.gif) no-repeat bottom right; }
+
+
 .box-titles { 
 	font-weight: bold;
 	line-height: 20px;
 	color: #557B83;          
 }
 
+
 /* LISTS */
+.small-list {
+	display:block;
+}
 .small-list .item {
 	display:block;
 }
