@@ -37,7 +37,7 @@ class AMBFinderTip extends CMHTMLObj {
 
     parent::add("<img class=\"tipsair\" src=\"$_CMAPP[images_url]/tipms_box_btsair.png\" $onClick>");
     
-    parent::add("<img src=\"$_CMAPP[images_url]/dot.gif\" width=\"1\" height=\"60\" border=\"0\"><br>");
+    parent::add("<img src=\"$_CMAPP[images_url]/dot.gif\" width=\"1\" height=\"60\" border=\"0\"><br />");
 
     //message
     parent::add("<div id=\"tipfala\">$this->message</div>");
@@ -48,7 +48,7 @@ class AMBFinderTip extends CMHTMLObj {
     $onClick .= " Finder_removeAlert('finderAlert_$sessionId');\"";
 
     parent::add("<img class=\"tipbtmsg\" src=\"$_CMAPP[images_url]/tipms_box_btmsg.png\" $onClick>");
-    parent::add("<div id=\"tipresposta\">$_language[reply_to] <br>");
+    parent::add("<div id=\"tipresposta\">$_language[reply_to] <br />");
     
     parent::add($this->user->username."</div>");
     parent::add("<div id=\"tipfooter\"><img src=\"$_CMAPP[images_url]/tipms_box_footer.png\"></div></div>");

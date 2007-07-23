@@ -60,8 +60,8 @@ class AMBAdminAvisos extends AMSimpleBox {
 	$conteudo .= " &nbsp;&nbsp;( <a href='#' onClick='AM_togleDivDisplay(\"hideShow".$i."\")'>".$_language['edit']."</a> | <a href='?acao=delete&id=$item->codeAviso'>".$_language['delete']."</a> )</td></tr>";  
 	
 	$conteudo .= "<tr><td><span id='hideShow".$i++."' style='display:none'><form action = $_SERVER[PHP_SELF] method=post>";
-	$conteudo .= "<input type='text' value='$item->titulo' name='".$_language['title']."'><br>";
-	$conteudo .= "<textarea name ='text'>$item->descricao</textarea><br>";
+	$conteudo .= "<input type='text' value='$item->titulo' name='".$_language['title']."'><br />";
+	$conteudo .= "<textarea name ='text'>$item->descricao</textarea><br />";
 	$conteudo .= "<input type='hidden' name='acao' value='edit'>";
 	$conteudo .= "<input type='hidden' name='id' value='$item->codeAviso'>";
 	$conteudo .= "<input type='submit' value='".$_language['update']."'"; //trocar por uma imagem e fazer em ajax
@@ -71,16 +71,16 @@ class AMBAdminAvisos extends AMSimpleBox {
 	/////////////////////////
     $conteudo .= "<table><tr><td><h3>".$_language['send_warn']."</h3></td></tr>";
     $conteudo .= "<tr><td><form action = $_SERVER[PHP_SELF] method=post>";
-    $conteudo .= "<input type='text' value='".$_language['warn_title']."' name='titulo' size=24><br>";
-    $conteudo .= "<textarea name ='text'>".$_language['text']."</textarea><br>";
-    $conteudo .= $_language['warn_time']."<br>";
+    $conteudo .= "<input type='text' value='".$_language['warn_title']."' name='titulo' size=24><br />";
+    $conteudo .= "<textarea name ='text'>".$_language['text']."</textarea><br />";
+    $conteudo .= $_language['warn_time']."<br />";
     $conteudo .= "<input type='radio' name='endTime' value='1'>".$_language['one_day'];
     $conteudo .= "<input type='radio' name='endTime' value='7'>".$_language['one_week'];
-    $conteudo .= "<input type='radio' name='endTime' value='14'>".$_language['two_weeks']."<br>";
+    $conteudo .= "<input type='radio' name='endTime' value='14'>".$_language['two_weeks']."<br />";
     $conteudo .= "<input type='radio' name='endTime' value='30'>".$_language['one_mouth']."";
     $conteudo .= "<input type='radio' name='endTime' value='180'>".$_language['six_mouths']."";
     $conteudo .= "<input type='radio' name='endTime' value='365'>".$_language['one_year']."";
-    $conteudo .= "<input type='radio' name='endTime' value='0' checked>".$_language['infinity']."<br>";
+    $conteudo .= "<input type='radio' name='endTime' value='0' checked>".$_language['infinity']."<br />";
     $conteudo .= "<input type='hidden' name='acao' value='send'>";
     $conteudo .= "<input type='submit' value='".$_language['send_warn']."'"; //trocar por uma imagem e fazer em ajax
     $conteudo .= "</form></td></tr></table>";

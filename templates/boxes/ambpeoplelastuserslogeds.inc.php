@@ -26,7 +26,7 @@ class AMBPeopleLastUsersLogeds extends AMSimpleBox implements CMActionListener {
     if($this->itens->__hasItems()) {
       foreach($this->itens as $item) {
 	parent::add(new AMTUserInfo($item));
-	parent::add("<br>");
+	parent::add("<br />");
       }
     } else parent::add("$_language[no_user_loggeds]");
     return parent::__toString();

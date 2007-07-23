@@ -27,7 +27,7 @@ class AMBProjectMine extends AMColorBox {
 	
 	$url = $_CMAPP['services_url']."/projects/project.php?frm_codProjeto=".$item->codeProject;
     
-	parent::add("<a href=\"$url\" class=\"green\">&raquo; ".$item->title."</a><br>");
+	parent::add("<a href=\"$url\" class=\"green\">&raquo; ".$item->title."</a><br />");
       }
     }else parent::add("$_language[project_not_projects]");
       

@@ -45,7 +45,7 @@ class AMBAdminUsersList extends AMTCadBox {
   public function __toString() {
     global $_language,$_CMAPP;
 
-    parent::add("<br><br>");
+    parent::add("<br /><br />");
 
     parent::add("<table id=\"".$this->class_prefix."_list\">");
       
@@ -83,13 +83,13 @@ class AMBAdminUsersList extends AMTCadBox {
 
 	if(isset($_REQUEST['frm_codProjeto']) && !empty($_REQUEST['frm_codProjeto'])) {
 	  parent::add("<tr id=\"$id\" class=\"".$this->class_prefix."_list_line_int\">");
-	  parent::add("<td align='left' valign='top' colspan = '5'><br><font class='project_list_subtitle'>$_language[join_reason]</font>");
-	  parent::add("<br><img src='$_CMAPP[media_url]/images/dot.gif' width='1' height='12' border='0'>");
+	  parent::add("<td align='left' valign='top' colspan = '5'><br /><font class='project_list_subtitle'>$_language[join_reason]</font>");
+	  parent::add("<br /><img src='$_CMAPP[media_url]/images/dot.gif' width='1' height='12' border='0'>");
 	  parent::add($reason[0]->textRequest."</td>");
 	  parent::add("</tr>");
 	  parent::add("<tr id=\"$id\" class=\"".$this->class_prefix."_list_line\">");
-	  parent::add("<td align='left' valign='top' colspan = '5'><br><font class='project_list_subtitle'>$_language[approval]</font>");
-	  parent::add("<br>".$response[0]->textResponse."</td>");
+	  parent::add("<td align='left' valign='top' colspan = '5'><br /><font class='project_list_subtitle'>$_language[approval]</font>");
+	  parent::add("<br />".$response[0]->textResponse."</td>");
 	  parent::add("</tr>");
 	}
 

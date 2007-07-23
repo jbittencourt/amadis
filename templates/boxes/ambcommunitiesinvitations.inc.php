@@ -119,7 +119,7 @@ class AMBCommunitiesInvitations extends AMColorBox implements CMActionListener {
 				$inv = $co->invitation[0];
 				$link = $_CMAPP['services_url']."/webfolio/webfolio.php?inv_codeCommunity=$co->code&inv_codeGroupMemberJoin=".$inv->codeGroupMemberJoin;
 
-				parent::add("<a href=\"$link&inv_com_action=A_accept\" class=\"blue\">$_language[accept]</a><br>");
+				parent::add("<a href=\"$link&inv_com_action=A_accept\" class=\"blue\">$_language[accept]</a><br />");
 				parent::add("<a href=\"$link&inv_com_action=A_reject\"class=\"blue\">$_language[reject]</a>");
 				parent::add("</tr>");
 				$_first = false;

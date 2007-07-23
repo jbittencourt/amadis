@@ -15,7 +15,7 @@ class AMBProjectNewsList extends AMListBox {
   public function __toString() {
     global $_language,$_CMAPP;
 
-    parent::add("<br><br>");
+    parent::add("<br /><br />");
 
     parent::add("<table id=\"".$this->class_prefix."_list\">");
     //    echo $this->itens;
@@ -51,7 +51,7 @@ class AMBProjectNewsList extends AMListBox {
 	parent::add("<tr id='$id'>");
 	parent::add("<td colspan='2' class='".$this->class_prefix."_list_line_int'>");
 	parent::add("<span class='project_list_subtitle'>$_language[project_news]: $item->title</span>");
-	parent::add("<br>".nl2br($item->text)."</td>");
+	parent::add("<br />".nl2br($item->text)."</td>");
 	parent::add("</tr>");
 	parent::add("<tr><td><img src='$_CMAPP[media_url]/images/dot.gif' width='1' height='8' border='0'></td></tr>");
       }

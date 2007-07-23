@@ -68,18 +68,18 @@ class AMBCommunitiesList extends AMPageBox implements CMActionListener {
 					$thumb = AMCommunityImage::getThumb($item);
 				} catch(CMException $e) {
 					/**
-					 * @todo correct exception
+					 * @TODO correct exception
 					 */
 					note($e); 
 				}
 				//note($thumb->getView()); die();
 				$box->add($thumb->getView());
 
-				$box->add("<td width=20%>");
+				$box->add('<td style="width: 20%">');
 				$box->add("<a href=\"".$_CMAPP['services_url']."/communities/community.php?frm_codeCommunity=".$item->code);
-				$box->add("\" class=\"cinza\">".$item->name."</a><br>");
+				$box->add("\" class=\"cinza\">".$item->name."</a><br />");
 				$box->add("</td><td class=\"texto\">".nl2br($item->description)."</td>");
-				$box->add("<td width=20%><a href=\"$_CMAPP[services_url]/communities/community.php?frm_codeCommunity=".$item->code."\" class=\"blue\">");
+				$box->add("<td style=\"width: 20%\"><a href=\"$_CMAPP[services_url]/communities/community.php?frm_codeCommunity=".$item->code."\" class=\"blue\">");
 				$box->add("$_language[community_visit]</a></td></tr>");
 			}
 		}
@@ -88,8 +88,8 @@ class AMBCommunitiesList extends AMPageBox implements CMActionListener {
 		}
 		$box->add('</table>');
 		$box->setTitle($this->title);
-		parent::add($box);
+		//parent::add($box);
 
-		return parent::__toString();
+		return $box->__toString();
 	}
 }

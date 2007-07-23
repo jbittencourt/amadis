@@ -15,8 +15,8 @@
  	public function doAction() {
  		global $_CMAPP, $_CMDEVEL, $_language;
 
- 		$t = "<table cellspacing=0 cellpadding=0 border=0 width=100%>";
- 		$ft = "</table>";
+ 		$t = '<table cellspacing="0" cellpadding="0" border="0" width="100%">';
+ 		$ft = '</table>';
  		if(!isset($_REQUEST['list_action'])) $_REQUEST['list_action'] = "";
  		switch($_REQUEST['list_action']) {
  			default:
@@ -98,7 +98,7 @@
  					$title = "$_language[list_projects_comments] $proj->title";
  					$box = new AMBProjectCommentsList($this->itens, $title, AMTCadBox::CADBOX_LIST);
 
- 					parent::add("<br><span class=\"project_title\">$_language[project]: ".$proj->title."<br></span>");
+ 					parent::add("<br /><span class=\"project-title\">$_language[project]: ".$proj->title."<br /></span>");
  					parent::add("<a  href='$_CMAPP[services_url]/projects/project.php?frm_codProjeto=$proj->codeProject' class='green'>");
  					parent::add("$_language[back_to_project]</a>");
 
@@ -129,7 +129,7 @@
  					$title = "$_language[list_projects_news] $proj->title";
  					$box = new AMBProjectNewsList($this->itens, $title, AMTCadBox::CADBOX_LIST);
 
- 					parent::add("<br><span class=\"project_title\">$_language[project]: ".$proj->title."<br></span>");
+ 					parent::add("<br /><span class=\"project-title\">$_language[project]: ".$proj->title."<br /></span>");
  					parent::add("<a  href='$_CMAPP[services_url]/projects/project.php?frm_codProjeto=$proj->codeProject' class='green'>");
  					parent::add("$_language[back_to_project]</a>");
 

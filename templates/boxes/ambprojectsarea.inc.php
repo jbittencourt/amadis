@@ -28,33 +28,28 @@ class AMBProjectsArea extends CMHTMLObj {
         /*
         *Buffering html of the box to output screen
         */
-        $buffer  = "<table cellspacing=0 cellpadding=0 border=0>\n";
-        $buffer .= "<form action=$url method=post name=frm_prjtArea>\n";
-        $buffer .= "<tr>\n";
-        $buffer .= "<td>\n";
+        $buffer  = "<div>\n";
+        $buffer .= "<form action=\"$url\" method=\"post\">\n<div>";
         if($this->index_image) {
             $img = "img_hm_projetos_area.gif";
         } else {
             $img = "img_projetos_area.gif";
         }
-        $buffer .= "<img src=\"".$_CMAPP['imlang_url']."/$img\"><br>";
-        $buffer .= "<img src=\"".$_CMAPP['images_url']."/dot.gif\" border=\"0\" height=\"7\" width=\"1\"><br>\n";
-        $buffer .= "<br><font class=\"textoint\">&raquo; $_language[areas]<br><br>\n";
-        $buffer .= "<select onChange=\"document.frm_prjtArea.submit();\" ";
-        $buffer .= "name=\"frm_codArea\" style=\"position: relative; top: 0pt;\">\n";
-        $buffer .= "<option selected value=\"\">[$_language[select_one]]</option>\n";
+        $buffer .= '<img src="'.$_CMAPP['imlang_url'].'/'.$img.'" alt="" /><br />';
+        $buffer .= '<br /><span class="textoint">&raquo; '.$_language['areas']."<br /><br />\n";
+        $buffer .= '<select onchange="document.frm_prjtArea.submit();" ';
+        $buffer .= 'name="frm_codArea" style="position: relative; top: 0pt;">';
+        $buffer .= '<option selected="selected">['.$_language['select_one'].']</option>';
         if(!empty($this->areas->items)) {
             foreach($this->areas as $item) {
-                $buffer .= "<option value=\"".$item->codeArea."\">".$item->name."</option>\n";
+                $buffer .= '<option value="'.$item->codeArea.'">'.$item->name.'</option>';
             }
         }
-        $buffer .= "</select>\n";
-        $buffer .= "<input type=\"hidden\" name=\"list_action\" value=\"A_list_areas\">\n";
-        $buffer .= "</font>\n";        
-        $buffer .= "</td>\n";
-        $buffer .= "</tr>\n";
-        $buffer .= "</form>\n";
-        $buffer .= "</table>\n";
+        $buffer .= '</select>';
+        $buffer .= '<input type="hidden" name="list_action" value="A_list_areas" />';
+        $buffer .= '</span>';
+        $buffer .= '</div></form>';
+        $buffer .= '</div>';
 
         parent::add($buffer);
 

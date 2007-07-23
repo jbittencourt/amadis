@@ -54,7 +54,7 @@ class AMBUploadFloatingBox extends CMHTMLObj {
     parent::add("             </tr>");
     parent::add("             <tr><td colspan=\"2\"><img src=\"$_CMAPP[images_url]/dot.gif\" width=\"10\"></td></tr>");
     parent::add("             <tr>");
-    parent::add("               <td colspan=\"2\" bgcolor=\"#fff4cb\" align=\"center\" valign=\"top\"><br>");
+    parent::add("               <td colspan=\"2\" bgcolor=\"#fff4cb\" align=\"center\" valign=\"top\"><br />");
 
     /*
      *Formulario de upload
@@ -80,15 +80,15 @@ class AMBUploadFloatingBox extends CMHTMLObj {
     parent::add("<input type=hidden name=frm_upload_type value=$_REQUEST[frm_upload_type]>");
     parent::add("<input type=hidden $this->upload_type>");
     
-    parent::add("<span class=texto>$_language[send_files]</span><br>");
+    parent::add("<span class=texto>$_language[send_files]</span><br />");
     
     if(!empty($_REQUEST['frm_numFields'])) {
       for($i=0; $i<$_REQUEST['frm_numFields']; $i++) {
-	parent::add("<input type=file name=frm_file_$i><br>");
+	parent::add("<input type=file name=frm_file_$i><br />");
       }
     } else {
       for($i = 0; $i < 5; $i++) {
-	parent::add("<input type=file name=frm_file_$i><br><br>");
+	parent::add("<input type=file name=frm_file_$i><br /><br />");
       }
     }
     parent::add("<input type=submit name=submit value=Enviar>");

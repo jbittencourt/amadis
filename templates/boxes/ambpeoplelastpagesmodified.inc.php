@@ -19,20 +19,19 @@
  	public function __toString() {
  		global $_CMAPP, $_language;
 
- 		parent::add("<b>&raquo;$_language[users_pages]</b><br>");
- 		//paginas de usuarios
+ 		parent::add("<b>&raquo;$_language[users_pages]</b><br />");
+
  		if($this->itens['users']->__hasItems()) {
  			foreach($this->itens['users'] as $item) {
  				$urlpage = $_CMAPP['services_url']."/pages/viewpage.php?frm_page=users/user_".$item->codeAnchor."&frm_codeUser=".$item->codeAnchor;
  				parent::add(new AMTUserInfo($item->user[0]));
- 				parent::add("<a href='$urlpage' class='cereja'>($_language[see_home_page])</a><br>");
+ 				parent::add('<a href="'.$urlpage.'" class="cereja">('.$_language['see_home_page'].')</a><br />');
  			}
- 			parent::add("<img src='$_CMAPP[media_url]/images/dot.gif' width='1' height='7' border='0'>");
+ 			parent::add('<img src="'.$_CMAPP['media_url'].'/images/dot.gif" width="1" height="7" alt="" />');
  			parent::add(new AMDotLine);
 
- 			parent::add("<img src='$_CMAPP[images_url]/icon_user_window.gif'> <a href='".$_CMAPP['services_url']."/pages/listpages.php' class='cereja'>".$_language['see_all_pages']."</a>");
- 		}
- 		else{
+ 			parent::add('<img src="'.$_CMAPP['images_url'].'/icon_user_window.gif"> <a href="'.$_CMAPP['services_url'].'/pages/listpages.php" class="cereja">'.$_language['see_all_pages'].'</a>');
+ 		} else{
  			parent::add($_language['no_page_updated']);
  		}
  		

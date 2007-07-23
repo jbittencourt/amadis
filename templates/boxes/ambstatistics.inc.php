@@ -17,7 +17,7 @@ class AMBStatistics extends AMBox {
   public function __toString() {
     global $_CMAPP,$_language;
     $stats = $this->stats;
-
+    
     parent::add('<table id="stats_table">');
     parent::add('<tr>');
     parent::add('<td id="stats_col">');
@@ -42,9 +42,9 @@ class AMBStatistics extends AMBox {
     parent::add('<td>');
 
     parent::add("<span id=\"stats_communities\" class=\"stats_text\"> $stats[communities] $_language[communities]</span>");
-    parent::add("<br><span id=\"stats_people\" class=\"stats_text\"> $stats[people] $_language[people]</span>");
-    parent::add("<br><span id=\"stats_projects\" class=\"stats_text\"> $stats[projects] $_language[projects]</span>");
-    //    parent::add("<br><span id=\"stats_courses\" class=\"stats_text\"> $stats[courses] $_language[courses]</span>");
+    parent::add("<br /><span id=\"stats_people\" class=\"stats_text\"> $stats[people] $_language[people]</span>");
+    parent::add("<br /><span id=\"stats_projects\" class=\"stats_text\"> $stats[projects] $_language[projects]</span>");
+    //    parent::add("<br /><span id=\"stats_courses\" class=\"stats_text\"> $stats[courses] $_language[courses]</span>");
 
     parent::add('</td>');
 
@@ -56,9 +56,5 @@ class AMBStatistics extends AMBox {
 
     return parent::__toString();
   }
-
 }
-
-
-
 ?>

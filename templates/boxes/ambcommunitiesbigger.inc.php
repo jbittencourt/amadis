@@ -32,7 +32,7 @@ class  AMBCommunitiesBigger extends AMColorBox {
 	$mString = ($item->numMembers > 1 ? "$item->numMembers - $_language[members]" : "$item->numMembers - $_language[member]");
 	
 	parent::add("$item->name - ($mString)");
-	parent::add("</a><br>");
+	parent::add("</a><br />");
       }
     }else   parent::add($_language['dont_have_communities']);
     

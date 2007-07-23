@@ -14,8 +14,8 @@ class AMBAdminUsers extends AMSimpleBox {
 	public function __toString() {
 		global $_language, $_CMAPP;
 		$conteudo = "";
-		$conteudo .= $_language['edit_people_n_groups']."<br>";
-		$conteudo .= "<a href='$_CMAPP[services_url]/admin/editUser.php'>".$_language['edit_people']."</a><br>";
+		$conteudo .= $_language['edit_people_n_groups']."<br />";
+		$conteudo .= "<a href='$_CMAPP[services_url]/admin/editUser.php'>".$_language['edit_people']."</a><br />";
 		//$conteudo .= $_language['edit_group'];
 		parent::add($conteudo);
 		return parent::__toString();

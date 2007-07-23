@@ -50,7 +50,7 @@ class AMBAdminChgStatus extends AMColorBox {
     parent::add($conteudo);
     parent::add($image1->getView());
     $conteudo = "</td><td valign='top'>".$message." ".$_language['user']." ".$us->username."?";
-    $conteudo .= "<form action='?frm_codUser=$us->codeUser' method='post'><input type='radio' value='y' name='action'>".$_language['yes_please']."!<br><input type='radio' value='n' name='action' CHECKED>".$_language['no_thanks']."</td></tr>";
+    $conteudo .= "<form action='?frm_codUser=$us->codeUser' method='post'><input type='radio' value='y' name='action'>".$_language['yes_please']."!<br /><input type='radio' value='n' name='action' CHECKED>".$_language['no_thanks']."</td></tr>";
     $conteudo .= "<tr><td></td><td align='right'><input type='submit' value='".$_language['confirm']."'>";
     $conteudo .= "</td></tr></table>";
     

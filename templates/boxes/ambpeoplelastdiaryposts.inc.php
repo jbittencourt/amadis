@@ -21,25 +21,22 @@
  	}
 
  	public function __toString() {
- 		global $_CMAPP, $_language;
+		global $_CMAPP, $_language;
 
- 		parent::add("<b>&raquo;$_language[last_blog_posts]</b><br>");
+ 		parent::add("<b>&raquo;$_language[last_blog_posts]</b><br />");
  		
  		if(!empty($this->itens)) {
  			foreach($this->itens as $item) {
- 				//TODO Solve the problem with the page scroll in the blog
- 				//parent::add("<a class=\"people_blog_entry\" href=\"$_CMAPP[services_url]/blog/blog.php?frm_codePost=$item->codePost#anchor_post_".$item->codePost."\">");
- 				parent::add("<a class=\"people_blog_entry\" href=\"$_CMAPP[services_url]/blog/blog.php?frm_codePost=$item->codePost\">");
+ 				parent::add('<a class="people_blog_entry" href="'.$_CMAPP['services_url'].'/blog/blog.php?frm_codePost='.$item->codePost.'#anchor_post_'.$item->codePost.'">');
  				parent::add("&raquo; ".$item->title."</a>:  (");
- 				parent::add(new AMTUserInfo($item->author[0],AMTUserInfo::LIST_USERNAME));
+ 				parent::add(new AMTUserInfo($item->author[0], AMTUserInfo::LIST_USERNAME));
  				parent::add(", ".date($_language['date_format'],$item->time).")");
- 				parent::add("<br>");
+ 				parent::add("<br />");
  			}
- 		}
- 		else{
+ 		} else{
  			parent::add($_language['no_diary_updated']);
  		}
- 		parent::add("<img src='$_CMAPP[media_url]/images/dot.gif' width='1' height='7' border='0'>");
+ 		//parent::add("<img src='$_CMAPP[media_url]/images/dot.gif' width='1' height='7' border='0' alt=\"\" />");
  		parent::add(new AMDotLine);
  		parent::add("<a class=\"grape\" href=\"$_CMAPP[services_url]/blog/listPosts.php\">");
  		parent::add("&raquo; $_language[list_recent_posts]</a>");

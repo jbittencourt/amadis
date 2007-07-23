@@ -28,8 +28,8 @@ class AMBProjectJoin extends AMColorBox {
     if(!$group->hasRequestedJoin($_SESSION['user']->codeUser)) {
       $box = new AMTShowHide("sendMessage", "$_language[project_join]", AMTShowHide::HIDE);
       $box->add("<form method=\"post\" action=\"$_SERVER[PHP_SELF]\" name=\"form_project_join\" id=\"form_project_join\">");
-      $box->add("<font class=texto>$_language[project_join_request]</font><br>");
-      $box->add("<textarea cols=27 rows=5 name=\"frm_text\"></textarea><br>");
+      $box->add("<font class=texto>$_language[project_join_request]</font><br />");
+      $box->add("<textarea cols=27 rows=5 name=\"frm_text\"></textarea><br />");
       $box->add("<input type=\"hidden\" name=\"frm_codeProject\" value=\"".$this->proj->codeProject."\">");
       $box->add("<input type=button onClick='sendProjectJoin()' value=\"$_language[send]\">");
       $box->add("</form>");

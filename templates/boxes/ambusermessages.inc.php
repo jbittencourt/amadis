@@ -40,21 +40,21 @@ class AMBUserMessages extends AMColorBox {
     
 		if($this->cProjects->__hasItems()) {
     		$this->__hasItems = true;
-      		parent::add("<b>&raquo;$_language[projects]</b><br>");
+      		parent::add("<b>&raquo;$_language[projects]</b><br />");
       		foreach($this->cProjects as $item) {
 				$men = $_language[project_comments];
 				if($item->numMessages == 1) { 
 	  				$men =  $_language[project_comment]; 
 				};
 				parent::add("<a class=\"new_comments\" href=\"$_CMAPP[services_url]/projects/project.php?frm_codProjeto=$item->codeProject\" class=\"cinza\">");
-				parent::add("$item->numMessages $men</a> <b>$item->title</b><br>");
+				parent::add("$item->numMessages $men</a> <b>$item->title</b><br />");
       		}
     	} else $this->__hasItems = false;
     
     	//listing the comments in the Diary
     	if($this->cDiary->__hasItems()) {
       		$this->__hasItems = true;
-      		parent::add("<b>&raquo;$_language[blog]</b><br>");
+      		parent::add("<b>&raquo;$_language[blog]</b><br />");
 
       		foreach($this->cDiary as $item) {
 				$men = $_language[blog_comments] ;
@@ -63,7 +63,7 @@ class AMBUserMessages extends AMColorBox {
 	  				$men =  $_language[blog_comment]; 
 				};
 				parent::add('<a class="new_comments" href="'.AMBoxBlog::getPermanentLink($item).'" class="cinza">');
-				parent::add("$item->numComments $men</a> <b>$item->title</b><br>");
+				parent::add("$item->numComments $men</a> <b>$item->title</b><br />");
       		}
     	} else $this->__hasItems = $this->__hasItems || false;
     

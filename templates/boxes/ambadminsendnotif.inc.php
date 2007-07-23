@@ -52,7 +52,7 @@ class AMBAdminSendNotif extends AMColorBox {
       
       $conteudo = "<table><tr><td>".$user->name."(".$user->email.")</td></tr>";
       $conteudo .= "<tr><td><form method='post' action='$_SERVER[PHP_SELF]?frm_codUser=$user->codeUser&acao=send'>";
-      $conteudo .= "<br><br>";
+      $conteudo .= "<br /><br />";
       $conteudo .= "<textarea name='notif' ROWS='6' COLS='35'></textarea></td></tr>";
       $conteudo .= "<tr><td align='right'><input type='submit' value='".$_language['send']."'>";
       $conteudo .= "</form></td></tr></table>";

@@ -84,7 +84,7 @@ class AMBProjectRequest extends AMColorBox
             parent::add("$_language[user_join_request] ");
 
             $reason = $user->request[0]->textRequest;
-            parent::add('<br><br><span class="texto">'.$reason.'</span>');
+            parent::add('<br /><br /><span class="texto">'.$reason.'</span>');
             parent::add("</td>");
 
             parent::add("</tr><tr><td colspan=3 class='response-button'>");
@@ -102,8 +102,8 @@ class AMBProjectRequest extends AMColorBox
 
             parent::add("<div id='accept-box-$code' class='response-box'>");
             parent::add("<form id='join-request-accept-$code'  method=\"post\" action=\"$_SERVER[PHP_SELF]\">");
-            parent::add("<font class=texto>$_language[message]</font><br>");
-            parent::add("<textarea cols=27 rows=5 name=\"frm_text\"></textarea><br>");
+            parent::add("<font class=texto>$_language[message]</font><br />");
+            parent::add("<textarea cols=27 rows=5 name=\"frm_text\"></textarea><br />");
             parent::add($input);
             parent::add("<button onClick=\"acceptUserJoin($code,$codeGroup,$codeUser)\" type=button>$img_accept</button>");
             parent::add("<button  onClick=\"doRequestCancel($code)\" type=button>$img_cancel</button>");
@@ -113,8 +113,8 @@ class AMBProjectRequest extends AMColorBox
 
             parent::add("<div id='reject-box-$code' class='response-box'>");
             parent::add("<form id='join-request-reject-$code' method=\"post\" action=\"$_SERVER[PHP_SELF]\">");
-            parent::add("<font class=texto>$_language[message]</font><br>");
-            parent::add("<textarea cols=27 rows=5 name=\"frm_text\"></textarea><br>");
+            parent::add("<font class=texto>$_language[message]</font><br />");
+            parent::add("<textarea cols=27 rows=5 name=\"frm_text\"></textarea><br />");
             parent::add("<input type=hidden name=req_action value='A_reject'>");
             parent::add($input);
             parent::add("<button onClick=\"rejectUserJoin($code,$codeGroup,$codeUser)\" type=button>$img_reject</button>");

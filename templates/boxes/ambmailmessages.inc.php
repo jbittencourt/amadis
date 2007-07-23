@@ -20,7 +20,7 @@ class AMBMailMessages extends AMColorBox {
       parent::add("&raquo; ");
       ($numMessages>1 ? parent::add("$numMessages $_language[new_message]") : 
        parent::add("$numMessages $_language[new_messages]"));
-      parent::add("<br><a class=\"cinza\" href=\"\">$_language[send_new_message]");
+      parent::add("<br /><a class=\"cinza\" href=\"\">$_language[send_new_message]");
       parent::add(new AMDotLine);
     } else {
       parent::add($_language[empty_inbox]);

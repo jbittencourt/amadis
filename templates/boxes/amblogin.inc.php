@@ -54,7 +54,7 @@ class AMBLogin extends CMHtmlObj {
     	$modes = AMEnvSession::getModes();
     	$options = array();
         foreach($modes as $k=>$item) {
-        	if($_SESSION['session']->visibility == $k) $options[] = "<option value=\"$k\" SELECTED>$item</option>";
+        	if($_SESSION['session']->visibility == $k) $options[] = "<option value=\"$k\" selected=\"selected\">$item</option>";
             else $options[] = "<option value=\"$k\">$item</option>";
         }
         parent::add(AMHTMLPage::loadView(array('options'=>$options), 'login_box'));

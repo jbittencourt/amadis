@@ -117,7 +117,7 @@ class AMBAdminCities extends AMSimpleBox implements CMActionListener {
 				$conteudo .= " &nbsp;&nbsp;( <a href='#' onClick='AM_togleDivDisplay(\"hideShow".$i."\")'>".$_language['edit']."</a> | <a href='?action=deleteCity&idCidade=$item->codeCity'>".$_language['delete']."</a> )</td></tr>";
 				//----------formulario
 				$conteudo .= "<tr><td><span id='hideShow".$i++."' style='display:none'><form action = '?action=editCity' method=post>";
-				$conteudo .= "<input type='text' value='$item->name' name='nomCidade1'><br>";
+				$conteudo .= "<input type='text' value='$item->name' name='nomCidade1'><br />";
 				$conteudo .= "<select name='codEstado1'>";
 				//----
 				$ee = new AMState;

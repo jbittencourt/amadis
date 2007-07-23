@@ -79,26 +79,25 @@ class AMBUserScraps extends AMPageBox implements CMActionListener {
 					$thumb->codeFile = $men->author[0]->picture;
 				}catch(CMObjEPropertieValueNotValid $e) {
 					$thumb = new AMUserThumb(AMUserPicture::DEFAULT_IMAGE);
-					
 				}
 				
 				$thumb->load();
 
 				$box->add($thumb->getView());
-				$box->add('<td valign=top>');
+				$box->add('<td valign="top">');
 				$men->author[0]->codeUser=$men->codeUser;
 				$box->add(new AMTUserInfo($men->author[0]));
-				$box->add(':<br>'.$men->message);
-				$box->add('<td valign=top>');
-				$box->add(date("$_language[hour_format]",$men->time)."<br>");
+				$box->add(':<br />'.$men->message);
+				$box->add('<td valign="top">');
+				$box->add(date("$_language[hour_format]",$men->time)."<br />");
 				$box->add(date("$_language[date_format]",$men->time));
 
 				if($_SESSION['environment']->logged) {
 					if($men->codeTo==$_SESSION['user']->codeUser) {
-						$box->add('<td valign=top>');
+						$box->add('<td valign="top">');
 						$link = "$_SERVER[PHP_SELF]?frm_codeMessage=$men->code&action=A_delete";
 						if(!empty($_REQUEST['frm_codeUser'])) {
-	      $link.="&frm_codeUser=$_REQUEST[frm_codeUser]";
+					    	$link.="&frm_codeUser=$_REQUEST[frm_codeUser]";
 						}
 						$box->add("<a href='$link'>$_language[delete]</a>");
 					}

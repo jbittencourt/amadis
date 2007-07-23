@@ -32,7 +32,7 @@ class AMBChatRoom extends CMHTMLPage {
     parent::add("<span class='titchat'>");
     parent::add("<img src='$_CMAPP[images_url]/img_chat_balao.gif'>&nbsp;");
     parent::add("<span class='tit_chat'> <b>".$this->room->name."</b></span>");
-    //parent::add("<br>no projeto <a href='#' class='local'>Portas da Felicidade</a>.</span>");
+    //parent::add("<br />no projeto <a href='#' class='local'>Portas da Felicidade</a>.</span>");
     parent::add("</div>");
 
     $script = "window.close();";

@@ -95,7 +95,7 @@ class AMBCommunityRequest extends AMColorBox implements CMActionListener {
 			parent::add("$_language[user_join_request] ");
 
 			$reason = $user->request[0]->textRequest;
-			parent::add('<br><br><span class="texto">'.$reason.'</span>');
+			parent::add('<br /><br /><span class="texto">'.$reason.'</span>');
 			parent::add("</td>");
 
 			parent::add("</tr><tr><td colspan=3 class='response-button'>");
@@ -115,8 +115,8 @@ class AMBCommunityRequest extends AMColorBox implements CMActionListener {
 
 			parent::add("<div id='accept-box-$code' class='response-box'>");
 			parent::add("<form method=\"post\" action=\"$_SERVER[PHP_SELF]\" name=\"send_message\">");
-			parent::add("<font class=texto>$_language[message]</font><br>");
-			parent::add("<textarea cols=27 rows=5 name=\"frm_text\"></textarea><br>");
+			parent::add("<font class=texto>$_language[message]</font><br />");
+			parent::add("<textarea cols=27 rows=5 name=\"frm_text\"></textarea><br />");
 			parent::add("<input type=hidden name=req_action value='A_accept'>");
 			parent::add($input);
 			parent::add("<button type=submit>$img_accept</button>");
@@ -127,8 +127,8 @@ class AMBCommunityRequest extends AMColorBox implements CMActionListener {
 
 			parent::add("<div id='reject-box-$code' class='response-box'>");
 			parent::add("<form method=\"post\" action=\"$_SERVER[PHP_SELF]\" name=\"send_message\">");
-			parent::add("<font class=texto>$_language[message]</font><br>");
-			parent::add("<textarea cols=27 rows=5 name=\"frm_text\"></textarea><br>");
+			parent::add("<font class=texto>$_language[message]</font><br />");
+			parent::add("<textarea cols=27 rows=5 name=\"frm_text\"></textarea><br />");
 			parent::add("<input type=hidden name=req_action value='A_reject'>");
 			parent::add($input);
 			parent::add("<button type=submit>$img_reject</button>");

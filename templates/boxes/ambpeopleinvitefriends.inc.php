@@ -27,7 +27,7 @@ class AMBPeopleInviteFriends extends CMHtmlObj implements CMActionListener {
 	  
 	  parent::add("<input type=checkbox name=user_$i value=$item->codeUser>");
 	  parent::add(new AMTUserInfo($item));
-	  parent::add("<br>");
+	  parent::add("<br />");
 	  
 	}
 	parent::add("<input type=submit value=$_language[add_friends]>");

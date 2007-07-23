@@ -73,7 +73,7 @@ class AMBCommunityManageMembers extends AMBox {
 
     parent::add("       <td width=\"49\" valign=\"top\"><img src=\"$_CMAPP[images_url]/".$this->image."\" width=\"49\" height=\"33\" border=\"0\"></td>");
     parent::add("       <td background=\"$_CMAPP[images_url]/".$this->theme."_bgtop.gif\" valign=\"top\" class=\"$this->titlecss\">");
-    parent::add("<img src=\"$_CMAPP[images_url]/dot.gif\" width=\"1\" height=\"8\" border=\"0\"><br>");
+    parent::add("<img src=\"$_CMAPP[images_url]/dot.gif\" width=\"1\" height=\"8\" border=\"0\"><br />");
     parent::add("       $this->titulo");
     parent::add("       </td>");
     parent::add("       <td width=\"49\" valign=\"top\"><img src=\"$_CMAPP[images_url]/".$this->theme."_02.gif\" width=\"49\" height=\"33\" border=\"0\"></td>");

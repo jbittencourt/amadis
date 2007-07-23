@@ -30,8 +30,9 @@ class AMBCommunityItems extends AMColorBox {
 
 		$urlforum = $_CMAPP['services_url']."/communities/communityforums.php?frm_codeCommunity=".$community->code;
 
-		return '<button class="community_items button-as-link" type="button" onClick="AM_openURL(\''.$urlforum.'\')"><img src="'.$_CMAPP['images_url'].'/icon_cm_forum_off.png"><br><font class="project_items_text"> '.$_language['community_forumbutton'].'</font></button>';
-
+		return '<button class="community_items button-as-link" type="button" onclick="AM_openURL(\''.$urlforum.'\')">'
+			 . '<img src="'.$_CMAPP['images_url'].'/icon_cm_forum_off.png"><br />'
+			 . '<span class="project_items_text"> '.$_language['community_forumbutton'].'</span></button>';
 	}
 
 	public static function getChatButton($community){
@@ -39,7 +40,9 @@ class AMBCommunityItems extends AMColorBox {
 
 		$urlchat = $_CMAPP['services_url']."/communities/chat.php?frm_codeCommunity=".$community->code;
 
-		return '<button class="community_items button-as-link" type="button" onClick="AM_openURL(\''.$urlchat.'\')"><img src="'.$_CMAPP['images_url'].'/icon_cm_chat_off.png"><br><font class="project_items_text"> '.$_language['community_chatbutton'].'</font></button>';
+		return '<button class="community_items button-as-link" type="button" onclick="AM_openURL(\''.$urlchat.'\')">'
+			 . '<img src="'.$_CMAPP['images_url'].'/icon_cm_chat_off.png"><br />'
+			 . '<span class="project_items_text"> '.$_language['community_chatbutton'].'</span></button>';
 	}
 
 	public static function getLeaveButton($community){
@@ -47,7 +50,10 @@ class AMBCommunityItems extends AMColorBox {
 
 		$url = "";
 
-		return "<button class='community_items1 button-as-link' type='button' onClick='if(confirm(\"".$_language['community_leave_confirm']."\")) { window.location=\"$_SERVER[PHP_SELF]?frm_codeCommunity=".$community->code."&co_action=A_leave\";  } else { return false; }'><img src='".$_CMAPP['images_url']."/ico_cm_abandonar_off.gif'><br><font class='project_items_text'> ".$_language['community_leavebutton']."</font></button>";
+		return '<button class="community_items button-as-link" type="button" onclick="if(confirm(\''.$_language['community_leave_confirm'].'\')) '
+			 . '{ window.location=\''.$_SERVER['PHP_SELF'].'?frm_codeCommunity='.$community->code.'&co_action=A_leave\';  } else '
+			 . '{ return false; }"><img src="'.$_CMAPP['images_url'].'/ico_cm_abandonar_off.gif"><br />'
+			 . '<span class="project_items_text"> '.$_language['community_leavebutton'].'</span></button>';
 	}
 
 	public function doAction() {

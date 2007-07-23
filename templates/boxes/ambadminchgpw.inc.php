@@ -40,7 +40,7 @@ class AMBAdminChgPw extends AMColorBox {
       }
       $conteudo .= "<table><tr><td>";
       $conteudo .= "<form method='post' action='$_SERVER[PHP_SELF]?frm_codUser=$user->codeUser&acao=insert'></td></tr>";
-      $conteudo .= "<tr><td>".$_language['set_new_pw']." ". $user->name."</td></tr><tr><td><input type='password' name='newpw'></td></tr><tr><td>".$_language['retype_new_pw']."<br><input type='password' name='rnewpw'></td></tr><tr><td align='right'><input type='submit' value='".$_language['change']."'>";
+      $conteudo .= "<tr><td>".$_language['set_new_pw']." ". $user->name."</td></tr><tr><td><input type='password' name='newpw'></td></tr><tr><td>".$_language['retype_new_pw']."<br /><input type='password' name='rnewpw'></td></tr><tr><td align='right'><input type='submit' value='".$_language['change']."'>";
       $conteudo .= "</form>";
       $conteudo .= "</td></tr></table>";
    

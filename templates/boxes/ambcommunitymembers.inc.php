@@ -31,7 +31,7 @@ class AMBCommunityMembers extends AMSimpleBox {
     global $_CMAPP, $_language;
     
 
-    parent::add("<img src=\"$_CMAPP[images_url]/dot.gif\" width=\"10\" height=\"10\"><br>");
+    parent::add("<img src=\"$_CMAPP[images_url]/dot.gif\" width=\"10\" height=\"10\"><br />");
 
     if($this->itens->__hasItems()) {
       foreach($this->itens as $item) {
@@ -39,12 +39,12 @@ class AMBCommunityMembers extends AMSimpleBox {
 	$temp = new AMTUserInfo($item);
 	$temp->setClass("cinza");
 	parent::add($temp);
-	parent::add("<br>");
+	parent::add("<br />");
       }
-      parent::add("<a href=\"".$_CMAPP['services_url']."/communities/members.php?frm_codeCommunity=".$this->community->code."\" class=\"cinza\">&nbsp;&nbsp;$_language[more_members]</a><br><br>");
+      parent::add("<a href=\"".$_CMAPP['services_url']."/communities/members.php?frm_codeCommunity=".$this->community->code."\" class=\"cinza\">&nbsp;&nbsp;$_language[more_members]</a><br /><br />");
     }
     else { 
-      parent::add($_language['no_members']."<br><br>");
+      parent::add($_language['no_members']."<br /><br />");
     }
 
     return parent::__toString();

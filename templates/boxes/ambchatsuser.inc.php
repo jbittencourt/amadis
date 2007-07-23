@@ -82,7 +82,7 @@ class AMBChatsUser extends AMColorBox {
     $this->empty =  true;
     if($this->salas_p->__hasItems()) {
       $this->empty = false;
-      parent::add("<b>$_language[projects]</b><br>");
+      parent::add("<b>$_language[projects]</b><br />");
       parent::add($this->renderRoomsList($this->salas_p,$_language[projects],"title"));
       parent::add(new AMDotline);
     };
@@ -91,7 +91,7 @@ class AMBChatsUser extends AMColorBox {
 
     if($this->salas_c->__hasItems()) {
       $this->empty = false;
-      parent::add("<b>$_language[communities]</b><br>");
+      parent::add("<b>$_language[communities]</b><br />");
       parent::add($this->renderRoomsList($this->salas_c,$_language[community],"name"));
     } 
 

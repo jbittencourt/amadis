@@ -94,8 +94,8 @@ class AMBAggregator extends CMHTMLObj {
 		parent::add($this->thumb);
 		parent::add("</td>");
 		parent::add("<td width='20'><img src='$_CMAPP[images_url]/dot.gif' width='20' height='10' border='0'></td>");
-		parent::add("<td valign='top'><font class='titdiarioproj'>$this->title</font><br>");
-		parent::add("<font class='txtdiarioproj'>$_language[aggregator_configuration_area]</font><br>");
+		parent::add("<td valign='top'><font class='titdiarioproj'>$this->title</font><br />");
+		parent::add("<font class='txtdiarioproj'>$_language[aggregator_configuration_area]</font><br />");
 
 		parent::add("</td>");
 		parent::add("<td width='20'><img src='$_CMAPP[images_url]/dot.gif' width='20' height='10' border='0'></td>");
@@ -118,7 +118,7 @@ class AMBAggregator extends CMHTMLObj {
 		parent::add("<tr bgcolor='#F1FAFD'>");
 
 		parent::add("<td><img src='$_CMAPP[images_url]/dot.gif' width='20' height='10' border='0'></td>");
-		parent::add("<td valign='top'><img src='$_CMAPP[imlang_url]/img_fontes_rss.gif' align='absmiddle'><br><img src='$_CMAPP[images_url]/dot.gif' width='10' height='7' border='0'><br>");
+		parent::add("<td valign='top'><img src='$_CMAPP[imlang_url]/img_fontes_rss.gif' align='absmiddle'><br /><img src='$_CMAPP[images_url]/dot.gif' width='10' height='7' border='0'><br />");
 		parent::add("<table cellpadding='2' cellspacing='0' border='0' width='100%'>");
 		parent::add("<tr>");
 		parent::add("<td><img src='$_CMAPP[images_url]/dot.gif' width='8' height='10' border='0'></td>");
@@ -138,7 +138,7 @@ class AMBAggregator extends CMHTMLObj {
 					parent::add("<img src='$_CMAPP[images_url]/icon_excluir_agregador.gif' id='delete_$src->codeSource' onclick=\"Aggregator_deleteSource(this.id);\" align='absmiddle'>");
 				}
 				parent::add("<span class='font_rss'>$src->title</span>");
-				parent::add("</span><br>");
+				parent::add("</span><br />");
 									
 			}
 		}
@@ -146,11 +146,11 @@ class AMBAggregator extends CMHTMLObj {
 		parent::add("</td>");
 		parent::add("<td align='right'><img src='$_CMAPP[imlang_url]/img_legenda_agregador.gif'></td>");
 		parent::add("</tr>");
-		parent::add("<tr><td colspan='2'><br><img src='$_CMAPP[imlang_url]/bt_adicionar_rss.gif' onclick='Aggregator_addSource($this->project_id);' class='cursor'><br>");
+		parent::add("<tr><td colspan='2'><br /><img src='$_CMAPP[imlang_url]/bt_adicionar_rss.gif' onclick='Aggregator_addSource($this->project_id);' class='cursor'><br />");
 
 		parent::add("<div class='box_add_rss'>");
-		parent::add("$_language[source_name]: <input id='frm_name' type='text'><br>");
-		parent::add("<img src='$_CMAPP[images_url]/dot.gif' width='5' height='4' border='0'><br>");
+		parent::add("$_language[source_name]: <input id='frm_name' type='text'><br />");
+		parent::add("<img src='$_CMAPP[images_url]/dot.gif' width='5' height='4' border='0'><br />");
 		parent::add("$_language[rss_link]: <input id='frm_rssLink' type='text'>");
 		parent::add("</div>");
 		parent::add("<img src='$_CMAPP[images_url]/dot.gif' width='20' height='25' border='0'></td></tr>");
@@ -169,7 +169,7 @@ class AMBAggregator extends CMHTMLObj {
 		parent::add("<tr bgcolor='#DCF0F6'>");
 
 		parent::add("<td background='$_CMAPP[images_url]/box_diarioproj_int_bgleft.gif'><img src='$_CMAPP[images_url]/dot.gif' width='20' height='10' border='0'></td>");
-		parent::add("<td valign='top'><img src='$_CMAPP[imlang_url]/img_palavras_filtro.gif' align='absmiddle'><br><img src='$_CMAPP[images_url]/dot.gif' width='10' height='14' border='0'><br>");
+		parent::add("<td valign='top'><img src='$_CMAPP[imlang_url]/img_palavras_filtro.gif' align='absmiddle'><br /><img src='$_CMAPP[images_url]/dot.gif' width='10' height='14' border='0'><br />");
 		parent::add("<table cellpadding='0' cellspacing='0' border='0' width='100%'>");
 		parent::add("<tr>");
 		parent::add("<td align='left' valign='top' class='palavras_filtro' id='filters'>");
@@ -180,23 +180,23 @@ class AMBAggregator extends CMHTMLObj {
 			$filters = explode(',', $this->filter);
 			foreach($filters as $filter) {
 				parent::add("<span id='filter_$count'>");
-				parent::add("$filter <img src='$_CMAPP[images_url]/icon_excluir_agregador.gif' onclick=\"Aggregator_deleteFilter($this->project_id, '$filter', $count);\" align='absmiddle'><br>");
+				parent::add("$filter <img src='$_CMAPP[images_url]/icon_excluir_agregador.gif' onclick=\"Aggregator_deleteFilter($this->project_id, '$filter', $count);\" align='absmiddle'><br />");
 				parent::add("</span>");
 				$count++;	
 			}
-		}else parent::add($_language['no_filters'].'<br>');
+		}else parent::add($_language['no_filters'].'<br />');
 		
 		parent::add("</td>");
 
 		parent::add("<td width='175' valign='top'>");
-		//parent::add("<br><a href='#' class='filtro' id='on'> Filtro ATIVO quando encontrar ALGUMA das palavras adicionadas.</a><br><br>");
-		//parent::add("<a href='#' class='filtro' id='off'>Filtro ATIVO quando encontrar TODAS as palavras adicionadas.</a><br>");
+		//parent::add("<br /><a href='#' class='filtro' id='on'> Filtro ATIVO quando encontrar ALGUMA das palavras adicionadas.</a><br /><br />");
+		//parent::add("<a href='#' class='filtro' id='off'>Filtro ATIVO quando encontrar TODAS as palavras adicionadas.</a><br />");
 
 		parent::add("</td>");
 
 		parent::add("</tr>");
-		parent::add("<tr><td colspan='2'><img src='$_CMAPP[images_url]/dot.gif' width='10' height='14' border='0'><br>");
-		parent::add("<input id='frm_filter' type='text'><br><img src='$_CMAPP[images_url]/dot.gif' width='10' height='5' border='0'><br>");
+		parent::add("<tr><td colspan='2'><img src='$_CMAPP[images_url]/dot.gif' width='10' height='14' border='0'><br />");
+		parent::add("<input id='frm_filter' type='text'><br /><img src='$_CMAPP[images_url]/dot.gif' width='10' height='5' border='0'><br />");
 		parent::add("<img class='cursor' onclick='Aggregator_addFilter($this->project_id, $count);' src='$_CMAPP[imlang_url]/bt_add_palavra_filtro.gif'></td></tr>");
 		parent::add("</table></td>");
 		parent::add("<td background='$_CMAPP[images_url]/box_diarioproj_int_bgrigth.gif'><img src='$_CMAPP[images_url]/dot.gif' width='20' height='10' border='0'></td>");

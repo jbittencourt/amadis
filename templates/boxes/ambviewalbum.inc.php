@@ -21,9 +21,9 @@ class AMBViewAlbum extends AMListBox {
 				$image->load();
 				parent::add($image->getView());
 				parent::add("</td></tr><tr><td align='right'>");
-				parent::add("<br>".nl2br($item->comments)."&nbsp;&nbsp;&nbsp;&nbsp;");
+				parent::add("<br />".nl2br($item->comments)."&nbsp;&nbsp;&nbsp;&nbsp;");
 				//Icons controller
-				parent::add("<a href='$_CMAPP[services_url]/album/zoom.php?frm_codePhoto=".$item->codePhoto."&state=view'><img src='$_CMAPP[images_url]/ico_ampliar_foto.gif'></a><br>");
+				parent::add("<a href='$_CMAPP[services_url]/album/zoom.php?frm_codePhoto=".$item->codePhoto."&state=view'><img src='$_CMAPP[images_url]/ico_ampliar_foto.gif'></a><br />");
 				parent::add("</td></tr></table></td>"); //closing the '$item[x]' block
 
 				if($flag == 1){  //if 2 photos was listed yet, lets put the next in a new line!
@@ -35,7 +35,7 @@ class AMBViewAlbum extends AMListBox {
 			}
 		}
 		else
-			parent::add("<tr><td class='".$this->class_prefix."_bg1'><br>".$_language['noPhotos']."</td><td></td></tr>");
+			parent::add("<tr><td class='".$this->class_prefix."_bg1'><br />".$_language['noPhotos']."</td><td></td></tr>");
 
 		parent::add("</table>");
 		return parent::__toString();

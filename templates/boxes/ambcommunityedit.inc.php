@@ -51,15 +51,15 @@ class AMBCommunityEdit extends AMColorBox {
 		$urlproject = $_CMAPP['services_url']."/communities/tieproject.php?frm_codeCommunity=".$this->community->code;
 
 		if($admin){
-			parent::add("<a href=\"$urledit\" class =\"cinza\">&raquo; ".$_language['community_link_edit']."</a><br>");
-			parent::add("<a href=\"$urleditimage\" class =\"cinza\">&raquo; ".$_language['community_link_edit_image']."</a><br>");
-			//parent::add("<a href=\"$urlmembers\" class =\"cinza\">&raquo; ".$_language['community_link_members']."</a><br>");
+			parent::add("<a href=\"$urledit\" class =\"cinza\">&raquo; ".$_language['community_link_edit']."</a><br />");
+			parent::add("<a href=\"$urleditimage\" class =\"cinza\">&raquo; ".$_language['community_link_edit_image']."</a><br />");
+			//parent::add("<a href=\"$urlmembers\" class =\"cinza\">&raquo; ".$_language['community_link_members']."</a><br />");
 		}
 		if($admin || $add_user)
-			parent::add("<a href=\"$urlinvite\" class =\"cinza\">&raquo; ".$_language['community_link_invite']."</a><br>");
+			parent::add("<a href=\"$urlinvite\" class =\"cinza\">&raquo; ".$_language['community_link_invite']."</a><br />");
 
 		if($admin || $add_proj)
-			parent::add("<a href=\"$urlproject\" class =\"cinza\">&raquo; ".$_language['community_link_project']."</a><br>");
+			parent::add("<a href=\"$urlproject\" class =\"cinza\">&raquo; ".$_language['community_link_project']."</a><br />");
 
 		if(!$admin && !$add_proj && !$add_user)
 			parent::add($_language['no_privileges']);

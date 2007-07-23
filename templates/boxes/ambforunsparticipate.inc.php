@@ -31,14 +31,14 @@ class AMBForunsParticipate extends CMHTMLObj {
                     $class = "class=\"webfolio_forum_new\"";
                     $newMsgsStr = "($item->newMessages)";
                 }
-                parent::add("<br><span class=\"$class\"><a href=\"$_CMAPP[services_url]/forum/forum.php?frm_codeForum=$item->code\">&raquo; $item->name $newMsgsStr</a></span>");
+                parent::add("<br /><span class=\"$class\"><a href=\"$_CMAPP[services_url]/forum/forum.php?frm_codeForum=$item->code\">&raquo; $item->name $newMsgsStr</a></span>");
             }
         } else {
-            parent::add("<br><span $class>$_language[no_forums_events]</span>");
+            parent::add("<br /><span $class>$_language[no_forums_events]</span>");
         }
 
-        parent::add("<br><img src=\"$_CMAPP[images_url]/box_traco.gif\">");
-        parent::add("<br><a href=\"$_CMAPP[services_url]/forum/userforums.php\" class=\"bluebox\">$_language[forum_list_more]</a>");
+        parent::add("<br /><img src=\"$_CMAPP[images_url]/box_traco.gif\">");
+        parent::add("<br /><a href=\"$_CMAPP[services_url]/forum/userforums.php\" class=\"bluebox\">$_language[forum_list_more]</a>");
         parent::add("</div>");
 
         return parent::__toString();

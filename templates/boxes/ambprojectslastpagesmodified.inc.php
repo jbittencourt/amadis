@@ -17,7 +17,7 @@ class AMBProjectsLastPagesModified extends AMColorBox {
   
     //paginas de projetos
     if($this->itens['projects']->__hasItems()) {
-      parent::add("<b>&raquo;$_language[projects_pages]</b><br>");
+      parent::add("<b>&raquo;$_language[projects_pages]</b><br />");
       
       foreach($this->itens['projects'] as $item) {
 	$urlpage  = $_CMAPP['services_url']."/pages/viewpage.php?frm_page=projetos/projeto_";
@@ -26,7 +26,7 @@ class AMBProjectsLastPagesModified extends AMColorBox {
 	$urlproj = "$_CMAPP[services_url]/projects/project.php?frm_codProjeto=$item->codeAnchor";
 
 	parent::add("<a href='$urlproj' class='marinho'>".$item->project[0]->title."</a>&nbsp;");
-	parent::add("<a href='$urlpage' class='projBlue'>($_language[see_home_page])</a><br>");
+	parent::add("<a href='$urlpage' class='projBlue'>($_language[see_home_page])</a><br />");
       }
       parent::add("<img src='$_CMAPP[media_url]/images/dot.gif' width='1' height='7' border='0'>");
       parent::add(new AMDotLine);

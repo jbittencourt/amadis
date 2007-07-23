@@ -35,7 +35,7 @@ class AMBDirList extends CMHTMLObj {
     parent::add("      <td bgcolor='#def0ff' width='10'>");
     parent::add("<img src='$_CMAPP[images_url]/dot.gif' border='0' height='10' width='10'></td>");
     parent::add("      <td bgcolor='#def0ff'>");
-    parent::add("<img src='$_CMAPP[images_url]/dot.gif' border='0' height='10' width='10'><br>");
+    parent::add("<img src='$_CMAPP[images_url]/dot.gif' border='0' height='10' width='10'><br />");
     parent::add("      <table border='0' cellpadding='0' cellspacing='0' width='100%'>");
     parent::add("          <tr>");
     parent::add("            <td valign='top'><img src='$_CMAPP[imlang_url]/top_meus_arquivos_amadis.gif'></td>");
@@ -43,11 +43,11 @@ class AMBDirList extends CMHTMLObj {
 
     parent::add("          </tr>");
     parent::add("      </table>");
-    parent::add("      <img src='$_CMAPP[images_url]/dot.gif' border='0' height='7' width='55'><br>");
+    parent::add("      <img src='$_CMAPP[images_url]/dot.gif' border='0' height='7' width='55'><br />");
     
     parent::add("<table border='0' cellpadding='0' cellspacing='2' width='100%'>");
     parent::add("    <tr bgcolor='#a8d4ee'>");
-    parent::add("      <td valign='top' width='10'><br>");
+    parent::add("      <td valign='top' width='10'><br />");
     parent::add("      </td>");
     parent::add("      <td><img src='$_CMAPP[imlang_url]/img_arq_nome.gif'></td>");
     parent::add("      <td><img src='$_CMAPP[imlang_url]/img_arq_data.gif'></td>");

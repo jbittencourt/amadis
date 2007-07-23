@@ -65,8 +65,8 @@ class AMBCommunityJoin extends AMColorBox implements CMActionListener {
 			if(!$group->hasRequestedJoin($_SESSION['user']->codeUser)) {
 				$box = new AMTShowHide("sendMessage", "$_language[community_join]", AMTShowHide::HIDE);
 				$box->add("<form method=\"post\" action=\"$_SERVER[PHP_SELF]\" name=\"send_message\">");
-				$box->add("<font class=texto>$_language[project_join_request]</font><br>");
-				$box->add("<textarea cols=27 rows=5 name=\"frm_text\"></textarea><br>");
+				$box->add("<font class=texto>$_language[project_join_request]</font><br />");
+				$box->add("<textarea cols=27 rows=5 name=\"frm_text\"></textarea><br />");
 				$box->add("<input type=\"hidden\" name=\"join_action\" value=\"A_join\">");
 				$box->add("<input type=\"hidden\" name=\"frm_codeCommunity\" value=\"".$this->community->code."\">");
 				$box->add("<input type=submit value=\"$_language[send]\">");
@@ -79,7 +79,7 @@ class AMBCommunityJoin extends AMColorBox implements CMActionListener {
 		}else{
 			$box = new AMTShowHide("sendMessage", "$_language[community_join]", AMTShowHide::HIDE);
 			$box->add("<form method=\"post\" action=\"$_SERVER[PHP_SELF]\" name=\"send_message1\">");
-			//$box->add("<font class=texto>$_language[community_join_request]</font><br>");
+			//$box->add("<font class=texto>$_language[community_join_request]</font><br />");
 			$box->add("<input type=\"hidden\" name=\"join_action\" value=\"A_auto_join\">");
 			$box->add("<input type=\"hidden\" name=\"frm_codeCommunity\" value=\"".$this->community->code."\">");
 			$box->add("<input type=submit value=\"$_language[send]\">");

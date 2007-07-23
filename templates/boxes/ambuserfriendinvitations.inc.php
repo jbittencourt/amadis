@@ -126,7 +126,7 @@ class AMBUserFriendInvitations extends AMColorBox implements CMActionListener {
 
   			//invitation text
   			parent::add("</td><td class=\"texto\">");
-  			parent::add("<span class=\"cinza\">$user->comentary</span><br>");
+  			parent::add("<span class=\"cinza\">$user->comentary</span><br />");
   			parent::add("$_language[friend_invitation] ");
   			parent::add("<a class=\"blue\" href=\"$_CMAPP[services_url]/webfolio/userinfo_details.php?frm_codeUser=$friend->codeUser\">$friend->username</a>.");
   			parent::add("</td><td align=center>");
@@ -138,11 +138,11 @@ class AMBUserFriendInvitations extends AMColorBox implements CMActionListener {
   			$rjFriend = "AMEnvSession.rejectFriend($friend->codeUser, $time, '','', AMEnvSessionCallBack.onRejectFriend);";
 
 
-  			parent::add("<a class='blue cursor' onClick=\"$mkFriend\">$_language[add_friend]</a><br>");
-  			parent::add("<a class='blue cursor' onClick=\"$rjFriend\">$_language[not_add_friend]</a><br>");
+  			parent::add("<a class='blue cursor' onClick=\"$mkFriend\">$_language[add_friend]</a><br />");
+  			parent::add("<a class='blue cursor' onClick=\"$rjFriend\">$_language[not_add_friend]</a><br />");
 
   			if($_first && $this->invitations->count() > 1) {
-  				parent::add("<tr><td colspan=4><br>");
+  				parent::add("<tr><td colspan=4><br />");
   				parent::add(new AMDotline("100%"));
   			}
 

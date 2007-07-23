@@ -63,21 +63,21 @@ class AMBProjectComents extends AMSimpleBox implements CMActionListener {
 			foreach($this->itens as $item) {
 				parent::add("&nbsp;");
 				parent::add(new AMTUserInfo($item->usuarios->items[0],AMTUserInfo::LIST_USERNAME));
-				parent::add(": ".$item->text."<br><br>");
+				parent::add(": ".$item->text."<br /><br />");
 			}
 		} else {
-			parent::add("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$_language[no_comments]<br>");
+			parent::add("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$_language[no_comments]<br />");
 		}
 
 		parent::add("<a href=\"".$_CMAPP['services_url']."/projects/listprojects.php?list_action=A_list_comments&frm_codProjeto=".$proj->codeProject);
 		parent::add("\" class=\"project_comment\">&raquo; $_language[more_comments]</a>");
 
 		if(!empty($_SESSION['user'])) {
-			$addFriendBox = new AMTShowHide("addFriend", "<br>&raquo; $_language[add_project_comment]", AMTShowHide::HIDE);
+			$addFriendBox = new AMTShowHide("addFriend", "<br />&raquo; $_language[add_project_comment]", AMTShowHide::HIDE);
 			$addFriendBox->setClass('project_comment');
 			$addFriendBox->add("<form method=\"post\" action='$_SERVER[PHP_SELF]' name=\"add_comment\">"); //  Adicionar um coment
-			$addFriendBox->add("<font class=texto>$_language[send_a_comment]</font><br>");
-			$addFriendBox->add("<textarea cols=27 rows=5 name=\"frm_desComentario\"></textarea><br>");
+			$addFriendBox->add("<font class=texto>$_language[send_a_comment]</font><br />");
+			$addFriendBox->add("<textarea cols=27 rows=5 name=\"frm_desComentario\"></textarea><br />");
 			$addFriendBox->add("<input type=\"hidden\" name=\"comments_action\" value=\"A_make_comment\">");
 			$addFriendBox->add("<input type=\"hidden\" name=\"frm_codProjeto\" value=\"$proj->codeProject\">");
 			$addFriendBox->add("<input type=submit value=\"$_language[send]\">");

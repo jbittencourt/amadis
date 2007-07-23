@@ -93,7 +93,7 @@
  			}
  			parent::add("</table>");
  			if($this->show_link == 1)
- 			parent::add("<br><a href='$base_link'><font class='blt_subtitulo'>&raquo; $_language[list_all_files]</font></a>");
+ 			parent::add("<br /><a href='$base_link'><font class='blt_subtitulo'>&raquo; $_language[list_all_files]</font></a>");
  		}
  		
  		

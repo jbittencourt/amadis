@@ -26,18 +26,15 @@ class AMBSearch extends AMColorBox  {
     }
 
 
-    $t = "<table cellspacing=\"0\" cellpading=\"0\" border=\"0\" width=\"100%\">";
-    $form  = "<form name=\"search_form\" action=\"$this->action\" method=\"post\"";
-    $form .= " onSubmit=\"return Search_validateForm(this.elements['frm_search'].value);\">";
-    $form .= "<input type=\"hidden\" name=\"search_action\" value=\"listing\">";
-    $form .= "<input type=\"hidden\" name=\"frm_action\" value=\"search_result\">";
-    $form .= "$t<tr><td colspan=2><input type=\"text\" name=\"frm_search\"></td></tr>";
-    $form .= "<tr><td class=textobox width=50%>";
+    $form  = '<form action="'.$this->action.'" method="post" onsubmit="return Search_validateForm(this.elements[\'frm_search\'].value);">';
+    $form .= '<div><input type="hidden" name="search_action" value="listing" />';
+    $form .= '<input type="hidden" name="frm_action" value="search_result" />';
+    $form .= $t.'<input type="text" name="frm_search" id="frm_search" />';
+        
+    $form .= AMMain::getSearchButton();
+    $form .= '<input type="hidden" name="list_action" value="search_communities" />';
     
-    $form .= "<td>".AMMain::getSearchButton()."</td></tr>";
-    $form .= "<input type=\"hidden\" name=\"list_action\" value=\"search_communities\">";
-    
-    $form .= "</form></table>";
+    $form .= '</div></form>';
     
     parent::add($form);
     

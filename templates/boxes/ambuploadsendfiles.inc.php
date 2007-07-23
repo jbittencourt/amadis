@@ -23,7 +23,7 @@ class AMBUploadSendFiles extends CMHTMLObj {
   public function __toString(){
     
     //numfields form
-    parent::add("<br><Br><form action=\"".$_SERVER[PHP_SELF]."\" method=\"post\" >");
+    parent::add("<br /><Br><form action=\"".$_SERVER[PHP_SELF]."\" method=\"post\" >");
     parent::add("<input type=hidden name=frm_dir value=$_REQUEST[frm_dir]>");
     parent::add("<input type=hidden name=\"MAX_FILE_SIZE\" value=\"00020\">");
     parent::add("<input type=hidden name=frm_upload_type value=$_REQUEST[frm_upload_type]>");
@@ -40,15 +40,15 @@ class AMBUploadSendFiles extends CMHTMLObj {
     parent::add("<input type=hidden name=frm_upload_type value=$_REQUEST[frm_upload_type]>");
     parent::add("<input type=hidden $this->upload_type>");
     
-    parent::add("Enviar um arquivo:<br>");
+    parent::add("Enviar um arquivo:<br />");
     
     if(!empty($_REQUEST[frm_numFields])) {
       for($i=0; $i<$_REQUEST[frm_numFields]; $i++) {
-	parent::add("<input type=file name=frm_file_$i><br>");
+	parent::add("<input type=file name=frm_file_$i><br />");
       }
-    }else parent::add("<input type=file name=frm_file><br>");
+    }else parent::add("<input type=file name=frm_file><br />");
     
-    parent::add("<br><input type=submit name=submit value=Enviar>");
+    parent::add("<br /><input type=submit name=submit value=Enviar>");
     parent::add("</form>");
     
     return parent::__toString();

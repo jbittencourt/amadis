@@ -26,7 +26,7 @@ class AMBAmadisNews extends AMColorBox {
 		if($hasItems) {
 			if($this->nProjects->__hasItems()) {
 				$news = true;
-				parent::add("<b>&raquo; $_language[projects]</b><br>");
+				parent::add("<b>&raquo; $_language[projects]</b><br />");
 				foreach($this->nProjects as $item) {
 					parent::add("<a class=\"cinza\" ");
 					/*
@@ -35,19 +35,19 @@ class AMBAmadisNews extends AMColorBox {
 					//parent::add("href=\"$_CMAPP[services_url]/projects/listprojects.php?list_action=A_list_news&frm_codProjeto=$item->codeProject#project_news_".$item->news[0]->code."\">");
 					parent::add("href=\"$_CMAPP[services_url]/projects/listprojects.php?list_action=A_list_news&frm_codProjeto=$item->codeProject\">");
 					parent::add("&raquo; ".$item->news[0]->title." - <b>($item->title)</b>");
-					parent::add("</a><br>");
+					parent::add("</a><br />");
 				}
 				parent::add(new AMDotLine);
 			}
 				
 			if($this->nCommunities->__hasItems()) {
 				$news = true;
-				parent::add("<b>&raquo; $_language[communities]</b><br>");
+				parent::add("<b>&raquo; $_language[communities]</b><br />");
 				foreach($this->nCommunities as $item) {
 					parent::add("<a class=\"cinza\" ");
 					parent::add("href=\"$_CMAPP[services_url]/communities/listcommunities.php?list_action=A_list_news&frm_codeCommunity=$item->code#community_news_".$item->news[0]->code."\">");
 					parent::add("&raquo; ".$item->news[0]->title." - <b>($item->name)</b>");
-					parent::add("</a><br>");
+					parent::add("</a><br />");
 				}
 				parent::add(new AMDotLine);
 			}

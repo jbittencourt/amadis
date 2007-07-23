@@ -71,7 +71,7 @@ class AMBAdminStates extends AMSimpleBox {
 
 			$conteudo .= "<tr><td><span id='hideShowState".$i++."' style='display:none'><form action = $_SERVER[PHP_SELF] method=post>";
 			$conteudo .= "<input type='text' value='$item->name' name='nomEstado1'> &nbsp;&nbsp;&nbsp;&nbsp;";
-			$conteudo .= "<input type='text' value='$item->code' name='desSigla1' size='2'><br>";
+			$conteudo .= "<input type='text' value='$item->code' name='desSigla1' size='2'><br />";
 			$conteudo .= "<input type='text' value='$item->country' name='desPais1'> &nbsp;&nbsp;&nbsp;&nbsp;";
 			$conteudo .= "<input type='hidden' name='action1' value='editState'>";
 			$conteudo .= "<input type='hidden' name='idState' value='$item->codeState'>";
@@ -83,7 +83,7 @@ class AMBAdminStates extends AMSimpleBox {
 		$conteudo .= "<tr><td><a href='#' onClick='AM_togleDivDisplay(\"hideShoww\")'>".$_language['add_new_state']."</a></td></tr>";
 		$conteudo .= "<tr><td><span id='hideShoww' style='display:none'><form action = $_SERVER[PHP_SELF] method=post>";
 		$conteudo .= "<input type='text' name='nomEstado' value= '".$_language['state_name']."'> &nbsp;&nbsp;&nbsp;&nbsp;";
-		$conteudo .= "<input type='text' name='desSigla'  value= '".$_language['acronym']."' size='2'><br>";
+		$conteudo .= "<input type='text' name='desSigla'  value= '".$_language['acronym']."' size='2'><br />";
 		$conteudo .= "<input type='text' name='desPais' value = '".$_language['country']."'> &nbsp;&nbsp;&nbsp;&nbsp;";
 		$conteudo .= "<input type='hidden' name='action1' value='addState'>";
 		$conteudo .= "<input type='submit' value='".$_language['add']."'>";

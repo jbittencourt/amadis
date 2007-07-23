@@ -76,12 +76,12 @@ class AMBProjectEdit extends AMColorBox implements CMActionListener {
     	$urleditimage = $_CMAPP['services_url']."/projects/edit_image.php?frm_codeProject=".$proj->codeProject;
     	$urleditareas = $_CMAPP['services_url']."/projects/edit_areas.php?frm_codeProject=".$proj->codeProject;
 
-    	parent::add("<a href=\"$urlinfo\" class =\"green\">&raquo; ".$_language['project_link_info']."</a><br>");
-    	parent::add("<a href=\"$urleditimage\" class =\"green\">&raquo; ".$_language['project_link_image']."</a><br>");
-    	parent::add("<a href=\"$urleditareas\" class =\"green\">&raquo; ".$_language['project_link_areas']."</a><br>");
-    	parent::add("<a href=\"$urlequipe\" class =\"green\">&raquo; ".$_language['project_link_group']."</a><br>");
-    	parent::add("<a href=\"$urlupload\" class =\"green\">&raquo; ".$_language['project_link_upload']."</a><br>");
-    	parent::add("<a href=\"#\" onClick='$leave_confirm' class =\"green\">&raquo; ".$_language['project_link_leave']."</a><br>");
+    	parent::add("<a href=\"$urlinfo\" class =\"green\">&raquo; ".$_language['project_link_info']."</a><br />");
+    	parent::add("<a href=\"$urleditimage\" class =\"green\">&raquo; ".$_language['project_link_image']."</a><br />");
+    	parent::add("<a href=\"$urleditareas\" class =\"green\">&raquo; ".$_language['project_link_areas']."</a><br />");
+    	parent::add("<a href=\"$urlequipe\" class =\"green\">&raquo; ".$_language['project_link_group']."</a><br />");
+    	parent::add("<a href=\"$urlupload\" class =\"green\">&raquo; ".$_language['project_link_upload']."</a><br />");
+    	parent::add("<a href=\"#\" onClick='$leave_confirm' class =\"green\">&raquo; ".$_language['project_link_leave']."</a><br />");
 
     	return parent::__toString();
       

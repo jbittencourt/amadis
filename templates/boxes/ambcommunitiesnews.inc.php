@@ -98,7 +98,7 @@ class AMBCommunitiesNews extends AMSimpleBox implements CMActionListener {
 	public function __toString() {
 		global $_CMAPP, $_language, $community;
 
-		parent::add("<img src=\"$_CMAPP[images_url]/dot.gif\" width=\"10\" height=\"10\"><br>");
+		parent::add("<img src=\"$_CMAPP[images_url]/dot.gif\" width=\"10\" height=\"10\"><br />");
 
 
 		switch($this->type) {
@@ -106,15 +106,15 @@ class AMBCommunitiesNews extends AMSimpleBox implements CMActionListener {
 				if($this->itens->__hasItems()) {
 					foreach($this->itens as $item) {
 							
-						//parent::add("<br>");
+						//parent::add("<br />");
 							
 						$data = date("d/m/Y",$item->news[0]->time);
 						parent::add("<a class =\"cinza\" href=\"$_CMAPP[services_url]/communities/viewnews.php?frm_codeNews=".$item->news[0]->code."\">");
 						parent::add("\"".$item->news[0]->title."\" ($data) - ".$item->name);
 
-						parent::add("</a><br>");
+						parent::add("</a><br />");
 					}
-				}else parent::add("<br>".$_language['without_communities_news']);
+				}else parent::add("<br />".$_language['without_communities_news']);
 				break;
 
 			case self::COMMUNITY_NEWS :
@@ -124,11 +124,11 @@ class AMBCommunitiesNews extends AMSimpleBox implements CMActionListener {
 						parent::add("<a class =\"cinza\">");
 						parent::add("<b>$item->title</b></a>: ".nl2br($item->text)." ".$_language['by']." ");
 						parent::add(new AMTUserInfo($item->users[0],AMTUserInfo::LIST_USERNAME));
-						parent::add("<br>");
+						parent::add("<br />");
 					}
-					parent::add("<a href='".$_CMAPP['services_url']."/communities/listcommunities.php?list_action=A_list_news&frm_codeCommunity=".$community->code."' class='community_view_news'>&raquo; ".$_language['see_all_news']."</a><br>");
+					parent::add("<a href='".$_CMAPP['services_url']."/communities/listcommunities.php?list_action=A_list_news&frm_codeCommunity=".$community->code."' class='community_view_news'>&raquo; ".$_language['see_all_news']."</a><br />");
 
-				}else parent::add("<br>".$_language['without_communities_news']."<br>");
+				}else parent::add("<br />".$_language['without_communities_news']."<br />");
 				$group = $community->getGroup();
 				if($_SESSION['user'] instanceof CMObj) {
 					if($group->isMember($_SESSION['user']->codeUser)) {

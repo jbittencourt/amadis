@@ -74,7 +74,7 @@ class AMBProjectOrfan extends AMColorBox implements CMActionListener {
     parent::add("</td><td align=center>");
 
     $js = "if(confirm('$_language[project_adopt_confirm]')) { adoptProject('$proj->codeProject'); } else { return false; }";
-    parent::add("<a href='#' onClick=\"$js\" class='green'>$_language[project_adopt]</a><br>");
+    parent::add("<a href='#' onClick=\"$js\" class='green'>$_language[project_adopt]</a><br />");
     parent::add("</tr>");
 
     parent::add("</table>");

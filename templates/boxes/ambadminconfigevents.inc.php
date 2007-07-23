@@ -15,9 +15,9 @@ class AMBAdminConfigEvents extends AMSimpleBox {
   public function __toString() {
     global $_language, $_CMAPP;
     
-    parent::add($_language['event']."<br>");
+    parent::add($_language['event']."<br />");
     
-    parent::add("<a href=\"$_CMAPP[services_url]/admin/sendmessages.php\">$_language[send_messages]</a><br>");    
+    parent::add("<a href=\"$_CMAPP[services_url]/admin/sendmessages.php\">$_language[send_messages]</a><br />");    
   
     return parent::__toString();
   }

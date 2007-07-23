@@ -74,7 +74,7 @@ class AMBProjectGroupAction implements AMAjax
                 $temp = new AMTUserInfo($item);
                 $temp->setClass("text");
                 $box->add($temp);
-                $box->add("<br>");
+                $box->add("<br />");
                 if($count>10) break;
                 else $count++;
             }
@@ -92,10 +92,10 @@ class AMBProjectGroupAction implements AMAjax
             $adopt = new AMBProjectOrfan($proj);
             $adopt->setWidth($box->getWidth());
             $box->add($adopt);
-            $box->add(self::$_lang['no_members']."<br>");
+            $box->add(self::$_lang['no_members']."<br />");
         }
 		
-        $box->add("<br>");
+        $box->add("<br />");
         $ret['requires'] = $box->getRequires();
         $ret['list'] = utf8_encode($box->__toString());
         return $ret;
