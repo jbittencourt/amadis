@@ -57,7 +57,7 @@ if(!empty($userBlog)) {
 
   }
 
-  $posts = $userBlog->listBlogPosts($_REQUEST['frm_calMonth'],$_REQUEST['frm_calYear']);
+  $posts = $userBlog->listLastBlogPosts($_REQUEST['frm_calMonth'],$_REQUEST['frm_calYear']);
   
   
   $xml = '   <title>'.html_entity_decode($title)."</title>\n";

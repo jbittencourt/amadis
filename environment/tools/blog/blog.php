@@ -25,6 +25,30 @@ $pag->addXOADHandler('AMBlog', 'AMBlog');
 
 if(!empty($_REQUEST['frm_action'])) {
 	switch($_REQUEST['frm_action']) {
+		case "A_post":
+			$post = new AMBlogPost;
+
+			if(!empty($_REQUEST['frm_codePost'])) {
+				$post->codePost = $_REQUEST[frm_codePost];
+				try {
+					$post->load();
+				}catch(CMObjException $e) {
+					$pag->addError($_language['error_post_cannot_be_edited']);
+				}
+			} else {
+				$post->time = time();
+				$post->codeUser = $_SESSION['user']->codeUser;
+			}
+			$post->loadDataFromRequest();
+			$post->body = stripslashes($_REQUEST['frm_body']);
+			try{
+				$post->save();
+				header("Location: blog.php?frm_ammsg=post_success");
+			}catch(CMObjException $e) {
+				$pag->addError($_language['error_post_cannot_be_edited']);
+			}
+			break;
+		
 		case "A_comentario":
 			$comentario = new AMBlogComment;
 			$comentario->loadDataFromRequest(); // pega os dados do request e manda p/ o banco
@@ -40,6 +64,40 @@ if(!empty($_REQUEST['frm_action'])) {
 			}
 				
 			break;
+
+		case "A_reply_comentario":
+			$pComment = new AMBlogComment;
+			$pComment->codeComment = $_REQUEST['frm_parentComment'];
+			
+			try {
+				$pComment->load();
+				
+				$comentario = new AMBlogComment;
+				$comentario->loadDataFromRequest(); // pega os dados do request e manda p/ o banco
+				$comentario->time = time();
+				$comentario->codeUser = $_SESSION['user']->codeUser;
+				try {
+					$comentario->save();
+					$pag->addMessage($_language['msg_comments_saved']); //aviso em java script
+				} catch(CMDBQueryError $e) {
+					new AMLog('blog.php - save_reply_comment', $e, AMLog::LOG_BLOG);
+					$_REQUEST['frm_amerror'] = "comment_not_saved";
+				}		
+				
+				$pComment->answered = AMBlogComment::ENUM_ANSWERED_TRUE;
+				
+				try {
+					$pComment->save();
+				}catch(CMException $e) {
+					new AMLog('blog.php - update_parentComment', $e, AMLog::LOG_BLOG);
+					$comentario->delete();
+				}
+			}catch(CMException $e) {
+				new AMLog('blog.php - load', $e, AMLog::LOG_BLOG);
+				$_REQUEST['frm_amerror'] = "comment_not_saved";
+			}
+		break;
+			
 
 			// ------------  teste para deletar posts
 		case "A_delete":
@@ -168,8 +226,8 @@ if(is_a($userBlog,'AMUser')) {
 	
 	if(!empty($_SESSION['user']) && ($_REQUEST['frm_calMonth']==$date['mon']) && ($_REQUEST['frm_calYear']==$date['year'])) {
 		if($userBlog->codeUser==$_SESSION['user']->codeUser) {
-			$caixa->addCabecalho("<br> <a class='diary_header' href='post.php' > &raquo; $_language[post_blog] </a>");
-			$caixa->addCabecalho("<br> <a class='diary_header' href='$linkEditar' > &raquo; $_language[edit_blog] </a>");
+			$caixa->addCabecalho('<br /><a class="diary_header" href="javascript:void(0);" onclick="Blog.newPost();"><img src="'.$_CMAPP['images_url'].'/ico_edit_blog.gif" alt=""/></a>');
+			$caixa->addCabecalho('<a class="diary_header" href="'.$linkEditar.'"><img src="'.$_CMAPP['images_url'].'/ico_up_blog.gif" alt="Editar diário" title="diario" /></a>');
 		}
 	}
 	$rsslink = $_CMAPP['services_url'] . "/blog/blogRSS.php?frm_codeUser=$userBlog->codeUser";
@@ -177,7 +235,7 @@ if(is_a($userBlog,'AMUser')) {
 	$pag->add($caixa);
 
 } else {
-	$pag->addError($_language['error_user_not_logged']);
+	$pag->addError($_language['error_user_not_logged'], '');
 }
 
 echo $pag;

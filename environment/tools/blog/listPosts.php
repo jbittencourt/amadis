@@ -78,9 +78,9 @@ $sbox->add('<input type=hidden name=action value=A_filter />');
 $f = create_function('$d', 'if($_SESSION["blog_posts_list_type"]==$d) return "selected";');
 
 $sbox->add('<p>' . $_language['blog_filter_date'] . '&nbsp; <select name="frm_date">');
-$sbox->add('<option value=today '. $f('today') . '>' . $_language['blog_filter_day'] );
-$sbox->add('<option value=week '. $f('week') . '> ' . $_language['blog_filter_week'] );
-$sbox->add('<option value=month ' . $f('month') . '> ' . $_language['blog_filter_month'] );
+$sbox->add('<option value="today" '. $f('today') . '>' . $_language['blog_filter_day'] );
+$sbox->add('<option value="week" '. $f('week') . '> ' . $_language['blog_filter_week'] );
+$sbox->add('<option value="month" ' . $f('month') . '> ' . $_language['blog_filter_month'] );
 $sbox->add('</select></p>');
 
 $sbox->add("<p>$_language[person] &nbsp;<input name=frm_user type=text value='$_REQUEST[frm_user]'/></p>");
