@@ -106,7 +106,7 @@ class AMXOTheme extends AMHTMLPage
 		parent::add('<div id="main_content">');
 		
 		if(!empty($this->imgid)) {
-            parent::add("<img src=\"".$this->imgid."\" border=0><br>");
+            parent::add("<img src=\"".$this->imgid."\" border=0><br />");
             parent::add('<img src="'.$_CMAPP['images_url'].'/dot.gif" height=5>');
         }
         else {
@@ -150,7 +150,7 @@ class AMXOTheme extends AMHTMLPage
                 $messages[] = array("message"=>$_language["msg_$msg"],
 			    "thrower"=>"request");
             }
-            parent::add("<br>");
+            parent::add("<br />");
         }
 
         
@@ -165,13 +165,13 @@ class AMXOTheme extends AMHTMLPage
 
         parent::add('<div id="erros_area">');
         if(!empty($errors)) {
-            parent::add("<br>");
+            parent::add("<br />");
             $debug_mode = (int) $_CMAPP['environment']->debug_mode;
             foreach($errors as $num=>$message) {
                 parent::add(new AMAlertBox(AMAlertBox::ERROR,$message['message']));
                 if($debug_mode) parent::add(new AMAlertBox(AMAlertBox::ERROR, $message['exception']));
             }
-            parent::add("<br>");
+            parent::add("<br />");
         }
         parent::add('</div>');
 
@@ -180,7 +180,7 @@ class AMXOTheme extends AMHTMLPage
             foreach($this->alerts as $num=>$message) {
                 parent::add(new AMAlertBox(AMAlertBox::ALERT,$message));
             }
-            parent::add("<br>");
+            parent::add("<br />");
         }
         parent::add('</div>');
 
@@ -189,7 +189,7 @@ class AMXOTheme extends AMHTMLPage
             foreach($messages as $num=>$message) {
                 parent::add(new AMAlertBox(AMAlertBox::MESSAGE,$message['message']));
             }
-            parent::add("<br>");
+            parent::add("<br />");
         }
         parent::add('</div>');
 

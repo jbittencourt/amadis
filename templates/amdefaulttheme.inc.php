@@ -17,7 +17,9 @@ class AMDefaultTheme extends AMHTMLPage
 
 	public $mainMenu;
 	public $navMenu;
+	public $sectionTitle;
 	protected $notices = array();
+	public $section;
 	
     function __construct($theme="") 
     {
@@ -87,9 +89,9 @@ class AMDefaultTheme extends AMHTMLPage
 
         $this->force_newline=0;
         $main_content = array();
-
+		
         if(!empty($this->imgid)) {
-            $section_title = '<img src="'.$this->imgid.'" alt="" /><br />';
+            $section_title = '<h1 class="section-title"><img src="'.$this->imgid.'" alt="" /><span class="section-'.$this->section.'">'.$this->sectionTitle.'</span></h1>';
         } else {
             $section_title = '&nbsp;';
         }
@@ -99,12 +101,14 @@ class AMDefaultTheme extends AMHTMLPage
         if(!empty($this->pathindicator)) {
             $main_content[] = $this->pathindicator->__toString();
         }
-		
-        foreach($this->contents as $item) {
-			if($item instanceof CMHTMLOBJ) {
-				$main_content[] = $item->__toString();
-			} else $main_content[] = $item;
-		}
+
+        if(!empty($this->contents)) {
+        	foreach($this->contents as $item) {
+				if($item instanceof CMHTMLOBJ) {
+					$main_content[] = $item->__toString();
+				} else $main_content[] = $item;
+			}
+        }
         
         $injection = array(
         	'main_menu'=>$this->mainMenu->__toString(),

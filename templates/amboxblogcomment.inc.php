@@ -10,7 +10,7 @@
  * @version 1.0
  * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
  */
-class AMBoxBlogComment extends CMHTMLObj
+class AMBoxBlogComment extends CMHTMLObj 
 {
 
     private $contents;
@@ -27,37 +27,14 @@ class AMBoxBlogComment extends CMHTMLObj
     function __toString() {
         global $_CMAPP;
 
-        parent::add("<div class=\"diary_comment\">");
-        parent::add("<table cellpadding=\"0\" cellspacing=\"0\">");
-        parent::add("<tr> ");
-        parent::add("<td align=\"right\" width=10><img src=\"$_CMAPP[images_url]/box_cmnt_es.gif\" width=\"10\" height=\"10\" border=\"0\"></td>");
-
-        parent::add("<td bgcolor=\"#B5C5FF\"><img src=\"$_CMAPP[images_url]/dot.gif\" width=\"1\" height=\"1\" border=\"0\"></td>");
-        parent::add("<td width=10><img src=\"$_CMAPP[images_url]/box_cmnt_ds.gif\" width=\"10\" height=\"10\" border=\"0\"></td>");
-        parent::add("</tr>");
-        parent::add("<tr> ");
-        parent::add("<td bgcolor=\"B5C5FF\"><img src=\"$_CMAPP[images_url]/dot.gif\" width=\"1\" height=\"1\" border=\"0\"></td>");
-        parent::add("<td valign=\"top\" bgcolor=\"#B5C5FF\"> ");
-
+        parent::add('<div class="diary-comment">');
         if(!empty($this->contents)) {
-            parent::add($this->contents);
+        	parent::add(implode('', $this->contents));
         }
-
-        parent::add("</td>");
-        parent::add("<td bgcolor=\"#B5C5FF\"><img src=\"$_CMAPP[images_url]/dot.gif\" width=\"1\" height=\"1\" border=\"0\"></td>");
-        parent::add("</tr>");
-        parent::add("<tr> ");
-        parent::add("<td align=\"right\"><img src=\"$_CMAPP[images_url]/box_cmnt_ei.gif\" width=\"10\" height=\"10\" border=\"0\"></td>");
-        parent::add("<td bgcolor=\"B5C5FF\"></td>");
-        parent::add("<td><img src=\"$_CMAPP[images_url]/box_cmnt_di.gif\" width=\"10\" height=\"10\" border=\"0\"></td>");
-        parent::add("</tr>");
-        parent::add("</table>");
-        parent::add("</div>");
-
+        parent::add('</div>');
+        
         return parent::__toString();
-
+        
     }
-
-
 }
 

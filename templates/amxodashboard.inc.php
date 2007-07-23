@@ -59,7 +59,7 @@ class  AMXODashBoard extends CMHTMLObj
 					</ul>	
 				</div>
 				<div id=\"loginBottomBorder\"></div>
-			</div><br>";
+			</div><br />";
       
 		$this->add($str);
             
@@ -231,7 +231,7 @@ class  AMXODashBoard extends CMHTMLObj
                 $bg="";
                 parent::add($line['line']);
                 if($line['line_after']) {
-                    parent::add("<br>");
+                    parent::add("<br />");
                 }
             }
         }

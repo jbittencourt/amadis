@@ -21,8 +21,7 @@
  * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
  **/
 
-abstract class  AMImageTemplate extends CMHTMLObj
-{
+abstract class  AMImageTemplate extends CMHTMLObj {
 	const METHOD_DB=0;
 	const METHOD_SESSION=1;
 	const METHOD_DEFAULT=2;
@@ -32,67 +31,61 @@ abstract class  AMImageTemplate extends CMHTMLObj
 	private $method;
 	private $thumb;
 
-  /**
-   * Constructor of the class.
-   *
-   * There are some observations that the developer should be aware when extending this
-   * class. Since PHP 5 don't support polimorphism, the value of $value can be interpreted 
-   * in two diferent ways. If $method is METHOD_DB, $value is the code of a file in the
-   * database, modeled by the class AMFile. If the $method is METHOD_SESSION, $value is
-   * interpreted as a AMImage.
-   *
-   * @param mixed $value If method is METHOD_DB, the value is code of the file in the databe. Otherwise is an object of the type AMFile
-   * @param integer $method The method that should be used to handle the vizualization of the image
-   **/
-  public function __construct($value,$method=self::METHOD_DB, $thumb=false)
-  {
-  	parent::__construct();
+  	/**
+   	 * Constructor of the class.
+   	 *
+  	 * There are some observations that the developer should be aware when extending this
+  	 * class. Since PHP 5 don't support polimorphism, the value of $value can be interpreted 
+  	 * in two diferent ways. If $method is METHOD_DB, $value is the code of a file in the
+  	 * database, modeled by the class AMFile. If the $method is METHOD_SESSION, $value is
+  	 * interpreted as a AMImage.
+  	 *
+  	 * @param mixed $value If method is METHOD_DB, the value is code of the file in the databe. Otherwise is an object of the type AMFile
+  	 * @param integer $method The method that should be used to handle the vizualization of the image
+  	 **/
+  	public function __construct($value,$method=self::METHOD_DB, $thumb=false)
+  	{
+  		parent::__construct();
   	
-  	$this->method = $method;
+  		$this->method = $method;
   	
-  	if($method==self::METHOD_DB) {
-  		$this->codeFile = $value;
+  		if($method==self::METHOD_DB) {
+  			$this->codeFile = $value;
+  		} elseif($method==self::METHOD_SESSION) {
+  			$this->imageObj= $value;
+  		} elseif($method==self::METHOD_DEFAULT) {
+  			$this->imageObj = $value;
+  		} else {
+  			Throw new AMException("Image render method not recognized.");
+  		}
+		$this->thumb = $thumb;
   	}
-  	elseif($method==self::METHOD_SESSION) {
-  		$this->imageObj= $value;
-  	}
-  	elseif($method==self::METHOD_DEFAULT) {
-  		$this->imageObj = $value;
-  	}
-  	else {
-  		Throw new AMException("Image render method not recognized.");
-  	}
-  	
-  	$this->thumb = $thumb;
-  }
 
 
-  /**
-   * Return the URL to the image, considering the method choosen by the user.
-   * 
-   * @return string The url to the image.
-   **/
-  public function getImageURL()
-  {
-  	global $_CMAPP;
+  	/**
+   	 * Return the URL to the image, considering the method choosen by the user.
+   	 * 
+  	 * @return string The url to the image.
+  	 **/
+  	public function getImageURL()
+  	{
+  		global $_CMAPP;
   	
-  	$url = "";
-  	switch($this->method) {
-    case self::METHOD_DB:
-    	$url = "$_CMAPP[media_url]/imagewrapper.php?method=db&frm_codeFile=".$this->codeFile;
-    	break;
-    case self::METHOD_SESSION:
-    	$rand = rand(0,100000);
-    	$_SESSION['amadis']['imageview'][$rand] = serialize($this->imageObj) ;
-    	$url = "$_CMAPP[media_url]/imagewrapper.php?method=session&frm_id=$rand";
-    	break;
-    case self::METHOD_DEFAULT:
-    	if($this->thumb) $url = $_CMAPP['thumbs_url']. '/' . $this->imageObj;
-    	else $url = $_CMAPP['url'] . '/files/' . $this->imageObj;
-    	break;
+  		$url = "";
+  		switch($this->method) {
+    		case self::METHOD_DB:
+    			$url = "$_CMAPP[media_url]/imagewrapper.php?method=db&frm_codeFile=".$this->codeFile;
+    			break;
+    		case self::METHOD_SESSION:
+    			$rand = rand(0,100000);
+    			$_SESSION['amadis']['imageview'][$rand] = serialize($this->imageObj) ;
+    			$url = "$_CMAPP[media_url]/imagewrapper.php?method=session&frm_id=$rand";
+    			break;
+    		case self::METHOD_DEFAULT:
+    			if($this->thumb) $url = $_CMAPP['thumbs_url']. '/' . $this->imageObj;
+    			else $url = $_CMAPP['url'] . '/files/' . $this->imageObj;
+    			break;
+  		}
+  		return $url;
   	}
-  	return $url;
-  }
-
-
 }

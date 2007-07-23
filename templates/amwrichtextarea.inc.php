@@ -55,7 +55,7 @@ class AMWRichTextArea extends CMWFormEl {
     }
     else {
       if($this->design != CMWFormEl::WFORMEL_DESIGN_STRING_DEFINED) $this->add($this->label);
-      if($this->design == CMWFormEl::WFORMEL_DESIGN_OVER) $this->add("<br>");
+      if($this->design == CMWFormEl::WFORMEL_DESIGN_OVER) $this->add("<br />");
     }
 
     if(!self::$_initialized) {

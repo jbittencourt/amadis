@@ -84,10 +84,10 @@ class AMUploadBox extends RDPagObj {
     //icones enviar e baixar
     $this->add("<td rowspan=\"4\"><img src=\"$urlimagens/dot.gif\" width=\"3\" height=\"1\" border=\"0\"></td>");
     $this->add("<td valign=\"top\" rowspan=\"4\" bgcolor=\"#ffffff\" align=\"center\" width=\"60\">");
-    $this->add("<br><br><br><br><br><br><a href=\"javascript:go_to_download()\"><img src=\"$urlimlang/btn_upload_baixar.gif\" width=\"38\" height=\"43\" border=\"0\"></a>");
-    $this->add("<br><br><a href=\"$_SERVER[PHP_SELF]?acao=A_envia_arq\"><img src=\"$urlimlang/btn_upload_enviar.gif\" width=\"38\" height=\"43\" border=\"0\"></a>");
+    $this->add("<br /><br /><br /><br /><br /><br /><a href=\"javascript:go_to_download()\"><img src=\"$urlimlang/btn_upload_baixar.gif\" width=\"38\" height=\"43\" border=\"0\"></a>");
+    $this->add("<br /><br /><a href=\"$_SERVER[PHP_SELF]?acao=A_envia_arq\"><img src=\"$urlimlang/btn_upload_enviar.gif\" width=\"38\" height=\"43\" border=\"0\"></a>");
     $this->add("</td>");
-    $this->add("<td valign=\"top\" rowspan=\"4\" bgcolor=\"#ffffff\"><br><br><br><br><img src=\"$urlimagens/img_computador.gif\" width=\"108\" height=\"147\" border=\"0\"></td>");
+    $this->add("<td valign=\"top\" rowspan=\"4\" bgcolor=\"#ffffff\"><br /><br /><br /><br /><img src=\"$urlimagens/img_computador.gif\" width=\"108\" height=\"147\" border=\"0\"></td>");
     $this->add("</tr>");
     
     $this->add("<tr>");

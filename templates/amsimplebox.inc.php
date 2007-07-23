@@ -26,28 +26,20 @@ abstract class AMSimpleBox extends CMHTMLObj {
   public function __toString(){
     global $_CMAPP;
 
-    parent::add("<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\">");
-    parent::add("<tbody>");
-    parent::add("<tr>");
-    parent::add("<td class=\"textoint\">");
-    parent::add("<img src=\"".$this->title."\" border=\"0\"><br>");
-    parent::add("<!--Begin parse itens-->");
+    parent::add('<div class="simple-box">');
+    parent::add('<img src="'.$this->title.'" alt="" /><br />');
+    parent::add('<!--Begin parse itens-->');
 
     if(!empty($this->stack)) {
-      foreach($this->stack as $item) {
-	parent::add($item);
-      }
+    	foreach($this->stack as $item) {
+			parent::add($item);
+      	}
     }
 
-    parent::add("<!--End parse itens-->");
-    parent::add("</td>");
-    parent::add("</tr>");
-    parent::add("</tbody>");
-    parent::add("</table>");
+    parent::add('<!--End parse itens-->');
+    parent::add('</div>');
 
     return parent::__toString();
-
   }
 }
-
 ?>

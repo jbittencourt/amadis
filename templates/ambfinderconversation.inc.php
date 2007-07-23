@@ -48,10 +48,10 @@ class AMBFinderConversation extends CMHTMLObj {
     	$userThumb->load();
     	$userThumbURL = $userThumb->thumb->getThumbURL();
     }
-    parent::add("<img src='$userThumbURL' class='element'><br>");
-    parent::add($this->user->username."<br>");
+    parent::add("<img src='$userThumbURL' class='element'><br />");
+    parent::add($this->user->username."<br />");
 
-    parent::add("<img class='setas' src='$_CMAPP[images_url]/box_msg_setas.png'><br>");
+    parent::add("<img class='setas' src='$_CMAPP[images_url]/box_msg_setas.png'><br />");
 
     //add a user sender thumbnail
     $userThumb = new AMUserThumb;
@@ -70,8 +70,8 @@ class AMBFinderConversation extends CMHTMLObj {
     	$userThumb->load();
     	$userThumbURL = $userThumb->thumb->getThumbURL();
     }
-    parent::add("<img src='$userThumbURL' class='element'><br>");
-    parent::add($_SESSION['user']->username."<br>");
+    parent::add("<img src='$userThumbURL' class='element'><br />");
+    parent::add($_SESSION['user']->username."<br />");
 
     parent::add("    </div>");
     parent::add("<div id='footerlement'><img src='$_CMAPP[images_url]/box_msg_pecas2.png'></div>");

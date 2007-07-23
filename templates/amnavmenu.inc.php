@@ -58,11 +58,11 @@ class  AMNavMenu extends CMHTMLObj
             
          // MY PROJECTS
             $projects  = $_SESSION['user']->listMyProjects();
-            $temp = '<li id="projects_menu" class="project_txt" onClick="toggleActive(this, \'project\', \'1\');" >'.$_language['projects'];
+            $temp = '<li id="projects_menu" class="project_txt" onclick="toggleActive(this, \'project\', \'1\');" >'.$_language['projects'];
 
             $tree = new AMTree($temp);
             $tree->setJSCall("changeMenuStatus('projects','$tree->name')");
-
+			
             if($_SESSION['amadis']['menus']['projects']==1) {
                 $tree->open();
             }
@@ -85,7 +85,7 @@ class  AMNavMenu extends CMHTMLObj
 			
             $friends = $_SESSION['user']->listFriends();
        	
-			$temp = '<li id="friends_menu" class="friends_txt" onClick="toggleActive(this, \'friends\', \'2\');" >'.$_language['friends'];
+			$temp = '<li id="friends_menu" class="friends_txt" onclick="toggleActive(this, \'friends\', \'2\');" >'.$_language['friends'];
 			            
             $tree = new AMTree($temp);
 
@@ -137,7 +137,7 @@ class  AMNavMenu extends CMHTMLObj
          // COMMUNITIES
             
             $communities = $_SESSION['user']->listMyCommunities();
-            $temp = '<li class="commnunities_txt" onClick="toggleActive(this, \'commnunities\', \'3\');">'.$_language['communities'];
+            $temp = '<li class="commnunities_txt" onclick="toggleActive(this, \'commnunities\', \'3\');">'.$_language['communities'];
             $tree = new AMTree($temp);
 
             $tree->setJSCall("changeMenuStatus('communities','$tree->name')");

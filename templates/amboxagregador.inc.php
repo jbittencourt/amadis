@@ -87,9 +87,9 @@ class AMBoxAgregador extends CMHTMLObj {
 		
 		parent::add("</td>");
 		parent::add("<td width='20'><img src='$_CMAPP[images_url]/dot.gif' width='20' height='10' border='0'></td>");
-		parent::add("<td valign='top'><font class='titdiarioproj'>$this->title</font><br>");
+		parent::add("<td valign='top'><font class='titdiarioproj'>$this->title</font><br />");
 		if($this->isMember) {
-			parent::add("<a href='$_CMAPP[services_url]/agregator/config_aggregator.php?frm_codeProject=$_REQUEST[frm_codeProject]' class='headerdiario'>&raquo; $_language[edit_source_list].</a><br>");
+			parent::add("<a href='$_CMAPP[services_url]/agregator/config_aggregator.php?frm_codeProject=$_REQUEST[frm_codeProject]' class='headerdiario'>&raquo; $_language[edit_source_list].</a><br />");
 		}
 		parent::add("</td>");
 		parent::add("<td width='20'><img src='$_CMAPP[images_url]/dot.gif' width='20' height='10' border='0'></td>");
@@ -128,8 +128,8 @@ class AMBoxAgregador extends CMHTMLObj {
 					parent::add("<td><img src='$_CMAPP[images_url]/dot.gif' width='20' height='10' border='0'></td>");
 					parent::add("<td valign='top'><img src='$_CMAPP[images_url]/img_diarioproj_mark.gif' align='absmiddle'>");
 					parent::add("<a href='$post[link]'><span class='titpost'>".$post['title']."</span></a>");
-					parent::add("<span class='datapost'>".$post['pubDate']."</span><br><img src='$_CMAPP[images_url]/dot.gif' width='10' height='7' border='0'><br>");
-					parent::add("<font class='txtdiarioproj'>".html_entity_decode($post['description']).".</span><br>");
+					parent::add("<span class='datapost'>".$post['pubDate']."</span><br /><img src='$_CMAPP[images_url]/dot.gif' width='10' height='7' border='0'><br />");
+					parent::add("<font class='txtdiarioproj'>".html_entity_decode($post['description']).".</span><br />");
 					parent::add("<table cellpadding='0' cellspacing='0' border='0' width='100%'>");
 				
 					parent::add("<tr><td colspan='2'><img src='$_CMAPP[images_url]/dot.gif' width='20' height='25' border='0'></td></tr>");
@@ -149,9 +149,9 @@ class AMBoxAgregador extends CMHTMLObj {
 					parent::add("<td background='$_CMAPP[images_url]/box_diarioproj_int_bgleft.gif'><img src='$_CMAPP[images_url]/dot.gif' width='20' height='10' border='0'></td>");
 					parent::add("<td valign='top'><img src='$_CMAPP[images_url]/img_diarioproj_mark.gif' align='absmiddle'>");
 					parent::add("<a href='".$post['link']."'><span class='titpost'>".$post['title']."</span></a>");
-					parent::add("<span class='datapost'>$post[pubDate]</span><br><img src='$_CMAPP[images_url]/dot.gif' width='10' height='7' border='0'><br>");
+					parent::add("<span class='datapost'>$post[pubDate]</span><br /><img src='$_CMAPP[images_url]/dot.gif' width='10' height='7' border='0'><br />");
 	
-					parent::add("<font class='txtdiarioproj'>".html_entity_decode($post['description'])."</span><br>");
+					parent::add("<font class='txtdiarioproj'>".html_entity_decode($post['description'])."</span><br />");
 					parent::add("</td>");
 					parent::add("<td  background='$_CMAPP[images_url]/box_diarioproj_int_bgrigth.gif'><img src='$_CMAPP[images_url]/dot.gif' width='20' height='10' border='0'></td>");
 					parent::add("</tr>	");

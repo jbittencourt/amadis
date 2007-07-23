@@ -69,9 +69,9 @@ class AMACORender extends CMHTMLObj {
     }
 
 
-    $box->add("<br><BUTTON TYPE=button class='image-button'><img src='$_CMAPP[imlang_url]/aco_bt_add_cell.gif' onClick='AM_showDiv(\"aco_listrender\")'></BUTTON>");
+    $box->add("<br /><BUTTON TYPE=button class='image-button'><img src='$_CMAPP[imlang_url]/aco_bt_add_cell.gif' onClick='AM_showDiv(\"aco_listrender\")'></BUTTON>");
 
-    $box->add("<br><br><div id=aco_listrender>");
+    $box->add("<br /><br /><div id=aco_listrender>");
     $box->add(new AMACOListRender);
     $box->add("</div>");
     parent::add($box);

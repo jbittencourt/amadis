@@ -81,7 +81,7 @@ class AMBoxBlogProfile extends CMHTMLObj
 		parent::add("<tr>");
 		parent::add("<td width=\"87\"><img src=\"$url/box_diario_logo_postar.gif\"  border=\"0\"></td>");
 		parent::add("<td width=\"20\"><img src=\"$url/dot.gif\" width=\"20\" height=\"10\" border=\"0\"></td>");
-		parent::add("<td valign=\"top\"><br><span class=\"diary_title\">$_language[edit_profile]</span><br>");
+		parent::add("<td valign=\"top\"><br /><span class=\"diary_title\">$_language[edit_profile]</span><br />");
 
 		parent::add("</td>");
 		parent::add("<td width=\"20\"><img src=\"$url/dot.gif\" width=\"20\" height=\"10\" border=\"0\"></td>");

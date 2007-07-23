@@ -30,7 +30,7 @@ class AMProjectList extends AMListBox {
   public function __toString() {
     global $_language,$_CMAPP;
 
-    parent::add("<br><br>");
+    parent::add("<br /><br />");
     //listagem
     parent::add("<table id=\"project_list\">");
       

@@ -19,7 +19,7 @@ class AMBox extends AMAbstractBox {
   protected $class;
   private $items;
 
-  public function __construct($id,$theme) {
+  public function __construct($id,$theme='') {
     parent::__construct($id);
     $this->theme = $theme;
 
@@ -38,36 +38,19 @@ class AMBox extends AMAbstractBox {
 
   public function __toString() {
     global $_CMAPP;
-    parent::add('<table id="'.$this->id.'" class="box '.$this->class.'">');
+    
+    $injection = array(
+    	'theme'=>$this->theme,
+    	'class'=>$this->class,
+    	'box_id'=>$this->id,
+    	'previx'=>$prefix,
+    	'box_content'=>implode("\n", $this->items)
+    );
+    
 
-    $prefix = $_CMAPP['images_url'].'/'.$this->theme.'/'.$this->theme.'_';
-    //header
-    parent::add('<tr>');
-    parent::add('<td id="ctl"><img src="'.$prefix.'es.gif">');
-    parent::add('<td id="top" background="'.$prefix.'bg_top.gif"><img src="'.$_CMAPP['images_url'].'/dot.gif">');
-    parent::add('<td id="ctr"><img src="'.$prefix.'ds.gif">');
-
-    //body
-    parent::add('<tr>');
-    parent::add('<td id="left" background="'.$prefix.'bg_left.gif"><img src="'.$_CMAPP['images_url'].'/dot.gif">');
-
-    parent::add('<td id="center">');
-    parent::add($this->items);
-
-    parent::add('<td id="right" background="'.$prefix.'bg_right.gif"><img src="'.$_CMAPP['images_url'].'/dot.gif">');
-
-    //footer
-    parent::add('<tr>');
-    parent::add('<td id="cbl"><img src="'.$prefix.'ei.gif">');
-    parent::add('<td id="bottom" background="'.$prefix.'bg_bottom.gif"><img src="'.$_CMAPP['images_url'].'/dot.gif">');
-    parent::add('<td id="cbr"><img src="'.$prefix.'di.gif">');
-
-    parent::add('</table>');
-
-    return parent::__toString();
+    
+    parent::add(AMHTMLPage::loadView($injection, 'box'));
+    return parent::__toString();     
   }
-
 }
-
-
 ?>

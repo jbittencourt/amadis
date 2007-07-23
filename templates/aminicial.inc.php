@@ -15,18 +15,13 @@
 class AMInicial extends AMMain {
   
 
-  function __construct() {
-    global $_CMAPP;
-    parent::__construct("green");
+  	function __construct() 
+  	{
+  		global $_CMAPP, $_language;
+    	parent::__construct('initial');
 
-    $this->setImgId($_CMAPP['imlang_url']."/top_apresentacao.gif");
-	
-    
-  }
-  
- 
+    	$this->setImgId($_CMAPP['images_url']."/ico_initial.gif");
+    	$this->setSectionTitle($_language['presentation']);
+    	
+	}
 }
-
-
-
-?>
