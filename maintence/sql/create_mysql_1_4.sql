@@ -199,6 +199,8 @@ CREATE TABLE `amadis`.`BlogComments` (
   `body` TEXT NOT NULL,
   `codePost` BIGINT(20) NOT NULL DEFAULT '0',
   `codeUser` BIGINT(20) NOT NULL DEFAULT '0',
+  `answered` enum('TRUE','FALSE') NOT NULL default 'FALSE',
+  `parentComment` int(11) NOT NULL,
   `time` BIGINT(20) NOT NULL DEFAULT '0',
   PRIMARY KEY (`codeComment`),
   FOREIGN KEY `FKblogpostsonBlogComments` (`codePost`)
