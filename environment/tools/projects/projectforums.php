@@ -20,8 +20,8 @@ if(!empty($_REQUEST['frm_codeProject'])) {
 	}
 } else {
 	$_REQUEST['frm_amerror'] = "any_project_id";
-	$pag->add("<br><div align=center><a href=\"".$_SERVER['HTTP_REFERER']."\" ");
-	$pag->add("class=\"cinza\">".$_language['voltar']."</a></div><br>");
+	$pag->add("<br /><div align=center><a href=\"".$_SERVER['HTTP_REFERER']."\" ");
+	$pag->add("class=\"cinza\">".$_language['voltar']."</a></div><br />");
 	echo $pag;
 	die();
 }
@@ -88,7 +88,7 @@ if(!empty($_REQUEST['frm_action'])) {
 	}
 }
 
-$pag->add("<br><br>");
+$pag->add("<br /><br />");
 $forums = $proj->listForums();
 
 $title = "<div class=\"forum_project_title\">$_language[project_forum_title] $proj->title</div>";

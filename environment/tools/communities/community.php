@@ -10,43 +10,43 @@ $box = new AMTwoColsLayout;
 
 
 if(!empty($_REQUEST['frm_codeCommunity'])) {
-  $community = new AMCommunities;
-  $community->code = $_REQUEST['frm_codeCommunity'];
-  try{
-    $community->load();
-    $group = $community->getGroup();
-  }catch(CMDBNoRecord $e){
-    $_REQUEST['frm_amerror'] = "community_not_exists";    
-    echo $pag;
-    die();
-  }catch(CMObjEPropertieValueNotValid $er){    
-    $_REQUEST['frm_amerror'] = "community_not_exists";    
-    echo $pag;
-    die(); 
-  }
+  	$community = new AMCommunities;
+  	$community->code = $_REQUEST['frm_codeCommunity'];
+  	try{
+		$community->load();
+    	$group = $community->getGroup();
+  	}catch(CMDBNoRecord $e){
+    	$_REQUEST['frm_amerror'] = "community_not_exists";    
+    	echo $pag;
+    	die();
+  	}catch(CMObjEPropertieValueNotValid $er){    
+    	$_REQUEST['frm_amerror'] = "community_not_exists";    
+    	echo $pag;
+    	die(); 
+  	}
 } else { 
-  $_REQUEST['frm_amerror'] = "no_community_id";
+  	$_REQUEST['frm_amerror'] = "no_community_id";
   
-  $pag->add("<br><div align=center><a href=\"".$_SERVER['HTTP_REFERER']."\" ");
-  $pag->add("class=\"cinza\">".$_language['voltar']."</a></div><br>");
-  echo $pag;
-  die();
+  	$pag->add("<br /><div align=center><a href=\"".$_SERVER['HTTP_REFERER']."\" ");
+  	$pag->add("class=\"cinza\">".$_language['voltar']."</a></div><br />");
+  	echo $pag;
+  	die();
 }
 
 
 //checks if the user is a member of the community
 if(!empty($_SESSION['user'])) {
-  $isMember = $group->isMember($_SESSION['user']->codeUser);
+  	$isMember = $group->isMember($_SESSION['user']->codeUser);
 }
 
 $_CMAPP['smartform']['language'] = $_language;
 
 if($isMember) {
-  $req = new AMBCommunityRequest($community);
-  if($req->hasRequests()) { 
-    $req->setWidth($box->getWidth());
-    $pag->add($req);
-  }
+  	$req = new AMBCommunityRequest($community);
+  	if($req->hasRequests()) { 
+    	$req->setWidth($box->getWidth());
+    	$pag->add($req);
+  	}
 }
 
 
@@ -56,19 +56,19 @@ if($isMember) {
  */
 
 //coluna da esquerda
-$box->add("<span class=\"txttitcomunidade\">$_language[community]: ".$community->name."<br></span>", AMTwoColsLayout::LEFT);
-$box->add("<img src=\"".$_CMAPP['images_url']."/dot.gif\" border=\"0\" height=10 width=1><br>", AMTwoColsLayout::LEFT);
+$box->add("<span class=\"txttitcomunidade\">$_language[community]: ".$community->name."<br /></span>", AMTwoColsLayout::LEFT);
+$box->add('<img src="'.$_CMAPP['images_url'].'/dot.gif" height="10" width="1" alt="" /><br />', AMTwoColsLayout::LEFT);
 
 if($community->image == 0) $box->add(new AMTCommunityImage(AMCommunityImage::DEFAULT_IMAGE , AMTCommunityImage::METHOD_DEFAULT), AMTwoColsLayout::LEFT);
 else $box->add(new AMTCommunityImage($community->image), AMTwoColsLayout::LEFT);
 
-$box->add("<br>", AMTwoColsLayout::LEFT);
-$box->add("<img src=\"".$_CMAPP['images_url']."/dot.gif\" border=\"0\" height=10 width=1><br>", AMTwoColsLayout::LEFT);
-$box->add("<span class=\"texto\">$community->description<br></span>",
+$box->add("<br />", AMTwoColsLayout::LEFT);
+$box->add('<img src="'.$_CMAPP['images_url'].'/dot.gif" height="10" width="1" alt="" /><br />', AMTwoColsLayout::LEFT);
+$box->add("<span class=\"texto\">$community->description<br /></span>",
 	  AMTwoColsLayout::LEFT);
-$box->add("<img src=\"".$_CMAPP['images_url']."/dot.gif\" border=\"0\" height=10 width=1><br>", AMTwoColsLayout::LEFT);
+$box->add('<img src="'.$_CMAPP['images_url'].'/dot.gif" height="10" width="1" alt="" /><br />', AMTwoColsLayout::LEFT);
 
-$box->add("<br>", AMTwoColsLayout::LEFT);
+$box->add("<br />", AMTwoColsLayout::LEFT);
 $box->add(new AMBCommunityMembers($community), AMTwoColsLayout::LEFT);
 
 /*
@@ -86,10 +86,10 @@ $box->add($communityNews,AMTwoColsLayout::LEFT);
  *COLUNA DIREITA
  */
 
-$box->add("<img src=\"".$_CMAPP['images_url']."/dot.gif\" width=\"20\" height=\"1\" border=\"0\">", AMTwoColsLayout::RIGHT);
+$box->add("<img src=\"".$_CMAPP['images_url']."/dot.gif\" width=\"20\" height=\"1\" alt=\"\" />", AMTwoColsLayout::RIGHT);
 
 $box->add(new AMBCommunityItems,AMTwoColsLayout::RIGHT);
-$box->add("<br>",AMTwoColsLayout::RIGHT);
+$box->add("<br />",AMTwoColsLayout::RIGHT);
 if($_SESSION['user'] instanceof CMUser) {
   
   /*
@@ -109,7 +109,7 @@ if($_SESSION['user'] instanceof CMUser) {
  *RELATED PROJECTS
  */
 
-$box->add("<br>", AMTwoColsLayout::RIGHT);
+$box->add("<br />", AMTwoColsLayout::RIGHT);
 $box->add(new AMBCommunityProjects, AMTwoColsLayout::RIGHT);
 
 $pag->add($box);

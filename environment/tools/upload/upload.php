@@ -33,8 +33,9 @@ switch($_REQUEST['frm_upload_type']) {
 
  case "project":
    
-   $pag = new AMTUpload("top_projetos.gif");
- 
+   $pag = new AMTUpload("ico_projects.gif", "project");
+ 	$pag->setSectionTitle($_language['projects']);
+ 	
    $urlBase .= "&frm_codeProjeto=$_REQUEST[frm_codeProjeto]";
    $upload_type = "name=frm_codeProjeto value=$_REQUEST[frm_codeProjeto]";
 
@@ -73,7 +74,8 @@ switch($_REQUEST['frm_upload_type']) {
 
  case "user":
 
-   $pag = new AMTUpload("top_meu_webfolio.gif");
+   $pag = new AMTUpload("top_webfolio.gif", "webfolio");
+   $pag->setSectionTitle($_language['my_webfolio']);
    if(!empty($_SESSION['user'])) {
      /*
       *Verificacao do realpath do diretorio
@@ -120,7 +122,7 @@ switch($_REQUEST['action']) {
    
    $dir = $UPLOAD_DIR->readDir($_SESSION['upload']['current']);
 
-   //$pag->add("<a href='$urlBase&frm_dir=$dir_pai'>voltar</a><br>");
+   //$pag->add("<a href='$urlBase&frm_dir=$dir_pai'>voltar</a><br />");
 
    /*
     *Caixa com a listagem dos arquivos do diretorio atual

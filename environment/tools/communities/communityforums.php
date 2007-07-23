@@ -20,8 +20,8 @@ if(!empty($_REQUEST['frm_codeCommunity'])) {
      }
 } else { 
   $_REQUEST['frm_amerror'] = "error_no_community_id";
-  $pag->add("<br><div align=center><a href=\"".$_SERVER['HTTP_REFERER']."\" ");
-  $pag->add("class=\"cinza\">".$_language['back']."</a></div><br>");
+  $pag->add("<br /><div align=center><a href=\"".$_SERVER['HTTP_REFERER']."\" ");
+  $pag->add("class=\"cinza\">".$_language['back']."</a></div><br />");
   echo $pag;
   die();
 }
@@ -76,7 +76,7 @@ if(!empty($_REQUEST['frm_action'])) {
   }
 }
 
-$pag->add("<br><br>");
+$pag->add("<br /><br />");
 $forums = $co->listForums();
 
 $title = "<div class=\"forum_project_title\">$_language[community_forum_title] $co->name</div>";

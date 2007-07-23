@@ -70,7 +70,7 @@ function parseImages($list,$pos=5,$name="") {
       $cont ++;
     }else {
       $pag->add("<img src='$_CMAPP[images_url]/ico_arq_pasta.gif' onClick=\"showHide('$k')\">");
-      $pag->add("<a onClick=\"showHide('$k');\" >$k</a><br>");
+      $pag->add("<a onClick=\"showHide('$k');\" >$k</a><br />");
       $alert = "<i><font size='2'>Vazio</font></i>";
       if(!empty($item)) parseImages($item,($pos+5),$k);
       else $pag->add("<div id='$k' style='display: none; margin-left: ".$pos."px;'>$alert</div>");

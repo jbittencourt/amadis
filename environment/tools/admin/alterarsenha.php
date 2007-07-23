@@ -10,14 +10,14 @@ $lang = $_SESSION[environment]->getLangUI($ui);
 
 $pag = new AMTCadastro();
 
-$pag->add("<br><table width=100% border=0 cellpadding=0 cellspacing=0>");
+$pag->add("<br /><table width=100% border=0 cellpadding=0 cellspacing=0>");
 
 //coluna da esquerda
 $pag->add("<tr><td class=\"fontgray\"");
 $pag->add(" valign=\"top\">");
 
 $tab = new AMColorBox("azul2");
-$tab->setTitle("<br>$lang[alterar_senha]");
+$tab->setTitle("<br />$lang[alterar_senha]");
 
 if ($_SESSION[usuario]) {
   
@@ -27,7 +27,7 @@ if ($_SESSION[usuario]) {
   default :
 
     if ($_REQUEST[erro] == "nao") {
-      $pag->add ("<center><font color=red>senha errada".$lang[senha_errada]."</font></center><br><br>");
+      $pag->add ("<center><font color=red>senha errada".$lang[senha_errada]."</font></center><br /><br />");
     }
 
     $ocultos = array("nomUser","desSenha","codUser","nomPessoa","tempo","strEMail","desEndereco","codCidade","codEstado","desCEP","desTelefone","desFax","desCargo","desHistorico","desUrl","codEscola","datNascimento","flaAtivo","flaAprovado","desSenhaPlain","codPlataforma","strMaildir","flaHomedir","strEMailAlt");
@@ -51,7 +51,7 @@ if ($_SESSION[usuario]) {
  case 1 :
 
    if ($_REQUEST[erro] == "nao") {
-      $pag->add ("<center><font color=red>nao confere".$lang[nao_conferem]."</center></font><br><br>");
+      $pag->add ("<center><font color=red>nao confere".$lang[nao_conferem]."</center></font><br /><br />");
     }
 
    if (md5($_REQUEST[frm_passOld]) == $user->desSenha or $_REQUEST[jah] == "jah") {
@@ -91,7 +91,7 @@ if ($_SESSION[usuario]) {
        $user->desSenha = $_REQUEST[frm_passNew];
        $user->salva();
        $pag->add ("<img src=\"$urlimagens/dot.gif\" height=\"10\" width=\"10\">");
-       $pag->add ("<center><font size=3><br>$lang[senha_alterada]<br><br></font>");
+       $pag->add ("<center><font size=3><br />$lang[senha_alterada]<br /><br /></font>");
        $pag->add("<a class=fontgray href=\"$url/inicial.php\">&laquo;&nbsp;$lang[voltar]</a></center>");
        $pag->add ("</td><td width=\"10%\" valign=\"top\">&nbsp;</td></tr></table>");
        $pag->imprime();

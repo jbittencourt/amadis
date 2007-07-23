@@ -25,9 +25,9 @@ if(isset($_REQUEST[acao])) {
 
   switch($_REQUEST[acao]) {
   case "A_change_email":
-    $pag->add("<br><br><div class=\"error\" align=center>$lang[email_desabilitado]</div>");
+    $pag->add("<br /><br /><div class=\"error\" align=center>$lang[email_desabilitado]</div>");
 
-    $pag->add("<br><br><div class=\"fontgray\">");
+    $pag->add("<br /><br /><div class=\"fontgray\">");
     $temp = str_replace("{EMAIL}",$_SESSION[usuario]->strEMail,$lang[email_desabilitado_desc]);
     $pag->add($temp);
     $pag->add("</div>");
@@ -90,10 +90,10 @@ $pag->add("<form name=mens action=\"$_SERVER[PHP_SELF]\" METHOD=POST>");
 $pag->add("<input type=hidden name=acao value=\"A_deletaMen\">");
 
 if ($_REQUEST[frm_Mailbox] == "sent") {
-  $pag->add("<br><img src=\"$urlimlang/img_tit_mensagens_enviadas.gif\"><br>");
+  $pag->add("<br /><img src=\"$urlimlang/img_tit_mensagens_enviadas.gif\"><br />");
 }
 else {
-  $pag->add("<br><img src=\"$urlimlang/img_tit_mensagens_recebidas.gif\"><br>");
+  $pag->add("<br /><img src=\"$urlimlang/img_tit_mensagens_recebidas.gif\"><br />");
 }
 
 $pag->add("<table border=0 cellspacing=0 cellpadding=0 width=\"100%\">");
@@ -132,7 +132,7 @@ else {
 $pag->add("<tr><td colspan=4 align=right><input type=submit value=$lang[apagar_email]></td>");
 $pag->add("</table>");
 $pag->add("</form>");
-$pag->add("<br><br>");
+$pag->add("<br /><br />");
 
 
 

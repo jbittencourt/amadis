@@ -18,7 +18,7 @@ if(isset($_REQUEST['frm_namespace']) && !empty($_REQUEST['frm_namespace'])) {
 }
 
 if(empty($wikiPage->text) && empty($_REQUEST['frm_title']) && $_REQUEST['frm_title'] != 'Main_Page') {
-	$wikiPage->text = "\nMain Page\n============\n\nEsta é uma pagina para voce porder organizar todo o seu conteudo de pesquisa de seu projeto\n";
+	$wikiPage->text = "\nMain Page\n============\n\nEsta é uma pagina para voce poder organizar todo o seu conteudo de pesquisa de seu projeto\n";
 }else if(ereg('^image_', $wikiPage->title)) {
 	$wikiPage->text = str_replace('image_', '', $wikiPage->title)."\n".str_repeat('=', strlen($wikiPage->title))."\n\n";
 	$image = new AMWikiFile;
@@ -64,7 +64,7 @@ $page->add('<div id="jsCrossMark_editArea" style="display:none;">');
 $page->add('<div id="edit_toolbar">'.CMHTMLObj::getScript('Wiki_loadToolBar();').'</div>');
 
 $page->add('<textarea style="display: none;" id="'.$wikiPage->title.'">'."\n".$wikiPage->text.'</textarea>');
-$page->add('<textarea id="txtarea" cols=85 rows=30></textarea><br><br>');
+$page->add('<textarea id="txtarea" cols=85 rows=30></textarea><br /><br />');
 
 $page->add('<input type="button" value="Salvar" id="save" onclick="javascript:Wiki_saveText();"/>');
 $page->add('<input type="button" value="Visualizar" id="preview" onclick="javascript:Wiki_preview();" />');

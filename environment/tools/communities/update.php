@@ -62,15 +62,15 @@ switch($_REQUEST['action']) {
  	default:
 
 	 	$conteudo = "<form method=post action=\"$_SERVER[PHP_SELF]\">";
- 		$conteudo.= "<input type=hidden name=action value=pag_1><br>";
+ 		$conteudo.= "<input type=hidden name=action value=pag_1><br />";
  		$conteudo.= "<input type=hidden name=frm_codeCommunity value=$_REQUEST[frm_codeCommunity]>";
  		$conteudo.= "<input type=hidden name=frm_artificio value='yes'>";
  		$conteudo.= "<table cellpadding='2' cellspacing='1' width='70%'><tbody><tr><td></td></tr><tr><td>";
  		$conteudo.= $_language['frm_name'];
- 		$conteudo.= "<br><input name='frm_name' id='frm_name' value='".$_SESSION['updating_community']->name."' size='30' maxlength='30' type='text'>";
+ 		$conteudo.= "<br /><input name='frm_name' id='frm_name' value='".$_SESSION['updating_community']->name."' size='30' maxlength='30' type='text'>";
  		$conteudo.= "</td></tr><tr><td>";
  		$conteudo.= $_language['frm_description'];
- 		$conteudo.= "<br><textarea name='frm_description' id='frm_description' rows='5' cols='35'>".$_SESSION['updating_community']->description."</textarea>";
+ 		$conteudo.= "<br /><textarea name='frm_description' id='frm_description' rows='5' cols='35'>".$_SESSION['updating_community']->description."</textarea>";
  		$conteudo.= "</td></tr><tr><td>";
 
  		if($_SESSION['updating_community']->flagAuth=='ALLOW') {
@@ -78,8 +78,8 @@ switch($_REQUEST['action']) {
  		} else {
  			$flaAuthRequest="checked";
  		}
- 		$conteudo.= "<br>".$_language['public']."&nbsp;<input name='frm_flagAuth' id='frm_flagAuth' value='ALLOW' $flaAuthAllow type='radio'>";
- 		$conteudo.= "<br>".$_language['moderate']."&nbsp;<input name='frm_flagAuth' id='frm_flagAuth' value='REQUEST' $flaAuthRequest type='radio'>";
+ 		$conteudo.= "<br />".$_language['public']."&nbsp;<input name='frm_flagAuth' id='frm_flagAuth' value='ALLOW' $flaAuthAllow type='radio'>";
+ 		$conteudo.= "<br />".$_language['moderate']."&nbsp;<input name='frm_flagAuth' id='frm_flagAuth' value='REQUEST' $flaAuthRequest type='radio'>";
 
  		$conteudo.= "</td></tr><tr><td><table align='right'><tbody><tr><td>";
  		$conteudo.= "&nbsp;<input name='cancelar' id='cancelar' value='".$_language['cancel']."' type='button'>";

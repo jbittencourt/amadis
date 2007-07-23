@@ -7,7 +7,7 @@ $_language = $_CMAPP['i18n']->getTranslationArray("chat");
 
 $pag = new AMTChat;
 
-$pag->add("<br>");
+$pag->add("<br />");
 
 $proj = new AMProject;
 

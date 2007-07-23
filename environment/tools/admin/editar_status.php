@@ -26,7 +26,7 @@ if ($_SESSION[usuario]->eMembroCategoria(ADMINISTRADOR_PLATAFORMA)) {
   else $itens[$lang[selecionar_outro_status]] = "editar_status.php";
   
   $pag->setSubMenu($itens);
-  $pag->add ("<br>");
+  $pag->add ("<br />");
 
   //salva os dados postados do formulario
   if ($_REQUEST[acao] == "A_apaga") {
@@ -35,12 +35,12 @@ if ($_SESSION[usuario]->eMembroCategoria(ADMINISTRADOR_PLATAFORMA)) {
 
     //nao permite que se apague a area se tiver usuario cadastrado nela
     if (!empty($projs->records)) {
-      $pag->add ("<center><font class=fontgray><font color=red size=+1>$lang[existem_projs_status]</font></font></center><br><br>");
+      $pag->add ("<center><font class=fontgray><font color=red size=+1>$lang[existem_projs_status]</font></font></center><br /><br />");
     }
 
     else {
       $apaga->deleta();
-      $pag->add ("<center><font class=fontgray><font color=red size=+1>$lang[status_apagada]</font></font></center><br><br>");
+      $pag->add ("<center><font class=fontgray><font color=red size=+1>$lang[status_apagada]</font></font></center><br /><br />");
     }
 
     unset ($_REQUEST[frm_codStatus]);
@@ -54,7 +54,7 @@ if ($_SESSION[usuario]->eMembroCategoria(ADMINISTRADOR_PLATAFORMA)) {
     if ($save->nomArea == "") {
       if ($_SESSION[environment]->existeStatus($_REQUEST[frm_desStatus]) == "1") {
 	$notSave = "1";
-	$pag->add ("<br><font class=fontgray><font color=red size=+1><center>$lang[status_jah_existe]</font></font></center><br><br>");
+	$pag->add ("<br /><font class=fontgray><font color=red size=+1><center>$lang[status_jah_existe]</font></font></center><br /><br />");
       }
     }
 
@@ -64,7 +64,7 @@ if ($_SESSION[usuario]->eMembroCategoria(ADMINISTRADOR_PLATAFORMA)) {
 
       $save->salva();
       
-      $pag->add ("<br><font class=fontgray><font color=red><center>$lang[dados_salvos]</font></font></center><br><br>");
+      $pag->add ("<br /><font class=fontgray><font color=red><center>$lang[dados_salvos]</font></font></center><br /><br />");
       
     }
 

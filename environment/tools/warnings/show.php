@@ -27,7 +27,7 @@ catch(CMDBNoRecord $e) {
 $pag->add("<table cellpadding='0' cellspacing='0' border='0' width='100%'><tr>");
 $pag->add("<td background='".$_CMAPP['media_url']."/images/img_avisos_bg.gif'><img src='".$_CMAPP['media_url']."/images/img_avisos.gif'></td></tr>");
 $pag->add("<tr><td>");
-$pag->add("<div class='avisos' id='tit'>$aviso->titulo</div><br>");
+$pag->add("<div class='avisos' id='tit'>$aviso->titulo</div><br />");
 $pag->add("<div class='avisos' id='corpo'>$aviso->descricao</div>");
 $pag->add("</td></tr></table>");
 echo $pag;

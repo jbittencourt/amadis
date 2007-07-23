@@ -34,8 +34,8 @@ if(isset($_REQUEST['frm_codeProject']) && !empty($_REQUEST['frm_codeProject'])) 
 } else {
   $_REQUEST['frm_amerror'] = "any_project_id";
 
-  $pag->add("<br><div align=center><a href=\"".$_SERVER['HTTP_REFERER']."\" ");
-  $pag->add("class=\"cinza\">".$_language['back']."</a></div><br>");
+  $pag->add("<br /><div align=center><a href=\"".$_SERVER['HTTP_REFERER']."\" ");
+  $pag->add("class=\"cinza\">".$_language['back']."</a></div><br />");
   echo $pag;
   die();
 }

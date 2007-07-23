@@ -19,8 +19,8 @@ if(array_key_exists('frm_codeProject', $_REQUEST) && !empty($_REQUEST['frm_codeP
 } else {
 	$_REQUEST['frm_amerror'] = "any_project_id";
 
-	$pag->add("<br><div align=center><a href=\"".$_SERVER['HTTP_REFERER']."\" ");
-	$pag->add("class=\"cinza\">".$_language['back']."</a></div><br>");
+	$pag->add("<br /><div align=center><a href=\"".$_SERVER['HTTP_REFERER']."\" ");
+	$pag->add("class=\"cinza\">".$_language['back']."</a></div><br />");
 	echo $pag;
 	die();
 }

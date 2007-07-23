@@ -8,7 +8,7 @@ $pag = new AMTAdmin();
 
 //soh imprime se o usuario for super
 //if ($_SESSION[usuario]->eMembroCategoria(ADMINISTRADOR_PLATAFORMA)) {
-$pag->add("Editar Categorias:<br>");
+$pag->add("Editar Categorias:<br />");
 
 //primeiro  mostra as categorias existentes
 

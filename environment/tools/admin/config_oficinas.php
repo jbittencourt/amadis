@@ -25,7 +25,7 @@ if ($_SESSION[usuario]->eMembroCategoria(ADMINISTRADOR_PLATAFORMA)) {
   else $itens[$lang[voltar_config_oficina]] = "config_oficinas.php";
   
   $pag->setSubMenu($itens);
-  $pag->add ("<br>");
+  $pag->add ("<br />");
   
 
 

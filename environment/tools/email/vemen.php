@@ -41,7 +41,7 @@ $to = htmlentities($men->to);
 
 $box = new AMColorBox("azul");
 
-$box->add("<br><table style=\"left-margin:10px\" border=0 cellspacing=0 cellpadding=0 width=\"100%\">");
+$box->add("<br /><table style=\"left-margin:10px\" border=0 cellspacing=0 cellpadding=0 width=\"100%\">");
 $box->add("<tr><td $s >$fg<b>De:</b> $from</td>");
 $box->add("<tr><td $s >$fg<b>Para:</b> $to</td>");
 $box->add("<tr><td $s >$fg<b>Assunto:</b> $men->subject</td>");
@@ -70,7 +70,7 @@ $box->add("<td ><img src=\"$urlimagens/dot.gif\" width=10></td>");
 
 $box->add("<tr><td $s ><img src=\"$urlimagens/dot.gif\" width=10 height=50></td>");
 
-$box->add("<br><br><br></table>");
+$box->add("<br /><br /><br /></table>");
 $pag->add($box);
 
 $pag->imprime();

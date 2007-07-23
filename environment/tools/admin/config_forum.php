@@ -64,7 +64,7 @@ if ($_SESSION[usuario]->eMembroCategoria(ADMINISTRADOR_PLATAFORMA)) {
     header("Location: config_forum.php");
   }
   
-  $pag->add ("<br>");
+  $pag->add ("<br />");
 
   $tab = new AMBox();
   $tab->setTitle($lang[config_forum]);

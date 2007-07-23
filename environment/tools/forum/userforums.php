@@ -22,7 +22,7 @@ else {
 } 
 
 
-$pag->add("<br><br>");
+$pag->add("<br /><br />");
 $forums = $user->listForums();
 
 $pag->add(new AMBMyForums($user->name, $forums));

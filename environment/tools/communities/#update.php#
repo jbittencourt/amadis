@@ -46,18 +46,18 @@ switch($_REQUEST[action]) {
  default:
 
    $conteudo = "<form method=post action=\"$_SERVER[PHP_SELF]\">";
-   $conteudo.= "<input type=hidden name=action value=pag_1><br>";
+   $conteudo.= "<input type=hidden name=action value=pag_1><br />";
    $conteudo.= "<input type=hidden name=frm_codeCommunity value=$_REQUEST[frm_codeCommunity]>";
    $conteudo.= "<input type=hidden name=frm_artificio value='yes'>";
    $conteudo.= "<table cellpadding='2' cellspacing='1' width='70%'><tbody><tr><td></td></tr><tr><td>";
    $conteudo.= $_language[frm_name];
-   $conteudo.= "<br><input name='frm_name' id='frm_name' value='".$_SESSION[community]->name."' size='30' maxlength='30' type='text'>";
+   $conteudo.= "<br /><input name='frm_name' id='frm_name' value='".$_SESSION[community]->name."' size='30' maxlength='30' type='text'>";
    $conteudo.= "</td></tr><tr><td>";
    $conteudo.= $_language[frm_description];
-   $conteudo.= "<br><textarea name='frm_description' id='frm_description' rows='5' cols='35'>".$_SESSION[community]->description."</textarea>";
+   $conteudo.= "<br /><textarea name='frm_description' id='frm_description' rows='5' cols='35'>".$_SESSION[community]->description."</textarea>";
    $conteudo.= "</td></tr><tr><td>";
-   $conteudo.= "<br>".$_language['public']."&nbsp;<input name='frm_flagAuth' id='frm_flagAuth' value='ALLOW' checked='checked' type='radio'>";
-   $conteudo.= "<br>".$_language['moderate']."&nbsp;<input name='frm_flagAuth' id='frm_flagAuth' value='REQUEST' type='radio'>";
+   $conteudo.= "<br />".$_language['public']."&nbsp;<input name='frm_flagAuth' id='frm_flagAuth' value='ALLOW' checked='checked' type='radio'>";
+   $conteudo.= "<br />".$_language['moderate']."&nbsp;<input name='frm_flagAuth' id='frm_flagAuth' value='REQUEST' type='radio'>";
    $conteudo.= "</td></tr><tr><td><table align='right'><tbody><tr><td>";
    $conteudo.= "&nbsp;<input name='cancelar' id='cancelar' value='".$_language['cancel']."' type='button'>";
    $conteudo.= "</td><td>";
@@ -109,8 +109,8 @@ switch($_REQUEST[action]) {
    $cadBox->add("<input type=hidden name=frm_codeCommunity value=$_REQUEST[frm_codeCommunity]>");
    $cadBox->add("<p align=center>".$_language[frm_image]);
    $cadBox->add("&nbsp;".$_language[valid_image_types]." ".implode(", ",$types).".");
-   $cadBox->add("<br><input type=file name=frm_image onChange=\"this.form.submit()\">");
-   $cadBox->add("<br><input type=submit onClick=\"this.form['action'].value='pag_2'\" value=\"$_language[next]\">");
+   $cadBox->add("<br /><input type=file name=frm_image onChange=\"this.form.submit()\">");
+   $cadBox->add("<br /><input type=submit onClick=\"this.form['action'].value='pag_2'\" value=\"$_language[next]\">");
    $cadBox->add("</form>");
 
 

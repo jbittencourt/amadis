@@ -21,7 +21,7 @@ $pag->requires("lib.js", CMHTMLObj::MEDIA_JS);
 $pag->add("<form action='$_SERVER[PHP_SELF]' method='POST' onSubmit=\"if(AM_getElement('message').value.length==0) return false; else return true;\">");
 $pag->add("<div class='Isendbox'>");
 
-$pag->add("<div class='message_left'>$_language[talk_to]:<br>");
+$pag->add("<div class='message_left'>$_language[talk_to]:<br />");
 $pag->add("<select name='frm_codeRecipient'>");
 
 $pag->add("<option value='$_language[all]'>$_language[all]</option>");
@@ -39,7 +39,7 @@ $pag->add("</select>");
 $pag->add("</div>");
 
 $pag->add("<div class='message_right'>");
-$pag->add("$_language[message]<br><input type='text' size='30' id='message' name='frm_message'>&nbsp;");
+$pag->add("$_language[message]<br /><input type='text' size='30' id='message' name='frm_message'>&nbsp;");
 $pag->add("<input type='submit' value='$_language[send]'>");
 $pag->add("</div>");
 

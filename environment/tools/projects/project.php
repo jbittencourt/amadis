@@ -16,15 +16,15 @@ if(isset($_REQUEST['frm_codProjeto']) && !empty($_REQUEST['frm_codProjeto'])) {
 		$proj->load();
 		$group = $proj->getGroup();
 	}catch(CMDBNoRecord $e){
-		$location  = $_CMAPP['services_url']."/projects/project.php?frm_amerror=project_not_exists";
-		$location .= "&frm_codProjeto=".$_REQUEST['frm_codProjeto'];
+		$location  = $_CMAPP['services_url'].'/projects/project.php?frm_amerror=project_not_exists'
+				   . '&frm_codProjeto='.$_REQUEST['frm_codProjeto'];
 		CMHTMLPage::redirect($location);
 	}
 } else {
-	$_REQUEST['frm_amerror'] = "any_project_id";
+	$_REQUEST['frm_amerror'] = 'any_project_id';
 
-	$pag->add("<br><div align=center><a href='".$_SERVER['HTTP_REFERER']."' ");
-	$pag->add("class='cinza'>".$_language['back']."</a></div><br>");
+	$pag->add('<br /><div align="center"><a href="'.$_SERVER['HTTP_REFERER'].'" ');
+	$pag->add('class="cinza">'.$_language['back'].'</a></div><br />');
 	echo $pag;
 	die();
 }
@@ -45,7 +45,6 @@ if($isMember) {
 	}
 }
 
-
 $proj_description = nl2br($proj->description);
 
 /*
@@ -53,10 +52,8 @@ $proj_description = nl2br($proj->description);
  */
 
 //coluna da esquerda
-$box->add("<font class='project_title'>$_language[project]: ".$proj->title."<br>",
-AMTwoColsLayout::LEFT);
-$box->add("<img src='".$_CMAPP['images_url']."/dot.gif' border='0' height='10' width='1'><br>",
-AMTwoColsLayout::LEFT);
+$box->add('<span class="project-title">'.$_language['project'].': '.$proj->title.'</span><br />', AMTwoColsLayout::LEFT);
+$box->add('<img src='.$_CMAPP['images_url'].'/dot.gif" border="0" height="10" width="1"><br />', AMTwoColsLayout::LEFT);
 
 $imageCode = AMProjectImage::getImage($proj);
 $image = new AMProjectImage();
@@ -73,41 +70,36 @@ try {
 	AMTwoColsLayout::LEFT);
 }
 
-$box->add("      <br>", AMTwoColsLayout::LEFT);
-$box->add("<img src='".$_CMAPP['images_url']."/dot.gif' border='0' height='10' width='1'><br>",
-AMTwoColsLayout::LEFT);
+$box->add('      <br />', AMTwoColsLayout::LEFT);
+$box->add('<img src="'.$_CMAPP['images_url'].'/dot.gif" border="0" height="10" width="1"><br />', AMTwoColsLayout::LEFT);
 
-$box->add("<font class='texto'>$_language[project]: $proj->title <br>$proj_description<br>",
-AMTwoColsLayout::LEFT);
-$box->add("<img src='".$_CMAPP['images_url']."/dot.gif' border='0' height='10' width='1'><br>",
-AMTwoColsLayout::LEFT);
+$box->add('<span class="texto">'.$_language['project'].': '.$proj->title.' <br />'.$proj_description.'</span><br />', AMTwoColsLayout::LEFT);
+$box->add('<img src="'.$_CMAPP['images_url'].'/dot.gif" border="0" height="10" width="1"><br />', AMTwoColsLayout::LEFT);
 
 /*
  *STATUS DO PROJETO
  * I disabled the project status. It has no
  * significance to the users of amadis
  */
-$box->add("    <img src='".$_CMAPP['imlang_url']."/img_dados_projeto.gif'><br>",
-AMTwoColsLayout::LEFT);
-$box->add("    <img src='".$_CMAPP['images_url']."/dot.gif' border='0' height='10' width='1'><br>",
-AMTwoColsLayout::LEFT);
+$box->add('    <img src="'.$_CMAPP['imlang_url'].'/img_dados_projeto.gif"><br />', AMTwoColsLayout::LEFT);
+$box->add('    <img src="'.$_CMAPP['images_url'].'/dot.gif" border="0" height="10" width="1"><br />', AMTwoColsLayout::LEFT);
 
 /*
  *AREAS
  */
 $projAreas = $proj->listAreas();
 
-$box->add("<b>$_language[project_areas]</b>",AMTwoColsLayout::LEFT);
+$box->add('<b>'.$_language['project_areas'].'</b>',AMTwoColsLayout::LEFT);
 if($projAreas->__hasItems()) {
 	$areas = array();
 	foreach ($projAreas as $item) {
 		$areas[] = $item->name;
 	}
-	$box->add(" ".implode(", ",$areas).'.',AMTwoColsLayout::LEFT);
-	$box->add("<br><br>",AMTwoColsLayout::LEFT);
+	$box->add(' '.implode(', ',$areas).'.',AMTwoColsLayout::LEFT);
+	$box->add('<br /><br />',AMTwoColsLayout::LEFT);
 }
 else {
-	$box->add($_language['any_area']."<br><br>",AMTwoColsLayout::LEFT);
+	$box->add($_language['any_area'].'<br /><br />',AMTwoColsLayout::LEFT);
 }
 
 /*
@@ -132,8 +124,7 @@ $box->add($projNews,AMTwoColsLayout::LEFT);
 $projItens = new AMBProjectItems;
 $box->add($projItens,AMTwoColsLayout::RIGHT);
 
-$box->add("<img src='".$_CMAPP['images_url']."/dot.gif' width='20' height='1' border='0'>",
-AMTwoColsLayout::RIGHT);
+$box->add('<img src="'.$_CMAPP['images_url'].'/dot.gif" width="20" height="1" border="0">', AMTwoColsLayout::RIGHT);
 
 /*
  *COLUNA DIREITA
@@ -149,12 +140,12 @@ AMTwoColsLayout::RIGHT);
  	if($_SESSION['user'] instanceof CMUser) {
  		if($isMember) {
  			$projEdit = new AMBProjectEdit($proj);
- 			$box->add($projEdit,AMTwoColsLayout::RIGHT);
+ 			$box->add($projEdit, AMTwoColsLayout::RIGHT);
  		}
  		else {
- 			$box->add(new AMBProjectJoin($proj),AMTwoColsLayout::RIGHT);
+ 			$box->add(new AMBProjectJoin($proj), AMTwoColsLayout::RIGHT);
  		}
- 		$box->add("<br>",AMTwoColsLayout::RIGHT);
+ 		$box->add('<br />', AMTwoColsLayout::RIGHT);
  	}
  }
 
@@ -168,13 +159,13 @@ AMTwoColsLayout::RIGHT);
  		$checkIfExist = new AMProjectLibraryEntry($proj->codeProject);
  		$checkIfExist->libraryExist();
  		$projLibrary = new AMBProjLibrary($proj);
- 		$box->add($projLibrary,AMTwoColsLayout::RIGHT);
+ 		$box->add($projLibrary, AMTwoColsLayout::RIGHT);
  	}
  	else{
  		$shared = new AMBProjLibraryShare($proj,5,1);
  		$box->add($shared, AMTwoColsLayout::RIGHT);
  	}
- 	$box->add("<br>",AMTwoColsLayout::RIGHT);
+ 	$box->add('<br />', AMTwoColsLayout::RIGHT);
  }
 
  // fim lib projeto
@@ -182,7 +173,7 @@ AMTwoColsLayout::RIGHT);
  $projComents = new AMBProjectComents;
  $box->add($projComents,AMTwoColsLayout::RIGHT);
 
- $box->add("<br>",AMTwoColsLayout::RIGHT);
+ $box->add('<br />', AMTwoColsLayout::RIGHT);
 
 
  $pag->add($box);

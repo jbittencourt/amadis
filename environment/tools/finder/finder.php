@@ -97,7 +97,7 @@ if($requests->__hasItems()) {
     if(!AMFinder::isChatOpen($item->codeSender)) {
       $pag->add("<script type=\"text/javascript\">");
       $pag->add("window.parent.parent.Finder_alertUser($item->codeSender, '$_CMAPP[services_url]', $item->code);</script>");
-      $pag->add($item->codeSender." enviou uma mensagem<br>");
+      $pag->add($item->codeSender." enviou uma mensagem<br />");
     }
   }
 }
@@ -142,7 +142,7 @@ if($users->__hasItems()) {
       //setar como ocupado
       $pag->add("<script language=\"javascript1.2\">");
       $pag->add("window.parent.parent.Finder_changeUserStatus('UserIco_$item->codeUser','$_CMAPP[url]','busy');</script>");
-      $pag->add($item->codeUser." ocupado<br>");
+      $pag->add($item->codeUser." ocupado<br />");
       
       break;
     case CMEnvSession::ENUM_VISIBILITY_HIDDEN: //oculto
@@ -150,7 +150,7 @@ if($users->__hasItems()) {
       //$_SESSION[amadis][finder][contacts][$item->codeUser][status] = AMFinder::FINDER_HIDDEN_MODE;
       $pag->add("<script language=\"javascript1.2\">");
       $pag->add("window.parent.parent.Finder_changeUserStatus('UserIco_$item->codeUser','$_CMAPP[url]','hidden');</script>");
-      $pag->add($item->codeUser."oculto<br>");
+      $pag->add($item->codeUser."oculto<br />");
       break;
     }
     

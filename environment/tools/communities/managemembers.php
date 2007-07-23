@@ -65,7 +65,7 @@ switch($lista){
  	$links["negadas"] = "managemembers.php?frm_codeCommunity=$_REQUEST[frm_codeCommunity]&lista=negadas";
  	$links["nao_julgadas"] = "managemembers.php?frm_codeCommunity=$_REQUEST[frm_codeCommunity]";
  	$box->add("<table align=center celspacing=\"0\" celspadding=\"0\" border=\"0\" width=\"500\">");
- 	$box->add("<br>");
+ 	$box->add("<br />");
  	$box->add(new AMDotLine("500"));
  	$box->add("<tr><td class=\"textoint\">$_language[accepted_subscriptions]:</td>");
  	$box->add("<td ><a class=\"cinza\" href=$links[negadas]>$_language[see_not_accepted_subscriptions] </a></td>");
@@ -79,7 +79,7 @@ switch($lista){
  	$links["aceitas"] = "managemembers.php?frm_codeCommunity=$_REQUEST[frm_codeCommunity]&lista=aceitas";
  	$links["nao_julgadas"] = "managemembers.php?frm_codeCommunity=$_REQUEST[frm_codeCommunity]";
  	$box->add("<table align=center celspacing=\"0\" celspadding=\"0\" border=\"0\" width=\"500\">");
- 	$box->add("<br>");
+ 	$box->add("<br />");
  	$box->add(new AMDotLine("500"));
  	$box->add("<tr><td ><a class=\"cinza\" href=$links[aceitas]>$_language[see_accepted_subscriptions] </a></td>");
  	$box->add("<td class=\"textoint\">$_language[not_accepted_subscriptions]:</td>");
@@ -94,7 +94,7 @@ switch($lista){
  	$links["aceitas"] = "managemembers.php?frm_codeCommunity=$_REQUEST[frm_codeCommunity]&lista=aceitas";
  	$links["negadas"] = "managemembers.php?frm_codeCommunity=$_REQUEST[frm_codeCommunity]&lista=negadas";
  	$box->add("<table align=center celspacing=\"0\" celspadding=\"0\" border=\"0\" width=\"500\">");
- 	$box->add("<br>");
+ 	$box->add("<br />");
  	$box->add(new AMDotLine("500"));
  	$box->add("<tr><td ><a class=\"cinza\" href=$links[aceitas]>$_language[see_accepted_subscriptions] </a></td>");
  	$box->add("<td><a  class=\"cinza\"href=$links[negadas]>$_language[see_not_accepted_subscriptions] </a></td>");

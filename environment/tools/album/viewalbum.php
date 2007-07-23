@@ -16,7 +16,7 @@ try{
 
 $page->add("<a href='$_CMAPP[services_url]/webfolio/userinfo_details.php?frm_codeUser=$user->codeUser'>&laquo;".$_language['back']."</a>");
 $box = new AMBViewAlbum($album->getMyPhotos(),$_language['userImages']."".$user->name);
-$page->add("<br>");
+$page->add("<br />");
 $page->add($box);
 
 echo $page;

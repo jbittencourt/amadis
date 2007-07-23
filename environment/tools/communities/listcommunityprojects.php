@@ -20,7 +20,7 @@ try {
 $pag = new AMTCommunities;
 
 $pag->add("<a  href=\"".$_CMAPP['services_url']."/communities/community.php?frm_codeCommunity=".$community->code."\" class=\"green\">$_language[back_to_community]</a>");
-$pag->add("<br><br>");
+$pag->add("<br /><br />");
 
 
 $projects = $community->listProjects();

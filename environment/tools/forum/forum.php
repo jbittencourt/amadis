@@ -38,8 +38,8 @@ if($error) {
   case 3: $_REQUEST['frm_amerror'] = "no_privileges"; break;
   }
   
-  $pag->add("<br><div align=center><a href=\"".$_SERVER['HTTP_REFERER']."\" ");
-  $pag->add("class=\"cinza\">".$_language['back']."</a></div><br>");
+  $pag->add("<br /><div align=center><a href=\"".$_SERVER['HTTP_REFERER']."\" ");
+  $pag->add("class=\"cinza\">".$_language['back']."</a></div><br />");
   echo $pag;
 
   die();
@@ -133,7 +133,7 @@ if(!empty($_REQUEST['frm_action'])) {
 
 //create a new instance of the class that render
 //the forum
-$pag->add("<br><br>");
+$pag->add("<br /><br />");
 $pag->add(new AMTForumRender($forum,$show_open));
 
 echo $pag;

@@ -30,7 +30,7 @@ $pag->add("\t<textarea name=frm_texto rows=2 cols=25 wrap></textarea>");
 $pag->add("<input type=submit value=\"Enviar\">");
 $pag->add("\t<input type=hidden name=acao value=\"A_envia\">");
 $pag->add("\t<input type=hidden name=frm_user value=$_REQUEST[frm_user]>");
-$pag->add("\t<br><input type=checkbox name=frm_scroll checked>Scroll");
+$pag->add("\t<br /><input type=checkbox name=frm_scroll checked>Scroll");
 $pag->add("</form>");
 
 $pag->add("</table>");

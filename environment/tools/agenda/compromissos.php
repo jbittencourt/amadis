@@ -56,7 +56,7 @@ function desmarcaOficina() {
 
 }       
 ");
-$pag->add ("<br>");
+$pag->add ("<br />");
 //------ FIM DESIGN --------
 
 echo ($_SESSION[usuario]->codUser);
@@ -240,7 +240,7 @@ foreach ($mes_cal as $semana) {
 }
 $tab->add("</TABLE>");
 
-$tab->add("<br><TABLE><TR>");
+$tab->add("<br /><TABLE><TR>");
 
 $tab->add("<FORM name=\"form1\" action=\"$_SERVER[PHP_SELF]\" method=\"POST\">");
 $tab->add("<TD><SELECT name=\"mes\" onChange=\"document.form1.submit()\">");
@@ -309,9 +309,9 @@ $azul = 'rgb(204, 255, 255)';//azul |vermelho, verde, azul
 $tabelaAzul = "Meus compromissos <img src=\"$urlimlang\azul.gif\">";
 $tabelaAmarela =  "Compromissos de minhas Oficinas ou Projetos <img src=\"$urlimlang\amarelo.gif";
 if(($tempoI<=$tempo) and ($tempo<=$tempoF)) $hoje = "(hoje)";
-$tab->add("<img src=\"$urlimlang/azul.gif\">Meus compromissos<br> ");
+$tab->add("<img src=\"$urlimlang/azul.gif\">Meus compromissos<br /> ");
 $tab->add("<img src=\"$urlimlang/amarelo.gif\">Compromissos de minhas Oficinas ou Projetos <hr noshade>");
-//$tab->add("<td style=\"vertical-align: top; text-align: right;\">$tabelaAzul<br>$tabelaAmarela</td>");//</td></tr>");
+//$tab->add("<td style=\"vertical-align: top; text-align: right;\">$tabelaAzul<br />$tabelaAmarela</td>");//</td></tr>");
 $tab->setTitulo("$dia/$mes/$ano $hoje");
 
 $tab->asTable=0;
@@ -341,7 +341,7 @@ if (!empty($compromissos->records)) {
     $nomeOficina[$x] = $comprom->buscaNomeOficina($comp->codOficina);
     //   if ($nomeProjeto[$x] != 'nenhum' &&  $nomeOficina[$x] != 'nenhum'){
     $titulo = '';
-    $titulo = '<br> &nbsp; &nbsp;';
+    $titulo = '<br /> &nbsp; &nbsp;';
     if ($nomeProjeto[$x] != 'nenhum'){
       $titulo.= 'Vinculado ao projeto: '.$nomeProjeto[$x];
     } else if ($nomeOficina[$x] != 'nenhum'){
@@ -369,7 +369,7 @@ if (!empty($compromissos->records)) {
 
     $class = "class=\"$tab->cor\"";
     //      //----comen�a a escrever compromissos
-    //      $tab->add("<TR style=\" background-color: $cor\" $class><td  width=\"15%\">$hora</td><td><span style=\"font-weight: bold;\">".$comp->nomCompromisso."</span><br> &nbsp; &nbsp; Vinculado a:<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Projeto: ".$nomeProjeto[$x]."<br>"."&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Oficina: ".$nomeOficina[$x]." </TD><td align=right><font size=-2>$acoes</font></td></TR>");
+    //      $tab->add("<TR style=\" background-color: $cor\" $class><td  width=\"15%\">$hora</td><td><span style=\"font-weight: bold;\">".$comp->nomCompromisso."</span><br /> &nbsp; &nbsp; Vinculado a:<br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Projeto: ".$nomeProjeto[$x]."<br />"."&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Oficina: ".$nomeOficina[$x]." </TD><td align=right><font size=-2>$acoes</font></td></TR>");
     //      $tab->add("<tr  style=\" background-color: $cor\"><td>&nbsp;</td><td colspan=2>$comp->desCompromisso</td></tr>");
     //      //-----Fim de escrever compromissos  
     //----comen�a a escrever compromissos

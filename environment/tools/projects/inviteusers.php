@@ -136,7 +136,7 @@ $box->add("</form>");
 $box->add("</td></tr>");
 
 
-$box->add("<td width=240 valign=top><br>");
+$box->add("<td width=240 valign=top><br />");
 
 $box->add('<form name="group" action="'.$_SERVER['PHP_SELF'].'" onSubmit="return checkUsers(this,\'frm_usersInvite[]\');">');
 $box->add('<input type=hidden name=frm_search_text value="'.$_REQUEST['frm_search_text'].'"> ');

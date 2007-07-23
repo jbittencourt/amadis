@@ -12,7 +12,7 @@ switch($_REQUEST['frm_action']) {
    $box = new AMTwoColsLayout;
    //coluna da esquerda
    $box->add(new AMBPeopleSearchUsers, AMTwoColsLayout::LEFT);
-   $box->add("<br><br>",AMTwoColsLayout::LEFT);
+   $box->add("<br /><br />",AMTwoColsLayout::LEFT);
    $box->add(new AMBPeopleLastUsersLogeds, AMTwoColsLayout::LEFT);
     
    $box->add(new AMBPeopleLastPagesModified, AMTwoColsLayout::RIGHT);

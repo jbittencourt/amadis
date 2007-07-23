@@ -77,7 +77,7 @@ for($j=0; $j< $numEstados;$j++){
     /**
   $conteudo .= "<tr><td><span id='hideShow".$i++."' style='display:none'><form action = $_SERVER[PHP_SELF] method=post>";
   $conteudo .= "<input type='text' value='$item->nomEstado' name='nomEstado1'> &nbsp;&nbsp;&nbsp;&nbsp;";
-  $conteudo .= "<input type='text' value='$item->desSigla' name='desSigla1' size='2'><br>";
+  $conteudo .= "<input type='text' value='$item->desSigla' name='desSigla1' size='2'><br />";
   $conteudo .= "<input type='text' value='$item->desPais' name='desPais1'> &nbsp;&nbsp;&nbsp;&nbsp;";
   $conteudo .= "<input type='submit' value='Atualizar'"; //trocar por uma imagem e fazer em ajax
   $conteudo .= "<input type='hidden' name='action' value='edit'>";
@@ -89,7 +89,7 @@ for($j=0; $j< $numEstados;$j++){
 $conteudo .= "<tr><td><a href='#' onClick='AM_togleDivDisplay(\"hideShoww\")'>Adicionar nova cidade</a></td></tr>";
 /**  $conteudo .= "<tr><td><span id='hideShoww' style='display:none'><form action = $_SERVER[PHP_SELF] method=post>";
   $conteudo .= "<input type='text' name='nomEstado' value= 'Nome do estado'> &nbsp;&nbsp;&nbsp;&nbsp;";
-  $conteudo .= "<input type='text' name='desSigla'  value= 'Sigla' size='2'><br>";
+  $conteudo .= "<input type='text' name='desSigla'  value= 'Sigla' size='2'><br />";
   $conteudo .= "<input type='text' name='desPais' value = 'Pais'> &nbsp;&nbsp;&nbsp;&nbsp;";
   $conteudo .= "<input type='hidden' name='action' value='add'>";
   $conteudo .= "<input type='submit' value='Adicionar'"; //trocar por uma imagem e fazer em ajax

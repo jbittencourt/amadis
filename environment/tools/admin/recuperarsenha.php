@@ -24,17 +24,17 @@ switch ($_REQUEST[pagina]) {
    switch ($_REQUEST[erro]) {
 
    case "campos_vazios" :
-     $tab->add ("<br><center><font color=red>$lang[campos_vazios]</font></center>");
+     $tab->add ("<br /><center><font color=red>$lang[campos_vazios]</font></center>");
      break;
 
    case "not_found" :
-     $tab->add ("<br><center><font color=red>$lang[not_found]</font></center>");
+     $tab->add ("<br /><center><font color=red>$lang[not_found]</font></center>");
      break;
    }
    
    $empty_list = array("codUser","desSenha","desSenhaPlain","strMaildir","codPlataforma","flaAprovado","flaAtivo","flaHomedir","","tempo","strEMail","desEndereco","codCidade","desCEP","desTelefone","desFax","desCargo","desHistorico","desUrl","codEscola","datNascimento");
 
-   $tab->setTitle("<br>$lang[recuperar_senha]<br><br><font size=2>$lang[instrucoes]</font>");
+   $tab->setTitle("<br />$lang[recuperar_senha]<br /><br /><font size=2>$lang[instrucoes]</font>");
    $form = new WSmartForm("AMUser","pagina1","$urlferramentas/admin/recuperarsenha.php?pagina=1",$empty_list);
    $form->setDesign(WFORMEL_DESIGN_OVER);
    $form->setCancelUrl("$url");
@@ -55,7 +55,7 @@ switch ($_REQUEST[pagina]) {
    $menu["$lang[voltar]"] = "$urlferramentas/admin/recuperarsenha.php";   
    $pag->setSubMenu($menu);
    
-   $tab->setTitle("<br><font size=3>$lang[escolha].</font><br>");
+   $tab->setTitle("<br /><font size=3>$lang[escolha].</font><br />");
 
    $a = "<a class=fontgray href=$urlferramentas/admin/recuperarsenha.php?pagina=2";
    $ab = "</a>";
@@ -67,7 +67,7 @@ switch ($_REQUEST[pagina]) {
    $td = "<td $class>";
    $tdb = "</td>";
    
-   $tableHeader = "<br><table cellspacing=0 cellpading=0 border=0 width=\"100%\"> $tr\n";
+   $tableHeader = "<br /><table cellspacing=0 cellpading=0 border=0 width=\"100%\"> $tr\n";
    $tableHeader .= "$td $font $lang[apelido] $ffont $tdb";
    $tableHeader .= "$td $font $lang[nome_pessoa] $ffont $tdb $td $font $lang[email] $ffont $tdb $trb\n";
    
@@ -194,7 +194,7 @@ switch ($_REQUEST[pagina]) {
    $td = "<td $class>";
    $tdb = "</td>";
    
-   $tableHeader = "<br><table cellspacing=0 cellpading=0 border=0 width=\"100%\"> $tr\n";
+   $tableHeader = "<br /><table cellspacing=0 cellpading=0 border=0 width=\"100%\"> $tr\n";
    
    $user =  new AMUser($_REQUEST[frm_codUser]);
    if($_REQUEST[acao]=="A_envia"){
@@ -221,14 +221,14 @@ switch ($_REQUEST[pagina]) {
      // - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
      $enviar = mail($user->strEMailAlt, $lang[mail_titulo], $decod_mail_corpo1."\n\n".$decod_mail_corpo2."\n\n".$novasenha."\n\n".$decod_mail_corpo3, "From: AMADIS");
-     $tableHeader .= "$td <center>$font $lang[nova_senha_enviada] $ffont </center> <br><br> $tdb $trb";
-     $tableHeader .= "$tr $td <center> $font  $user->strEMailAlt $ffont </center><br><br> $tdb $trb";
+     $tableHeader .= "$td <center>$font $lang[nova_senha_enviada] $ffont </center> <br /><br /> $tdb $trb";
+     $tableHeader .= "$tr $td <center> $font  $user->strEMailAlt $ffont </center><br /><br /> $tdb $trb";
      $tableHeader .= "$tr $td <center><a class=fontgray href=$url>$lang[voltar_principal]</a></center> $tdb $trb";
 
 
    }else{
 
-     $tableHeader .= "$td <center> $font $lang[enviar_para] $ffont </center><br> $tdb $trb";
+     $tableHeader .= "$td <center> $font $lang[enviar_para] $ffont </center><br /> $tdb $trb";
      $tableHeader .= "$tr $td <center> $a&frm_codUser=$user->codUser> $user->strEMailAlt $ab </center> $tdb $trb";
      
    }

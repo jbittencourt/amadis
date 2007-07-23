@@ -6,7 +6,7 @@ $_language = $_CMAPP['i18n']->getTranslationArray("admin");
 
 $pag = new AMTAdmin();
 
-$pag->add("<br><br>");
+$pag->add("<br /><br />");
 
 $box = new AMBEditCommunities;
 

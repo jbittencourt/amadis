@@ -118,7 +118,7 @@ $box->add(AMMain::getSearchButton());
 $box->add("</form>");
 
 $box->add("</td></tr>");
-$box->add("<td width=240 valign=top><br>");
+$box->add("<td width=240 valign=top><br />");
 $box->add('<form name="group" action="'.$_SERVER['PHP_SELF'].'" onSubmit="return checkUsers(this,\'frm_projectTie[]\');">');
 $box->add('<input type=hidden name=frm_search_text value="'.$_REQUEST['frm_search_text'].'"> ');
 $box->add("<input type=hidden name=action value=\"A_tie\">");

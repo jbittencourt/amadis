@@ -8,7 +8,7 @@ $pag = new AMTAdmin();
 
 //soh imprime se o usuario for super
 //if ($_SESSION[usuario]->eMembroCategoria(ADMINISTRADOR_PLATAFORMA)) {
-$pag->add("<br><br>");
+$pag->add("<br /><br />");
 
 $box = new AMBAdminAlfabeto;
 

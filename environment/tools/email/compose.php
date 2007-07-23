@@ -18,7 +18,7 @@ $lang = $_SESSION[environment]->getLangUI($ui);
 
 $pag = new AMCorreio();
 
-$pag->add("<p><img src=\"$urlimlang/img_tit_mensagens_enviar.gif\"><br>");
+$pag->add("<p><img src=\"$urlimlang/img_tit_mensagens_enviar.gif\"><br />");
 
 $pag->requires("attach.js");
 if(isset($_REQUEST[acao])) {
@@ -83,7 +83,7 @@ if(isset($_REQUEST[acao])) {
   }
 }
 
-$pag->add("<br>");
+$pag->add("<br />");
 
 
 

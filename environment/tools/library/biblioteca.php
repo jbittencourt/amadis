@@ -183,7 +183,7 @@ if($count_all != 0 ){
 			$conteudo .= "<tr bgcolor='#F9F9FA'><td colspan='5' align='left' valign='top'><table cellpadding='0' cellspacing='0' border='0'>";
 			$conteudo .= "<tr><td>";
 			$conteudo .= "<img src='$_CMAPP[media_url]/images/img_blt_$title_icon.gif'border='0'></td>";
-			$conteudo .= "<td valign='top' width='100'><font class='blt_subtitulo'><img src='$_CMAPP[media_url]/images/dot.gif' width='20' height='13'><br>&nbsp;&nbsp;- $conta_arquivo  $_language[files]</font></td>";
+			$conteudo .= "<td valign='top' width='100'><font class='blt_subtitulo'><img src='$_CMAPP[media_url]/images/dot.gif' width='20' height='13'><br />&nbsp;&nbsp;- $conta_arquivo  $_language[files]</font></td>";
 			if($lista == 1){//caso seja a vez de listarmos a categoria de imagem temos a opcao de preview por thumbs
 				if($flag_on == 1){
 					$flag_on = 0;
@@ -329,10 +329,10 @@ if($count_all != 0 ){
 						$thumb->codeFile = $item->codeFile;
 						$thumb->load();
 
-						$conteudo .=  "<td class='blt_col_$cor_css' width='120' align='center'><br>";
+						$conteudo .=  "<td class='blt_col_$cor_css' width='120' align='center'><br />";
 						$page->add($conteudo);
 						$page->add($thumb->getView());
-						$conteudo = "<br>$item->name<br> <a href='$_SERVER[PHP_SELF]?frm_type=$_REQUEST[frm_type]&frm_codeProjeto=$_REQUEST[frm_codeProjeto]&opcao=download&codeFile=$item->codeFile'><img src='$_CMAPP[media_url]/images/img_blt_ico_baixar.gif'></a><img onclick='Library_delFile($item->codeFile,\"$link\");' src='$_CMAPP[media_url]/images/img_blt_ico_excluir.gif' width='17' height='14' alt='EXCLUIR' border='0' class='cursor'>";
+						$conteudo = "<br />$item->name<br /> <a href='$_SERVER[PHP_SELF]?frm_type=$_REQUEST[frm_type]&frm_codeProjeto=$_REQUEST[frm_codeProjeto]&opcao=download&codeFile=$item->codeFile'><img src='$_CMAPP[media_url]/images/img_blt_ico_baixar.gif'></a><img onclick='Library_delFile($item->codeFile,\"$link\");' src='$_CMAPP[media_url]/images/img_blt_ico_excluir.gif' width='17' height='14' alt='EXCLUIR' border='0' class='cursor'>";
 
 						$share = $library->isShared($item->codeFile);
 
@@ -372,25 +372,25 @@ $conteudo .= "<td><img src='$_CMAPP[media_url]/images/dot.gif' width='10' height
 $conteudo .= "<tr><td><img src='$_CMAPP[media_url]/images/box_biblio_03.gif' width='10' height='10' border='0'></td>";
 $conteudo .= "<td><div><a href='#' onClick='AM_togleDivDisplay(\"hideShowState\")' class='blt_subtitulo'>".$_language['legends']."</a>";
 $conteudo .= "<span id='hideShowState' style='display:none'><img src='$_CMAPP[media_url]/images/img_blt_ico_baixar.gif'> - ". $_language['file_download'];
-$conteudo .= "<br><img src='$_CMAPP[media_url]/images/img_blt_ico_excluir.gif'> - ".$_language['file_del'];
-$conteudo .= "<br><img src='$_CMAPP[media_url]/images/img_blt_ico_eye_off.gif'> - ".$_language['leg_unshare'];
-$conteudo .= "<br> <img src='$_CMAPP[media_url]/images/img_blt_ico_eye_on.gif'> - ".$_language['leg_share'];
-$conteudo .= "<br> <img src='$_CMAPP[media_url]/images/icon_thumb_off.gif'> - ".$_language['leg_thumb'];
-$conteudo .= "<br> <img src='$_CMAPP[media_url]/images/icon_thumb_on.gif'> - ".$_language['leg_thumboff'];
+$conteudo .= "<br /><img src='$_CMAPP[media_url]/images/img_blt_ico_excluir.gif'> - ".$_language['file_del'];
+$conteudo .= "<br /><img src='$_CMAPP[media_url]/images/img_blt_ico_eye_off.gif'> - ".$_language['leg_unshare'];
+$conteudo .= "<br /> <img src='$_CMAPP[media_url]/images/img_blt_ico_eye_on.gif'> - ".$_language['leg_share'];
+$conteudo .= "<br /> <img src='$_CMAPP[media_url]/images/icon_thumb_off.gif'> - ".$_language['leg_thumb'];
+$conteudo .= "<br /> <img src='$_CMAPP[media_url]/images/icon_thumb_on.gif'> - ".$_language['leg_thumboff'];
 $conteudo .= "</span></div><img src='$_CMAPP[media_url]/images/dot.gif' width='10' height='10' border='0'></td>";
 $conteudo .= "<td><img src='$_CMAPP[media_url]/images/box_biblio_04.gif' width='10' height='10' border='0'></td></tr>";
 $conteudo .= "<tr><td colspan='3' bgcolor='#C3B6E4'><img src='$_CMAPP[media_url]/images/dot.gif' width='10' height='4' border='0'></td></tr>";
-$conteudo .= "<tr><td colspan='3' bgcolor='#E9E5F5' valign='top'><img src='$_CMAPP[media_url]/images/dot.gif' width='10' height='30' border='0'><br>";
+$conteudo .= "<tr><td colspan='3' bgcolor='#E9E5F5' valign='top'><img src='$_CMAPP[media_url]/images/dot.gif' width='10' height='30' border='0'><br />";
 $conteudo .= "<table cellpadding='5' cellspacing='0' border='0' align='center'>";
 $conteudo .= "<tr><td><img src='$_CMAPP[media_url]/images/img_blt_enviarbiblio.gif'>";
 $conteudo .= "<form enctype='multipart/form-data' action='$_SERVER[PHP_SELF]' method='post' name='upload' onSubmit='Library_checkForm(this)'>";
 $conteudo .= "<td><input name='uploadFile' type='file'><input type='hidden' name='fieldName' value='uploadFile'><input type='hidden' name='MAX_FILE_SIZE' value='2048'><input type='hidden' name='frm_type' value='$_REQUEST[frm_type]'><input type='hidden' name='frm_codeProjeto' value='$_REQUEST[frm_codeProjeto]'><input type='hidden' name ='opcao' value ='save'></td>";
 $conteudo .= "<td valign='top'><input type='submit' value='$_language[send]'></form></td></tr>";
-$conteudo .= "</table><br></td></tr><tr>";
+$conteudo .= "</table><br /></td></tr><tr>";
 $conteudo .= "<td bgcolor='#FFFFFF'><img src='$_CMAPP[media_url]/images/box_biblio_up01.gif' width='10' height='10' border='0'></td>";
 $conteudo .= "<td bgcolor='#E9E5F5'><img src='$_CMAPP[media_url]/images/dot.gif' width='1' height='1' border='0'></td>";
 $conteudo .= "<td bgcolor='#FFFFFF'><img src='$_CMAPP[media_url]/images/box_biblio_up02.gif' width='10' height='10' border='0'></td></tr>";
-$conteudo .= "</table><br><br><!-- fim corpo do diario --></td></tr></table>";
+$conteudo .= "</table><br /><br /><!-- fim corpo do diario --></td></tr></table>";
 $page->add($conteudo);
 
 echo $page;

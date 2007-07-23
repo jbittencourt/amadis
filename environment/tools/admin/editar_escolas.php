@@ -57,7 +57,7 @@ if ($_SESSION[usuario]->eMembroCategoria(ADMINISTRADOR_PLATAFORMA) ||
   }
   
   $pag->setSubMenu($itens);
-  $pag->add ("<br>");
+  $pag->add ("<br />");
   
 
   //salva os dados postados do formulario
@@ -67,12 +67,12 @@ if ($_SESSION[usuario]->eMembroCategoria(ADMINISTRADOR_PLATAFORMA) ||
 
     //avisa q tem gente na escola e nao deixa apagar
     if (!empty($users->records)) {
-      $pag->add ("<center><font class=fontgray><font color=red size=+1>$lang[existem_alunos_escola]</font></font></center><br><br>");
+      $pag->add ("<center><font class=fontgray><font color=red size=+1>$lang[existem_alunos_escola]</font></font></center><br /><br />");
       $aviso = "?erro=alunos";
     }
 
     else {
-      $pag->add ("<center><font class=fontgray><font color=red size=+1>$lang[escola_apagada]</font></font></center><br><br>");
+      $pag->add ("<center><font class=fontgray><font color=red size=+1>$lang[escola_apagada]</font></font></center><br /><br />");
       $apaga->deleta();
     }
 
@@ -95,7 +95,7 @@ if ($_SESSION[usuario]->eMembroCategoria(ADMINISTRADOR_PLATAFORMA) ||
     if ($save->nomEscola == "") {
       if ($_SESSION[environment]->existeEscola($_REQUEST[frm_nomEscola]) == "1") {
 	$notSave = "1";
-	$pag->add ("<br><font class=fontgray><font color=red size=+1><center>$lang[escola_jah_existe]</font></font></center><br><br>");
+	$pag->add ("<br /><font class=fontgray><font color=red size=+1><center>$lang[escola_jah_existe]</font></font></center><br /><br />");
       }
     }
 
@@ -108,7 +108,7 @@ if ($_SESSION[usuario]->eMembroCategoria(ADMINISTRADOR_PLATAFORMA) ||
       $save->desTelefone = $_REQUEST[frm_desTelefone];
       $save->salva();
       
-      $pag->add ("<br><font class=fontgray><font color=red><center>$lang[dados_salvos]</font></font></center><br><br>");
+      $pag->add ("<br /><font class=fontgray><font color=red><center>$lang[dados_salvos]</font></font></center><br /><br />");
       
     }
 

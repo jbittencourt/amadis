@@ -28,7 +28,7 @@ if(count($files) > 0) {
 		} catch (CMException $e) { }
 
 		$image = str_replace('image_', $thumb->codeFile.'_', $file['name']);
-		$page->add('<img src="'.$thumb->thumb->getThumbUrl().'" onclick="Wiki_insertImageTag(\'../../files/'.$image.'\');"> '.$file['name'].'<br>');
+		$page->add('<img src="'.$thumb->thumb->getThumbUrl().'" onclick="Wiki_insertImageTag(\'../../files/'.$image.'\');"> '.$file['name'].'<br />');
 		$page->add('<br clear="all">');
 			
 	}
@@ -37,10 +37,10 @@ if(count($files) > 0) {
 
 $page->add('<form action="insert_image.php" method="post" enctype="multipart/form-data">');
 
-$page->add('<label for="frm_image">Send Image</label><br>');
+$page->add('<label for="frm_image">Send Image</label><br />');
 $page->add('<input type="file" name="frm_image" id="frm_image" />');
 $page->add('<input type="hidden" name="frm_namespace" id="frm_namespace" value="'.$_REQUEST['frm_namespace'].'" />');
-$page->add('<input type="hidden" name="action" id="action" value="save_image" /><br>');
+$page->add('<input type="hidden" name="action" id="action" value="save_image" /><br />');
 $page->add('<input type="submit" name="submit" id="submit" value="'.$_language['send'].'" />');
 
 $page->add('</form>'); 
