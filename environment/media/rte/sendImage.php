@@ -54,7 +54,7 @@ if(isset($_REQUEST['action']) && $_REQUEST['action'] == "A_sendImage") {
     
     $out[] = "<div class='item' style=\"background-image: url('$url');\">";
     $out[] = "  <div>";
-    $out[] = "    $file->name<br>$meta[0]x$meta[1] px / {$meta[2]}KB";
+    $out[] = "    $file->name<br />$meta[0]x$meta[1] px / {$meta[2]}KB";
     $out[] = "    <p><a onClick=\"var leg = document.getElementById('legenda'); if(leg.style.display =='block') leg.style.display='none'; else leg.style.display='block';\">&raquo;Legenda</a></p>";
     $out[] = "  </div>";
     $out[] = "  <div class='buttonOK'><button onClick=\"$click\"><img src='../images/buttonOK.gif'></button></div>";

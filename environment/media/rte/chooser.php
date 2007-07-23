@@ -31,7 +31,7 @@ if($list->__hasItems()) {
       
       $pag->add("<img style='cursor: pointer;' src='$url' onClick=\"sendImageSrc('../../media/thumb.php?frm_image=$item->codeFile&action=library')\">");
       
-      $pag->add("</td><td>$item->nome<br>");
+      $pag->add("</td><td>$item->nome<br />");
       $pag->add("</td>");
       
     }catch (CMException $e) {    

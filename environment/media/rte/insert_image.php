@@ -25,7 +25,7 @@ if($userBib->__hasItems()) {
 
 			$uOut[] = "<div class='item' style=\"background-image: url('$url');\">";
 			$uOut[] = "<div>";
-			$uOut[] = "$item->name<br>$meta[0]x$meta[1] px / {$meta[2]}KB";
+			$uOut[] = "$item->name<br />$meta[0]x$meta[1] px / {$meta[2]}KB";
 			$uOut[] = "<p><a onClick=\"toggle('legenda_$item->codeFile'); legend='legend_$item->codeFile';\">&raquo;Legenda</a></p>";
 			$uOut[] = "</div>";
 			$uOut[] = "<div class='buttonOK'>";
@@ -67,7 +67,7 @@ if($pBib->__hasItems()) {
 			$pOut[$pj]['title'] = $pjTitle;
 			$pOut[$pj][] = "<div class='item' style=\"background-image: url('$url');\">";
 			$pOut[$pj][] = "<div>";
-			$pOut[$pj][] = "{$item->files[0]->nome}<br>$meta[0]x$meta[1] px / {$meta[2]}KB";
+			$pOut[$pj][] = "{$item->files[0]->nome}<br />$meta[0]x$meta[1] px / {$meta[2]}KB";
 			$pOut[$pj][] = "<p><a onClick=\"toggle('legenda_$image->codeFile'); legend='legend_$image->codeFile';\">&raquo;Legenda</a></p>";
 			$pOut[$pj][] = "</div>";
 			$pOut[$pj][] = "<div class='buttonOK'>";
@@ -164,7 +164,7 @@ function AddImage(imageURL, legenda) {
 </head>
 <body>
 
-<div id='mainbox'><img src='<?=$_CMAPP['imlang_url']."/boxTitulo.gif"?>'><br>
+<div id='mainbox'><img src='<?=$_CMAPP['imlang_url']."/boxTitulo.gif"?>'><br />
 <div id='listBox'>
 <ul>
 	<li class='MyBib Selected' id='MyBib'
