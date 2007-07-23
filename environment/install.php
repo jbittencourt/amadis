@@ -19,16 +19,16 @@ $project_pages = $pages.'/projects';
 
 //Apache 2 or superior is required;
 if(version_compare(substr(substr(apache_get_version(), 0, 13),-6), '2.0.1', '>=')) {
-  $out[] = "<br><h4>APACHE_VERSION: ".apache_get_version()." [OK]</h4>";
+  $out[] = "<br /><h4>APACHE_VERSION: ".apache_get_version()." [OK]</h4>";
   $ok = true;
 } else {
-  $out[] = "<br><b style='Color: red;'> You need Apache 2.0.1 or superior!</b>";
+  $out[] = "<br /><b style='Color: red;'> You need Apache 2.0.1 or superior!</b>";
   $ok = false;
 }
 
 //PHP 5.0.1 or superior is required;
 if(!version_compare(PHP_VERSION, '5.0.1', ">=")) {
-  $out[] = "<br><b style='Color: red;'> You need PHP 5.0.1 or superior!<B>";
+  $out[] = "<br /><b style='Color: red;'> You need PHP 5.0.1 or superior!<B>";
   $ok = false;
 } else {
   $out[] = "<h4>PHP_VERSION: ".PHP_VERSION."</h4>";
@@ -41,9 +41,9 @@ $pMedia = getPerms($basedir."/environment/media");
 
 if($perm != "www" && $pMedia != "www") {
   $ok = false;
-  $out[] = "<b style='color:red;'> You need set writable the following diretories:</b><br> ";
-  $out[] = "<b>Execute the commands below in terminal:</b><br>";
-  $out[] = "<h4><i>chmod 777 $basedir/environment<br>chmod 777 $basedir/environment/media</i></h4>";
+  $out[] = "<b style='color:red;'> You need set writable the following diretories:</b><br /> ";
+  $out[] = "<b>Execute the commands below in terminal:</b><br />";
+  $out[] = "<h4><i>chmod 777 $basedir/environment<br />chmod 777 $basedir/environment/media</i></h4>";
 }
 
 if($ok) {
@@ -67,7 +67,7 @@ if($ok) {
       $form[4] = "<tr><td>Put JPSpan path:</td><td bgcolor='#FF0000'><input size='40' value=$_REQUEST[jpspan] type='text' name='jpspan'></td></tr>";
       
     }
-    $tmp = "<h4>CM->DEVEL_PATH: <i>$_REQUEST[cmdevel]</i><br>JPSpan_PATH: <i>$_REQUEST[jpspan]</i></h4>";
+    $tmp = "<h4>CM->DEVEL_PATH: <i>$_REQUEST[cmdevel]</i><br />JPSpan_PATH: <i>$_REQUEST[jpspan]</i></h4>";
     $out[] = (!$ok ? "<b style='color: red;' >Check detached paths!</b>".implode("\n", $form): $tmp);
   } else {
     $out[] = implode("\n", $form);
@@ -82,21 +82,21 @@ if($ok) {
   $out[] = "<h4>AMADIS configuration</h4>";
   $out[] = "Create configurations files:";
   
-  $out[] = "<b>config.xml file:</b> <i>$config_xml</i><br>";
-  $out[] = "<b>config.inc.php file:</b> <i> $config_php</i><br>";
+  $out[] = "<b>config.xml file:</b> <i>$config_xml</i><br />";
+  $out[] = "<b>config.inc.php file:</b> <i> $config_php</i><br />";
   $out[] = "Created config files: [OK]";
   //check homepages diretory
   if(file_exists($pages)) {
-    $out[] = "<br><b style='color: red;'>You need create homepage's diretory.</b><br>";
-    $out[] = "Execute as root, the commands below in terminal:<br><br>";
-    $out[] = "<b><i>mkdir $pages<br>";
-    $out[] = "chown www-data $pages<br>";
-    $out[] = "chgrp www-data $pages</i></b><br><br>";
+    $out[] = "<br /><b style='color: red;'>You need create homepage's diretory.</b><br />";
+    $out[] = "Execute as root, the commands below in terminal:<br /><br />";
+    $out[] = "<b><i>mkdir $pages<br />";
+    $out[] = "chown www-data $pages<br />";
+    $out[] = "chgrp www-data $pages</i></b><br /><br />";
   } else {
 //     if(@mkdir($users_pages, 0755)) $out[] = "";
 //     mkdir($project_pages, 0755);
   }
-  $out[] = "</fieldset><br>";  
+  $out[] = "</fieldset><br />";  
     
 }
 

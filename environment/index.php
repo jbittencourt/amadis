@@ -5,7 +5,7 @@ include($_CMAPP['path']."/templates/aminicial.inc.php");
 
 $_language = $_CMAPP['i18n']->getTranslationArray("inicial");
 
-$pag = new AMInicial();
+$pag = new AMInicial;
 
 /**
  * BEM-VINDO AO AMADIS
