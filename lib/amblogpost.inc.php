@@ -26,10 +26,10 @@ class AMBlogPost extends CMObj
    * @return object Retorna lista de comentarios de um post.
    *
    */
-    function listComments (){
+    function listComments($parent='0'){
         $query=new CMQuery(AMBlogComment);
         $query->setOrder("AMBlogComment::time desc");
-        $query->setFilter("codePost = ".$this->codePost);
+        $query->setFilter("codePost = ".$this->codePost . ' AND parentComment = \''.$parent.'\'');
 
         $j = new CMJoin(CMJoin::INNER);
         $j->on("AMBlogComment::codeUser=AMUser::codeUser");

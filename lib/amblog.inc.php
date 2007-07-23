@@ -21,17 +21,18 @@ class AMBlog implements AMAjax {
 		
 		$box = new AMBoxBlogComment;
 
-		$ico = "<img id='diary_comment_ico' src='".$_CMAPP['images_url']."/ico_comentario.gif'>";
+		//$ico = "<img id='diary_comment_ico' src='".$_CMAPP['images_url']."/ico_comentario.gif'>";
 		
 		if($comments->__hasItems()) {
   			foreach($comments as $item) {
-    		    $smile = new AMSmileRender($item->body); 
-    			$box->add("<div> $ico  ".$smile->__toString()."(");
-    			$box->add(new AMTUserInfo($item->user->items[0],AMTUserInfo::LIST_USERNAME));
-    			$box->add(",".date($_language['date_format'],$item->time).")</div>");
+				$smile = new AMSmileRender($item->body);
+    			$box->add('<div><span class="comment-date">(');
+    			$box->add(new AMTUserInfo($item->user->items[0], AMTUserInfo::LIST_USERNAME));
+    			$box->add(','.date($_language['date_format'], $item->time).')</span></div>');
+    			$box->add('<div class="comment-entry">'.nl2br(strip_tags($smile->__toString())).'</div><hr />');
   			}
 		} else {
-  			$box->add("<div>$ico ".$_language['comments_dont_exists']."</div>");
+  			$box->add("<div class=\"no-comments\">$ico ".$_language['comments_dont_exists']."</div>");
 		}
 
 		$campos = array("body");
