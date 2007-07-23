@@ -12,11 +12,12 @@ class AMTUpload extends AMMain {
   private $itens = array();
   private $subTitle, $thumb;
   
-  public function __construct($img_top) {
+  public function __construct($img_top, $section) {
     global $_CMAPP;
     parent::__construct();
-
-    $this->setImgId($_CMAPP['imlang_url']."/$img_top");
+	
+    $this->page->section = $section;
+    $this->setImgId($_CMAPP['images_url']."/$img_top");
   }
   
   public function setTitle($title) {
@@ -60,7 +61,7 @@ class AMTUpload extends AMMain {
     parent::add(" <tr>");
     parent::add("   <td><img class='imgtitupload' src='$this->thumb'></td>");
     parent::add("   <td width='20'><img src='$_CMAPP[images_url]/dot.gif' width='20' height='10' border='0'></td>");
-    parent::add("   <td valign='top'><font class='titupload'>$_language[edit_page]</font><br>");
+    parent::add("   <td valign='top'><font class='titupload'>$_language[edit_page]</font><br />");
     parent::add("   <font class='subtitupload'>".$this->subTitle."</font>");
     parent::add("   </td>");
 

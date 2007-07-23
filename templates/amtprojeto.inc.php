@@ -14,11 +14,11 @@ class AMTProjeto extends AMMain {
   
 
   function __construct() {
-    global $_CMAPP;
-    parent::__construct();
+    global $_CMAPP, $_language;
+    parent::__construct("project");
 
     $this->requires("project.css",CMHTMLObj::MEDIA_CSS);
-    $this->setImgId($_CMAPP['imlang_url']."/top_projetos.gif");
-
+    $this->setImgId($_CMAPP['images_url']."/ico_projects.gif");
+	$this->setSectionTitle($_language['projects']);
   }
 }

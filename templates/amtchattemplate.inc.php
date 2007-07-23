@@ -79,8 +79,8 @@ class AMChatArea extends CMHtmlObj {
 		echo "<table width=\"510\" border=\"0\" noshade cellspacing=\"0\" cellpadding=\"0\">";
 		echo "<tr>";
 		echo "<td class=\"$men[desTag]\" valign=\"top\" class=\"perfil\" >";
-		echo "<br> <b>$user->username</b>";
-		$acao = explode("<br>", $men['desMensagem']);
+		echo "<br /> <b>$user->username</b>";
+		$acao = explode("<br />", $men['desMensagem']);
 
 		echo "&nbsp; $acao[0]</td>";
 		echo "<td valign=\"top\" width=\"70%\"class=\"$men[desTag]\">";

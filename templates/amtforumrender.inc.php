@@ -128,7 +128,7 @@ class AMTForumRender extends CMHTMLObj {
 
     //test if user has privileges to post a message
     if($this->privs['post']) {
-      $obj->add("<br><a href=\"#reply_$msg_unique_name\" onClick=\"Forum_displayReply('reply_$msg_unique_name',$men->code,'RE:$men->title')\"><img vspace=\"10\" hspace=\"12\" align=\"middle\" src=\"$_CMAPP[imlang_url]/forum_ico_responder.gif\" border=0></a>");
+      $obj->add("<br /><a href=\"#reply_$msg_unique_name\" onClick=\"Forum_displayReply('reply_$msg_unique_name',$men->code,'RE:$men->title')\"><img vspace=\"10\" hspace=\"12\" align=\"middle\" src=\"$_CMAPP[imlang_url]/forum_ico_responder.gif\" border=0></a>");
     }
 
     //edit and delete buttons
@@ -149,7 +149,7 @@ class AMTForumRender extends CMHTMLObj {
 
     
     if(is_array($men->children)) {
-      $obj->add("<br>");
+      $obj->add("<br />");
       $level++;
 
       foreach($men->children as $child) {
@@ -211,7 +211,7 @@ class AMTForumRender extends CMHTMLObj {
     parent::add("<tr>");
     parent::add("<td height=\"36\" width=\"45\" align=\"center\"><img src=\"$_CMAPP[images_url]/forum_ico_topicproj.gif\" width=\"26\" height=\"20\" border=\"0\"></td>");
     //nome do forum
-    parent::add("<td class=\"forum_title\"><img src=\"$_CMAPP[images_url]/dot.gif\" width=\"1\" height=\"12\" border=\"0\"><br>".$this->forum->name);
+    parent::add("<td class=\"forum_title\"><img src=\"$_CMAPP[images_url]/dot.gif\" width=\"1\" height=\"12\" border=\"0\"><br />".$this->forum->name);
     
     parent::add("<td align=right>");
     //open all messages button
@@ -262,7 +262,7 @@ class AMTForumRender extends CMHTMLObj {
 
     //new topic button
     if($this->privs['post']) {
-      parent::add("<br><div class=\"forum_novo_topico\">");
+      parent::add("<br /><div class=\"forum_novo_topico\">");
       parent::add("<a href=\"#anchor_reply_forum_new_topic\" onClick=\"Forum_displayReply('reply_forum_new_topic',0,'')\"><img src=\"$_CMAPP[imlang_url]/bt_forum_novo_topico.png\"></a>");
       parent::add("<a name=\"anchor_reply_forum_new_topic\"><div id=\"reply_forum_new_topic\" class=\"box_forum_resposta\" style=\"position:relative; display:none;\"></div>");
       

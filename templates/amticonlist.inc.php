@@ -98,7 +98,7 @@ class AMTIconList extends CMHTMLObj {
 				parent::add('<span id="icon-image">');
 				parent::add($icon);
 				parent::add('</span>');
-				parent::add('<br><span id="icon-legend">'.$name.'</span>');
+				parent::add('<br /><span id="icon-legend">'.$name.'</span>');
 				parent::add('</a>');
 				parent::add('<span id="icon-space"></span>');
       		}

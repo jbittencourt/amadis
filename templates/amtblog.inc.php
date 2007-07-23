@@ -7,12 +7,13 @@
 class AMTBlog extends AMMain {	
 
 	function __construct() {
-		global $_CMAPP;
-		parent::__construct("bege");
+		global $_CMAPP, $_language;
+		parent::__construct('blog');
 
 		$this->requires("diary.css",self::MEDIA_CSS);
 
-		$this->setImgId($_CMAPP['imlang_url']."/top_diario.gif");
+		$this->setImgId($_CMAPP['images_url']."/ico_blog.gif");
+		$this->setSectionTitle($_language['blog']);
 
 	}
 }

@@ -49,7 +49,7 @@ class AMTCadBox extends CMHTMLObj {
       $this->class = 'cad-box-webfolio';
       break;
     case AMTCadBox::PROJECT_THEME:
-      $this->titlecss = "project_title";
+      $this->titlecss = "project-title";
       $this->theme = "box_cadproj";
       $this->image = "box_cadproj_01$image.gif";
       $this->class = 'cad-box-project';
@@ -61,7 +61,7 @@ class AMTCadBox extends CMHTMLObj {
       $this->class = 'cad-box-community';
       break;
     case AMTCadBox::PEOPLE_THEME:
-      $this->titlecss = "people_title";
+      $this->titlecss = "people-title";
       $this->theme = "box_cad_pessoas";
       $this->image = "box_cad_pessoas_01$image.gif";
       $this->class = 'cad-box-people';
@@ -95,43 +95,17 @@ class AMTCadBox extends CMHTMLObj {
   public function __toString() {
     global $_CMAPP;
 
-
-    parent::add("<!-- inicio do cadBox -->");
-    parent::add("<table id='cad-box' class='cad-box $this->class'>");
-    parent::add("<tr>");
-
-    parent::add("<td id='ctl'><img src=\"$_CMAPP[images_url]/".$this->image."\"></td>");
-    parent::add("<td id='bt' background=\"$_CMAPP[images_url]/".$this->theme."_bgtop.gif\" class='cad-box-cols-top'>");
-    parent::add("<img src=\"$_CMAPP[images_url]/dot.gif\" width=\"1\" height=\"8\" border=\"0\"><span class=\"$this->titlecss\" id='cadbox-title'>");
-    parent::add($this->titulo);
-    parent::add("</td>");
-    parent::add("<td id='ctr'><img src=\"$_CMAPP[images_url]/".$this->theme."_02.gif\"></td>");
-    parent::add("</tr>");
-
-    parent::add("<tr>");
-    parent::add("<td id='bl' class='cad-box-cols-sides' background=\"$_CMAPP[images_url]/".$this->theme."_bgleft.gif\">");
-    parent::add("<img src=\"$_CMAPP[images_url]/dot.gif\" width=\"1\" height=\"1\"></td>");
-    parent::add("<td>");
-
-    parent::add($this->buffer);
-
-    parent::add("</td>");
-    parent::add("<td id='br' class='cad-box-cols-sides' background=\"$_CMAPP[images_url]/".$this->theme."_bgright.gif\">");
-    parent::add("<img src=\"$_CMAPP[images_url]/dot.gif\" width=\"1\" height=\"1\" border=\"0\"></td>");
-    parent::add("</tr>");
-
-    parent::add("<tr>");
-    parent::add("<td id='cbl'><img src=\"$_CMAPP[images_url]/".$this->theme."_03.gif\"></td>");
-    parent::add("<td id='bb' class='cad-box-cols-top' background=\"$_CMAPP[images_url]/".$this->theme."_bgbottom.gif\">");
-    parent::add("<img src=\"$_CMAPP[images_url]/dot.gif\" width=\"1\" height=\"1\" border=\"0\"></td>");
-    parent::add("<td id='cbr'><img src=\"$_CMAPP[images_url]/".$this->theme."_04.gif\"></td>");
-    parent::add("</tr>");
-    parent::add("</table>");
-
-    parent::add("<!-- fim do cadBox -->");
+	$injection = array(
+		'box_class'=>$this->class,
+		'box_id'=>'cad-box',
+		'cad_box_title'=>'<span class="'.$this->titlecss.'">'. $this->titulo .'</span>',
+		'box_content'=>implode("\n", $this->buffer)
+	);
     
-    return parent::__toString();
+    
+	parent::add(AMHTMLPage::loadView($injection, 'box'));
+	
+	return parent::__toString();
+	
   }
-
-
 }

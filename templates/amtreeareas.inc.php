@@ -22,7 +22,7 @@ class AMTreeAreas extends CMHTMLObj{
       $area = $this->list->records[$i];
       if($area->codPai==$parent->codArea) {
 	$node->add($this->getTree($area));
-	$node->add("<br>");
+	$node->add("<br />");
 	$hits++;
       }
     }
@@ -40,7 +40,7 @@ class AMTreeAreas extends CMHTMLObj{
     foreach($this->list->records as $area) {
       if($area->codPai==0) {
 	parent::add($this->getTree($area));
-	parent::add("<br>");
+	parent::add("<br />");
       }
     }
 

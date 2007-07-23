@@ -23,36 +23,35 @@ class AMTCommunitySmallList extends CMHTMLObj {
 	public function __toString() {
 		global $_CMAPP;
 
-		parent::add("<table class='small_list'>");
+		parent::add('<div class="small-list">');
 		if($this->items->__hasItems()) {
 			foreach($this->items as $comm) {
-				parent::add("<tr>");
-				parent::add("<td>");
-				
-				
-				try {
+    			parent::add('<div class="item">');
+	    		parent::add('  <div class="thumb">');
+	    		try {
 					$img = AMCommunityImage::getThumb($comm,true);
 					parent::add($img->getView());
 				} catch(CMException $e) {
-					echo $e; die('bla');
+					parent::add(new AMTProjectImage(AMProjectImage::DEFAULT_IMAGE, AMImageTemplate::METHOD_DEFAULT, true));
 				}
-				
-				parent::add("<td>");
-				$text = substr($comm->description,0,50);
+    			parent::add('  </div>');
+    		
+	    		$text = substr($comm->description,0,150);
 				if($text!=$comm->description) {
 					$text.="...";
 				}
-				parent::add("<a href='$_CMAPP[services_url]/communities/community.php?frm_codeCommunity=$comm->code'>$comm->name</a> - $text");
-				parent::add("<tr><td colspan=2><img src='$_CMAPP[images_url]/dot.gif' height='10'>");
+				    			
+				parent::add('  <div class="description">');
+				parent::add('    <a href="'.$_CMAPP['services_url'].'/communities/community.php?frm_codeCommunity='.$comm->code.'">'.$comm->name.'</a> - '.$text);
+    			parent::add('  </div>');
+	
+    			parent::add('</div>');
+    			parent::add('<br class="clear" />');
 			}
 		}
-		parent::add("</table>");
+		parent::add('</div>');
 
 		return parent::__toString();
 	}
-
-	
-
 }
-
 ?>

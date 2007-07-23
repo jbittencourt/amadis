@@ -6,20 +6,17 @@
 
 
 class AMTPeople extends AMMain {
-  
 
-  function __construct() {
+	function __construct() 
+  	{
     
-    global $_CMAPP;
-    parent::__construct("green");
-    
-    $this->setImgId($_CMAPP['imlang_url']."/top_pessoas.gif");
-    $this->requires("people.css",CMHTMLObj::MEDIA_CSS);
+    	global $_CMAPP, $_language;
+    	
+    	parent::__construct('people');
 
+    	$this->setImgId($_CMAPP['images_url']."/ico_people.gif");
+    	$this->requires("people.css",CMHTMLObj::MEDIA_CSS);
+		$this->setSectionTitle($_language['people']);
 
-  }
+  	}
 }
-
-
-
-?>

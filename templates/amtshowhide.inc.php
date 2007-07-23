@@ -43,7 +43,7 @@ class AMTShowHide extends CMHTMLObj {
 
   public function __toString($stringReturn=false) {
     
-    $link = "<a class=\"$this->class cursor\" onClick=\"AM_togleDivDisplay('$this->divName')\">".$this->linkLabel."</a><br>";
+    $link = "<a class=\"$this->class cursor\" onClick=\"AM_togleDivDisplay('$this->divName')\">".$this->linkLabel."</a><br />";
 
     $div[] = "<div id=\"$this->divName\" style=\"$this->initState\">";
     
