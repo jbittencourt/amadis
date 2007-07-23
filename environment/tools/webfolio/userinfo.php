@@ -34,8 +34,8 @@ $pag->add("</a>");
 $pag->add("<div id=\"perfil\"> ");
 $pag->add("<!-- box perfil -->");
 $pag->add("<font class=\"texto\"><b>$user->username</b>");
-$pag->add("<br>".$user->email);
-$pag->add("<br>");
+$pag->add("<br />".$user->email);
+$pag->add("<br />");
 
 $pag->add("<div class=\"tooltip_line\"><a href=\"$where_to_go\">$_language[webfolio_visit]</a></div>");
 

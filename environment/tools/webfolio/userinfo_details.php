@@ -4,7 +4,7 @@ include("../../config.inc.php");
 
 $_language = $_CMAPP['i18n']->getTranslationArray("webfolio");
 
-$pag = new AMTWebfolio();
+$pag = new AMTWebfolio;
 $box = new AMTwoColsLayout;
 
 if(isset($_REQUEST['action'])) {
@@ -47,7 +47,7 @@ if(isset($_REQUEST['action'])) {
       $message->save();
       $pag->addMessage($_language['error_message_send_success']);
     }catch (CMException $e) {
-      $pag->addError($_language['error_message_not_send']."<br>".$_language['error_contact_admin'], $e->getMessage());
+      $pag->addError($_language['error_message_not_send']."<br />".$_language['error_contact_admin'], $e->getMessage());
     }
     break;
   }
@@ -68,13 +68,13 @@ try{
 $foto = AMUserPicture::getImage($user);
 $box->add(new AMTUserImage($foto),AMTwoColsLayout::LEFT);
 
-$box->add("<p><span class=\"texto\"><b>".$user->name."<br>".date($_language['date_format'],(integer) $user->birthDate)."</b>", AMTwoColsLayout::LEFT);
+$box->add("<p><span class=\"texto\"><b>".$user->name."<br />".date($_language['date_format'],(integer) $user->birthDate)."</b>", AMTwoColsLayout::LEFT);
 
-$box->add('<br><span class="texto"><br>'.$user->aboutMe.'<br></span>',
+$box->add('<br /><span class="texto"><br />'.$user->aboutMe.'<br /></span>',
 	  AMTwoColsLayout::LEFT);
 
 
-$box->add('<br><span class="texto"><b>'.$user->email.'</b></span>',
+$box->add('<br /><span class="texto"><b>'.$user->email.'</b></span>',
 	  AMTwoColsLayout::LEFT);
 
 $box->add("</font>",
@@ -83,7 +83,7 @@ $box->add("</font>",
 
 
 $box->add(new AMBMyWebfolio, AMTwoColsLayout::RIGHT);
-$box->add("<br>", AMTwoColsLayout::RIGHT);
+$box->add("<br />", AMTwoColsLayout::RIGHT);
 
 $pag->add($box);
 
@@ -92,7 +92,7 @@ $projs = $user->listProjects();
 $box2 = new AMColorBox($_CMAPP['imlang_url'].'/box_wfprojetos_tit.gif',AMColorBox::COLOR_BOX_BLUE);
 if($projs->__hasItems()) {
   $box2->add(new AMTIconList($projs,AMTIconList::PROJECT_LIST,7));
-  $box2->add("<br><a href='$_CMAPP[services_url]/projects/listprojects.php'>&raquo; $_language[list_all_projects]</a>");
+  $box2->add("<br /><a href='$_CMAPP[services_url]/projects/listprojects.php'>&raquo; $_language[list_all_projects]</a>");
 }
 else {
   $box2->add("<span class='texto'>$_language[user_no_projects]</span>");
@@ -107,7 +107,7 @@ $box3 = new AMColorBox("$_CMAPP[imlang_url]/box_wfcomunidades_tit.gif",AMColorBo
 $comms = $user->listCommunities();
 if($comms->__hasItems()) {
   $box3->add(new AMTIconList($comms,AMTIconList::COMMUNITY_LIST,7));
-  $box3->add("<br><a href='$_CMAPP[services_url]/communities/listcommunities.php'>&raquo; $_language[list_all_communities]</a>");
+  $box3->add("<br /><a href='$_CMAPP[services_url]/communities/listcommunities.php'>&raquo; $_language[list_all_communities]</a>");
 } 
 else {
   $box3->add("<span class='texto'>$_language[user_no_communities]</span>");
@@ -122,7 +122,7 @@ $box4 = new AMColorBox("$_CMAPP[imlang_url]/box_wfamigos_tit.gif",AMColorBox::CO
 $friends = $user->listFriends();
 if($friends->__hasItems()) {  
   $box4->add(new AMTIconList($friends,AMTIconList::USER_LIST,7));
-  $box4->add("<br><a href='$_CMAPP[services_url]/webfolio/listfriends.php?frm_codeUser=$user->codeUser'>&raquo; $_language[list_all_friends]</a>");
+  $box4->add("<br /><a href='$_CMAPP[services_url]/webfolio/listfriends.php?frm_codeUser=$user->codeUser'>&raquo; $_language[list_all_friends]</a>");
 } 
 else {
   $box4->add("<span class='texto'>$_language[user_no_friends]</span>");

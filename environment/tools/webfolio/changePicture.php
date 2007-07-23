@@ -86,8 +86,8 @@ switch($action) {
 		$cadBox->add("<input type=hidden name=action value=pag_1>");
 		$cadBox->add("<p align=center>".$_language['frm_foto']);
 		$cadBox->add("&nbsp;".$_language['valid_image_types']." ".implode(", ",$types).".");
-		$cadBox->add("<br><input type=file name=frm_foto onChange=\"this.form.submit()\">");
-		$cadBox->add("<br><input type=submit onClick=\"this.form['action'].value='pag_2'\" value=\"$_language[finish]\">");
+		$cadBox->add("<br /><input type=file name=frm_foto onChange=\"this.form.submit()\">");
+		$cadBox->add("<br /><input type=submit onClick=\"this.form['action'].value='pag_2'\" value=\"$_language[finish]\">");
 		$cadBox->add("</form>");
 
 		$cadBox->setTitle($_language['pag_1']);
