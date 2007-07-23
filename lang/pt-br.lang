@@ -296,7 +296,7 @@ msg_post_success = "Sua nota foi editada com sucesso"
 msg_profile_edit_success = "Seu Di&aacute;rio foi editado com sucesso."
 
 error_post_cannot_be_edited = "Esta nota n&atilde;o pode ser editada post j&aacute; possui coment&ecirc;rios";
-error_comment_not_saved = "A nota n&atilde;o foi salva com sucesso!"
+error_comment_not_saved = "O coment&aacute;rio n&atilde;o foi salvo com sucesso!"
 error_post_cannot_be_deleted = "Este Post nao pode ser deletado pois ja possui comentarios!"
 error_post_not_delete = "N&atilde;o foi possivel deletar esta nota!"
 error_post_does_not_exist = "Esse post n&atilde;o existe ou foi apagado"
@@ -308,6 +308,9 @@ blog_filter_day = "Hoje";
 blog_filter_week = "&Uacute;ltima semana";
 blog_filter_month = "&Uacute;ltimo m&ecirc;s";
 blog_posts_select = "Filtrar notas no di&aacute;rio"
+
+reply = "Responder"
+my_reply = "Minha resposta para esse coment&aacute;rio"
 
 [Correio]
 frm_destinatario = "Destinat&aacute;rio de minha mensagem:"
