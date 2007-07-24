@@ -92,8 +92,8 @@
  				}
 
  				parent::add("<tr><td class='blt_box_p'><a href='$_CMAPP[services_url]/library/biblioteca.php?frm_type=projeto&frm_codeProjeto=$_REQUEST[frm_codProjeto]&opcao=download&codeArquivo=$item->codeFile'><img src='$_CMAPP[media_url]$icon'></a></td>");
- 				parent::add("<td class='blt_box_p'>&raquo; $item->nome</td>");
- 				parent::add("<td class='blt_box_p'>( ".date("d/m/Y",$item->tempo)." )</td></tr>");
+ 				parent::add("<td class='blt_box_p'>&raquo; $item->name</td>");
+ 				parent::add("<td class='blt_box_p'>( ".date("d/m/Y",$item->time)." )</td></tr>");
  			}
  			parent::add("</table>");
  		}
