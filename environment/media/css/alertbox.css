@@ -31,14 +31,17 @@
 	text-decoration: underline;
 }
 
-#box-message {	background-color: #E3FFDE; }
-#box-message.message .border-top { }
-#box-message.message .border-bottom { }
+.closeButton { float: right; margin-right: 30px; cursor: pointer; }
+
+#box-message {	background-color: #E3FFDE;}
+#box-message.message .border-top { background: transparent; }
+#box-message.message .border-bottom { background: transparent; }
 #box-message.message .border-top-left { height: 5px; background: url(../images/box_alert_02/box_alert_es.gif) no-repeat top left; }
 #box-message.message .border-top-right {height: 5px;  background: transparent url(../images/box_alert_02/box_alert_ds.gif) no-repeat top right; }
-#box-message.message .border-bottom-left { height: 5px; background: transparent url(../images/box_alert_02/box_alert_ei.gif) no-repeat bottom left; }
-#box-message.message .border-bottom-right { height: 5px; background: transparent url(../images/../images/box_alert_02/box_alert_di.gif) no-repeat bottom right; }
-#box-message.message .content { height: 50px; }
+#box-message.message .border-bottom-left {  background: transparent url(../images/box_alert_02/box_alert_ei.gif) no-repeat bottom left; }
+#box-message.message .border-bottom-right {  background: transparent url(../images/../images/box_alert_02/box_alert_di.gif) no-repeat bottom right; }
+#box-message.message .content { height: 50px;}
+
 
 
 #box-dialog { background-color: #F3F7FF; }
