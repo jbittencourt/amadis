@@ -64,7 +64,7 @@ class AMAlertBox extends AMAbstractBox {
     	global $_CMAPP;
 
 	    $url = $_CMAPP['images_url'].'/'.$this->theme;
-		
+		$this->add('<img src="'.$_CMAPP['images_url'].'/close.gif" class="closeButton" onclick="$(\''.$this->id.'\').remove();" alt="" />');
 	    $injection = array(
 	    	'box_class'=>$this->class,
 	    	'box_id'=>$this->id,

@@ -52,8 +52,7 @@ class AMViewPageMenu extends CMHTMLObj {
 				array($_CMAPP['imlang_url']."/wf_mn_diario_off.gif",
 						$_CMAPP['imlang_url']."/wf_mn_diario_on.gif")
 				);
-			$url = ($_REQUEST['frm_codeUser'] == $_SESSION['user']->codeUser ? $_CMAPP['services_url']."/webfolio/webfolio.php" :
-	      	$_CMAPP['services_url']."/webfolio/userinfo_details.php?frm_codeUser=$_REQUEST[frm_codeUser]");
+			$url = ($_REQUEST['frm_codeUser'] == $_SESSION['user']->codeUser ? $_CMAPP['services_url']."/webfolio/webfolio.php" : $_CMAPP['services_url']."/webfolio/userinfo_details.php?frm_codeUser=$_REQUEST[frm_codeUser]");
       		$this->addSecundaryItem($url,
 				array($_CMAPP['imlang_url']."/wf_mn_webfolio_off.gif",
 						$_CMAPP['imlang_url']."/wf_mn_webfolio_on.gif",)

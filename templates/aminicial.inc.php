@@ -1,5 +1,4 @@
 <?
-
 /**
  * Template of the inicial page
  *
@@ -14,10 +13,9 @@
 
 class AMInicial extends AMMain {
   
-
   	function __construct() 
   	{
-  		global $_CMAPP, $_language;
+   		global $_CMAPP, $_language;
     	parent::__construct('initial');
 
     	$this->setImgId($_CMAPP['images_url']."/ico_initial.gif");
