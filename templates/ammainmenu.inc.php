@@ -13,7 +13,8 @@
 class AMMainMenu extends CMHtmlObj {
   	private $itens;
 
-  	public function __construct() {
+  	public function __construct() 
+  	{
     	global $_CMAPP;
     	parent::__construct();
 
@@ -21,18 +22,14 @@ class AMMainMenu extends CMHtmlObj {
 	    	//adiciona o item "inicial" no menu principal (se o usuario estiver logado)
     		$this->addItem($_CMAPP['url']."/index.php", 'begin');
     	}
-    	$this->addItem($_CMAPP['services_url']."/projects/projects.php", 'projects');
-	    $this->addItem($_CMAPP['services_url']."/people/people.php", 'people');
-	    $this->addItem($_CMAPP['services_url']."/communities/communities.php", 'communities');
+    	$this->addItem($_CMAPP['services_url'].'/projects/projects.php', 'projects');
+	    $this->addItem($_CMAPP['services_url'].'/people/people.php', 'people');
+	    $this->addItem($_CMAPP['services_url'].'/communities/communities.php', 'communities');
 
-//     if(!empty($_SESSION['user'])) {
-//       $this->addItem($_CMAPP['services_url']."/admin/admin.php",
-// 		     array($_CMAPP['imlang_url']."/ico_administracao_off.gif",
-// 			   $_CMAPP['imlang_url']."/ico_administracao_on.gif",)
-// 		     );
-//     }
-
-  	}
+     	/*if(!empty($_SESSION['user'])) {
+       		$this->addItem($_CMAPP['services_url'].'/admin/admin.php', 'administration');
+     	}*/
+ 	}
 
 
 	public function addItem($url, $label)
@@ -41,19 +38,8 @@ class AMMainMenu extends CMHtmlObj {
 		$this->items[] = "<li><a href='".$url."'>".strtoupper($_language[$label])."</a></li>";
 	}
 	
-	/**
-	 *<ul id="menufontExtra" class="menufont">
-	 *	<li><a href="#test">COMUNIDADES</a></li>
-	 *	<li><a href="#">PESSOAS</a></li>
-	 *	<li><a href="#">OFICINAS</a></li>
-	 *	<li><a href="#">WEBFÓLIO</a></li>
-	 *	<li><a href="#">FERRAMENTAS</a></li>
-	 *</ul>
-	 * 
-	 *
-	 * @return unknown
-	 */
-  	public function __toString() {
+	public function __toString() 
+	{
     	global $_CMAPP, $_language;
     
 
@@ -67,7 +53,6 @@ class AMMainMenu extends CMHtmlObj {
 		parent::add('</ul>');
 
     	return parent::__toString();
-
   	}
 
 }

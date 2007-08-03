@@ -1,7 +1,6 @@
 <?php
 include('../../config.inc.php');
 $_language = $_CMAPP['i18n']->getTranslationArray("wiki");
-$page = new AMTProjeto();
 
 if(isset($_REQUEST['frm_namespace']) && !empty($_REQUEST['frm_namespace'])) {
 	$wikiPage = new AMWikiPage;
@@ -17,8 +16,12 @@ if(isset($_REQUEST['frm_namespace']) && !empty($_REQUEST['frm_namespace'])) {
 	}
 }
 
+if(ereg('user_', $wikiPage->namespace)) {
+	$page = new AMTWebfolio;
+} else $page = new AMTProjeto;
+
 if(empty($wikiPage->text) && empty($_REQUEST['frm_title']) && $_REQUEST['frm_title'] != 'Main_Page') {
-	$wikiPage->text = "\nMain Page\n============\n\nEsta é uma pagina para voce poder organizar todo o seu conteudo de pesquisa de seu projeto\n";
+	$wikiPage->text = "\nMain Page\n============\n\n$_language[wiki_default_page]\n";
 }else if(ereg('^image_', $wikiPage->title)) {
 	$wikiPage->text = str_replace('image_', '', $wikiPage->title)."\n".str_repeat('=', strlen($wikiPage->title))."\n\n";
 	$image = new AMWikiFile;
@@ -42,12 +45,13 @@ $page->addPageBegin(CMHTMLObj::getScript("var CURRENT_PAGE = '$wikiPage->title'"
  * Action bar
  */
 $page->add('<ul id="jsCrossmark_actionBar">
+	<li><a href="index.php?frm_namespace='.$wikiPage->namespace.'">'.$_language['Main_Pain'].'</a></li>	
 	<li><a href="index.php?frm_namespace='.$wikiPage->namespace.'&frm_title='.$wikiPage->title.'">'.$_language['article'].'</a></li>
-	<li>'.$_language['discusion'].'</li>
+	<!--li>'.$_language['discusion'].'</li-->
 	<li><a href="javascript:void(0);" onclick="javascript:toggleEdit();">'.$_language['edit'].'</a></li>
 	<li><a href="history.php?frm_namespace='.$wikiPage->namespace.'&frm_title='.$wikiPage->title.'">'.$_language['history'].'</a></li>
-	<li>'.$_language['move'].'</li>
-	<li>'.$_language['watch'].'</li>
+	<!--li>'.$_language['move'].'</li-->
+	<!--li>'.$_language['watch'].'</li-->
 </ul>');
 
 $page->add('<div id="preview_result"></div>');

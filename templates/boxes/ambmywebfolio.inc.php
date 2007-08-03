@@ -37,6 +37,7 @@ class AMBMyWebfolio extends AMColorBox implements CMActionListener {
 		
   		parent::add('<br /><br />');
   		parent::add(self::getMessageButton($urlviewmsg));
+  		parent::add(self::getWikiButton($_SESSION['user']->codeUser));
 
   		parent::add('<br /><br />');
   		parent::add('<span style="font-weight: bold;">'.$_language['other_actions'].':</span><br />');
@@ -178,6 +179,18 @@ class AMBMyWebfolio extends AMColorBox implements CMActionListener {
     			 . '<img src="'.$_CMAPP['images_url'].'/dot.gif" height="25px;" width="10px" alt="" /><br />'
     			 . '<span class="webfolio-items-text"> '.$_language['read_messages'].$txt_link.'</span>'
     			 . '</button>';
+    	return $button;
+  	}
+  	
+  	public static function getWikiButton($user)
+  	{
+    	global $_CMAPP,$_language;
+    
+    	$urlwiki = $_CMAPP['services_url']."/wiki/index.php?frm_namespace=user_".$user;
+    	$button  = "<button id='wiki' class='webfolio-items button-as-link' type='button' onclick=\"AM_openURL('$urlwiki')\">";
+    	$button .= "<img src='$_CMAPP[images_url]/dot.gif' height='25px;'><br />";
+    	$button .= "<span class='webfolio-items-text'>Wiki</span>";
+    	$button .= "</button>";
     	return $button;
   	}
   	

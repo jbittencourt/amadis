@@ -29,7 +29,7 @@
 Depois agente escreve algumas coisas legais sobre o amadis, a medida que
 for avancando, hehehe.
 </div>
-<br>
+<br />
 <div class="portlet-line">
 <div id="orange-line"><img src="media/images/mn_traco_laranja.gif"></div>
 </div>
@@ -39,12 +39,12 @@ for avancando, hehehe.
 
 
 <div id="content" style='min-height: 500px;'>
-<br><h1>Assistente de instala&ccedil;&atilde;o e configura&ccedil;&atilde;o do AMADIS<h1>
+<br /><h1>Assistente de instala&ccedil;&atilde;o e configura&ccedil;&atilde;o do AMADIS<h1>
 {CONTENT}
 </div>
 
 <div id="amadis-footer">
-<br>
+<br />
 <table border="0" cellspacing="0" cellpadding="0" align="left" width="100%">
 <td valign="top" background="media/images/bg_fundo_cinza.gif">&nbsp;</td>
 <td background="media/images/bg_fundo_cinza.gif">&nbsp;</td>

@@ -59,6 +59,6 @@
 #box-error.error .border-bottom { }
 #box-error.error .border-top-left { height: 5px; background: url(../images/box_alert_03/box_alert_es.gif) no-repeat top left; }
 #box-error.error .border-top-right {height: 5px;  background: transparent url(../images/box_alert_03/box_alert_ds.gif) no-repeat top right; }
-#box-error.error .border-bottom-left { height: 5px; background: transparent url(../images/box_alert_03/box_alert_ei.gif) no-repeat bottom left; }
-#box-error.error .border-bottom-right { height: 5px; background: transparent url(../images/../images/box_alert_03/box_alert_di.gif) no-repeat bottom right; }
+#box-error.error .border-bottom-left { background: transparent url(../images/box_alert_03/box_alert_ei.gif) no-repeat bottom left; }
+#box-error.error .border-bottom-right { background: transparent url(../images/../images/box_alert_03/box_alert_di.gif) no-repeat bottom right; }
 #box-error.error .content { height: 50px; }

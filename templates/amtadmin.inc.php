@@ -1,5 +1,4 @@
 <?
-
 /**
  * 
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
@@ -11,18 +10,13 @@
 class AMTAdmin extends AMMain {
   
 
-  function __construct() {
-    global $_CMAPP;
-    parent::__construct("verde");
+  	function __construct() 
+  	{
+  		global $_CMAPP;
+    	parent::__construct();
     
-    $this->setImgId($_CMAPP['imlang_url']."/img_tit_admin.gif");
-    //    $this->requires("admin.css",CMHTMLObj::MEDIA_CSS);
-    $this->requires("admin.js",CMHTMLObj::MEDIA_JS);
-  }
-
-
+    	$this->setImgId($_CMAPP['imlang_url']."/img_tit_admin.gif");
+    	$this->requires("admin.css",CMHTMLObj::MEDIA_CSS);
+    	$this->requires("admin.js",CMHTMLObj::MEDIA_JS);
+  	}
 }
-
-
-
-?>

@@ -6,15 +6,10 @@ $_language = $_CMAPP['i18n']->getTranslationArray("admin");
 
 $pag = new AMTAdmin();
 
-$box = new AMTwoColsLayout;
-
 $box1 = new AMBAdminStates;
 
 $box2 = new AMBAdminCities;
 
-$box->add($box1,AMTwoColsLayout::LEFT);
-$box->add($box2,AMTwoColsLayout::RIGHT);
-
-$pag->add($box);
-
+$pag->add($box1);
+$pag->add($box2);
 echo $pag;

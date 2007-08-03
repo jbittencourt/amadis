@@ -120,3 +120,10 @@ BUTTON#message { background-image: url("../images/icon_message_on.gif"); backgro
 
 BUTTON#message[class~=webfolio-items] { background-image: url("../images/icon_message_off.gif"); background-color: #FFF; }
 BUTTON#message[class~=webfolio-items]:hover { background-image: url("../images/icon_message_on.gif"); background-color: #EFF3FD; }
+
+/*Botao do wiki*/
+/*IE*/
+BUTTON#wiki { width:75px; background-image: url("../images/icon_wiki_on.gif"); background-color: #EFF3FD; }
+
+BUTTON#wiki[class~=webfolio-items] { background-image: url("../images/icon_wiki_off.gif"); background-color: #ffffff; }
+BUTTON#wiki[class~=webfolio-items]:hover { background-image: url("../images/icon_wiki_on.gif"); background-color: #EFF3FD; }

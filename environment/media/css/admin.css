@@ -2,3 +2,33 @@
                       background-color: #FFFCFC;
                       border: 2px #FFDCDF solid;
                       }
+table.admin {
+	width: 100%;
+}
+
+table.admin tr th { background: #CCC; }
+table.admin tr td { border: solid 1px #DDD; }
+
+h3 { 
+	font-weight: bold; 
+	font-size: 130%;
+	margin: 1px; 
+}
+
+.row1 { background: #EEE; }
+.row0 { background: transparent; }
+
+table.admin tr td.edit-area { border: none; }
+
+form input, form select {
+	margin-bottom: 5px;
+	margin-left: 5px;
+}
+
+form input[type=submit] {
+	border: solid #DDD 1px;
+	border-bottom: 2px;
+	border-right: 2px;
+	padding: 1px 5px;
+	background: #DDD;
+}
