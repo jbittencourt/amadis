@@ -94,12 +94,13 @@ class AMTCadBox extends CMHTMLObj {
 
   public function __toString() {
     global $_CMAPP;
-
+	
 	$injection = array(
 		'box_class'=>$this->class,
 		'box_id'=>'cad-box',
 		'cad_box_title'=>'<span class="'.$this->titlecss.'">'. $this->titulo .'</span>',
-		'box_content'=>implode("\n", $this->buffer)
+		'box_content'=>implode("\n", $this->buffer),
+		'box_left_corner_style'=>'background: transparent url(../../media/images/'.$this->image.') no-repeat;'
 	);
     
     
