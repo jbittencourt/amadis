@@ -92,7 +92,7 @@ class AMEnvironment extends CMEnvironment
     {
         $s = new CMSearch('AMProject');
         $s->addSearchFields("AMProject::title","AMProject::description");
-        $s->setSeachString($searchString);
+        $s->setSearchString($searchString);
 
         $q = clone $s;
         $q->setCount();
@@ -201,7 +201,7 @@ class AMEnvironment extends CMEnvironment
     {
         $s = new CMSearch('AMUser');
         $s->addSearchFields("AMUser::name","AMUser::username");
-        $s->setSeachString($searchString);
+        $s->setSearchString($searchString);
 
         $q = clone $s;
         $q->setCount();
@@ -446,7 +446,7 @@ class AMEnvironment extends CMEnvironment
     {
         $s = new CMSearch('AMCommunities');
         $s->addSearchFields("AMCommunities::name","AMCommunities::description");
-        $s->setSeachString($searchString);        
+        $s->setSearchString($searchString);        
 
         $q = clone $s;
         $q->setCount();
