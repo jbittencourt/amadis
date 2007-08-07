@@ -1,7 +1,7 @@
 <!-- BEGIN BOX <?php print $box_id . '-' . $box_class; ?>-->
 <div id="<?php print $box_id; ?>" class="box <?php print $box_class; ?>" <?php print $box_width; ?>>
 	<div class="border-top">
-		<div class="border-top-left">
+		<div class="border-top-left" <?if(isset($box_left_corner_style)) echo 'style="'.$box_left_corner_style.'"'?>>
 			<div class="border-top-right"><?php print $cad_box_title; ?></div>
 		</div>
 	</div>
