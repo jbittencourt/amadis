@@ -74,6 +74,7 @@ acesso_negado = "Acesso negado"
 contact_errors = "Caso persista o erro, entre em contato com o administrador do ambiente."
 
 no_privileges = "Voc&ecirc; n&atilde;o tem privil&eacute;gios"
+error_no_admin_privileges="Voc&ecirc; n&atilde;o possui privil&eacute;gios de administrador"
 
 #Most common actions
 try_again = "Tente novamente"
@@ -203,9 +204,9 @@ frm_re_password="Re-digite a senha:"
 
 frm_name="Digite o seu nome completo:"
 frm_email="Digite o seu e-mail:"
-frm_bithDate="Data de nascimento"
+frm_birthDate="Data de nascimento"
 frm_endereco="Digite o seu endere&ccedil;o residencial:"
-frm_codCidade="Selecione a sua cidade:"
+frm_codeCity="Selecione a sua cidade:"
 frm_cep="Digite o seu CEP:"
 frm_telefone="Digite o seu telefone. Ex:(0xx)-N. Telefone:"
 
@@ -1061,6 +1062,9 @@ view_logs = "Visualizar Logs"
 view_log = "Visualizar Log"
 select = "Selecione"
 
+privs_admin_all="Administra Tudo"
+privs_manage_users="Administra Usu&acute;rios"
+privs_manage_modules="Administra Ferramentas"
 
 [forum]
 frm_title = "T&iacute;tulo do F&oacute;rum"
@@ -1170,5 +1174,5 @@ watch = "Vigiar"
 discusion = "Discus&atilde;o"
 history = "Hist&oacute;ria"
 article = "Artigo"
-Main_Pain = "P&aacute;gina Principal"
+Main_Page = "P&aacute;gina Principal"
 wiki_default_page = "Esta &eacute; uma p&aacute;gina para voc&ecirc; poder organizar o seu projeto ou p&aacute;gina pessoal"
