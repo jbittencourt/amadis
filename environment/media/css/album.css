@@ -1,31 +1,27 @@
 /* CSSs Album */
 
-.album_title {
-                 font-family: Arial, Helvetica, sans-serif;
-                 font-size: 16px;
-                 font-weight: bold;
-                 line-height: 20px;	
-                 color: #5587bb;
-                 }
+.album-title {
+	font-weight: bold;
+	font-size: 135%;
+	line-height: 20px;	
+	color: #5587bb;
+	padding-left: 50px;
+}
 
 .album_table { 
-               border-color: #dde5fd;
-               background-color: #fff;
-               border-style: solid;
-               border-right-width:1px;
-               padding: 6px; 
-               font-family: verdana, Helvetica, sans-serif; 
-               font-size: 11px;
-               color: #000;
-               }
+	border-color: #dde5fd;
+	background-color: #fff;
+	border-style: solid;
+	border-right-width:1px;
+	padding: 6px; 
+	color: #000;
+}
 
 A.album_link { 
-               font-family: Arial, Helvetica, sans-serif;
-               color: #666666;
-               font-size: 11px;
-               line-height: 14px;
-                              
-               }
+	color: #666666;
+	line-height: 14px;
+}
+
 A.album_link:hover{ 
-                    color: #dde5fd;
-                     }
+	color: #dde5fd;
+}

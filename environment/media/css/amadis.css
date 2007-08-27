@@ -716,7 +716,7 @@ a.cinza:hover {
 }
 
 .user-image {
-	background: url(/~robson/amadisphp/media/images/perfil.gif) no-repeat;
+	background: url(../images/perfil.gif) no-repeat;
 	padding: 20px 15px 30px 26px;	
 }
 

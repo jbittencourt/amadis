@@ -76,3 +76,36 @@
 	border-top: none;
 	border-bottom: none; 
 }
+
+/*CADBOX ALBUM*/
+#cad-box.cad-box-album .border-top { background: url(../images/box_cad_album_bgtop.gif) repeat-x top left; }
+#cad-box.cad-box-album .border-top-left { background: url(../images/box_cad_album_01.gif) no-repeat top left; }
+#cad-box.cad-box-album .border-top-right { background: transparent url(../images/box_cad_album_02.gif) no-repeat top right; }
+#cad-box.cad-box-album .border-bottom { background: transparent url(../images/box_cad_album_bgbottom.gif) repeat-x bottom left; }
+#cad-box.cad-box-album .border-bottom-left { background: transparent url(../images/box_cad_album_03.gif) no-repeat bottom left; }
+#cad-box.cad-box-album .border-bottom-right { background: transparent url(../images/../images/box_cad_album_04.gif) no-repeat bottom right; }
+#cad-box.cad-box-album .content { 
+	background-color: #F6F8FF;
+	border: solid #DDE5FD 7px;
+	border-top: none;
+	border-bottom: none; 
+}
+
+/* Cadbox forms */
+#cad_user input {
+	border: solid #666 1px;
+}
+#frm_aboutMe {
+	border: solid #666 1px;
+	margin-bottom: 5px;
+	width: 540px;
+}
+
+#cad_user select {
+	border: solid #666 1px; 
+	margin-right: 5px;
+}
+.cad-user-label {
+	font-weight: bold;
+	padding-bottom: 10px;
+}	
