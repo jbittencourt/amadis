@@ -146,7 +146,7 @@ class AMEnvironment extends CMEnvironment
 
         $q->addJoin($j, "state");
 
-        $q->setOrder("States.name asc");
+        $q->setOrder("Cities.name ASC");
         $q->setDistinct();
 
         return $q->execute();
@@ -678,5 +678,10 @@ class AMEnvironment extends CMEnvironment
     	$ustemp= @unserialize($var);
 		if($ustemp==false) return $var;
 		return $ustemp;
+    }
+    
+    public function spotLigthUsers($username)
+    {
+    	
     }
 }

@@ -32,6 +32,7 @@ class AMFile extends CMObj {
 			parent::load();
 			$_SESSION['amadis']['old_photo_name'] = $this->name;
 		}catch(CMException $e){
+			new AMLog('AMFile : load',$e, AMLog::LOG_CORE);
 			throw $e;
 		}
 		 

@@ -17,8 +17,12 @@ class AMState extends CMObj
 
 	public function listCities() {
 		$q = new CMQuery('AMCity');
-		$q->setFilter(" state='$this->codeState'");
-		return $q->execute();
+		$q->setFilter(" codeState='$this->codeState'");
+		try {
+			return $q->execute();
+		}catch(CMException $e) {
+			die($e->getMessage());
+		}
 	}
 
 
