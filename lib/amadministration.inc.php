@@ -19,7 +19,7 @@ class AMAdministration implements CMACLAppInterface {
 
     	if(empty($_SESSION['AMADIS']['Admin']['group'])) {
             $g = new CMGroup;
-            $g->codeGroup = 30;
+            $g->codeGroup = $_SESSION['config']['admin']['codeGroup'];
             $g->load();
             $_SESSION['AMADIS']['Admin']['group'] = $g;
         }  else {
