@@ -15,7 +15,8 @@ class AMUserList extends AMTCadBox {
 
 
 
-	public function __construct(CMContainer $items,$title,$theme, $type=AMTCadBox::CADBOX_SEARCH) {
+	public function __construct(CMContainer $items,$title,$theme, $type=AMTCadBox::CADBOX_SEARCH) 
+	{
 		global $_language;
 
 		switch($theme) {
@@ -38,7 +39,8 @@ class AMUserList extends AMTCadBox {
 	}
 
 
-	public function __toString() {
+	public function __toString() 
+	{
 		global $_language,$_CMAPP;
 
 		parent::add("<br /><br />");

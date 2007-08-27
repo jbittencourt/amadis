@@ -14,7 +14,7 @@ class AMBAdminUsers extends AMColorBox {
 	public function __toString() {
 		global $_language, $_CMAPP;
 		$conteudo = "";
-		$conteudo .= '<a href="#">'.$_language['edit_groups'].'</a><br />';
+		$conteudo .= '<a href="'.$_CMAPP['services_url'].'/admin/manage_groups.php">'.$_language['edit_groups'].'</a><br />';
 		$conteudo .= "<a href='$_CMAPP[services_url]/admin/editUser.php'>".$_language['edit_people']."</a><br />";
 		//$conteudo .= $_language['edit_group'];
 		parent::add($conteudo);

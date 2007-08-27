@@ -40,7 +40,8 @@ class AMMain extends AMHTMLPage
 
         $this->page->navMenu = new AMNavMenu();
 		
-        $this->requires('prototype.js', CMHTMLObj::MEDIA_JS );        
+        $this->requires('prototype.js', CMHTMLObj::MEDIA_JS );
+        $this->requires('scriptaculous/scriptaculous.js?load=effects', CMHTMLObj::MEDIA_JS );        
         $this->requires("tooltip.css",self::MEDIA_CSS);
         $this->requires("lib.js",self::MEDIA_JS);
         $this->requires("finder.js", self::MEDIA_JS);

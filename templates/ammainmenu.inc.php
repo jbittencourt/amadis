@@ -26,9 +26,12 @@ class AMMainMenu extends CMHtmlObj {
 	    $this->addItem($_CMAPP['services_url'].'/people/people.php', 'people');
 	    $this->addItem($_CMAPP['services_url'].'/communities/communities.php', 'communities');
 
-     	/*if(!empty($_SESSION['user'])) {
-       		$this->addItem($_CMAPP['services_url'].'/admin/admin.php', 'administration');
-     	}*/
+	    $admin = new AMAdministration;
+		$group = $admin->getGroup();
+
+		if($_SESSION['environment']->logged && $group->isMember((integer) $_SESSION['user']->codeUser)) {
+			$this->addItem($_CMAPP['services_url'].'/admin/admin.php', 'administration');	
+		}
  	}
 
 

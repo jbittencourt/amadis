@@ -83,7 +83,7 @@ abstract class  AMImageTemplate extends CMHTMLObj {
     			break;
     		case self::METHOD_DEFAULT:
     			if($this->thumb) $url = $_CMAPP['thumbs_url']. '/' . $this->imageObj;
-    			else $url = $_CMAPP['url'] . '/files/' . $this->imageObj;
+    			else $url = $_CMAPP['images_url'] . '/' . $this->imageObj;
     			break;
   		}
   		return $url;

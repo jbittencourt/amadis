@@ -64,15 +64,18 @@ class AMBMyWebfolio extends AMColorBox implements CMActionListener {
   		if(!empty($_SESSION['user'])) {
   			if(!$_SESSION['user']->isMyFriend($_REQUEST['frm_codeUser'])) {
   				parent::add(self::getAddFriendButton('#'));
-  				$addFriendBox = new AMTShowHide("addFriend", "&raquo; $_language[add_friend]", AMTShowHide::HIDE);
-  				$addFriendBox->add("<form method='post' action='$_SERVER[PHP_SELF]' name='add_friend'>");
-  				$addFriendBox->add("<font class=texto>$_language[send_a_comment]</font><br />");
-  				$addFriendBox->add("<textarea cols=27 rows=5 name='frm_comentary'></textarea><br />");
-  				$addFriendBox->add("<input type='hidden' name='frm_codeUser' value='$_REQUEST[frm_codeUser]'>");
-  				$addFriendBox->add("<input type='hidden' name='action' value='A_make_friend'>");
-  				$addFriendBox->add("<input type=submit value='$_language[send]'>");
-  				$addFriendBox->add("</form>");
-  				//parent::add($addFriendBox);
+  				
+  				$box = new AMColorBox($_languge['add_friend'], AMColorBox::COLOR_BOX_YELLOWB);
+  				$box->add("<form method='post' action='$_SERVER[PHP_SELF]' name='add_friend'>");
+  				$box->add("<font class=texto>$_language[send_a_comment]</font><br />");
+  				$box->add("<textarea cols=27 rows=5 name='frm_comentary'></textarea><br />");
+  				$box->add("<input type='hidden' name='frm_codeUser' value='$_REQUEST[frm_codeUser]'>");
+  				$box->add("<input type='hidden' name='action' value='A_make_friend'>");
+  				$box->add("<input type=submit value='$_language[send]'>");
+  				$box->add("</form>");
+  				parent::add('<div id="addFriend" style="display:none;">');
+  				parent::add($box);
+  				parent::add("</div>");
   			}
 
   			$sendMessageBox = new AMTShowHide("sendMessage", "&raquo; $_language[send_a_message]", AMTShowHide::HIDE);
@@ -134,7 +137,7 @@ class AMBMyWebfolio extends AMColorBox implements CMActionListener {
   	{
     	global $_CMAPP,$_language;
 
-    	$button  = '<button id="friend" class="webfolio-items button-as-link" type="button" onclick="AM_openURL(\''.$url.'\')">'
+    	$button  = '<button id="friend" class="webfolio-items button-as-link" type="button" onclick="$(\'addFriend\').toggle();">'
     			 . '<img src="'.$_CMAPP['images_url'].'/dot.gif" height="25px;" width="10px" alt="" /><br />'
     			 . '<span class="webfolio-items-text"> '.$_language['friend'].'</span>'
     			 . '</button>';

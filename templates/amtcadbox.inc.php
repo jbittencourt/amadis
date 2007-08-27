@@ -73,7 +73,7 @@ class AMTCadBox extends CMHTMLObj {
       $this->class = 'cad-box-diary';
       break;
     case AMTCadBox::ALBUM_THEME:
-      $this->titlecss = "album_title";
+      $this->titlecss = "album-title";
       $this->theme = "box_cad_album";
       $this->image = "box_cad_album_01$image.gif";
       $this->class = 'cad-box-album';

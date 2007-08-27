@@ -37,7 +37,7 @@ class AMBAdminCities extends AMSimpleBox implements CMActionListener {
 				$city->codeCity = $_REQUEST['idCidade'];
 				$city->load();
 				$city->name = $_REQUEST['nomCidade1'];
-				$city->state =  $_REQUEST['codEstado1'];
+				$city->countryState =  $_REQUEST['codEstado1'];
 				try{
 					$city->save();
 				}catch(CMException $e){
@@ -45,15 +45,18 @@ class AMBAdminCities extends AMSimpleBox implements CMActionListener {
 				break;
 
 			case "addCity":
+			
 				$city->name = $_REQUEST['nomCidade'];
-				$city->state =  $_REQUEST['codEstado'];
+				$city->codeState = $_REQUEST['codEstado'];
 				$city->time = time();
 				try{
 					$city->save();
 				}catch(CMException $e){
+					new AMLog('AMBAdminCities addCity', $e, AMLog::LOG_CORE);
 				}
+				
 				break;
-
+			
 		}
 	}
 
@@ -66,7 +69,7 @@ class AMBAdminCities extends AMSimpleBox implements CMActionListener {
 		
 		parent::add('<table class="admin">');
 		
-		parent::add('<tr><th>'.$_language['state'].'</th>');
+		parent::add('<tr><th>'.$_language['city_name'].'</th>');
 		parent::add('<th>'.$_language['actions'].'</th></tr>');
 		$est = new AMState;
 		$q = new CMQuery('AMState');
@@ -85,14 +88,15 @@ class AMBAdminCities extends AMSimpleBox implements CMActionListener {
 				$conteudo .= '<td>'.$item->name.'</td>';
 				$conteudo .= '<td>( <a href="#" onClick="$(\'hideShow'.$i.'\').toggle();">'.$_language['edit'].'</a> | ';
 				$conteudo .= '<a href="?action=deleteCity&idCidade='.$item->codeCity.'">'.$_language['delete'].'</a> )</td></tr>';
-				$conteudo .= '<tr><td colspan="2" class="edit-area"><span id="hideShow'.$i++.'" style="display:none"><form action="?action=editCity" method="post">';
+				$conteudo .= '<tr><td colspan="2" class="edit-area"><span id="hideShow'.$i++.'" style="display:none">';
+				$conteudo .= '<form action="?action=editCity" method="post">';
 				$conteudo .= '<input type="text" value="'.$item->name.'" name="nomCidade1"><br />';
 				$conteudo .= '<select name="codEstado1">';
 				$ee = new AMState;
 				$he = $ee->listStates();
 
 				foreach($he as $items){
-					if($items->codeState == $item->state){
+					if($items->codeState == $item->codeState){
 						$conteudo .= "<option value='$items->codeState' selected>$items->name</option>";
 					}
 					else{
