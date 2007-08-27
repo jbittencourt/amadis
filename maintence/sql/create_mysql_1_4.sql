@@ -959,13 +959,23 @@ ALTER TABLE `WikiRevision`
 -- 
 -- Table structure for table `WikiText`
 -- 
-
 CREATE TABLE `WikiFile` (
   `revision` bigint(20) NOT NULL,
   `file` bigint(20) NOT NULL,
   PRIMARY KEY  (`revision`, `file`)
 )
 ENGINE=InnoDB
+CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+--
+-- Table structure for table `ModulesConfiguration`
+--
+CREATE TABLE `ModulesConfiguration` (
+  `module` tinytext NOT NULL,
+  `property` tinytext NOT NULL,
+  `value` tinytext NOT NULL
+) 
+ENGINE=InnoDB 
 CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 -- ------------------------------------
@@ -984,6 +994,35 @@ INSERT INTO `Areas` (`codeArea`, `name`) VALUES (1, 'Ciências'),
 (6, 'Literatura'),(7, 'Educação Física'),(8, 'Geografia'),
 (9, 'Química'),(10, 'Língua Estrangeira'),(12, 'Música'),
 (13, 'Filosofia'),(14, 'Educação Infantil'),(15, 'Artes');
+
+INSERT INTO `ModulesConfiguration` (`module`, `property`, `value`) 
+VALUES ('admin', 'codeGroup', '1'), 
+('webfolio', 'richTextAboutMe', 'TRUE'),
+('webfolio', 'emailRequired', 'TRUE');
+
+--
+-- Setting up the administration user in the database
+--
+INSERT INTO `User` (`codeUser`, `username`, `time`, `name`, `password`, `active`, `email`, `address`, `codeCity`, `cep`, `url`, `birthDate`, `aboutMe`, `picture`) 
+VALUES 
+(1, 'admin', '' , 'Administrator User', SELECT MD5('admin#2007'), '1', 'robson@lec.ufrgs.br', '', 1, '', '', '', 'I\'m the law!', 1);
+
+
+INSERT INTO `ACO` (`code`, `description`, `time`) 
+VALUES 
+(1, 'ADMINISTRATION ', 1187103195);
+
+INSERT INTO `ACLUser` (`codeACO`, `codeUser`, `privilege`) 
+VALUES 
+(1, 1, 'admin_all');
+
+INSERT INTO `Groups` (`codeGroup`, `description`, `managed`, `time`) 
+VALUES 
+(1, 'Administration', 'MANAGED', 1187103195);
+
+INSERT INTO `GroupMember` (`codeGroup`, `codeUser`, `status`, `time`) 
+VALUES 
+(1, 1, 'ACTIVE', 1187103195);
 
 -- ----------------------------------------------------------------------
 -- EOF
