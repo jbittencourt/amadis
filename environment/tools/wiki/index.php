@@ -45,7 +45,7 @@ $page->addPageBegin(CMHTMLObj::getScript("var CURRENT_PAGE = '$wikiPage->title'"
  * Action bar
  */
 $page->add('<ul id="jsCrossmark_actionBar">
-	<li><a href="index.php?frm_namespace='.$wikiPage->namespace.'">'.$_language['Main_Pain'].'</a></li>	
+	<li><a href="index.php?frm_namespace='.$wikiPage->namespace.'">'.$_language['Main_Page'].'</a></li>	
 	<li><a href="index.php?frm_namespace='.$wikiPage->namespace.'&frm_title='.$wikiPage->title.'">'.$_language['article'].'</a></li>
 	<!--li>'.$_language['discusion'].'</li-->
 	<li><a href="javascript:void(0);" onclick="javascript:toggleEdit();">'.$_language['edit'].'</a></li>

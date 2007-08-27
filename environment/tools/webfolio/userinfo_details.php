@@ -66,7 +66,9 @@ try{
 
 
 $foto = AMUserPicture::getImage($user);
-$box->add(new AMTUserImage($foto),AMTwoColsLayout::LEFT);
+if($foto == AMUserPicture::DEFAULT_IMAGE) {
+	$box->add(new AMTUserImage(AMUserPicture::DEFAULT_IMAGE, AMImageTemplate::METHOD_DEFAULT), AMTwoColsLayout::LEFT);
+} else $box->add(new AMTUserImage($foto),AMTwoColsLayout::LEFT);
 
 $box->add("<p><span class=\"texto\"><b>".$user->name."<br />".date($_language['date_format'],(integer) $user->birthDate)."</b>", AMTwoColsLayout::LEFT);
 

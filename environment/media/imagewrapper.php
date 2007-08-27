@@ -41,9 +41,12 @@ switch($_REQUEST['method']) {
  	$imagem->codeFile = (integer) $_REQUEST['frm_codeFile'];
  	Try {
  		$imagem->load();
- 	}catch(Exception $e) {
+ 	}catch(CMDBNoRecord $e) {
+
  		//tests if a debug var is set in the request, if not, send an error image, otherwise print the exception.
 		new AMErrorReport($e, 'IMAGEWRAPPER::'.$_REQUEST['method'], AMLog::LOG_CORE );
+		AMLog::commit();
+		
 		error();
  	}
  	break;

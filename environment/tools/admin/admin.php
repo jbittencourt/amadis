@@ -4,6 +4,13 @@ include_once("../../config.inc.php");
 
 $_language = $_CMAPP[i18n]->getTranslationArray("admin");
 
+$admin = new AMAdministration;
+$group = $admin->getGroup();
+
+if(!$group->isMember((integer) $_SESSION['user']->codeUser)) {
+	header('Location: ../webfolio/webfolio.php?frm_ammsg=no_admin_privilegies');	
+}
+
 $pag = new AMTAdmin();
 
 $box = new AMTwoColsLayout;

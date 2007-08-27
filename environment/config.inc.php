@@ -109,7 +109,7 @@ if($_conf->app->languages->active == 1) {
 //para suportar imagens em varias linguas
 $_CMAPP['imlang_url'] = $_CMAPP['images_url']."/".$_CMAPP['i18n']->getActualLang();
 
-//colocar o login aqui, servir� para que mais tarde o logon possa ocorrer em qualquer p�gina.
+//colocar o login aqui, servira para que mais tarde o logon possa ocorrer em qualquer pagina.
 if(isset($_REQUEST['login_action'])) {
 	switch($_REQUEST['login_action']) {
 		case "A_login":
@@ -136,11 +136,8 @@ if(isset($_REQUEST['login_action'])) {
 
 if($_SESSION['environment']->logged) {
 	$_SESSION['session']->update();
-}
-else {
-	if($_CMAPP['notrestricted']==false) {
-		Header("Location: ".$_CMAPP['url']."/index.php?frm_amerror=session_timeout");
-	}
+} elseif($_CMAPP['notrestricted']==false) {
+	Header("Location: ".$_CMAPP['url']."/index.php?frm_amerror=session_timeout");
 }
 
 if(!ereg("(index|register|recoverpassword|loginfailure)",basename($_SERVER['SCRIPT_FILENAME']))) {
@@ -163,5 +160,10 @@ if(isset($arr[3])) {
 	$_CMAPP['amadis_where_am_i'] = '';
 }
 
-
-
+/**
+ * Load the configuration of the database
+ */
+$_mConfig = new AMModulesConfiguration;
+if(!isset($_SESSION['config'])) {
+	$_mConfig->loadConfig();
+}
