@@ -1,6 +1,6 @@
 ALTER TABLE `Cities` CHANGE `state` `codeState` INT( 11 ) NOT NULL DEFAULT '0'
 
-CREATE TABLE `ModulesConfiguration` (
+CREATE TABLE ModulesConfiguration (
   `module` tinytext NOT NULL,
   `property` tinytext NOT NULL,
   `value` tinytext NOT NULL

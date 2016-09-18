@@ -951,10 +951,10 @@ CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 SET FOREIGN_KEY_CHECKS = 1;
 
-ALTER TABLE `WikiRevision`
-  ADD CONSTRAINT `WikiRevision_ibfk_5` FOREIGN KEY (`page`) REFERENCES `WikiPage` (`codePage`),
-  ADD CONSTRAINT `WikiRevision_ibfk_6` FOREIGN KEY (`text`) REFERENCES `WikiText` (`codeText`),
-  ADD CONSTRAINT `WikiRevision_ibfk_7` FOREIGN KEY (`user`) REFERENCES `User` (`codeUser`);
+-- ALTER TABLE `WikiRevision`
+--  ADD CONSTRAINT `WikiRevision_ibfk_5` FOREIGN KEY (`page`) REFERENCES `WikiPage` (`codePage`),
+--  ADD CONSTRAINT `WikiRevision_ibfk_6` FOREIGN KEY (`text`) REFERENCES `WikiText` (`codeText`),
+--  ADD CONSTRAINT `WikiRevision_ibfk_7` FOREIGN KEY (`user`) REFERENCES `User` (`codeUser`);
 
 -- 
 -- Table structure for table `WikiText`
@@ -1000,12 +1000,31 @@ VALUES ('admin', 'codeGroup', '1'),
 ('webfolio', 'richTextAboutMe', 'TRUE'),
 ('webfolio', 'emailRequired', 'TRUE');
 
+
+
+INSERT INTO  `amadis`.`Files` (
+`codeFile` ,
+`mimeType` ,
+`size` ,
+`name` ,
+`metadata` ,
+`time`,
+`data`
+)
+VALUES (
+'1',  '',  '0',  'AdminPicture.png',  '',  '0',''
+);
+
+
+
+
+
 --
 -- Setting up the administration user in the database
 --
 INSERT INTO `User` (`codeUser`, `username`, `time`, `name`, `password`, `active`, `email`, `address`, `codeCity`, `cep`, `url`, `birthDate`, `aboutMe`, `picture`) 
 VALUES 
-(1, 'admin', '' , 'Administrator User', SELECT MD5('admin#2007'), '1', 'robson@lec.ufrgs.br', '', 1, '', '', '', 'I\'m the law!', 1);
+(1, 'admin', '' , 'Administrator User', '154ca39e6f9e5f97afadc06b6ce7de67', '1', 'juliano@hardfunstudios.com', '', 1, '', '', '', '', 1);
 
 
 INSERT INTO `ACO` (`code`, `description`, `time`) 

@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL & ~ E_NOTICE & ~ E_STRICT & ~ E_DEPRECATED);
+
 /**
  * Discover the root of the application
  **/
@@ -48,10 +50,10 @@ set_exception_handler('exception_handler');
 $_CMAPP['services_path'] = $_CMAPP['path']."/environment/tools";
 
 include($_CMDEVEL['path']."/cmdevel.inc.php");
-include("cmpersistence.inc.php");
-include("cmapp.inc.php");
-include("cminterface.inc.php");
-include("cmwebservice/cmwsmartform.inc.php");
+include($_CMDEVEL['path']."/cmpersistence.inc.php");
+include($_CMDEVEL['path']."/cmapp.inc.php");
+include($_CMDEVEL['path']."/cminterface.inc.php");
+include($_CMDEVEL['path']."/cmwebservice/cmwsmartform.inc.php");
 //load the exception file, that contation many exceptions, so
 //the classes can't be resolved by the classloader(__autoload)
 include($_CMAPP['path']."/lib/exceptions/amexceptions.inc.php");
@@ -114,7 +116,7 @@ if(isset($_REQUEST['login_action'])) {
 	switch($_REQUEST['login_action']) {
 		case "A_login":
 			try {
-				$_SESSION['environment']->login($_REQUEST['frm_username'],$_REQUEST['frm_password']);
+                                $_SESSION['environment']->login($_REQUEST['frm_username'],$_REQUEST['frm_password']);
 			}
 			catch(CMLoginFailure $e) {
 				$file = basename($_SERVER['SCRIPT_FILENAME']);
@@ -124,6 +126,7 @@ if(isset($_REQUEST['login_action'])) {
 				Header("Location: ".$_CMAPP['url']."/loginfailure.php?frm_amerror=invalid_login");
 				die();
 			}
+                        catch(CMDBNoRecord $e) {};
 
 			break;
 
