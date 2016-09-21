@@ -27,36 +27,36 @@ var encoding = "iso-8859-1";
 function initRTE(imgPath, incPath, css, genXHTML) {
   //set browser vars
   var ua = navigator.userAgent.toLowerCase();
-  isIE = ((ua.indexOf("msie") != -1) && (ua.indexOf("opera") == -1) && (ua.indexOf("webtv") == -1)); 
+  isIE = ((ua.indexOf("msie") != -1) && (ua.indexOf("opera") == -1) && (ua.indexOf("webtv") == -1));
   isGecko = (ua.indexOf("gecko") != -1);
   isSafari = (ua.indexOf("safari") != -1);
   isKonqueror = (ua.indexOf("konqueror") != -1);
-	
+
   generateXHTML = genXHTML;
-	
+
   //check to see if designMode mode is available
   //Safari/Konqueror think they are designMode capable even though they are not
-  if (document.getElementById && document.designMode && !isSafari && !isKonqueror) {
-    isRichText = true;
-  }
-	
+  //if (document.getElementById && document.designMode && !isSafari && !isKonqueror) {
+  //  isRichText = true;
+  //}
+  isRichText = true;
+
   if (isIE) {
     document.onmouseover = raiseButton;
     document.onmouseout  = normalButton;
     document.onmousedown = lowerButton;
     document.onmouseup   = raiseButton;
   }
-	
+
   //set paths vars
   imagesPath = imgPath;
   includesPath = incPath;
   cssFile = css;
-	
+
   if (isRichText) document.writeln('<style type="text/css">@import "' + includesPath + 'rte.css";</style>');
-	
+
   //for testing standard textarea, uncomment the following line
   //isRichText = false;
-
 
 }
 
@@ -64,9 +64,9 @@ function writeRichText(rte, html, width, height, buttons, readOnly) {
   if (isRichText) {
     if (allRTEs.length > 0) allRTEs += ";";
     allRTEs += rte;
-		
+
     if (readOnly) buttons = false;
-		
+
     //adjust minimum table widths
     if (isIE) {
       if (buttons && (width < 540)) width = 540;
@@ -75,7 +75,7 @@ function writeRichText(rte, html, width, height, buttons, readOnly) {
       if (buttons && (width < 540)) width = 540;
       var tablewidth = width + 4;
     }
-		
+
     document.writeln('<div class="rteDiv">');
     if (buttons == true) {
       document.writeln('<table class="rteBack" cellpadding=2 cellspacing=0 id="Buttons1_' + rte + '" width="' + tablewidth + '">');
@@ -157,7 +157,7 @@ function writeRichText(rte, html, width, height, buttons, readOnly) {
     if (!readOnly) document.writeln('<br /><input type="checkbox" id="chkSrc' + rte + '" onclick="toggleHTMLSrc(\'' + rte + '\',' + buttons + ');" />&nbsp;<label for="chkSrc' + rte + '">View Source</label>');
     document.writeln('<input type="hidden" id="hdn' + rte + '" name="' + rte + '" value="">');
     document.writeln('</div>');
-		
+
     document.getElementById('hdn' + rte).value = html;
     enableDesignMode(rte, html, readOnly);
   } else {
@@ -170,7 +170,7 @@ function writeRichText(rte, html, width, height, buttons, readOnly) {
 }
 
 
-function initPalleteDlg(rte) { 
+function initPalleteDlg(rte) {
   document.writeln('<iframe width="154" height="104" id="cp' + rte + '" style="position:absolute; visibility:hidden;" src="' + includesPath + 'palette.htm" marginwidth="0" marginheight="0" scrolling="no"></iframe>');
 }
 
@@ -194,7 +194,7 @@ function getFrameHTML(rte,innerHtml) {
   frameHtml += innerHtml + "\n";
   frameHtml += "</body>\n";
   frameHtml += "</html>";
-  
+
   return frameHtml;
 }
 
@@ -246,8 +246,8 @@ function initDesignMode(rte,readOnly) {
 
 
 function updateRTE(rte) {
-  if (!isRichText) return;
-	
+  if (!isRichText) return true;
+
   //check for readOnly mode
   var readOnly = false;
   if (document.all) {
@@ -255,7 +255,7 @@ function updateRTE(rte) {
   } else {
     if (document.getElementById(rte).contentDocument.designMode != "on") readOnly = true;
   }
-	
+
   if (isRichText && !readOnly) {
     //if viewing source, switch back to design view
     if (document.getElementById("chkSrc" + rte).checked) document.getElementById("chkSrc" + rte).click();
@@ -268,7 +268,7 @@ function updateRTE(rte) {
 function setHiddenVal(rte) {
   //set hidden form field value for current rte
   var oHdnField = document.getElementById('hdn' + rte);
-	
+
   //convert html output to xhtml (thanks Timothy Bell and Vyacheslav Smolin!)
   if (oHdnField.value == null) oHdnField.value = "";
   if (document.all) {
@@ -284,7 +284,7 @@ function setHiddenVal(rte) {
       oHdnField.value = document.getElementById(rte).contentWindow.document.body.innerHTML;
     }
   }
-	
+
   //if there is no content (other than formatting) set value to nothing
   if (stripHTML(oHdnField.value.replace("&nbsp;", " ")) == "" &&
       oHdnField.value.toLowerCase().search("<hr") == -1 &&
@@ -306,7 +306,7 @@ function rteCommand(rte, command, option) {
   } else {
     oRTE = document.getElementById(rte).contentWindow;
   }
-	
+
   try {
     oRTE.focus();
     oRTE.document.execCommand(command, false, option);
@@ -320,7 +320,7 @@ function rteCommand(rte, command, option) {
 function toggleHTMLSrc(rte, buttons) {
   //contributed by Bob Hutzel (thanks Bob!)
   var oHdnField = document.getElementById('hdn' + rte);
-	
+
   if (document.getElementById("chkSrc" + rte).checked) {
     //we are checking the box
     if (buttons) {
@@ -358,11 +358,11 @@ function toggleHTMLSrc(rte, buttons) {
 }
 
 function dlgColorPalette(evt,rte, command) {
-  
+
 
   //function to display or hide color palettes
   setRange(rte);
-	
+
   //get dialog position
   var oDialog = document.getElementById('cp' + rte);
   var buttonElement = document.getElementById(command + '_' + rte);
@@ -372,7 +372,7 @@ function dlgColorPalette(evt,rte, command) {
 
   oDialog.style.left = (iLeftPos) + "px";
   oDialog.style.top = (iTopPos) + "px";
-	
+
   if ((command == parent.command) && (rte == currentRTE)) {
     //if current command dialog is currently open, close it
     if (oDialog.style.visibility == "hidden") {
@@ -388,7 +388,7 @@ function dlgColorPalette(evt,rte, command) {
     }
     showHideElement(oDialog, 'show');
   }
-	
+
   //save current values
   parent.command = command;
   currentRTE = rte;
@@ -408,7 +408,7 @@ function dlgInsertLink(rte, command) {
   parent.command = command;
   currentRTE = rte;
   InsertLink = popUpWin(includesPath + 'insert_link.htm', 'InsertLink', 360, 180, '');
-	
+
   //get currently highlighted text and set link text value
   setRange(rte);
   var linkText = '';
@@ -442,14 +442,14 @@ function setColor(color) {
   //function to set color
   var rte = currentRTE;
   var parentCommand = parent.command;
-	
+
   if (document.all) {
     if (parentCommand == "hilitecolor") parentCommand = "backcolor";
-		
+
     //retrieve selected range
     rng.select();
   }
-	
+
   rteCommand(rte, parentCommand, color);
   showHideElement('cp' + rte, "hide");
 }
@@ -475,13 +475,13 @@ function addImage(rte) {
 function getOffsetTop(elm) {
   var mOffsetTop = elm.offsetTop;
   var mOffsetParent = elm.offsetParent;
-	
+
   while(1) {
     mOffsetTop += mOffsetParent.offsetTop;
     mOffsetParent = mOffsetParent.offsetParent;
     if (mOffsetParent==document.body) break;
   }
-	
+
   return mOffsetTop;
 }
 
@@ -491,7 +491,7 @@ function getOffsetLeft(elm) {
   var mOffsetLeft = elm.offsetLeft;
   var mOffsetParent = elm.offsetParent;
   var parents_up = 2;
-	
+
   while(1) {
     mOffsetLeft += mOffsetParent.offsetLeft;
     mOffsetParent = mOffsetParent.offsetParent;
@@ -515,14 +515,14 @@ function selectFont(rte, selectname) {
 function insertHTML(html) {
   //function to add HTML -- thanks dannyuk1982
   var rte = currentRTE;
-	
+
   var oRTE;
   if (document.all) {
     oRTE = frames[rte];
   } else {
     oRTE = document.getElementById(rte).contentWindow;
   }
-	
+
   oRTE.focus();
   if (document.all) {
     var oRng = oRTE.document.selection.createRange();
@@ -540,7 +540,7 @@ function showHideElement(element, showHide) {
   if (document.getElementById(element)) {
     element = document.getElementById(element);
   }
-	
+
   if (showHide == "show") {
     element.style.visibility = "visible";
   } else if (showHide == "hide") {
@@ -553,7 +553,7 @@ function setRange(rte) {
   var oRTE;
   if (document.all) {
     oRTE = frames[rte];
-    var selection = oRTE.document.selection; 
+    var selection = oRTE.document.selection;
     if (selection != null) rng = selection.createRange();
   } else {
     oRTE = document.getElementById(rte).contentWindow;
@@ -566,15 +566,15 @@ function setRange(rte) {
 function stripHTML(oldString) {
   //function to strip all html
   var newString = oldString.replace(/(<([^>]+)>)/ig,"");
-	
+
   //replace carriage returns and line feeds
   newString = newString.replace(/\r\n/g," ");
   newString = newString.replace(/\n/g," ");
   newString = newString.replace(/\r/g," ");
-	
+
   //trim string
   newString = trim(newString);
-	
+
   return newString;
 }
 
@@ -585,18 +585,18 @@ function trim(inputString) {
   if (typeof inputString != "string") return inputString;
   var retValue = inputString;
   var ch = retValue.substring(0, 1);
-	
+
   while (ch == " ") { // Check for spaces at the beginning of the string
     retValue = retValue.substring(1, retValue.length);
     ch = retValue.substring(0, 1);
   }
   ch = retValue.substring(retValue.length - 1, retValue.length);
-	
+
   while (ch == " ") { // Check for spaces at the end of the string
     retValue = retValue.substring(0, retValue.length - 1);
     ch = retValue.substring(retValue.length - 1, retValue.length);
   }
-	
+
   // Note that there are two spaces in the string - look for multiple spaces within the string
   while (retValue.indexOf("  ") != -1) {
     // Again, there are two spaces in each of the strings
@@ -612,7 +612,7 @@ function geckoKeyPress(evt) {
   //function to add bold, italic, and underline shortcut commands to gecko RTEs
   //contributed by Anti Veeranna (thanks Anti!)
   var rte = evt.target.id;
-	
+
   if (evt.ctrlKey) {
     var key = String.fromCharCode(evt.charCode).toLowerCase();
     var cmd = '';
@@ -624,7 +624,7 @@ function geckoKeyPress(evt) {
 
     if (cmd) {
       rteCommand(rte, cmd, null);
-			
+
       // stop the event bubble
       evt.preventDefault();
       evt.stopPropagation();
@@ -638,14 +638,14 @@ function geckoKeyPress(evt) {
 function ieKeyPress(evt, rte) {
   var key = (evt.which || evt.charCode || evt.keyCode);
   var stringKey = String.fromCharCode(key).toLowerCase();
-	
+
   //the following breaks list and indentation functionality in IE (don't use)
   //	switch (key) {
   //		case 13:
   //			//insert <br /> tag instead of <p>
   //			//change the key pressed to null
   //			evt.keyCode = 0;
-  //			
+  //
   //			//insert <br /> tag
   //			currentRTE = rte;
   //			insertHTML('<br />');
@@ -671,7 +671,7 @@ function checkspell() {
 
 function raiseButton(e) {
   var el = window.event.srcElement;
-	
+
   className = el.className;
   if (className == 'rteImage' || className == 'rteImageLowered') {
     el.className = 'rteImageRaised';
@@ -680,7 +680,7 @@ function raiseButton(e) {
 
 function normalButton(e) {
   var el = window.event.srcElement;
-	
+
   className = el.className;
   if (className == 'rteImageRaised' || className == 'rteImageLowered') {
     el.className = 'rteImage';
@@ -689,10 +689,9 @@ function normalButton(e) {
 
 function lowerButton(e) {
   var el = window.event.srcElement;
-	
+
   className = el.className;
   if (className == 'rteImage' || className == 'rteImageRaised') {
     el.className = 'rteImageLowered';
   }
 }
-
