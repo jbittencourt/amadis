@@ -25,7 +25,7 @@ class AMWRichTextArea extends CMWFormEl {
   }
 
 
-  function safeContent() {    
+  function safeContent() {
     //returns safe code for preloading in the RTE
     $tmpString = $this->prop['value'];
 

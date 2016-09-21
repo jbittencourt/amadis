@@ -11,7 +11,7 @@
  * @version 1.0
  * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
  */
-@require_once('Calendar/Month/Weekdays.php');
+require_once('Calendar/Month/Weekdays.php');
 
 class AMTCalendar extends CMHTMLObj {
 
@@ -57,7 +57,7 @@ class AMTCalendar extends CMHTMLObj {
 
 
     }
-    
+
     public function setMoveLink($url) {
 
     //calcute the next an the previus month;
@@ -135,7 +135,7 @@ class AMTCalendar extends CMHTMLObj {
             if(($int_day==$today_day) && ($this->month==$today_month) && ($this->year==$today_year)) {
                 $class .= " today";
             }
-            
+
             if ($Day->isFirst()) {
                 parent::add("<span class='firstday $class'>");
             }

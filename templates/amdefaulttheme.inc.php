@@ -12,7 +12,7 @@
  * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
  * @see AMNavMenu
  **/
-class AMDefaultTheme extends AMHTMLPage 
+class AMDefaultTheme extends AMHTMLPage
 {
 
 	public $mainMenu;
@@ -20,49 +20,50 @@ class AMDefaultTheme extends AMHTMLPage
 	public $sectionTitle;
 	protected $notices = array();
 	public $section;
-	
-    function __construct($theme="") 
+	public $notifications;
+
+    function __construct($theme="")
     {
         global $_CMAPP;
         parent::__construct();
     }
 
-    function add($line) 
+    function add($line)
     {
         $this->contents[] = $line;
     }
 
 
-    function setImgId($img) 
+    function setImgId($img)
     {
         $this->imgid = $img;
     }
-    
-    function setLeftMargin($w) 
+
+    function setLeftMargin($w)
     {
         $this->leftMargin = $w;
     }
 
-    public function getNotifications() 
+    public function getNotifications()
     {
         return $this->notifications;
     }
-    
+
     public function addNotices($notices)
     {
     	$this->notices[] = implode("\n", $notices);
     }
-    
-    public function __toString() 
+
+    public function __toString()
     {
         global $_CMAPP,$_language;
 
 
-    /** 
-     * Flush the communicators handlers
-     **/
+		    /**
+		     * Flush the communicators handlers
+		     **/
 
-        if(!empty($_SESSION['communicator'])) 
+        if(!empty($_SESSION['communicator']))
         {
             $this->requires("communicator.php?client");
         }
@@ -89,7 +90,7 @@ class AMDefaultTheme extends AMHTMLPage
 
         $this->force_newline=0;
         $main_content = array();
-		
+
         if(!empty($this->imgid)) {
             $section_title = '<h1 class="section-title"><img src="'.$this->imgid.'" alt="" /><span class="section-'.$this->section.'">'.$this->sectionTitle.'</span></h1>';
         } else {
@@ -97,19 +98,21 @@ class AMDefaultTheme extends AMHTMLPage
         }
 
         $section_title .= '<div id="dashed-line"></div>';
-        
+
         if(!empty($this->pathindicator)) {
             $main_content[] = $this->pathindicator->__toString();
         }
 
+
         if(!empty($this->contents)) {
         	foreach($this->contents as $item) {
-				if($item instanceof CMHTMLOBJ) {
-					$main_content[] = $item->__toString();
-				} else $main_content[] = $item;
-			}
+							if($item instanceof CMHTMLOBJ) {
+								  //echo "Redering class: ".get_class($item)." </br>";
+									$main_content[] = $item->__toString();
+							} else $main_content[] = $item;
+						}
         }
-        
+
         $injection = array(
         	'main_menu'=>$this->mainMenu->__toString(),
         	'side_bar'=>$this->navMenu->__toString(),
@@ -117,13 +120,16 @@ class AMDefaultTheme extends AMHTMLPage
         	'notices'=>implode("\n", $this->notices),
         	'main_content'=>implode("\n", $main_content)
         );
-        
+
+
         parent::add(self::loadView($injection, 'default_theme'));
-        
+
+
         $html = parent::__toString();
-        $html = "  "; //fix error bellow footer 
+        $html = "  "; //fix error bellow footer
+
         AMLog::commit();
-        
+
         return $html;
      }
 }

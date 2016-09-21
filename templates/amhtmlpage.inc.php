@@ -12,12 +12,12 @@
  */
 class AMHTMLPage extends CMHTMLPage {
 
- 	public function __construct() 
+ 	public function __construct()
  	{
     	parent::__construct("AMADISPage");
     	$this->requires("amadis.css",self::MEDIA_CSS);
 	}
-	
+
 	/**
 	 * Load a simple visualization, and inject variables
 	 *
@@ -29,16 +29,16 @@ class AMHTMLPage extends CMHTMLPage {
 	public static function loadView($vars, $view, $location='core_templates')
 	{
 		global $_CMAPP, $_language;
-		
+
 		//start buffer
 		ob_start();
-		
+
 		if(is_array($vars)) {
 			foreach($vars as $var=>$value) {
 				$$var = $value;
 			}
 		}
-		
+
 		$path = $_CMAPP['path'].'/templates/'.$location;
 		$ext = pathinfo($view, PATHINFO_EXTENSION);
 		$file = ($ext == '') ? $view.'.phtml' : $view;
@@ -53,7 +53,7 @@ class AMHTMLPage extends CMHTMLPage {
 		}
 
 		$contents = ob_get_contents();
-		
+
 		//Clean and return
 		ob_end_clean();
 		return $contents;

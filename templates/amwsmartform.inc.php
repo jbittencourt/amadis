@@ -9,7 +9,7 @@ class AMWSmartform extends CMWSmartForm {
 
   public function __construct($objClass,$name,$action="",$fields_rec="",$fields_hidden="",$fields_ausentes="",$method="POST",$enctype="") {
     parent::__construct($objClass,$name,$action,$fields_rec,$fields_hidden,$fields_ausentes,$method,$enctype);
-    
+
     //ajust the form format
     $format = new CMHTMLFormat;
     $format->setTabela("table cellspacing=1 cellpadding=2 width=\"70%\"","/table");
@@ -43,6 +43,7 @@ class AMWSmartform extends CMWSmartForm {
     $comp->setLabel($old->getLabel());
     unset($this->components[$field]);
     $this->addComponent($field,$comp);
+
   }
 
 }

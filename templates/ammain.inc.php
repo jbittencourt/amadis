@@ -12,7 +12,7 @@
  * @author Juliano Bittencourt <juliano@lec.ufrgs.br>
  * @see AMNavMenu
  **/
-class AMMain extends AMHTMLPage 
+class AMMain extends AMHTMLPage
 {
     protected $main_menu;
     protected $contents;
@@ -22,33 +22,33 @@ class AMMain extends AMHTMLPage
     protected $pathindicator;
     protected static $XOADHandlers = array();
     protected $alerts, $notifications = array();
-	protected $page;
-	
-    function __construct($theme="") 
+	  protected $page;
+
+    function __construct($theme="")
     {
         global $_CMAPP, $_conf;
         parent::__construct();
-        
+
         switch( (string) $_conf->app->interface->theme ) {
         	case 'xo':
         		$this->page = new AMXOTheme; break;
         	default:
         		$this->page = new AMDefaultTheme; break;
         }
-		$this->page->section = $theme;
+		    $this->page->section = $theme;
         $this->page->mainMenu = new AMMainMenu();
 
         $this->page->navMenu = new AMNavMenu();
-		
+
         $this->requires('prototype.js', CMHTMLObj::MEDIA_JS );
-        $this->requires('scriptaculous/scriptaculous.js?load=effects', CMHTMLObj::MEDIA_JS );        
+        $this->requires('scriptaculous/scriptaculous.js?load=effects', CMHTMLObj::MEDIA_JS );
         $this->requires("tooltip.css",self::MEDIA_CSS);
         $this->requires("lib.js",self::MEDIA_JS);
         $this->requires("finder.js", self::MEDIA_JS);
         $this->requires("finder.css", self::MEDIA_CSS);
         $this->requires("envsession.js", self::MEDIA_JS);
         $this->requires("tipms.css", self::MEDIA_CSS);
-        
+
 
     /** Set Finder hash table
      *
@@ -69,13 +69,13 @@ class AMMain extends AMHTMLPage
         $_SESSION['XOADHandlers'] = array();
     }
 
-    
-    function add($line) 
+
+    function add($line)
     {
         $this->page->contents[] = $line;
     }
 
-    function setMenuSuperior($img1,$img2,$img3) 
+    function setMenuSuperior($img1,$img2,$img3)
     {
         $this->tema[0]= $img1;
         $this->tema[1]= $img2;
@@ -86,13 +86,13 @@ class AMMain extends AMHTMLPage
     {
     	$this->page->sectionTitle = $title;
     }
-    
-    function setImgId($img) 
+
+    function setImgId($img)
     {
         $this->page->imgid = $img;
     }
-    
-    function setLeftMargin($w) 
+
+    function setLeftMargin($w)
     {
         $this->leftMargin = $w;
     }
@@ -103,15 +103,15 @@ class AMMain extends AMHTMLPage
    *
    * The AMMain automaticaly do an error message capture,
    * that seeks for an frm_amerror parameter in the actual
-   * request and transform it in an error. This function 
+   * request and transform it in an error. This function
    * makes the actual page to ignore the frm_amerror.
    **/
-    public function disableAutoError() 
+    public function disableAutoError()
     {
         $this->auto_error_report = 0;
     }
 
-    
+
   /**
    * Adds an error message to this page.
    *
@@ -125,18 +125,18 @@ class AMMain extends AMHTMLPage
    * <code>
    *   header($_CMAPP[services_url]."/projetos/create.php?frm_amerror=project_exists");
    * </code>
-   * 
+   *
    * This function will search for an key in the language file named error_projet_exists. Note
    * that the error message should be in global or in the selected language section.
    *
    * If a debug option is enable, a new AMError is gerenated to show a exception messages.
    * This form is better to show messages errors to developers, without affect final users.
    *
-   * @param String $message The message suffix 
+   * @param String $message The message suffix
    * @param object $e An associated exception
    * @see AMMain::addMessage(), AMMain::addAlert()
    **/
-    function addError($message, $e) 
+    function addError($message, $e)
     {
         $err = new AMError($message,"AMMain", $e);
     }
@@ -148,7 +148,7 @@ class AMMain extends AMHTMLPage
    * standard message and not an error message. It can look to the
    * actual request searching for an frm_ammgs parameter.
    **/
-    function addMessage($message) 
+    function addMessage($message)
     {
         $msg = new AMMessage($message,"AMMain");
     }
@@ -187,44 +187,45 @@ class AMMain extends AMHTMLPage
    *
    * @param String $handler - Name of the class that will be used for XOAD
    */
-    public static function addXOADHandler($class, $handlerName) 
+    public static function addXOADHandler($class, $handlerName)
     {
         $_SESSION['XOADHandlers'][$class] = $handlerName;
     }
 
-    public static function getXOADHandlers() 
+    public static function getXOADHandlers()
     {
         return $_SESSION['XOADHandlers'];
     }
-    
-    public function addNotification($notification) 
+
+    public function addNotification($notification)
     {
         $this->page->notifications[] = $notification;
     }
-    
-    
-    public function setRSSFeed($link, $title="") 
+
+
+    public function setRSSFeed($link, $title="")
     {
     	$this->page->setRSSFeed($link, $title="");
     }
-    
-    public function __toString() 
+
+    public function __toString()
     {
         global $_CMAPP,$_language;
 
-   /**
-     * Adds the error messages to the page, if there is any. It
-     * searchs for the AMErrors intantiated and error messages 
-     * passed by the URL with the frm_amerror.
-     **/
+       /**
+         * Adds the error messages to the page, if there is any. It
+         * searchs for the AMErrors intantiated and error messages
+         * passed by the URL with the frm_amerror.
+         **/
         $errors = AMError::getErrors();
+
         if($this->auto_error_report) {
-      //search if there is some error passed by the url
+            //search if there is some error passed by the url
             if(!empty($_REQUEST["frm_amerror"])) {
                 if(!is_array($_REQUEST["frm_amerror"])) {
                     $_REQUEST["frm_amerror"] = array($_REQUEST["frm_amerror"]);
                 }
-                
+
                 foreach($_REQUEST["frm_amerror"] as $error) {
                     $errors[] = array("message"=>$_language["error_$error"],
 			    "thrower"=>"request");
@@ -232,24 +233,24 @@ class AMMain extends AMHTMLPage
             }
         }
 
-    /**
-     * Adds the messages to the page, if there is any. It
-     * searchs for the AMMessage intantiated and messages 
-     * passed by the URL with the frm_ammessage.
-     **/
+        /**
+         * Adds the messages to the page, if there is any. It
+         * searchs for the AMMessage intantiated and messages
+         * passed by the URL with the frm_ammessage.
+         **/
         $messages = AMMessage::getMessages();
         if(!empty($_REQUEST["frm_ammsg"])) {
             if(!is_array($_REQUEST["frm_ammsg"])) {
                 $_REQUEST["frm_ammsg"] = array($_REQUEST["frm_ammsg"]);
             }
-            
+
             foreach($_REQUEST["frm_ammsg"] as $msg) {
                 $messages[] = array("message"=>$_language["msg_$msg"],
 			    "thrower"=>"request");
             }
         }
 
-        
+
         //notification area
         $notices[] = '<div id="notification_area">';
         $notifications = $this->page->getNotifications();
@@ -294,12 +295,12 @@ class AMMain extends AMHTMLPage
         }
         $notices[] = '</div>';
 
+
         /*if(!empty($this->pathindicator)) {
             $main_content[] = $this->pathindicator;
         }
 		*/
         $this->page->addNotices($notices);
-        
         //this div forces the inclusion of an AMTUserinfo in the page
     	//this force the inclusion of the file, so on the fly pages(like comments in diary)
     	//will work .
@@ -313,20 +314,22 @@ class AMMain extends AMHTMLPage
 
         $this->page->addPageBegin(XOAD_Utilities::header("$_CMAPP[media_url]/libs/xoad"));
 
+
         if($_SESSION['environment']->logged) {
             AMMain::addXOADHandler("AMFinder", "AMFinder");
             $this->page->addPageBegin(self::getScript("var Finder_chatSRC = '$_CMAPP[services_url]/finder/finder_chat.php';"));
             $this->page->addPageEnd(CMHTMLObj::getScript("initEnvironment();"));
             //$this->setOnload("initEnvironment();");
         }
-        
+
         $handlers = AMMain::getXOADHandlers();
         if(!empty($handlers)) {
             foreach($handlers as $class=>$handler) {
                 $this->page->addPageBegin(self::getScript("var $handler = ".XOAD_Client::register(new $class)));
             }
         }
-        
+
+
         return $this->page->__toString();
     }
 
@@ -356,8 +359,8 @@ class AMMain extends AMHTMLPage
         return '<button class="admin_items button-as-link " type="button" onclick="AM_openURL(\''.$link.'\')">'
         	 . '<img src="'.$_CMAPP['images_url'].'/ico_alt_senha.gif" alt="" /> '.$_language['changepw_button'].'</button>';
     }
-    
-    
+
+
     public static function getChangeStatusButton($codeUser)
     {
         global $_CMAPP,$_language;
@@ -366,7 +369,7 @@ class AMMain extends AMHTMLPage
         return '<button class="admin_items button-as-link " type="button" onclick="AM_openURL(\''.$link.'\')">'
 			 . '<img src="'.$_CMAPP['images_url'].'/ico_alt_status.gif" alt="" /> '.$_language['changestatus_button'].'</button>';
     }
-    
+
     public static function getSendNotificationButton($codeUser)
     {
         global $_CMAPP,$_language;

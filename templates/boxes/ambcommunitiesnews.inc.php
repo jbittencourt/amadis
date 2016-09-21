@@ -47,7 +47,6 @@ class AMBCommunitiesNews extends AMSimpleBox implements CMActionListener {
 			default:
 
 				$fields_rec = array("title","text");
-
 				//formulary
 				$this->form = new AMWSmartForm('AMCommunityNews',"cad_community_news",$_SERVER['PHP_SELF'],$fields_rec);
 
@@ -105,9 +104,9 @@ class AMBCommunitiesNews extends AMSimpleBox implements CMActionListener {
 			case self::COMMUNITIES_NEWS :
 				if($this->itens->__hasItems()) {
 					foreach($this->itens as $item) {
-							
+
 						//parent::add("<br />");
-							
+
 						$data = date("d/m/Y",$item->news[0]->time);
 						parent::add("<a class =\"cinza\" href=\"$_CMAPP[services_url]/communities/viewnews.php?frm_codeNews=".$item->news[0]->code."\">");
 						parent::add("\"".$item->news[0]->title."\" ($data) - ".$item->name);
@@ -118,6 +117,7 @@ class AMBCommunitiesNews extends AMSimpleBox implements CMActionListener {
 				break;
 
 			case self::COMMUNITY_NEWS :
+
 				if($this->itens->__hasItems()) {
 					foreach($this->itens as $item) {
 						$data = date("d/m/Y",$item->time);
@@ -128,9 +128,13 @@ class AMBCommunitiesNews extends AMSimpleBox implements CMActionListener {
 					}
 					parent::add("<a href='".$_CMAPP['services_url']."/communities/listcommunities.php?list_action=A_list_news&frm_codeCommunity=".$community->code."' class='community_view_news'>&raquo; ".$_language['see_all_news']."</a><br />");
 
-				}else parent::add("<br />".$_language['without_communities_news']."<br />");
+				} else {
+					parent::add("<br />".$_language['without_communities_news']."<br />");
+				};
+
 				$group = $community->getGroup();
 				if($_SESSION['user'] instanceof CMObj) {
+
 					if($group->isMember($_SESSION['user']->codeUser)) {
 						$box = new AMTShowHide('add_new',"&raquo; $_language[add_news]",  AMTShowHide::HIDE);
 						$box->setClass('community_add_news');
@@ -138,6 +142,7 @@ class AMBCommunitiesNews extends AMSimpleBox implements CMActionListener {
 						parent::add($box);
 					}
 				}
+
 				break;
 		}
 		return parent::__toString();
