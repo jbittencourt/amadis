@@ -1,1 +1,6 @@
 environment/media/libs/xoad/*
+environment/media/thumbnails/*
+environment/media/pages/*
+environment/logs/*
+environment/files/*
+etc/config.xml
