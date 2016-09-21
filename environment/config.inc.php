@@ -1,5 +1,5 @@
 <?php
-error_reporting(E_ALL & ~ E_NOTICE & ~ E_STRICT & ~ E_DEPRECATED);
+#error_reporting(E_ALL & ~ E_NOTICE & ~ E_STRICT & ~ E_DEPRECATED);
 
 /**
  * Discover the root of the application
@@ -20,7 +20,7 @@ $_CMAPP['config'] = simplexml_load_file($_CMAPP['config_file']);
 
 if(!isset($_CMAPP['notrestricted'])){
 	$_CMAPP['notrestricted'] = "";
-}	
+}
 
 
 //load the path of the libs
@@ -143,7 +143,7 @@ if($_SESSION['environment']->logged) {
 	Header("Location: ".$_CMAPP['url']."/index.php?frm_amerror=session_timeout");
 }
 
-if(!ereg("(index|register|recoverpassword|loginfailure)",basename($_SERVER['SCRIPT_FILENAME']))) {
+if(!preg_match("/(index|register|recoverpassword|loginfailure)/",basename($_SERVER['SCRIPT_FILENAME']))) {
 	$_CMAPP['form_login_action'] = $_SERVER['PHP_SELF'];
 } else {
 	$_CMAPP['form_login_action'] = $_CMAPP['services_url']."/webfolio/webfolio.php";
